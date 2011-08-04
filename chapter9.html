@@ -60,13 +60,10 @@ mais cela rendrait aussi les relations entre les modules moins
 évidentes, et pourrait aboutir à une version modulaire du code
 spaghetti dont je parlais plus haut.</P>
 <P>La plupart des langages de programmation modernes ont un système de module intégré ou un autre. Pas le  JavaScript. Une fois encore, il nous faut inventer quelque chose nous-mêmes. La façon la plus évidente de commencer est de mettre chaque module dans un fichier différent. On voit ainsi plus clairement quel code relève de quel module.</P>
-<P><A NAME="key3"></A>Browsers load JavaScript files when they find a
-<CODE>&lt;script&gt;</CODE> tag with an <CODE>src</CODE>
-attribute in the HTML of the web-page. The extension <CODE>.js</CODE>
-is usually used for files containing JavaScript code. On the console,
-a shortcut for loading files is provided by the <CODE>load</CODE>
-function.</P>
-<PRE STYLE="margin-bottom: 0.5cm">load(&quot;FunctionalTools.js&quot;);</PRE><P>
+<P><A NAME="key3"></A>Les navigateurs chargent les fichiers JavaScript quand ils rencontrent une balise <CODE>&lt;script&gt;</CODE> avec un attribut <CODE>src</CODE>
+dans le code source de la page HTML. L'extension <CODE>.js</CODE>
+est habituellement utilisée pour les fichiers qui contiennent du code JavaScript. Dans la console, un raccourci pour charger les fichiers est fourni par la fonction <CODE>load</CODE>.</P>
+<PRE>load(&quot;FunctionalTools.js&quot;);</PRE><P>
 In some cases, giving load commands in the wrong order will result in
 errors. If a module tries to create a <CODE>Dictionary</CODE>
 object, but the <CODE>Dictionary</CODE> module has
