@@ -67,10 +67,7 @@ Il est certainement bourré de chausse-trapes et de pièges à loups, et mène l
 01100010 00000000 00000000</pre>
 <p>Il s'agit d'un programme qui fait la somme des nombres de 1 à 10 et donne le résultat (1 + 2 + ... + 10 = 55). Il pourrait tourner sur l'ordinateur le plus simple. Pour programmer les premiers ordinateurs, il était nécessaire de disposer de grandes séries d'interrupteurs dans la bonne position, ou de perforer des trous dans des cartes et les faire avaler à la machine. Vous imaginez facilement à quel point la procédure était fastidieuse et sujette à erreurs. Écrire ne serait-ce qu'un programme simple exigeait beaucoup d'intelligence et de discipline, les programmes complexes étaient carrément hors d'atteinte.</p>
 <p>Bien entendu, saisir à la main des séquences cabalistiques d'octets (c'est ainsi qu'on appelle en général les suites de 1 et de 0 ci-dessus) donnait au programmeur l'impression d'être un puissant sorcier. Et il fallait que ça en vaille la peine, en termes de satisfaction professionnelle.</p>
-<p>Each line of the program contains a single instruction. It could be
-written in English like this:</p><ol><li>Store the number 0 in memory location 0</li><li>Store the number 1 in memory location 1</li><li>Store the value of memory location 1 in memory location 2</li><li>Subtract the number 11 from the value in memory location 2</li><li>If the value in memory location 2 is the number 0, continue with instruction 9</li><li>Add the value of memory location 1 to memory location 0</li><li>Add the number 1 to the value of memory location 1</li><li>Continue with instruction 3</li><li>Output the value of memory location 0</li></ol><p>While that is more readable than the binary soup, it is still rather
-unpleasant. It might help to use names instead of numbers for the
-instructions and memory locations:</p><pre class="preformatted"> Set 'total' to 0
+<p>Chaque ligne de programme contient une seul instruction unique. On pourrait l'exprimer en français sous cette forme&nbsp;:</p><ol><li>Stocker le nombre 0 à l'adresse mémoire 0</li><li>Stocker le nombre 1 à l'adresse mémoire 1</li><li>Stocker la valeur de l'adresse mémoire 1 dans l'adresse mémoire 2</li><li>Soustraire 11 de la valeur stockée à l'adresse mémoire 2</li><li>Si l avaleur stockée à l'adresse mémoire 2 est le nombre 0, alors continuer avec l'instruction 9</li><li>Ajouter la valeur de l'adresse mémoire 1 à l'adresse mémoire 0</li><li>Ajouter le nombre 1 à la valeur de l'adresse mémoire 1</li><li>Continuer avec l'instruction 3</li><li>donner la valeur de l'adresse mémoire 0</li></ol><p>C'est déjà plus lisible que la soupe binaire, mais cela reste relativement désagréable. Il pourrait être utile d'utiliser des noms au lieu de nombres pour les instructions et les adresses mémoire&nbsp;:</p><pre class="preformatted"> Set 'total' to 0
  Set 'count' to 1
 [loop]
  Set 'compare' to 'count'
@@ -80,19 +77,9 @@ instructions and memory locations:</p><pre class="preformatted"> Set 'total' to 
  Add 1 to 'count'
  Continue at [loop]
 [end]
- Output 'total'</pre><p>At this point it is not too hard to see how the program works. Can
-you? The first two lines give two memory locations their starting
-values: <code>total</code> will be used to build up the result of the program,
-and <code>count</code> keeps track of the number that we are currently looking
-at. The lines using <code>compare</code> are probably the weirdest ones. What the
-program wants to do is see if <code>count</code> is equal to 11, in order to
-decide whether it can stop yet. Because the machine is so primitive,
-it can only test whether a number is zero, and make a decision (jump)
-based on that. So it uses the memory location labelled <code>compare</code> to
-compute the value of <code>count - 11</code>, and makes a decision based on that
-value. The next two lines add the value of <code>count</code> to the result, and
-increment <code>count</code> by one every time the program has decided that it is
-not 11 yet.</p><p>Here is the same program in JavaScript:</p><pre class="code"><span class="keyword">var</span> <span class="variable">total</span> = <span class="atom">0</span>, <span class="variable">count</span> = <span class="atom">1</span>;
+ Output 'total'</pre>
+<p>À partir de là il n'est pas trop difficile de deviner comment fonctionne le programme. qu'en dites-vous&nbsp;? Les deux premières lignes donnent leur valeur initiale aux adresses mémoire&nbsp;:<code>total</code> sera utilisé pour calculer le résultat du programme et <code>count</code> conserve le nombre courant. Les lignes qui utilisent <code>compare</code> sont probablement les plus bizarres. Ce que le programme cherche à savoir c'est si <code>count</code> est égal à 11, de manière s'il doit interrompre le calcul. comme la machine est très rudimentaire, il peut seulement tester si un nombre est zéro, et prend une décision  (jump) basée sur ce critère. il utilise donc l'adresse mémoire nommée <code>compare</code> pour calculer la valeur de <code>count - 11</code>, et décide suivant la valeur obtenue. les deux lignes suivantes ajoutent la valeur de <code>count</code> au résultat, et
+incrémente <code>count</code> d'une unité à chaque fois que le programme a décidé qu'il n'avait pas encore atteint 11.</p><p>Voici maintenant le même programme en JavaScript&nbsp;:</p><pre class="code"><span class="keyword">var</span> <span class="variable">total</span> = <span class="atom">0</span>, <span class="variable">count</span> = <span class="atom">1</span>;
 <span class="keyword">while</span> (<span class="variable">count</span> &lt;= <span class="atom">10</span>) {
   <span class="variable">total</span> += <span class="variable">count</span>;
   <span class="variable">count</span> += <span class="atom">1</span>;
