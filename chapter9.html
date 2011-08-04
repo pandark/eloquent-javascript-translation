@@ -64,11 +64,7 @@ spaghetti dont je parlais plus haut.</P>
 dans le code source de la page HTML. L'extension <CODE>.js</CODE>
 est habituellement utilisée pour les fichiers qui contiennent du code JavaScript. Dans la console, un raccourci pour charger les fichiers est fourni par la fonction <CODE>load</CODE>.</P>
 <PRE>load(&quot;FunctionalTools.js&quot;);</PRE><P>
-In some cases, giving load commands in the wrong order will result in
-errors. If a module tries to create a <CODE>Dictionary</CODE>
-object, but the <CODE>Dictionary</CODE> module has
-not been loaded yet, it will be unable to find the constructor, and
-will fail.</P>
+Dans certains cas, mettre les commandes dans le mauvais ordre va générer des erreurs. Si un module essaie de créer un objet <CODE>Dictionary</CODE>, mais que le module <CODE>Dictionary</CODE> n'a pas encore été chargé, il sera incapable de trouver le constructor, et échouera.</P>
 <P>One would imagine this to be easy to solve. Just put some calls to
 <CODE>load</CODE> at the top of the file for a
 module, to load all the modules it depends on. Unfortunately, because
