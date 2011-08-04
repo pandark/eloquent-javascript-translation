@@ -37,13 +37,13 @@ et <CODE>Dictionary</CODE>. Tous ces éléments ont
 programme. Une façon de découper ce programme en modules pourrait
 être&nbsp;:</P>
 <UL>
-	<LI><P STYLE="margin-bottom: 0cm">un module <CODE>FunctionalTools</CODE>,
+	<LI><P>un module <CODE>FunctionalTools</CODE>,
 	qui inclut les fonctions du <A HREF="chapter6.html">chapitre 6</A>,
 	et ne dépend de rien d'autre.</P>
-	<LI><P STYLE="margin-bottom: 0cm">un autre module <CODE>ObjectTools</CODE>,
+	<LI><P>un autre module <CODE>ObjectTools</CODE>,
 	qui contient des choses comme <CODE>clone</CODE> et
 	<CODE>create</CODE>, et dépend de <CODE>FunctionalTools</CODE>.</P>
-	<LI><P STYLE="margin-bottom: 0cm"><CODE>Dictionary</CODE>,
+	<LI><P><CODE>Dictionary</CODE>,
 	contenant le type Dictionnaire, et dépendant de <CODE>FunctionalTools</CODE>.</P>
 	<LI><P>et finalement le module <CODE>Terrarium</CODE>,
 	dépendant de <CODE>ObjectTools</CODE> et
@@ -52,90 +52,91 @@ programme. Une façon de découper ce programme en modules pourrait
 <P>Quand un module dépend d'un autre, il utilise des fonctions et
 des variables de ce module, et ne fonctionnera que si le module est
 chargé.</P>
-<P>It is a good idea to make sure dependencies never form a circle.
-Not only do circular dependencies create a practical problem (if
-module <CODE>A</CODE> and <CODE>B</CODE>
-depend on each other, which one should be loaded first?), it also
-makes the relation between the modules less straightforward, and can
-result in a modularised version of the spaghetti I mentioned earlier.</P>
+<P>C'est une bonne idée de s'assurer que les dépendances ne sont
+jamais en boucle. Non seulement cela créerait un problème pratique
+(si les modules <CODE>A</CODE> et <CODE>B</CODE>
+dépendent l'un de l'autre, lequel doit être chargé en premier&nbsp;?),
+mais cela rendrait aussi les relations entre les modules moins
+évidentes, et pourrait aboutir à une version modulaire du code
+spaghetti dont je parlais plus haut.</P>
 <P>Most modern programming languages have some kind of module system
 built in. Not JavaScript. Once again, we have to invent something
 ourselves. The most obvious way to start is to put every module in a
 different file. This makes it clear which code belongs to which
 module.</P>
 <P><A NAME="key3"></A>Browsers load JavaScript files when they find a
-<CODE CLASS="western">&lt;script&gt;</CODE> tag with an <CODE CLASS="western">src</CODE>
-attribute in the HTML of the web-page. The extension <CODE CLASS="western">.js</CODE>
+<CODE>&lt;script&gt;</CODE> tag with an <CODE>src</CODE>
+attribute in the HTML of the web-page. The extension <CODE>.js</CODE>
 is usually used for files containing JavaScript code. On the console,
-a shortcut for loading files is provided by the <CODE CLASS="western">load</CODE>
+a shortcut for loading files is provided by the <CODE>load</CODE>
 function.</P>
-<PRE CLASS="western" STYLE="margin-bottom: 0.5cm">load(&quot;FunctionalTools.js&quot;);</PRE><P>
+<PRE STYLE="margin-bottom: 0.5cm">load(&quot;FunctionalTools.js&quot;);</PRE><P>
 In some cases, giving load commands in the wrong order will result in
-errors. If a module tries to create a <CODE CLASS="western">Dictionary</CODE>
-object, but the <CODE CLASS="western">Dictionary</CODE> module has
+errors. If a module tries to create a <CODE>Dictionary</CODE>
+object, but the <CODE>Dictionary</CODE> module has
 not been loaded yet, it will be unable to find the constructor, and
 will fail.</P>
 <P>One would imagine this to be easy to solve. Just put some calls to
-<CODE CLASS="western">load</CODE> at the top of the file for a
+<CODE>load</CODE> at the top of the file for a
 module, to load all the modules it depends on. Unfortunately, because
-of the way browsers work, calling <CODE CLASS="western">load</CODE>
+of the way browsers work, calling <CODE>load</CODE>
 does not immediately cause the given file to be loaded. The file will
 be loaded <EM>after</EM> the current file has finished executing.
 Which is too late, usually.</P>
 <P>In most cases, the practical solution is to just manage
-dependencies by hand: Put the <CODE CLASS="western">script</CODE>
+dependencies by hand: Put the <CODE>script</CODE>
 tags in your HTML documents in the right order.</P>
 <P>There are two ways to (partially) automate dependency management.
 The first is to keep a separate file with information about the
 dependencies between modules. This can be loaded first, and used to
 determine the order in which to load the files. The second way is to
-not use a <CODE CLASS="western">script</CODE> tag (<CODE CLASS="western">load</CODE>
+not use a <CODE>script</CODE> tag (<CODE>load</CODE>
 internally creates and adds such a tag), but to fetch the content of
 the file directly (see <A HREF="chapter14.html">chapitre 14</A>), and
-then use the <CODE CLASS="western">eval</CODE> function to execute
+then use the <CODE>eval</CODE> function to execute
 it. This makes script loading instantaneous, and thus easier to deal
 with.</P>
-<P><A NAME="key4"></A><CODE CLASS="western">eval</CODE>, short for
+<P><A NAME="key4"></A><CODE>eval</CODE>, short for
 'evaluate', is an interesting function. You give it a string value,
 and it will execute the content of the string as JavaScript code.</P>
-<PRE CLASS="western" STYLE="margin-bottom: 0.5cm">eval(&quot;print(\&quot;I am a string inside a string!\&quot;);&quot;);</PRE><P>
-You can imagine that <CODE CLASS="western">eval</CODE> can be used to
+<PRE STYLE="margin-bottom: 0.5cm">eval(&quot;print(\&quot;I am a string inside a string!\&quot;);&quot;);</PRE><P>
+You can imagine that <CODE>eval</CODE> can be used to
 do some interesting things. Code can build new code, and run it. In
 most cases, however, problems that can be solved with creative uses
-of <CODE CLASS="western">eval</CODE> can also be solved with creative
+of <CODE>eval</CODE> can also be solved with creative
 uses of anonymous functions, and the latter is less likely to cause
 strange problems.</P>
-<P>When <CODE CLASS="western">eval</CODE> is called inside a
+<P>When <CODE>eval</CODE> is called inside a
 function, all new variables will become local to that function. Thus,
-when a variation of the <CODE CLASS="western">load</CODE> would use
-<CODE CLASS="western">eval</CODE> internally, loading the <CODE CLASS="western">Dictionary</CODE>
-module would create a <CODE CLASS="western">Dictionary</CODE>
-constructor inside of the <CODE CLASS="western">load</CODE> function,
+when a variation of the <CODE>load</CODE> would use
+<CODE>eval</CODE> internally, loading the <CODE>Dictionary</CODE>
+module would create a <CODE>Dictionary</CODE>
+constructor inside of the <CODE>load</CODE> function,
 which would be lost as soon as the function returned. There are ways
 to work around this, but they are rather clumsy.</P>
 <P>Let us quickly go over the first variant of dependency management.
 It requires a special file for dependency information, which could
 look something like this:</P>
-<PRE CLASS="western">var dependencies =
+<PRE>var dependencies =
   {&quot;ObjectTools.js&quot;: [&quot;FunctionalTools.js&quot;],
    &quot;Dictionary.js&quot;:  [&quot;ObjectTools.js&quot;],
    &quot;TestModule.js&quot;:  [&quot;FunctionalTools.js&quot;, &quot;Dictionary.js&quot;]};</PRE><P>
-The <CODE CLASS="western">dependencies</CODE> object contains a
+The <CODE>dependencies</CODE> object contains a
 property for each file that depends on other files. The values of the
 properties are arrays of file names. Note that we could not use a
-<CODE CLASS="western">Dictionary</CODE> object here, because we can
-not be sure that the <CODE CLASS="western">Dictionary</CODE> module
+<CODE>Dictionary</CODE> object here, because we can
+not be sure that the <CODE>Dictionary</CODE> module
 has been loaded yet. Because all the properties in this object will
-end in <CODE CLASS="western">&quot;.js&quot;</CODE>, they are
-unlikely to interfere with hidden properties like <CODE CLASS="western">__proto__</CODE>
-or <CODE CLASS="western">hasOwnProperty</CODE>, and a regular object
+end in <CODE>&quot;.js&quot;</CODE>, they are
+unlikely to interfere with hidden properties like <CODE>__proto__</CODE>
+or <CODE>hasOwnProperty</CODE>, and a regular object
 will work fine.</P>
 <P>The dependency manager must do two things. Firstly it must make
 sure that files are loaded in the correct order, by loading a file's
 dependencies before the file itself. And secondly, it must make sure
 that no file is loaded twice. Loading the same file twice might cause
 problems, and is definitely a waste of time.</P>
-<PRE CLASS="western">var loadedFiles = {};
+<PRE>var loadedFiles = {};
 
 function require(file) {
   if (dependencies[file]) {
@@ -148,11 +149,11 @@ function require(file) {
     load(file);
   }
 }</PRE><P>
-<A NAME="key5"></A>The <CODE CLASS="western">require</CODE> function
+<A NAME="key5"></A>The <CODE>require</CODE> function
 can now be used to load a file and all its dependencies. Note how it
 recursively calls itself to take care of dependencies (and possible
 dependencies of that dependency).</P>
-<PRE CLASS="western" STYLE="margin-bottom: 0.5cm">require(&quot;TestModule.js&quot;);
+<PRE STYLE="margin-bottom: 0.5cm">require(&quot;TestModule.js&quot;);
 test();</PRE><P>
 Building a program as a set of nice, small modules often means the
 program will use a lot of different files. When programming for the
@@ -162,27 +163,27 @@ You can write and test your program as a number of small files, and
 put them all into a single big file when 'publishing' the program to
 the web.</P>
 <P>Just like an object type, a module has an interface. In simple
-collection-of-functions modules such as <CODE CLASS="western">FunctionalTools</CODE>,
+collection-of-functions modules such as <CODE>FunctionalTools</CODE>,
 the interface usually consists of all the functions that are defined
 in the module. In other cases, the interface of the module is only a
 small part of the functions defined inside it. For example, our
 manuscript-to-HTML system from <A HREF="chapter6.html">chapitre 6</A>
-only needs an interface of a single function, <CODE CLASS="western">renderFile</CODE>.
+only needs an interface of a single function, <CODE>renderFile</CODE>.
 (The sub-system for building HTML would be a separate module.)</P>
 <P>For modules which only define a single type of object, such as
-<CODE CLASS="western">Dictionary</CODE>, the object's interface is
+<CODE>Dictionary</CODE>, the object's interface is
 the same as the module's interface.</P>
 <P>In JavaScript, 'top-level' variables all live together in a single
 place. In browsers, this place is an object that can be found under
-the name <CODE CLASS="western">window</CODE>. The name is somewhat
-odd, <CODE CLASS="western">environment</CODE> or <CODE CLASS="western">top</CODE>
+the name <CODE>window</CODE>. The name is somewhat
+odd, <CODE>environment</CODE> or <CODE>top</CODE>
 would have made more sense, but since browsers associate a JavaScript
-environment with a window (or 'frame'), someone decided that <CODE CLASS="western">window</CODE>
+environment with a window (or 'frame'), someone decided that <CODE>window</CODE>
 was a logical name.</P>
-<PRE CLASS="western">show(window);
+<PRE>show(window);
 show(window.print == print);
 show(window.window.window.window.window);</PRE><P>
-As the third line shows, the name <CODE CLASS="western">window</CODE>
+As the third line shows, the name <CODE>window</CODE>
 is merely a property of this environment object, pointing at itself.</P>
 <P><A NAME="key6"></A>When much code is loaded into an environment,
 it will use many top-level variable names. Once there is more code
@@ -200,11 +201,11 @@ for values that are not part of their external interface.</P>
 all in your modules is, of course, not very practical. Fortunately,
 there is a trick to get around this. We write all the code for the
 module inside a function, and then finally add the variables that are
-part of the module's interface to the <CODE CLASS="western">window</CODE>
+part of the module's interface to the <CODE>window</CODE>
 object. Because they were created in the same parent function, all
 the functions of the module can see each other, but code outside of
 the module can not.</P>
-<PRE CLASS="western">function buildMonthNameModule() {
+<PRE>function buildMonthNameModule() {
   var names = [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;,
                &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;,
                &quot;October&quot;, &quot;November&quot;, &quot;December&quot;];
@@ -225,9 +226,9 @@ buildMonthNameModule();
 
 show(getMonthName(11));</PRE><P>
 This builds a very simple module for translating between month names
-and their number (as used by <CODE CLASS="western">Date</CODE>, where
-January is <CODE CLASS="western">0</CODE>). But note that
-<CODE CLASS="western">buildMonthNameModule</CODE> is still a
+and their number (as used by <CODE>Date</CODE>, where
+January is <CODE>0</CODE>). But note that
+<CODE>buildMonthNameModule</CODE> is still a
 top-level variable that is not part of the module's interface. Also,
 we have to repeat the names of the interface functions three times.
 Ugh.</P>
@@ -235,16 +236,16 @@ Ugh.</P>
 anonymous, and calling it directly. To do this, we have to add a pair
 of parentheses around the function value, or JavaScript will think it
 is a normal function definition, which can not be called directly.</P>
-<P>The second problem can be solved with a helper function, <CODE CLASS="western">provide</CODE>,
+<P>The second problem can be solved with a helper function, <CODE>provide</CODE>,
 which can be given an object containing the values that must be
-exported into the <CODE CLASS="western">window</CODE> object.</P>
-<PRE CLASS="western">function provide(values) {
+exported into the <CODE>window</CODE> object.</P>
+<PRE>function provide(values) {
   forEachIn(values, function(name, value) {
     window[name] = value;
   });
 }</PRE><P>
 Using this, we can write a module like this:</P>
-<PRE CLASS="western">(function() {
+<PRE>(function() {
   var names = [&quot;Sunday&quot;, &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;,
                &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;];
   provide({
@@ -269,10 +270,10 @@ your browser, and test them out. Once a module is more or less
 finished, it is not difficult to wrap it in a function.</P>
 <P>There are cases where a module will export so many variables that
 it is a bad idea to put them all into the top-level environment. In
-cases like this, you can do what the standard <CODE CLASS="western">Math</CODE>
+cases like this, you can do what the standard <CODE>Math</CODE>
 object does, and represent the module as a single object whose
 properties are the functions and values it exports. For example...</P>
-<PRE CLASS="western">var HTML = {
+<PRE>var HTML = {
   tag: function(name, content, properties) {
     return {name: name, properties: properties, content: content};
   },
@@ -282,19 +283,19 @@ properties are the functions and values it exports. For example...</P>
   /* ... many more HTML-producing functions ... */
 };</PRE><P>
 When you need the content of such a module so often that it becomes
-cumbersome to constantly type <CODE CLASS="western">HTML</CODE>, you
-can always move it into the top-level environment using <CODE CLASS="western">provide</CODE>.</P>
-<PRE CLASS="western">provide(HTML);
+cumbersome to constantly type <CODE>HTML</CODE>, you
+can always move it into the top-level environment using <CODE>provide</CODE>.</P>
+<PRE>provide(HTML);
 show(link(&quot;http://docs.sun.com/source/816-6408-10/object.htm&quot;,
           &quot;This is how objects work.&quot;));</PRE><P>
 You can even combine the function and object approaches, by putting
 the internal variables of the module inside a function, and having
 this function return an object containing its external interface.</P>
-<P>When adding methods to standard prototypes, such as those of <CODE CLASS="western">Array</CODE>
-and <CODE CLASS="western">Object</CODE> a similar problem to
-name-space pollution occurs. If two modules decide to add a <CODE CLASS="western">map</CODE>
-method to <CODE CLASS="western">Array.prototype</CODE>, you might
-have a problem. If these two versions of <CODE CLASS="western">map</CODE>
+<P>When adding methods to standard prototypes, such as those of <CODE>Array</CODE>
+and <CODE>Object</CODE> a similar problem to
+name-space pollution occurs. If two modules decide to add a <CODE>map</CODE>
+method to <CODE>Array.prototype</CODE>, you might
+have a problem. If these two versions of <CODE>map</CODE>
 have the precise same effect, things will continue to work, but only
 by sheer luck.</P>
 <P>Designing an interface for a module or an object type is one of
@@ -323,8 +324,8 @@ this means they are just badly designed, and can easily be remedied
 by splitting them into a few more modest functions. But in other
 cases, there is no way around it. Typically, some of these arguments
 have a sensible 'default' value. We could, for example, write yet
-another extended version of <CODE CLASS="western">range</CODE>.</P>
-<PRE CLASS="western">function range(start, end, stepSize, length) {
+another extended version of <CODE>range</CODE>.</P>
+<PRE>function range(start, end, stepSize, length) {
   if (stepSize == undefined)
     stepSize = 1;
   if (end == undefined)
@@ -338,11 +339,11 @@ another extended version of <CODE CLASS="western">range</CODE>.</P>
 
 show(range(0, undefined, 4, 5));</PRE><P>
 It can get hard to remember which argument goes where, not to mention
-the annoyance of having to pass <CODE CLASS="western">undefined</CODE>
-as a second argument when a <CODE CLASS="western">length</CODE>
+the annoyance of having to pass <CODE>undefined</CODE>
+as a second argument when a <CODE>length</CODE>
 argument is used. We can make passing arguments to this function more
 comprehensive by wrapping them in an object.</P>
-<PRE CLASS="western">function defaultTo(object, values) {
+<PRE>function defaultTo(object, values) {
   forEachIn(values, function(name, value) {
     if (!object.hasOwnProperty(name))
       object[name] = value;
@@ -361,7 +362,7 @@ function range(args) {
 }
 
 show(range({stepSize: 4, length: 5}));</PRE><P>
-The <CODE CLASS="western">defaultTo</CODE> function is useful for
+The <CODE>defaultTo</CODE> function is useful for
 adding default values to an object. It copies the properties of its
 second argument into its first argument, skipping those that already
 have a value.</P>
@@ -373,7 +374,7 @@ all the time, which can make them a lot more productive. For
 JavaScript, unfortunately, the amount of available libraries is not
 very large.</P>
 <P>But recently this seems to be improving. There are a number of
-good libraries with 'basic' tools, things like <CODE CLASS="western">map</CODE>
+good libraries with 'basic' tools, things like <CODE>map</CODE>
 and <CODE>clone</CODE>. Other languages tend to
 provide such obviously useful things as built-in standard features,
 but with JavaScript you'll have to either build a collection of them
@@ -405,15 +406,15 @@ the reasons why there are relatively few good, widely used JavaScript
 libraries. It is possible that, in the future, new versions of
 ECMAScript and changes in browsers will make toolkits less necessary,
 and thus (partially) solve this problem.</P>
-<P STYLE="margin-bottom: 0cm"><A HREF="chapter8.html">&lt;&lt;
+<P><A HREF="chapter8.html">&lt;&lt;
 Chapitre précédent</A> | <A HREF="contents.html">Table des matières</A>
 | <A HREF="index.html">Couverture</A> | <A HREF="chapter10.html">Chapitre
 suivant &gt;&gt;</A></P>
-<P STYLE="margin-bottom: 0cm">© <A HREF="mailto:marijnh@gmail.com">Marijn
+<P>© <A HREF="mailto:marijnh@gmail.com">Marijn
 Haverbeke</A> (<A HREF="http://creativecommons.org/licenses/by/3.0/deed.fr">licence</A>),
 écrit entre mars et juillet 2007, dernière modification le 11
 juillet 2011.</P>
-<P STYLE="margin-bottom: 0cm"><SCRIPT SRC="js/ejs.js"></SCRIPT><BR>
+<P><SCRIPT SRC="js/ejs.js"></SCRIPT><BR>
 </P>
 </BODY>
 </HTML>
