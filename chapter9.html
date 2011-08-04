@@ -31,30 +31,30 @@ précisons les relations entre ces parties.</P>
 terrarium, nous avons utilisé un grand nombre de fonctions décrites
 dans le <A HREF="chapter6.html">chapitre 6</A>. Ce dernier
 définissait également quelques nouveaux concepts qui n'avaient rien
-de spécifique aux terrariums, comme les types <CODE CLASS="western">clone</CODE>
-et <CODE CLASS="western">Dictionary</CODE>. Tous ces éléments ont
+de spécifique aux terrariums, comme les types <CODE>clone</CODE>
+et <CODE>Dictionary</CODE>. Tous ces éléments ont
 été introduits de façon peu méthodique dans l'environnement du
 programme. Une façon de découper ce programme en modules pourrait
 être&nbsp;:</P>
 <UL>
-	<LI><P STYLE="margin-bottom: 0cm">un module <CODE CLASS="western">FunctionalTools</CODE>,
+	<LI><P STYLE="margin-bottom: 0cm">un module <CODE>FunctionalTools</CODE>,
 	qui inclut les fonctions du <A HREF="chapter6.html">chapitre 6</A>,
 	et ne dépend de rien d'autre.</P>
-	<LI><P STYLE="margin-bottom: 0cm">un autre module <CODE CLASS="western">ObjectTools</CODE>,
-	qui contient des choses comme <CODE CLASS="western">clone</CODE> et
-	<CODE CLASS="western">create</CODE>, et dépend de <CODE CLASS="western">FunctionalTools</CODE>.</P>
-	<LI><P STYLE="margin-bottom: 0cm"><CODE CLASS="western">Dictionary</CODE>,
-	contenant le type Dictionnaire, et dépendant de <CODE CLASS="western">FunctionalTools</CODE>.</P>
-	<LI><P>et finalement le module <CODE CLASS="western">Terrarium</CODE>,
-	dépendant de <CODE CLASS="western">ObjectTools</CODE> et
-	<CODE CLASS="western">Dictionary</CODE>.</P>
+	<LI><P STYLE="margin-bottom: 0cm">un autre module <CODE>ObjectTools</CODE>,
+	qui contient des choses comme <CODE>clone</CODE> et
+	<CODE>create</CODE>, et dépend de <CODE>FunctionalTools</CODE>.</P>
+	<LI><P STYLE="margin-bottom: 0cm"><CODE>Dictionary</CODE>,
+	contenant le type Dictionnaire, et dépendant de <CODE>FunctionalTools</CODE>.</P>
+	<LI><P>et finalement le module <CODE>Terrarium</CODE>,
+	dépendant de <CODE>ObjectTools</CODE> et
+	<CODE>Dictionary</CODE>.</P>
 </UL>
 <P>Quand un module dépend d'un autre, il utilise des fonctions et
 des variables de ce module, et ne fonctionnera que si le module est
 chargé.</P>
 <P>It is a good idea to make sure dependencies never form a circle.
 Not only do circular dependencies create a practical problem (if
-module <CODE CLASS="western">A</CODE> and <CODE CLASS="western">B</CODE>
+module <CODE>A</CODE> and <CODE>B</CODE>
 depend on each other, which one should be loaded first?), it also
 makes the relation between the modules less straightforward, and can
 result in a modularised version of the spaghetti I mentioned earlier.</P>
@@ -374,7 +374,7 @@ JavaScript, unfortunately, the amount of available libraries is not
 very large.</P>
 <P>But recently this seems to be improving. There are a number of
 good libraries with 'basic' tools, things like <CODE CLASS="western">map</CODE>
-and <CODE CLASS="western">clone</CODE>. Other languages tend to
+and <CODE>clone</CODE>. Other languages tend to
 provide such obviously useful things as built-in standard features,
 but with JavaScript you'll have to either build a collection of them
 for yourself or use a library. Using a library is recommended: It is
