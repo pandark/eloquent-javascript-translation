@@ -69,16 +69,10 @@ Dans certains cas, mettre les commandes dans le mauvais ordre va générer des e
 <P>In most cases, the practical solution is to just manage
 dependencies by hand: Put the <CODE>script</CODE>
 tags in your HTML documents in the right order.</P>
-<P>There are two ways to (partially) automate dependency management.
-The first is to keep a separate file with information about the
-dependencies between modules. This can be loaded first, and used to
-determine the order in which to load the files. The second way is to
-not use a <CODE>script</CODE> tag (<CODE>load</CODE>
-internally creates and adds such a tag), but to fetch the content of
-the file directly (see <A HREF="chapter14.html">chapitre 14</A>), and
-then use the <CODE>eval</CODE> function to execute
-it. This makes script loading instantaneous, and thus easier to deal
-with.</P>
+<P>Dans la plupart des cas, la solution la plus simple consiste à gérer les dépendances à la main&nbsp;: mettez les balises <CODE>script</CODE> dans le bon ordre dans vos documents HTML.</P>
+<P>Il existe deux façons d'automatiser (en partie) la gestion des dépendances.
+La première consiste à conserver dans un fichier distinct les informations sur les dépendances entre les modules. Ce fichier peut être chargé en premier lieu, et utilisé pour déterminer l'ordre dans lequel charger les autres. La seconde consiste à ne pas utiliser de balise <CODE>script</CODE> (<CODE>load</CODE>
+crée et ajoute en interne une telle balise), mais à aller chercher le contenu du fichier directement (voir le <A HREF="chapter14.html">chapitre 14</A>), et ensuite à utiliser la fonction <CODE>eval</CODE> pour l'exécuter. Ceci charge le script instantanément, et le rend ainsi plus facile à gérer.</P>
 <P><A NAME="key4"></A><CODE>eval</CODE>, short for
 'evaluate', is an interesting function. You give it a string value,
 and it will execute the content of the string as JavaScript code.</P>
