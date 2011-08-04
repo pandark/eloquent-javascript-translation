@@ -66,10 +66,8 @@ Il est certainement bourré de chausse-trapes et de pièges à loups, et mène l
 00010000 00000010 00000000
 01100010 00000000 00000000</pre>
 <p>Il s'agit d'un programme qui fait la somme des nombres de 1 à 10 et donne le résultat (1 + 2 + ... + 10 = 55). Il pourrait tourner sur l'ordinateur le plus simple. Pour programmer les premiers ordinateurs, il était nécessaire de disposer de grandes séries d'interrupteurs dans la bonne position, ou de perforer des trous dans des cartes et les faire avaler à la machine. Vous imaginez facilement à quel point la procédure était fastidieuse et sujette à erreurs. Écrire ne serait-ce qu'un programme simple exigeait beaucoup d'intelligence et de discipline, les programmes complexes étaient carrément hors d'atteinte.</p>
-<p>Of course, manually entering these arcane patterns of bits (which is
-what the 1s and 0s above are generally called) did give the programmer
-a profound sense of being a mighty wizard. And that has to be worth
-something, in terms of job satisfaction.</p><p>Each line of the program contains a single instruction. It could be
+<p>Bien entendu, saisir à la main des séquences cabalistiques d'octets (c'est ainsi qu'on appelle en général les suites de 1 et de 0 ci-dessus) donnaient au programmeur l'impression d'être un puissant sorcier. Et il fallait que ça en vaille la peine, en termes de satisfaction professionnelle.</p>
+<p>Each line of the program contains a single instruction. It could be
 written in English like this:</p><ol><li>Store the number 0 in memory location 0</li><li>Store the number 1 in memory location 1</li><li>Store the value of memory location 1 in memory location 2</li><li>Subtract the number 11 from the value in memory location 2</li><li>If the value in memory location 2 is the number 0, continue with instruction 9</li><li>Add the value of memory location 1 to memory location 0</li><li>Add the number 1 to the value of memory location 1</li><li>Continue with instruction 3</li><li>Output the value of memory location 0</li></ol><p>While that is more readable than the binary soup, it is still rather
 unpleasant. It might help to use names instead of numbers for the
 instructions and memory locations:</p><pre class="preformatted"> Set 'total' to 0
