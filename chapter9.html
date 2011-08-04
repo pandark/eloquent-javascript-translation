@@ -65,13 +65,7 @@ dans le code source de la page HTML. L'extension <CODE>.js</CODE>
 est habituellement utilisée pour les fichiers qui contiennent du code JavaScript. Dans la console, un raccourci pour charger les fichiers est fourni par la fonction <CODE>load</CODE>.</P>
 <PRE>load(&quot;FunctionalTools.js&quot;);</PRE><P>
 Dans certains cas, mettre les commandes dans le mauvais ordre va générer des erreurs. Si un module essaie de créer un objet <CODE>Dictionary</CODE>, mais que le module <CODE>Dictionary</CODE> n'a pas encore été chargé, il sera incapable de trouver le constructor, et échouera.</P>
-<P>One would imagine this to be easy to solve. Just put some calls to
-<CODE>load</CODE> at the top of the file for a
-module, to load all the modules it depends on. Unfortunately, because
-of the way browsers work, calling <CODE>load</CODE>
-does not immediately cause the given file to be loaded. The file will
-be loaded <EM>after</EM> the current file has finished executing.
-Which is too late, usually.</P>
+<P>On pourrait croire que ce problème est facile à résoudre. et qu'il suffit d'ajouter quelques calls à <CODE>load</CODE> en tête du fichier pour un module et charger ainsi tous les modules dont il dépend. Malheureusement, compte-tenu du fonctionnement du navigateur, un appel de <CODE>load</CODE> ne provoque pas immédiatement le chargement d'un fichier donné. Le fichier sera chargé <EM>après</EM> que le fichier courant aura fini d'être exécuté. ce qui est généralement trop tard.<P>
 <P>In most cases, the practical solution is to just manage
 dependencies by hand: Put the <CODE>script</CODE>
 tags in your HTML documents in the right order.</P>
