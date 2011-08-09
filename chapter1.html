@@ -85,10 +85,8 @@ l'incrémentent <code>count</code> d'une unité à chaque fois que le programme 
   <span class="variable">count</span> += <span class="atom">1</span>;
 }
 <span class="variable">print</span>(<span class="variable">total</span>);</pre><p>C'est encore un peu mieux pour nous. Le plus important c'est qu'il n'y a plus besoin de préciser la façon dont nous voulons que le programme fasse un bond par-ci par-là. Le mot magique <code>while</code> s'en occupe. Le programme continue à exécuter les lignes ci-dessous tant que la condition qu'on lui a donnée est satisfaite&nbsp;: <code>count &lt;= 10</code>, ce qui veut dire tant que "<code>count</code> est inférieur ou égal à <code>10</code>". Apparemment, il n'y a plus besoin de créer une valeur temporaire et de la comparer à zéro. C'était un stupide petit détail, justement le pouvoir des langages de programmation c'est qu'ils règlent pour nous les stupides petits détails.</p>
-<p>Finally, here is what the program could look like if we happened to
-have the convenient operations <code>range</code> and <code>sum</code> available, which
-respectively create a collection of numbers within a range and compute
-the sum of a collection of numbers:</p><pre class="code"><span class="variable">print</span>(<span class="variable">sum</span>(<span class="variable">range</span>(<span class="atom">1</span>, <span class="atom">10</span>)));</pre><p>The moral of this story, then, is that the same program can be
+<p>Finalement, voici à quoi pourrait ressembler le programme si nous nous étions arrangés pour que les opérations <code>range</code> et <code>sum</code> soient disponibles, elles créent respectivement une collection de nombres dans une série et calculent la somme d'une série de nombres&nbsp;:</p>
+<pre class="code"><span class="variable">print</span>(<span class="variable">sum</span>(<span class="variable">range</span>(<span class="atom">1</span>, <span class="atom">10</span>)));</pre><p>The moral of this story, then, is that the same program can be
 expressed in long and short, unreadable and readable ways. The first
 version of the program was extremely obscure, while this last one is
 almost English: <code>print</code> the <code>sum</code> of the <code>range</code> of numbers from <code>1</code>
