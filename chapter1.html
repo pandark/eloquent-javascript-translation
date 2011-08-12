@@ -86,13 +86,9 @@ l'incrémentent <code>count</code> d'une unité à chaque fois que le programme 
 }
 <span class="variable">print</span>(<span class="variable">total</span>);</pre><p>C'est encore un peu mieux pour nous. Le plus important c'est qu'il n'y a plus besoin de préciser la façon dont nous voulons que le programme fasse un bond par-ci par-là. Le mot magique <code>while</code> s'en occupe. Le programme continue à exécuter les lignes ci-dessous tant que la condition qu'on lui a donnée est satisfaite&nbsp;: <code>count &lt;= 10</code>, ce qui veut dire tant que "<code>count</code> est inférieur ou égal à <code>10</code>". Apparemment, il n'y a plus besoin de créer une valeur temporaire et de la comparer à zéro. C'était un stupide petit détail, justement le pouvoir des langages de programmation c'est qu'ils règlent pour nous les stupides petits détails.</p>
 <p>Finalement, voici à quoi pourrait ressembler le programme si nous nous étions arrangés pour que les opérations <code>range</code> et <code>sum</code> soient disponibles, elles créent respectivement une collection de nombres dans une série et calculent la somme d'une série de nombres&nbsp;:</p>
-<pre class="code"><span class="variable">print</span>(<span class="variable">sum</span>(<span class="variable">range</span>(<span class="atom">1</span>, <span class="atom">10</span>)));</pre><p>The moral of this story, then, is that the same program can be
-expressed in long and short, unreadable and readable ways. The first
-version of the program was extremely obscure, while this last one is
-almost English: <code>print</code> the <code>sum</code> of the <code>range</code> of numbers from <code>1</code>
-to <code>10</code>. (We will see in later chapters how to build things like <code>sum</code>
-and <code>range</code>.)</p><p>A good programming language helps the programmer by providing a more
-abstract way to express himself. It hides uninteresting details,
+<pre class="code"><span class="variable">print</span>(<span class="variable">sum</span>(<span class="variable">range</span>(<span class="atom">1</span>, <span class="atom">10</span>)));</pre><p>la morale de cette histoire c'est donc que le me programme peut être exprimé de façon brève ou longue, de façon plus ou moins lisible ou illisible. La première version du programme était extrêmement obscure, tandis que la dernière était quasiment de l'anglais&nbsp;: <code>print</code> the code>sum</code> (somme) of the <code>range</code> of numbers from <code>1</code>
+to <code>10</code> (imprimer la somme d'une série de nombres de 1 à 10). (Nous verrons dans un chapitre ultérieur comment construire des choses comme <code>sum</code>
+et <code>range</code>.)</p><p>Un bon langage de programmation aide le programmeur en lui fournissant une façpn pmlus abstriate de s'exprimer. Il masque les détails inutiles,
 provides convenient building blocks (such as the <code>while</code> construct),
 and, most of the time, allows the programmer to add building blocks
 himself (such as the <code>sum</code> and <code>range</code> operations).</p></div><hr/><div class="block"><p>JavaScript is the language that is, at the moment, mostly being used
