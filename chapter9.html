@@ -66,16 +66,11 @@ est habituellement utilisée pour les fichiers qui contiennent du code JavaScrip
 <PRE>load(&quot;FunctionalTools.js&quot;);</PRE><P>
 Dans certains cas, mettre les commandes dans le mauvais ordre va générer des erreurs. Si un module essaie de créer un objet <CODE>Dictionary</CODE>, mais que le module <CODE>Dictionary</CODE> n'a pas encore été chargé, il sera incapable de trouver le constructor, et échouera.</P>
 <P>On pourrait croire que ce problème est facile à résoudre. et qu'il suffit d'ajouter quelques calls à <CODE>load</CODE> en tête du fichier pour un module et charger ainsi tous les modules dont il dépend. Malheureusement, compte-tenu du fonctionnement du navigateur, un appel de <CODE>load</CODE> ne provoque pas immédiatement le chargement d'un fichier donné. Le fichier sera chargé <EM>après</EM> que le fichier courant aura fini d'être exécuté. ce qui est généralement trop tard.<P>
-<P>In most cases, the practical solution is to just manage
-dependencies by hand: Put the <CODE>script</CODE>
-tags in your HTML documents in the right order.</P>
 <P>Dans la plupart des cas, la solution la plus simple consiste à gérer les dépendances à la main&nbsp;: mettez les balises <CODE>script</CODE> dans le bon ordre dans vos documents HTML.</P>
 <P>Il existe deux façons d'automatiser (en partie) la gestion des dépendances.
 La première consiste à conserver dans un fichier distinct les informations sur les dépendances entre les modules. Ce fichier peut être chargé en premier lieu, et utilisé pour déterminer l'ordre dans lequel charger les autres. La seconde consiste à ne pas utiliser de balise <CODE>script</CODE> (<CODE>load</CODE>
 crée et ajoute en interne une telle balise), mais à aller chercher le contenu du fichier directement (voir le <A HREF="chapter14.html">chapitre 14</A>), et ensuite à utiliser la fonction <CODE>eval</CODE> pour l'exécuter. Ceci charge le script instantanément, et le rend ainsi plus facile à gérer.</P>
-<P><A NAME="key4"></A><CODE>eval</CODE>, short for
-'evaluate', is an interesting function. You give it a string value,
-and it will execute the content of the string as JavaScript code.</P>
+<P><A NAME="key4"></A><CODE>eval</CODE>, l'abréviation de «&nbsp;evaluate&nbsp;», est une fonction intéressante. Si vous lui donnez une valeur de chaîne (string); elle exécutera le contenu de la chaîne en JavaScript.</P>
 <PRE STYLE="margin-bottom: 0.5cm">eval(&quot;print(\&quot;I am a string inside a string!\&quot;);&quot;);</PRE><P>
 You can imagine that <CODE>eval</CODE> can be used to
 do some interesting things. Code can build new code, and run it. In
