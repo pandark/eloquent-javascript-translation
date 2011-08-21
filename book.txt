@@ -515,7 +515,7 @@ order in which they are applied is determined by the _precedence_ of
 the operators. The first example shows that multiplication has a
 higher precedence than addition. Division and multiplication always
 come before subtraction and addition. When multiple operators with the
-same precendence appear next to each other (|1 - 1 + 1|) they are
+same precedence appear next to each other (|1 - 1 + 1|) they are
 applied left-to-right.
 
 Try to figure out what value this produces, and then run it to see if
@@ -1159,7 +1159,7 @@ The trick with the modulo (_|%|_) operator is an easy way to test
 whether a number is divisible by another number. If it is, the
 remainder of their division, which is what modulo gives you, is zero.
 
-If we wanted to print all of the numbers between 0 and 20, but put
+If we wanted to print all numbers below 20, but put
 parentheses around the ones that are not divisible by 4, we can do it
 like this:
 
