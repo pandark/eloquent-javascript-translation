@@ -18,102 +18,102 @@
 </div>
 <h1><span class="number">Chapitre 4&nbsp;: </span>Structures de données&nbsp;: objets et tableaux</h1>
 <div class="block">
-<p>This chapter will be devoted to solving a few simple problems. In the process, we will discuss two new types of values, arrays and objects, and look at some techniques related to them.</p>
-<p>Consider the following situation: Your crazy aunt Emily, who is rumoured to have over fifty cats living with her (you never managed to count them), regularly sends you e-mails to keep you up to date on her exploits. They usually look like this:</p>
-<blockquote>Dear nephew,
+<p>Ce chapitre sera consacré à la résolution de quelques problèmes simples. En chemin, nous allons étudier deux nouveaux types de valeurs, les tableaux et les objects, et regarder quelques techniques les concernant.</p>
+<p>Considérons la situation suivante : votre tante Emilie l'exentrique, dont la rumeur dit qu'elle vit avec cinquante chats (en fait personne n'arrive à les compter), vous envoie régulièrement des email pour vous tenir au courant de ses exploits. Ils sont de la forme suivante :</p>
+<blockquote>Mon cher neuveu,
 <br/><br/>
-Your mother told me you have taken up skydiving. Is this true? You watch yourself, young man! Remember what happened to my husband? And that was only from the second floor!
+Ta mère m'a dit que tu as commencé à faire du parachutisme. Est-ce que c'est vrai ? Fait attention à toi, mon garçon ! Souviens toi ce qui est arrivé à mon mari, et ce n'était que du deuxième étage !
 <br/><br/>
-Anyway, things are very exciting here. I have spent all week trying to get the attention of Mr. Drake, the nice gentleman who moved in next door, but I think he is afraid of cats. Or allergic to them? I am going to try putting Fat Igor on his shoulder next time I see him, very curious what will happen.
+En tout cas, les choses sont très intéressantes de mon côté. J'ai passé toute la semaine à essayer d'obtenir l'attention de Mr. Drake, le sympatique monsieur qui a aménagé en face, mais je pense qu'il a peur des chats. A moins qu'il soit alergique ? A la prochaine rencontre, je vais essayer de poser Igor Le Gros sur son épaule. Je suis curieuse du résultat.
 <br/><br/>
-Also, the scam I told you about is going better than expected. I have already gotten back five 'payments', and only one complaint. It is starting to make me feel a bit bad though. And you are right that it is probably illegal in some way.
+Par ailleurs, l'escroquerie dont je t'avais parlé fonctionne mieux que je pensais. J'ai déjà récupéré cinq 'paiements', et seulement une seule plainte. Mais j'ai quelques remors malgré tout. Et tu as sans doute raison de dire que c'est probablement illégal d'une manière ou d'une autre.
 <br/><br/>
 (... etc ...)
 <br/><br/>
-Much love, Aunt Emily
+Grosses bises, Tante Emilie
 <br/><br/>
-died 27/04/2006: Black Leclère
+Décès le 27/04/2006: Leclère Noire
 <br/><br/>
-born 05/04/2006 (mother Lady Penelope): Red Lion, Doctor Hobbles the 3rd, Little Iroquois</blockquote>
-<p>To humour the old dear, you would like to keep track of the genealogy of her cats, so you can add things like &quot;P.S. I hope Doctor Hobbles the 2nd enjoyed his birthday this Saturday!&quot;, or &quot;How is old Lady Penelope doing? She's five years old now, isn't she?&quot;, preferably without accidentally asking about dead cats. You are in the possession of a large quantity of old e-mails from your aunt, and fortunately she is very consistent in always putting information about the cats' births and deaths at the end of her mails in precisely the same format.</p>
-<p>You are hardly inclined to go through all those mails by hand. Fortunately, we were just in need of an example problem, so we will try to work out a program that does the work for us. For a start, we write a program that gives us a list of cats that are still alive after the last e-mail.</p>
+Naissance le 05/04/2006 (mère Lady Penelope) : Lion Rouge, Docteur Hobbles le 3e, Petit Iroquois</blockquote>
+<p>Pour amuser cette vieille dame, vous voudriez garder une trace de la généalogie de ses chats, pour pouvoir ajouter des commentaires comme &quot;P.S. J'espère que Docteur Hobbles le 2e a bien fêté son anniversaire samedi !&quot;, ou bien &quot;Comme va cette vieille Lady Penelope ? Elle a cinq ans maintenant, n'est-ce pas ?&quot;, en évitant de préférence de demander des nouvelles des chats décédés. Vous avez une grande quantité archivée d'email de votre tante, et par chance, elle est très constante dans sa manière de donner les renseignements sur les naissances et décès des chats, à la fin de ses emails, toujours dans le même format.</p>
+<p>Vous n'avez pas envie de parcourir à la main tout ses messages. Heureusement, nous avions justement besoin d'un exemple, nous allons donc écrire un programme qui va faire le travail pour nous. Pour commencer, nous écrivons un programme qui va nous donner la liste des chats qui sont toujours vivants à la fin le dernier email.</p>
 <p>Before you ask, at the start of the correspondence, aunt Emily had only a single cat: Spot. (She was still rather conventional in those days.)</p>
 </div><hr/><div class="block">
 <div class="picture"><img src="img/eyes.png"/></div>
 </div><hr/><div class="block">
-<p>It usually pays to have some kind of clue what one's program is going to do before starting to type. Here's a plan:</p>
+<p>Il est généralement préférable d'avoir une idée de départ sur ce que va faire un programme avant de se mettre à l'écrire... Voici le plan&nbsp;:</p>
 <ol><li>
-Start with a set of cat names that has only &quot;Spot&quot; in it.
+Commencer avec un ensemble de nom de chats qne comprenant que &quot;Spot&quot;.
 </li><li>
-Go over every e-mail in our archive, in chronological order.
+Parcourir chaque email dans l'archive, par ordre chronologique.
 </li><li>
-Look for paragraphs that start with &quot;born&quot; or &quot;died&quot;.
+Chercher les paragraphes qui commencent par &quot;Naissance le&quot; ou &quot;Décès le&quot;.
 </li><li>
-Add the names from paragraphs that start with &quot;born&quot; to our set of names.
+Ajouter les noms de chats trouvés dans les paragraphes qui commencent par &quot;Naissance le&quot; à l'ensemble de noms.
 </li><li>
-Remove the names from paragraphs that start with &quot;died&quot; from our set.
+Supprimer les noms de chats trouvés dans les paragraphes qui commencent par &quot;Décès le&quot; de notre ensemble.
 </li></ol>
 
-<p>Where taking the names from a paragraph goes like this:</p>
+<p>On prendra les noms à partir d'un paragraphe de la façon suivante :</p>
 <ol><li>
-Find the colon in the paragraph.
+Trouver les 'deux points' (:) dans le paragraphe.
 </li><li>
-Take the part after this colon.
+Prendre la partie après ce signe.
 </li><li>
-Split this part into separate names by looking for commas.
+Séparer en noms différents en cherchant les virgules.
 </li></ol>
 
-<p>It may require some suspension of disbelief to accept that aunt Emily always used this exact format, and that she never forgot or misspelled a name, but that is just how your aunt is.</p>
+<p>Tout ceci peut rendre nécessaire de mettre de côté le doute, et d'accepter aveuglément que tante Emilie utilise toujours cet exact format d'écriture, et qu'elle n'oublie jamais un nom de chat, ni ne fait de faute de frappe, mais c'est exactement comme çà qu'est votre tante.</p>
 </div><hr/><div class="block">
-<p>First, let me tell you about <a name="key1"></a>properties. A lot of JavaScript values have other values associated with them. These associations are called properties. Every string has a property called <a name="key2"></a><code>length</code>, which refers to a number, the amount of characters in that string.</p>
-<p><a name="key3"></a>Properties can be accessed in two ways:</p>
+<p>D'abord, je vais vous expliquer les <a name="key1"></a>propriétés. Beaucoup de valeurs en Javascript ont d'autres valeurs associés. Ces associations sont appelées propriétés. Chaque chaîne de caractère a une propriété appelée <a name="key2"></a><code>length</code>, (longueur), qui correspond à un nombre, la quantité de caractères dans cette chaîne.</p>
+<p><a name="key3"></a>On peut accéder aux propriétés de deux manières :</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">text</span> = <span class="string">&quot;purple haze&quot;</span>;
 <span class="variable">show</span>(<span class="variable">text</span>[<span class="string">&quot;length&quot;</span>]);
 <span class="variable">show</span>(<span class="variable">text</span>.<span class="property">length</span>);</pre>
-<p>The second way is a shorthand for the first, and it only works when the name of the property would be a valid variable name ― when it doesn't have any spaces or symbols in it and does not start with a digit character.</p>
-<p>The values <code>null</code> and <code>undefined</code> do not have any properties. Trying to read properties from such a value produces an error. Try the following code, if only to get an idea about the kind of error-message your browser produces in such a case (which, for some browsers, can be rather cryptic).</p>
+<p>La seconde manière est un raccourci de la première et ne fonctionne que lorsque le nom de la propriété s'écrit comme un nom de variable ― lorsqu'il n'y a pas d'espace ou de symbole, et lorsqu'elle ne commence par par un chiffre.</p>
+<p>Les valeurs <code>null</code> et <code>undefined</code> n'ont pas de propriété. Essayer de lire des propriétés de ces valeurs donnera une erreur. Essayez le code suivant, juste pour voir le type de message d'erreur que votre navigateur va retourner dans ce cas de figure. (Pour certains navigateurs, ce message sera assez mystérieux).</p>
 <pre class="code invalid"><span class="keyword">var</span> <span class="variable">nothing</span> = <span class="atom">null</span>;
 <span class="variable">show</span>(<span class="variable">nothing</span>.<span class="property">length</span>);</pre>
 </div><hr/><div class="block">
-<p>The properties of a string value can not be changed. There are quite a few more than just <code>length</code>, as we will see, but you are not allowed to add or remove any.</p>
-<p>This is different with values of the type <a name="key4"></a>object. Their main role is to hold other values. They have, you could say, their own set of tentacles in the form of properties. You are free to modify these, remove them, or add new ones.</p>
-<p><a name="key5"></a>An object can be written like this:</p>
+<p>Les propriétés d'une chaîne de caractère ne peuvent pas être changées. Elles sont plus nombreuses que la longueur <code>length</code>, comme nous allons le voir, mais vous ne pouvez ni ajouter ni supprimer des propriétés.</p>
+<p>C'est différent avec les valeur du type <a name="key4"></a>object. Leur rôle principal est de conserver d'autres valeurs. Ils ont, en quelque sorte leur propre, leur propre jeu de "tentacules" sous forme de propriétés. Vous pouvez les modifier, les supprimer ou en ajouter d'autres.</p>
+<p><a name="key5"></a>Un objet peut s'écrire de la façon suivante :</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">cat</span> = {<span class="property">colour</span>: <span class="string">&quot;grey&quot;</span>, <span class="property">name</span>: <span class="string">&quot;Spot&quot;</span>, <span class="property">size</span>: <span class="atom">46</span>};
 <span class="variable">cat</span>.<span class="property">size</span> = <span class="atom">47</span>;
 <span class="variable">show</span>(<span class="variable">cat</span>.<span class="property">size</span>);
 <span class="keyword">delete</span> <span class="variable">cat</span>.<span class="property">size</span>;
 <span class="variable">show</span>(<span class="variable">cat</span>.<span class="property">size</span>);
 <span class="variable">show</span>(<span class="variable">cat</span>);</pre>
-<p>Like variables, each property attached to an object is labelled by a string. The first statement creates an object in which the property <code>&quot;colour&quot;</code> holds the string <code>&quot;grey&quot;</code>, the property <code>&quot;name&quot;</code> is attached to the string <code>&quot;Spot&quot;</code>, and the property <code>&quot;size&quot;</code> refers to the number <code>46</code>. The second statement gives the property named <code>size</code> a new value, which is done in the same way as modifying a variable.</p>
-<p>The keyword <a name="key6"></a><code>delete</code> cuts off properties. Trying to read a non-existent property gives the value <code>undefined</code>.</p>
-<p>If a property that does not yet exist is set with the <a name="key7"></a><code>=</code> operator, it is added to the object.</p>
+<p>Comme les variables, chaque propriété attachée à un objet a son nom sous forme d'une chaîne de caractère. la première ligne créé un objet dans lequel la propriété <code>&quot;colour&quot;</code> contient la chaîne <code>&quot;grey&quot;</code>, la propriété <code>&quot;name&quot;</code> est liée à la chaîne <code>&quot;Spot&quot;</code>, et la propriété <code>&quot;size&quot;</code> fait référence au nombre <code>46</code>. La deuxième ligne fait référence à la propriété <code>size</code> une nouvelle valeur, ce qui se fait de la même manière que pour la modification d'une variable.</p>
+<p>Le mot-clé <a name="key6"></a><code>delete</code> supprime les propriétés. Essayer de lire une propriété qui n'existe pas donnera la valeur <code>undefined</code>.</p>
+<p>Si une propriété qui n'existe pas encore est affectée avec l'opérateur <a name="key7"></a><code>=</code> operator, elle est ajoutée à l'objet.</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">empty</span> = {};
 <span class="variable">empty</span>.<span class="property">notReally</span> = <span class="atom">1000</span>;
 <span class="variable">show</span>(<span class="variable">empty</span>.<span class="property">notReally</span>);</pre>
-<p>Properties whose names are not valid variable names have to be quoted when creating the object, and approached using brackets:</p>
+<p>Les propriétés dont le nom ne pourrait pas être une variable doivent être mise entre quillement au moment de la création de l'objet, et utilisées avec des parenthèses :</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">thing</span> = {<span class="string">&quot;gabba gabba&quot;</span>: <span class="string">&quot;hey&quot;</span>, <span class="string">&quot;5&quot;</span>: <span class="atom">10</span>};
 <span class="variable">show</span>(<span class="variable">thing</span>[<span class="string">&quot;5&quot;</span>]);
 <span class="variable">thing</span>[<span class="string">&quot;5&quot;</span>] = <span class="atom">20</span>;
 <span class="variable">show</span>(<span class="variable">thing</span>[<span class="atom">2</span> + <span class="atom">3</span>]);
 <span class="keyword">delete</span> <span class="variable">thing</span>[<span class="string">&quot;gabba gabba&quot;</span>];</pre>
-<p>As you can see, the part between the brackets can be any expression. It is converted to a string to determine the property name it refers to. One can even use variables to name properties:</p>
+<p>Comme vous pouvez le voir, on peut mettre n'importe quelle expression entre les parenthèses. Elle sera convertie dans une chaîne pour définir le nom de la propriété. On peut aussi utiliser des variables pour donner un nom à une propriété&nbsp;:</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">propertyName</span> = <span class="string">&quot;length&quot;</span>;
 <span class="keyword">var</span> <span class="variable">text</span> = <span class="string">&quot;mainline&quot;</span>;
 <span class="variable">show</span>(<span class="variable">text</span>[<span class="variable">propertyName</span>]);</pre>
-<p>The operator <a name="key8"></a><code>in</code> can be used to test whether an object has a certain property. It produces a boolean.</p>
+<p>L'opérateur <a name="key8"></a><code>in</code> peur servir à tester si un objet possède une certaine propriété. Son résultat est un booléen.</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">chineseBox</span> = {};
 <span class="variable">chineseBox</span>.<span class="property">content</span> = <span class="variable">chineseBox</span>;
 <span class="variable">show</span>(<span class="string">&quot;content&quot;</span> in <span class="variable">chineseBox</span>);
 <span class="variable">show</span>(<span class="string">&quot;content&quot;</span> in <span class="variable">chineseBox</span>.<span class="property">content</span>);</pre>
 </div><hr/><div class="block">
-<p>When object values are shown on the console, they can be clicked to inspect their properties. This changes the output window to an 'inspect' window. The little 'x' at the top-right can be used to return to the output window, and the left-arrow can be used to go back to the properties of the previously inspected object.</p>
+<p>Quand les valeurs d'un objet sont affichées sur la console, on peut cliquer à la souris pour inspecter leurs propriétés. La fenêtre de 'sortie' devient une fenêtre 'inspecteur'. Le petit 'x' en haut à droite s'utilise pour retourner à la fenêtre de sortie, et la flêche gauche permet de retourner aux propriétés de l'objet inspecté.</p>
 <pre class="code"><span class="variable">show</span>(<span class="variable">chineseBox</span>);</pre>
 </div><hr/><div class="block">
 <a name="exercise1"></a>
 <div class="exercisenum">Ex. 4.1</div>
 <div class="exercise">
-<p>The solution for the cat problem talks about a 'set' of names. A <a name="key9"></a>set is a collection of values in which no value may occur more than once. If names are strings, can you think of a way to use an object to represent a set of names?</p>
-<p>Show how a name can be added to this set, how one can be removed, and how you can check whether a name occurs in it.</p>
+<p>La solution pour le problème des Chats nous parle d'un 'ensemble' de noms. Un <a name="key9"></a>ensemble (ou 'set') est un groupe de valeurs dans lequel aucune valeur ne peut apparaître plus d'une fois. Si les noms de chats sont des chaînes de caractères, pouvez-vous imaginer une façon pour qu'un objet devienne un ensemble de noms&nbsp;?</p>
+<p>Ecrivez comment un nom peut être ajouté à cet ensemble, comment on peut le supprimer, et comment on peut tester si un certain nom est bien présent.</p>
 </div>
 <div class="solution">
 <p>This can be done by storing the content of the set as the properties of an object. Adding a name is done by setting a property by that name to a value, any value. Removing a name is done by deleting this property. The <code>in</code> operator can be used to determine whether a certain name is part of the set<a class="footref" href="#footnote1">1</a>.</p>
