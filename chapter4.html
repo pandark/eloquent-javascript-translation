@@ -1,4 +1,4 @@
-<html>
+s<html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/book.css"/>
 <link rel="stylesheet" type="text/css" href="css/highlight.css"/>
@@ -18,9 +18,9 @@
 </div>
 <h1><span class="number">Chapitre 4&nbsp;: </span>Structures de données&nbsp;: objets et tableaux</h1>
 <div class="block">
-<p>Ce chapitre sera consacré à la résolution de quelques problèmes simples. En chemin, nous allons étudier deux nouveaux types de valeurs, les tableaux et les objects, et regarder quelques techniques les concernant.</p>
-<p>Considérons la situation suivante : votre tante Emilie l'exentrique, dont la rumeur dit qu'elle vit avec cinquante chats (en fait personne n'arrive à les compter), vous envoie régulièrement des email pour vous tenir au courant de ses exploits. Ils sont de la forme suivante :</p>
-<blockquote>Mon cher neuveu,
+<p>Ce chapitre sera consacré à la résolution de quelques problèmes simples. En chemin, nous allons étudier deux nouveaux types de valeurs, les tableaux et les objets, et regarder quelques techniques les concernant.</p>
+<p>Considérons la situation suivante : votre tante Emilie l'exentrique, dont la rumeur dit qu'elle vit avec cinquante chats (en fait personne n'arrive à les compter), vous envoie régulièrement des emails pour vous tenir au courant de ses exploits. Ils sont de la forme suivante :</p>
+<blockquote>Mon cher neveu,
 <br/><br/>
 Ta mère m'a dit que tu as commencé à faire du parachutisme. Est-ce que c'est vrai ? Fait attention à toi, mon garçon ! Souviens toi ce qui est arrivé à mon mari, et ce n'était que du deuxième étage !
 <br/><br/>
@@ -63,7 +63,7 @@ Prendre la partie après ce signe.
 Séparer en noms différents en cherchant les virgules.
 </li></ol>
 
-<p>Tout ceci peut rendre nécessaire de mettre de côté le doute, et d'accepter aveuglément que tante Emilie utilise toujours cet exact format d'écriture, et qu'elle n'oublie jamais un nom de chat, ni ne fait de faute de frappe, mais c'est exactement comme çà qu'est votre tante.</p>
+<p>Cet énoncé d'exercice peut rendre nécessaire d'oublier quelques instants les exceptions possibles, et d'accepter aveuglément que tante Emilie utilise toujours le même format d'écriture, qu'elle n'oublie jamais un nom de chat, ni ne fait de faute de frappe, mais votre tante est comme çà, et çà tombe bien pour nous.</p>
 </div><hr/><div class="block">
 <p>D'abord, je vais vous expliquer les <a name="key1"></a>propriétés. Beaucoup de valeurs en Javascript ont d'autres valeurs associés. Ces associations sont appelées propriétés. Chaque chaîne de caractère a une propriété appelée <a name="key2"></a><code>length</code>, (longueur), qui correspond à un nombre, la quantité de caractères dans cette chaîne.</p>
 <p><a name="key3"></a>On peut accéder aux propriétés de deux manières :</p>
@@ -113,10 +113,10 @@ Séparer en noms différents en cherchant les virgules.
 <div class="exercisenum">Ex. 4.1</div>
 <div class="exercise">
 <p>La solution pour le problème des Chats nous parle d'un 'ensemble' de noms. Un <a name="key9"></a>ensemble (ou 'set') est un groupe de valeurs dans lequel aucune valeur ne peut apparaître plus d'une fois. Si les noms de chats sont des chaînes de caractères, pouvez-vous imaginer une façon pour qu'un objet devienne un ensemble de noms&nbsp;?</p>
-<p>Ecrivez comment un nom peut être ajouté à cet ensemble, comment on peut le supprimer, et comment on peut tester si un certain nom est bien présent.</p>
+<p>Ecrivez mantenant comment un nom peut être ajouté à cet ensemble, comment on peut le supprimer, et comment on peut vérifier si un certain nom est bien présent dans l'ensemble.</p>
 </div>
 <div class="solution">
-<p>This can be done by storing the content of the set as the properties of an object. Adding a name is done by setting a property by that name to a value, any value. Removing a name is done by deleting this property. The <code>in</code> operator can be used to determine whether a certain name is part of the set<a class="footref" href="#footnote1">1</a>.</p>
+<p>Une solution consiste à mémoriser le contenu de l'ensemble comme étant une propriété d'un objet. Pour ajouter un nom, on crée une propriété avec ce nom, en lui affectant une valeur, n'importe laquelle. Pour supprimer un nom, on supprimera la propriété de l'objet. L'opérateur <code>in</code> sera utilisé pour savoir si une certaine propriété fait partie de l'ensemble <a class="footref" href="#footnote1">1</a>.</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">set</span> = {<span class="string">&quot;Spot&quot;</span>: <span class="atom">true</span>};
 <span class="comment">// Add &quot;White Fang&quot; to the set</span>
 <span class="variable">set</span>[<span class="string">&quot;White Fang&quot;</span>] = <span class="atom">true</span>;
@@ -126,8 +126,8 @@ Séparer en noms différents en cherchant les virgules.
 <span class="variable">show</span>(<span class="string">&quot;Asoka&quot;</span> in <span class="variable">set</span>);</pre>
 </div>
 </div><hr/><div class="block">
-<p><a name="key10"></a>Object values, apparently, can change. The types of values discussed in <a href="chapter2.html">chapter 2</a> are all immutable, it is impossible to change an existing value of those types. You can combine them and derive new values from them, but when you take a specific string value, the text inside it can not change. With objects, on the other hand, the content of a value can be modified by changing its properties.</p>
-<p>When we have two numbers, <code>120</code> and <code>120</code>, they can for all practical purposes be considered the precise same number. With objects, there is a difference between having two references to the same object and having two different objects that contain the same properties. Consider the following code:</p>
+<p><a name="key10"></a>On voit ici que les valeurs d'un objet peuvent changer. Les types de valeurs vues dans le<a href="chapter2.html">chapitre 2</a> sont toutes invariantes, il n'est pas possible de changer une valeur existante pour ces types de données. Vous pouvez les associer ou les réutiliser pour d'autres valeurs, mais lorsque vous prenez le contenu particulier d'une chaîne de caractères ne peut pas être modifié en essayant de changer ses propriétés.</p>
+<p>A partir de deux nombres, <code>120</code> et <code>120</code>, il est possible de les considérer comme identiques pour les besoins de la programmation. Avec des objets, il y a une différence importante entre avoir deux 'références' du même objet, et avoir deux objets distincts qui possèdent les mêmes propriétés. Considérons le code suivant&nbsp;:</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">object1</span> = {<span class="property">value</span>: <span class="atom">10</span>};
 <span class="keyword">var</span> <span class="variable">object2</span> = <span class="variable">object1</span>;
 <span class="keyword">var</span> <span class="variable">object3</span> = {<span class="property">value</span>: <span class="atom">10</span>};
@@ -138,34 +138,34 @@ Séparer en noms différents en cherchant les virgules.
 <span class="variable">object1</span>.<span class="property">value</span> = <span class="atom">15</span>;
 <span class="variable">show</span>(<span class="variable">object2</span>.<span class="property">value</span>);
 <span class="variable">show</span>(<span class="variable">object3</span>.<span class="property">value</span>);</pre>
-<p><code>object1</code> and <code>object2</code> are two variables grasping the <em>same</em> value. There is only one actual object, which is why changing <code>object1</code> also changes the value of <code>object2</code>. The variable <code>object3</code> points to another object, which initially contains the same properties as <code>object1</code>, but lives a separate life.</p>
-<p>JavaScript's <a name="key11"></a><code>==</code> operator, when comparing objects, will only return <code>true</code> if both values given to it are the precise same value. Comparing different objects with identical contents will give <code>false</code>. This is useful in some situations, but unpractical in others.</p>
+<p><code>object1</code> et <code>object2</code> sont deux variables attachées à la <em>même</em> valeur. Il n'y a en fait qu'un seul objet, c'est pourquoi en changeant <code>object1</code> on change également al valeur de <code>object2</code>. La variable <code>object3</code> pointe vers un autre objet, qui contient au départ la même propriété que <code>object1</code>, mais il a une existence distincte.</p>
+<p>L'opérateur JavaScript <a name="key11"></a><code>==</code>, lorsqu'il compare des objets, ne retournera que la valeur booléenne <code>true</code> si chacune des valeur qu'on lui donne à comparer sont exactement les mêmes. Comparer des objets différents ayant des contenus identiques donnera le résultat <code>false</code>. C'est utile dans certaines situation, mais pas adapté dans d'autres.</p>
 </div><hr/><div class="block">
-<p>Object values can play a lot of different roles. Behaving like a set is only one of those. We will see a few other roles in this chapter, and <a href="chapter8.html">chapter 8</a> shows another important way of using objects.</p>
-<p>In the plan for the cat problem ― in fact, call it an <em>algorithm</em>, not a plan, that makes it sound like we know what we are talking about ― in the algorithm, it talks about going over all the e-mails in an archive. What does this archive look like? And where does it come from?</p>
-<p>Do not worry about the second question for now. <a href="chapter14.html">Chapter 14</a> talks about some ways to import data into your programs, but for now you will find that the e-mails are just magically there. Some magic is really easy, inside computers.</p>
+<p>Les valeurs d'un objet peuvent jouer beaucoup de rôles différents. Cette utilisation pour gérer un ensemble en est une. Nous allons voir d'autres utilisations dans ce chapitre et le <a href="chapter8.html">chapitre 8</a> couvrira d'autres utilisations importantes des objets.</p>
+<p>Dans le plan d'action pour le problème des Chats -en fait, appelons le un <em>algorithme</em>, au lieu d'un plan, celà nous donne l'impression qu'on sait de quoi on parle― dans l'algorythme, on parle de parcourir chaque email contenu dans une archive. Mais comment se présente cette archive&nbsp;? Et d'où vient-elle&nbsp;?</p>
+<p>Ne vous inquiétez pas de la deuxième question pour le moment. Le <a href="chapter14.html">chapitre 14</a> explique quelques-une des possibilités pour importer des données dans vos programmes. Pour l'instant, on dira que les emails sont déjà là, comme par magie. La magie est parfois très facile, avec les ordinateurs.</p>
 </div><hr/><div class="block">
-<p>The way in which the archive is stored is still an interesting question. It contains a number of e-mails. An e-mail can be a string, that should be obvious. The whole archive could be put into one huge string, but that is hardly practical. What we want is a collection of separate strings.</p>
-<p>Collections of things are what objects are used for. One could make an object like this:</p>
-<pre class="code"><span class="keyword">var</span> <span class="variable">mailArchive</span> = {<span class="string">&quot;the first e-mail&quot;</span>: <span class="string">&quot;Dear nephew, ...&quot;</span>,
-                   <span class="string">&quot;the second e-mail&quot;</span>: <span class="string">&quot;...&quot;</span>
-                   <span class="comment">/* and so on ... */</span>};</pre>
-<p>But that makes it hard to go over the e-mails from start to end ― how does the program guess the name of these properties? This can be solved by more predictable property names:</p>
-<pre class="code"><span class="keyword">var</span> <span class="variable">mailArchive</span> = {<span class="atom">0</span>: <span class="string">&quot;Dear nephew, ... (mail number 1)&quot;</span>,
-                   <span class="atom">1</span>: <span class="string">&quot;(mail number 2)&quot;</span>,
-                   <span class="atom">2</span>: <span class="string">&quot;(mail number 3)&quot;</span>};
+<p>La façon dont l'archive est enregisrée reste une question pertinente. Elle contient une quantité d'emails. Un email peut être vu comme une chaîne de caractères, c'est évident. Toute l'archive pourrait être mise dans une énorme chaîne de caractère, mais ce ne serait pas pratique. Ce qu'il nous faut c'est une structure de chaînes de caractères distinctes.</p>
+<p>Les objets sont justement utilisés pour structurer des choses. On pourrait très bien créer un objet comme celui-ci&nbsp;:</p>
+<pre class="code"><span class="keyword">var</span> <span class="variable">mailArchive</span> = {<span class="string">&quot;le premier email&quot;</span>: <span class="string">&quot;Cher neveu, ...&quot;</span>,
+                   <span class="string">&quot;le deuxieme email&quot;</span>: <span class="string">&quot;...&quot;</span>
+                   <span class="comment">/* etc ... */</span>};</pre>
+<p>Mais parcourir les emails du début à la fin serait difficile ― comment le programme peut-il deviner le nom de ces propriétés&nbsp;? La solution est d'utiliser des noms de propriétés plus pratiques&nbsp;:</p>
+<pre class="code"><span class="keyword">var</span> <span class="variable">mailArchive</span> = {<span class="atom">0</span>: <span class="string">&quot;Cher neveu, ... (email numero 1)&quot;</span>,
+                   <span class="atom">1</span>: <span class="string">&quot;(email numero 2)&quot;</span>,
+                   <span class="atom">2</span>: <span class="string">&quot;(email numero 3)&quot;</span>};
 
 <span class="keyword">for</span> (<span class="keyword">var</span> <span class="variable">current</span> = <span class="atom">0</span>; <span class="variable">current</span> in <span class="variable">mailArchive</span>; <span class="variable">current</span>++)
-  <span class="variable">print</span>(<span class="string">&quot;Processing e-mail #&quot;</span>, <span class="variable">current</span>, <span class="string">&quot;: &quot;</span>, <span class="variable">mailArchive</span>[<span class="variable">current</span>]);</pre>
-<p>Luck has it that there is a special kind of objects specifically for this kind of use. They are called <a name="key12"></a>arrays, and they provide some conveniences, such as a <a name="key13"></a><code>length</code> property that contains the amount of values in the array, and a number of operations useful for this kind of collections.</p>
-<p><a name="key14"></a>New arrays can be created using brackets (<code>[</code> and <code>]</code>):</p>
-<pre class="code"><span class="keyword">var</span> <span class="variable">mailArchive</span> = [<span class="string">&quot;mail one&quot;</span>, <span class="string">&quot;mail two&quot;</span>, <span class="string">&quot;mail three&quot;</span>];
+  <span class="variable">print</span>(<span class="string">&quot;Traitement du mail #&quot;</span>, <span class="variable">current</span>, <span class="string">&quot;: &quot;</span>, <span class="variable">mailArchive</span>[<span class="variable">current</span>]);</pre>
+<p>La chance veut qu'il existe un type d'objet particulier qui corrrespond exactement à ce type de besoin. Ce sont les tableaux (<a name="key12"></a>arrays), et ils fournissent des services très utiles, comme par exemple <a name="key13"></a><code>length</code> (longueur), une propriété qui contient le nombre d'éléments dans le tableau, et bien d'autres fonctions utiles pour ce type de structure.</p>
+<p><a name="key14"></a>Pour créer de nouveaux tableaux on utilise des crochets (<code>[</code> et <code>]</code>):</p>
+<pre class="code"><span class="keyword">var</span> <span class="variable">mailArchive</span> = [<span class="string">&quot;mail un&quot;</span>, <span class="string">&quot;mail deux&quot;</span>, <span class="string">&quot;mail trois&quot;</span>];
 
 <span class="keyword">for</span> (<span class="keyword">var</span> <span class="variable">current</span> = <span class="atom">0</span>; <span class="variable">current</span> &lt; <span class="variable">mailArchive</span>.<span class="property">length</span>; <span class="variable">current</span>++)
-  <span class="variable">print</span>(<span class="string">&quot;Processing e-mail #&quot;</span>, <span class="variable">current</span>, <span class="string">&quot;: &quot;</span>, <span class="variable">mailArchive</span>[<span class="variable">current</span>]);</pre>
-<p>In this example, the numbers of the elements are not specified explicitly anymore. The first one automatically gets the number 0, the second the number 1, and so on.</p>
-<p>Why start at 0? People tend to start counting from 1. As unintuitive as it seems, numbering the elements in a collection from 0 is often more practical. Just go with it for now, it will grow on you.</p>
-<p>Starting at element 0 also means that in a collection with <code>X</code> elements, the last element can be found at position <code>X - 1</code>. This is why the <code>for</code> loop in the example checks for <code>current &lt; mailArchive.length</code>. There is no element at position <code>mailArchive.length</code>, so as soon as <code>current</code> has that value, we stop looping.</p>
+  <span class="variable">print</span>(<span class="string">&quot;Traitement du mail #&quot;</span>, <span class="variable">current</span>, <span class="string">&quot;: &quot;</span>, <span class="variable">mailArchive</span>[<span class="variable">current</span>]);</pre>
+<p>Dans cet exemple, le nombre d'éléments n'est plus explicite. Le premier a automatiquement le numéro 0, le deuxième le numéro 1, et ainsi de suite.</p>
+<p>Pourquoi commencer à 0&nbsp;? On compte d'habitude à partir de 1. Aussi étrange que celà paraîsse, la numérotation à partir de 0 est souvent plus pratique pour programmer. Acceptez le pour l'instant, vous allez vous y faire.</p>
+<p>Commencer par l'élément 0 veut aussi dire que dans une structure qui a <code>X</code> éléments, le dernier élément sera trouvé à la position <code>X - 1</code>. C'est pourquoi la boucle <code>for</code> dans notre exemple teste la valeur <code>current &lt; mailArchive.length</code>. IL n'y a pas d'élément à la position <code>mailArchive.length</code>, donc dès que <code>current</code> atteint cette valeur, on arrête la boucle.</p>
 </div><hr/><div class="block">
 <a name="exercise2"></a>
 <div class="exercisenum">Ex. 4.2</div>
