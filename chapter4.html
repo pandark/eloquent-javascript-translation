@@ -100,20 +100,20 @@ Séparer en noms différents en cherchant les virgules.
 <pre class="code"><span class="keyword">var</span> <span class="variable">propertyName</span> = <span class="string">&quot;length&quot;</span>;
 <span class="keyword">var</span> <span class="variable">text</span> = <span class="string">&quot;mainline&quot;</span>;
 <span class="variable">show</span>(<span class="variable">text</span>[<span class="variable">propertyName</span>]);</pre>
-<p>The operator <a name="key8"></a><code>in</code> can be used to test whether an object has a certain property. It produces a boolean.</p>
+<p>L'opérateur <a name="key8"></a><code>in</code> peur servir à tester si un objet possède une certaine propriété. Son résultat est un booléen.</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">chineseBox</span> = {};
 <span class="variable">chineseBox</span>.<span class="property">content</span> = <span class="variable">chineseBox</span>;
 <span class="variable">show</span>(<span class="string">&quot;content&quot;</span> in <span class="variable">chineseBox</span>);
 <span class="variable">show</span>(<span class="string">&quot;content&quot;</span> in <span class="variable">chineseBox</span>.<span class="property">content</span>);</pre>
 </div><hr/><div class="block">
-<p>When object values are shown on the console, they can be clicked to inspect their properties. This changes the output window to an 'inspect' window. The little 'x' at the top-right can be used to return to the output window, and the left-arrow can be used to go back to the properties of the previously inspected object.</p>
+<p>Quand les valeurs d'un objet sont affichées sur la console, on peut cliquer à la souris pour inspecter leurs propriétés. La fenêtre de 'sortie' devient une fenêtre 'inspecteur'. Le petit 'x' en haut à droite s'utilise pour retourner à la fenêtre de sortie, et la flêche gauche permet de retourner aux propriétés de l'objet inspecté.</p>
 <pre class="code"><span class="variable">show</span>(<span class="variable">chineseBox</span>);</pre>
 </div><hr/><div class="block">
 <a name="exercise1"></a>
 <div class="exercisenum">Ex. 4.1</div>
 <div class="exercise">
-<p>The solution for the cat problem talks about a 'set' of names. A <a name="key9"></a>set is a collection of values in which no value may occur more than once. If names are strings, can you think of a way to use an object to represent a set of names?</p>
-<p>Show how a name can be added to this set, how one can be removed, and how you can check whether a name occurs in it.</p>
+<p>La solution pour le problème des Chats nous parle d'un 'ensemble' de noms. Un <a name="key9"></a>ensemble (ou 'set') est un groupe de valeurs dans lequel aucune valeur ne peut apparaître plus d'une fois. Si les noms de chats sont des chaînes de caractères, pouvez-vous imaginer une façon pour qu'un objet devienne un ensemble de noms&nbsp;?</p>
+<p>Ecrivez comment un nom peut être ajouté à cet ensemble, comment on peut le supprimer, et comment on peut tester si un certain nom est bien présent.</p>
 </div>
 <div class="solution">
 <p>This can be done by storing the content of the set as the properties of an object. Adding a name is done by setting a property by that name to a value, any value. Removing a name is done by deleting this property. The <code>in</code> operator can be used to determine whether a certain name is part of the set<a class="footref" href="#footnote1">1</a>.</p>
