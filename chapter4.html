@@ -30,20 +30,20 @@ Par ailleurs, l'escroquerie dont je t'avais parlé fonctionne mieux que je pensa
 <br/><br/>
 (…etc.)
 <br/><br/>
-Grosses bises, Tante Émilie
+Grosses bises, Tante Emily
 <br/><br/>
 Décès le 27/04/2006: Leclère Noire
 <br/><br/>
 Naissance le 05/04/2006 (mère Lady Penelope)&nbsp;: Lion Rouge, Docteur Hobbles le 3e, Petit Iroquois</blockquote>
 <p>Pour amuser cette vieille dame, vous voudriez garder une trace de la généalogie de ses chats, pour pouvoir ajouter des commentaires comme &quot;P.S. J'espère que Docteur Hobbles le 2e a bien fêté son anniversaire samedi !&quot;, ou bien &quot;Comme va cette vieille Lady Penelope ? Elle a cinq ans maintenant, n'est-ce pas ?&quot;, en évitant de préférence de demander des nouvelles des chats décédés. Vous avez une grande quantité archivée d'email de votre tante, et par chance, elle est très constante dans sa manière de donner les renseignements sur les naissances et décès des chats, à la fin de ses emails, toujours dans le même format.</p>
 <p>Vous n'avez pas envie de parcourir à la main tout ses messages. Heureusement, nous avions justement besoin d'un exemple, nous allons donc écrire un programme qui va faire le travail pour nous. Pour commencer, nous écrivons un programme qui va nous donner la liste des chats qui sont toujours vivants à la fin le dernier email.</p>
-<p>Before you ask, at the start of the correspondence, aunt Emily had only a single cat: Spot. (She was still rather conventional in those days.)</p>
+<p>Avant que vous ne posiez la question, au début de cette correspondance, la tante Emily n'avait qu'un seul chat&nbsp;: Spot (elle était encore assez conformiste à cette époque).</p>
 </div><hr/><div class="block">
 <div class="picture"><img src="img/eyes.png"/></div>
 </div><hr/><div class="block">
-<p>Il est généralement préférable d'avoir une idée de départ sur ce que va faire un programme avant de se mettre à l'écrire... Voici le plan&nbsp;:</p>
+<p>Il est généralement préférable d'avoir une idée de départ sur ce que va faire un programme avant de se mettre à l'écrire… Voici le plan&nbsp;:</p>
 <ol><li>
-Commencer avec un ensemble de nom de chats qne comprenant que &quot;Spot&quot;.
+Commencer avec un ensemble de nom de chats ne comprenant que &quot;Spot&quot;.
 </li><li>
 Parcourir chaque email dans l'archive, par ordre chronologique.
 </li><li>
@@ -54,29 +54,29 @@ Ajouter les noms de chats trouvés dans les paragraphes qui commencent par &quot
 Supprimer les noms de chats trouvés dans les paragraphes qui commencent par &quot;Décès le&quot; de notre ensemble.
 </li></ol>
 
-<p>On prendra les noms à partir d'un paragraphe de la façon suivante :</p>
+<p>On prendra les noms à partir d'un paragraphe de la façon suivante&nbsp;:</p>
 <ol><li>
-Trouver les 'deux points' (:) dans le paragraphe.
+Trouver les deux-points (:) dans le paragraphe.
 </li><li>
 Prendre la partie après ce signe.
 </li><li>
 Séparer en noms différents en cherchant les virgules.
 </li></ol>
 
-<p>Cet énoncé d'exercice peut rendre nécessaire d'oublier quelques instants les exceptions possibles, et d'accepter aveuglément que tante Emilie utilise toujours le même format d'écriture, qu'elle n'oublie jamais un nom de chat, ni ne fait de faute de frappe, mais votre tante est comme çà, et çà tombe bien pour nous.</p>
+<p>Cet énoncé d'exercice peut rendre nécessaire d'oublier quelques instants les exceptions possibles, et d'accepter aveuglément que tante Emilie utilise toujours le même format d'écriture, qu'elle n'oublie jamais un nom de chat, ni ne fait de faute de frappe, mais votre tante est comme ça, et ça tombe bien pour nous.</p>
 </div><hr/><div class="block">
-<p>D'abord, je vais vous expliquer les <a name="key1"></a>propriétés. Beaucoup de valeurs en Javascript ont d'autres valeurs associés. Ces associations sont appelées propriétés. Chaque chaîne de caractère a une propriété appelée <a name="key2"></a><code>length</code>, (longueur), qui correspond à un nombre, la quantité de caractères dans cette chaîne.</p>
-<p><a name="key3"></a>On peut accéder aux propriétés de deux manières :</p>
+<p>D'abord, je vais vous expliquer les <a name="key1"></a>propriétés. Beaucoup de valeurs en Javascript ont d'autres valeurs associées. Ces associations sont appelées propriétés. Chaque chaîne de caractères a une propriété appelée <a name="key2"></a><code>length</code>, (longueur), qui correspond à un nombre, la quantité de caractères dans cette chaîne.</p>
+<p><a name="key3"></a>On peut accéder aux propriétés de deux manières&nbsp;:</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">text</span> = <span class="string">&quot;purple haze&quot;</span>;
 <span class="variable">show</span>(<span class="variable">text</span>[<span class="string">&quot;length&quot;</span>]);
 <span class="variable">show</span>(<span class="variable">text</span>.<span class="property">length</span>);</pre>
-<p>La seconde manière est un raccourci de la première et ne fonctionne que lorsque le nom de la propriété s'écrit comme un nom de variable ― lorsqu'il n'y a pas d'espace ou de symbole, et lorsqu'elle ne commence par par un chiffre.</p>
+<p>La seconde manière est un raccourci de la première et ne fonctionne que lorsque le nom de la propriété s'écrit comme un nom de variable ―&nbsp;lorsqu'il n'y a pas d'espace ou de symbole, et lorsqu'elle ne commence pas par un chiffre.</p>
 <p>Les valeurs <code>null</code> et <code>undefined</code> n'ont pas de propriété. Essayer de lire des propriétés de ces valeurs donnera une erreur. Essayez le code suivant, juste pour voir le type de message d'erreur que votre navigateur va retourner dans ce cas de figure. (Pour certains navigateurs, ce message sera assez mystérieux).</p>
 <pre class="code invalid"><span class="keyword">var</span> <span class="variable">nothing</span> = <span class="atom">null</span>;
 <span class="variable">show</span>(<span class="variable">nothing</span>.<span class="property">length</span>);</pre>
 </div><hr/><div class="block">
-<p>Les propriétés d'une chaîne de caractère ne peuvent pas être changées. Elles sont plus nombreuses que la longueur <code>length</code>, comme nous allons le voir, mais vous ne pouvez ni ajouter ni supprimer des propriétés.</p>
-<p>C'est différent avec les valeur du type <a name="key4"></a>object. Leur rôle principal est de conserver d'autres valeurs. Ils ont, en quelque sorte leur propre, leur propre jeu de "tentacules" sous forme de propriétés. Vous pouvez les modifier, les supprimer ou en ajouter d'autres.</p>
+<p>Les propriétés d'une chaîne de caractères ne peuvent pas être changées. Elles sont plus nombreuses que la longueur <code>length</code>, comme nous allons le voir, mais vous ne pouvez ni ajouter ni supprimer des propriétés.</p>
+<p>C'est différent avec les valeur du type <a name="key4"></a>object. Leur rôle principal est de conserver d'autres valeurs. Ils ont, en quelque sorte leur propre jeu de "tentacules" sous forme de propriétés. Vous pouvez les modifier, les supprimer ou en ajouter d'autres.</p>
 <p><a name="key5"></a>Un objet peut s'écrire de la façon suivante :</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">cat</span> = {<span class="property">colour</span>: <span class="string">&quot;grey&quot;</span>, <span class="property">name</span>: <span class="string">&quot;Spot&quot;</span>, <span class="property">size</span>: <span class="atom">46</span>};
 <span class="variable">cat</span>.<span class="property">size</span> = <span class="atom">47</span>;
@@ -84,13 +84,13 @@ Séparer en noms différents en cherchant les virgules.
 <span class="keyword">delete</span> <span class="variable">cat</span>.<span class="property">size</span>;
 <span class="variable">show</span>(<span class="variable">cat</span>.<span class="property">size</span>);
 <span class="variable">show</span>(<span class="variable">cat</span>);</pre>
-<p>Comme les variables, chaque propriété attachée à un objet a son nom sous forme d'une chaîne de caractère. la première ligne créé un objet dans lequel la propriété <code>&quot;colour&quot;</code> contient la chaîne <code>&quot;grey&quot;</code>, la propriété <code>&quot;name&quot;</code> est liée à la chaîne <code>&quot;Spot&quot;</code>, et la propriété <code>&quot;size&quot;</code> fait référence au nombre <code>46</code>. La deuxième ligne fait référence à la propriété <code>size</code> une nouvelle valeur, ce qui se fait de la même manière que pour la modification d'une variable.</p>
+<p>Comme les variables, chaque propriété attachée à un objet a son nom sous forme d'une chaîne de caractères. la première ligne créé un objet dans lequel la propriété <code>&quot;colour&quot;</code> contient la chaîne <code>&quot;grey&quot;</code>, la propriété <code>&quot;name&quot;</code> est liée à la chaîne <code>&quot;Spot&quot;</code>, et la propriété <code>&quot;size&quot;</code> fait référence au nombre <code>46</code>. La deuxième ligne fait référence à la propriété <code>size</code> une nouvelle valeur, ce qui se fait de la même manière que pour la modification d'une variable.</p>
 <p>Le mot-clé <a name="key6"></a><code>delete</code> supprime les propriétés. Essayer de lire une propriété qui n'existe pas donnera la valeur <code>undefined</code>.</p>
 <p>Si une propriété qui n'existe pas encore est affectée avec l'opérateur <a name="key7"></a><code>=</code> operator, elle est ajoutée à l'objet.</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">empty</span> = {};
 <span class="variable">empty</span>.<span class="property">notReally</span> = <span class="atom">1000</span>;
 <span class="variable">show</span>(<span class="variable">empty</span>.<span class="property">notReally</span>);</pre>
-<p>Les propriétés dont le nom ne pourrait pas être une variable doivent être mise entre quillement au moment de la création de l'objet, et utilisées avec des parenthèses :</p>
+<p>Les propriétés dont le nom ne pourrait pas être une variable doivent être mises entre guillemets au moment de la création de l'objet, et utilisées avec des parenthèses&nbsp;:</p>
 <pre class="code"><span class="keyword">var</span> <span class="variable">thing</span> = {<span class="string">&quot;gabba gabba&quot;</span>: <span class="string">&quot;hey&quot;</span>, <span class="string">&quot;5&quot;</span>: <span class="atom">10</span>};
 <span class="variable">show</span>(<span class="variable">thing</span>[<span class="string">&quot;5&quot;</span>]);
 <span class="variable">thing</span>[<span class="string">&quot;5&quot;</span>] = <span class="atom">20</span>;
