@@ -73,28 +73,28 @@
 <p>On peut comparer des chaînes de la même façon&nbsp;:</p>
 <pre class="code expression"><span class="string">&quot;Aardvark&quot;</span> &lt; <span class="string">&quot;Zoroaster&quot;</span></pre>
 <p>Le classement des chaînes suit plus ou moins l'ordre alphabétique. Plus ou moins parce que… les lettres en haut de casse (en capitales) sont toujours «&nbsp;inférieures&nbsp;» à celles qui sont en minuscules, donc <code>&quot;Z&quot; &lt; &quot;a&quot;</code> (Z rn capitale, a en minuscule) vaut <code>true</code>, et les caractères non alphabétiques ('<code>!</code>', '<code>@</code>', etc.) sont également inclus dans ce classement. Le véritable principe sur lequel repose la comparaison est le <a name="key24"></a>standard Unicode. Ce dernier assigne un nombre à potentiellement tout caractère dont on peut avoir besoin, y compris les caractères spéciaux de langues comme le grec, l'arabe, le japonais, le tamoul, etc. Disposer de tels nombres est bien pratique pour stocker des chaînes dans un ordinateur — vous pouvez les représenter comme une série de nombres. En comparant les chaînes, le JavaScript se contente de comparer les nombres associés aux caractères dans la chaîne, de gauche à droite.</p>
-<p>Other similar operators are <a name="key25"></a><code>&gt;=</code> ('is greater than or equal to'), <a name="key26"></a><code>&lt;=</code> (is less than or equal to), <a name="key27"></a><code>==</code> ('is equal to'), and <a name="key28"></a><code>!=</code> ('is not equal to').</p>
+<p>Voici d'autres opérateurs du même genre&nbsp;: <a name="key25"></a><code>&gt;=</code> («&nbsp;supérieur ou égal à&nbsp;»), <a name="key26"></a><code>&lt;=</code> («&nbsp;inférieur ou égal à&nbsp;»), <a name="key27"></a><code>==</code> («&nbsp;égal à&nbsp;»), et <a name="key28"></a><code>!=</code> («&nbsp;n'est pas égal à&nbsp;»).</p>
 <pre class="code expression"><span class="string">&quot;Itchy&quot;</span> != <span class="string">&quot;Scratchy&quot;</span></pre>
 <pre class="code expression"><span class="atom">5e2</span> == <span class="atom">500</span></pre>
 </div><hr/><div class="block">
-<p>There are also some useful operations that can be applied to boolean values themselves. JavaScript supports three logical operators: <em>and</em>, <em>or</em>, and <em>not</em>. These can be used to 'reason' about booleans.</p>
-<p>The <a name="key29"></a><code>&amp;&amp;</code> operator represents logical <em>and</em>. It is a binary operator, and its result is only <code>true</code> if both of the values given to it are <code>true</code>.</p>
+<p>Il existe également des opérations très utiles qui peuvent être appliquées aux valeurs booléennes elles-mêmes. JavaScript prend en charge trois opérateurs logiques&nbsp;: <em>and</em>, <em>or</em>, et <em>not</em>. que l'on peut utiliser pour des opérations logiques sur les booléens.</p>
+<p>l'opérateur <a name="key29"></a><code>&amp;&amp;</code> représente le <em>and</em> (et) logique. C'est un opérateur binaire dont le résultat est <code>true</code> seulement si les deux valeurs qu'on lui donne sont <code>true</code>.</p>
 <pre class="code expression"><span class="atom">true</span> &amp;&amp; <span class="atom">false</span></pre>
-<p><a name="key30"></a><code>||</code> is the logical <em>or</em>, it is <code>true</code> if either of the values given to it is <code>true</code>:</p>
+<p><a name="key30"></a><code>||</code> est le <em>or</em> (ou) logique, qui vaut <code>true</code> si l'une ou l'autre des valeurs qu'on lui attribue est <code>true</code>:</p>
 <pre class="code expression"><span class="atom">true</span> || <span class="atom">false</span></pre>
-<p><em>Not</em> is written as an exclamation mark, <a name="key31"></a><code>!</code>, it is a unary operator that flips the value given to it, <code>!true</code> is <code>false</code>, and <code>!false</code> is <code>true</code>.</p>
+<p><em>Not</em> s'écrit avec un point d'exclamation, <a name="key31"></a><code>!</code>, c'est un opérateur unaire qui inverse la valeur qu'on lui attribue, <code>!true</code> est <code>false</code>, et<code>!false</code> signifie <code>true</code>.</p>
 </div><hr/><div class="block">
 <a name="exercise1"></a>
 <div class="exercisenum">Ex. 2.1</div>
 <div class="exercise">
 <pre class="code expression">((<span class="atom">4</span> &gt;= <span class="atom">6</span>) || (<span class="string">&quot;grass&quot;</span> != <span class="string">&quot;green&quot;</span>)) &amp;&amp;
    !(((<span class="atom">12</span> * <span class="atom">2</span>) == <span class="atom">144</span>) &amp;&amp; <span class="atom">true</span>)</pre>
-<p>Is this true? For readability, there are a lot of unnecessary parentheses in there. This simple version means the same thing:</p>
+<p>Est-ce vrai&nbsp; (true)? Pour une meilleure lisibilité, on peut se séparer d'un grand nombre de parenthèses inutiles ici. Cette version plus simple signifie la même chose&nbsp;:</p>
 <pre class="code expression">(<span class="atom">4</span> &gt;= <span class="atom">6</span> || <span class="string">&quot;grass&quot;</span> != <span class="string">&quot;green&quot;</span>) &amp;&amp;
    !(<span class="atom">12</span> * <span class="atom">2</span> == <span class="atom">144</span> &amp;&amp; <span class="atom">true</span>)</pre>
 </div>
 <div class="solution">
-<p>Yes, it is <code>true</code>. You can reduce it step by step like this:</p>
+<p>Oui, c'est bien <code>true</code>. Vous pouvez le décomposer étape par étape comme ceci&nbsp;:</p>
 <pre class="code expression">(<span class="atom">false</span> || <span class="atom">true</span>) &amp;&amp; !(<span class="atom">false</span> &amp;&amp; <span class="atom">true</span>)</pre>
 <pre class="code expression"><span class="atom">true</span> &amp;&amp; !<span class="atom">false</span></pre>
 <pre class="code expression"><span class="atom">true</span></pre>
