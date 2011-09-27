@@ -5726,13 +5726,13 @@ function Console(param) {
   var buffers = SELECT({"class": "buffers"});
   replaceChildNodes(
     param.controls,
-    BUTTON({title: "Run the code in this buffer", "type": "button"},
-           "Run", attach("onclick", function(){runCode(active.getCode(), false);})),
+    BUTTON({title: "Lancer le code dans ce tampon", "type": "button"},
+           "Lancer", attach("onclick", function(){runCode(active.getCode(), false);})),
     buffers,
-    BUTTON({title: "New buffer", "type": "button"}, "New", attach("onclick", createBuffer)),
-    BUTTON({title: "Load a file as a new buffer", "type": "button"}, "Load", attach("onclick", loadFile)),
-    BUTTON({title: "Close this buffer", "type": "button"}, "Close", attach("onclick", closeBuffer)),
-    BUTTON({title: "Reset the console environment", "type": "button"}, "Reset", attach("onclick", resetEnvironment)));
+    BUTTON({title: "Nouveau tampon", "type": "button"}, "Nouveau", attach("onclick", createBuffer)),
+    BUTTON({title: "Charge un fichier dans un nouveau tampon", "type": "button"}, "Charger", attach("onclick", loadFile)),
+    BUTTON({title: "Fermer ce tampon", "type": "button"}, "Fermer", attach("onclick", closeBuffer)),
+    BUTTON({title: "Réinitialiser l'environnement de la console", "type": "button"}, "Réinitialiser", attach("onclick", resetEnvironment)));
   connect(buffers, "onchange", function(){
     showBuffer(buffers.options[buffers.selectedIndex].buffer);
   });
@@ -5771,7 +5771,7 @@ function Console(param) {
     return res;
   }
   function createBuffer(){
-    var name = prompt("Enter a name for the new buffer", "");
+    var name = prompt("Saisissez un nom pour le nouveau tampon", "");
     if (name)
       addBuffer(name);
   }
@@ -5790,14 +5790,14 @@ function Console(param) {
     }
   }
   function loadFile(){
-    var filename = prompt("Enter a filename or URL", "");
+    var filename = prompt("Saisissez un nom de fichier ou une URL", "");
     if (filename) {
       var simplename = stripPath(filename);
       if (!/^http:\/\//.test(filename))
         filename = "js/" + filename;
       var defer = doXHR(filename);
       defer.addCallback(function(xhr){addBuffer(simplename, xhr.responseText);});
-      defer.addErrback(function(){alert("File '" + simplename + "' could not be loaded.");});
+      defer.addErrback(function(){alert("Le fichier « " + simplename + " » n'a pas pu être chargé.");});
     }
   }
 
