@@ -5615,17 +5615,17 @@ function Output(place, parent) {
   this.parent = parent;
 
   this.outhead = DIV({"class": "outputhead"},
-                     DIV({"class": "outputbutton", "title": "Clear output"}, "\u263C",
+                     DIV({"class": "outputbutton", "title": "Vider la sortie"}, "\u263C",
                          attach("onclick", method(this, "clear"))),
-                     "Output:");
+                     "Sortie :");
   this.out = PRE(), this.show = PRE();
   this.scroll = DIV({"class": "outputinner", "id": "outputinner"}, this.out);
   this.showhead = DIV({"class": "outputhead"},
-                      DIV({"class": "outputbutton", "title": "Store this value in $i"}, "$",
+                      DIV({"class": "outputbutton", "title": "Stocker cette valeur dans $i"}, "$",
                           attach("onclick", method(this, "copy"))),
                       DIV({"class": "outputbutton", "title": "Close inspect view"}, "\u00D7",
                           attach("onclick", method(this, "close"))),
-                      DIV({"class": "outputbutton", "title": "Back"}, "\u2190",
+                      DIV({"class": "outputbutton", "title": "Retour"}, "\u2190",
                           attach("onclick", method(this, "back"))),
                      "View object");
   replaceChildNodes(this.place, this.outhead, this.scroll);
@@ -5872,7 +5872,7 @@ function Console(param) {
     event.stop();
   }
 
-  addBuffer("*scratch*");
+  addBuffer("*brouillon*");
 
   this.loadCode = addBuffer;
   this.showCode = gotoBuffer;
