@@ -1,5 +1,5 @@
 <fruits>
-  <fruit name="banana" color="yellow"/>
-  <fruit name="lemon" color="yellow"/>
-  <fruit name="cherry" color="red"/>
+  <fruit name="banane" color="jaune"/>
+  <fruit name="citron" color="jaune"/>
+  <fruit name="cerise" color="rouge"/>
 </fruits>

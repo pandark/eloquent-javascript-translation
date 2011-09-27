@@ -1,14 +1,14 @@
-<catalog>
+<catalogue>
   <fruit>
-    <name>apple</name>
-    <color>red</color>
+    <nom>pomme</nom>
+    <couleur>rouge</couleur>
   </fruit>
   <fruit>
-    <name>orange</name>
-    <color>orange</color>
+    <nom>orange</nom>
+    <couleur>orange</couleur>
   </fruit>
   <fruit>
-    <name>banana</name>
-    <color>yellow</color>
+    <nom>banane</nom>
+    <couleur>jaune</couleur>
   </fruit>
-</catalog>
+</catalogue>
