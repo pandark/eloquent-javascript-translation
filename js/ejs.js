@@ -4967,9 +4967,9 @@ var processPage = function(){
       setOpen(!open);
     }
 
-    var showHide = BUTTON({"class": "showhide", "type": "button", "title": "Open or close the console"},
+    var showHide = BUTTON({"class": "showhide", "type": "button", "title": "Ouvrir ou fermer la console"},
       attach("onclick", toggle));
-    var resize = BUTTON({"class": "resize", "type": "button", "title": "Resize the console", "id": "resize"},
+    var resize = BUTTON({"class": "resize", "type": "button", "title": "Redimensionner la console", "id": "resize"},
       attach("onmousedown", dragResize));
 
     var output = DIV({"class": "output", "id": "output"}),
