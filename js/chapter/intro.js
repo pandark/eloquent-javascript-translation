@@ -1,17 +1,17 @@
-function range(start, end) {
+function serie(debut, fin) {
   if (arguments.length < 2) {
-    end = start;
-    start = 0;
+    fin = debut;
+    debut = 0;
   }
-  var result = [];
-  for (var i = start; i <= end; i++)
-    result.push(i);
-  return result;
+  var resultat = [];
+  for (var i = debut; i <= fin; i++)
+    resultat.push(i);
+  return resultat;
 }
 
-function sum(numbers) {
+function somme(nombres) {
   var total = 0;
-  for (var i = 0; i < numbers.length; i++)
-    total += numbers[i];
+  for (var i = 0; i < nombres.length; i++)
+    total += nombres[i];
   return total;
 }
