@@ -4688,14 +4688,14 @@ var processPage = function(){
       }
 
       if (!expr) {
-          var load = code.insertBefore(BUTTON({"class": "codebutton load", "type": "button", "title": "Load this code into the console"}), code.firstChild);
+          var load = code.insertBefore(BUTTON({"class": "codebutton load", "type": "button", "title": "Charger de code dans la console"}), code.firstChild);
         connect(load, "onclick", function(){
           setOpen(true);
-          _console.loadCode("example", getCode(code));
+          _console.loadCode("exemple", getCode(code));
         });
       }
 
-      var run = code.insertBefore(BUTTON({"class": "codebutton run", "title": "Run this code", "type": "button"}), code.firstChild);
+      var run = code.insertBefore(BUTTON({"class": "codebutton run", "title": "Lancer ce code", "type": "button"}), code.firstChild);
       connect(run, "onclick", function(event){
         removeElementClass(code, "not-run");
         setOpen(true);
