@@ -113,7 +113,7 @@ if(typeof (MochiKit.Iter)!="undefined"){
 obj=MochiKit.Iter.list(obj);
 l=obj.length;
 }else{
-throw new TypeError("Argument not an array-like and MochiKit.Iter not present");
+throw new TypeError("Argument ne ressemble pas à un tableau et MochiKit.Iter n'est pas présent");
 }
 }
 if(!_18){
@@ -335,7 +335,7 @@ if(fn===null){
 return lst;
 }
 }else{
-throw new TypeError("Argument not an array-like and MochiKit.Iter not present");
+throw new TypeError("Argument ne ressemble pas à un tableau et MochiKit.Iter n'est pas présent");
 }
 }
 if(fn===null){
@@ -356,7 +356,7 @@ if(!_8d(arguments[i])){
 if(itr){
 return itr.list(itr.imap.apply(null,arguments));
 }else{
-throw new TypeError("Argument not an array-like and MochiKit.Iter not present");
+throw new TypeError("Argument ne ressemble pas à un tableau et MochiKit.Iter n'est pas présent");
 }
 }
 var l=arguments[i].length;
@@ -393,7 +393,7 @@ if(!m.isArrayLike(lst)){
 if(MochiKit.Iter){
 lst=MochiKit.Iter.list(lst);
 }else{
-throw new TypeError("Argument not an array-like and MochiKit.Iter not present");
+throw new TypeError("Argument ne ressemble pas à un tableau et MochiKit.Iter n'est pas présent");
 }
 }
 if(fn===null){
@@ -455,12 +455,12 @@ return m.bind.apply(this,m.extend([_a7,_a6],arguments,2));
 var _ab=[];
 var m=MochiKit.Base;
 if(arguments.length===0){
-throw new TypeError("compose() requires at least one argument");
+throw new TypeError("compose() nécessite au moins un argument");
 }
 for(var i=0;i<arguments.length;i++){
 var fn=arguments[i];
 if(typeof (fn)!="function"){
-throw new TypeError(m.repr(fn)+" is not a function");
+throw new TypeError(m.repr(fn)+" n'est pas une fonction");
 }
 _ab.push(fn);
 }
@@ -557,7 +557,7 @@ return 1;
 }
 }
 var _c9=m.repr;
-throw new TypeError(_c9(a)+" and "+_c9(b)+" can not be compared");
+throw new TypeError(_c9(a)+" et "+_c9(b)+" ne peuvent pas être comparés");
 },compareDateLike:function(a,b){
 return MochiKit.Base.compare(a.getTime(),b.getTime());
 },compareArrayLike:function(a,b){
@@ -686,7 +686,7 @@ throw e;
 }
 }
 if(_e5=="undefined"){
-throw new TypeError("undefined can not be serialized as JSON");
+throw new TypeError("undefined ne peut pas être sérialisé sous forme de JSON");
 }
 if(_e5=="function"){
 return null;
@@ -796,13 +796,13 @@ sum+=o;
 }
 }
 if(_115<=0){
-throw new TypeError("mean() requires at least one argument");
+throw new TypeError("mean() nécessite au moins un argument");
 }
 return sum/_115;
 },median:function(){
 var data=MochiKit.Base.flattenArguments(arguments);
 if(data.length===0){
-throw new TypeError("median() requires at least one argument");
+throw new TypeError("median() nécessite au moins un argument");
 }
 data.sort(compare);
 if(data.length%2==0){
@@ -1838,7 +1838,7 @@ var _236=arr[1].split(".");
 var str="";
 var obj={};
 str+="if (!MochiKit."+_236[1]+") { throw new Error(\"";
-str+="This function has been deprecated and depends on MochiKit.";
+str+="Cette fonction a été dépréciée et dépend de MochiKit.";
 str+=_236[1]+".\");}";
 str+="return MochiKit."+_236[1]+"."+arr[0];
 str+=".apply(this, arguments);";
@@ -1908,7 +1908,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Style depends on MochiKit.Base!";
+throw "MochiKit.Style dépend de MochiKit.Base!";
 }
 try{
 if(typeof (MochiKit.DOM)=="undefined"){
@@ -1916,7 +1916,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Style depends on MochiKit.DOM!";
+throw "MochiKit.Style dépend de MochiKit.DOM!";
 }
 if(typeof (MochiKit.Style)=="undefined"){
 MochiKit.Style={};
@@ -2211,7 +2211,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Signal depends on MochiKit.Base!";
+throw "MochiKit.Signal dépend de MochiKit.Base!";
 }
 try{
 if(typeof (MochiKit.DOM)=="undefined"){
@@ -2219,7 +2219,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Signal depends on MochiKit.DOM!";
+throw "MochiKit.Signal dépend de MochiKit.DOM!";
 }
 try{
 if(typeof (MochiKit.Style)=="undefined"){
@@ -2227,7 +2227,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Signal depends on MochiKit.Style!";
+throw "MochiKit.Signal dépend de MochiKit.Style!";
 }
 if(typeof (MochiKit.Signal)=="undefined"){
 MochiKit.Signal={};
@@ -2505,16 +2505,16 @@ obj=_2a2;
 func=_2a3;
 if(typeof (_2a3)=="string"){
 if(typeof (_2a2[_2a3])!="function"){
-throw new Error("'funcOrStr' must be a function on 'objOrFunc'");
+throw new Error("'funcOrStr' doit être une fonction de 'objOrFunc'");
 }
 }else{
 if(typeof (_2a3)!="function"){
-throw new Error("'funcOrStr' must be a function or string");
+throw new Error("'funcOrStr' doit être une fonction ou une chaîne de caractères");
 }
 }
 }else{
 if(typeof (_2a2)!="function"){
-throw new Error("'objOrFunc' must be a function if 'funcOrStr' is not given");
+throw new Error("'objOrFunc' doit être une fonction si 'funcOrStr' n'est pas donné");
 }else{
 func=_2a2;
 }
@@ -2524,7 +2524,7 @@ return [obj,func];
 src=MochiKit.DOM.getElement(src);
 var self=MochiKit.Signal;
 if(typeof (sig)!="string"){
-throw new Error("'sig' must be a string");
+throw new Error("'sig' doit être une chaîne de caractères");
 }
 var _2ab=self._getDestPair(_2a8,_2a9);
 var obj=_2ab[0];
@@ -2574,7 +2574,7 @@ src.removeEventListener(sig.substr(2),_2b5,false);
 if(src.detachEvent){
 src.detachEvent(sig,_2b5);
 }else{
-throw new Error("'src' must be a DOM element");
+throw new Error("'src' doit être un élément DOM");
 }
 }
 },disconnect:function(_2b6){
@@ -2703,7 +2703,7 @@ if(_2db.length==1){
 throw _2db[0];
 }else{
 if(_2db.length>1){
-var e=new Error("Multiple errors thrown in handling 'sig', see errors property");
+var e=new Error("De multiples erreurs ont été lancées en traitant 'sig', voir la propriété errors");
 e.errors=_2db;
 throw e;
 }
@@ -2746,7 +2746,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Iter depends on MochiKit.Base!";
+throw "MochiKit.Iter dépend de MochiKit.Base!";
 }
 if(typeof (MochiKit.Iter)=="undefined"){
 MochiKit.Iter={};
@@ -2779,7 +2779,7 @@ return self.iteratorRegistry.match(_2e5);
 catch(e){
 var m=MochiKit.Base;
 if(e==m.NotFound){
-e=new TypeError(typeof (_2e5)+": "+m.repr(_2e5)+" is not iterable");
+e=new TypeError(typeof (_2e5)+": "+m.repr(_2e5)+" n'est pas itérable");
 }
 throw e;
 }
@@ -3073,7 +3073,7 @@ x=_33b.next();
 }
 catch(e){
 if(e==self.StopIteration){
-e=new TypeError("reduce() of empty sequence with no initial value");
+e=new TypeError("reduce() d'une séquence vide sans valeur initiale");
 }
 throw e;
 }
@@ -3106,12 +3106,12 @@ _340=arguments[0];
 stop=arguments[1];
 step=arguments[2];
 }else{
-throw new TypeError("range() takes 1, 2, or 3 arguments!");
+throw new TypeError("range() prend 1, 2, ou 3 arguments&nbsp;!");
 }
 }
 }
 if(step===0){
-throw new TypeError("range() step must not be 0");
+throw new TypeError("le pas de range() ne doit pas être 0");
 }
 return {next:function(){
 if((step>0&&_340>=stop)||(step<0&&_340<=stop)){
@@ -3358,7 +3358,7 @@ throw "";
 }
 }
 catch(e){
-throw "MochiKit.Async depends on MochiKit.Base!";
+throw "MochiKit.Async dépend de MochiKit.Base!";
 }
 if(typeof (MochiKit.Async)=="undefined"){
 MochiKit.Async={};
@@ -3424,14 +3424,14 @@ return;
 },callback:function(res){
 this._check();
 if(res instanceof MochiKit.Async.Deferred){
-throw new Error("Deferred instances can only be chained if they are the result of a callback");
+throw new Error("Des instances différées ne peuvent être chaînées que si elles sont le résultat d'un callback");
 }
 this._resback(res);
 },errback:function(res){
 this._check();
 var self=MochiKit.Async;
 if(res instanceof self.Deferred){
-throw new Error("Deferred instances can only be chained if they are the result of a callback");
+throw new Error("Des instances Deferred ne peuvent être chaînées que si elles sont le résultat d'un callback");
 }
 if(!(res instanceof Error)){
 res=new self.GenericError(res);
@@ -3454,7 +3454,7 @@ fn=MochiKit.Base.partial.apply(null,arguments);
 return this.addCallbacks(null,fn);
 },addCallbacks:function(cb,eb){
 if(this.chained){
-throw new Error("Chained Deferreds can not be re-used");
+throw new Error("Les instances Deferred chaînées ne peuvent pas être réutilisées");
 }
 this.chain.push([cb,eb]);
 if(this.fired>=0){
@@ -3524,7 +3524,7 @@ return new ActiveXObject("Microsoft.XMLHTTP");
 },function(){
 return new ActiveXObject("Msxml2.XMLHTTP.4.0");
 },function(){
-throw new MochiKit.Async.BrowserComplianceError("Browser does not support XMLHttpRequest");
+throw new MochiKit.Async.BrowserComplianceError("Le navigateur ne prend pas en charge XMLHttpRequest");
 }];
 for(var i=0;i<_393.length;i++){
 var func=_393[i];
@@ -3562,7 +3562,7 @@ catch(e){
 if(_398==200||_398==201||_398==204||_398==304||_398==1223){
 d.callback(this);
 }else{
-var err=new MochiKit.Async.XMLHttpRequestError(this,"Request failed");
+var err=new MochiKit.Async.XMLHttpRequestError(this,"La requête a échoué");
 if(err.number){
 d.errback(err);
 }else{
@@ -3696,7 +3696,7 @@ d.callback(this);
 return d;
 },release:function(){
 if(!this.locked){
-throw TypeError("Tried to release an unlocked DeferredLock");
+throw TypeError("A essayé de relâcher un DeferredLock déverrouillé");
 }
 this.locked=false;
 if(this.waiting.length>0){
@@ -4000,7 +4000,7 @@ function initEnvironment(win, output, callback) {
     htmlTable.push(String(html));
     var result = window.open("view.html?id=" + (htmlTable.length - 1));
     if (!result)
-      alert("There seems to be a popup-blocker stopping this page from opening new windows. Try turning it off first.");
+      alert("Il semble qu'un bloqueur de fenêtres popup empêche cette page d'ouvrir de nouvelles fenêtres. Essayez d'abord de le désactiver.");
     return result;
   };
 
@@ -4042,7 +4042,7 @@ function makeFrame(place, init) {
 
   var fdoc = frame.contentWindow.document;
   fdoc.open();
-  fdoc.write("<html><head><title>Default</title></head><body style=\"border-width: 0\"></body></html>");
+  fdoc.write("<html><head><title>Défaut</title></head><body style=\"border-width: 0\"></body></html>");
   fdoc.close();
 
   if (init) {
@@ -4408,7 +4408,7 @@ function Console(param) {
   function runCode(code, showResult) {
     if (self.env && !self.env.__ENV) {
       self.env = baseEnv;
-      self.env.print("Lost attached window, detaching.");
+      self.env.print("La fenêtre associée a été perdue, dissociation.");
     }
 
     if (streaming || !self.env) {
@@ -4508,7 +4508,7 @@ function Console(param) {
       if (self.env == win) {
         var title = self.env.document.title;
         setEnvironment(baseEnv);
-        self.env.print("Detaching from window '", title || "[unnamed]", "'.");
+        self.env.print("Dissocié de la fenêtre '", title || "[sans nom]", "'.");
       }
     }
     function attach() {
@@ -4518,7 +4518,7 @@ function Console(param) {
       var unload = connect(win, "onunload", detach);
       connect(window, "onunload", function(){disconnect(unload);});
       setEnvironment(win);
-      self.env.print("Attaching to window '", win.document.title || "[unnamed]", "'.");
+      self.env.print("Associé à la fenêtre '", win.document.title || "[sans nom]", "'.");
     }
 
     if (isAccessibleWindow(win)) {
@@ -4530,7 +4530,7 @@ function Console(param) {
         attach();
     }
     else {
-      self.env.print("Not an accessible window.");
+      self.env.print("Ce n'est pas une fenêtre accessible.");
     }
   }
 
@@ -4720,13 +4720,13 @@ var processPage = function(){
         message = TEXTAREA(null, "");
     popup = DIV({"class": "reactpopup"},
                 P(null, "Send me a message..."),
-                P(null, SPAN(null, "Your name:"), name),
-                P(null, SPAN(null, "Your e-mail:"), email),
-                P(null, SPAN(null, "Subject:"), subject),
+                P(null, SPAN(null, "Votre nom&nbsp;:"), name),
+                P(null, SPAN(null, "Votre e-mail&nbsp;:"), email),
+                P(null, SPAN(null, "Sujet&nbsp;:"), subject),
                 P(null, message),
                 P(null,
-                  BUTTON({type: "button"}, "Send", attach("onclick", sendReaction)), " ",
-                  BUTTON({type: "button"}, "Cancel", attach("onclick", closeReaction))));
+                  BUTTON({type: "button"}, "Envoyer", attach("onclick", sendReaction)), " ",
+                  BUTTON({type: "button"}, "Annuler", attach("onclick", closeReaction))));
     if (fixedConsole) popup.style.position = "fixed";
     document.body.appendChild(popup);
     name.focus();
@@ -4739,7 +4739,7 @@ var processPage = function(){
                                             "Content-length": data.length,
                                             "Connection": "close"}});
       function fail(reason) {
-        alert("Could not deliver your message. (" + reason + ")");
+        alert("Impossible de transmettre votre message. (" + reason + ")");
       }
       request.addErrback(function(xhr){
         fail((err.xhr && err.xhr.statusText) || err.message);
@@ -4768,11 +4768,11 @@ var processPage = function(){
 
     function sendReaction() {
       if (message.value == "") {
-        alert("You did not enter a message.");
+        alert("Vous n'avez pas saisi de message.");
         return;
       }
 
-      if (!/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(email.value) && !confirm("If you do not enter a valid e-mail address, I will probably ignore you. Send anyway?"))
+      if (!/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(email.value) && !confirm("Si vous ne saisissez pas une adresse électronique valide, je vous ignorerai probablement. Envoyer quand même&nbsp;?"))
         return;
 
       setCookie("name", name.value);
@@ -4792,7 +4792,7 @@ var processPage = function(){
 
   function addReactButton() {
     var b = BUTTON({type: "button", "class": "react",
-                    title: "Send me a message"},
+                    title: "Envoyez-moi un message"},
                     attach("onclick", react));
     document.body.appendChild(b);
     if (fixedConsole) b.style.position = "fixed";
@@ -4996,13 +4996,13 @@ var processPage = function(){
   if (/Version\/2/.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent)) {
     if (!getCookie("safariwarning", false)) {
       setCookie("safariwarning", "1");
-      alert("Safari 2 unfortunately does not support the JavaScript used by this book. Extra functionality will be disabled. Upgrade to version 3 (still beta), or use Firefox to read the book with full functionality.");
+      alert("Safari 2 ne prend malheureusement pas en charge le JavaScript utilisé par ce livre. Des fonctionnalités supplémentaires seront désactivées. Metez à jours vers la version 3 (encore bêta), ou utilisez Firefox pour lire le livre avec toutes ses fonctionnalités.");
     }
   }
   else if (window.opera && Number(window.opera.version()) < 9.52) {
     if (!getCookie("operawarning", false)) {
       setCookie("operawarning", "1");
-      alert("Your version of Opera is not supported by this site. The 'active' components of this book will be disabled. Use version 9.52+, Firefox, or a recent Safari if you want full functionality.");
+      alert("Votre version d'Opera n'est pas pris en charge par ce site. Les composants 'actifs' de ce livre vont être désactivés. Utilisez la version 9.52+, Firefox, ou une version récente de Safari si vous voulez bénéficier de toutes les fonctionnalités.");
     }
   }
   else {
