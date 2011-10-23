@@ -4602,14 +4602,14 @@ var processPage = function(){
     forEach(getElementsByTagAndClassName("div", "solution"), function(solution) {
       solution.style.display = "none";
 
-      var showToggle = DIV({"class": "toggle"}, "[show solution]");
+      var showToggle = DIV({"class": "toggle"}, "[afficher la solution]");
       connect(showToggle, "onclick", function() {
 	showToggle.style.display = "none";
 	solution.style.display = "";
       });
       solution.parentNode.insertBefore(showToggle, solution);
 
-      var hideToggle = DIV({"class": "solutionarrow", title: "Hide the solution."}, "\u00D7");
+      var hideToggle = DIV({"class": "solutionarrow", title: "Masquer la solution."}, "\u00D7");
       connect(hideToggle, "onclick", function() {
 	showToggle.style.display = "";
 	solution.style.display = "none";
