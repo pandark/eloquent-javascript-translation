@@ -5009,7 +5009,7 @@ var processPage = function(){
     hideSolutions();
     moveFootnotes();
     addCodeButtons();
-    addReactButton();
+  //  addReactButton();
     addConsole();
     restoreBookmark();
   }
