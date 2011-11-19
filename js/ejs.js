@@ -4444,7 +4444,7 @@ function Console(param) {
            "Lancer", attach("onclick", function(){runCode(active.getCode(), false);})),
     buffers,
     BUTTON({title: "Nouveau tampon", "type": "button"}, "Nouveau", attach("onclick", createBuffer)),
-    BUTTON({title: "Charge un fichier dans un nouveau tampon", "type": "button"}, "Charger", attach("onclick", loadFile)),
+    BUTTON({title: "Charger un fichier dans un nouveau tampon", "type": "button"}, "Charger", attach("onclick", loadFile)),
     BUTTON({title: "Fermer ce tampon", "type": "button"}, "Fermer", attach("onclick", closeBuffer)),
     BUTTON({title: "Réinitialiser l'environnement de la console", "type": "button"}, "Réinitialiser", attach("onclick", resetEnvironment)));
   connect(buffers, "onchange", function(){
