@@ -4688,7 +4688,7 @@ var processPage = function(){
       }
 
       if (!expr) {
-          var load = code.insertBefore(BUTTON({"class": "codebutton load", "type": "button", "title": "Charger de code dans la console"}), code.firstChild);
+          var load = code.insertBefore(BUTTON({"class": "codebutton load", "type": "button", "title": "Charger ce code dans la console"}), code.firstChild);
         connect(load, "onclick", function(){
           setOpen(true);
           _console.loadCode("exemple", getCode(code));
