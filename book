@@ -3701,112 +3701,118 @@ de l'exception. Une meilleure idée consiste à utiliser des valeurs uniques,
 comme l'objet |FoundSeven|, ou d'introduire un nouveau type d'objets, comme
 cela a été décrit dans le \\coo.
 
-===========================
-Functional Programming / fp
-===========================
+================================
+Programmation fonctionnelle / fp
+================================
 
-As programs get bigger, they also become more complex and harder to
-understand. We all think ourselves pretty clever, of course, but we
-are mere human beings, and even a moderate amount of chaos tends to
-baffle us. And then it all goes downhill. Working on something you do
-not really understand is a bit like cutting random wires on those
-time-activated bombs they always have in movies. If you are lucky, you
-might get the right one -- especially if you are the hero of the movie
-and strike a suitably dramatic pose -- but there is always the
-possibility of blowing everything up.
+Au fur et à mesure que les programmes prennent de l'ampleur, ils deviennent
+plus complexes et plus durs à comprendre. Nous nous considérons tous comme
+étant plutôt intelligents, bien sûr, mais nous ne sommes que des êtres
+humains et même une petite dose de chaos peut nous laisser perplexes. Et
+ensuite cela devient infernal. Travailler sur quelque chose que vous ne
+maîtrisez pas vraiment, c'est un peu comme couper des fils au hasard sur
+une de ces bombes à retardement que vous voyez dans les films. Si vous
+avez de la chance, vous couperez le bon, particulièrement si vous êtes
+le héros du film et que vous prenez une attitude héroïque, mais il y a
+toujours une possibilité de tout faire sauter.
 
-Admittedly, in most cases, breaking a program does not cause any large
-explosions. But when a program, by someone's ignorant tinkering, has
-degenerated into a ramshackle mass of errors, reshaping it into
-something sensible is a terrible labour -- sometimes you might just as
-well start over.
+Je vous le concède, la plupart du temps, casser un programme ne va pas
+causer une grosse explosion. Mais quand un programme qui a été trifouillé
+par quelqu'un d'ignorant, dégénère en un ramassis d'erreurs, remettre de
+l'ordre dans le code est un travail de longue haleine, parfois il est aussi
+simple de recommencer depuis le début.
 
-@_abstraction_Thus, the programmer is always looking for ways to keep
-the complexity of his programs as low as possible. An important way to
-do this is to try and make code more abstract. When writing a program,
-it is easy to get sidetracked into small details at every point. You
-come across some little issue, and you deal with it, and then proceed
-to the next little problem, and so on. This makes the code read like a
-grandmother's tale.
+@_abstraction_Ainsi, le développeur recherche toujours les moyens de faire
+un code aussi simple que possible. Une manière importante d'y arriver c'est
+de rendre le code plus abstrait. Quand on fait du code pour un programme, on
+se perd très facilement dans des petits détails. Vous butez sur un petit
+problème, vous vous penchez dessus et puis vous vous occupez du problème
+d'après et ainsi de suite. Au final, on lit le code à la façon d'une
+recette de grand-mère.
 
-| Yes, dear, to make pea soup you will need split peas, the dry kind.
-| And you have to soak them at least for a night, or you will have to
-| cook them for hours and hours. I remember one time, when my dull son
-| tried to make pea soup. Would you believe he hadn't soaked the peas?
-| We almost broke our teeth, all of us. Anyway, when you have soaked
-| the peas, and you'll want about a cup of them per person, and pay
-| attention because they will expand a bit while they are soaking, so
-| if you aren't careful they will spill out of whatever you use to
-| hold them, so also use plenty water to soak in, but as I said, about
-| a cup of them, when they are dry, and after they are soaked you cook
-| them in four cups of water per cup of dry peas. Let it simmer for
-| two hours, which means you cover it and keep it barely cooking, and
-| then add some diced onions, sliced celery stalk, and maybe a carrot
-| or two and some ham. Let it all cook for a few minutes more, and it
-| is ready to eat.
+| Oui, mon cher, pour faire de la soupe aux pois, vous aurez besoin de
+| petits pois, de type sec. Et vous devez les laisser tremper pour au
+| moins une nuit, ou vous devrez les faire cuire pendant des heures.
+| Je me souviens une fois quand mon idiot de fils a essayé de faire
+| de la soupe de pois. Me croirez-vous si je vous dis qu'il n'a pas
+| fait tremper ses pois ? Nous nous sommes presque cassés les dents,
+| tout le monde. Bref, quand vous aurez trempé les pois, et vous en
+| voulez à peu près une tasse par personne, faites attention car ils
+| prendront un peu de volume quand ils seront trempés, donc si vous ne
+| prenez pas garde, ils déborderont du contenant que vous avez choisi
+| pour ce faire, faites attention également d'utiliser beaucoup d'eau.
+| Mais comme je vous l'ai dit, il en faut à peu près une tasse et
+| quand ils sont trempés, vous les faites cuire avec 4 tasses d'eau
+| pour une tasse de pois. Laissez les mijoter pendant deux heures,
+| ce qui sous-entend que vous mettiez un couvercle et que vous
+| chauffiez à peine, et ensuite ajoutez des oignons coupés en dés,
+| des tiges de céleri, peut-être une ou deux carottes et un peu de
+| jambon. Laissez encore cuire pendant quelques minutes et après
+| c'est prêt à être servi.
 
-Another way to describe this recipe:
+Une autre façons de décrire la recette :
 
-| Per person: one cup dried split peas, half a chopped onion, half a
-| carrot, a celery stalk, and optionally ham.
+| Ingrédients par personne : une tasse de petits pois, un oignon
+| coupé en morceaux, une demie carotte, une tige de céleri et
+| éventuellement du jambon.
 |
-| Soak peas overnight, simmer them for two hours in four cups of water
-| (per person), add vegetables and ham, and cook for ten more minutes.
+| Faites tremper les pois une nuit, faites les mijoter pendant deux
+| heures dans 4 tasses d'eau (par personne), ajoutez les légumes et
+| le jambon, faites cuire pendant dix minutes supplémentaires.
 
-This is shorter, but if you don't know how to soak peas you'll surely
-screw up and put them in too little water. But how to soak peas can be
-looked up, and that is the trick. If you assume a certain basic
-knowledge in the audience, you can talk in a language that deals with
-bigger concepts, and express things in a much shorter and clearer way.
-This, more or less, is what abstraction is.
+C'est plus court, mais si vous ne savez pas comment faire tremper les pois,
+vous raterez sûrement et les ferez tremper dans trop peu d'eau. Mais on peut
+rechercher comment tremper les pois, et c'est ça la clé. Si vous partez du
+principe que le public a des connaissances de base, vous pouvez recourir à
+un langage pour mentionner des concepts plus larges et vous exprimez d'une
+manière plus concise et plus claire. C'est plus ou moins ce que l'on veut
+dire quand on parle d'abstraction.
 
-How is this far-fetched recipe story relevant to programming? Well,
-obviously, the recipe is the program. Furthermore, the basic knowledge
-that the cook is supposed to have corresponds to the functions and
-other constructs that are available to the programmer. If you remember
-the introduction of this book, things like |while| make it easier to
-build loops, and in \\cdata we wrote some simple functions in order to
-make other functions shorter and more straightforward. Such tools,
-some of them made available by the language itself, others built by
-the programmer, are used to reduce the amount of uninteresting details
-in the rest of the program, and thus make that program easier to work
-with.
-
----
-
-@_functional programming_Functional programming, which is the subject
-of this chapter, produces abstraction through clever ways of combining
-functions. A programmer armed with a repertoire of fundamental
-functions and, more importantly, the knowledge on how to use them, is
-much more effective than one who starts from scratch. Unfortunately, a
-standard JavaScript environment comes with deplorably few essential
-functions, so we have to write them ourselves or, which is often
-preferable, make use of somebody else's code (more on that in
-\\cmodularity).
-
-There are other popular approaches to abstraction, most notably
-object-oriented programming, the subject of \\coo.
+En quoi est-ce que cette recette tirée par les cheveux a un lien avec
+la programmation ? Et bien, évidemment, la recette est un programme. De
+surcroît, la connaissance minimale que le cuisinier est supposé avoir
+correspond aux fonctions et autres concepts qui sont accessibles aux
+codeurs. Si vous vous rappelez de l'introduction à ce livre, des choses
+telles que |while| rendent la construction de boucles plus faciles. Dans le
+\\cdata, nous avons écrit des fonctions simples afin d'avoir des fonctions
+plus courtes et plus directes. De tels outils, dont certains sont fournis par
+le langage lui-même et d'autres conçus par le programmeur, sont utilisés
+de manière à réduire le nombre de détails inutiles dans le reste du
+programme. Ce qui rend le programme plus abordable pour travailler dessus.
 
 ---
 
-One ugly detail that, if you have any good taste at all, must be
-starting to bother you is the endlessly repeated |for| loop going over
-an array: |for (var i = 0; i < something.length; i++) ...|. Can this
-be abstracted?
+La _programmation fonctionnelle_, qui est le sujet qui nous intéresse dans
+ce chapitre, produit des abstractions en combinant de manière astucieuse
+des fonctions. Un codeur équipé d'un répertoire de fonctions fondamentales
+et, plus important, maîtrisant les manières de les utiliser est bien plus
+efficace que quelqu'un qui commence à partir de zéro. Malheureusement, un
+environnement JavaScript de base ne fournit que peu de fonctions essentielles,
+donc nous devons les écrire nous mêmes, ou, ce qui est souvent préférable,
+utiliser le code de quelqu'un d'autre (plus de détails dans le \\cmodularity).
 
-The problem is that, whereas most functions just take some values,
-combine them, and return something, such a loop contains a piece of
-code that it must execute. It is easy to write a function that goes
-over an array and prints out every element:
+Il y a d'autres approches plus populaires de l'abstraction, particulièrement
+la programmation orientée objet, qui est le sujet du \\coo.
+
+Il y a un détail fâcheux, si vous avez un peu de goût, qui doit commencer à
+vous embêter, c'est la répétition incessante de boucles |for| dans certaines
+matrices : |for (var i = 0; i < something.length; i++) ...|. Est-ce qu'on
+peut en faire une abstraction ?
+
+Le problème, c'est que si beaucoup de fonctions prennent juste des valeurs,
+les combinent et donnent un résultat, une telle boucle contient un bout
+de code qu'elle doit exécuter. Il est facile d'écrire une fonction qui
+s'occupe d'une matrice et affiche chaque élément :
 
 > function printArray(array) {
 >   for (var i = 0; i < array.length; i++)
 >     print(array[i]);
 > }
 
-But what if we want to do something else than print? Since 'doing
-something' can be represented as a function, and functions are also
-values, we can pass our action as a function value:
+Mais qu'est-ce qu'on fait si on veut faire autre chose qu'afficher ? Puisque
+« faire quelque chose » peut être représenté par une fonction, et que
+les fonctions sont aussi des valeurs, on peut fournir notre action comme
+une valeur de type fonction :
 
 > function forEach(array, action) {
 >   for (var i = 0; i < array.length; i++)
@@ -3815,78 +3821,81 @@ values, we can pass our action as a function value:
 >
 > forEach(["Wampeter", "Foma", "Granfalloon"], print);
 
-And by making use of an anonymous function, something just like a
-|for| loop can be written with less useless details:
+Et en utilisant une fonction anonyme, quelque chose comme une boucle |for|
+peut être écrite avec moins de détails inutiles.
 
 > function sum(numbers) {
 >   var total = 0;
 >   forEach(numbers, function (number) {
->     total += number;
+>      total += number;
 >   });
 >   return total;
 > }
 > show(sum([1, 10, 100]));
 
-Note that the variable |total| is visible inside the anonymous
-function because of the lexical scoping rules. Also note that this
-version is hardly shorter than the |for| loop and requires a rather
-clunky |});| at its end -- the brace closes the body of the anonymous
-function, the parenthesis closes the function call to _|forEach|_, and
-the semicolon is needed because this call is a statement.
+Remarquez que la variable |total| est visible à l'intérieur de la fonction
+anonyme, à cause des règles de portée des variables. Remarquez également
+que cette version n'est pas vraiment plus courte que celle avec une boucle
+|for| et nécessite l'écriture peu commode |});| à sa fin : l'accolade
+ferme le corps de la fonction anonyme, la parenthèse ferme l'appel à la
+fonction _|forEach|_ et le point virgule est nécessaire car cet appel est
+une instruction.
 
-You do get a variable bound to the current element in the array,
-|number|, so there is no need to use |numbers[i]| anymore, and when
-this array is created by evaluating some expression, there is no need
-to store it in a variable, because it can be passed to |forEach|
-directly.
+Vous obtenez une variable liée à l'élément en cours dans le tableau,
+|number|, aussi vous n'avez plus besoin d'utiliser |numbers[i]|. Et quand ce
+tableau est créé par l'évaluation d'une expression quelconque, il n'y a
+pas besoin de le stocker dans une variable car cette expression peut être
+passé à |forEach| directement.
 
-The cat-code in \\cdata contains a piece like this:
+Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
 !> var paragraphs = mailArchive[mail].split("\n");
 !> for (var i = 0; i < paragraphs.length; i++)
 !>   handleParagraph(paragraphs[i]);
 
-This can now be written as...
+Il peut maintenant être écrit de la façon suivante :
 
-!> forEach(mailArchive[mail].split("\n"), handleParagraph);
+!>  forEach(mailArchive[mail].split("\n"), handleParagraph);
 
-On the whole, using more abstract (or 'higher level') constructs
-results in more information and less noise: The code in |sum| reads
-'*for each number in numbers add that number to the total*', instead
-of... '*there is this variable that starts at zero, and it counts
-upward to the length of the array called numbers, and for every value
-of this variable we look up the corresponding element in the array and
-add this to the total*'.
-
----
-
-What |forEach| does is take an algorithm, in this case 'going over an
-array', and abstract it. The 'gaps' in the algorithm, in this case,
-what to do for each of these elements, are filled by functions which
-are passed to the algorithm function.
-
-Functions that operate on other functions are called _higher-order
-function_s. By operating on functions, they can talk about actions on
-a whole new level. The |makeAddFunction| function from \\cfunctions is
-also a higher-order function. Instead of taking a function value as an
-argument, it produces a new function.
-
-Higher-order functions can be used to generalise many algorithms that
-regular functions can not easily describe. When you have a repertoire
-of these functions at your disposal, it can help you think about your
-code in a clearer way: Instead of a messy set of variables and loops,
-you can decompose algorithms into a combination of a few fundamental
-algorithms, which are invoked by name, and do not have to be typed out
-again and again.
-
-Being able to write *what* we want to do instead of *how* we do it
-means we are working at a higher level of abstraction. In practice,
-this means shorter, clearer, and more pleasant code.
+Au final, une construction plus abstraite (ou « de plus haut niveau »)
+correspond à plus d'informations et à moins de bruits parasites : Le
+code dans la fonction |sum| se lit « *pour chaque nombre dans la liste
+des nombres, ajouter ce nombre au total* », plutôt que : « *il y a une
+variable qui commence à 0, et elle compte un par un jusqu'à atteindre le
+nombre d'élément d'un tableau de nombres et à chaque valeur de cette
+variable, nous examinons l'élément correspondant dans ce tableau et
+l'ajoutons au total* ».
 
 ---
 
-Another useful type of higher-order function *modifies* the function
-value it is given:
+Ce que fait |forEach| est de prendre un algorithme, ici « parcourir un
+tableau » et de rendre celui-ci abstrait. Les « trous » dans cet algorithme
+(ici : que faire pour chacun des éléments du tableau), sont comblés
+par des fonctions passées à la fonction algorithme.
+
+Les fonctions qui opèrent sur d'autres fonctions sont appelées _fonctions
+d'ordre supérieur_. En opérant sur d'autres fonctions, elles peuvent décrire
+des actions à un niveau supérieur. La fonction |makeAddFunction| dans le
+\\cfunctions est aussi une fonction d'ordre supérieur. Au lieu de prendre
+une valeur de fonction comme argument, elle construit une nouvelle fonction.
+
+Les fonctions d'ordre supérieur peuvent être utilisées pour généraliser
+de nombreux algorithmes que des fonctions classiques ne peuvent pas facilement
+décrire. Quand vous avez à votre disposition de telles fonctions, elles
+peuvent vous aider à concevoir votre code avec une plus grande clarté :
+au lieu d'une combinaison complexe de variables et de boucles, vous pouvez
+décomposer les algorithmes en algorithmes plus fondamentaux, qui sont
+appelés par leur nom et ne doivent pas être ré-écrits sans cesse.
+
+Etre en mesure d'écrire *ce que* nous voulons faire au lieu de *comment*
+nous le faisons, c'est travailler à un niveau d'abstraction supérieur. En
+pratique, cela implique un code plus concis, plus clair et plus agréable
+à lire.
+
+---
+
+Une autre catégorie utile de fonctions d'ordre supérieur *modifie* la
+fonction qui lui est fournie :
 
 > function negate(func) {
 >   return function(x) {
@@ -3896,18 +3905,18 @@ value it is given:
 > var isNotNaN = negate(isNaN);
 > show(isNotNaN(NaN));
 
-The function returned by |negate| feeds the argument it is given to
-the original function |func|, and then negates the result. But what if
-the function you want to negate takes more than one argument? You can
-get access to any arguments passed to a function with the |arguments|
-array, but how do you call a function when you do not know how many
-arguments you have?
+La fonction renvoyée par la fonction |negate| reçoit un argument qu'elle
+fournit à la fonction initiale |func| et inverse son résultat. Mais si la
+fonction que vous voulez inverser reçoit plus d'un argument ? Vous pouvez
+accéder à n'importe quels arguments passés à une fonction à l'aide du
+tableau |arguments|, mais comment appeler une fonction quand vous ne savez
+pas combien d'arguments vous avez ?
 
-Functions have a method called _|apply|_, which is used for situations
-like this. It takes two arguments. The role of the first argument will
-be discussed in \\coo, for now we just use |null| there. The second
-argument is an array containing the arguments that the function must
-be applied to.
+Les fonctions ont une méthode nommée _|apply|_, utilisée dans les situations
+de ce type. Elle prend deux arguments. Le rôle du premier argument sera
+détaillé dans le \\coo, pour le moment nous utiliserons |null| pour cet
+argument. Le second argument est un tableau qui contient tous les arguments
+devant s'appliquer à la fonction.
 
 > show(Math.min.apply(null, [5, 6]));
 >
@@ -3917,17 +3926,17 @@ be applied to.
 >   };
 > }
 
-Unfortunately, on the Internet Explorer browser a lot of built-in
-functions, such as |alert|, are not *really* functions... or
-something. They report their type as |"object"| when given to the
-|typeof| operator, and they do not have an |apply| method. Your own
-functions do not suffer from this, they are always real functions.
+Malheureusement, dans le navigateur Internet Explorer, différentes
+fonctions comme |alert|, ne sont pas *vraiment* des fonctions... ni quoi
+que ce soit. Elles indiquent un type |"object"| quand s'appliquent sur elles
+l'opérateur |typeof| et n'ont pas de méthode |apply|. Vos propres fonctions
+n'ont pas cet inconvénient, ce sont toujours de vraies fonctions.
 
 ---
 
-Let us look at a few more basic algorithms related to arrays. The
-|sum| function is really a variant of an algorithm which is usually
-called _|reduce|_ or |fold|:
+Jetons un œil maintenant à quelques algorithmes plus simples qui sont
+reliés aux tableaux. La fonction |sum| est en fait une variante d'un
+algorithme qui est habituellement appelé _|reduce|_ ou |fold| :
 
 > function reduce(combine, base, array) {
 >   forEach(array, function (element) {
@@ -3944,31 +3953,32 @@ called _|reduce|_ or |fold|:
 >   return reduce(add, 0, numbers);
 > }
 
-|reduce| combines an array into a single value by repeatedly using a
-function that combines an element of the array with a base value. This
-is exactly what |sum| did, so it can be made shorter by using
-|reduce|... except that addition is an operator and not a function in
-JavaScript, so we first had to put it into a function.
+|reduce| convertit un tableau en une seule valeur en ayant recours de
+manière répétée à une fonction qui combine un élément du tableau
+avec une valeur de base. C'est exactement ce que fait la fonction |sum|,
+donc elle peut être raccourcie par l'utilisation de |reduce|... sauf que
+l'addition est un opérateur et non une fonction dans JavaScript, donc on
+doit d'abord la mettre dans une fonction.
 
-The reason |reduce| takes the function as its first argument instead
-of its last, as in |forEach|, is partly that this is tradition --
-other languages do it like that -- and partly that this allows us to
-use a particular trick, which will be discussed at the end of this
-chapter. It does mean that, when calling |reduce|, writing the
-reducing function as an anonymous function looks a bit weirder,
-because now the other arguments follow after the function, and the
-resemblance to a normal |for| block is lost entirely.
+La raison pour laquelle |reduce| accepte cette fonction comme premier
+argument et non comme dernier (comme dans |forEach|) c'est en partie par
+tradition (d'autres langages ont ce fonctionnement) et en partie parce que
+cela permet une astuce particulière, dont on discutera plus tard à la fin
+de ce chapitre. Cela veut dire que lorsque l'on appelle |reduce|, écrire la
+fonction de réduction comme une fonction anonyme semble un peu bizarre. Car
+maintenant les arguments viennent après la fonction et on perd totalement
+la ressemblance avec un bloc |for| normal.
 
 ***
 
-Write a function |countZeroes|, which takes an array of numbers as its
-argument and returns the amount of zeroes that occur in it. Use
-|reduce|.
+Écrivez une fonction |countZeroes| qui prend un tableau de nombres en argument
+et qui renvoie le nombre de zéro qui sont rencontrés. Utilisez |reduce|.
 
-Then, write the higher-order function |count|, which takes an array
-and a test function as arguments, and returns the amount of elements
-in the array for which the test function returned |true|. Re-implement
-|countZeroes| using this function.
+Puis, écrivez une fonction |count| de plus haut niveau qui accepte un tableau
+et une fonction de tests en tant qu'arguments, et qui donne en retour le
+nombre d'éléments dans le tableau pour lesquels la fonction de test a
+renvoyé |true|.
+Intégrez de nouveau |countZeroes| en utilisant cette fonction.
 
 ///
 
@@ -3979,24 +3989,25 @@ in the array for which the test function returned |true|. Re-implement
 >   return reduce(counter, 0, array);
 > }
 
-@_|?:|_The weird part, with the question mark and the colon, uses a
-new operator. In \\cbasics we have seen unary and binary operators.
-This one is ternary -- it acts on three values. Its effect resembles
-that of |if|/|else|, except that, where |if| conditionally executes
-statements, this one conditionally chooses expressions. The first
-part, before the question mark, is the condition. If this condition is
-|true|, the expression after the question mark is chosen, |1| in this
-case. If it is |false|, the part after the colon, |0| in this case, is
-chosen.
+@_|?:|_ La partie bizarre, celle avec le point d'interrogation et les
+deux points, utilise un nouvel opérateur. Dans le \\cbasics, nous avons
+vu les opérateurs unaires et binaires. Celui-ci est ternaire : il agit
+sur trois valeurs. Son fonctionnement ressemble à celui de |if|/|else|,
+sauf que là où |if| exécute de manière conditionnelle des instructions,
+celui-ci choisit ses expressions en fonction d'une condition. La première
+partie avant le point d'interrogation est la condition. Si cette condition
+est |true|, l'expression après le point d'interrogation est choisie, ici
+|1|. Si c'est |false|, la partie après la virgule, ici |0|, est choisie.
 
-Use of this operator can make some pieces of code much shorter. When
-the expressions inside it get very big, or you have to make more
-decisions inside the conditional parts, just using plain |if| and
-|else| is usually more readable.
+L'utilisation de cet opérateur peut raccourcir efficacement des portions de
+code. Quand les expressions à l'intérieur deviennent vraiment énormes, ou
+que vous devez prendre plus de décisions à l'intérieur des portions pour
+les conditions, la simple utilisation de |if| et |else| est habituellement
+plus lisible.
 
-Here is the solution that uses a |count| function, with a function
-that produces equality-testers included to make the final
-|countZeroes| function even shorter:
+Voici la solution qui utilise une fonction |count|, avec une fonction qui
+inclut des tests d'égalité afin d'avoir au final une fonction |countZeroes|
+encore plus courte.
 
 > function count(test, array) {
 >   return reduce(function(total, element) {
@@ -4014,10 +4025,11 @@ that produces equality-testers included to make the final
 
 ---
 
-One other generally useful 'fundamental algorithm' related to arrays
-is called _|map|_. It goes over an array, applying a function to every
-element, just like |forEach|. But instead of discarding the values
-returned by function, it builds up a new array from these values.
+Un autre « algorithme fondamental » généralement utile en lien avec
+les tableaux porte le nom de _|map|_. Il balaye un tableau, en exécutant une
+fonction sur chaque élément, tout comme |forEach|. Mais au lieu de rejeter
+les valeurs de retour de la fonction, il construit un nouveau tableau pour
+chacune de ses valeurs.
 
 > function map(func, array) {
 >   var result = [];
@@ -4029,555 +4041,584 @@ returned by function, it builds up a new array from these values.
 >
 > show(map(Math.round, [0.01, 2, 9.89, Math.PI]));
 
-Note that the first argument is called |func|, not |function|, this
-is because |function| is a keyword and thus not a valid variable name.
+On remarque que le premier argument est appelé |func|, pas |function|. En
+effet, |function| est un mot-clé et n'est par conséquent pas un nom de
+variable recevable.
 
 ---
 
-There once was, living in the deep mountain forests of Transylvania, a
-recluse. Most of the time, he just wandered around his mountain,
-talking to trees and laughing with birds. But now and then, when the
-pouring rain trapped him in his little hut, and the howling wind made
-him feel unbearably small, the recluse felt an urge to write
-something, wanted to pour some thoughts out onto paper, where they
-could maybe grow bigger than he himself was.
+Il était une fois un ermite vivant dans les forêts reculées des montagnes
+de Transylvanie. La plupart du temps, il ne faisait que se promener autour
+de sa montagne pour parler aux arbres et rigoler avec les oiseaux. Mais de
+temps en temps, quand la pluie torrentielle s'abattait sur sa petite hutte
+et que le vent rugissant le faisait sentir intolérablement trop petit,
+l'ermite ressentait le besoin pressant d'écrire quelque chose, il voulait
+coucher ses pensées sur du papier, là où elles pourraient peut-être
+devenir beaucoup plus grandes que lui.
 
-After failing miserably at poetry, fiction, and philosophy, the
-recluse finally decided to write a technical book. In his youth, he
-had done some computer programming, and he figured that if he could
-just write a good book about that, fame and recognition would surely
-follow.
+Après avoir échoué misérablement dans ses tentatives d'écrire de la
+poésie, de la fiction, de la philosophie, l'ermite décida finalement
+d'écrire un livre technique. Dans sa jeunesse, il avait fait de la
+programmation et il pensa que s'il pouvait juste écrire un bon livre sur
+ce sujet, la célébrité et la reconnaissance arriveraient sans doute après.
 
-So he wrote. At first he used fragments of tree bark, but that turned
-out not to be very practical. He went down to the nearest village and
-bought himself a laptop computer. After a few chapters, he realised he
-wanted to put the book in HTML format, in order to put it on his
-web-page...
+Donc il écrivit. D'abord il utilisa des morceaux d'écorce d'arbre, mais
+il s'avéra que ce n'était pas pratique. Il descendit au village le plus
+proche, et s'acheta un ordinateur portable. Après quelques chapitres,
+il réalisa qu'il voulait convertir son livre au format HTML, afin de le
+télécharger vers sa page personnelle en ligne...
 
 ---
 
-Are you familiar with HTML? It is the method used to add mark-up to
-pages on the web, and we will be using it a few times in this book, so
-it would be nice if you know how it works, at least generally. If you
-are a good student, you could go search the web for a good
-introduction to HTML now, and come back here when you have read it.
-Most of you probably are lousy students, so I will just give a short
-explanation and hope it is enough.
+Est-ce que vous connaissez le HTML ? C'est la méthode utilisée pour ajouter
+du formattage sur les pages des sites web et on l'utilisera de temps en temps
+dans ce livre, donc ce serait bien si vous saviez comment cela fonctionne,
+au moins de manière générale. Si vous êtes un bon étudiant, vous
+pourriez rechercher sur internet une introduction au HTML maintenant et
+revenir quand vous l'aurez lu. La plupart d'entre vous sont sans doute des
+étudiants médiocres, donc je vais juste donner une petite explication et
+j'espère que ce sera suffisant.
 
-_HTML_ stands for 'HyperText Mark-up Language'. An HTML document is
-all text. Because it must be able to express the structure of this
-text, information about which text is a heading, which text is purple,
-and so on, a few characters have a special meaning, somewhat like
-backslashes in JavaScript strings. The 'less than' and 'greater than'
-characters are used to create '_tag_s'. A tag gives extra information
-about the text in the document. It can stand on its own, for example
-to mark the place where a picture should appear in the page, or it can
-contain text and other tags, for example when it marks the start and
-end of a paragraph.
+_HTML_ veut dire « HyperText Mark-up Language » (Langage à Balise
+Hyper Texte). Un document HTML est entièrement en texte. Parce qu'il doit
+être capable d'exprimer la structure de ce texte et de spécifier quelle
+donnée du texte est un titre, quelle partie du texte est en violet et
+ainsi de suite, quelques caractères ont un sens spécial, un peu comme les
+antislash (\) dans les chaînes Javascript. Les signes « inférieur »
+et « supérieur » sont utilisés pour créer des « _balise_s »
+(NdT: ou tags). Une balise apporte de l'information supplémentaire sur le
+document. Elle peut fonctionner de manière autonome par exemple pour indiquer
+où doit apparaître une image sur la page, ou elle peut contenir du texte et
+d'autres balises, par exemple pour marquer le début et la fin des paragraphes.
 
-Some tags are compulsory, a whole HTML document must always be
-contained in between |html| tags. Here is an example of an HTML
-document:
+Certaines balises sont obligatoires, un document HTML intégral doit toujours
+tenir entre deux balises |html|. Voici un example d'un document HTML :
 
 ] <html>
 ]   <head>
-]     <title>A quote</title>
+]     <title>Une citation</title>
 ]   </head>
 ]   <body>
-]     <h1>A quote</h1>
+]     <h1>Une citation</h1>
 ]     <blockquote>
-]       <p>The connection between the language in which we
-]       think/program and the problems and solutions we can imagine
-]       is very close.  For this reason restricting language
-]       features with the intent of eliminating programmer errors is
-]       at best dangerous.</p>
+]       <p>La connexion entre le langage dans lequel nous
+] pensons/programmons et les problèmes et solutions que nous pouvons
+] imaginer est très proche. Pour cette raison, restreindre les
+] capacités du langage dans l'intention d'éliminer les erreurs des
+] programmeurs est au mieux dangereuse.</p>
 ]       <p>-- Bjarne Stroustrup</p>
 ]     </blockquote>
-]     <p>Mr. Stroustrup is the inventor of the C++ programming
-]     language, but quite an insightful person nevertheless.</p>
-]     <p>Also, here is a picture of an ostrich:</p>
-]     <img src="img/ostrich.png"/>
+]     <p>M. Stroustrup est l'inventeur du langage de programmation
+] C++, mais il est malgré tout une personne des plus perspicaces.</p>
+]     <p>Aussi, voici une photo d'une autruche:</p>
+]     <img src="img/autruche.png"/>
 ]   </body>
 ] </html>
 
-Elements that contain text or other tags are first opened with
-|<tagname>|, and afterwards finished with |</tagname>|. The |html|
-element always contains two children: |head| and |body|. The first
-contains information *about* the document, the second contains the
-actual document.
+Des éléments qui contiennent du texte ou d'autres balises sont
+d'abord ouverts avec |<tagname>|, et après ils sont terminés par
+|</tagname>|. L'élément |html| contient toujours deux enfants : |head|
+et |body|. Le premier contient des informations *sur* le document, le second
+contient le document en lui-même.
 
-Most tag names are cryptic abbreviations. |h1| stands for 'heading 1',
-the biggest kind of heading. There are also |h2| to |h6| for
-successively smaller headings. |p| means 'paragraph', and |img| stands
-for 'image'. The |img| element does not contain any text or other
-tags, but it does have some extra information,
-|src="img/ostrich.png"|, which is called an '_attribute_'. In this
-case, it contains information about the image file that should be
-shown here.
+La plupart des noms de balise sont des abbréviations cryptiques. |h1| veut
+dire « heading 1 » (titre 1), le plus gros titre qu'il y ait. Il y a
+aussi |h2| jusqu'à |h6| pour des titres de plus en plus petits. |p| veut
+dire « paragraphe », et |img| veut dire « image ». L'élément
+|img| ne contient pas de texte ou de balise, mais il contient une
+information supplémentaire (|src="img/autruche.png"|) qui est appelée
+un « _attribut_ ». Dans ce cas, il contient une information sur le
+fichier image qui devrait être affichée ici.
 
-Because |<| and |>| have a special meaning in HTML documents, they can
-not be written directly in the text of the document. If you want to
-say '|5 < 10|' in an HTML document, you have to write '|5 &lt; 10|',
-where '|lt|' stands for 'less than'. '|&gt;|' is used for '|>|', and
-because these codes also give the ampersand character a special
-meaning, a plain '|&|' is written as '|&amp;|'.
+Parce que |<| et |>| ont un sens spécial dans les documents HTML,
+ils ne peuvent être écrits directement dans le texte du document. Si
+vous voulez dire « 5 < 10 » dans un document HTML, vous devez
+écrire « |5 &lt; 10| », où « |lt| » veut dire « moins
+que ». « |&gt;| » est utilisé pour « |>| » et parce que ces
+codes donnent aussi à l'esperluette un sens spécial, un simple « |&| »
+est écrit « |&amp;| ».
 
-Now, those are only the bare basics of HTML, but they should be enough
-to make it through this chapter, and later chapters that deal with
-HTML documents, without getting entirely confused.
+Maintenant, ce ne sont que les bases de l'HTML, mais elles devraient être
+suffisantes pour pouvoir suivre les explications dans ce chapitre, ainsi que
+les chapitres suivants qui traitent des documents HTML, sans trop se perdre
+en chemin.
 
 ---
 
-The JavaScript console has a function |viewHTML| that can be used to
-look at HTML documents. I stored the example document above in the
-variable |stroustrupQuote|, so you can view it by executing the
-following code:
+La console JavaScript a une fonction |viewHTML| qui peut être utilisée
+pour voir des documents HTML. J'ai stocké le document de l'exemple ci-dessus
+dans |stroustrupQuote|, on peut donc le voir en exécutant ce code :
 
 > viewHTML(stroustrupQuote);
 
-If you have some kind of pop-up blocker installed or integrated in
-your browser, it will probably interfere with |viewHTML|, which tries
-to show the HTML document in a new window or tab. Try to configure the
-blocker to allow pop-ups from this site.
+Si vous avez un genre de bloqueur de fenêtres pop-up installé ou intégré
+dans votre navigateur, il interférera probablement avec |viewHTML|, qui
+essayera de montrer le document HTML dans une nouvelle fenêtre ou un nouvel
+onglet. Essayez de configurer votre bloqueur pour autoriser les pop-ups de
+ce site.
 
 ---
 
-So, picking up the story again, the recluse wanted to have his book in
-HTML format. At first he just wrote all the tags directly into his
-manuscript, but typing all those less-than and greater-than signs made
-his fingers hurt, and he constantly forgot to write |&amp;| when he
-needed an |&|. This gave him a headache. Next, he tried to write the
-book in Microsoft Word, and then save it as HTML. But the HTML that
-came out of that was fifteen times bigger and more complicated than it
-had to be. And besides, Microsoft Word gave him a headache.
+Donc, pour en revenir à notre histoire, l'ermite voulait avoir son livre au
+format HTML. D'abord il a juste écrit toutes les balises directement dans
+le manuscrit, mais taper tous ces signes inférieur et supérieur lui ont
+donné mal aux doigts à la fin et il oubliait sans arrêt d'écrire |&amp;|
+quand il avait besoin d'un |&|. Celui lui donna mal à la tête. Ensuite il
+essaya d'écrire son livre dans Microsoft Word et de le sauver en HTML. Mais
+le HTML qui était produit était quinze fois plus gros et plus compliqué
+que ce qu'il devait être. Et en plus Microsoft Word lui donnait mal au crâne.
 
-The solution that he eventually came up with was this: He would write
-the book as plain text, following some simple rules about the way
-paragraphs were separated and the way headings looked. Then, he would
-write a program to convert this text into precisely the HTML that he
-wanted.
+La solution sur laquelle il s'arrêta était finalement celle-ci : il
+écrirait ce livre en texte simple, en suivant quelques règles simples
+pour la façon dont les paragraphes devraient être séparés et l'aspect
+que devrait avoir les titres. Puis il écrirait un programme pour convertir
+le texte en HTML précisément comme il le souhaitait.
 
-The rules are this:
+Les règles sont celles-ci :
 
- 1. Paragraphs are separated by blank lines.
- 2. A paragraph that starts with a '%' symbol is a header. The more '%' symbols, the smaller the header.
- 3. Inside paragraphs, pieces of text can be emphasised by putting them between asterisks.
- 4. Footnotes are written between braces.
+ 1. Les paragraphes sont séparés par des lignes vides.
+ 2. Un paragraphe qui commence par le symbole « % » est un titre. Plus il y a de symboles « % », plus le titre est petit.
+ 3. À l'intérieur des paragraphes, des morceaux de texte peuvent être mis en emphase en les encadrant par des astérisques.
+ 4. Les notes de bas de page sont entre accolades.
 
 ---
 
-After he had struggled painfully with his book for six months, the
-recluse had still only finished a few paragraphs. At this point, his
-hut was struck by lightning, killing him, and forever putting his
-writing ambitions to rest. From the charred remains of his laptop, I
-could recover the following file:
+Après qu'il ait lutté durement avec son livre pendant six mois, l'ermite
+avait seulement finit quelques paragraphes. À ce moment là, sa cabane fut
+frappée par un éclair, le tuant et mettant fin à jamais à ses ambitions
+d'écrivain. Dans les débris carbonisés de son ordinateur portable, j'ai
+pu récupérer le fichier suivant :
 
-] % The Book of Programming
-] 
-] %% The Two Aspects
-] 
-] Below the surface of the machine, the program moves. Without effort,
-] it expands and contracts. In great harmony, electrons scatter and
-] regroup. The forms on the monitor are but ripples on the water. The
-] essence stays invisibly below.
-] 
-] When the creators built the machine, they put in the processor and the
-] memory. From these arise the two aspects of the program.
-] 
-] The aspect of the processor is the active substance. It is called
-] Control. The aspect of the memory is the passive substance. It is
-] called Data.
-] 
-] Data is made of merely bits, yet it takes complex forms. Control
-] consists only of simple instructions, yet it performs difficult
-] tasks. From the small and trivial, the large and complex arise.
-] 
-] The program source is Data. Control arises from it. The Control
-] proceeds to create new Data. The one is born from the other, the
-] other is useless without the one. This is the harmonious cycle of
-] Data and Control.
-] 
-] Of themselves, Data and Control are without structure. The programmers
-] of old moulded their programs out of this raw substance. Over time,
-] the amorphous Data has crystallised into data types, and the chaotic
-] Control was restricted into control structures and functions.
-] 
-] %% Short Sayings
-] 
-] When a student asked Fu-Tzu about the nature of the cycle of Data and
-] Control, Fu-Tzu replied 'Think of a compiler, compiling itself.'
-] 
-] A student asked 'The programmers of old used only simple machines and
-] no programming languages, yet they made beautiful programs. Why do we
-] use complicated machines and programming languages?'. Fu-Tzu replied
-] 'The builders of old used only sticks and clay, yet they made
-] beautiful huts.'
-] 
-] A hermit spent ten years writing a program. 'My program can compute
-] the motion of the stars on a 286-computer running MS DOS', he proudly
-] announced. 'Nobody owns a 286-computer or uses MS DOS anymore.',
-] Fu-Tzu responded.
-] 
-] Fu-Tzu had written a small program that was full of global state and
-] dubious shortcuts. Reading it, a student asked 'You warned us against
-] these techniques, yet I find them in your program. How can this be?'
-] Fu-Tzu said 'There is no need to fetch a water hose when the house is
-] not on fire.'{This is not to be read as an encouragement of sloppy
-] programming, but rather as a warning against neurotic adherence to
-] rules of thumb.}
-] 
-] %% Wisdom
-] 
-] A student was complaining about digital numbers. 'When I take the root
-] of two and then square it again, the result is already inaccurate!'.
-] Overhearing him, Fu-Tzu laughed. 'Here is a sheet of paper. Write down
-] the precise value of the square root of two for me.'
-] 
-] Fu-Tzu said 'When you cut against the grain of the wood, much strength
-] is needed. When you program against the grain of a problem, much code
-] is needed.'
-] 
-] Tzu-li and Tzu-ssu were boasting about the size of their latest
-] programs. 'Two-hundred thousand lines', said Tzu-li, 'not counting
-] comments!'. 'Psah', said Tzu-ssu, 'mine is almost a *million* lines
-] already.' Fu-Tzu said 'My best program has five hundred lines.'
-] Hearing this, Tzu-li and Tzu-ssu were enlightened.
-] 
-] A student had been sitting motionless behind his computer for hours,
-] frowning darkly. He was trying to write a beautiful solution to a
-] difficult problem, but could not find the right approach. Fu-Tzu hit
-] him on the back of his head and shouted '*Type something!*' The student
-] started writing an ugly solution. After he had finished, he suddenly
-] understood the beautiful solution.
-] 
+] % Le livre de programmation
+]
+] %% Les deux points de vue
+]
+] Sous la surface de la machine, le programme évolue. Sans effort, il
+] prend de l'ampleur et se contracte. Avec beaucoup d'harmonie, les
+] électrons se dispersent et se regroupent. Les formes sur le moniteur
+] ne sont que l'écume de la vague.
+]
+] Quand les créateurs ont construit la machine, ils y ont mis un
+] processeur et de la mémoire. À partir de là surgissent les deux
+] points de vue sur le programme.
+]
+] Du côté du processeur, l'élément actif est appelé Contrôle. Du côté
+] de la mémoire, l'élément passif est appelé Données.
+]
+] Les données sont faites de simples bits, et pourtant elles prennent
+] des formes complexes. Le contrôle consiste en de simples instructions
+] et pourtant il exécute des tâches difficiles, de la plus petite et la
+] plus triviale, à la plus grande et la plus compliquée.
+]
+] Le programme source est la donnée. Le Contrôle y naît. Le Contrôle va
+] ensuite s'employer à créer de nouvelles données. L'un naît de
+] l'autre, l'un ne sert à rien sans l'existence de l'autre. C'est le
+] cycle harmonieux des Données et du Contrôle.
+]
+] Par nature, les Données et le Contrôle sont sans structure. Les
+] programmeurs de la vieille école mijotaient leurs programmes à partir
+] de cette soupe primitive. Le temps passant, les Données amorphes se
+] sont cristallisées en de nouveaux types de données et le Contrôle
+] chaotique a été restreint aux structures de contrôle et aux
+] fonctions.
+]
+] %% Petits proverbes
+]
+] Quand un étudiant a questionné Fu-Tzu sur la nature du cycle des
+] Données et du Contrôle, Fu-Tzu répondit « Pensez à un
+] compileur en train d'essayer de se compiler. »
+]
+] Un étudiant demanda : « Les programmeurs de la vieille école
+] utilisaient des machines simples et pas de langages de programmation
+] et pourtant ils concevaient de beaux programmes. Pourquoi
+] utilisons-nous des machines compliquées et des langages de
+] programmation ? » Fu-Tzu répondit : « Les bâtisseurs d'autrefois
+] utilisaient seulement des bâtons et de l'argile et pourtant ils
+] faisaient des cabanes magnifiques. »
+]
+] Un ermite passa dix ans à écrire un programme. « Mon programme peut
+] calculer le mouvement des étoiles sur un ordinateur 286 qui fait
+] tourner MS DOS » annonça t-il fièrement. « Personne ne possède un
+] ordinateur 286 ou ne l'utilise aujourd'hui » répondit-il.
+]
+] Fu-Tzu avait écrit un petit programme qui était plein de variables
+] globales et de raccourcis douteux. En le lisant, un étudiant demanda
+] « Vous nous avez mis en garde contre ces techniques, et pourtant je
+] les ai trouvées dans ce programme. Comment cela se fait-il ? » Fu-Tzu
+] répondit : « Il n'y a pas besoin d'aller chercher un tuyau d'arrosage
+] quand la maison n'est pas en feu. » {Cela ne doit pas se lire comme
+] un encouragement à faire du code de mauvaise qualité, mais comme un
+] avertissement contre une adhésion servile à la règle d'or.}
+]
+] %% Sagesse
+]
+] Un étudiant se plaignait des valeurs numériques. « Quand je prend
+] la racine de deux et que je veux de nouveau son carré, le résultat est
+] inexact ! ».
+] En entendant cela, Fu-Tzu rit. « Voici une feuille de papier.
+] Écrivez-moi la valeur précise de la racine de deux. »
+]
+] Fu-Tzu dit : « Quand vous sciez du bois contre le fil, beaucoup
+] d'huile de coude est nécessaire. Quand vous programmez contre le
+] sens, beaucoup de code est nécessaire. »
+]
+] Tzu-li et Tzu-ssu se vantaient de la taille de leur programmes.
+] « Deux cents mille lignes », dit Tzu-li, « sans compter les
+] commentaires ! ». « Psah », dit Tzu-ssu, « le mien fait presque
+] un *million* de lignes déjà. » Fu-tzu dit « Mon meilleur
+] programme fait cinq cents lignes. » En entendant cela, Tzu-li
+] et Tzu-ssu furent éclairés.
+]
+] Un étudiant était resté assis immobile derrière son ordinateur
+] pendant des heures, en ruminant furieusement. Il était en train
+] d'essayer de concevoir une solution élégante en réponse à un
+] problème difficile, mais il ne pouvait pas trouver le bon moyen
+] de le faire. Fu-tzu le frappa sur l'arrière de la tête, et cria
+] « tape quelque chose ! » L'étudiant se mit à écrire un code
+] dégueulasse. Quand il eut terminé, il comprit tout à coup quelle
+] était la solution simple.
+]
 ] %% Progression
-] 
-] A beginning programmer writes his programs like an ant builds her
-] hill, one piece at a time, without thought for the bigger structure.
-] His programs will be like loose sand. They may stand for a while, but
-] growing too big they fall apart{Referring to the danger of internal
-] inconsistency and duplicated structure in unorganised code.}.
-] 
-] Realising this problem, the programmer will start to spend a lot of
-] time thinking about structure. His programs will be rigidly
-] structured, like rock sculptures. They are solid, but when they must
-] change, violence must be done to them{Referring to the fact that
-] structure tends to put restrictions on the evolution of a program.}.
-] 
-] The master programmer knows when to apply structure and when to leave
-] things in their simple form. His programs are like clay, solid yet
-] malleable.
-] 
-] %% Language
-] 
-] When a programming language is created, it is given syntax and
-] semantics. The syntax describes the form of the program, the semantics
-] describe the function. When the syntax is beautiful and the semantics
-] are clear, the program will be like a stately tree. When the syntax is
-] clumsy and the semantics confusing, the program will be like a bramble
-] bush.
-] 
-] Tzu-ssu was asked to write a program in the language called Java,
-] which takes a very primitive approach to functions. Every morning, as
-] he sat down in front of his computer, he started complaining. All day
-] he cursed, blaming the language for all that went wrong. Fu-Tzu
-] listened for a while, and then reproached him, saying 'Every language
-] has its own way. Follow its form, do not try to program as if you
-] were using another language.'
+]
+] Un programmeur débutant écrit un programme à la manière d'une
+] fourmis qui construit sa fourmilière, sans même penser à la
+] structure finale. Ses programmes seront comme des grains de
+] sable fin. Ils peuvent tenir un moment, mais en devenant plus
+] gros ils tombent {en référence aux dangers d'une
+] incompatibilité interne et aux structures dupliquées dans un
+] code en désordre.}.
+]
+] En prenant conscience de ce problème, le codeur commencera à
+] passer plus de temps à réfléchir à la structure. Ses programmes
+] seront structurés rigidement, à la manière
+] de sculptures de pierre. Ils sont solides, mais quand ils doivent
+] changer, on doit leur faire violence {en référence au fait
+] que la structure a tendance à brider l'évolution du
+] programme.}.
+]
+] Le programmeur expérimenté sait quand la structure est
+] importante, et quand il doit laisser les choses telles quel.
+] Ses programmes sont comme de l'argile, à la fois solide et
+] malléable.
+]
+] %% Langage
+]
+] Quand un langage de programmation est créé, on lui donne une
+] syntaxe et des règles sémantiques. La syntaxe décrit la
+] forme du programme, la sémantique décrit la fonction. Quand
+] la syntaxe est belle et que les règles sont claires, le
+] programme sera un arbre majestueux. Quand la syntaxe est
+] maladroite et que les règles sont confuses, le programme
+] sera comme un tas de ronces.
+]
+] On demanda à Tzu-ssu d'écrire un programme dans un langage
+] appelé Java qui adopte une approche vraiment primitive avec
+] les fonctions. Tous les matins, au moment où il s'asseyait
+] en face de son ordinateur, il commençait à se plaindre.
+] Toute la journée il jurait, accusant le langage pour tout
+] ce qui se passait mal. Fu-tzu écouta pendant un moment,
+] puis lui fit des reproches en lui disant « Chaque langage
+] a sa philosophie. Suis son dessein, n'essaye pas de coder
+] comme si tu  utilisais un autre langage de programmation.»
 
 ---
 
-To honour the memory of our good recluse, I would like to finish his
-HTML-generating program for him. A good approach to this problem goes
-like this:
+Afin d'honorer la mémoire de notre vénérable ermite, j'aimerais finir son
+programme de génération HTML pour lui. Une bonne approche à ce problème
+ressemble à ce qui suit :
 
- 1. Split the file into paragraphs by cutting it at every empty line.
- 2. Remove the '%' characters from header paragraphs and mark them as headers.
- 3. Process the text of the paragraphs themselves, splitting them into normal parts, emphasised parts, and footnotes.
- 4. Move all the footnotes to the bottom of the document, leaving numbers## in their place.
- 5. Wrap each piece into the correct HTML tags.
- 6. Combine everything into a single HTML document.
+ 1. Découper le fichier en paragraphes en le découpant à chaque fin de ligne.
+ 2. Supprimer les caractères « % » des paragraphes d'entête et marquer ceux-ci comme entête.
+ 3. Traiter le texte des paragraphes proprement dit, les découper en corps de texte, textes en emphase et notes de bas de page.
+ 4. Déplacer les notes de bas de page en fin de document, mettre des numéros## à leur place.
+ 5. Entourer chaque élément d'une balise HTML adéquate.
+ 6. Regrouper le tout en un unique document HTML.
 
-## Like this...
+## Comme ceci
 
-This approach does not allow footnotes inside emphasised text, or vice
-versa. This is kind of arbitrary, but helps keep the example code
-simple. If, at the end of the chapter, you feel like an extra
-challenge, you can try to revise the program to support 'nested'
-mark-up.
+Cette approche ne permet pas les notes de bas de page à l'intérieur des
+textes en emphase et inversement. C'est un choix arbitraire mais il permet de
+rester sur un exemple assez simple. Si, à la fin du chapitre, vous voulez
+vous lancer un défi, essayer de modifier le programme pour qu'il prenne en
+charge les marquages « imbriqués ».
 
-The whole manuscript, as a string value, is available on this page
-by calling |recluseFile| function.
+Le manuscrit complet, sous forme de chaine, est disponible sur cette page
+en appelant la fonction |recluseFile|.
 
 ---
 
-Step 1 of the algorithm is trivial. A blank line is what you get when
-you have two newlines in a row, and if you remember the |split| method
-that strings have, which we saw in \\cdata, you will realise that this
-will do the trick:
+La première étape de cet algorithme est triviale. Une ligne blanche est le
+résultat de deux retours-chariots consécutifs et, si vous vous rappelez
+que les chaînes disposent d'une méthode |split|, comme vu dans \\cdata,
+vous comprendrez que cela fera l'affaire :
 
-> var paragraphs = recluseFile().split("\n\n");
-> print("Found ", paragraphs.length, " paragraphs.");
+> var paragraphes = recluseFile().split("\n\n");
+> print("Trouvé ", paragraphes.length, " paragraphes.");
 
 ***
 
-Write a function |processParagraph| that, when given a paragraph
-string as its argument, checks whether this paragraph is a header. If
-it is, it strips off the '%' characters and counts their number. Then,
-it returns an object with two properties, |content|, which contains
-the text inside the paragraph, and |type|, which contains the tag that
-this paragraph must be wrapped in, |"p"| for regular paragraphs,
-|"h1"| for headers with one '%', and |"hX"| for headers with |X| '%'
-characters.
+Ecrire une fonction |transformeParagraphe| qui, recevant un paragraphe sous
+forme de chaîne en argument, détermine si ce paragraphe est un entête. S'il
+l'est, enlever les caractères « % » et les compter. Cette fonction renvoie
+un objet doté de 2 propriétés, |content| contenant le texte du paragraphe,
+et |type|, qui contient le tag qui devra entourer le paragraphe, |"p"| pour
+des paragraphes proprement dit, |"h1"| pour les entêtes avec un seul « %
+», et |"hX"| pour les entêtes avec |X| « % » caractères.
 
-Remember that strings have a |charAt| method that can be used to look
-at a specific character inside them.
+Rappelez-vous que les chaînes possèdent une méthode |charAt| permettant
+de rechercher un caractère précis dans les caractères qui la composent.
 
 ///
 
-> function processParagraph(paragraph) {
->   var header = 0;
->   while (paragraph.charAt(0) == "%") {
->     paragraph = paragraph.slice(1);
->     header++;
+> function transformeParagraphe(paragraphe) {
+>   var entete = 0;
+>   while (paragraphe.charAt(0) == "%") {
+>     paragraphe = paragraphe.slice(1);
+>     entete++;
 >   }
 >
->   return {type: (header == 0 ? "p" : "h" + header),
->           content: paragraph};
+>   return {type: (entete == 0 ? "p" : "h" + entete),
+>           content: paragraphe};
 > }
 >
-> show(processParagraph(paragraphs[0]));
+> show(transformeParagraphe(paragraphes[0]));
 
 ---
 
-This is where we can try out the |map| function we saw earlier.
+C'est là que nous pouvons essayer la fonction |map| citée précédemment.
 
-> var paragraphs = map(processParagraph,
+> var paragraphes = map(transformeParagraphe,
 >                      recluseFile().split("\n\n"));
 
-And *bang*, we have an array of nicely categorised paragraph objects.
-We are getting ahead of ourselves though, we forgot step 3 of the
-algorithm:
+Et *boum*, nous avons un tableau de paragraphes proprement triés. Nous
+sommes allés un peu vite, nous avons oublié l'étape 3 de l'algorithme:
 
-| Process the text of the paragraphs themselves, splitting them into
-| normal parts, emphasised parts, and footnotes.
+| Traiter le texte des paragraphes proprement dit, séparer en texte normal,
+texte en emphase, notes de bas de page.
 
-Which can be decomposed into:
+Ce qui se décompose en :
 
- 1. If the paragraph starts with an asterisk, take off the emphasised part and store it.
- 2. If the paragraph starts with an opening brace, take off the footnote and store it.
- 3. Otherwise, take off the part until the first emphasised part or footnote, or until the end of the string, and store it as normal text.
- 4. If there is anything left in the paragraph, start at 1 again.
+ 1. Si le paragraphe commence par un astérisque, retirer la partie mise en emphase et la stocker.
+ 2. Si le paragraphe commence par une accolade ouvrante, retirer la note de page et la stocker.
+ 3. Dans les autres cas, retirer le morceau de texte jusqu'à la première mise en exergue, mise en bas de page, sinon jusqu'à la fin de la chaîne, et l'enregistrer comme texte normal.
+ 4. S'il reste encore quelque chose dans le paragraphe, reprendre à nouveau en 1.
 
 ***
 
-Build a function |splitParagraph| which, given a paragraph string,
-returns an array of paragraph fragments. Think of a good way to
-represent the fragments.
+Écrire une fonction |decoupeParagraphe| qui, recevant une chaîne de
+caractères représentant un paragraphe, renvoie un tableau de morceaux du
+texte. Réfléchir à la façon de bien représenter les morceaux du texte.
 
-The method |indexOf|, which searches for a character or sub-string in
-a string and returns its position, or |-1| if not found, will probably
-be useful in some way here.
+La méthode |indexOf|, qui recherche un caractère ou une sous-chaîne de
+caractères dans une chaîne de caractères et renvoie sa position, ou |-1|
+si elle ne trouve pas, sera utile ici.
 
-This is a tricky algorithm, and there are many not-quite-correct or
-way-too-long ways to describe it. If you run into problems, just think
-about it for a minute. Try to write inner functions that perform the
-smaller actions that make up the algorithm.
+C'est un algorithme astucieux, et il y a différentes façons approximatives
+ou trop longues pour l'expliquer. En cas de difficulté, n'y passer qu'une
+minute. Essayer d'écrire des sous-fonctions qui effectuent une partie des
+actions qui composent l'algorithme.
 
 ///
 
-Here is one possible solution:
+Voici une solution possible :
 
-> function splitParagraph(text) {
->   function indexOrEnd(character) {
->     var index = text.indexOf(character);
->     return index == -1 ? text.length : index;
+> function decoupeParagraphe(texte) {
+>   function indexOuFin(caractere) {
+>     var index = texte.indexOf(caractere);
+>     return index == -1 ? texte.length : index;
 >   }
 >
->   function takeNormal() {
->     var end = reduce(Math.min, text.length,
->                      map(indexOrEnd, ["*", "{"]));
->     var part = text.slice(0, end);
->     text = text.slice(end);
->     return part;
+>   function extraitTexteNormal() {
+>     var fin = reduce(Math.min, texte.length,
+>                      map(indexOuFin, ["*", "{"]));
+>     var extraction = texte.slice(0, fin);
+>     texte = texte.slice(fin);
+>     return extraction;
 >   }
 >
->   function takeUpTo(character) {
->     var end = text.indexOf(character, 1);
->     if (end == -1)
->       throw new Error("Missing closing '" + character + "'");
->     var part = text.slice(1, end);
->     text = text.slice(end + 1);
->     return part;
+>   function extraitJusquA(caractere) {
+>     var fin = texte.indexOf(caractere, 1);
+>     if (fin == -1)
+>       throw new Error("Manque '" + caractere + "' fermant");
+>     var extraction = texte.slice(1, fin);
+>     texte = texte.slice(fin + 1);
+>     return extraction;
 >   }
 >
 >   var fragments = [];
 >
->   while (text != "") {
->     if (text.charAt(0) == "*")
->       fragments.push({type: "emphasised",
->                       content: takeUpTo("*")});
->     else if (text.charAt(0) == "{")
->       fragments.push({type: "footnote",
->                       content: takeUpTo("}")});
+>   while (texte != "") {
+>     if (texte.charAt(0) == "*")
+>       fragments.push({type: "enEmphase",
+>                       contenu: extraitJusquA("*")});
+>     else if (texte.charAt(0) == "{")
+>       fragments.push({type: "noteBasDePage",
+>                       contenu: extraitJusquA("}")});
 >     else
 >       fragments.push({type: "normal",
->                       content: takeNormal()});
+>                       contenu: extraitTexteNormal()});
 >   }
 >   return fragments;
 > }
 
-Note the over-eager use of |map| and |reduce| in the |takeNormal|
-function. This is a chapter about functional programming, so program
-functionally we will! Can you see how this works? The |map| produces
-an array of positions where the given characters were found, or the
-end of the string if they were not found, and the |reduce| takes the
-minimum of them, which is the next point in the string that we have to
-look at.
+Remarquez l'utilisation abrupte de |map| et |reduce| dans la fonction
+|extraitTexteNormal|. Ceci est un chapitre sur la programmation fonctionnelle,
+donc c'est de la programmation fonctionnelle que nous ferons !
+Voyez-vous comment cela fonctionne ? La fonction |map| renvoie un tableau des
+positions où les caractères indiqués ont été trouvés, ou bien renvoie
+la fin de la chaîne si aucun n'a été trouvé, et la fonction |reduce|
+prend le minimum de ces positions, qui est la prochain position dans la
+chaîne où nous allons regarder.
 
-If you'd write that out without mapping and reducing you'd get
-something like this:
+Si vous voulez écrire cela sans |map| et |reduce|, vous obtiendrez à peu
+près ceci :
 
-!> var nextAsterisk = text.indexOf("*");
-!> var nextBrace = text.indexOf("{");
-!> var end = text.length;
-!> if (nextAsterisk != -1)
-!>   end = nextAsterisk;
-!> if (nextBrace != -1 && nextBrace < end)
-!>   end = nextBrace;
+!> var prochainAsterisque = texte.indexOf("*");
+!> var prochaineAccolade = texte.indexOf("{");
+!> var fin = texte.length;
+!> if (prochainAsterisque != -1)
+!>   fin = prochainAsterisque;
+!> if (prochaineAccolade != -1 && prochaineAccolade < fin)
+!>   fin = prochaineAccolade;
 
-Which is even more hideous. Most of the time, when a decision has to
-be made based on a series of things, even if there are only two of
-them, writing it as array operations is nicer than handling every
-value in a separate |if| statement. (Fortunately, \\cregexp describes
-an easier way to ask for the first occurrence of 'this or that
-character' in a string.)
+Ce qui est encore plus moche. La plupart du temps, quand il faut prendre une
+décision basée sur plusieurs critères, ne serait-ce que deux, l'écrire
+sous forme d'une opération dans un tableau est plus lisible que de décrire
+chaque critère dans une instruction |if|. (Heureusement, dans le \\cregexp,
+il y a une description simple de la façon de déterminer la première
+occurrence de 'ceci ou cela' dans une chaîne).
 
-If you wrote a |splitParagraph| that stored fragments in a different
-way than the solution above, you might want to adjust it, because the
-functions in the rest of the chapter assume that fragments are objects
-with |type| and |content| properties.
+Si vous avez écrit une fonction |decoupeParagraphe| qui enregistre les
+morceaux de texte d'une façon différente de la solution ci-dessus, vous
+devriez la modifier, car les fonctions du reste de ce chapitre supposent
+que les morceaux de texte sont des objets dotés des propriétés |type|
+et |contenu|.
 
 ---
 
-We can now wire |processParagraph| to also split the text inside the
-paragraphs, my version can be modified like this:
+Nous pouvons maintenant faire le lien avec |transformeParagraphe| pour
+découper également le texte à l'intérieur des paragraphes, ma version
+peut être modifiée de la façon suivante :
 
-> function processParagraph(paragraph) {
->   var header = 0;
->   while (paragraph.charAt(0) == "%") {
->     paragraph = paragraph.slice(1);
->     header++;
+> function transformeParagraphe(paragraphe) {
+>   var entete = 0;
+>   while (paragraphe.charAt(0) == "%") {
+>     paragraphe = paragraphe.slice(1);
+>     entete++;
 >   }
 >
->   return {type: (header == 0 ? "p" : "h" + header),
->           content: splitParagraph(paragraph)};
+>   return {type: (entete == 0 ? "p" : "h" + entete),
+>           contenu: decoupeParagraphe(paragraphe)};
 > }
 
-Mapping that over the array of paragraphs gives us an array of
-paragraph objects, which in turn contain arrays of fragment objects.
-The next thing to do is to take out the footnotes, and put references
-to them in their place. Something like this:
+L'exécution de cette fonction sur le tableau des objets paragraphes nous
+renvoie un nouveau tableau d'objets paragraphe, qui contiennent des tableaux
+d'objet. Chacun de ces objets contient une fraction de paragraphe.
+La chose à faire ensuite est d'extraire les notes de bas de page, et mettre
+des références vers celles-ci à leur place. Comme ceci :
 
-> function extractFootnotes(paragraphs) {
->   var footnotes = [];
->   var currentNote = 0;
+> function extraitNotesBasDePage(paragraphes) {
+>   var notesBasDePage = [];
+>   var noteEnCours = 0;
 >
->   function replaceFootnote(fragment) {
->     if (fragment.type == "footnote") {
->       currentNote++;
->       footnotes.push(fragment);
->       fragment.number = currentNote;
->       return {type: "reference", number: currentNote};
+>   function remplaceNoteBasDePage(fragment) {
+>     if (fragment.type == "noteBasDePage") {
+>       noteEnCours++;
+>       notesBasDePage.push(fragment);
+>       fragment.numero = noteEnCours;
+>       return {type: "reference", numero: noteEnCours};
 >     }
 >     else {
 >       return fragment;
 >     }
 >   }
 >
->   forEach(paragraphs, function(paragraph) {
->     paragraph.content = map(replaceFootnote,
->                             paragraph.content);
+>   forEach(paragraphes, function(paragraphe) {
+>     paragraphe.contenu = map(remplaceNoteBasDePage,
+>                             paragraphe.contenu);
 >   });
 >
->   return footnotes;
-> }     
+>   return notesBasDePage;
+> }
 
-The |replaceFootnote| function is called on every fragment. When it
-gets a fragment that should stay where it is, it just returns it, but
-when it gets a footnote, it stores this footnote in the |footnotes|
-array, and returns a reference to it instead. In the process, every
-footnote and reference is also numbered.
+La fonction |remplaceNoteBasDePage| est appelée sur chaque morceau. Quand
+elle reçoit un morceau qui doit rester où il est, elle ne fait que renvoyer
+ce morceau, mais si elle reçoit une note de bas de page, elle stocke celui-ci
+dans le tableau |notesBasDePage|, et renvoie une référence vers celui-ci à
+la place. Dans le même temps, chaque note de bas de page et sa référence
+sont numérotées.
 
 ---
 
-That gives us enough tools to extract the information we need from the
-file. All that is left now is generating the correct HTML.
+Nous avons suffisamment d'outils pour extraire les informations du fichier. Il
+nous reste à générer un fichier HTML correct.
 
-A lot of people think that concatenating strings is a great way to
-produce HTML. When they need a link to, for example, a site where you
-can play the game of Go, they will do:
+De nombreuses personnes pensent que la concaténation de chaînes de caractère
+est un bon moyen de construire du HTML. Quand elles veulent, par exemple,
+un lien vers un site où l'on peut jouer au jeu de Go, elles font ceci :
 
 > var url = "http://www.gokgs.com/";
-> var text = "Play Go!";
-> var linkText = "<a href=\"" + url + "\">" + text + "</a>";
-> print(linkText);
+> var texte = "Jouer au Go!";
+> var texteLien = "<a href=\"" + url + "\">" + texte + "</a>";
+> print(texteLien);
 
-(Where |a| is the tag used to create links in HTML documents.) ... Not
-only is this clumsy, but when the string |text| happens to include an
-angular bracket or an ampersand, it is also wrong. Weird things will
-happen on your website, and you will look embarrassingly amateurish.
-We wouldn't want that to happen. A few simple HTML-generating
-functions are easy to write. So let us write them.
+(Où |a| est la balise utilisée pour créer des liens dans les documents
+HTML)… Ceci est non seulement maladroit, mais, quand la chaîne |texte|
+se trouve contenir un chevron (caractère '<' ou '>') ou une esperluette
+(caractère '&'), cela provoque une erreur. Des choses bizarres vont se
+passer sur votre site web, et vous passerez pour un amateur. Nous ne voulons
+pas que cela se produise. Il est facile d'écrire quelques fonctions simples
+de génération de HTML. Alors, écrivons-les.
 
 ---
 
-The secret to successful HTML generation is to treat your HTML
-document as a data structure instead of a flat piece of text.
-JavaScript's objects provide a very easy way to model this:
+Le secret d'une génération HTML réussie est de traiter votre document
+comme une structure de données plutôt qu'un simple texte plat.
+Les objets en JavaScript permettent de modéliser cela facilement :
 
-> var linkObject = {name: "a",
->                   attributes: {href: "http://www.gokgs.com/"},
->                   content: ["Play Go!"]};
+> var objetLien= {nom: "a",
+>                   attributs: {href: "http://www.gokgs.com/"},
+>                   contenu: ["Jouer au Go!"]};
 
-Each HTML element contains a |name| property, giving the name of the
-tag it represents. When it has attributes, it also contains an
-|attributes| property, which contains an object in which the
-attributes are stored. When it has content, there is a |content|
-property, containing an array of other elements contained in this
-element. Strings play the role of pieces of text in our HTML document,
-so the array |["Play Go!"]| means that this link has only one element
-inside it, which is a simple piece of text.
+Chaque élément HTML possède une propriété |nom|, contenant le nom de la
+balise qu'il représente. Quand il a des attributs, il possède également
+une propriété |attributs|, qui est un objet contenant ces attributs. Quand
+il a un contenu, il possède une propriété |contenu| contenant un tableau
+des autres éléments qu'il englobe. Des chaînes de caractères contiennent
+les portions de texte de notre document HTML, ainsi, le tableau |["Jouer
+au Go!"]| signifie que ce lien n'a qu'un élément englobé, cet élément
+étant un simple morceau de texte.
 
-Typing in these objects directly is clumsy, but we don't have to do
-that. We provide a shortcut function to do this for us:
+Taper tout ces objets à la main serait pénible, mais nous n'allons pas
+faire comme ça. Une fonction utilitaire fera cela pour nous:
 
-> function tag(name, content, attributes) {
->   return {name: name, attributes: attributes, content: content};
+> function tag(nom, contenu, attributs) {
+>   return {nom: nom, attributs: attributs, contenu: contenu};
 > }
 
-Note that, since we allow the |attributes| and |content| of an element
-to be undefined if they are not applicable, the second and third
-argument to this function can be left off when they are not needed.
+Remarquez que du fait que nous autorisons que les propriétés |attributs|
+et |contenu| d'un élément soient indéfinis s'il ne s'appliquent pas,
+le second et troisième élément de cette fonction peuvent être ignorés
+s'il ne sont pas nécessaires.
 
-|tag| is still rather primitive, so we write shortcuts for common
-types of elements, such as links, or the outer structure of a simple
-document:
+La fonction |tag| est cependant assez simpliste, c'est pourquoi nous écrivons
+quelques fonctions utilitaires pour des éléments fréquemment utilisés,
+comme les liens, ou la structure générale d'un document simple :
 
-> function link(target, text) {
->   return tag("a", [text], {href: target});
+> function lien(cible, texte) {
+>   return tag("a", [texte], {href: cible});
 > }
 >
-> function htmlDoc(title, bodyContent) {
->   return tag("html", [tag("head", [tag("title", [title])]),
->                       tag("body", bodyContent)]);
+> function documentHtml(titre, contenu) {
+>   return tag("html", [tag("head", [tag("title", [titre])]),
+>                       tag("body", contenu)]);
 > }
 
 ***
 
-Looking back at the example HTML document if necessary, write an
-|image| function which, when given the location of an image file, will
-create an |img| HTML element.
+En reprenant, si nécessaire, l'exemple de document HTML donné précédemment,
+écrire une fonction |image| qui, recevant un fichier d'image, créé un
+élément HTML |img|.
 
 ///
 
@@ -4587,211 +4628,217 @@ create an |img| HTML element.
 
 ---
 
-When we have created a document, it will have to be reduced to a
-string. But building this string from the data structures we have been
-producing is very straightforward. The important thing is to remember
-to transform the special characters in the text of our document...
+Quand nous aurons créé un document, il devra être mis à plat sous forme
+de chaîne. Mais construire cette chaîne a partir des structures de données
+que nous aurons construites sera facile. L'aspect important dont il faut se
+souvenir est de transformer les caractères spéciaux de notre document…
 
-> function escapeHTML(text) {
->   var replacements = [[/&/g, "&amp;"], [/"/g, "&quot;"],
+> function echappeHTML(texte) {
+>   var remplacements = [[/&/g, "&amp;"], [/"/g, "&quot;"],
 >                       [/</g, "&lt;"], [/>/g, "&gt;"]];
->   forEach(replacements, function(replace) {
->     text = text.replace(replace[0], replace[1]);
+>   forEach(remplacements, function(remplacement) {
+>     texte = texte.replace(remplacement[0], remplacement[1]);
 >   });
->   return text;
+>   return texte;
 > }
 
-The |replace| method of strings creates a new string in which all
-occurrences of the pattern in the first argument are replaced by the
-second argument, so |"Borobudur".replace(/r/g, "k")| gives
-|"Bokobuduk"|. Don't worry about the pattern syntax here -- we'll get
-to that in \\cregexp. The |escapeHTML| function puts the different
-replacements that have to be made into an array, so that it can loop
-over them and apply them to the argument one by one.
+La méthode |replace| des objets chaînes créé une nouvelle chaîne dans
+laquelle toutes les occurrences du motif passé en premier en premier argument
+sont remplacées par le second argument, ainsi |"Borobudur".replace(/r/g,
+"k")| donne |"Bokobuduk"|. Ne vous souciez pas ici de la syntaxe des motifs,
+cela sera vu au \\cregexp. La fonction |echappeHTML| stocke les différents
+motifs à remplacer dans un tableau, aussi, il suffit d'énumérer à l'aide
+d'une boucle chacun de ces motifs pour les appliquer un par un.
 
-Double quotes are also replaced, because we will also be using this
-function for the text inside the attributes of HTML tags. Those will
-be surrounded by double quotes, and thus must not have any double
-quotes inside of them.
+Les guillemets sont également remplacés, car nous utiliserons cette fonction
+pour le texte à l'intérieur des attributs des balises HTML. Ces attributs
+seront encadrés par des guillements, et par conséquent ne pourront en
+contenir eux-mêmes.
 
-Calling replace four times means the computer has to go over the whole
-string four times to check and replace its content. This is not very
-efficient. If we cared enough, we could write a more complex version
-of this function, something that resembles the |splitParagraph|
-function we saw earlier, to go over it only once. For now, we are too
-lazy for this. Again, \\cregexp shows a much better way to do this.
+Appeler quatre fois la méthode replace signifie que l'ordinateur devra
+balayer quatre fois la totalité de la chaîne à convertir. Ce n'est pas très
+efficace. Avec plus de soin, nous pourrions écrire une version plus complexe
+de cette fonction, qui ressemblerait à la fonction |decoupeParagraphe| vue
+précédemment, pour ne parcourir cette chaîne qu'une seule fois. Pour le
+moment, nous sommes trop paresseux pour cela. De toute façon, nous verrons
+au \\cregexp une bien meilleure façon de faire tout cela.
 
 ---
 
-To turn an HTML element object into a string, we can use a recursive
-function like this:
+Pour transformer un élément HTML en une chaîne, nous pouvons utiliser
+une fonction récursive comme celle-ci :
 
-> function renderHTML(element) {
+> function renduHTML(element) {
 >   var pieces = [];
 >
->   function renderAttributes(attributes) {
->     var result = [];
->     if (attributes) {
->       for (var name in attributes) 
->         result.push(" " + name + "=\"" +
->                     escapeHTML(attributes[name]) + "\"");
+>   function renduAttributs(attributs) {
+>     var resultat = [];
+>     if (attributs) {
+>       for (var nom in attributs)
+>         resultat.push(" " + nom + "=\"" +
+>                     echappeHTML(attributs[nom]) + "\"");
 >     }
->     return result.join("");
+>     return resultat.join("");
 >   }
 >
->   function render(element) {
->     // Text node
+>   function rendu(element) {
+>     // Element texte
 >     if (typeof element == "string") {
->       pieces.push(escapeHTML(element));
+>       pieces.push(echappeHTML(element));
 >     }
->     // Empty tag
->     else if (!element.content || element.content.length == 0) {
->       pieces.push("<" + element.name +
->                   renderAttributes(element.attributes) + "/>");
+>     // Balise vide
+>     else if (!element.contenu || element.contenu.length == 0) {
+>       pieces.push("<" + element.nom +
+>                   renduAttributs(element.attributs) + "/>");
 >     }
->     // Tag with content
+>     // Balise avec du contenu
 >     else {
->       pieces.push("<" + element.name +
->                   renderAttributes(element.attributes) + ">");
->       forEach(element.content, render);
->       pieces.push("</" + element.name + ">");
+>       pieces.push("<" + element.nom +
+>                   renduAttributs(element.attributs) + ">");
+>       forEach(element.contenu, rendu);
+>       pieces.push("</" + element.nom + ">");
 >     }
 >   }
 >
->   render(element);
+>   rendu(element);
 >   return pieces.join("");
 > }
 
-Note the |in| loop that extracts the properties from a JavaScript
-object in order to make HTML tag attributes out of them. Also note
-that in two places, arrays are being used to accumulate strings, which
-are then joined into a single result string. Why didn't I just start
-with an empty string and then add the content to it with the |+=|
-operator?
+Remarquez la boucle avec |in| qui extrait les propriétés d'un objet
+JavaScript dans le but de créer les attributs d'une balise HTML en se basant
+sur ces propriétés. Remarquez également qu'à deux reprises, des tableaux
+sont utilisés pour stocker des chaînes, qui sont finalement regroupées
+pour ne former qu'une seule chaîne. Pourquoi n'avons-nous pas simplement
+commencé avec une chaîne vide à laquelle nous aurions ajouté d'autres
+chaînes, à l'aide de l'opérateur |+=| ?
 
-It turns out that creating new strings, especially big strings, is
-quite a lot of work. Remember that JavaScript string values never
-change. If you concatenate something to them, a new string is created,
-the old ones stay intact. If we build up a big string by concatenating
-lots of little strings, new strings have to be created at every step,
-only to be thrown away when the next piece is concatenated to them.
-If, on the other hand, we store all the little strings in an array and
-then join them, only *one* big string has to be created.
+Il se trouve que la création des chaînes, en particulier quand elles sont de
+grande taille, représente un certain travail. Rappelez-vous que le contenu des
+chaînes JavaScript est immuable. Si vous concaténez une chaîne à une autre,
+une nouvelle chaîne est créée, les deux premières ne changeant pas. Si
+nous construisons une très grande chaîne en concaténant de nombreuses
+chaînes, une nouvelle chaîne doit être créée à chacun des ajouts,
+et sera supprimée après l'ajout suivant.
+Si, d'un autre côté, nous stockons toutes les chaînes dans un tableau
+pour les rassembler à la fin, une seule grande chaîne sera créée.
 
 ---
 
-So, let us try out this HTML generating system...
+Ainsi, essayons notre outil de génération de HTML...
 
-> print(renderHTML(link("http://www.nedroid.com", "Drawings!")));
+> print(renduHTML(lien("http://www.nedroid.com", "Dessins !")));
 
-That seems to work.
+Cela semble fonctionner.
 
-> var body = [tag("h1", ["The Test"]),
->             tag("p", ["Here is a paragraph, and an image..."]),
+> var corps = [tag("h1", ["Le Test"]),
+>             tag("p", ["Voici un paragraphe, et une image..."]),
 >             image("img/sheep.png")];
-> var doc = htmlDoc("The Test", body);
-> viewHTML(renderHTML(doc));
+> var doc = documentHtml("Le Test", corps);
+> viewHTML(renduHTML(doc));
 
-Now, I should probably warn you that this approach is not perfect.
-What it actually renders is _XML_, which is similar to HTML, but more
-structured. In simple cases, such as the above, this does not cause
-any problems. However, there are some things, which are correct XML,
-but not proper HTML, and these might confuse a browser that is trying
-to show the documents we create. For example, if you have an empty
-|script| tag (used to put JavaScript into a page) in your document,
-browsers will not realise that it is empty and think that everything
-after it is JavaScript. (In this case, the problem can be fixed by
-putting a single space inside of the tag, so that it is no longer
-empty, and gets a proper closing tag.)
+Je devrais maintenant vous prévenir que cette approche n'est pas
+parfaite. Ce qu'elle génère est en fait du _XML_, qui est proche du HTML,
+mais plus structuré. Dans les cas les plus simple, cela n'engendre pas de
+problème. Cependant, il existe des séquences correctes en XML, qui ne sont
+pas correctes en HTML, et peuvent embrouiller un navigateur lorsqu'il va
+vouloir afficher notre document. Si par exemple vous avez un jeu de balises
+|script| vides (on les utilise pour insérer du JavaScript dans une page)
+dans votre document, les navigateurs ne vont pas s'en apercevoir et penser
+que tout ce qui suit est du JavaScript (dans ce cas, le problème peut être
+réglé en mettant une espace unique entre les balises ouvrante et fermante
+pour que la balise ne soit pas vide, et ainsi avoir une balise fermante).
 
 ***
 
-Write a function |renderFragment|, and use that to implement another
-function |renderParagraph|, which takes a paragraph object (with the
-footnotes already filtered out), and produces the correct HTML element
-(which might be a paragraph or a header, depending on the |type|
-property of the paragraph object).
+Écrivez une fonction |renduFragment|, et utilisez-la pour implémenter
+une autre fonction, |renduParagraphe|, qui prend un objet paragraphe (en
+ne tenant pas compte des notes de bas de page) et produit l'élement HTML
+correct (qui peut être un paragraphe ou un en-tête, en fonction du |type|
+de l'objet paragraphe).
 
-This function might come in useful for rendering the footnote
-references:
+Cette fonction pourrait s'avérer utile pour produire les liens vers les
+références de bas de page :
 
-> function footnote(number) {
->   return tag("sup", [link("#footnote" + number,
->                           String(number))]);
+> function basDePage(numero) {
+>   return tag("sup", [lien("#note" + numero,
+>                           String(numero))]);
 > }
 
-A |sup| tag will show its content as 'superscript', which means it
-will be smaller and a little higher than other text. The target of the
-link will be something like |"#footnote1"|. Links that contain a '#'
-character refer to 'anchors' within a page, and in this case we will
-use them to make it so that clicking on the footnote link will take
-the reader to the bottom of the page, where the footnotes live.
+Une balise |sup| affiche son contenu en « exposant », ce qui signifie
+que ce contenu sera plus petit et un peu plus haut sur la ligne que le reste
+du texte. La cible du lien prendra une forme telle que |"#note1"|. Les liens
+contenant un caractère « # » font référence aux « ancres »
+à l'intérieur d'une page, et ici nous les utiliserons pour renvoyer le
+lecteur à la fin de la page, où seront les notes de bas de page.
 
-The tag to render emphasised fragments with is |em|, and normal text
-can be rendered without any extra tags.
+La balise pour générer des parties mises en emphase est |em| ; un texte
+normal peut être fourni avec n'importe quelle balise supplémentaire.
 
 ///
 
-> function renderParagraph(paragraph) {
->   return tag(paragraph.type, map(renderFragment,
->                                  paragraph.content));
+> function renduParagraphe(paragraphe) {
+>   return tag(paragraphe.type, map(renduFragment,
+>                                  paragraphe.contenu));
 > }
 >
-> function renderFragment(fragment) {
+> function renduFragment(fragment) {
 >   if (fragment.type == "reference")
->     return footnote(fragment.number);
->   else if (fragment.type == "emphasised")
->     return tag("em", [fragment.content]);
+>     return basDePage(fragment.numero);
+>   else if (fragment.type == "enEmphase")
+>     return tag("em", [fragment.contenu]);
 >   else if (fragment.type == "normal")
->     return fragment.content;
+>     return fragment.contenu;
 > }
 
 ---
 
-We are almost finished. The only thing that we do not have a rendering
-function for yet are the footnotes. To make the |"#footnote1"| links
-work, an anchor must be included with every footnote. In HTML, an
-anchor is specified with an |a| element, which is also used for links.
-In this case, it needs a |name| attribute, instead of an |href|.
+Nous y sommes presque. Le dernier élément pour lequel nous ne disposons
+pas de fonction de génération HTML sont les notes de bas de page. Pour
+que les liens |"#note1"| fonctionnent, une ancre doit être incluse dans
+chaque note de bas de page. En HTML, les ancres sont décrites à l'aide
+d'une balise |a|, également utilisé pour les liens. Dans ce cas, la balise
+prend un attribut |name| au lieu de |href|.
 
-> function renderFootnote(footnote) {
->   var anchor = tag("a", [], {name: "footnote" + footnote.number});
->   var number = "[" + footnote.number + "] ";
->   return tag("p", [tag("small", [anchor, number,
->                                  footnote.content])]);
+> function renduNoteBasDePage(noteBasDePage) {
+>   var ancre = tag("a", [], {name: "note" + noteBasDePage.numero});
+>   var numero = "[" + noteBasDePage.numero + "] ";
+>   return tag("p", [tag("small", [ancre, numero,
+>                                  noteBasDePage.contenu])]);
 > }
 
-Here, then, is the function which, when given a file in the correct
-format and a document title, returns an HTML document:
+Enfin, voici une fonction qui, recevant un fichier correctement formaté et
+un titre de document, renvoie un document HTML.
 
-> function renderFile(file, title) {
->   var paragraphs = map(processParagraph, file.split("\n\n"));
->   var footnotes = map(renderFootnote,
->                       extractFootnotes(paragraphs));
->   var body = map(renderParagraph, paragraphs).concat(footnotes);
->   return renderHTML(htmlDoc(title, body));
+> function renduFichier(fichier, titre) {
+>   var paragraphes = map(transformeParagraphe, fichier.split("\n\n"));
+>   var notesBasDePage = map(renduNoteBasDePage,
+>                       extraitNotesBasDePage(paragraphes));
+>   var corps = map(renduParagraphe, paragraphes).concat(notesBasDePage);
+>   return renduHTML(documentHtml(titre, corps));
 > }
 >
-> viewHTML(renderFile(recluseFile(), "The Book of Programming"));
+> viewHTML(renduFichier(recluseFile(), "The Book of Programming"));
 
-The _|concat|_ method of an array can be used to concatenate another
-array to it, similar to what the |+| operator does with strings.
-
----
-
-In the chapters after this one, elementary higher-order functions like
-|map| and |reduce| will always be available and will be used by code
-examples. Now and then, a new useful tool is added to this. In
-\\cmodularity, we develop a more structured approach to this set of
-'basic' functions.
+La méthode _|concat|_ des objets de type tableau sert à concaténer un
+tableau avec un autre, tout comme l'opérateur |+| le fait avec les chaînes
+de caractère.
 
 ---
 
-When using higher-order functions, it is often annoying that operators
-are not functions in JavaScript. We have needed |add| or |equals|
-functions at several points. Rewriting these every time, you will
-agree, is a pain. From now on, we will assume the existence of an
-object called |op|, which contains these functions:
+Dans les chapitres suivant, les fonctions élémentaires d'ordre supérieur
+comme |map| et |reduce| seront toujours disponibles et utilisées dans les
+exemples. Ici et là, on leur ajoutera d'autres outils qui nous sembleront
+utiles. Dans le \\cmodularity, nous verrons une approche plus structurée
+pour gérer ce jeu de fonctions de base.
+
+---
+
+Lorsqu'on utilise des fonctions d'ordre supérieur, il est souvent agaçant
+que les opérateurs ne soient pas des fonctions en JavaScript. Nous avons
+eu besoin des fonctions |add| ou |equals| à différents endroits. Les
+réécrire à chaque fois est fastidieux, n'est-ce pas ? Aussi, à partir de
+maintenant, nous supposons l'existence d'un objet nommé |op|, qui contient
+ces fonctions :
 
 > var op = {
 >   "+": function(a, b){return a + b;},
@@ -4801,16 +4848,17 @@ object called |op|, which contains these functions:
 >   /* and so on */
 > };
 
-So we can write |reduce(op["+"], 0, [1, 2, 3, 4, 5])| to sum an array.
-But what if we need something like |equals| or |makeAddFunction|, in
-which one of the arguments already has a value? In that case we are
-back to writing a new function again.
+Nous pouvons donc écrire |reduce(op["+"], 0, [1, 2, 3, 4, 5])| pour faire la
+somme d'un tableau. Mais que se passe-t-il si nous avons besoin de quelque
+chose comme |equals| ou |makeAddFunction|, dans lequel un des arguments a
+déjà cette valeur ? Dans ce cas nous voilà revenus à l'écriture d'une
+nouvelle fonction.
 
-For cases like that, something called '_partial application_' is
-useful. You want to create a new function that already knows some of
-its arguments, and treats any additional arguments it is passed as
-coming after these fixed arguments. This can be done by making
-creative use of the |apply| method of a function:
+Dans les cas comme ceux-là, l'utilisation d'une « _application partielle_ »
+est intéressante. Vous voulez créer une nouvelle fonction qui connaît déjà
+un certain nombre de ces arguments et traite des arguments supplémentaires
+passés après ces arguments fixes. Vous pourrez le faire en utilisant de
+façon créative la méthode |apply| d'une fonction :
 
 > function asArray(quasiArray, start) {
 >   var result = [];
@@ -4826,27 +4874,28 @@ creative use of the |apply| method of a function:
 >   };
 > }
 
-We want to allow binding multiple arguments at the same time, so the
-|asArray| function is necessary to make normal arrays out of the
-|arguments| objects. It copies their content into a real array, so
-that the |concat| method can be used on it. It also takes an optional
-second argument, which can be used to leave out some arguments at the
-start.
+Nous voulons autoriser la combinaison de plusieurs arguments en même temps,
+donc la fonction |asArray| est nécessaire pour constituer des tableaux
+normaux avec les objets |arguments|. Elle copie leur contenu dans un vrai
+tableau, si bien que la méthode |concat| peut lui être appliquée. Elle
+peut prendre aussi un deuxième argument facultatif, permettant d'ignorer
+le ou les premiers arguments.
 
-Also note that it is necessary to store the |arguments| of the outer
-function (|partial|) into a variable with another name, because
-otherwise the inner function can not see them -- it has its own
-|arguments| variable, which shadows the one of the outer function.
+Notez également qu'il faut stocker les |arguments| de la fonction externe
+(|partial|) dans une variable avec un autre nom, sinon la fonction interne
+ne peut pas les voir (elle a sa propre variable |arguments|, qui masque
+celle de la fonction externe).
 
-Now |equals(10)| can be written as |partial(op["=="], 10)|.
+Maintenant |equals(10)| peut s'écrire |partial(op["=="], 10)|.
 
 > show(map(partial(op["+"], 1), [0, 2, 4, 6, 8, 10]));
 
-The reason |map| takes its function argument before its array argument
-is that it is often useful to partially apply map by giving it a
-function. This 'lifts' the function from operating on a single value
-to operating on an array of values. For example, if you have an array
-of arrays of numbers, and you want to square them all, you do this:
+La raison pour laquelle |map| prend son argument de fonction avant
+l'organisation du tableau est qu'il est souvent utile d'appliquer partiellement
+map en lui attribuant une fonction. Ce qui donne à la fonction davantage
+de puissance, elle n'opère plus sur une seule valeur mais sur un tableau
+de valeurs. Par exemple, si vous avez un tableau de tableau de nombres,
+et que vous voulez les mettre tous au carré, vous procédez ainsi :
 
 > function square(x) {return x * x;}
 >
@@ -4854,10 +4903,10 @@ of arrays of numbers, and you want to square them all, you do this:
 
 ---
 
-One last trick that can be useful when you want to combine functions
-is _function composition_. At the start of this chapter I showed a
-function |negate|, which applies the boolean *not* operator to the
-result of calling a function:
+Une dernière astuce qui peut être utile quand vous voulez combiner des
+fonctions est la _composition de fonctions_. Au début de ce chapitre j'ai
+montré une fonction |negate|, qui applique l'opérateur booléen *not*
+au résultat de l'appel d'une fonction :
 
 > function negate(func) {
 >   return function() {
@@ -4865,10 +4914,10 @@ result of calling a function:
 >   };
 > }
 
-This is a special case of a general pattern: call function A, and then
-apply function B to the result. Composition is a common concept in
-mathematics. @_|compose|_It can be caught in a higher-order function
-like this:
+C'est un cas particulier d'une structure plus générale : appeler la
+fonction A, puis appliquer la fonction B au résultat. La composition est
+un concept usuel en mathématiques.  @_|compose|_Elle peut être utilisée
+dans une fonction de haut niveau de la façon suivante :
 
 > function compose(func1, func2) {
 >   return function() {
@@ -4881,12 +4930,12 @@ like this:
 > show(isDefined(Math.PI));
 > show(isDefined(Math.PIE));
 
-Here we are defining new functions without using the |function|
-keyword at all. This can be useful when you need to create a simple
-function to give to, for example, |map| or |reduce|. However, when a
-function becomes more complex than these examples, it is usually
-shorter (not to mention more efficient) to just write it out with
-|function|.
+Nous voilà en train de définir de nouvelles fonctions sans utiliser du
+tout le mot-clé |function|. Cela peut être utile si vous avez besoin de
+créer une fonction simple à passer, par exemple, à |map| ou |reduce|
+. Toutefois, quand une fonction devient plus complexe que ces exemples,
+il est généralement plus rapide (sans parler du gain en efficacité)
+de l'écrire avec |function|.
 
 ==================
 Searching / search
