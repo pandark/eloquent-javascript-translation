@@ -3369,51 +3369,54 @@ les propriétés d'une valeur de chaîne sont toutes en lecture seule.
 > array.length = 2;
 > show(array);
 
-======================
-Error Handling / error
-======================
+===========================
+Gestion des erreurs / error
+===========================
 
-Writing programs that work when everything goes as expected is a good
-start. Making your programs behave properly when encountering
-unexpected conditions is where it really gets challenging.
+Écrire des programmes qui fonctionnent quand tout se passe comme prévu,
+c'est un bon point de départ. Mais vous arranger pour que vos programmes
+se comportent de façon acceptable dans des circonstances inattendues,
+cela devient un véritable défi.
 
-The problematic situations that a program can encounter fall into two
-categories: Programmer mistakes and genuine problems. If someone
-forgets to pass a required argument to a function, that is an example
-of the first kind of problem. On the other hand, if a program asks the
-user to enter a name and it gets back an empty string, that is
-something the programmer can not prevent.
+Les situations problématiques qu'un programme peut rencontrer se classent en
+deux catégories : les erreurs du développeur et les réels problèmes. Si
+quelqu'un oublie de passer un argument requis à une fonction, c'est un
+exemple de la première catégorie. En revanche, si un programme demande à
+l'utilisateur de saisir un nom et qu'il obtient en retour une chaîne vide,
+il s'agit d'un problème que le développeur ne peut pas empêcher.
 
-In general, one deals with programmer errors by finding and fixing
-them, and with genuine errors by having the code check for them and
-perform some suitable action to remedy them (for example, asking for
-the name again), or at least fail in a well-defined and clean way.
+En général, on traite les erreurs du développeur en les cherchant et en
+les corrigeant, et pour les erreurs réelles, en faisant en sorte que le
+code les vérifie et effectue l'action appropriée pour y remédier (par
+exemple en redemandant le nom de l'utilisateur), ou au moins en échouant
+de façon bien définie et propre.
 
 ---
 
-It is important to decide into which of these categories a certain
-problem falls. For example, consider our old |power| function:
+Il est important de décider de quelle catégorie un certain problème peut
+relever. Par exemple, reprenons notre ancienne fonction |puissance| :
 
-> function power(base, exponent) {
+> function puissance(base, exponent) {
 >   var result = 1;
 >   for (var count = 0; count < exponent; count++)
 >     result *= base;
 >   return result;
 > }
 
-When some geek tries to call |power("Rabbit", 4)|, that is quite
-obviously a programmer error, but how about |power(9, 0.5)|? The
-function can not handle fractional exponents, but, mathematically
-speaking, raising a number to the halfth power is perfectly reasonable
-(_|Math.pow|_ can handle it). In situations where it is not entirely
-clear what kind of input a function accepts, it is often a good idea
-to explicitly state the kind of arguments that are acceptable in a
-comment.
+Quand un geek essaie d'appeler |puissance("Lapin", 4)|, c'est de toute
+évidence une erreur du développeur, mais qu'en est-il de |power(9,
+0.5)| ? La fonction ne sait pas manipuler des exposant sous forme de
+fraction, mais mathématiquement parlant, élever un nombre à la puissance
+1/2 est parfaitement raisonnable (_|Math.pow|_ sait le faire). Dans des
+situations où le type de saisie que peut accepter une fonction n'est pas
+totalement clair, il est préférable de préciser explicitement le type
+d'arguments acceptables dans un commentaire.
 
 ---
 
-If a function encounters a problem that it can not solve itself, what
-should it do? In \\cdata we wrote the function |between|:
+Si une fonction rencontre un problème qu'elle ne peut résoudre par
+elle-même, que doit-elle faire ? Dans le \\cdata, nous avons écrit la
+fonction |between| :
 
 > function between(string, start, end) {
 >   var startAt = string.indexOf(start) + start.length;
@@ -3421,32 +3424,33 @@ should it do? In \\cdata we wrote the function |between|:
 >   return string.slice(startAt, endAt);
 > }
 
-If the given |start| and |end| do not occur in the string, |indexOf|
-will return |-1| and this version of |between| will return a lot of
-nonsense: |between("Your mother!", "{-", "-}")| returns |"our mother"|.
+Si le |start| et le |end| donnés n'apparaissent pas dans la chaîne, |indexOf|
+renverra |-1| et cette version de |between| retournera des absurdités :
+|between("Ta mère !", "{-", "-}")| renvoie |"a mère"|.
 
-When the program is running, and the function is called like that, the
-code that called it will get a string value, as it expected, and
-happily continue doing something with it. But the value is wrong, so
-whatever it ends up doing with it will also be wrong. And if you are
-unlucky, this wrongness only causes a problem after having passed
-through twenty other functions. In cases like that, it is extremely
-hard to find out where the problem started.
+Quand le programme s’exécute et que la fonction est appelée ainsi,
+le code qui l'a appelé obtiendra une chaîne, comme prévu, et continuera
+joyeusement à la manipuler. Mais la valeur est erronée, donc quel que soit
+le résultat obtenu, il sera faux. Et si vous êtes malchanceux, cette erreur
+ne provoquera de problème qu'après avoir été passée à une vingtaine
+d'autres fonctions. Dans des cas comme celui-ci, il est extrêmement difficile
+de trouver où le problème a débuté.
 
-In some cases, you will be so unconcerned about these problems that
-you don't mind the function misbehaving when given incorrect input.
-For example, if you know for sure the function will only be called
-from a few places, and you can prove that these places give it decent
-input, it is generally not worth the trouble to make the function
-bigger and uglier so that it can handle problematic cases.
+Dans certains cas, vous ne serez absolument pas concerné par ce genre de
+problème et vous n'aurez que faire du mauvais comportement de la fonction
+lorsqu'elle reçoit un mauvais type d'argument. Par exemple, si vous êtes
+sûr qu'une fonction ne sera appelée qu'à quelques endroits et que vous
+pouvez prouver que ces endroits ne fournissent que le bon type d'argument,
+ça ne vaut alors généralement pas le coup de faire grossir la fonction
+et de la rendre plus moche pour qu'elle puisse traiter des cas problématiques.
 
-But most of the time, functions that fail 'silently' are hard to use,
-and even dangerous. What if the code calling |between| wants to know
-whether everything went well? At the moment, it can not tell, except
-by re-doing all the work that |between| did and checking the result of
-|between| with its own result. That is bad. One solution is to make
-|between| return a special value, such as |false| or |undefined|, when
-it fails.
+Mais la plupart du temps, les fonctions qui échouent « silencieusement »
+sont difficiles à utiliser, et même dangereuses. Que se passe-t-il si le
+code appelant |between| veut savoir si tout s'est bien passé ? Sur le
+moment, il ne peut le dire, sauf à refaire tout le travail qu'a effectué
+|between| et à vérifier le résultat de |between| par rapport au sien. Ce
+qui n'est pas bien. Une solution serait de faire renvoyer par |between|
+une valeur spéciale telle que |false| ou [undefined| quand elle échoue.
 
 > function between(string, start, end) {
 >   var startAt = string.indexOf(start);
@@ -3460,21 +3464,22 @@ it fails.
 >   return string.slice(startAt, endAt);
 > }
 
-You can see that error checking does not generally make functions
-prettier. But now code that calls |between| can do something like:
+Vous pouvez voir que les vérifications d'erreurs ne rendent généralement
+pas les fonctions plus jolies. Mais maintenant, le code qui appelle |between|
+peut faire quelque chose comme :
 
-> var input = prompt("Tell me something", "");
+> var input = prompt("Dites-moi quelque chose", "");
 > var parenthesized = between(input, "(", ")");
 > if (parenthesized != undefined)
->   print("You parenthesized '", parenthesized, "'.");
+>   print("Vous avez mis entre parenthèses '", parenthesized, "'.");
 
 ---
 
-In many cases returning a special value is a perfectly fine way to
-indicate an error. It does, however, have its downsides. Firstly, what
-if the function can already return every possible kind of value? For
-example, consider this function that gets the last element from an
-array:
+Dans beaucoup de cas, renvoyer une valeur spéciale est une façon tout à
+fait appropriée pour indiquer une erreur. Il y a malheureusement un revers à
+la médaille. D'abord, que se passe-t-il si la fonction peut déjà renvoyer
+toutes sortes de valeurs possibles ? Par exemple, prenons cette fonction
+qui récupère le dernier élément d'un tableau :
 
 > function lastElement(array) {
 >   if (array.length > 0)
@@ -3485,51 +3490,53 @@ array:
 >
 > show(lastElement([1, 2, undefined]));
 
-So did the array have a last element? Looking at the value
-|lastElement| returns, it is impossible to say.
+Le tableau avait-il un dernier élément ? En regardant la valeur que
+renvoie |lastElement|, c'est impossible à dire.
 
-The second issue with returning special values is that it can
-sometimes lead to a whole lot of clutter. If a piece of code calls
-|between| ten times, it has to check ten times whether |undefined| was
-returned. Also, if a function calls |between| but does not have a
-strategy to recover from a failure, it will have to check the return
-value of |between|, and if it is |undefined|, this function can then
-return |undefined| or some other special value to its caller, who in
-turn also checks for this value.
+Le second problème quand on renvoie des valeurs spéciales, c'est que
+cela peut conduire à créer pas mal de bazar. Si une partie de code
+appelle |between| dix fois, elle doit vérifier dix fois si |undefined|
+a été retourné. De même, si une fonction appelle |between|, mais n'a
+pas de stratégie gérer un éventuel échec, elle devra vérifier la valeur
+renvoyée par |between|, et si c'est |undefined|, cette fonction peut alors
+renvoyer |undefined| ou une autre valeur spéciale à sa fonction appelante,
+qui à son tour vérifiera cette valeur.
 
-Sometimes, when something strange occurs, it would be practical to
-just stop doing what we are doing and immediately jump back to a place
-that knows how to handle the problem.
+Des fois, quand quelque chose de bizarre se passe, il serait pratique de juste
+arrêter ce que l'on est en train de faire, et de revenir immédiatement à
+un endroit où le problème peut être réglé.
 
-Well, we are in luck, a lot of programming languages provide such a
-thing. Usually, it is called _exception handling_.
+Nous avons de la chance. Beaucoup de langages de programmation fournissent
+de tels mécanismes. C'est ce qu'on appelle généralement _la gestion
+des exceptions_.
 
 ---
 
-The theory behind exception handling goes like this: It is possible
-for code to _raise_ (or _throw_) an _exception_, which is a value.
-Raising an exception somewhat resembles a super-charged return from a
-function -- it does not just jump out of the current function, but
-also out of its callers, all the way up to the top-level call that
-started the current execution. This is called _unwinding the stack_.
-You may remember the _stack_ of function calls that was mentioned in
-\\cfunctions. An exception zooms down this stack, throwing away all
-the call contexts it encounters.
+La théorie derrière la gestion des exceptions fonctionne ainsi : il est
+possible pour le code de _lever_ (ou _jeter_) une _exception_, qui est une
+valeur. Quand on lève une exception, cela ressemble parfois à un retour de
+fonction boosté aux stéroïdes : on ne sort pas simplement de la fonction
+en cours, mais aussi des fonctions appellantes, en remontant à la fonction
+appellante de plus haut niveau qui a initié l'exécution actuelle. Cela
+s'appelle _dépiler_. Vous vous rappelez peut-être que la _pile_ des appels
+de fonction qui avait été abordée au \\cfunctions. Une exception descend
+dans cette pile, en renvoyant tous les contextes des appels qu'elle rencontre.
 
-If they always zoomed right down to the base of the stack, exceptions
-would not be of much use, they would just provide a novel way to blow
-up your program. Fortunately, it is possible to set obstacles for
-exceptions along the stack. These '_catch_' the exception as it is
-zooming down, and can do something with it, after which the program
-continues running at the point where the exception was caught.
+Si elles descendaient sans s'arrêter jusqu'au bas de la pile, les exceptions
+ne seraient pas d'un grand intérêt, elles fourniraient juste un moyen
+original de détruire le programme. Heureusement, il est possible de dresser
+des obstacles aux exceptions le long de la pile. Ceux-ci « _attrapent_ »
+l'exception quand elle descend, et ils peuvent s'en charger, après quoi
+le programme continue de fonctionner normalement à partir du point où
+l'exception a été attrapée.
 
-An example:
+Un exemple :
 
 > function lastElement(array) {
 >   if (array.length > 0)
 >     return array[array.length - 1];
 >   else
->     throw "Can not take the last element of an empty array.";
+>     throw "Impossible de prendre le dernier élément d'un tableau vide.";
 > }
 >
 > function lastElementPlusTen(array) {
@@ -3540,55 +3547,57 @@ An example:
 >   print(lastElementPlusTen([]));
 > }
 > catch (error) {
->   print("Something went wrong: ", error);
+>   print("Une erreur est survenue : ", error);
 > }
 
-_|throw|_ is the keyword that is used to raise an exception. The
-keyword _|try|_ sets up an obstacle for exceptions: When the code in
-the block after it raises an exception, the _|catch|_ block will be
-executed. The variable named in parentheses after the word |catch| is
-the name given to the exception value inside this block.
+_|throw|_ est le mot-clé qui est utilisé pour lever l'exception. Le mot-clé
+_|try|_ lève un obstacle pour les exceptions : quand une exception est
+levée dans le code du bloc suivant ce _|try|_, le bloc _|catch|_ sera
+exécuté. La variable nommée entre parenthèses après le mot |catch|
+est le nom donné à la valeur d'exception à l'intérieur du bloc.
 
-Note that the function |lastElementPlusTen| completely ignores the
-possibility that |lastElement| might go wrong. This is the big
-advantage of exceptions -- error-handling code is only necessary at
-the point where the error occurs, and the point where it is handled.
-The functions in between can forget all about it.
+On remarque que la fonction |LastelementPlusTen| ignore complètement la
+possibilité que |LastElement| puisse ne pas fonctionner. C'est là le grand
+avantage des exceptions, un code pour s'occuper de l'erreur n'est nécessaire
+qu'au moment où l'erreur survient, et à l'endroit où on s'en occupe. Les
+fonctions sur le chemin peuvent tout ignorer à ce sujet.
 
-Well, almost.
+Enfin, presque.
 
 ---
 
-Consider the following: A function |processThing| wants to set a
-top-level variable |currentThing| to point to a specific thing while
-its body executes, so that other functions can have access to that
-thing too. Normally you would of course just pass the thing as an
-argument, but assume for a moment that that is not practical. When the
-function finishes, |currentThing| should be set back to |null|.
+Réfléchissez un instant à ceci : une fonction |processThing| veut
+déclarer une variable globale |currentThing| pour pointer vers quelque
+chose de spécifique pendant que son corps exécute, de manière à ce que
+d'autres fonctions puissent également y avoir accès. Normalement, vous
+passeriez simplement cette chose comme un argument, mais imaginons l'espace
+d'un instant que ce n'est pas possible en pratique. Quand la fonction se
+termine, |currentThing| devrait être redéfinie avec une valeur |null|.
 
 > var currentThing = null;
 >
 > function processThing(thing) {
 >   if (currentThing != null)
->     throw "Oh no! We are already processing a thing!";
+>     throw "Oh non ! Nous sommes déjà en train d'exécuter quelque chose !";
 >
 >   currentThing = thing;
->   /* do complicated processing... */
+>   /* do complicated processing… */
 >   currentThing = null;
 > }
 
-But what if the complicated processing raises an exception? In that
-case the call to |processThing| will be thrown off the stack by the
-exception, and |currentThing| will never be reset to |null|.
+Mais que ce se passerait-il si cette opération compliquée lève une exception
+? Dans ce cas, l'appel à |processThing| sera rejeté en dehors de la pile par
+l'exception, et |currentThing| n'aura pas de valeur redéfinie comme |null|.
 
-|try| statements can also be followed by a _|finally|_ keyword, which
-means 'no matter *what* happens, run this code after trying to run the
-code in the |try| block'. If a function has to clean something up, the
-cleanup code should usually be put into a |finally| block:
+Les instructions |try| peuvent aussi être suivies par un mot-clé _|finally|_,
+ce qui veut dire « quoi qu'il arrive, exécutez ce code après avoir
+essayé d'exécuter ce code dans un bloc |try| ». Si une fonction doit
+nettoyer quelque chose, le code qui effectue ce nettoyage doit en général
+être inséré dans un bloc |finally| :
 
 > function processThing(thing) {
 >   if (currentThing != null)
->     throw "Oh no! We are already processing a thing!";
+>     throw "Oh non ! Nous sommes déjà en train d'exécuter quelque chose !";
 >
 >   currentThing = thing;
 >   try {
@@ -3601,42 +3610,44 @@ cleanup code should usually be put into a |finally| block:
 
 ---
 
-A lot of errors in programs cause the JavaScript environment to raise
-an exception. For example:
+Beaucoup d'erreurs de programmation obligent l'environnement JavaScript à
+lever des exceptions. Par exemple :
 
 > try {
 >   print(Sasquatch);
 > }
 > catch (error) {
->   print("Caught: " + error.message);
+>   print("A: " + error.message);
 > }
 
-In cases like this, special error objects are raised. These always
-have a |message| property containing a description of the problem. You
-can raise similar objects using the |new| keyword and the _|Error|_
-constructor:
+Dans des cas comme celui-là, des objets spéciaux de type erreur sont
+levés. Ils ont toujours une propriété |message| contenant une description
+du problème. Vous pouvez lever des objets similaires en utilisant le mot-clé
+|new| et le constructeur _|error|_ :
 
-> throw new Error("Fire!");
-
----
-
-When an exception goes all the way to the bottom of the stack without
-being caught, it gets handled by the environment. What this means
-differs between the different browsers, sometimes a description of the
-error is written to some kind of log, sometimes a window pops up
-describing the error.
-
-The errors produced by entering code in the console on this page are
-always caught by the console, and displayed among the other output.
+> throw new Error("Au feu !");
 
 ---
 
-Most programmers consider exceptions purely an error-handling
-mechanism. In essence, though, they are just another way of
-influencing the control flow of a program. For example, they can be
-used as a kind of |break| statement in a recursive function. Here is a
-slightly strange function which determines whether an object, and the
-objects stored inside it, contain at least seven |true| values:
+Quand une exception descend tout en bas de la pile sans être attraée, elle
+est prise en charge par l'environnement. Ce que cela signifie diffère selon
+les différents navigateurs, quelquefois une description de l'erreur est
+écrite sous la forme d'une entrée de  journal, d'autres fois une fenêtre
+décrivant l'erreur apparaît.
+
+Les erreurs générées par le code entré dans la console sur cette page
+sont toujours attrapée par la console, et sont affichées avec les autres
+sorties de la console.
+
+---
+
+La plupart des programmeurs considèrent les exceptions uniquement comme un
+mécanisme de gestion des erreurs. Par essence, pourtant, elles représentent
+juste une autre manière d'influer sur le contrôle du flux d'un programme. Par
+exemple, elles peuvent être utilisées comme une sorte d'instruction |break|
+dans une fonction récursive. Voici une fonction un peu bizarre qui détermine
+si un objet, ainsi que les autres objets stockés à l'intérieur, contiennent
+au moins sept valeurs |true| :
 
 > var FoundSeven = {};
 >
@@ -3667,27 +3678,28 @@ objects stored inside it, contain at least seven |true| values:
 >   }
 > }
 
-The inner function |count| is recursively called for every object that
-is part of the argument. When the variable |counted| reaches seven,
-there is no point in continuing to count, but just returning from the
-current call to |count| will not necessarily stop the counting, since
-there might be more calls below it. So what we do is just throw a
-value, which will cause the control to jump right out of any calls to
-|count|, and land at the |catch| block.
+La fonction interne |count| est appelée récursivement pour chaque objet qui
+fait partie d'un argument. Quand la variable |counted| atteint sept, il n'y
+a aucun intérêt à continuer de compter, mais se contenter de remonter de
+l'appel courant à |count| ne va pas nécessairement arrêter l'énumération,
+comme il pourrait y avoir plusieurs appels derrière. Donc ce que l'on fait
+c'est juste lever une exception, ce qui obligera le contrôleur à rejeter
+tout appel, et à se rendre au bloc |catch|.
 
-But just returning |true| in case of an exception is not correct.
-Something else might be going wrong, so we first check whether the
-exception is the object |FoundSeven|, created specifically for this
-purpose. If it is not, this |catch| block does not know how to handle
-it, so it raises it again.
+Mais se contenter de retourner |true| dans le cas d'une exception n'est
+pas correct. Quelque chose peut mal se passer, donc on vérifie d'abord si
+l'exception est l'objet |FoundSeven|, créé spécifiquement dans ce but. Si
+ce n'est pas le cas, ce bloc |catch| ne sait pas comment s'en occuper,
+donc il la lève encore.
 
-This is a pattern that is also common when dealing with error
-conditions -- you have to make sure that your |catch| block only
-handles exceptions that it knows how to handle. Throwing string
-values, as some of the examples in this chapter do, is rarely a good
-idea, because it makes it hard to recognise the type of the exception.
-A better idea is to use unique values, such as the |FoundSeven|
-object, or to introduce a new type of objects, as described in \\coo.
+On a ici un modèle qui est également habituel lorsqu'on s'occupe de
+conditions d'erreur : vous devez vous assurez que votre bloc |catch|
+s'occupe seulement des exceptions qu'il sait traiter. Lever des exceptions de
+type chaîne de caractères, comme certains exemples de ce chapitre le font,
+est rarement une bonne idée, car cela rend difficile de reconnaître le type
+de l'exception. Une meilleure idée consiste à utiliser des valeurs uniques,
+comme l'objet |FoundSeven|, ou d'introduire un nouveau type d'objets, comme
+cela a été décrit dans le \\coo.
 
 ===========================
 Functional Programming / fp
