@@ -378,7 +378,7 @@ renderContent cs now = page "Table des matières" [contentDiv [header, listHeade
           appendices = filter ((==Appendix) . ctype) cs
           makeLink c = link (fileName c) (title c)
           makeList cs = Tg "ol" [("class", "contents")] (map (listitem . (:[]) . makeLink) cs)
-          bottomLinks = tg "p" [link "terms.html" "Index lexicographique alphabétique", tg "br" [], link "index.html" "Page de couverture"]
+          bottomLinks = tg "p" [link "terms.html" "Index lexicographique alphabétique", tg "br" [], link "contributors.html" "Contributeurs", tg "br" [], link "index.html" "Page de couverture"]
 
 
 renderChapters cs now = do let rcs = map (renderChapter' cs) cs
@@ -406,6 +406,7 @@ renderChapter (pos, (c, rc)) cs now = page (title c) (addScripts content')
 renderPrintable rcs now = page "Print Version" [divClass "content" (concat rcs), footer now]
 
 footer now = divClass "footer" [Tx "\x00A9 ", link "mailto:marijnh@gmail.com" "Marijn Haverbeke",
+                                Tx " et ", link "contributors.html" "contributeurs",
                                 Tx " (", (link "http://creativecommons.org/licenses/by/3.0/deed.fr" "licence"), Tx ")",
                                 Tx (", écrit entre mars et juillet 2007, dernière modification le " ++ (formatDate now) ++ ".")]
 
