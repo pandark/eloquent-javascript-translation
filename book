@@ -11539,59 +11539,61 @@ support pratiques, ceci peut rendre les appels côté serveur presque aussi
 simples qu'ils le sont côté client… à l'exception bien sûr du retour
 des résultats qui ne sera pas aussi instantané.
 
-+++++++++++++++++++++++++++++++++++++++++++
-More (obscure) control structures / control
-+++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Plus de structures de contrôle (obscures) / control
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In \\cbasics, a number of control statements were introduced, such as
-|while|, |for|, and |break|. To keep things simple, I left out some
-others, which, in my experience, are a lot less useful. This appendix
-briefly describes these missing control statements.
+Dans le \\cbasics, un certain nombre de structures de contrôle ont été
+introduites, comme |while|, |for|, et |break|. Pour garder les choses
+simples, j'en ai laissé d'autres de côté, qui, d'après mon expérience,
+sont beaucoup moins utiles. Cet appendice décrit rapidement ces structures
+de contrôles manquantes.
 
 ---
 
-First, there is _|do|_. |do| works like |while|, but instead of
-executing the loop body zero or more times, it executes it one or more
-times. A |do| loop looks like this:
+Pour commencer, il y a _|do|_. |do| fonctionne comme |while|, mais au lieu
+d'exécuter zéro ou plusieurs fois, il l'exécute une ou plusieurs fois. Une
+boucle |do| ressemble à cela :
 
 > do {
->   var answer = prompt("Say 'moo'.", "");
->   print("You said '", answer, "'.");
-> } while (answer != "moo");
+>   var reponse = prompt("Dites 'meuh'.", "");
+>   print("Vous avez dit '", reponse , "'.");
+> } while (reponse != "meuh");
 
-To emphasise the fact that the condition is only checked *after* the
-loop has run once, it is written at the end of the loop's body.
+Pour bien montrer que la condition est seulement testée *après* une
+première exécution, on l'écrit à la fin du corps de la boucle.
 
 ---
 
-Next, there is _|continue|_. This one is closely related to |break|,
-and can be used in the same places. While |break| jumps *out* of a
-loop and causes the program to proceed after the loop, |continue|
-jumps to the next iteration of the loop.
+Ensuite, il y a _|continue|_. Celui-là est très lié à |break| et peut
+être utilisé aux mêmes endroits. Alors que le |break| saute *en-dehors*
+de la boucle et fait continuer le programme après la boucle, |continue|
+saute à l'itération suivante de la boucle.
 
 > for (var i = 0; i < 10; i++) {
 >   if (i % 3 != 0)
 >     continue;
->   print(i, " is divisible by three.");
+>   print(i, " est divisible par trois.");
 > }
 
-A similar effect can usually be produced using just |if|, but there
-are cases where |continue| looks nicer.
+Un effet similaire peut en général être obtenu simplement avec |if|,
+mais il existe des cas où |continue| sera plus joli.
 
 ---
 
-When there is a loop sitting inside another loop, a |break| or
-|continue| statement will affect only the inner loop. Sometimes you
-want to jump out of the *outer* loop. To be able to refer to a
-specific loop, loop statements can be _label_led. A label is a name
-(any valid variable name will do), followed by a colon (|:|).
+Quand il y a une boucle à l'intérieur d'une autre boucle, un |break| ou un
+|continue| n'affectera que la boucle interne. Parfois, vous aurez envie de
+sauter en-dehors de la boucle *extérieure*. Pour être capable de référencer
+une boucle spécifique, les boucles peuvent être _label_lisée. Un label est
+un nom (n'importe quel nom de variable fera l'affaire), suivi de deux points
+(|:|).
 
-> outer: for (var sideA = 1; sideA < 10; sideA++) {
->   inner: for (var sideB = 1; sideB < 10; sideB++) {
->     var hypotenuse = Math.sqrt(sideA * sideA + sideB * sideB);
+> outer: for (var coteA = 1; coteA < 10; coteA++) {
+>   inner: for (var coteB = 1; coteB < 10; coteB++) {
+>     var hypotenuse = Math.sqrt(coteA * coteA + coteB * coteB);
 >     if (hypotenuse % 1 == 0) {
->       print("A right triangle with straight sides of length ",
->             sideA, " and ", sideB, " has a hypotenuse of ",
+>       print("Un triangle rectangle avec ses côtés adjacents à l'angle droit de longueurs ",
+>             coteA, " et ", coteB, " a une hypoténuse de ",
 >             hypotenuse, ".");
 >       break outer;
 >     }
@@ -11600,49 +11602,49 @@ specific loop, loop statements can be _label_led. A label is a name
 
 ---
 
-Next, there is a construct called _|switch|_ which can be used to
-choose which code to execute based on some value. This is a very
-useful thing to do, but the syntax JavaScript uses for this (which it
-took from the C programming language) is so clumsy and ugly that I
-usually prefer to use a chain of |if| statements instead.
+Ensuite, il existe une construction appelée _|switch|_  qui peut être
+utilisée pour choisir quel code exécuter suivant une certaine valeur. C'est
+quelque chose d'utile, mais la syntaxe JavaScript utilisée pour cela (qui
+est empruntée au langage de programmation C) est si bizarre et moche que
+je préfère en général utiliser une chaîne de |if| à la place.
 
 > function weatherAdvice(weather) {
 >   switch(weather) {
->     case "rainy":
->       print("Remember to bring an umbrella.");
+>     case "pluvieux":
+>       print("Pensez à prendre un parapluie.");
 >       break;
->     case "sunny":
->       print("Dress lightly.");
->     case "cloudy":
->       print("Go outside.");
+>     case "ensoleillé":
+>       print("Habillez-vous légèrement.");
+>     case "nuageux":
+>       print("Allez dehors.");
 >       break;
 >     default:
->       print("Unknown weather type: ", weather);
+>       print("Type de temps inconnu : ", weather);
 >       break;
 >   }
 > }
 >
-> weatherAdvice("sunny");
+> weatherAdvice("ensoleillé");
 
-Inside the block opened by |switch|, you can write a number of |case|
-labels. The program will jump to the label that corresponds to the
-value that |switch| was given (comparing the values with an equivalent
-of |===|, so without automatic type conversion), or to |default| if no
-matching value is found. Then it start executing statements there, and
-*continues* past other labels, until it reaches a |break| statement.
-In some cases, such as the |"sunny"| case in the example, this can be
-used to share some code between cases (it recommends going outside for
-both sunny and cloudy weather). Most of the time, this just adds a lot
-of ugly |break| statements, or causes problems when you forget to add
-one.
+A l'intérieur du bloc ouvert par |switch|, vous pouvez écrire un certain
+nombre de labels |case|. Le programme sautera au label qui correspond à la
+valeur donnée  au |switch|, ou sautera à |default| si on ne trouve aucune
+valeur correspondante. Il commence alors à exécuter les instructions à
+cet endroit, et *continue* à travers les autres labels, jusqu'à ce qu'il
+atteigne un |break|. Dans certains cas, comme le cas |"ensoleillé"| dans
+notre exemple, cela permet de partager du code entre plusieurs cas (il est
+recommandé d'aller dehors à la fois pour le temps ensoleillé et pour le
+temps nuageux). La plupart du temps, cela ajoute juste beaucoup de |break| pas
+très jolis, ou bien cause des problèmes quand vous oubliez d'en ajouter un.
 
-Like loops, |switch| statements can be given a label.
+Comme pour les boucles, on peut donner un label aux structures |switch|.
 
 ---
 
-Finally, there is a keyword named _|with|_. I've never actually *used*
-this in a real program, but I have seen other people use it, so it is
-useful to know what it is. Code using |with| looks like this:
+Enfin, il y a le mot-clé nommé _|with|_. je ne l'ai en fait jamais *utilisé*
+dans un programme réel, mais j'ai vu d'autres personnes l'utiliser, il peut
+donc être utile de savoir ce que c'est. Le code utilisant |with| ressemble
+à cela :
 
 > var scope = "outside";
 > var object = {name: "Ignatius", scope: "inside"};
@@ -11654,12 +11656,13 @@ useful to know what it is. Code using |with| looks like this:
 > show(object.name);
 > show(newVariable);
 
-Inside the block, the properties of the object given to |with| act as
-variables. Newly introduced variables are *not* added as properties to
-this object though. I assume the idea behind this construct was that
-it could be useful in methods that make lots of use of the properties
-of their object. You could start such a method with |with(this)
-{...}|, and not have to write |this| all the time after that.
+A l'intérieur du bloc, les  propriétés de l'objet passé à |with|
+agissent comme des variables. Des  variables nouvellement introduites ne
+sont toutefois pas ajoutées à  l'objet. Je suppose que l'idée derrière
+cette construction était que  cela pouvait être utile dans des méthodes
+qui utilisent beaucoup les  propriétés de leur objet. Vous pouvez commencer
+de telles méthodes avec |with(this) {…}|, et ainsi ne pas avoir à écrire
+|this| tout le temps après cela.
 
 +++++++++++++++++++++++++
 Binary Heaps / binaryheap
