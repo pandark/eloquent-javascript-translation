@@ -11665,149 +11665,151 @@ de telles méthodes avec |with(this) {…}|, et ainsi ne pas avoir à écrire
 |this| tout le temps après cela.
 
 +++++++++++++++++++++++++
-Binary Heaps / binaryheap
+Tas binaires / binaryheap
 +++++++++++++++++++++++++
 
-In \\csearch, the _binary heap_ was introduced as a method to store a
-collection of objects in such a way that the smallest element can be
-quickly found. As promised, this appendix will explain the details
-behind this data structure.
+Dans le \\csearch, le _binary heap_ (ou _tas binaire_ en français) était
+introduit comme une méthode pour stocker une collection d'objets d'une
+façon que le plus petit élément soit rapidement trouvé. Comme promis,
+cet appendice va expliquer les détails derrière cette structure de données.
 
-Consider again the problem we needed to solve. The A* algorithm
-created large amounts of small objects, and had to keep these in an
-'open list'. It was also constantly removing the smallest element from
-this list. The simplest approach would be to just keep all the objects
-in an array, and search for the smallest one when we need it. But,
-unless we have a *lot* of time, this will not do. Finding the smallest
-element in an unsorted array requires going over the whole array, and
-checking each element.
+Etudions de nouveau le problème à résoudre. L'algorithme A* créait une
+grande quantité de petits objets, et devait les conserver dans une 'liste
+ouverte'. Il supprimait également constamment les plus petits objets de
+la liste. L'approche la plus simple aurait été de conserver simplement
+les objets dans un tableau, et de chercher le plus petit élément que
+l'on pouvait trouver quand nous en avions besoin. Mais, à moins que nous
+ayions *beaucoup* de temps, ça ne fonctionnera pas. Trouver le plus petit
+élément dans un tableau non-trié nécessite de parcourir tout le tableau
+et de vérifier chaque élément.
 
-The next solution would be, of course, to sort our array. JavaScript
-arrays have a wonderful _|sort|_ method, which can be used to do the
-heavy work. Unfortunately, re-sorting a whole array every time an
-element is removed is more work than searching for a minimum value in
-an unsorted array. Some tricks can be used, such as, instead of
-re-sorting the whole array, just making sure new values are inserted
-in the right place so that the array, which was sorted before, stays
-sorted. This is coming closer to the approach a binary heap uses
-already, but inserting a value in the middle of an array requires
-moving all the elements after it one place up, which is still just too
-slow.
+La solution suivante aurait été, bien entendu, de trier notre tableau. Les
+tableaux javaScript ont une magnifique méthode _|sort|_, qui peut être
+utilisée pour des tâches difficiles. Malheureusement, re-trier un tableau
+entier chaque fois qu'un élément est supprimé demande plus de travail que
+chercher simplement la valeur minimale dans un tableau non-trié. On peut
+utiliser certaines astuces, comme par exemple, au lieu de re-trier tout le
+tableau, s'assurer simplement que les nouvelles valeurs sont insérées au
+bon endroit, ce qui permet au tableau, qui était trié auparavant, de rester
+trié. Cela se rapproche de la méthode que le tas binaire utilise déjà,
+mais insérer une valeur au milieu d'un tableau nécessite de déplacer tous
+les éléments après lui d'une case, ce qui est encore trop lent.
 
-Another approach is to not use an array at all, but to store the
-values in a set of interconnected objects. A simple form of this is to
-have every object hold one value and two (or less) links to other
-objects. There is one root object, holding the smallest value, which
-is used to access all the other objects. Links always point to objects
-holding greater values, so the whole structure looks something like
-this:
+Une autre approche est de ne pas utiliser de tableau du tout, mais de
+stocker les valeurs dans un ensemble d'objets interconnectés. Un exemple
+simple de cela est que chaque objet contienne un ou deux (ou moins) liens
+vers d'autres objets. Il y a un objet racine, contenant la valeur la plus
+petite, qui est utilisée pour accéder à tous les autres objets. Les
+liens pointent toujours vers des objets ayant des valeurs plus grandes,
+la structure globale ressemble donc à quelque chose comme ça :
 
 [[tree.png]]
 
-Such structures are usually called _tree_s, because of the way they
-branch. Now, when you need the smallest element, you just take off the
-top element and rearrange the tree so that one of the top element's
-children -- the one with the lowest value -- becomes the new top. When
-inserting new elements, you 'descend' the tree until you find an
-element less than the new element, and insert it there. This takes a
-lot less searching than a sorted array does, but it has the
-disadvantage of creating a lot of objects, which also slows things
-down.
+De telles structures sont appelées des _arbre_s, à cause de la façon
+dont elles se séparent en branches. Maintenant, lorsque vous cherchez le
+plus petit élément, vous avez juste à prendre l'élément supérieur et
+réarranger l'arbre pour que l'un des fils de cet élement supérieur -- celui
+avec la plus petite valeur -- devienne le nouvel élément supérieur. Lorsque
+vous insérez de nouveaux éléments, vous 'descendez' l'arbre jusqu'à ce
+que vous trouviez un élément plus petit que ce nouvel élément, et vous
+l'insérez à cet endroit. Cela nécessite beaucoup moins de recherches
+que dans un tableau trié, mais cela a l'inconvénient de créer beaucoup
+d'objets, ce qui ralentit aussi les choses.
 
 ---
 
-A binary heap, then, does make use of a sorted array, but it is only
-partially sorted, much like the tree above. Instead of objects, the
-positions in the array are used to form a tree, as this picture tries
-to show:
+Un tas binaire, lui, utilise un tableau trié, mais il n'est que partiellement
+trié, un peu comme l'arbre ci-dessus. Au lieu d'objets, les positions dans
+le tableau sont utilisées pour former l'arbre, comme ce qu'essaie de montrer
+cette image :
 
 [[heap.png]]
 
-Array element |1| is the root of the tree, array element |2| and |3|
-are its children, and in general array element |X| has children |X *
-2| and |X * 2 + 1|. You can see why this structure is called a 'heap'.
-Note that this array starts at |1|, while JavaScript arrays start at
-|0|. The heap will always keep the smallest element in position |1|,
-and make sure that for every element in the array at position |X|, the
-element at |X / 2| (round down) is smaller.
+L'élément |1| du tableau est la racine de l'arbre, les éléments |2| et
+|3| sont ses fils, et d'une façon générale, l'élément |X| du tableau a
+comme fils les élements |X * 2| and |X * 2 + 1|. Vous pouvez voir pourquoi
+cette structure est appelée 'tas' . Remarquez que ce tableau commence à |1|
+alors que les tableaux JavaScript commence à |0|. Le tas conserve toujours
+son plus petit élément en |1|, et s'assure que pour tout élément du tableau
+à la position |X|, l'élément |X/2| (arrondi à l'inférieur) est plus petit.
 
-Finding the smallest element is now a matter of taking the element at
-position |1|. But when this element is removed, the heap must make
-sure that there are no holes left in the array. To do this, it takes
-the last element in the array and moves it to the start, and then
-compares it to its child elements at position |2| and |3|. It is
-likely to be greater, so it is exchanged with one of them, and the
-process of comparing it with its children is repeated for the new
-position, and so on, until it comes to a position where its children
-are greater, or a position where it has no children.
+Pour trouver désormais le plus petit élément, il faut prendre l'élément
+à la position |1|. Mais quand cet élément est supprimé, le tas doit
+s'assurer qu'il ne reste pas de trous dans le tableau. Pour cela, il prend
+le dernier élément du tableau, et le remonte au départ. Il le compare
+ensuite avec ses éléments fils aux positions |2| et |3|. Il est probable
+qu'ils seront plus grands, on l'échange donc avec l'un d'entre eux, et
+le processus de comparaison avec ses fils est répété pour la nouvelle
+position, et ainsi de suite, jusqu'à arriver à une position où ses fils
+sont plus grands, ou à une position où il n'a pas de fils.
 
 ] [2, 3, 5, 4, 8, 7, 6]
-] Take out 2, move 6 to the front.
+] On enlève 2, on déplace 6 au début.
 ] [6, 3, 5, 4, 8, 7]
-] 6 is greater than its first child 3, so swap them.
+] 6 est plus grand que son premier fils 3, donc on les échange.
 ] [3, 6, 5, 4, 8, 7]
-] Now 6 has children 4 and 8 (position 4 and 5). It is greater than
-] 4, so we swap again.
+] Maintenant 6 a pour fils 4 et 8 (position 4 et 5). Il est plus grand que
+] 4, donc on les échange de nouveau.
 ] [3, 4, 5, 6, 8, 7]
-] 6 is in position 4, and has no more children. The heap is in order
-] again.
+] 6 est en position 4, et n'a plus de fils. Le tas est de nouveau trié.
 
-Similarly, when an element has to be added to the heap, it is put at
-the end of the array and allowed to 'bubble' up by repeatedly
-exchanging it with its parent, until we find a parent that is less
-than the new node.
+De la même façon, lorsqu'un élément est ajouté au tas, on le met à
+la fin du tableau et on l'autorise à 'remonter' (comme une bulle de savon)
+en l'échangeant de façon répétée avec son parent, jusqu'à ce que l'on
+trouve un parent qui est plus petit que le nouvel élément.
 
 ] [3, 4, 5, 6, 8, 7]
-] Element 2 gets added again, it starts at the back.
+] On joute l'élément 2 de nouveau, il démarre à la fin.
 ] [3, 4, 5, 6, 8, 7, 2]
-] 2 is in position 7, its parent is at 3, which is a 5. 5 is greater
-] than 2, so we swap.
+] 2 est en position 7, son parent est en position 3, où se trouve un 5.
+] 5 est plus grand que 2, donc on les échange.
 ] [3, 4, 2, 6, 8, 7, 5]
-] The parent of position 3 is position 1. Again, we swap.
+] Le parent de la position 3 est la position 1. De nouveau, on échange.
 ] [2, 4, 3, 6, 8, 7, 5]
-] The element can not go further than position 1, so we are done.
+] L'élément ne peut pas aller plus loin que la position 1, on a donc fini.
 
-Note how adding or inserting an element does not require it to be
-compared with every element in the array. In fact, because the jumps
-between parents and children get bigger as the array gets bigger, this
-advantage is especially large when we have a lot of elements##.
+Remarquez comment l'ajout et la suppression d'un élément ne nécessitent
+plus de le comparer à tous les éléments du tableau. En fait, comme les
+sauts entre parents et enfants deviennent de plus en plus grands à mesure
+que le tableau grandit, cet avantage est particulièrement important lorsque
+vous avez de nombreux éléments.##
 
-## The amount of comparisons and swaps that are needed -- in the worst
-case -- can be approached by taking the logarithm (base 2) of the
-amount of elements in the heap.
+## Le nombre de comparaisons et d'échanges nécessaires, dans le pire des cas,
+peut être  estimé en prenant le logarithme (base 2) du nombre d'éléments
+du tas.
 
 ---
 
-Here is the full code of a binary heap implementation. Two things to
-note are that, instead of directly comparing the elements put into the
-heap, a function (|scoreFunction|) is first applied to them, so that
-it becomes possible to store objects that can not be directly
-compared.
+Voici le code complet de l'implémtentation du tas binaire. Deux choses sont
+à noter. Premièrement, au lieu de comparer directement les éléments mis
+dans le tas, une fonction (|scoreFunction|) est appliquée en premier lieu,
+ce qui permet de stocker des éléments qui ne peuvent pas être comparés
+directement.
 
-Also, because JavaScript arrays start at |0|, and the parent/child
-calculations use a system that starts at |1|, there are a few strange
-calculations to compensate.
+Deuxièmement, comme les tableaux JavaScript commencent en |0|, et que
+les calculs parents/fils utilisent un système qui démarre en |1|, il y a
+quelques calculs bizarres pour compenser cette différence.
 
 > function BinaryHeap(scoreFunction){
 >   this.content = [];
 >   this.scoreFunction = scoreFunction;
 > }
-> 
+>
 > BinaryHeap.prototype = {
 >   push: function(element) {
->     // Add the new element to the end of the array.
+>     // Ajouter le nouvel élément à la fin du tableau.
 >     this.content.push(element);
->     // Allow it to bubble up.
+>     // L'autoriser à remonter.
 >     this.bubbleUp(this.content.length - 1);
 >   },
 >
 >   pop: function() {
->     // Store the first element so we can return it later.
+>     // Stocker le premier élément, pour pouvoir le renvoyer plus tard
 >     var result = this.content[0];
->     // Get the element at the end of the array.
+>     // Récupérer l'élément à la fin du tableau.
 >     var end = this.content.pop();
->     // If there are any elements left, put the end element at the
->     // start, and let it sink down.
+>     // S'il reste au moins un élément,
+>     // mettre le dernier élément au début et le faire descendre
 >     if (this.content.length > 0) {
 >       this.content[0] = end;
 >       this.sinkDown(0);
@@ -11817,12 +11819,12 @@ calculations to compensate.
 >
 >   remove: function(node) {
 >     var len = this.content.length;
->     // To remove a value, we must search through the array to find
->     // it.
+>     // Pour supprimer une valeur,
+>     // nous devons parcourir le tableau pour la trouver
 >     for (var i = 0; i < len; i++) {
 >       if (this.content[i] == node) {
->         // When it is found, the process seen in 'pop' is repeated
->         // to fill up the hole.
+>         // Comme on l'a trouvé, on répéte le processus vu dans 'pop'
+>         // pour boucher le trou
 >         var end = this.content.pop();
 >         if (i != len - 1) {
 >           this.content[i] = end;
@@ -11834,7 +11836,7 @@ calculations to compensate.
 >         return;
 >       }
 >     }
->     throw new Error("Node not found.");
+>     throw new Error("Noeud non trouvé.");
 >   },
 >
 >   size: function() {
@@ -11842,21 +11844,22 @@ calculations to compensate.
 >   },
 >
 >   bubbleUp: function(n) {
->     // Fetch the element that has to be moved.
+>     // On va chercher l'élément qui doit être déplacé
 >     var element = this.content[n];
->     // When at 0, an element can not go up any further.
+>     // Quand il est à 0, un élément ne peut pas remonter plus haut
 >     while (n > 0) {
->       // Compute the parent element's index, and fetch it.
+>       // Calculer l'index du parent de l'élément, et aller le chercher.
 >       var parentN = Math.floor((n + 1) / 2) - 1,
 >           parent = this.content[parentN];
->       // Swap the elements if the parent is greater.
+>       // Echanger les éléments si le parent est plus grand.
 >       if (this.scoreFunction(element) < this.scoreFunction(parent)) {
 >         this.content[parentN] = element;
 >         this.content[n] = parent;
->         // Update 'n' to continue at the new position.
+>         // Mettre à jour 'n' pour continuer à la nouvelle position.
 >         n = parentN;
 >       }
->       // Found a parent that is less, no need to move it further.
+>       // On a trouvé un parent qui est plus petit,
+>       // ce n'est pas nécessaire de le faire bouger davantage.
 >       else {
 >         break;
 >       }
@@ -11864,27 +11867,27 @@ calculations to compensate.
 >   },
 >
 >   sinkDown: function(n) {
->     // Look up the target element and its score.
+>     // Récupérer l'élément cible et son score.
 >     var length = this.content.length,
 >         element = this.content[n],
 >         elemScore = this.scoreFunction(element);
 >
 >     while(true) {
->       // Compute the indices of the child elements.
+>       // Calculer les indices des éléments fils.
 >       var child2N = (n + 1) * 2, child1N = child2N - 1;
->       // This is used to store the new position of the element,
->.      // if any.
+>       // On utilise cela pour stocker la nouvelle position de l'élément,
+>.      // s'il y en a une.
 >       var swap = null;
->       // If the first child exists (is inside the array)...
+>       // Si le premier fils existe (est à l'intérieur du tableau)...
 >       if (child1N < length) {
->         // Look it up and compute its score.
+>         // On le récupère et on calcule son score.
 >         var child1 = this.content[child1N],
 >             child1Score = this.scoreFunction(child1);
->         // If the score is less than our element's, we need to swap.
+>         // Si le score est plus petit que celui de notre élément, on doit échanger
 >         if (child1Score < elemScore)
 >           swap = child1N;
 >       }
->       // Do the same checks for the other child.
+>       // Faire les mêmes vérifications pour l'autre fils.
 >       if (child2N < length) {
 >         var child2 = this.content[child2N],
 >             child2Score = this.scoreFunction(child2);
@@ -11892,13 +11895,13 @@ calculations to compensate.
 >           swap = child2N;
 >       }
 >
->       // If the element needs to be moved, swap it, and continue.
+>       // Si l'élément doit être déplacé, on échange et on continue.
 >       if (swap != null) {
 >         this.content[n] = this.content[swap];
 >         this.content[swap] = element;
 >         n = swap;
 >       }
->       // Otherwise, we are done.
+>       // Sinon, on a fini.
 >       else {
 >         break;
 >       }
@@ -11906,7 +11909,7 @@ calculations to compensate.
 >   }
 > };
 
-And a simple test...
+Et un test simple…
 
 > var heap = new BinaryHeap(function(x){return x;});
 > forEach([10, 3, 4, 8, 2, 9, 7, 1, 2, 6, 5],
