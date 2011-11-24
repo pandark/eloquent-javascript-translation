@@ -8487,269 +8487,280 @@ qu'à l'avenir de nouvelles versions d'ECMAScript et des modifications dans
 les navigateurs rendent les boîtes à outils moins nécessaires, ce qui
 résoudrait partiellement ce problème.
 
-============================
-Regular Expressions / regexp
-============================
+===============================
+Expressions régulières / regexp
+===============================
 
-At various points in the previous chapters, we had to look for
-patterns in string values. In \\cdata we extracted date values from
-strings by writing out the precise positions at which the numbers that
-were part of the date could be found. Later, in \\cfp, we saw some
-particularly ugly pieces of code for finding certain types of
-characters in a string, for example the characters that had to be
-escaped in HTML output.
+À diverses occasions dans les chapitres précédents, nous avons dû jeter
+un coup d'œil aux structures des valeurs de chaînes. Dans le \\cdata
+nous avons extrait des valeurs de chaînes en notant les positions exactes
+dans lesquelles on peut trouver les nombres qui indiquent une partie de
+la date. Plus loin, dans le \\cfp, nous avons vu des bouts de code assez
+laids destinés à chercher certains types de caractères dans une chaîne,
+par exemple ceux qui devaient être échappés en HTML.
 
-@_regular expression_Regular expressions are a language for describing
-patterns in strings. They form a small, separate language, which is
-embedded inside JavaScript (and in various other programming
-languages, in one way or another). It is not a very readable language
--- big regular expressions tend to be completely unreadable. But, it
-is a useful tool, and can really simplify string-processing programs.
+@_regular expression_Les expressions régulières constituent un langage qui
+décrit les structures des chaînes. Il s'agit d'un petit langage spécifique
+mais qui est inclus dans le JavaScript (comme dans beaucoup d'autres langages
+de programmation, d'une façon ou d'une autre). Il n'est pas très lisible --
+les expressions régulières volumineuses finissent par devenir complètement
+illisibles. C'est pourtant un outil très utile qui peut vraiment simplifier
+les programmes qui traitent les chaînes.
 
 ---
 
-Just like strings get written between quotes, regular expression
-patterns get written between slashes (_|/|_). This means that slashes
-inside the expression have to be escaped.
+Tout comme on écrit les chaînes entre guillemets, les expressions
+régulières sont écrites entre des slash(_|/|_). Ce qui implique que des
+slash à l'intérieur de l'expression devront être échappés.
 
 > var slash = /\//;
 > show("AC/DC".search(slash));
 
-The _|search|_ method resembles |indexOf|, but it searches for a
-regular expression instead of a string. Patterns specified by regular
-expressions can do a few things that strings can not do. For a start,
-they allow some of their elements to match more than a single
-character. In \\cfp, when extracting mark-up from a document, we
-needed to find the first asterisk or opening brace in a string. That
-could be done like this:
+La méthode _|search|_ ressemble à la méthode |indexOf|, mais elle cherche
+une expression régulière et non une chaîne. Les structures indiquées dans
+les expressions régulières peuvent effectuer quelques petites choses que les
+chaînes ne peuvent pas faire. Pour commencer elles permettent à certains
+de leurs éléments de coïncider sur plus d'un seul caractère. Dans le
+\\cfp, quand nous avons extrait les balises pour un document, nous avons eu
+besoin de trouver la première astérisque ou parenthèse ouvrante dans une
+chaîne. Nous pouvions faire ainsi :
 
 > var asteriskOrBrace = /[\{\*]/;
 > var story =
->   "We noticed the *giant sloth*, hanging from a giant branch.";
+>   "Nous avons remarqué le *grand paresseux*, pendu à une énorme branche.";
 > show(story.search(asteriskOrBrace));
 
-The |[| and |]| characters have a special meaning inside a regular
-expression. They can enclose a set of characters, and they mean 'any
-of these characters'. Most non-alphanumeric characters have some
-special meaning inside a regular expression, so it is a good idea to
-always escape them with a backslash## when you use them to refer to
-the actual characters.
+Les caractères |[| et |]| ont une signification particulière dans les
+expressions régulières. Lorsqu'ils encadrent d'autres caractères, ils
+signifient n'importe lequel de ces caractères.
+Comme la plupart des caractères non alphanumériques ont une signification
+particulière dans les expressions régulières, c'est une bonne idée de les
+échapper systématiquement avec un antislash## pour qu'ils soient compris
+comme de simples caractères.
 
-## In this case, the backslashes were not really necessary, because
-the characters occur between |[| and |]|, but it is easier to just
-escape them anyway, so you won't have to think about it.
+## Dans cet exemple, les antislash ne sont pas vraiment nécessaires, car
+il s'agit de caractères encadrés par |[| et |]| mais il est plus facile
+de les échapper tout de même et de ne plus avoir à y penser.
 
 ---
 
-There are a few shortcuts for sets of characters that are needed
-often. The dot (|.|) can be used to mean 'any character that is not a
-newline', an escaped 'd' (|\d|) means 'any digit', an escaped 'w'
-(|\w|) matches any alphanumeric character (including underscores, for
-some reason), and an escaped 's' (|\s|) matches any white-space (tab,
-newline, space) character.
+Il y a quelques raccourcis pour des ensembles de caractères souvent utilisés.
+Le point (|.|) peut être utilisé pour n'importe quel caractère autre que
+le retour chariot,
+un « d » échappé (|\d|) signifie un chiffre, un « w » échappé
+(|\w|) correspond à n'importe quel caractère alphanumérique (y compris
+un souligné, pour certaines raisons) et un « s » échappé (|\s|) est
+équivalent aux caractères d'espaces (tabulation, retour chariot, espace).
 
 > var digitSurroundedBySpace = /\s\d\s/;
 > show("1a 2 3d".search(digitSurroundedBySpace));
 
-The escaped 'd', 'w', and 's' can be replaced by their capital letter
-to mean their opposite. For example, |\S| matches any character that
-is *not* white-space. When using |[| and |]|, a pattern can be
-inverted by starting with a |^| character:
+Les caractères « d », « w » et « s » echappés peuvent être
+remplacés par la lettre capitale correspondante pour avoir la signification
+contraire. Par exemple, |\S| correspond à n'importe quel caractère qui
+n'est pas un espace. Lorsqu'on utilise |[| et |]|, un motif peut être
+inversé en commençant par un caractère |^| :
 
-> var notABC = /[^ABC]/;
-> show("ABCBACCBBADABC".search(notABC));
+> var pasABC = /[^ABC]/;
+> show("ABCBACCBBADABC".search(pasABC));
 
-As you can see, the way regular expressions use characters to express
-patterns makes them A) very short, and B) very hard to read.
+Comme vous pouvez le voir, la façon dont les expressions régulières
+utilisent des caractères pour construire des motifs les rend a) très courts,
+et b) très difficiles à lire.
 
 ***
 
-Write a regular expression that matches a date in the format
-|"XX/XX/XXXX"|, where the |X|s are digits. Test it against the string
-|"born 15/11/2003 (mother Spot): White Fang"|.
+Écrivez une expression régulière qui retrouve une date au format
+|"XX/XX/XXXX"|, dans laquelle les |X| sont des chiffres. Essayez sur cette
+chaîne |"naissance le 15/11/2003 (mère Spot): Croc Blanc"|.
 
 ///
 
 > var datePattern = /\d\d\/\d\d\/\d\d\d\d/;
-> show("born 15/11/2003 (mother Spot): White Fang".search(datePattern));
+> show("naissance le 15/11/2003 (mère Spot): Croc Blanc".search(datePattern));
 
 ---
 
-Sometimes you need to make sure a pattern starts at the beginning of a
-string, or ends at its end. For this, the special characters |^| and
-|$| can be used. The first matches the start of the string, the second
-the end.
+Vous aurez parfois besoin de vous assurer qu'un motif démarre au début
+d'une chaîne ou s'achève à son extrémité. Pour cela, on peut utiliser
+les caractères spéciaux |^| et |$|. Le premier coïncide avec le début
+de la chaîne, le deuxième avec la fin.
 
 > show(/a+/.test("blah"));
 > show(/^a+$/.test("blah"));
 
-The first regular expression matches any string that contains an |a|
-character, the second only those strings that consist entirely of |a|
-characters.
+La première expression régulière retrouve toute chaîne qui contient
+un caractère |a|, la seconde seulement les chaînes qui sont entièrement
+constituées de caractères |a|.
 
-Note that regular expressions are objects, and have methods. Their
-_|test|_ method returns a boolean indicating whether the given string
-matches the expression.
+Notez que les expressions régulières sont des objets et qu'elles ont des
+méthodes. Leur méthode _|test|_ renvoie un booléen qui indique si une
+chaîne donnée correspond avec l'expression.
 
-The code |\b| matches a 'word boundary', which can be punctuation,
-white-space, or the start or end of the string.
+Le code |\b| correspond à une « limite de mot », qui peut être une
+ponctuation, une espace ou le début ou la fin d'une chaîne de caractères.
 
-> show(/cat/.test("concatenate"));
-> show(/\bcat\b/.test("concatenate"));
+> show(/cat/.test("concatener"));
+> show(/\bcat\b/.test("concatener"));
 
 ---
 
-Parts of a pattern can be allowed to be repeated a number of times.
-Putting an asterisk (|*|) after an element allows it to be repeated
-any number of times, including zero. A plus (|+|) does the same, but
-requires the pattern to occur at least one time. A question mark (|?|)
-makes an element 'optional' -- it can occur zero or one times.
+On peut autoriser des parties d'un motif à se répéter un certain nombre
+de fois. Mettre un astérisque (|*|) après un élément l'autorise à être
+répété autant de fois qu'on veut, y compris zéro fois. Un plus (|+|) se
+comporte de la même façon mais a besoin que le motif apparaisse au moins
+une fois. Un point d'interrogation (|?|) rend l'élément facultatif --
+il peut apparaître une fois ou aucune.
 
 > var parenthesizedText = /\(.*\)/;
-> show("Its (the sloth's) claws were gigantic!".search(parenthesizedText));
+> show("Ses (celles du paresseux) griffes étaient gigantesques!".search(parenthesizedText));
 
-When necessary, braces can be used to be more precise about the amount
-of times an element may occur. A number between braces (|{4}|) gives
-the exact amount of times it must occur. Two numbers with a comma
-between them (|{3,10}|) indicate that the pattern must occur at least
-as often as the first number, and at most as often as the second one.
-Similarly, |{2,}| means two or more occurrences, while |{,4}| means
-four or less.
+Lorsque c'est nécessaire, des accolades peuvent être utilisées pour
+préciser le nombre de fois où un élément peut apparaître. Un nombre
+entre accolades (|{4}|) donne la quantité exacte de fois. Deux nombres
+séparés par une virgule indiquent que le motif doit apparaître au moins
+le nombre de fois indiqué par le premier nombre et au maximum le nombre de
+fois indiqué par le deuxième. De manière similaire, |{2,}| signifie deux
+occurrences ou plus tandis que |{,4}| signifie quatre occurrences ou moins.
 
 > var datePattern = /\d{1,2}\/\d\d?\/\d{4}/;
-> show("born 15/11/2003 (mother Spot): White Fang".search(datePattern));
+> show("naissance le 15/11/2003 (mère Spot): Croc Blanc".search(datePattern));
 
-The pieces |/\d{1,2}/| and |/\d\d?/| both express 'one or two digits'.
+Les parties |/\d{1,2}/| et |/\d\d?/| signifient toutes deux « un ou deux
+chiffres ».
 
 ***
 
-Write a pattern that matches e-mail addresses. For simplicity, assume
-that the parts before and after the |@| can contain only alphanumeric
-characters and the characters |.| and |-| (dot and dash), while the
-last part of the address, the country code after the last dot, may
-only contain alphanumeric characters, and must be two or three
-characters long.
+Écrivez un motif qui correspond avec les adresses mail. Pour simplifier,
+considérez que les parties avant et après le |@| peuvent contenir seulement
+des caractères alphanumériques et des caractères |.| et |-| (point et
+tiret), tandis que la dernière partie de l'adresse, le code du pays après
+le dernier point, peut contenir des caractères alphanumériques et doit
+être long de deux ou trois caractères.
 
 ///
 
 > var mailAddress = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
 >
 > show(mailAddress.test("kenny@test.net"));
-> show(mailAddress.test("I mailt kenny@tets.nets, but it didn wrok!"));
-> show(mailAddress.test("the_giant_sloth@gmail.com"));
+> show(mailAddress.test("J'ai envyoé un mail à kenny@tets.nets, mais ça mrache pas !"));
+> show(mailAddress.test("le_paresseux_geant@gmail.com"));
 
-The |\b|s at the start and end of the pattern make sure that the
-second string does not match.
+Les |\b| au début et à la fin du motif permettent de s'assurer que la
+deuxième chaîne de caractères ne correspond pas.
 
 ---
 
-Part of a regular expression can be grouped together with parentheses.
-This allows us to use |*| and such on more than one character. For
-example:
+Des   parties d'une expression régulière peuvent être rassemblées en les
+mettant entre parenthèses. Ce qui nous permet d'utiliser |*| et autres  sur
+plus d'un caractère. Par exemple :
 
 > var cartoonCrying = /boo(hoo+)+/i;
-> show("Then, he exclaimed 'Boohoooohoohooo'".search(cartoonCrying));
+> show("C'est alors qu'il s'exclama 'Boohoooohoohooo'".search(cartoonCrying));
 
-Where did the |i| at the end of that regular expression come from?
-After the closing slash, 'options' may be added to a regular
-expression. An |i|, here, means the expression is case-insensitive,
-which allows the lower-case B in the pattern to match the upper-case
-one in the string.
+D'où vient le |i| à la fin de cette expression régulière ? Après le
+slash fermant, une option peut être ajoutée à une expression régulière. Un
+|i| ici signifie que l'expression est insensible à la casse, ce qui permet
+d'utiliser un B minuscule dans le motif pour correspondre à celui en
+majuscule dans la chaîne de caractères.
 
-A pipe character (|||) is used to allow a pattern to make a choice
-between two elements. For example:
+Un caractère barre verticale (|||) est utilisé pour permettre à un motif
+d'avoir le choix entre deux éléments. Par exemple :
 
 > var holyCow = /(sacred|holy) (cow|bovine|bull|taurus)/i;
 > show(holyCow.test("Sacred bovine!"));
 
 ---
 
-Often, looking for a pattern is just a first step in extracting
-something from a string. In previous chapters, this extraction was
-done by calling a string's |indexOf| and |slice| methods a lot. Now
-that we are aware of the existence of regular expressions, we can use
-the |match| method instead. When a string is matched against a regular
-expression, the result will be |null| if the match failed, or an array
-of matched strings if it succeeded.
+Souvent, chercher un motif n'est que la première étape dans l'extraction
+d'un élément dans une chaîne. Dans les chapitres précédents, cette
+extraction était effectuée en appelant beaucoup les méthodes |indexOf|
+et |slice| de l'objet string. Maintenant que nous sommes conscients de
+l'existence des expressions régulières, nous pouvons utiliser plutôt
+la méthode |match|. Quand on teste la correspondance d'une chaîne à une
+expression régulière, le résultat sera |null| si la correspondance échoue
+ou un tableau de chaînes si des correspondances sont trouvées.
 
-> show("No".match(/Yes/));
-> show("... yes".match(/yes/));
-> show("Giant Ape".match(/giant (\w+)/i));
+> show("Non".match(/Oui/));
+> show("... oui".match(/oui/));
+> show("Grand singe".match(/grand (\w+)/i));
 
-The first element in the returned array is always the part of the
-string that matched the pattern. As the last example shows, when there
-are parenthesized parts in the pattern, the parts they match are also
-added to the array. Often, this makes extracting pieces of string very
-easy.
+Le premier élément dans le tableau renvoyé est toujours la partie
+de la chaîne qui correspond au motif. Comme on le voit dans le dernier
+exemple, lorsqu'il y a des parties du motif entre parenthèses, celles qui
+correspondent sont également ajoutées au tableau. Souvent, cela facilite
+grandement l'extraction de fragments de chaînes.
 
-> var parenthesized = prompt("Tell me something", "").match(/\((.*)\)/);
+> var parenthesized = prompt("Dites-moi quelque chose", "").match(/\((.*)\)/);
 > if (parenthesized != null)
->   print("You parenthesized '", parenthesized[1], "'");
+>   print("Vous avez mis entre parenthèses '", parenthesized[1], "'");
 
 ***
 
-Re-write the function |extractDate| that we wrote in \\cdata. When
-given a string, this function looks for something that follows the
-date format we saw earlier. If it can find such a date, it puts the
-values into a |Date| object. Otherwise, it throws an exception. Make
-it accept dates in which the day or month are written with only one
-digit.
+Réécrivez la fonction |extractDate| que nous avons écrite dans le
+\\cdata. Lorsqu'on lui donne une chaîne à traiter, cette fonction cherche
+quelque chose qui suit le format de date que nous avons vu précédemment. Si
+elle peut retrouver une telle date, elle met la valeur dans l'objet
+|Date|. Sinon, elle lève une exception. Faites en sorte qu'elle accepte
+les dates dans lesquelles le jour ou le mois sont écrits avec un seul chiffre.
 
 ///
 
 > function extractDate(string) {
 >   var found = string.match(/(\d\d?)\/(\d\d?)\/(\d{4})/);
 >   if (found == null)
->     throw new Error("No date found in '" + string + "'.");
+>     throw new Error("Aucune date trouvée dans '" + string + "'.");
 >   return new Date(Number(found[3]), Number(found[2]) - 1,
 >                   Number(found[1]));
 > }
 >
-> show(extractDate("born 5/2/2007 (mother Noog): Long-ear Johnson"));
+> show(extractDate("naissance le 5/2/2007 (mère Noog): Long-ear Johnson"));
 
-This version is slightly longer than the previous one, but it has the
-advantage of actually checking what it is doing, and shouting out when
-it is given nonsensical input. This was a lot harder without regular
-expressions -- it would have taken a lot of calls to |indexOf| to find
-out whether the numbers had one or two digits, and whether the dashes
-were in the right places.
+Cette version est légèrement plus longue que la précédente mais elle a
+l'avantage de vérifier effectivement ce qui est fait et de faire retentir la
+sirène d'alarme quand une entrée illogique est faite. C'était beaucoup plus
+difficile sans expression régulière -- cela aurait nécessité beaucoup
+d'appels à |indexOf| pour déterminer si les nombres avaient un ou deux
+chiffres et si les tirets étaient à la bonne place.
 
 ---
 
-The _|replace|_ method of string values, which we saw in \\cfp, can be
-given a regular expression as its first argument.
+La méthode _|replace|_ des valeurs de chaîne, que nous avons vue dans
+le \\cfp, peut être employée comme premier argument d'une expression
+régulière.
 
 > print("Borobudur".replace(/[ou]/g, "a"));
 
-Notice the |g| character after the regular expression. It stands for
-'global', and means that every part of the string that matches the
-pattern should be replaced. When this |g| is omitted, only the first
-|"o"| would be replaced.
+Remarquez le caractère |g| après l'expression régulière. Elle signifie
+« global » et veut dire que toute partie de chaîne qui coïncide avec
+le motif devrait être remplacée. Quand le |g| est omis, seul le premier
+|"o"| doit être remplacé.
 
-Sometimes it is necessary to keep parts of the replaced strings. For
-example, we have a big string containing the names of people, one name
-per line, in the format "Lastname, Firstname". We want to swap these
-names, and remove the comma, to get a simple "Firstname Lastname"
-format.
+Il est parfois nécessaire de conserver des parties de chaînes
+remplacées. Par exemple, nous avons une longue chaîne qui contient des noms
+de personnes, un nom par ligne, au format «nom, prénom ». Nous voulons
+inverser l'ordre des informations et supprimer la virgule, pour obtenir un
+simple format « prénom, nom »
 
 > var names = "Picasso, Pablo\nGauguin, Paul\nVan Gogh, Vincent";
 > print(names.replace(/([\w ]+), ([\w ]+)/g, "$2 $1"));
 
-The |$1| and |$2| the replacement string refer to the parenthesized
-parts in the pattern. |$1| is replaced by the text that matched
-against the first pair of parentheses, |$2| by the second, and so on,
-up to |$9|.
+Le |$1| et le |$2| de la chaîne de remplacement, font référence aux
+parties entre parenthèses dans le motif. |$1| est remplacée par le texte
+correspondant à la première paire de parenthèses du motif, |$2| par la
+deuxième et ainsi de suite jusqu'à |$9|.
 
-If you have more than 9 parentheses parts in your pattern, this will
-no longer work. But there is one more way to replace pieces of a
-string, which can also be useful in some other tricky situations. When
-the second argument given to the |replace| method is a function value
-instead of a string, this function is called every time a match is
-found, and the matched text is replaced by whatever the function
-returns. The arguments given to the function are the matched elements,
-similar to the values found in the arrays returned by |match|: The
-first one is the whole match, and after that comes one argument for
-every parenthesized part of the pattern.
+Si vous avez plus de 9 parties entre parenthèses, cela ne fonctionnera
+plus. Cependant, il existe un autre moyen de remplacer des parties de
+chaînes de caractères, qui peut être utile dans certaines situations
+délicates. Lorsque le second argument donné à la méthode |replace| est
+une valeur fonction au lieu d'une chaîne de caractères, cette fonction
+est appelée à chaque fois qu'une correspondance est trouvée ; le texte
+correspondant est alors remplacé par ce que la fonction renvoie. Les
+arguments donnés à la fonction sont les éléments qui correspondent,
+similaires aux valeurs trouvées dans les tableaux renvoyés par |match| :
+le premier est la correspondance complète, puis vient un argument pour
+chaque partie entre parenthèses du motif.
 
 > function eatOne(match, amount, unit) {
 >   amount = Number(amount) - 1;
@@ -8763,15 +8774,16 @@ every parenthesized part of the pattern.
 >   return amount + " " + unit;
 > }
 >
-> var stock = "1 lemon, 2 cabbages, and 101 eggs";
+> var stock = "1 citron, 2 choux, et 101 oeufs";
 > stock = stock.replace(/(\d+) (\w+)/g, eatOne);
 >
 > print(stock);
 
 ***
 
-That last trick can be used to make the HTML-escaper from \\cfp more
-efficient. You may remember that it looked like this: 
+Cette dernière astuce peut être utilisée pour rendre plus efficaces les
+echappeurs HTML vus dans le \\cfp. Vous vous souvenez peut-être qu'ils
+ressemblaient à ça :
 
 > function escapeHTML(text) {
 >   var replacements = [["&", "&amp;"], ["\"", "&quot;"],
@@ -8782,8 +8794,8 @@ efficient. You may remember that it looked like this:
 >   return text;
 > }
 
-Write a new function |escapeHTML|, which does the same thing, but only
-calls |replace| once.
+Écrivez une nouvelle fonction |escapeHTML|, qui fasse la même chose,
+mais qui n'appelle |replace| qu'une seule fois.
 
 ///
 
@@ -8795,63 +8807,67 @@ calls |replace| once.
 >   });
 > }
 >
-> print(escapeHTML("The 'pre-formatted' tag is written \"<pre>\"."));
+> print(escapeHTML("Le tag pour le pré-formatage s'écrit \"<pre>\"."));
 
-The |replacements| object is a quick way to associate each character
-with its escaped version. Using it like this is safe (i.e. no
-|Dictionary| object is needed), because the only properties that will
-be used are those matched by the |/[<>&"]/| expression.
+L'objet |replacements| est un moyen rapide d'associer chaque caractère
+à sa version échappée. L'utiliser ainsi ne pose pas de problème
+(c'est-à-dire aucun objet |Dictionary| n'est nécessaire) parce que les
+seules propriétés qui seront utilisées sont celles qui correspondent avec
+l'expression |/[<>&"]/|.
 
 ---
 
-There are cases where the pattern you need to match against is not
-known while you are writing the code. Say we are writing a (very
-simple-minded) obscenity filter for a message board. We only want to
-allow messages that do not contain obscene words. The administrator of
-the board can specify a list of words that he or she considers
-unacceptable.
+Il y des cas où les motifs avec lesquels doivent correspondre les
+chaînes ne sont pas connus au moment où le code est écrit. Par exemple,
+si nous écrivons un filtre à obscénités (simpliste) pour un forum de
+discussions. Nous voulons autoriser uniquement les messages qui ne contiennent
+pas de mot obscène. L'administrateur du forum peut spécifier une liste de
+mots qu'il ou elle considère comme inacceptables.
 
-The most efficient way to check a piece of text for a set of words is
-to use a regular expression. If we have our word list as an array, we
-can build the regular expression like this:
+Le moyen le plus efficace de vérifier un fragment du texte pour un ensemble
+de mots est d'utiliser une expression régulière. Si nous mettons notre liste
+de mots dans un tableau, nous pourrons construire l'expression régulière
+de la façon suivante :
 
-> var badWords = ["ape", "monkey", "simian", "gorilla", "evolution"];
+> var badWords = ["primate", "singe", "simien", "gorille", "evolution"];
 > var pattern = new RegExp(badWords.join("|"), "i");
 > function isAcceptable(text) {
 >   return !pattern.test(text);
 > }
 >
-> show(isAcceptable("Mmmm, grapes."));
-> show(isAcceptable("No more of that monkeybusiness, now."));
+> show(isAcceptable("Henry Kissinger a reçu le prix Nobel de la paix en 1973."));
+> show(isAcceptable("Ça suffit avec ces histoires de singes."));
 
-We could add |\b| patterns around the words, so that the thing about
-grapes would not be classified as unacceptable. That would also make
-the second one acceptable, though, which is probably not correct.
-Obscenity filters are hard to get right (and usually way too annoying
-to be a good idea).
+Nous pourrions ajouter des motifs |\b| autour des mots, pour que les
+choses à propos de Henry Kissinger ne soient pas considérées comme
+irrecevables. Cependant, cela rendrait aussi le deuxième acceptable, ce
+qui n'est probablement pas correct. Les filtres parentaux sont difficiles à
+concevoir et à paramétrer (et la plupart du temps sont bien trop agaçant
+pour être une bonne idée).
 
-The first argument to the _|RegExp|_ constructor is a string
-containing the pattern, the second argument can be used to add
-case-insensitivity or globalness. When building a string to hold the
-pattern, you have to be careful with backslashes. Because, normally,
-backslashes are removed when a string is interpreted, any backslashes
-that must end up in the regular expression itself have to be escaped:
+Le premier argument pour le constructeur _|RegExp|_ est une chaîne
+contenant le motif, le deuxième argument peut être utilisé pour ajouter
+l'insensibilité à la casse ou la globalité. Quand on élabore une chaîne
+pour contenir le motif, on doit faire très attention aux antislashs. En
+effet, en principe, les antislashs sont supprimés quand une chaîne est
+interprétée, tous les antislashs qui doivent se trouver dans l'expression
+régulière elle-même doivent donc être échappés :
 
 > var digits = new RegExp("\\d+");
 > show(digits.test("101"));
 
 ---
 
-The most important thing to know about regular expressions is that
-they exist, and can greatly enhance the power of your string-mangling
-code. They are so cryptic that you'll probably have to look up the
-details on them the first ten times you want to make use of them.
-Persevere, and you will soon be off-handedly writing expressions that
-look like occult gibberish
+Le plus important à savoir à propos des expressions régulières est qu'elles
+existent et peuvent augmenter de façon significative la puissance de votre
+code altérateur de chaînes. Elles sont tellement alambiquées qu'il vous
+faudra probablement regarder de très près leur détail les dix premières
+fois où vous voudrez les utiliser. Persévérez et vous écrirez vite sans
+les mains des expressions qui auront l'air de formules cabalistiques.
 
 [[xkcd_regular_expressions.png]]
 
-(Comic by [Randall Munroe | http://xkcd.com].)
+(Bande dessinée de [Randall Munroe | http://xkcd.com].)
 
 =====================================
 Web programming: A crash course / web
