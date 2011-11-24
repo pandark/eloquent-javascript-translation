@@ -11128,87 +11128,87 @@ de fuite de mémoire — ajouter des propriétés aux objets des nœuds du
 DOM peut causer des problèmes comparables.
 
 ===================
-HTTP requests / xhr
+Requêtes HTTP / xhr
 ===================
 
-As mentioned in \\cweb, communication on the World Wide Web happens
-over the _HTTP_ protocol. A simple @_HTTP request_request might look
-like this:
+Comme mentionné dans le \\cweb, les communications sur le World Wide Web
+se passent via le protocole _HTTP_. Une simple @_requête HTTP_requête
+pourrait ressembler à ça :
 
 ] GET /files/fruit.txt HTTP/1.1
 ] Host: eloquentjavascript.net
-] User-Agent: The Imaginary Browser
+] User-Agent: Le Navigateur Imaginaire
 
-Which asks for the file |files/fruit.txt| from the server at
-|eloquentjavascript.net|. In addition, it specifies that this request
-uses version 1.1 of the HTTP protocol -- version 1.0 is also still in
-use, and works slightly differently. The |Host| and |User-Agent| lines
-follow a pattern: They start with a word that identifies the
-information they contain, followed by a colon and the actual
-information. These are called '_header_s'. The |User-Agent| header
-tells the server which browser (or other kind of program) is being
-used to make the request. Other kinds of headers are often sent along,
-for example to state the types of documents that the client can
-understand, or the language that it prefers.
+Ce qui demande au serveur |eloquentjavascript.net| le fichier
+|files/fruit.txt|. En plus, la requête spécifie que la version de
+HTTP utilisée est 1.1 (la version 1.0 est encore utilisée et fonctionne
+légèrement différemment). La ligne |Host| et |User-Agent| suivent un même
+modèle : elles commencent par un mot qui identifie l'information qu'elle
+contient, suivi par deux points et l'information elle-même. Ces lignes
+sont appelées « en-têtes » (_en-têtes_). L'en-tête |User-Agent|
+dit au serveur quel navigateur (ou autre type de programme) a lancé
+la requête. D'autres en-têtes sont souvent utilisés tout le long, par
+exemple pour déclarer quels types de documents le client peut comprendre,
+ou pour spécifier le langage qu'il préfère.
 
-When given the above request, the server might send the following
-_response_:
+Après avoir reçu la requête ci-dessus, le serveur peut envoyer la _réponse_
+suivante :
 
 ] HTTP/1.1 200 OK
 ] Last-Modified: Mon, 23 Jul 2007 08:41:56 GMT
 ] Content-Length: 24
 ] Content-Type: text/plain
 ]
-] apples, oranges, bananas
+] pommes, oranges, bananes
 
-The first line indicates again the version of the HTTP protocol,
-followed by the status of the request. In this case the status code is
-|200|, meaning 'OK, nothing out of the ordinary happened, I am sending
-you the file'. This is followed by a few headers, indicating (in this
-case) the last time the file was modified, its length, and its type
-(plain text). After the headers you get a blank line, followed by the
-file itself.
+La première ligne indique encore la version du protocole HTTP utilisée,
+suivie par l'état de la requête. Dans ce cas, le code d'état est |200|,
+ce qui signifie « OK, rien d'anormal ne s'est produit, je vous envoie les
+fichiers ». Viennent ensuite quelques en-têtes indiquant (dans ce cas)
+la dernière fois que le fichier a été modifié, sa longueur et son type
+(texte brut). Après l'en-tête, vous obtenez une ligne blanche suivie par
+le fichier lui-même.
 
-Apart from requests starting with |GET|, which indicates the client
-just wants to fetch a document, the word |POST| can also be used to
-indicate some information will be sent along with the request, which
-the server is expected to process in some way.##
+En plus des requêtes commençant par |GET|, indiquant que le client veut
+seulement récupérer le document, le mot Post peut aussi être utilisé
+pour indiquer que des informations seront envoyées avec la requête dont
+on attend que le serveur les traite d'une manière ou d'une autre.##
 
-## These are not the only types of requests. There is also |HEAD|, to
-request just the headers for a document, not its content, |PUT|, to
-add a document to a server, and |DELETE|, to delete a document. These
-are not used by browsers, and often not supported by web-servers, but
--- if you add server-side programs to support them -- they can be
-useful.
-
----
-
-When you click a link, submit a form, or in some other way encourage
-your browser to go to a new page, it will do an HTTP request and
-immediately unload the old page to show the newly loaded document. In
-typical situations, this is just what you want -- it is how the web
-traditionally works. Sometimes, however, a JavaScript program wants to
-communicate with the server without re-loading the page. The 'Load'
-button in the console, for example, can load files without leaving the
-page.
-
-To be able to do things like that, the JavaScript program must make
-the HTTP request itself. Contemporary browsers provide an interface
-for this. As with opening new windows, this interface is subject to
-some restrictions. To prevent a script from doing anything scary, it
-is only allowed to make HTTP requests to the domain that the current
-page came from.
+## Ce ne sont pas les seuls types de requêtes. Il y a aussi |HEAD| pour
+demander uniquement les en-têtes d'un document sans le contenu, |PUT|
+pour ajouter un document sur un serveur et |DELETE| pour supprimer un
+document. Ceux-ci ne sont pas utilisés par les navigateurs et ne sont
+souvent même pas pris en charge par les serveurs web.
 
 ---
 
-@_|XMLHttpRequest|_An object used to make an HTTP request can, on most
-browsers, be created by doing |new XMLHttpRequest()|. Older versions
-of Internet Explorer, which originally invented these objects, require
-you to do |new ActiveXObject("Msxml2.XMLHTTP")| or, on even older
-versions, |new ActiveXObject("Microsoft.XMLHTTP")|. _|ActiveXObject|_
-is Internet Explorer's interface to various kinds of browser add-ons.
-We are already used to writing incompatibility-wrappers by now, so let
-us do so again:
+Lorsque vous cliquez sur un lien, soumettez un formulaire ou encouragez
+de quelque manière votre navigateur à aller sur une nouvelle page,
+il fera une requête HTTP et déchargera immédiatement l'ancienne page
+pour afficher le nouveau document. Dans les situations classiques, c'est
+exactement ce que vous voulez — c'est la manière dont le Web fonctionne
+traditionnellement. Parfois cependant, un programme JavaScript veut communiquer
+avec le serveur sans avoir à recharger la page. Le bouton « Load »
+de la console, par exemple, peut charger des fichiers sans quitter la page.
+
+Pour être capable de faire des choses comme celle-là, le programme
+JavaScript doit faire une requête HTTP lui-même. Les navigateurs actuels
+fournissent une interface pour faire cela. Comme pour ouvrir une fenêtre,
+cette interface est sujette à certaines restrictions. Pour empêcher les
+scripts de faire quoi que ce soit d'effrayant, il est uniquement permis de
+faire une requête HTTP sur le domaine d'où vient la page actuelle.
+
+---
+
+@_|XMLHttpRequest|_Un objet utilisé pour faire une requête HTTP
+peut, dans la plupart des navigateurs, être créé en faisant |new
+XMLHttpRequest()|. Les versions plus anciennes d'Internet Explorer
+qui inventa originellement cette technique nécessitent de faire |new
+ActiveXObject("Msxml2.XMLHTTP")|, ou pour des versions encore plus anciennes
+|new ActiveXObject("Microsoft.XMLHTTP")|. _|ActiveXObject|_ est l'interface
+d'Internet Explorer pour diverses sortes d'additions au navigateur. Nous
+sommes déjà habitués à écrire des fonctions pour prendre en charge les
+incompatibilités, alors faisons le encore une fois :
 
 > function makeHttpObject() {
 >   try {return new XMLHttpRequest();}
@@ -11218,123 +11218,130 @@ us do so again:
 >   try {return new ActiveXObject("Microsoft.XMLHTTP");}
 >   catch (error) {}
 >
->   throw new Error("Could not create HTTP request object.");
+>   throw new Error("La création de l'objet pour les requêtes HTTP n'a pas pu avoir lieu.");
 > }
 >
 > show(typeof(makeHttpObject()));
 
-The wrapper tries to create the object in all three ways, using |try|
-and |catch| to detect which ones fail. If none of the ways work, which
-might be the case on older browsers or browsers with strict security
-settings, it raises and error.
+La fonction encapsulatrice essaie de créer l'objet des trois manières en
+utilisant |try| et |catch| pour détecter celles qui échouent. Si aucune
+des manières ne fonctionne, ce qui peut être le cas avec les plus vieux
+navigateurs ou les navigateurs avec des paramêtres de sécurité stricts,
+une erreur est signalée.
 
-Now why is this object called an *XML* HTTP request? This is a bit of
-a misleading name. _XML_ is a way to store textual data. It uses tags
-and attributes like HTML, but is more structured and flexible -- to
-store your own kinds of data, you may define your own types of XML
-tags. These HTTP request objects have some built-in functionality for
-dealing with retrieved XML documents, which is why they have XML in
-their name. They can also handle other types of documents, though, and
-in my experience they are used just as often for non-XML requests.
+Maintenant, pourquoi cet objet est-il appelé *XML* HTTP request ? C'est un
+nom un peu trompeur. _XML_ est un moyen de stocker des données textuelles. Il
+utilise des balises et des attributs comme HTML, mais est plus structuré
+et flexible — pour stocker vos propres sortes de données vous pouvez
+définir vos propres types de balises XML. Ces objets requêtes HTTP ont
+certaines fonctionnalités intégrées pour s'occuper de la récupération de
+documents XML, raison pour laquelle ils ont XML dans leur nom. Ils peuvent
+cependant gérer également d'autres types de documents, et d'après mon
+expérience sont utilisés aussi souvent pour des requêtes non-XML.
 
 ---
 
-Now that we have our HTTP object, we can use it to make a request
-similar the example shown above.
+Maintenant que nous avons notre objet HTTP, nous pouvons l'utiliser pour
+fabriquer une requête.
 
 > var request = makeHttpObject();
 > request.open("GET", "files/fruit.txt", false);
 > request.send(null);
 > print(request.responseText);
 
-The _|open|_ method is used to configure a request. In this case we
-choose to make a |GET| request for our |fruit.txt| file. The _URL_
-given here is relative, it does not contain the |http://| part or a
-server name, which means it will look for the file on the server that
-the current document came from. The third parameter, |false|, will be
-discussed in a moment. After |open| has been called, the actual
-request can be made with the _|send|_ method. When the request is a
-|POST| request, the data to be sent to the server (as a string) can be
-passed to this method. For |GET| requests, one should just pass
-|null|.
+La méthode _|open|_ est utilisée pour configurer la requête. Dans ce
+cas, nous choisissons de fabriquer une requête |GET| pour notre fichier
+|fruit.txt|. L'_URL_ donnée ici est facultative, elle ne contient pas la
+partie |http://| ou le nom d'un serveur, ce qui signifie qu'elle va chercher
+le fichier sur le serveur d'où vient le document courant. Le troisième
+paramètre, |false|, sera examiné dans un moment. Après que |open| ait
+été appelé, la véritable requête peut être faite avec la méthode
+_|send|_. Lorsque la requête est une requête |POST|, les données à
+envoyer au serveur (comme une chaîne de caractères) peuvent être passées
+par cette méthode. Pour les requêtes |GET|, il y a juste à passer |null|.
 
-After the request has been made, the _|responseText|_ property of the
-request object contains the content of the retrieved document. The
-headers that the server sent back can be inspected with the
-_|getResponseHeader|_ and _|getAllResponseHeaders|_ functions. The
-first looks up a specific header, the second gives us a string
-containing all the headers. These can occasionally be useful to get
-some extra information about the document.
+Une fois que la requête a été faite, la propriété _|responseText|_ de
+l'objet requête contient le contenu du document récupéré. Les en-têtes
+que le serveur a renvoyés peuvent être inspectés avec les fonctions
+_|getResponseHeader|_ et _|getAllResponseHeaders|_. La première cherche
+un en-tête particulier tandis que la seconde nous donne une chaîne de
+caractères contenant tous les en-têtes. Ceux-ci peuvent être utiles
+en certaines occasions pour obtenir des informations supplémentaires sur
+le document.
 
 > print(request.getAllResponseHeaders());
 > show(request.getResponseHeader("Date"));
 
-If, for some reason, you want to add headers to the request that is
-sent to the server, you can do so with the _|setRequestHeader|_
-method. This takes two strings as arguments, the name and the value of
-the header.
+Si pour une quelconque raison, vous voulez ajouter des en-têtes à la
+requête qui est envoyée au serveur, vous pouvez utiliser la méthode
+_|setRequestHeader|_. Elle prend deux chaînes de caractères en arguments,
+le nom et la valeur de l'en-tête.
 
-The response code, which was |200| in the example, can be found under
-the _|status|_ property. When something went wrong, this cryptic code
-will indicate it. For example, |404| means the file you asked for did
-not exist. The _|statusText|_ contains a slightly less cryptic
-description of the status.
+Le code de réponse, qui était |200| dans l'exemple, peut être trouvé dans
+la propriété _|status|_. Si quelque chose se passe mal, ce code obscur
+l'indiquera immédiatement. Par exemple, |404| signifie que le fichier que
+vous avez demandé n'existe pas. Le _|statusText|_ contient une description
+légèrement moins énigmatique de l'état.
 
 > show(request.status);
 > show(request.statusText);
 
-When you want to check whether a request succeeded, comparing the
-|status| to |200| is usually enough. In theory, the server might in
-some situations return the code |304| to indicate that the older
-version of the document, which the browser has stored in its
-'_cache_', is still up to date. But it seems that browsers shield you
-from this by setting the |status| to |200| even when it is |304|.
-Also, if you are doing a request over a non-HTTP protocol##, such as
-FTP, the |status| will not be usable because the protocol does not
-use HTTP status codes.
+Lorsque vous voulez vérifier si une requête a fonctionné, comparer |status|
+avec |200| est en général suffisant. En théorie, le serveur pourrait
+retourner le code |304| dans certaines situations pour indiquer que l'ancienne
+version du document stockée par le navigateur dans son « _cache_ » est
+encore à jour. Cependant, il semble que les navigateurs vous protègent de
+cela en définissant |status| à |200| même lorsqu'il vaut |304|. Il faut
+également savoir que si vous faites une requête à travers un protocole
+non-HTTP##, comme FTP, |status| ne sera pas utilisable parce que le protocole
+n'utilise pas les codes d'états HTTP.
 
-## Not only the 'XML' part of the |XMLHttpRequest| name is misleading
--- the object can also be used for request over protocols other than
-HTTP, so |Request| is the only meaningful part we have left.
+## La partie XML du nom |XMLHttpRequest| n'est pas la seule à être trompeuse
+— l'objet peut aussi être utilisé pour une requête à travers des
+protocoles autres que HTTP, |Request| est donc la seule partie significative
+qu'il nous reste.
 
 ---
 
-When a request is done as in the example above, the call to the |send|
-method does not return until the request is finished. This is
-convenient, because it means the |responseText| is available after the
-call to |send|, and we can start using it immediately. There is a
-problem, though. When the server is slow, or the file is big, doing a
-request might take quite a while. As long as this is happening, the
-program is waiting, which causes the whole browser to wait. Until the
-program finishes, the user can not do anything, not even scroll the
-page. Pages that run on a local network, which is fast and reliable,
-might get away with doing requests like this. Pages on the big great
-unreliable Internet, on the other hand, should not.
+Lorsqu'une requête est faite comme dans l'exemple suivant, l'appel à
+la méthode |send| ne rend pas la main tant que la requête n'est pas
+terminée. C'est pratique car cela signifie que |responseText| est disponible
+après l'envoi de |send| et que l'on peut immédiatement l'utiliser. Il y a
+cependant un problème. Lorsque le serveur est lent ou que le fichier est
+lourd, faire une requête peut prendre un certain temps. Tant qu'elle est
+en train d'être faite, le programme attend, ce qui fait que le navigateur
+tout entier attend. Jusqu'à ce que le programme s'achève, l'utilisateur
+ne peut rien faire, même pas faire défiler la page. Les pages qui tournent
+sur un réseau local rapide et fiable pourraient s'en sortir en faisant des
+requêtes comme cela. Les pages sur l'immense et imprévisible Internet ne
+peuvent pas, pour ce qui les concerne, en faire autant.
 
-When the third argument to |open| is |true|, the request is set to be
-'_asynchronous_'. This means that |send| will return right away, while
-the request happens in the background.
+Lorsque le troisième argument de |open| est |true|, la requête est définie
+pour être « _asynchrone_ ». Cela signifie que |send| rendra la main
+immédiatement pendant que la requête se fera en arrière-plan.
 
 > request.open("GET", "files/fruit.xml", true);
 > request.send(null);
 > show(request.responseText);
 
-But wait a moment, and...
+Mais attendez un moment, et…
 
 > print(request.responseText);
 
-'Waiting a moment' could be implemented with |setTimeout| or something
-like that, but there is a better way. A request object has a
-_|readyState|_ property, indicating the state it is in. This will
-become |4| when the document has been fully loaded, and have a smaller
-value before that##. To react to changes in this status, you can set
-the _|onreadystatechange|_ property of the object to a function. This
-function will be called every time the state changes.
+« Attendez un moment » peut être implémenté avec |setTimeout|
+ou quelque chose du même genre, mais il existe un meilleur moyen. Un objet
+requête a une propriété _|readyState|_ indiquant l'état dans lequel il se
+trouve. Il passera à |4| lorsque le document aura été complètement chargé,
+et aura une valeur inférieure avant cela##. Pour réagir au changement
+de cet état, nous pouvons définir la propriété _|onreadystatechange|_
+de l'objet par une fonction. Cette fonction sera appelée à chaque fois
+que l'état change.
 
-## |0| ('uninitialized') is the state of the object before |open| is
-called on it. Calling |open| moves it to |1| ('open'). Calling |send|
-makes it proceed to |2| ('sent'). When the server responds, it goes to
-|3| ('receiving'). Finally, |4| means 'loaded'.
+## |0| (« non initialisé ») est l'état de l'objet avant qu'|open| ne
+soit appelé dessus. Appeler |open| le passe à |1| (« ouvert »). Appeler
+|send| le fait poursuivre vers |2| (« envoyé »). Lorsque le serveur
+répond, il passe à |3| (« réception »). Enfin, |4| signifie
+« chargé ».
 
 > request.open("GET", "files/fruit.xml", true);
 > request.send(null);
@@ -11345,34 +11352,35 @@ makes it proceed to |2| ('sent'). When the server responds, it goes to
 
 ---
 
-When the file retrieved by the request object is an XML document, the
-request's _|responseXML|_ property will hold a representation of this
-document. This representation works like the DOM objects discussed in
-\\cdom, except that it doesn't have HTML-specific functionality, such
-as |style| or |innerHTML|. |responseXML| gives us a document object,
-whose |documentElement| property refers to the outer tag of the XML
-document.
+Lorsque le fichier récupéré par l'objet requête est un document XML, la
+propriété _|responseXML|_ de la requête contiendra une représentation de
+ce document. Cette représentation fonctionne de la même manière que l'objet
+DOM examiné dans le \\cdom, mis à part qu'il n'a pas de fonctionnalités
+spécifiques au HTML telles que |style| ou |innerHTML|. |responseXML|
+nous fournit un objet document dont la propriété |documentElement| fait
+référence à la balise extérieure du document XML.
 
 > var catalog = request.responseXML.documentElement;
 > show(catalog.childNodes.length);
 
-Such XML documents can be used to exchange structured information with
-the server. Their form -- tags contained inside other tags -- is often
-very suitable to store things that would be tricky to represent as
-simple flat text. The DOM interface is rather clumsy for extracting
-information though, and XML documents are notoriously wordy: The
-|fruit.xml| document looks like a lot, but all it says is 'apples are
-red, oranges are orange, and bananas are yellow'.
+De tels documents XML peuvent être utilisés pour échanger des informations
+structurées avec le serveur. Leur forme — des balises contenant d'autres
+balises — est souvent très adaptée pour le stockage de choses qu'il
+serait difficile de représenter seulement avec du texte plat. Cependant,
+l'interface DOM est plutôt mal fichue pour extraire des informations, et
+les documents XML sont connus pour être verbeux : Le document |fruit.xml|
+a l'air imposant alors qu'il dit seulement « les pommes sont rouges,
+les oranges sont orange et les bananes sont jaunes ».
 
 ---
 
-@_|JSON|_As an alternative to XML, JavaScript programmers have come up
-with something called [JSON | http://www.json.org]. This uses the
-basic notation of JavaScript values to represent 'hierarchical'
-information in a more minimalist way. A JSON document is a file
-containing a single JavaScript object or array, which in turn contains
-any number of other objects, arrays, strings, numbers, booleans, or
-|null| values. For an example, look at |fruit.json|:
+Les programmeurs JavaScript ont trouvé une alternative à XML appelée [JSON
+| http://www.json.org]. Elle utilise la notation JavaScript élémentaire
+des valeurs pour représenter les informations hiérarchisées sous une
+forme plus minimaliste. Un document JSON est un fichier contenant un seul
+objet JavaScript ou un tableau, pouvant lui-même contenir d'autres objets,
+des tableaux, des chaînes de caractères, des nombres, des booléens ou la
+valeur null. Par exemple, regardez |fruit.json| :
 
 > request.open("GET", "files/fruit.json", true);
 > request.send(null);
@@ -11381,10 +11389,11 @@ any number of other objects, arrays, strings, numbers, booleans, or
 >     print(request.responseText);
 > };
 
-Such a piece of text can be converted to a normal JavaScript value by
-using the _|eval|_ function. Parentheses should be added around it
-before calling |eval|, because otherwise JavaScript might interpret an
-object (enclosed by braces) as a block of code, and produce an error.
+Un morceau de texte comme celui-ci peut être converti en valeur JavaScript
+normale en utilisant la fonction _|eval|_. Des parenthèses doivent
+être ajoutées autour de lui avant d'appeler |eval|, car sinon JavaScript
+pourrait interpréter un objet (entouré d'accolades) comme un bloc de code
+et engendrer une erreur.
 
 > function evalJSON(json) {
 >   return eval("(" + json + ")");
@@ -11392,37 +11401,41 @@ object (enclosed by braces) as a block of code, and produce an error.
 > var fruit = evalJSON(request.responseText);
 > show(fruit);
 
-When running |eval| on a piece of text, you have to keep in mind that
-this means you let the piece of text run whichever code it wants.
-Since JavaScript only allows us to make requests to our own domain,
-you will usually know exactly what kind of text you are getting, and
-this is not a problem. In other situations, it might be unsafe.
+Lorsque vous exécutez |eval| sur un morceau de texte, vous devez garder à
+l'esprit que cela signifie que vous permettez à ce bout de texte d'exécuter
+arbitrairement n'importe quel code. Comme JavaScript ne nous permet de faire
+des requêtes que sur notre propre domaine, vous connaitrez généralement
+de manière précise le genre de texte que vous récupérez et cela ne pose
+pas de problème. Dans d'autres situations, cela peut se révéler dangereux.
 
 ***
 
-Write a function called |serializeJSON| which, when given a JavaScript
-value, produces a string with the value's JSON representation. Simple
-values like numbers and booleans can be simply given to the |String|
-function to convert them to a string. Objects and arrays can be
-handled by recursion.
+Écrivez une fonction appelée |serializeJSON| qui, lorsqu'on lui fournit une
+valeur JavaScript, crée une chaîne de caractères avec la représentation
+JSON de la valeur. Les valeurs simples comme les nombres et les booléens
+peuvent simplement être données à la fonction |String| pour les convertir
+en chaînes de caractères. Les objets et les tableaux peuvent être traités
+par récursion.
 
-Recognizing arrays can be tricky, since its type is |"object"|. You
-can use |instanceof Array|, but that only works for arrays that were
-created in your own window -- others will use the |Array| prototype
-from other windows, and |instanceof| will return |false|. A cheap
-trick is to convert the |constructor| property to a string, and see
-whether that contains |"function Array"|.
+Il faut reconnaître que les tableaux peuvent être sournois car ils
+sont du type « |object| ». Vous pouvez utiliser |instanceof Array|,
+mais cela fonctionnera uniquement pour les tableaux créés dans la même
+fenêtre — les autres utiliseront le prototype d'|Array| des autres
+fenêtres et |instanceof| renverra |false|. Une astuce est de convertir
+la propriété |constructor| en chaîne de caractères et de voir si elle
+contient « |function Array| ».
 
-When converting a string, you have to take care to escape special
-characters inside it. If you use double-quotes around the string, the
-characters to escape are |\"|, |\\|, |\f|, |\b|, |\n|, |\t|, |\r|, and
-|\v|##.
+Quand vous convertissez une chaîne, vous devez faire attention à échapper
+ses caractères. Si vous utilisez des guillemets doubles autour de la chaîne,
+les caractères à échapper sont |\"|, |\\|, |\f|, |\b|, |\n|, |\t|, |\r|,
+et |\v|##.
 
-## We already saw |\n|, which is a newline. |\t| is a tab character,
-|\r| a 'carriage return', which some systems use before or instead of
-a newline to indicate the end of a line. |\b| (backspace), |\v|
-(vertical tab), and |\f| (form feed) are useful when working with old
-printers, but less so when dealing with Internet browsers.
+## Nous avons déjà rencontré |\n|, qui crée une nouvelle ligne. |\t| est
+un caractère de tabulation, |\r| un « retour chariot », que certains
+systèmes utilisent au lieu d'un |\n| pour indiquer une fin de ligne. |\b|
+(backspace), |\v| (tabulation verticale), et |\f| (saut de page) sont utiles
+quand on travaille avec de vieilles imprimantes mais moins utiles quand on
+parle de navigateurs Web.
 
 ///
 
@@ -11464,22 +11477,24 @@ printers, but less so when dealing with Internet browsers.
 >
 > print(serializeJSON(fruit));
 
-The trick used in |serializeString| is similar to what we saw in the
-|escapeHTML| function in \\cregexp. It uses an object to look up the
-correct replacements for each of the characters. Some of them, such as
-|"\\\\"|, look quite weird because of the need to put two backslashes
-for every backslash in the resulting string.
+L'astuce utilisée dans |serializeString| est similaire à celle que nous avons
+vue dans la fonction |escapeHTML| du \\cregexp. Elle utilise un objet pour
+chercher les substitutions nécessaires pour chacun des caractères. Certaines
+d'entre elles, comme |"\\\\"|, ont l'air assez étranges parce qu'il est
+nécessaire de mettre deux antislash devant chaque antislash dans la chaîne
+de résultat.
 
-Also note that the names of properties are quoted as strings. For some
-of them, this is not necessary, but for property names with spaces and
-other strange things in them it is, so the code just takes the easy
-way out and quotes everything.
+Notez également que les noms de propriétés sont entre guillemets comme
+des chaînes. Pour certaines d'entre elles ce n'est pas nécessaire, mais
+c'est préféraable pour ceux qui incluent des espaces et d'autres choses
+curieuses, donc le code joue la sécurité et met tout entre guillemets.
 
 ---
 
-When making lots of requests, we do, of course, not want to repeat the
-whole |open|, |send|, |onreadystatechange| ritual every time. A very
-simple wrapper could look like this:
+Quand on fait de nombreuses requêtes, on ne souhaite pas, bien
+entendu, répéter à chaque fois le même rituel |open|, |send|,
+|onreadystatechange|. Voilà à quoi peut ressembler une fonction
+encapsulatrice très simple :
 
 > function simpleHttpRequest(url, success, failure) {
 >   var request = makeHttpObject();
@@ -11497,28 +11512,32 @@ simple wrapper could look like this:
 >
 > simpleHttpRequest("files/fruit.txt", print);
 
-The function retrieves the url it is given, and calls the function it
-is given as a second argument with the content. When a third argument
-is given, this is used to indicate failure -- a non-|200| status code.
+La fonction accède à l'URL qu'on lui donne et appelle la fonction qu'on
+lui donne comme second argument avec le contenu. Quand un troisième argument
+est passé, il sert à indiquer une erreur — un code d'état différent
+de |200|.
 
-To be able to do more complex requests, the function could be made to
-accept extra parameters to specify the method (|GET| or |POST|), an
-optional string to post as data, a way to add extra headers, and so
-on. When you have so many arguments, you'd probably want to pass them
-as an arguments-object as seen in \\cmodularity.
+Pour pouvoir faire des requêtes plus complexes, on peut s'arranger pour pour
+que la fonction accepte des paramètres supplémentaires pour préciser la
+méthode (|GET| ou |POST|), une chaîne facultative pour l'envoyer comme
+donnée, une façon d'ajouter des en-têtes supplémentaires et ainsi de
+suite. Quand vous aurez autant d'arguments, vous souhaiterez probablement
+les passer comme un « objet d'arguments » comme nous l'avons vu dans
+le \\cmodularity.
 
 ---
 
-Some websites make use of intensive communication between the programs
-running on the client and the programs running on the server. For such
-systems, it can be practical to think of some HTTP requests as calls
-to functions that run on the server. The client makes request to URLs
-that identify the functions, giving the arguments as URL parameters or
-|POST| data. The server then calls the function, and puts the result
-into JSON or XML document that it sends back. If you write a few
-convenient support functions, this can make calling server-side
-functions almost as easy as calling client-side ones... except, of
-course, that you do not get their results instantly.
+Certains sites web font un usage intensif de la communication entre les
+programmes qui tournent côté client et ceux qui tournent côté serveur. Dans
+de tels systèmes, il peut être pratique de considérer certaines requêtes
+HTTP comme des appels à des fonctions qui s'exécutent sur le serveur. Le
+client fait une requête vers des URL qui identifient les fonctions,
+leur donnant des arguments sous forme de paramètres URL ou de données
+|POST|. Le serveur appelle alors la fonction, et met le résultat dans un
+document JSON ou XML qu'il renvoie. Si vous écrivez quelques fonctions de
+support pratiques, ceci peut rendre les appels côté serveur presque aussi
+simples qu'ils le sont côté client… à l'exception bien sûr du retour
+des résultats qui ne sera pas aussi instantané.
 
 +++++++++++++++++++++++++++++++++++++++++++
 More (obscure) control structures / control
