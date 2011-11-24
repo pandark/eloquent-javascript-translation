@@ -2,117 +2,122 @@
 Introduction / intro
 ====================
 
-When personal computers were first introduced, most of them came
-equipped with a simple programming language, usually a variant of
-_BASIC_. Interacting with the computer was closely integrated with
-this language, and thus every computer-user, whether he wanted to or
-not, would get a taste of it. Now that computers have become plentiful
-and cheap, typical users don't get much further than clicking things
-with a mouse. For most people, this works very well. But for those of
-us with a natural inclination towards technological tinkering, the
-removal of programming from every-day computer use presents something
-of a barrier.
+Lorsque les premiers ordinateurs personnels sont apparus, la plupart d'entre
+eux étaient fournis avec un langage de programmation simple, généralement
+une variante de _BASIC_. Les interactions avec l'ordinateur étaient fortement
+liées à ce langage, et tout utilisateur d'un ordinateur devait dès lors y
+goûter, qu'il le veuille ou non. À présent que les ordinateurs sont devenus
+nombreux et bon marché, l'utilisateur moyen se contente la plupart du temps
+de ce qu'il peut faire en cliquant avec la souris. Pour nombre d'entre eux,
+cela fonctionne très bien. Mais pour ceux d'entre nous qui ont une inclination
+naturelle au bricolage technique, la disparition de la programmation dans
+l'usage quotidien d'un ordinateur représente une forme de barrière.
 
-Fortunately, as an effect of developments in the World Wide Web, it so
-happens that every computer equipped with a modern web-browser also
-has an environment for programming JavaScript. In today's spirit of
-not bothering the user with technical details, it is kept well hidden,
-but a web-page can make it accessible, and use it as a platform for
-learning to program.
+Heureusement, avec l'évolution du World Wide Web, il se trouve que chaque
+ordinateur équipé d'un navigateur web moderne a également un environnement
+pour programmer en JavaScript. Il est gardé bien caché car il est dans
+l'air du temps de ne pas ennuyer l'utilisateur avec des détails techniques,
+mais une page web peut le rendre accessible et l'utiliser comme une plateforme
+pour apprendre à programmer.
 
-That is what this (hyper-)book tries to do.
+C'est ce que ce livre (ou hyper-livre) essaie de faire.
 
 ---
 
-| I do not enlighten those who are not eager to learn, nor arouse those
-| who are not anxious to give an explanation themselves. If I have
-| presented one corner of the square and they cannot come back to me
-| with the other three, I should not go over the points again.
+| Je n'ai pas pour but d'éclairer ceux qui ne sont pas désireux
+| d'apprendre, ni éveiller ceux qui ne sont pas soucieux de donner une
+| explication eux-mêmes. Si je leur ai montré un angle du carré et
+| qu'ils ne peuvent pas revenir à moi avec les trois autres, je ne
+| devrais pas revenir sur le premier angle.
 |
-| -- Confucius
+| — Confucius
 
-Besides explaining JavaScript, this book tries to be an introduction
-to the basic principles of programming. Programming, it turns out, is
-hard. The fundamental rules are, most of the time, simple and clear.
-But programs, while built on top of these basic rules, tend to become
-complex enough to introduce their own rules, their own complexity.
-Because of this, programming is rarely simple or predictable. As
-Donald Knuth, who is something of a founding father of the field,
-says, it is an *art*.
+Au-delà des explications qu'il donne sur le JavaScript, ce livre s'efforce
+d'initier aux principes fondamentaux de la programmation. Programmer
+s'avère être un exercice difficile. Les règles de base sont la plupart
+du temps simples et claires. Cependant, même des programmes construits
+suivant ces règles de base, tendent à devenir suffisamment élaborés pour
+générer leurs propres règles et leur propre complexité. Voilà pourquoi la
+programmation est rarement simple et prévisible. Comme le dit Donald Knuth,
+que l'on peut considérer comme un des pères fondateurs dans ce domaine,
+c'est un *art*.
 
-To get something out of this book, more than just passive reading is
-required. Try to stay sharp, make an effort to solve the exercises,
-and only continue on when you are reasonably sure you understand the
-material that came before.
+Pour tirer quelque chose de ce livre, il est indispensable de faire plus que
+de le lire passivement. Essayez de garder l'esprit affûté, efforcez-vous
+de résoudre les exercices, et n'allez plus loin que lorsque vous êtes
+certain d'avoir bien assimilé les étapes précédentes.
 
 ---
 
-| The computer programmer is a creator of universes for which he alone
-| is responsible. Universes of virtually unlimited complexity can be
-| created in the form of computer programs.
+| Le programmeur en informatique est un créateur d'univers dont il
+| est seul responsable. Des univers d'une complexité potentiellement
+| illimitée peuvent être créés sous forme de programmes informatiques.
 |
-| -- Joseph Weizenbaum, *Computer Power and Human Reason*
+| ― Joseph Weizenbaum, *La puissance de l'ordinateur et la raison humaine*
 
-A program is many things. It is a piece of text typed by a programmer,
-it is the directing force that makes the computer do what it does, it
-is data in the computer's memory, yet it controls the actions
-performed on this same memory. Analogies that try to compare programs
-to objects we are familiar with tend to fall short, but a
-superficially fitting one is that of a machine. The gears of a
-mechanical watch fit together ingeniously, and if the watchmaker was
-any good, it will accurately show the time for many years. The
-elements of a program fit together in a similar way, and if the
-programmer knows what he is doing, the program will run without
-crashing.
+Un programme, c'est beaucoup de choses. C'est un bout de texte tapé par un
+programmeur, c'est la force directrice qui indique à l'ordinateur ce qu'il
+doit faire, c'est un ensemble de données dans la mémoire de l'ordinateur,
+et pourtant il contrôle les actions accomplies dans cette même mémoire. Les
+analogies qui comparent les programmes à des objets qui nous sont familiers
+ont tendance à tourner court alors que celle d'une machine est, de manière
+superficielle, mieux adaptée. Les roues et les engrenages d'une montre
+mécanique sont ingénieusement agencés et coordonnés, et si l'horloger
+connaît son affaire, la montre donnera l'heure pendant des années. Les
+parties d'un programme sont de même étroitement solidaires et si le
+programmeur sait ce qu'il fait, son programme fonctionnera sans plantage.
 
-A computer is a machine built to act as a host for these immaterial
-machines. Computers themselves can only do stupidly straightforward
-things. The reason they are so useful is that they do these things at
-an incredibly high speed. A program can, by ingeniously combining many
-of these simple actions, do very complicated things.
+Un ordinateur est une machine conçue pour héberger ce genre de machines
+immatérielles. Les ordinateurs eux-mêmes ne peuvent qu'exécuter stupidement
+des choses simples. S'ils sont très utiles, c'est parce qu'ils peuvent
+faire ces choses à une vitesse incroyable. Un programme peut, en combinant
+un grand nombre de ces actions simples, accomplir des tâches très complexes.
 
-To some of us, writing computer programs is a fascinating game. A
-program is a building of thought. It is costless to build, weightless,
-growing easily under our typing hands. If we get carried away, its
-size and complexity will grow out of control, confusing even the one
-who created it. This is the main problem of programming. It is why so
-much of today's software tends to crash, fail, screw up.
+Pour beaucoup d'entre nous, écrire des programmes informatiques est un
+jeu fascinant. Un programme est une construction de l'esprit. Il ne coûte
+rien à élaborer, il ne pèse rien et se développe facilement sous nos
+mains. Si nous nous laissons aller, sa taille et sa complexité vont prendre
+des proportions démesurées, au point d'échapper au contrôle même de celui
+qui l'a créé. C'est le principal problème de la programmation. C'est la
+raison pour laquelle beaucoup de logiciels aujourd'hui finissent par planter,
+échouer et tout saloper.
 
-When a program works, it is beautiful. The art of programming is the
-skill of controlling complexity. The great program is subdued, made
-simple in its complexity.
-
----
-
-Today, many programmers believe that this complexity is best managed
-by using only a small set of well-understood techniques in their
-programs. They have composed strict rules about the form programs
-should have, and the more zealous among them will denounce those who
-break these rules as *bad* programmers.
-
-What hostility to the richness of programming! To try to reduce it to
-something straightforward and predictable, to place a taboo on all the
-weird and beautiful programs. The landscape of programming techniques
-is enormous, fascinating in its diversity, still largely unexplored.
-It is certainly littered with traps and snares, luring the
-inexperienced programmer into all kinds of horrible mistakes, but that
-only means you should proceed with caution, keep your wits about you.
-As you learn, there will always be new challenges, new territory to
-explore. The programmer who refuses to keep exploring will surely
-stagnate, forget his joy, lose the will to program (and become a
-manager).
-
-As far as I am concerned, the definite criterion for a program is
-whether it is correct. Efficiency, clarity, and size are also
-important, but how to balance these against each other is always a
-matter of judgement, a judgement that each programmer must make for
-himself. Rules of thumb are useful, but one should never be afraid to
-break them.
+Quand un programme fonctionne, c'est beau. L'art de la programmation est
+l'art de contrôler la complexité. Un programme de grande qualité est
+discret et apparaît simple malgré sa complexité.
 
 ---
 
-In the beginning, at the birth of computing, there were no programming
-languages. Programs looked something like this:
+Aujourd'hui, beaucoup de programmeurs croient que cette complexité est
+plus facile à gérer en utilisant seulement un petit jeu de techniques
+bien comprises dans leurs programmes. Ils ont élaboré des règles strictes
+concernant la forme que devraient adopter les programmes, et les plus zélés
+d'entre eux dénonceront ceux qui enfreignent ces règles comme de *mauvais*
+programmeurs.
+
+Quelle hostilité envers la richesse de la programmation ! Essayer de
+la réduire à quelque chose de direct et de prévisible, jeter l'opprobre
+sur tous les programmes bizarres et magnifiques. Le champ des techniques de
+programmation est gigantesque, fascinant par sa diversité et encore largement
+inexploré. Il est certainement bourré de chausse-trappes et de pièges à
+loups, menaçant de faire commettre au programmeur inexpérimenté toute sorte
+d'affreuses erreurs. Cela signifie seulement que vous devez procéder avec
+prudence et garder votre sang-froid. En apprenant, vous rencontrerez toujours
+de nouveaux défis, de nouveaux territoires à explorer. Le programmeur qui
+refuse l'exploration va sûrement végéter, ne plus trouver ça drôle,
+perdre le désir de programmer (et devenir chef de projet).
+
+En ce qui me concerne, le critère décisif pour évaluer un programme est :
+« Est-il correct ? ». L'efficacité, la clarté et la taille sont
+également importantes, mais pouvoir peser avec exactitude le poids de l'un
+et le poids de l'autre est toujours une question d'opinion, une opinion
+que doit se faire chaque programmeur. Les règles générales sont utiles,
+mais on ne devrait jamais avoir peur de les transgresser.
+
+---
+
+Au début de l'informatique, lorsqu'elle venait de naître, il n'existait
+pas de langage de programmation. Les programmes ressemblaient à ceci :
 
 ] 00110001 00000000 00000000
 ] 00110001 00000001 00000001
@@ -124,274 +129,285 @@ languages. Programs looked something like this:
 ] 00010000 00000010 00000000
 ] 01100010 00000000 00000000
 
-That is a program to add the numbers from one to ten together, and
-print out the result (1 + 2 + ... + 10 = 55). It could run on a very
-simple kind of computer. To program early computers, it was necessary
-to set large arrays of switches in the right position, or punch holes
-in strips of cardboard and feed them to the computer. You can imagine
-how this was a tedious, error-prone procedure. Even the writing of
-simple programs required much cleverness and discipline, complex ones
-were nearly inconceivable.
+Il s'agit d'un programme qui fait la somme des nombres de 1 à 10 et donne
+le résultat (1 + 2 + … + 10 = 55). Il pourrait tourner sur l'ordinateur le
+plus simple. Pour programmer les premiers ordinateurs, il était nécessaire
+de disposer de grandes séries d'interrupteurs dans la bonne position, ou de
+perforer des trous dans des cartes et les faire avaler à la machine. Vous
+imaginez facilement à quel point la procédure était fastidieuse et sujette
+à erreurs. Écrire ne serait-ce qu'un programme simple exigeait beaucoup
+d'intelligence et de discipline, les programmes complexes étaient carrément
+hors d'atteinte.
 
-Of course, manually entering these arcane patterns of bits (which is
-what the 1s and 0s above are generally called) did give the programmer
-a profound sense of being a mighty wizard. And that has to be worth
-something, in terms of job satisfaction.
+Bien entendu, saisir à la main des masques de bits (c'est ainsi qu'on
+appelle en général les suites de 1 et de 0 ci-dessus) donnait au programmeur
+l'impression d'être un puissant sorcier. Cela ne peut pas compter pour du
+beurre en ce qui concerne la satisfaction professionnelle.
 
-Each line of the program contains a single instruction. It could be
-written in English like this:
+Chaque ligne de programme contient une instruction unique. On pourrait
+l'exprimer en français sous cette forme :
 
- 1. Store the number 0 in memory location 0
- 2. Store the number 1 in memory location 1
- 3. Store the value of memory location 1 in memory location 2
- 4. Subtract the number 11 from the value in memory location 2
- 5. If the value in memory location 2 is the number 0, continue with instruction 9
- 6. Add the value of memory location 1 to memory location 0
- 7. Add the number 1 to the value of memory location 1
- 8. Continue with instruction 3
- 9. Output the value of memory location 0
+ 1. Stocker le nombre 0 à l'adresse mémoire 0
+ 2. Stocker le nombre 1 à l'adresse mémoire 1
+ 3. Stocker la valeur de l'adresse mémoire 1 dans l'adresse mémoire 2
+ 4. Soustraire 11 de la valeur stockée à l'adresse mémoire 2
+ 5. Si la valeur à l'adresse mémoire 2 est le nombre 0, continuer à l'instruction 9
+ 6. Ajouter la valeur de l'adresse mémoire 1 à l'adresse mémoire 0
+ 7. Ajouter le nombre 1 à la valeur de l'adresse mémoire 1
+ 8. Continuer avec l'instruction 3
+ 9. Donner la valeur de l'adresse mémoire 0
 
-While that is more readable than the binary soup, it is still rather
-unpleasant. It might help to use names instead of numbers for the
-instructions and memory locations:
+Alors que c'est déjà plus lisible que la soupe binaire, cela reste assez
+désagréable. Il pourrait être utile d'utiliser des noms au lieu de nombres
+pour les instructions et les adresses mémoire :
 
-]  Set 'total' to 0
-]  Set 'count' to 1
-] [loop]
-]  Set 'compare' to 'count'
-]  Subtract 11 from 'compare'
-]  If 'compare' is zero, continue at [end]
-]  Add 'count' to 'total'
-]  Add 1 to 'count'
-]  Continue at [loop]
-] [end]
-]  Output 'total'
+]  Mettre 0 à 'total'
+]  Mettre 1 à 'compteur'
+] [boucle]
+]  Mettre compteur' à 'comparaison'
+]  Soustraire 11 à 'comparaison'
+]  Si 'comparaison' est zero, continuer à [fin]
+]  Ajouter 'compteur' à 'total'
+]  Ajouter 1 à 'compteur'
+]  Continuer à [boucle]
+] [fin]
+]  Afficher 'total'
 
-At this point it is not too hard to see how the program works. Can
-you? The first two lines give two memory locations their starting
-values: |total| will be used to build up the result of the program,
-and |count| keeps track of the number that we are currently looking
-at. The lines using |compare| are probably the weirdest ones. What the
-program wants to do is see if |count| is equal to 11, in order to
-decide whether it can stop yet. Because the machine is so primitive,
-it can only test whether a number is zero, and make a decision (jump)
-based on that. So it uses the memory location labelled |compare| to
-compute the value of |count - 11|, and makes a decision based on that
-value. The next two lines add the value of |count| to the result, and
-increment |count| by one every time the program has decided that it is
-not 11 yet.
+À partir de là il n'est pas trop difficile de deviner comment fonctionne
+le programme. Qu'en dites-vous ? Les deux premières lignes donnent leur
+valeur initiale aux adresses mémoire : |total| sera utilisé pour calculer
+le résultat du programme et |compteur| conserve le nombre courant. Les
+lignes qui utilisent |comparaison| sont probablement les plus bizarres. Ce
+que le programme cherche à savoir c'est si |compteur| est égal à 11,
+de manière à savoir s'il doit interrompre le calcul. Comme la machine est
+très rudimentaire, il peut seulement tester si un nombre est zéro, et prend
+une décision (sauter) basée sur ce critère. il utilise donc l'adresse
+mémoire nommée |comparaison| pour calculer la valeur de |compteur - 11|,
+et décide suivant la valeur obtenue. Les deux lignes suivantes ajoutent la
+valeur de |compteur| au résultat, et l'incrémentent |compteur| d'une unité
+à chaque fois que le programme a décidé qu'il n'avait pas encore atteint 11.
 
-Here is the same program in JavaScript:
+Voici maintenant le même programme en JavaScript :
 
-> var total = 0, count = 1;
-> while (count <= 10) {
->   total += count;
->   count += 1;
+> var total = 0, compteur = 1;
+> while (compteur <= 10) {
+>   total += compteur;
+>   compteur += 1;
 > }
 > print(total);
 
-This gives us a few more improvements. Most importantly, there is no
-need to specify the way we want the program to jump back and forth
-anymore. The magic word |while| takes care of that. It continues
-executing the lines below it as long as the condition it was given
-holds: |count <= 10|, which means '|count| is less than or equal
-to |10|'. Apparently, there is no need anymore to create a temporary
-value and compare that to zero. This was a stupid little detail, and
-the power of programming languages is that they take care of stupid
-little details for us.
+C'est encore un peu mieux pour nous. Le plus important est qu'il n'y a plus
+besoin de préciser la façon dont nous voulons que le programme fasse un bond
+par-ci par-là. Le mot magique |while| s'en occupe. Le programme continue à
+exécuter les lignes ci-dessous tant que la condition qu'on lui a donnée est
+satisfaite : |compteur <= 10|, ce qui veut dire tant que « |compteur|
+est inférieur ou égal à |10| ». Apparemment, il n'y a plus besoin de
+créer une valeur temporaire et de la comparer à zéro. C'était un petit
+détail stupide, et le pouvoir des langages de programmation est justement
+qu'ils règlent pour nous ce genre de choses accessoires.
 
-Finally, here is what the program could look like if we happened to
-have the convenient operations |range| and |sum| available, which
-respectively create a collection of numbers within a range and compute
-the sum of a collection of numbers:
+Finalement, voici à quoi pourrait ressembler le programme si nous nous étions
+arrangés pour que les opérations |serie| et |somme| soient disponibles,
+la première créant une collection de nombres dans une série tandis que
+la seconde calcule la somme d'une série de nombres :
 
-> print(sum(range(1, 10)));
+> print(somme(serie(1, 10)));
 
-The moral of this story, then, is that the same program can be
-expressed in long and short, unreadable and readable ways. The first
-version of the program was extremely obscure, while this last one is
-almost English: |print| the |sum| of the |range| of numbers from |1|
-to |10|. (We will see in later chapters how to build things like |sum|
-and |range|.)
+La morale de cette histoire est donc que le même programme peut être
+exprimé de façon brève ou longue, lisible ou illisible. La première
+version du programme était extrêmement obscure, tandis que la dernière
+est quasiment du français : |print| (afficher) la |somme| de la |serie|
+des nombres de |1| à |10|. Nous verrons par la suite dans d'autres chapitres
+comment construire des choses telles que |somme| et |serie|.
 
-A good programming language helps the programmer by providing a more
-abstract way to express himself. It hides uninteresting details,
-provides convenient building blocks (such as the |while| construct),
-and, most of the time, allows the programmer to add building blocks
-himself (such as the |sum| and |range| operations).
-
----
-
-JavaScript is the language that is, at the moment, mostly being used
-to do all kinds of clever and horrible things with pages on the World
-Wide Web. Some [people |
-http://steve-yegge.blogspot.com/2007/02/next-big-language.html] claim
-that the next version of JavaScript will become an important language
-for other tasks too. I am unsure whether that will happen, but if you
-are interested in programming, JavaScript is definitely a useful
-language to learn. Even if you do not end up doing much
-web programming, the mind-bending programs I will show you in this
-book will always stay with you, haunt you, and influence the programs
-you write in other languages.
-
-There are those who will say *terrible* things about JavaScript. Many
-of these things are true. When I was for the first time required to
-write something in JavaScript, I quickly came to despise the language.
-It would accept almost anything I typed, but interpret it in a way
-that was completely different from what I meant. This had a lot to do
-with the fact that I did not have a clue what I was doing, but there
-is also a real issue here: JavaScript is ridiculously liberal in what
-it allows. The idea behind this design was that it would make
-programming in JavaScript easier for beginners. In actuality, it
-mostly makes finding problems in your programs harder, because the
-system will not point them out to you.
-
-However, the flexibility of the language is also an advantage. It
-leaves space for a lot of techniques that are impossible in more rigid
-languages, and it can be used to overcome some of JavaScript's
-shortcomings. After learning it properly, and working with it for a
-while, I have really learned to *like* this language.
+Un bon langage de programmation aide le programmeur en lui fournissant une
+manière plus abstraite de s'exprimer. Il masque les détails inintéressants,
+procure des composants de base pratiques (comme la |while|) et, la plupart
+du temps, permet au programmeur d'ajouter lui-même de telles briques (comme
+les opérations |somme| et |serie|).
 
 ---
 
-Contrary to what the name suggests, JavaScript has very little to do
-with the programming language named Java. The similar name was
-inspired by marketing considerations, rather than good judgement. In
-1995, when JavaScript was introduced by Netscape, the Java language
-was being heavily marketed and gaining in popularity. Apparently,
-someone thought it a good idea to try and ride along on this
-marketing. Now we are stuck with the name.
+JavaScript est le langage qui est, actuellement, le plus
+utilisé pour faire toutes sortes de choses géniales et
+horribles avec des pages sur le World Wide Web. [Certains |
+http://steve-yegge.blogspot.com/2007/02/next-big-language.html] prétendent
+que la prochaine version de JavaScript en fera un langage de référence
+pour d'autres tâches également. J'ignore si cela va se produire, mais si
+vous êtes intéressé par la programmation, JavaScript est sans aucun doute
+un langage utile à apprendre. Même si en fin de compte vous ne faites pas
+tellement de programmation web, les programmes hallucinants que je vais vous
+montrer dans cet ouvrage resteront toujours en vous, à vous hanter et à
+influencer les programmes que vous écrirez dans d'autres langages.
 
-Related to JavaScript is a thing called ECMAScript. When browsers
-other than Netscape started to support JavaScript, or something that
-looked like it, a document was written to describe precisely how the
-language should work. The language described in this document is
-called ECMAScript, after the organisation that standardised it.
+Certains vous diront des choses *terribles* à propos de JavaScript. Beaucoup
+de ces reproches sont fondés. La première fois que j'ai dû écrire quelque
+chose en JavaScript, j'ai rapidement méprisé ce langage. Il acceptait
+à peu près tout ce que je tapais, mais l'interprétait d'une façon
+complètement différente de celle que je voulais. Cela venait surtout du
+fait que je n'avais aucune idée de ce que je faisais, mais il y a aussi un
+véritable problème ici : JavaScript est absurdement laxiste dans ce qu'il
+permet. L'idée derrière cette conception était de rendre la programmation
+en JavaScript plus facile pour les débutants. En réalité, il rend surtout
+plus difficile la recherche des problèmes dans vos programmes, parce que
+le système ne vous les montrera pas.
 
-ECMAScript describes a general-purpose programming language, and does
-not say anything about the integration of this language in an Internet
-browser. JavaScript is ECMAScript plus extra tools for dealing with
-Internet pages and browser windows.
-
-A few other pieces of software use the language described in the
-ECMAScript document. Most importantly, the ActionScript language used
-by Flash is based on ECMAScript (though it does not precisely follow
-the standard). Flash is a system for adding things that move and make
-lots of noise to web-pages. Knowing JavaScript won't hurt if you ever
-find yourself learning to build Flash movies.
-
-JavaScript is still evolving. Since this book came out, ECMAScript 5
-has been released, which is compatible with the version described
-here, but adds some of the functionality we will be writing ourselves
-as built-in methods. The newest generation of browsers provides this
-expanded version of JavaScript. As of 2011, 'ECMAScript harmony', a
-more radical extension of the language, is in the process of being
-standardised. You should not worry too much about these new versions
-making the things you learn from this book obsolete. For one thing,
-they will be an extension of the language we have now, so almost
-everything written in this book will still hold.
+Toutefois, la souplesse de ce langage est aussi un avantage. Elle laisse la
+place à de nombreuses techniques que les langages de programmation plus
+rigides ne permettent pas, et on peut l'utiliser pour compenser certains
+défauts de JavaScript. Après l'avoir étudié correctement et avoir
+travaillé avec un certain temps, j'ai vraiment appris à *aimer* ce langage.
 
 ---
 
-Most chapters in this book contain quite a lot of code##. In my
-experience, reading and writing code is an important part of learning
-to program. Try to not just glance over these examples, but read them
-attentively and understand them. This can be slow and confusing at
-first, but you will quickly get the hang of it. The same goes for the
-exercises. Don't assume you understand them until you've actually
-written a working solution.
+Contrairement à ce que son nom suggère, JavaScript a très peu à voir avec
+le langage de programmation nommé Java. Le nom similaire a été inspiré
+par des considérations commerciales plutôt que rationnelles. En 1995,
+quand le JavaScript a été lancé par Netscape, le langage Java était promu
+partout et gagnait en popularité. Apparemment, quelqu'un a dû penser que
+c'était une bonne idée d'essayer de surfer sur la mode du moment. Nous
+voilà aujourd'hui coincé avec ce nom.
 
-## 'Code' is the substance that programs are made of. Every piece of a
-program, whether it is a single line or the whole thing, can be
-referred to as 'code'.
+Il existe un langage associé au JavaScript et qui s'appelle ECMAScript. Quand
+les navigateurs autres que Netscape ont commencé à prendre en charge le
+JavaScript, ou quelque chose du même genre, on a écrit une documentation pour
+décrire avec précision comment le langage en question devait fonctionner. On
+l'a appelé ECMAScript, d'après le nom de l'organisation qui l'a standardisé.
 
-Because of the way the web works, it is always possible to look at the
-JavaScript programs that people put in their web-pages. This can be a
-good way to learn how some things are done. Because most web
-programmers are not 'professional' programmers, or consider JavaScript
-programming so uninteresting that they never properly learned it, a
-lot of the code you can find like this is of a *very* bad quality.
-When learning from ugly or incorrect code, the ugliness and confusion
-will propagate into your own code, so be careful who you learn from.
+ECMAScript décrit un langage de programmation à usage général, mais ne
+dit rien sur l'intégration de ce langage dans un navigateur internet. Le
+JavaScript c'est ECMAScript plus des outils supplémentaires pour gérer
+les pages web et les fenêtres de navigation.
+
+Quelques autres logiciels utilisent le langage décrit dans le document
+ECMAScript. Plus important, le langage ActionScript utilisé par Flash est
+basé sur ECMAScript (bien qu'il ne suive pas précisément le standard). Flash
+est un système utilisé pour ajouter des trucs qui bougent et font du bruit
+sur les pages web. Ça ne vous fera pas de mal de connaître JavaScript si
+vous devez un jour apprendre à faire des animations en Flash.
+
+JavaScript continue d'évoluer. Depuis la sortie de cet ouvrage, ECMAScript
+5 est sorti, il est compatible avec la version décrite ici, mais y ajoute,
+en tant que méthodes natives, quelques fonctionnalités que nous écrirons
+nous-même. La dernière génération de navigateurs fournit cette version
+augmentée de JavaScript. En 2011, « ECMAScript harmony », une extension
+plus radicale du langage, est en cours de standardisation. Vous ne devriez
+pas trop craindre que ces nouvelles versions rendent obsolètes ce que vous
+apprenez dans ce livre. Il ne s'agira que d'une extension du langage dont
+nous disposons actuellement, donc pratiquement tout ce qui est écrit dans
+ce livre restera valide.
 
 ---
 
-To allow you to try out programs, both the examples and the code you
-write yourself, this book makes use of something called a _console_.
-If you are using a modern graphical browser (Internet Explorer version
-6 or higher, Firefox 1.5 or higher, Opera 9 or higher, Safari 3 or
-higher), the pages in this book will show a bar at the bottom of your
-screen. You can open the console by clicking on the little arrow on
-the far right of this bar.
+La plupart des chapitres de ce livre contiennent une quantité non négligeable
+de code##. D'après mon expérience, lire et écrire du code est une part
+importante de l'apprentissage de la programmation. Essayez de ne pas seulement
+jeter un œil sur ces exemples mais lisez-les vraiment attentivement et
+comprenez-les. Cela peut être long et déroutant au début, mais vous prendrez
+rapidement le coup. Il en va de même concernant les exercices. N'estimez pas
+les comprendre avant d'avoir effectivement écrit une solution qui fonctionne.
 
-The console contains three important elements. There is the output
-window, which is used to show error messages and things that programs
-print out. Below that, there is a line where you can type in a piece
-of JavaScript. Try typing in a number, and pressing the enter key to
-run what you typed. If the text you typed produced something
-meaningful, it will be shown in the output window. Now try typing
-|wrong!|, and press enter again. The output window will show an error
-message. You can use the arrow-up and arrow-down keys to go back to
-previous commands that you typed.
+## Le « Code » est la substance dont sont composés les
+programmes. Chaque morceau de programme, que ce soit une ligne unique ou
+tout un ensemble, peut être appelé « code ».
 
-For bigger pieces of code, those that span multiple lines and which
-you want to keep around for a while, the field on the right can be
-used. The 'Run' button is used to execute programs written in this
-field. It is possible to have multiple programs open at the same time.
-Use the 'New' button to open a new, empty buffer. When there is more
-than one open buffer, the menu next to the 'Run' button can be used to
-choose which one is being shown. The 'Close' button, as you might
-expect, closes a buffer.
+Le fonctionnement même du Web fait qu'il est toujours possible d'examiner
+les programmes JavaScript que les gens utilisent dans leurs pages
+web. Cela peut être un bon moyen d'apprendre comment certaines choses sont
+réalisées. Étant donné que la plupart des programmeurs web ne sont pas
+des programmeurs « professionnels », ou qu'ils ne considèrent pas
+la programmation JavaScript comme suffisamment intéressante pour en faire
+convenablement l'apprentissage, beaucoup du code que vous pourrez trouver
+ainsi sera de *très* mauvaise qualité. Quand vous apprenez à partir de
+code laid et incorrect, la laideur et la confusion se propagent dans votre
+propre code ; faites donc très attention de qui vous prenez vos leçons.
 
-Example programs in this book always have a small button with an arrow
-in their top-right corner, which can be used to run them. The example
-we saw earlier looked like this:
+---
 
-> var total = 0, count = 1;
-> while (count <= 10) {
->   total += count;
->   count += 1;
+Pour vous permettre d'essayer les programmes, aussi bien les exemples que le
+code que vous écrirez vous-même, ce livre utilise ce que l'on appelle une
+_console_. Si vous utilisez un navigateur graphique moderne (Internet Explorer
+version 6 ou supérieur, Firefox 1.5 ou supérieur, Opera 9 ou supérieur,
+Safari 3 ou supérieur), les pages de ce livre vont afficher une barre en
+bas de votre écran. Vous pouvez ouvrir la console en cliquant sur la petite
+flèche à l'extrémité droite de cette barre.
+
+La console contient trois éléments importants. Il y a une fenêtre de
+sortie, qui est utilisée pour montrer les messages d'erreurs et les choses
+qu'affichent les programmes. Sous celle-ci se trouve une ligne où vous pouvez
+saisir un bout de JavaScript. Essayez de saisir un nombre et appuyez sur la
+touche Entrée pour lancer ce que vous avez tapé. Si le texte que vous avez
+saisi a produit quelque chose de sensé, cela sera affiché dans la fenêtre
+de sortie. Maintenant, essayez de taper |mauvais!|, et appuyez à nouveau
+sur Entrée. La fenêtre de sortie va afficher un message d'erreur. Vous
+pouvez utiliser les touches flèche vers le haut et flèche vers le bas pour
+revenir aux commandes que vous avez saisies précédemment.
+
+Pour les bouts de code plus importants, ceux qui s'étendent sur plusieurs
+lignes et que vous voulez conserver un peu, le champ de droite peut être
+utilisé. Le bouton « Lancer » est utilisé pour exécuter les programmes
+écrits dans ce champ. Il est possible d'avoir plusieurs programmes ouverts en
+même temps. Utilisez les boutons « Nouveau » et « Charger » pour
+ajouter un nouveau programme (vide ou depuis un fichier sur le web). Quand il
+y a plus d'un programme ouvert, le menu après le bouton « Lancer » peut
+être utilisé pour choisir lequel est affiché. Le bouton « Fermer »,
+comme vous pouvez vous en douter, ferme un programme.
+
+Il y a toujours un petit bouton avec une flèche dans le coin supérieur
+droit des programmes d'exemple de ce livre, qui peut être utilisé pour
+les lancer. L'exemple que nous avons vu auparavant ressemblait à ceci :
+
+> var total = 0, compteur = 1;
+> while (compteur <= 10) {
+>   total += compteur;
+>   compteur += 1;
 > }
 > print(total);
 
-Run it by clicking the arrow. There is also another button, which is
-used to load the program into the console. Do not hesitate to modify
-it and try out the result. The worst that could happen is that you
-create an endless loop. An endless loop is what you get when the
-condition of the |while| never becomes false, for example if you
-choose to add |0| instead of |1| to the count variable. Now the
-program will run forever.
+Lancez-le en cliquant sur la flèche. Il y a aussi un autre bouton qui sert
+à charger le programme dans la console. N'hésitez pas à le modifier et
+à essayer le résultat. Le pire qu'il puisse arriver est que vous créiez
+une boucle sans fin. Une boucle infinie est ce que vous obtenez lorsque
+la condition d'un |while| ne devient jamais fausse, par exemple si vous
+choisissez d'ajouter |0| au lieu de |1| à la variable compteur. Alors le
+programme va tourner pour toujours.
 
-Fortunately, browsers keep an eye on the programs running inside them.
-Whenever one of them is taking suspiciously long to finish, they will
-ask you if you want to cut it off.
-
----
-
-In some later chapters, we will build example programs that consist of
-many blocks of code. Often, you have to run every one of them for the
-program to work. As you may have noticed, the arrow in a block of code
-turns purple after the block has been run. When reading a chapter, try
-to run every block of code you come across, especially those that
-'define' something new (you will see what that means in the next
-chapter).
-
-It is, of course, possible that you can not read a chapter in one
-sitting. This means you will have to start halfway when you continue
-reading, but if you don't run all the code starting from the top of
-the chapter, some things might not work. By holding the shift key
-while pressing the 'run' arrow on a block of code, all blocks before
-that one will be run as well, so when you start in the middle of a
-chapter, hold shift the first time you run a piece of code, and
-everything should work as expected.
+Heureusement, les navigateurs gardent un œil sur les programmes qu'ils font
+tourner. Lorsque l'un d'eux prend un délai démesuré pour se terminer,
+ils vous demandent si vous voulez l'interrompre.
 
 ---
 
-Finally, the little face in the top-left corner of your screen can be
-used to send me, the author, a message. If you have a comment, or you
-find a passage ridiculously confusing, or you just spot a spelling
-error, tell me about it. Sending a message can be done without leaving
-the page, so it won't interrupt your reading.
+Dans certains chapitres à venir, nous créerons des programmes d'exemple
+qui seront constitués de multiples blocs de code. Souvent, vous devrez
+lancer chacun d'eux pour faire fonctionner le programme. Comme vous l'avez
+peut-être remarqué, la flèche d'un bloc de code devient violette lorsque
+le bloc a été exécuté. Lorsque vous lisez un chapitre, essayez de
+lancer chaque bloc de code que vous rencontrez, particulièrement ceux qui
+« définissent » quelque chose de nouveau (vous verrez ce que cela
+signifie dans le prochain chapitre).
+
+Il est évidemment possible que vous ne puissiez pas lire un chapitre
+d'une seule traite. Ça veut dire que vous devrez commencer à mi-chemin
+quand vous reprendrez votre lecture, mais si vous ne lancez pas tout le
+code en commençant du haut du chapitre, certaines choses peuvent ne pas
+fonctionner. En maintenant la touche majuscule pendant que vous appuyez sur
+la flèche « Lancer » d'un bloc de code, tous les blocs précédents
+celui-ci seront également exécutés, ainsi lorsque vous commencez au
+milieu d'un chapitre, maintenez la touche majuscule enfoncée la première
+fois que vous faites tourner un morceau de code, et tout devrait fonctionner
+comme prévu.
+
+---
+
+Enfin, le petit visage dans le coin supérieur gauche de votre écran peut
+être utilisé pour m'envoyer, à moi l'auteur, un message##. Si vous avez
+un commentaire, ou que vous trouvez un passage incroyablement confus,
+ou simplement que vous repérez une faute d'orthographe, faites-le moi
+savoir. Il est possible d'envoyer un message sans quitter la page, ainsi
+vous ne serez pas interrompu dans votre lecture.
+
+## NdT: N'oubliez pas que l'auteur est anglophone.
 
 ==============================================================
 Basic JavaScript: values, variables, and control flow / basics
