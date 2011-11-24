@@ -8869,594 +8869,615 @@ les mains des expressions qui auront l'air de formules cabalistiques.
 
 (Bande dessinée de [Randall Munroe | http://xkcd.com].)
 
-=====================================
-Web programming: A crash course / web
-=====================================
+===========================================
+Programmation Web : un cours condensé / web
+===========================================
 
-You are probably reading this in a web browser, so you are likely to
-be at least a little familiar with the World Wide Web. This
-chapter contains a quick, superficial introduction to the various
-elements that make the web work, and the way they relate to
-JavaScript. The three after this one are more practical, and show some
-of the ways JavaScript can be used to inspect and change a web-page.
-
----
-
-The Internet is, basically, just a computer network spanning most of
-the world. Computer networks make it possible for computers to send
-each other messages. The techniques that underlie networking are an
-interesting subject, but not the subject of this book. All you have to
-know is that, typically, one computer, which we will call the
-_server_, is waiting for other computers to start talking to it. Once
-another computer, the _client_, opens communications with this server,
-they will exchange whatever it is that needs to be exchanged using
-some specific language, a _protocol_.
-
-The Internet is used to carry messages for *many* different protocols.
-There are protocols for chatting, protocols for file sharing,
-protocols used by malicious software to control the computer of the
-poor schmuck who installed it, and so on. The protocol that is of
-interest to us is that used by the World Wide Web. It is called
-_HTTP_, which stands for Hyper Text Transfer Protocol, and is used to
-retrieve web-pages and the files associated with them.
-
-In HTTP communication, the server is the computer on which the
-web-page is stored. The client is the computer, such as yours, which
-asks the server for a page, so that it can display it. Asking for a
-page like this is called an '_HTTP request_'.
+Vous lisez probablement ceci dans un navigateur web, donc vous êtes
+susceptible d'être au moins un peu familier avec le World Wild Web. Ce
+chapitre contient une rapide et superficielle introduction aux différents
+éléments qui font fonctionner la toile, et la manière dont ils sont
+liés au JavaScript. Les trois suivants sont plus pratiques et présentent
+certaines des manières avec lesquelles JavaScript peut-être utilisé pour
+inspecter et changer une page web.
 
 ---
 
-Web-pages and other files that are accessible though the Internet are
-identified by _URL_s, which is an abbreviation of Universal Resource
-Locators. A URL looks like this:
+L'Internet est fondamentalement un simple réseau d'ordinateurs couvrant
+l'essentiel du monde. Les réseaux d'ordinateurs permettent aux ordinateurs
+de s'envoyer des messages les uns aux autres. Les techniques qui sont à la
+base de la mise en réseau sont un sujet intéressant mais pas le propos
+de ce livre. Tout ce que vous avez à savoir est que, généralement, un
+ordinateur, que nous appellerons _serveur_, attend que d'autres ordinateurs
+se mettent à lui parler. Une fois qu'un autre ordinateur, le _client_,
+ouvre une communication avec ce serveur, ils vont échanger ce qui a besoin
+d'être échangé en utilisant un langage spécifique, un _protocole_.
+
+L'Internet est utilisé pour transporter des messages pour *nombre* de
+différents protocoles. Il y a des protocoles pour chatter, des protocoles pour
+l'échange de fichiers, des protocoles utilisés par des logiciels malicieux
+afin de contrôler l'ordinateur du pauvre schnock qui l'a installé et ainsi
+de suite. Le protocole qui nous intéresse est celui qu'on utilise pour le
+World Wide Web. Il s'appelle _HTTP_, ce qui signifie Hyper Text Transfer
+Protocol (Protocole de Transfert Hyper Texte) et il sert à retrouver des
+pages web et les fichiers qui leur sont associés.
+
+En communication HTTP, le serveur est l'ordinateur sur lequel la page web
+est conservée. Le client est un ordinateur, comme le vôtre, qui demande
+une page au serveur, afin de pouvoir l'afficher. Demander une page ainsi
+s'appelle une « _requête HTTP_ ».
+
+---
+
+Les pages web et autres fichiers qui sont accessibles à travers l'Internet
+sont identifiés par des « _URL_ », ce qui est une abréviation pour
+Universal Resource Locators (Localisateurs de Ressource Universel). Une URL
+ressemble à ceci:
 
 ] http://acc6.its.brooklyn.cuny.edu/~phalsall/texts/taote-v3.html
 
-It is composed of three parts. The start, |http://|, indicates that
-this URL uses the HTTP protocol. There are some other protocols, such
-as FTP (File Transfer Protocol), which also make use of URLs. The next
-part, |acc6.its.brooklyn.cuny.edu|, names the server on which this
-page can be found. The end of the URL,
-|/~phalsal/texts/taote-v3.html|, names a specific file on this server.
+Elle est composée de trois parties. Le début, |http://|, indique que cette
+URL utilise le protocole HTTP. Il y a d'autres protocoles, comme le FTP
+(File Transfer Protocol ou Protocole de Transfert de Fichiers), qui utilisent
+eux aussi des URL. La partie suivante, |acc6.its.brooklyn.cuny.edu|, nomme
+le serveur sur lequel cette page peut-être trouvée. La fin de l'URL,
+|/~phalsal/texts/taote-v3.html|, nomme le fichier spécifique sur ce serveur.
 
-Most of the time, the World Wide Web is accessed using a browser.
-After typing a URL or clicking a link, the browser makes the
-appropriate HTTP request to the appropriate server. If all goes well,
-the server responds by sending a file back to the browser, who shows
-it to the user in one way or another.
+La plupart du temps, le World Wide Web est accessible grâce à un
+navigateur. Après avoir tapé une URL ou cliqué un lien, le navigateur fait
+la requête HTTP appropriée au serveur adéquat. Si tout se passe bien,
+le serveur répond en renvoyant un ficher au navigateur, qui le montre à
+l'utilisateur d'une façon ou d'une autre.
 
-When, as in the example, the retrieved file is an _HTML_ document, it
-will be displayed as a web-page. We briefly discussed HTML in \\cfp,
-where we saw that it could refer to image files. In \\cmodularity, we
-found that HTML pages can also contain |<script>| tags to load files
-of JavaScript code. When showing an HTML document, a browser will
-fetch all these extra files from their servers, so it can add them to
-the document.
-
----
-
-Although a URL is supposed to point at a file, it is possible for a
-web-server to do something more complicated than just looking up a
-file and sending it to the client. -- It can process this file in some
-way first, or maybe there is no file at all, but only a program that,
-given an URL, has some way of generating the relevant document for it.
-
-Programs that transform or generate documents on a server are a
-popular way to make web-pages less static. When a file is just a file,
-it is always the same, but when there is a program that builds it
-every time it is requested, it could be made to look different for
-each person, based on things like whether this person has logged in or
-specified certain preferences. This can also make managing the content
-of web-pages much easier -- instead of adding a new HTML file whenever
-something new is put on a website, a new document is added to some
-central storage, and the program knows where to find it and how to
-show it to clients.
-
-This kind of web programming is called _server-side programming_. It
-affects the document before it is sent to the user. In some cases, it
-is also practical to have a program that runs *after* the page has
-been sent, when the user is looking at it. This is called _client-side
-programming_, because the program runs on the client computer.
-Client-side web programming is what JavaScript was invented for.
+Quand, comme dans l'exemple, le fichier retrouvé est un document _HTML_, il
+sera affiché comme une page web. Nous avons brièvement discuté d'HTML dans
+le \\cfp, où nous avons vu qu'il pouvait référencer des fichiers image. Dans
+le \\cmodularity, nous avons trouvé que les pages HTML peuvent contenir
+la balise |<script>| pour charger des fichiers de code JavaScript. Quand
+un document HTML s'affiche, un navigateur récupére tous ces fichiers
+supplémentaires depuis leur serveur, de manière à les ajouter au document.
 
 ---
 
-Running programs client-side has an inherent problem. You can never
-really know in advance what kinds of programs the page you are
-visiting is going to run. If it can send information from your
-computer to others, damage something, or infiltrate your system,
-surfing the web would be a rather hazardous activity.
+Bien qu'une URL soit supposée pointer sur un fichier, il est possible
+qu'un serveur web fasse quelque chose de plus compliqué que simplement
+rechercher un ficher et l'envoyer au client. -- Il peut traiter ce fichier
+d'une certaine manière en premier, ou peut-être n'y a-t-il pas du tout
+de fichier, mais seulement un programme qui, quand on lui donne une URL,
+a une façon de générer le document pertinent pour elle.
 
-To solve this dilemma, browsers severely limit the things a JavaScript
-program may do. It is not allowed to look at your files, or to modify
-anything not related to the web-page it came with. Isolating a
-programming environment like this is called _sand-boxing_. Allowing
-the programs enough room to be useful, and at the same time
-restricting them enough to prevent them from doing harm is not an easy
-thing to do. Every few months, some JavaScript programmer comes up
-with a new way to circumvent the limitations and do something harmful
-or privacy-invading. The people responsible for the browsers respond
-by modifying their programs to make this trick impossible, and all is
-well again -- until the next problem is discovered.
+Des programmes qui transforment ou génèrent des documents sur un serveur
+sont une façon populaire de rendre les pages web moins statiques. Quand
+un fichier est juste un fichier, il est toujours le même, mais quand il
+y a un programme pour le fabriquer chaque fois qu'il est demandé, il peut
+être fait pour sembler différent à chaque utilisateur, en fonction de son
+identification et de sss préférences. Cela peut aussi rendre la gestion de
+contenu sur les pages web bien plus simple -- au lieu d'ajouter un nouveau
+fichier HTML chaque fois que quelque chose de nouveau est placé sur un
+site web, un nouveau document est stocké dans un entrepôt central et le
+programme sait où le trouver et comment le montrer aux clients.
+
+Ce type de programmation web s'appelle _programmation côté serveur_. Cela
+affecte le document avant qu'il ne soit envoyé à l'utilisateur. Dans certains
+cas, il est pratique d'avoir un programme qui tourne *après* que la page a
+été envoyée, quand l'utilisateur la regarde. Ceci s'appelle _programmation
+côté client_, car le programme tourne sur l'ordinateur du client. La
+programmation web côté client est ce pour quoi JavaScript a été inventé.
 
 ---
 
-One of the first JavaScript tricks that became widely used is the
-@_|window.open|__|open|_ method of the |window| object. It takes a URL
-as an argument, and will open a new window showing that URL.
+Faire tourner des programmes côté client comporte un problème
+implicite. Vous ne pouvez jamais vraiment savoir à l'avance quels genres
+de programmes la page que vous visitez va faire fonctionner. Si elle peut
+envoyer des informations de votre ordinateur vers d'autres, endommager
+quelque chose ou infiltrer votre système, surfer sur la toile pourrait
+être une activité bien hasardeuse.
+
+Pour résoudre ce dilemme, les navigateurs limitent sévèrement les choses
+qu'un programme JavaScript peut faire. Il n'est pas permis de consulter
+vos fichiers ou de modifier quoi que ce soit d'étranger à la page web
+dont il provient. Isoler un environnement de programmation comme cela,
+se nomme _sand-boxing_ (jouer dans le bac à sable). Offrir aux programmes
+suffisamment de place pour être utiles et en même temps les restreindre
+suffisamment pour les empêcher de faire du mal, n'est pas une chose simple
+à faire. Tous les quelques mois, un programmeur JavaScript découvre une
+nouvelle façon de contourner les limitations, de faire quelque chose de
+mal ou de transgresser les barrières qui entourent la vie privée. Les
+responsables des navigateurs répondent en modifiant leurs programmes pour
+rendre cette astuce impossible et tout va bien à nouveau -- jusqu'à ce
+que le prochain problème soit découvert.
+
+---
+
+Une des premières astuces de JavaScript qui devint largement utilisée est
+la méthode @_|window.open|__|open|_ de l'objet |window|. Elle prend une
+URL comme argument et ouvrira une nouvelle fenêtre affichant cette URL.
 
 > var perry = window.open("http://www.pbfcomics.com");
 
-Unless you turned off pop-up blocking in \\cfp, there's a chance that
-this new window is blocked. There is a good reason pop-up blockers
-exist. Web-programmers, especially those trying to get people to pay
-attention to advertisements, have abused the poor |window.open| method
-so much that by now, most users hate it with a passion. It has its
-place though, and in this book we will be using it to show some
-example pages. As a general rule, your scripts should not open any new
-windows unless the user asked for them.
+A moins que vous n'ayez désactivé le bloqueur de pop-up dans le \\cfp,
+il y a une chance que cette nouvelle fenêtre soit bloquée. Il y a une
+bonne raison pour que les bloqueurs de pop-up existent. Les programmeurs
+web, particulièrement ceux qui essayent d'attirer l'attention des gens sur
+les publicités, ont tellement abusé de cette pauvre méthode |window.open|
+qu'à présent, la plupart des utilisateurs la détestent avec passion. Elle
+a son utilité pourtant et dans ce livre nous l'utiliserons pour afficher
+certains exemples de page. D'une manière générale, vos scripts ne devraient
+pas ouvrir de nouvelle fenêtre sauf quand l'utilisateur le demande.
 
-Note that, because |open| (just like |setTimeout| and company) is a
-method on the |window| object, the |window.| part can be left off.
-When a function is called 'normally', it is called as a method on the
-top-level object, which is what |window| is. Personally, I think
-|open| sounds a bit generic, so I'll usually type |window.open|, which
-makes it clear that it is a window that is being opened.
+Notez que, cp |open| (tout comme |setTimeout| et compagnie) est une méthode de
+l'objet |window|, la partie |window.| peut être enlevée. Quand une fonction
+est appelée « normalement », elle est appelée comme une méthode sur
+l'objet de plus haut niveau, ce qu'est |window|. Personnellement, je pense que
+|open| semble un peu générique, donc généralement je tape |window.open|,
+qui indique clairement que c'est une fenêtre qui est en cours d'ouverture.
 
-The value returned by |window.open| is a new window. This is the
-global object for the script running in that window, and contains all
-the standard things like the |Object| constructor and the |Math|
-object. But if you try to look at them, most browsers will (probably)
-not let you...
+La valeur retournée par |window.open| est une nouvelle fenêtre. C'est l'objet
+global pour le script tournant dans cette fenêtre, et il contient toutes les
+choses standards comme le constructeur |Object| et l'objet |Math|. Mais si vous
+essayez d'y jeter un oeil, la plupart des navigateurs ne vont (probablement)
+pas vous laisser faire...
 
 !> show(perry.Math);
 
-This is part of the sand-boxing that I mentioned earlier. Pages opened
-by your browser might show information that is meant only for you, for
-example on sites where you logged in, and thus it would be bad if any
-random script could go and read them. The exception to this rule is
-pages opened on the same domain: When a script running on a page from
-|eloquentjavascript.net| opens another page on that same domain, it
-can do everything it wants to this page.
+C'est la partie du sand-boxing que j'ai mentionnée plus tôt. Les pages
+ouvertes par votre navigateur peuvent afficher des informations qui vous
+sont seulement destinées, par exemple sur des sites où vous vous êtes
+identifiés, et il serait donc mauvais que n'importe quel script au hasard
+puisse y aller et les lire. L'exception à cette règle, ce sont les pages
+ouvertes pour le même domaine : quand un script tournant sur une page de
+|eloquentjavascript.net| ouvre une autre page de ce même domaine, il peut
+faire tout ce qu'il veut sur cette page.
 
-An opened window can be closed with its @_|window.close|__|close|_
-method. If you didn't already close it yourself...
+Une fenêtre ouverte peut être fermée avec sa méthode
+@_|window.close|__|close|_. Si vous ne l'avez pas déjà fermée vous même...
 
 > perry.close();
 
-Other kinds of sub-documents, such as frames
-(documents-within-a-document), are also windows from the perspective
-of a JavaScript program, and have their own JavaScript environment. In
-fact, the environment that you have access to in the console belongs
-to a small invisible frame hidden somewhere on this page -- this way,
-it is slightly harder for you to accidentally mess up the whole page.
+D'autres types de sous-documents, comme les frames (documents dans un
+document) sont aussi des fenêtres du point de vue d'un programme JavaScript
+et ont leur propre environnement JavaScript. En fait, l'environnement auquel
+vous avez accédé dans la console appartient à une petite frame invisible
+quelque part dans cette page -- de cette manière, il est un petit peu plus
+difficile pour vous d'accidentellement mettre la pagaille dans toute la page.
 
 ---
 
-Every window object has a _|document|_ property, which contains an
-object representing the document shown in that window. This object
-contains, for example, a property @_|document.location|_|location|,
-with information about the URL of the document.
+Chaque objet fenêtre a une propriété _|document|_, qui contient un objet
+représentant le document affiché dans la fenêtre. Cet objet contient,
+par exemple, une propriété @_|document.location|_|location|, avec des
+informations sur l'URL du document.
 
 > show(document.location.href);
 
-Setting |document.location.href| to a new URL can be used to make the
-browser load another document. Another application of the |document|
-object is its @_|document.write|_|write| method. This method, when
-given a string argument, writes some HTML to the document. When it is
-used on a fully loaded document, it will replace the whole document by
-the given HTML, which is usually not what you want. The idea is to
-have a script call it while the document is being loaded, in which
-case the written HTML will be inserted into the document at the place
-of the |script| tag that triggered it. This is a simple way to add
-some dynamic elements to a page. For example, here is a trivially
-simple document showing the current time.
+Mettre |document.location.href| à une nouvelle URL peut être utilisé pour
+demander au navigateur de charger  un autre document. Une autre application de
+l'objet |document| est sa méthode @_|document.write|_|write|. Cette méthode,
+quand on lui donne un argument texte, écrit du HTML dans le document. Quand
+c'est utilisé dans un document totalement chargé, cela remplacera le
+document complet par le HTML donné, ce qui n'est généralement pas ce que
+vous voulez. L'idée est d'avoir un script l'appelant pendant que le document
+est en cours de chargement, dans ce cas le HTML écrit sera inséré dans
+le document à l'endroit où la balise |script| l'a déclenché. C'est une
+manière simple d'ajouter des éléments dynamiques à une page. Par exemple,
+voici un document carrément simple affichant l'heure courante.
 
-> print(timeWriter);
-> var time = viewHTML(timeWriter);
+> print(horlogeParlante);
+> var temps = viewHTML(horlogeParlante);
 
-> time.close();
+> temps.close();
 
-Often, the techniques shown in \\cdom provide a cleaner and more
-versatile way to modify the document, but occasionally,
-|document.write| is the nicest, simplest way to do something.
-
----
-
-Another popular application of JavaScript in web pages centers around
-_form_s. In case you are not quite sure what the role of 'forms' is,
-let me give a quick summary.
-
-A basic HTTP request is a simple request for a file. When this file is
-not really a passive file, but a server-side program, it can become
-useful to include information other than a filename in the request.
-For this purpose, HTTP requests are allowed to contain additional
-'parameters'. Here is an example:
-
-] http://www.google.com/search?q=aztec%20empire
-
-After the filename (|/search|), the URL continues with a question
-mark, after which the parameters follow. This request has one
-parameter, called |q| (for 'query', presumably), whose value is |aztec
-empire|. The |%20| part corresponds to a space. There are a number of
-characters that can not occur in these values, such as spaces,
-ampersands, or question marks. These are 'escaped' by replacing them
-with a |%| followed by their numerical value##, which serves the same
-purpose as the backslashes used in strings and regular expressions,
-but is even more unreadable.
-
-## The value a character gets is decided by the ASCII standard, which
-assigns the numbers 0 to 127 to a set of letters and symbols used by
-the Latin alphabet. This standard is a precursor of the Unicode
-standard mentioned in \\cbasics.
-
-JavaScript provides functions _|encodeURIComponent|_ and
-_|decodeURIComponent|_ to add these codes to strings and remove them
-again.
-
-> var encoded = encodeURIComponent("aztec empire");
-> show(encoded);
-> show(decodeURIComponent(encoded));
-
-When a request contains more than one parameter, they are separated by
-ampersands, as in...
-
-] http://www.google.com/search?q=aztec%20empire&lang=nl
+Souvent, la technique affichée dans le \\cdom fournit une manière plus
+propre et plus souple de modifier un document, mais occasionnellement,
+|document.write| est la manière la plus belle et la plus simple de le faire.
 
 ---
 
-A form, basically, is a way to make it easy for browser-users to
-create such parameterised URLs. It contains a number of fields, such
-as input boxes for text, checkboxes that can be 'checked' and
-'unchecked', or thingies that allow you to choose from a given set of
-values. It also usually contains a 'submit' button and, invisible to
-the user, an 'action' URL to which it should be sent. When the submit
-button is clicked, or enter is pressed, the information that was
-entered in the fields is added to this action URL as parameters, and
-the browser will request this URL.
+Une autre application populaire du JavaScript dans les pages web tourne
+autour des _form_. Dans les cas où vous ne seriez pas tout à fait sûr du
+rôle des « formulaires », laissez moi vous présenter un rapide résumé.
 
-Here is the HTML for a simple form:
+Une requête HTTP élémentaire est une simple requête pour un fichier. Quand
+ce fichier n'est pas vraiment un fichier passif, mais un programme côté
+serveur, il peut devenir utile d'inclure des informations autres qu'un nom
+de fichier dans la requête. Pour cela, les requêtes HTTP sont autorisées
+à contenir des « paramètres » additionnels. Voici un exemple:
 
-] <form name="userinfo" method="get" action="info.html">
-]   <p>Please give us your information, so that we can send
-]   you spam.</p>
-]   <p>Name: <input type="text" name="name"/></p>
+] http://www.google.com/search?q=empire%20aztec
+
+Après le fichier (|/search|), l'URL continue avec un point d'interrogation,
+suivi de paramètres. Cette requête a un paramètre, nommé |q| (pour
+'query'/requête on présume), dont la valeur est |empire aztec|. La partie
+|%20| correspond à un espace. Il y a nombre de caractères qui peuvent
+apparaître dans ces valeurs, comme les espaces, les esperluettes ou les
+points d'interrogation. Ceux-ci sont remplacés par un |%| suivi par une
+valeur numérique ##, ce qui a la même fonction que les antislash utilisés
+dans les textes et expressions régulières, mais est encore plus illisible.
+
+## La valeur qu'un caractère prend est décidée par le standard ASCII,
+qui assigne les nombres 0 à 127 à un ensemble de lettres et symboles
+utilisés par l'alphabet Latin. Ce standard est un précurseur du standard
+Unicode mentionné dans le \\cbasics.
+
+JavaScript fournit les fonctions _|encodeURIComponent|_ et
+_|decodeURIComponent|_ pour ajouter ces codes aux textes et également
+les enlever.
+
+> var encodé = encodeURIComponent("empire aztec");
+> show(encodé);
+> show(decodeURIComponent(encodé));
+
+Quand une requête contient plus d'un paramètre, ils sont séparés par
+une esperluette, comme dans...
+
+] http://www.google.com/search?q=empire%20aztec&lang=fr
+
+---
+
+Un formulaire, essentiellement, est une manière de rendre facile aux
+utilisateurs des navigateurs la création de ces URL paramétrées. Il
+contient un nombre de champs, comme des boîtes d'entrée de texte, des
+cases à cocher qui peuvent être « cochées » et « décochées » ou des
+bidules permettant de choisir parmi un ensemble de valeurs. Il contient en
+général aussi un bouton de « soumission » et, invisible à l'utilisateur,
+une URL « action » à laquelle il sera envoyé. Quand on clique sur le bouton
+« soumettre » ou qu'on appuie sur la touche Entrée, les informations
+qui ont été saisies dans les champs sont ajoutées comme paramètres à
+cette URL action, et le navigateur va demander cette URL.
+
+Voici le HTML pour un formulaire simple :
+
+] <form name="info_utilisateur" method="get" action="info.html">
+]   <p>S'il vous plaît donnez-nous vos informations, afin que nous puissions vous envoyer du spam.</p>
+]   <p>Nom: <input type="text" name="nom"/></p>
 ]   <p>E-Mail: <input type="text" name="email"/></p>
-]   <p>Sex: <select name="sex">
-]             <option>Male</option>
-]             <option>Female</option>
-]             <option>Other</option>
+]   <p>Sexe: <select name="sexe">
+]             <option>Homme</option>
+]             <option>Femme</option>
+]             <option>Autre</option>
 ]           </select></p>
-]   <p><input name="send" type="submit" value="Send!"/></p>
+]   <p><input name="envoyer" type="submit" value="Envoyer !"/></p>
 ] </form>
 
-The name of the form can be used to access it with JavaScript, as we
-shall see in a moment. The names of the fields determine the names of
-the HTTP parameters that are used to store their values. Sending this
-form might produce a URL like this:
+Le nom du formulaire peut être utilisé pour y accéder avec JavaScript,
+comme nous allons le voir dans un moment. Les noms des champs déterminent
+les noms des paramètres HTTP qui sont utilisés afin de stocker leurs
+valeurs. Envoyer ce formulaire peut produire une URL comme ceci:
 
-] http://planetspam.com/info.html?name=Ted&email=ted@zork.com&sex=Male
+] http://planetspam.com/info.html?nom=Ted&email=ted@zork.com&sexe=Homme
 
-There are quite a few other tags and properties that can be used in
-forms, but in this book we will stick with simple ones, so that we can
-concentrate on JavaScript.
-
----
-
-The |method="get"| property of the example form shown above indicates
-that this form should encode the values it is given as URL parameters,
-as shown before. There is an alternative method for sending
-parameters, which is called |post|. An HTTP request using the |post|
-method contains, in addition to a URL, a block of data. A form using
-the |post| method puts the values of its parameters in this data block
-instead of in the URL.
-
-When sending big chunks of data, the |get| method will result in URLs
-that are a mile wide, so |post| is usually more convenient. But the
-difference between the two methods is not just a question of
-convenience. Traditionally, |get| requests are used for requests that
-just ask the server for some document, while |post| requests are used
-to take an action that changes something on the server. For example,
-getting a list of recent messages on an Internet forum would be a
-|get| request, while adding a new message would be a |post| request.
-There is a good reason why most pages follow this distinction --
-programs that automatically explore the web, such as those used by
-search engines, will generally only make |get| requests. If changes to
-a site can be made by |get| requests, these well-meaning 'crawlers'
-could do all kinds of damage.
+Il y a nombre d'autres tags et propriétés qui peuvent être utilisés dans
+les formulaires mais dans ce livre nous nous en tiendrons aux plus simples,
+afin de nous concentrer sur JavaScript.
 
 ---
 
-When the browser is displaying a page containing a form, JavaScript
-programs can inspect and modify the values that are entered in the
-form's fields. This opens up possibilities for all kinds of tricks,
-such as checking values before they are sent to the server, or
-automatically filling in certain fields.
+La propriété |method="get"| du formulaire d'exemple ci-dessus indique que
+ce formulaire doit encoder les valeurs qu'on lui donne en tant que paramètres
+d'URL, comme montré avant. Il existe une méthode alternative pour envoyer les
+paramètres, qui s'appelle |post|. Une requête HTTP utilisant la méthode
+|post| contient, en plus d'une URL, un bloc de données. Un formulaire
+utilisant la méthode |post| met les valeurs de ses paramètres dans ce bloc
+de données plutôt que dans l'URL.
 
-The form shown above can be found in the file |example_getinfo.html|.
-Open it.
-
-> var form = window.open("example_getinfo.html");
-
-When a URL does not contain a server name, is called a _relative URL_.
-Relative URLs are interpreted by the browser to refer to files on the
-same server as the current document. Unless they start with a slash,
-the path (or directory) of the current document is also retained, and
-the given path is appended to it.
-
-We will be adding a validity check to the form, so that it only
-submits if the name field is not left empty and the e-mail field
-contains something that looks like a valid e-mail address. Because we
-no longer want the form to submit immediately when the 'Send!' button
-is pressed, its |type| property has been changed from |"submit"| to
-|"button"|, which turns it into a regular button with no effect. --
-\\Cevent will show a *much* better way of doing this, but for now, we
-use the naive method.
+Quand on envoie de grandes quantités de données, la méthode |get| va
+générer des URL d'un kilomètre de long, donc |post| est généralement
+plus pratique. Mais la différence entre les deux méthodes n'est pas juste
+une question de convenance. Traditionnellement, les requêtes |get| sont
+utilisées pour demander un document au serveur, alors que les requêtes
+|post| sont utilisées pour déclencher une action qui change quelque
+chose sur le serveur. Par exemple, obtenir une liste des messages récents
+d'un forum Internet serait une requête |get|, alors qu'ajouter un nouveau
+message serait une requête |post|. Il y a une bonne raison pour laquelle la
+plupart des pages suivent cette distinction -- les programmes qui explorent
+automatiquement le web, comme ceux utilisés par les moteurs de recherche,
+vont généralement seulement faire des requêtes |get|. Si des changements sur
+un site peuvent être faits par une requête |get|, ces robots d'exploration
+bien intentionnés pourraient faire pas mal de dégâts.
 
 ---
 
-@_|attach|_To be able to work with the newly opened window (if you
-closed it, re-open it first), we 'attach' the console to it, like
-this:
+Quand le navigateur affiche une page contenant un formulaire, les programmes
+JavaScript peuvent inspecter et modifier les valeurs qui sont entrées dans
+les champs du formulaire. Cela ouvre des possibilités pour toutes sortes
+d'astuces, comme vérifier les valeurs avant qu'elles ne soient envoyées
+au serveur ou remplir automatiquement certains champs.
 
-> attach(form);
+Le formulaire affiché ci-dessus peut être trouvé dans le fichier
+|example_getinfo.html|.
+Ouvrez-le.
 
-After doing this, the code run from the console will be run in the
-given window. To verify that we are indeed working with the correct
-window, we can look at the document's |location| and |title|
-properties.
+> var formulaire = window.open("example_getinfo.html");
+
+Quand une URL ne contient pas un nom de serveur, elle est appelée _URL
+relative_. Les URL relatives sont interprétées par le navigateur pour
+référencer des fichiers sur le même serveur que le document en cours. A
+moins qu'il ne commence avec un slash, le chemin (ou répertoire) du document
+en cours est aussi conservé et le chemin donné lui est ajouté.
+
+Nous ajouterons une vérification de validité au formulaire, afin qu'il
+soumette seulement si le champ nom n'est pas laissé vide et si le champ e-mail
+contient quelque chose qui ressemble à une addresse e-mail valide. Parce
+que nous ne voulons plus que le formulaire soit soumis immédiatement quand
+le bouton « Envoyer ! » est cliqué. Sa propriété |type| a été
+changée de |"submit"| à |"button"|, ce qui le change en un bouton ordinaire
+sans aucun effet. -- Le \\cevent montrera une *bien* meilleure manière de
+faire ceci, mais pour l'instant, nous utilisons la méthode naïve.
+
+---
+
+@_|attach|_Afin de travailler avec la fenêtre nouvellement ouverte (si vous
+l'avez fermée, rouvrez-la d'abord), nous lui « attachons » la console,
+comme ceci:
+
+> attach(formulaire);
+
+Après avoir fait ceci, le code lancé de la console tournera dans la fenêtre
+donnée. Pour vérifier que nous fonctionnons effectivement avec la bonne
+fenêtre, nous pouvons regarder les propriétés |location| et |title|
+du document.
 
 > print(document.location.href);
 > print(document.title);
 
-Because we have entered a new environment, previously defined
-variables, such as |form|, are no longer present.
+Étant donné que nous avons entré un nouvel environnement, les variables
+précédemment définies, comme |formulaire|, ne sont plus présentes.
 
-!> show(form);
+!> show(formulaire);
 
-@_|detach|_To get back to our starting environment, we can use the
-|detach| function (without arguments). But first, we have to add that
-validation system to the form.
+@_|detach|_Pour revenir à notre environnement de départ, nous pouvons
+utiliser la fonction |detach| (sans argument). Mais d'abord, nous avons à
+ajouter le système de validation au formulaire.
 
 ---
 
-Every HTML tag shown in a document has a JavaScript object associated
-with it. These objects can be used to inspect and manipulate almost
-every aspect of the document. In this chapter, we will work with the
-objects for forms and form fields, \\cdom talks about these objects in
-more detail.
+Toute balise HTML affichée dans un document a un objet JavaScript
+associé. Ces objets peuvent être utilisés pour inspecter et manipuler
+presque tout aspect du document. Dans ce chapitre, nous allons travailler
+avec les objets pour formulaires et champs de formulaire. Le \\cdom traite
+de façon plus détaillée de ces objets.
 
-@_|document.forms|_The |document| object has a property named |forms|,
-which contains links to all the forms in the document, by name. Our
-form has a property |name="userinfo"|, so it can be found under the
-property |userinfo|.
+@_|document.forms|_L'objet |document| a une propriété nommée |forms|,
+qui contient des liens vers tous les formulaires du document, par nom. Notre
+formulaire a une propriété |name="info_utilisateur"|, afin d'être trouvable
+sous la propriété |info_utilisateur|.
 
-> var userForm = document.forms.userinfo;
-> print(userForm.method);
-> print(userForm.action);
+> var formulaireUtilisateur = document.forms.info_utilisateur;
+> print(formulaireUtilisateur.method);
+> print(formulaireUtilisateur.action);
 
-In this case, the properties |method| and |action| that were given to
-the HTML |form| tag are also present as properties of the JavaScript
-object. This is often the case, but not always: Some HTML properties
-are spelled differently in JavaScript, others are not present at all.
-\\Cdom will show a way to get at all properties.
+Dans ce cas, les propriétés |method| et |action| qui ont été données
+à la balise HTML |form| sont aussi présentes comme propriétés de l'objet
+JavaScript. C'est souvent le cas, mais pas toujours: Certaines propriétés
+HTML sont orthographiées différemment en JavaScript, d'autres ne sont
+pas présentes du tout. Le \\cdom exposera un moyen d'obtenir toutes les
+propriétés.
 
-The object for the |form| tag has a property |elements|, which refers
-to an object containing the fields of the form, by name.
+L'objet de la balise |form| a une propriété |elements|, qui se réfère
+a un objet contenant les champs du formulaire, par nom.
 
-> var nameField = userForm.elements.name;
-> nameField.value = "Eugène";
+> var champsNom = formulaireUtilisateur.elements.nom;
+> champsNom.value = "Eugène";
 
-Text-input objects have a |value| property, which can be used to read
-and change their content. If you look at the form window after running
-the above code, you'll see that the name has been filled in.
+Les objets d'entrée texte ont une propriété |value|, qui peut être
+utilisée pour lire et changer leur contenu. Si vous regardez la fenêtre
+du formulaire après le fonctionnement du code ci-dessus, vous verrez que
+le nom a été rempli.
 
 ***
 
-Being able to read the values of the form fields makes it possible to
-write a function |validInfo|, which takes a form object as its
-argument and returns a boolean value: |true| when the |name| field is
-not empty and the |email| field contains something that looks like an
-e-mail address, |false| otherwise. Write this function.
+Être capable de lire les valeurs des champs du formulaire rend possible
+l'écriture d'une fonction |valideInfo|, qui prend un objet formulaire comme
+argument et retourne une valeur booléenne: |true| quand le champ |nom|
+n'est pas vide et le champ |email| contient quelque chose qui ressemble à
+une adresse email, sinon |false|. Ecrivez cette fonction.
 
 ///
 
-> function validInfo(form) {
->   return form.elements.name.value != "" &&
->     /^.+@.+\.\w{2,3}$/.test(form.elements.email.value);
+> function valideInfo(formulaire) {
+>   return formulaire.elements.nom.value != "" &&
+>     /^.+@.+\.\w{2,3}$/.test(formulaire.elements.email.value);
 > }
 >
-> show(validInfo(document.forms.userinfo));
+> show(valideInfo(document.forms.info_utilisateur));
 
-You did think to use a regular expression for the e-mail check, didn't
-you?
+Vous avez bien pensé à utiliser une expression régulière pour la
+vérification de l'e-mail, n'est-ce pas ?
 
 ---
 
-All we have to do now is determine what happens when people click the
-'Send!' button. At the moment, it does not do anything at all. This
-can be remedied by setting its |onclick| property.
+Tout ce que nous avons à faire maintenant est de déterminer ce qui arrive
+quand les gens cliquent sur le bouton « Envoyer ! ». Pour l'instant,
+il ne se passe rien du tout. Cela sera corrigé en réglant sa propriété
+|onclick|.
 
-> userForm.elements.send.onclick = function() {
->   alert("Click.");
+> formulaireUtilisateur.elements.envoyer.onclick = function() {
+>   alert("Clique.");
 > };
 
-Just like the actions given to |setInterval| and |setTimeout| (\\coo),
-the value stored in an _|onclick|_ (or similar) property can be either
-a function or a string of JavaScript code. In this case, we give it a
-function that opens an alert window. Try clicking it.
+Tout comme les actions données à |setInterval| et |setTimeout| (\\coo),
+la valeur stockée dans une propriété _|onclick|_ (ou similaire) peut
+être soit une fonction soit une chaîne de code JavaScript. Dans ce cas,
+nous lui donnons une fonction qui ouvre une fenêtre d'alerte. Essayez de
+la sélectionner.
 
 ***
 
-Finish the form validator by giving the button's |onclick| property a
-new value -- a function that checks the form, submits when it is
-valid, or pops up a warning message when it is not. It will be useful
-to know that form objects have a _|submit|_ method that takes no
-parameters and submits the form.
+Finissez le validateur de formulaire en donnant à la propriété |onclick|
+du bouton une nouvelle valeur -- une fonction qui vérifie le formulaire,
+le soumet quand il est valide, ou génère un message d'avertissement quand
+il ne l'est pas. Il est utile de savoir que les objets formulaires ont une
+méthode _|submit|_ qui ne prend aucun paramètre et soumet le formulaire.
 
 ///
 
-> userForm.elements.send.onclick = function() {
->   if (validInfo(userForm))
->     userForm.submit();
+> formulaireUtilisateur.elements.envoyer.onclick = function() {
+>   if (valideInfo(formulaireUtilisateur))
+>     formulaireUtilisateur.submit();
 >   else
->     alert("Give us a name and a valid e-mail address!");
+>     alert("Donnez-nous un nom et une adresse e-mail valides !");
 > };
 
 ---
 
-Another trick related to form inputs, as well as other things that can
-be 'selected', such as buttons and links, is the _|focus|_ method.
-When you know for sure that a user will want to start typing in a
-certain text field as soon as he enters the page, you can have your
-script start by placing the cursor in it, so he won't have to click it
-or select it in some other way.
+Une autre astuce liée aux entrées de formulaire, ainsi que d'autres choses
+qui peuvent être « sélectionnées », comme les boutons ou liens,
+est la méthode _|focus|_. Quand vous savez avec certitude qu'un utilisateur
+voudra saisir dans un certain champ dès qu'il entre dans la page, vous
+pouvez faire en sorte que votre script y place le curseur, afin qu'il n'ait
+pas à cliquer pour le sélectionner d'une quelconque manière.
 
-> userForm.elements.name.focus();
+> formulaireUtilisateur.elements.nom.focus();
 
-Because the form sits in another window, it may not be obvious that
-something was selected, depending on the browser you are using. Some
-pages also automatically make the cursor jump to the next field when
-it looks like you finished filling in one field -- for example, when
-you type a zip code. This should not be overdone -- it makes the page
-behave in a way the user does not expect. If he is used to pressing
-tab to move the cursor manually, or mistyped the last character and
-wants to remove it, such magic cursor-jumping is very annoying.
+Puisque le formulaire est dans une autre fenêtre, il n'est pas forcément
+évident que quelque chose ait été sélectionné, cela dépend du navigateur
+que vous utilisez. Certaines pages vont aussi automatiquement faire passer le
+curseur sur le champ suivant quand il semble que vous ayez fini de remplir un
+champ -- par exemple, quand vous tapez un code postal. Ceci ne devrait pas
+être fait de manière exagérée -- cela donne à la page un comportement
+auquel l'utilisateur ne s'attend pas. S'il est habitué à la tabulation
+pour déplacer le curseur manuellement ou a fait une erreur sur le dernier
+caractère et veut l'enlever, ce curseur sauteur magique est très ennuyeux.
 
 ---
 
 > detach();
 
-Test the validator. When you enter valid information and click the
-button, the form should submit. If the console was still attached to
-it, this will cause it to detach itself, because the page reloads and
-the JavaScript environment is replaced by a new one.
+Testez le validateur. Quand vous entrez une information valide et cliquez
+sur le bouton, le formulaire devrait se soumettre. Si la console y est
+toujours attachée, cela la fera se détacher, car la page se rechargera et
+l'environnement JavaScript sera remplacé par un nouveau.
 
-If you haven't closed the form window yet, this will close it.
+Si vous n'avez pas encore clos la fenêtre de formulaire, ceci la fermera.
 
-> form.close();
-
----
-
-The above may look easy, but let me assure you, client-side
-web programming is no walk in the park. It can, at times, be a very
-painful ordeal. Why? Because programs that are supposed to run on the
-client computer generally have to work for all popular browsers. Each
-of these browsers tends to work slightly different. To make things
-worse, each of them contains a unique set of problems. Do not assume
-that a program is bug-free just because it was made by a multi-billion
-dollar company. So it is up to us, the web-programmer, to rigorously
-test our programs, figure out what goes wrong, and find ways to work
-around it.
-
-Some of you might think "I will just report any problems/_bug_s I find
-to the browser manufacturers, and they will certainly solve fix them
-immediately". These people are in for a major disappointment. The most
-recent version of Internet Explorer, the browser that is still used by
-some seventy percent of web-surfers (and that every web-developer
-likes to rag on) still contains bugs that have been known for over
-five years. Serious bugs, too.
-
-But do not let that discourage you. With the right kind of
-obsessive-compulsive mindset, such problems provide wonderful
-challenges. And for those of us who do not like wasting our time,
-being careful and avoiding the obscure corners of the browser's
-functionality will generally prevent you from running into too much
-trouble.
+> formulaire.close();
 
 ---
 
-Bugs aside, the by-design differences in interface between browsers
-still make for an interesting challenge. The current situation looks
-something like this: On the one hand, there are all the 'small'
-browsers: Firefox, Safari, and Opera are the most important ones, but
-there are more. These browsers all make a reasonable effort to adhere
-to a set of standards that have been developed, or are being
-developed, by the W3C, an organisation that tries to make the Web a
-less confusing place by defining standard interfaces for things like
-this. On the other hand, there is Internet Explorer, Microsoft's
-browser, which rose to dominance in a time when many of these
-standards did not really exist yet, and hasn't made much effort to
-adjust itself to what other people are doing.
+Cela peut sembler simple, mais je vous assure que la programmation côté
+client n'est pas de tout repos. Cela peut même parfois être une épreuve
+douloureuse. Pourquoi ? Parce que les programmes qui sont supposés tourner sur
+l'ordinateur client doivent généralement fonctionner dans les navigateurs
+les plus populaires. Chacun de ces navigateurs a tendance à fonctionner de
+manière légèrement différente. Pour rendre les choses plus complexes,
+chacun d'entre eux contient son propre ensemble de problèmes. Ne présumez
+pas qu'un programme est sans bug juste parce qu'il a été fait par une
+entreprise qui pèse plusieurs milliards de dollars. Donc il nous revient à
+nous, développeurs web, de rigoureusement tester nos programmes, d'arriver
+à comprendre ce qui va pas et de trouver des manières de contourner les
+problèmes.
 
-In some areas, such as the way the content of an HTML document can be
-approached from JavaScript (\\cdom), the standards are based on the
-method that Internet Explorer invented, and things work more or less
-the same on all browsers. In other areas, such as the way events
-(mouse-clicks, key-presses, and such) are handled (\\cevent), Internet
-Explorer works radically different from other browsers.
+Certains d'entre vous peuvent penser « Je vais juste remonter tous les
+problèmes/bugs que je trouve aux fabricants du navigateur et ils vont
+certainement les résoudre immédiatement ». Ces gens se préparent à
+une grosse déception. Les plus récentes versions d'Internet Explorer,
+le navigateur qui est toujours utilisé par quelque soixante dix pour cent
+des surfeurs de la toile (et que chaque développeur web aime à taquiner)
+contient toujours des bugs qui sont connus depuis plus de cinq ans. De
+sérieux bugs en plus.
 
-For a long time, owing partially to the cluelessness of the average
-JavaScript developer, and partially to the fact that browser
-incompatibilities were much worse when browsers like Internet Explorer
-version 4 or 5 and old versions of Netscape were still common, the
-usual way to deal with such differences was to detect which browser
-the user was running, and litter code with alternate solutions for
-each browser -- if this is Internet Explorer, do this, if this is
-Netscape, do that, and if this is other browser that we didn't think
-of, just hope for the best. You can imagine how hideous, confusing,
-and long such programs were.
+Mais que cela ne vous décourage pas. Avec un état d'esprit du genre
+obsessionnel-compulsif comme il convient, de tels problèmes lancent des
+défis merveilleux. Et pour ceux d'entre vous qui n'aiment pas perdre leur
+temps, être prudent et éviter les recoins obscurs des fonctionnalités du
+navigateur vous évitera de tomber sur des problèmes trop embarrassants.
 
-Many sites would also just refuse to load when opened in a browser
-that was 'not supported'. This caused a few of the minor browsers to
-swallow their pride and pretend they were Internet Explorer, just so
-they would be allowed to load such pages. The properties of the
-_|navigator|_ object contain information about the browser that a page
-was loaded in, but because of such lying this information is not
-particularly reliable. See what yours says##:
+---
 
-## Some browsers seem to hide the properties of the |navigator|
-object, in which case this will print nothing.
+A part les bugs, les différences de conception d'interface entre navigateurs
+produisent un défi intéressant. La situation en cours ressemble à
+quelque chose comme ceci : d'un côté, il y a tous les « petits »
+navigateurs : Firefox, Safari et Opéra sont les plus importants mais il
+en existe d'autres. Ces navigateurs font tous un effort raisonnable pour
+adhérer à un ensemble de standards qui ont été développés ou sont
+en train d'être développés, par le W3C, une organisation qui essaie de
+faire de la toile un environnement moins désordonné en définissant des
+interfaces standards pour des choses comme ceci. D'un autre côté, il y a
+Internet Explorer, le navigateur de Microsoft, qui a grandi jusqu'à dominer
+à une époque quand la plupart de ces standards n'existaient pas vraiment
+encore et n'a guère fait d'efforts pour s'ajuster à ce que les autres font.
 
-> forEachIn(navigator, function(name, value) {
->   print(name, " = ", value);
+Dans certains domaines, tels que la façon dont le contenu d'un document
+HTML peut être interprété par le JavaScript (\\cdom), les standards
+sont basés sur la méthode inventée par Internet Explorer et les choses
+marchent plus ou moins de la même façon pour tous les navigateurs. Dans
+d'autres domaines, tels que la façon dont les événements sont gérés
+(clic de souris, touche du clavier enfoncée et autres), Internet Explorer
+fonctionne différemment des autres.
+
+Pendant longtemps, en partie à cause du manque de jugeotte du développeur
+JavaScript moyen, en partie à cause des incompatibilités entre navigateurs
+qui étaient bien pires quand les navigateurs comme Internet Explorer versions
+4 et 5 et les vieilles versions de Netscape étaient encore fréquentes,
+la manière habituelle de gérer de telles différences était de détecter
+quel navigateur l'utilisateur faisait tourner et de disperser dans le code des
+solutions alternatives pour chaque navigateur -- si c'est Internet Explorer,
+fais ceci, si c'est Netscape, fais cela, et si c'est n'importe quel autre
+navigateur auquel nous n'avons pas pensé, garde l'espoir que tout se passera
+pour le mieux. Vous pouvez imaginer à quel point ces programmes étaient
+hideux, obscurs et longs.
+
+Nombre de sites pouvaient aussi refuser de se charger quand ils étaient
+ouverts dans un navigateur qui n'était « pas supporté ». Cela obligea
+quelques-uns des navigateurs mineurs à ravaler leur fierté et prétendre
+qu'ils étaient Internet Explorer, juste assez pour être autorisés à charger
+de telles pages. Les propriétés de l'objet _|navigator|_ contiennent des
+informations sur le navigateur dans lequel une page a été chargée, mais
+à cause de ces mensonges cette information n'est pas particulièrement
+fiable. Voyez ce que dit le vôtre##:
+
+## Certains navigateurs semblent cacher les propriétés de l'objet
+|navigator|, dans ce cas ce qui suit n'affichera rien.
+
+> forEachIn(navigator, function(nom, valeur) {
+>   print(nom, " = ", valeur);
 > });
 
-A better approach is to try and 'isolate' our programs from
-differences in browsers. If you need, for example, to find out more
-about an event, such as the clicks we handled by setting the |onclick|
-property of our send button, you have to look at the top-level object
-called |event| on Internet Explorer, but you have to use the first
-argument passed to the event-handling function on other browsers. To
-handle this, and a number of other differences related to events, one
-can write a helper function for attaching events to things, which
-takes care of all the plumbing and allows the event-handling functions
-themselves to be the same for all browsers. In \\cevent we will write
-such a function.
+Une meilleur approche consiste à essayer « d'isoler » nos programmes
+des différences entre navigateurs. Si vous devez, par exemple, en découvrir
+plus sur un événement, comme le clic que nous avons géré en modifiant la
+propriété |onclick| de notre bouton d'envoi, vous devez regarder l'objet de
+haut niveau nommé |event| dans Internet Explorer, mais vous devez utiliser
+le premier argument passé à la fonction gérant cet évènement dans
+les autres navigateurs. Pour gérer ceci, et nombre d'autres différences
+liées aux évènements, on peut écrire une fonction d'aide pour attacher
+les évènements aux choses, elle prendra soin de toute la plomberie et
+permettra aux fonctions de gestion d'événements d'être les mêmes pour
+tous les navigateurs. Dans le \\cevent nous écrirons une fonction de ce genre.
 
-(Note: The browser quirks mentioned in the following chapters refer to
-the state of affairs in early 2007, and might no longer be accurate on
-some points.)
+(Note: Les caprices de navigateur mentionnés dans les chapitres suivants
+font référence à l'état en cours en début 2007, et peuvent ne plus
+être aussi précis sur certains points.)
 
 ---
 
-These chapters will only give a somewhat superficial introduction to
-the subject of browser interfaces. They are not the main subject of
-this book, and they are complex enough to fill a thick book on their
-own. When you understand the basics of these interfaces (and
-understand something about HTML), it is not too hard to look for
-specific information online. The interface documentation for the
-[Firefox | https://developer.mozilla.org/en/Gecko_DOM_Reference]
-and [Internet Explorer |
-http://msdn2.microsoft.com/library/yek4tbz0.aspx] browsers are a good
-place to start.
+Ces chapitres ne donneront qu'une introduction superficielle du sujet des
+interfaces des navigateurs. Elles ne sont le principal sujet de ce livre et
+elles sont suffisamment complexes pour remplir un livre par elles-mêmes. Quand
+vous aurez compris les bases de ces interfaces (et compris quelque chose à
+propos d'HTML), ce ne sera pas trop difficile de rechercher des informations
+spécifiques en ligne. Les documentations des interfaces des navigateurs
+[Firefox | http://www.mozilla.org/docs/dom/domref/dom_shortTOC.html] et
+[Internet Explorer |
+http://msdn2.microsoft.com/library/yek4tbz0p.aspx] constituent de bons points
+de départ.
 
-The information in the next chapters will not deal with the quirks of
-'previous-generation' browsers. They deal with Internet Explorer 6,
-Firefox 1.5, Opera 9, Safari 3, or any more recent versions of the
-same browsers. Most of it will also probably be relevant to modern but
-obscure browsers such as Konqueror, but this has not been extensively
-checked. Fortunately, these previous-generation browsers have pretty
-much died out, and are hardly used anymore.
+Les informations dans les prochains chapitres n'aborderont pas les caprices des
+navigateurs de « génération antérieure ». Elles parlent d'Internet
+Explorer 6, Firefox 1.5, Opera 9, Safari 3, ou n'importe quelle version plus
+récente de ces mêmes navigateurs. La plus grande part sera aussi applicable
+aux modernes mais obscurs navigateurs comme Konqueror, mais cela n'a pas
+été complètement vérifié. Heureusement, ces navigateurs de génération
+antérieure ont plus ou moins disparu, et ne sont plus guère utilisés.
 
-There is, however, a group of web-users that will still use a browser
-without JavaScript. A large part of this group consists of people
-using a regular graphical browser, but with JavaScript disabled for
-security reasons. Then there are people using textual browsers, or
-browsers for blind people. When working on a 'serious' site, it is
-often a good idea to start with a plain HTML system that works, and
-then add non-essential tricks and conveniences with JavaScript.
+Il y a, malgré tout, un groupe d'utiliseurs web qui vont toujours utiliser
+un navigateur sans JavaScript. Une large part de ce groupe est constitué
+de personnes utilisant un navigateur graphique usuel, mais avec JavaScript
+désactivé pour des raisons de sécurité. Ensuite ceux qui utilisent des
+navigateurs textes, ou navigateurs pour personnes aveugles. Quand on travaille
+sur un site « sérieux », c'est une bonne idée de commencer avec un
+simple système HTML qui fonctionne et ensuite d'ajouter des bidouilles non
+essentielles et des trucs pratiques avec JavaScript.
 
 ===============================
 The Document-Object Model / dom
