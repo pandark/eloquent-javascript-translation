@@ -10073,118 +10073,129 @@ des tas de choses  bling-bling et qui bougent. Retenez-vous, sinon vos pages
 deviendront certainement illisibles ou même, si vous allez assez loin,
 pourraient provoquer de temps en temps une crise d'épilepsie.
 
-======================
-Browser Events / event
-======================
+================================
+Évènements du navigateur / event
+================================
 
-To add interesting functionality to a web-page, just being able to
-inspect or modify the document is generally not enough. We also need
-to be able to detect what the user is doing, and respond to it. For
-this, we will use a thing called _event handler_s. Pressed keys are
-events, mouse clicks are events, even mouse motion can be seen as a
-series of events. In \\cweb, we added an |onclick| property to a
-button, in order to do something when it was pressed. This is a simple
-event handler.
+Pour ajouter des fonctionnalités intéressantes à une page Web, être capable
+d'inspecter et de modifier un document est généralement suffisant. Nous
+avons également besoin de détecter ce que l'utilisateur est en train de
+faire et émettre une réponse en conséquence. Pour cela, nous utiliserons
+quelque chose nommé _gestionnaire d'évènements_. Les appuis sur des touches
+du clavier sont des évènements, les clics de souris sont des évènements,
+même les mouvements de souris peuvent être interprétés comme des séries
+d'évènements. Dans le \\cweb, nous avons ajouté une propriété |onclick|
+à un bouton, dans le but de provoquer quelque chose lorsque ce bouton est
+actionné. Ceci est un gestionnaire d'évènement simple.
 
-The way browser events work is, fundamentally, very simple. It is
-possible to register handlers for specific event types and specific
-DOM nodes. Whenever an _event_ occurs, the handler for that event, if
-any, is called. For some events, such as key presses, knowing just
-that the event occurred is not good enough, you also want to know
-which key was pressed. To store such information, every event creates
-an _event object_, which the handler can look at.
+La manière dont les évènements du navigateur fonctionnent est
+fondamentalement très simple. Il est possible d'enregistrer des gestionnaires
+pour des types d'évènements et des noeuds DOM spécifiques. Quel que soit le
+moment de l'_évènement_, le gestionnaire de cet évènement, s'il existe, est
+appelé. Pour certains évènements, comme des touches de clavier pressées,
+le fait que l'évènement se soit produit n'est pas suffisant, il faut aussi
+savoir quelle touche a été pressée. Pour enregistrer cette information,
+chaque évènement crée un _objet évènement_, qui peut être analysé
+par le gestionnaire.
 
-It is important to realise that, even though events can fire at any
-time, no two handlers ever run at the same moment. If other JavaScript
-code is still running, the browser waits until it finishes before it
-calls the next handler. This also holds for code that is triggered in
-other ways, such as with |setTimeout|. In programmer jargon, browser
-JavaScript is _single-threaded_, there are never two '_thread_s'
-running at the same time. This is, in most cases, a good thing. It is
-very easy to get strange results when multiple things happen at the
-same time.
+Il est important de noter que si des évènements peuvent apparaître à
+tout moment, deux gestionnaires d'évènements ne vont pas fonctionner en
+même temps. Si du code JavaScript est encore en train de fonctionner,
+le navigateur va attendre que celui-ci se termine avant d'appeler le
+gestionnaire suivant. Cela vaut aussi pour du code qui est déclenché d'une
+autre manière, comme avec |setTimeout|. Dans le jargon de la programmation,
+le navigateur JavaScript gére une _tâche unique_ à la fois, il n'y a
+jamais deux _tâches_ fonctionnant au même instant. Dans la plupart des cas,
+c'est une bonne chose. Il est très facile d'obtenir des résultats étranges
+quand plusieurs choses sont traitées au même instant.
 
-An event, when not handled, can 'bubble' through the DOM tree. What
-this means is that if you click on, for example, a link in a
-paragraph, any handlers associated with the link are called first. If
-there are no such handlers, or these handlers do not indicate that
-they have finished handling the event, the handlers for the paragraph,
-which is the parent of the link, are tried. After that, the handlers
-for |document.body| get a turn. Finally, if no JavaScript handlers
-have taken care of the event, the browser handles it. When clicking a
-link, this means that the link will be followed.
-
----
-
-So, as you see, events are easy. The only hard thing about them is
-that browsers, while all supporting more or less the same
-functionality, support this functionality through different
-interfaces. As usual, the most incompatible browser is Internet
-Explorer, which ignores the standard that most other browsers follow.
-After that, there is Opera, which does not properly support some
-useful events, such as the |onunload| event which fires when leaving a
-page, and sometimes gives confusing information about keyboard events.
-
-There are four event-related actions one might want to take.
-
- * Registering an event handler.
- * Getting the event object.
- * Extracting information from this object.
- * Signalling that an event has been handled.
-
-None of them work the same across all major browsers.
+Un évènement, quand il n'est pas géré, peut « remonter » à travers
+l'arborescence DOM. Cela signifie que si vous cliquez sur un lien dans un
+paragraphe, par exemple, n'importe quel gestionnaire associé avec le lien est
+appelé en premier. S'il n'y a pas de gestionnaire ou que ces gestionnaires
+n'indiquent pas qu'ils ont fini de traiter l'évènement en question, les
+gestionnaires d'évènements liés au paragraphe, qui est parent du lien,
+sont appelés. Après cela, les gestionnaires de |document.body| sont
+invoqués. Finalement, si aucun gestionnaire JavaScript ne s'est occupé
+de cet évènement, le navigateur le gère. Quand on clique sur le lien,
+cela signifie que le lien va être suivi.
 
 ---
 
-As a practice field for our event-handling, we open a document with a
-button and a text field. Keep this window open (and attached) for the
-rest of the chapter.
+Donc comme vous pouvez le voir, les évènements sont simples. La seule
+chose compliquée à leur propos est que, bien que les navigateurs prennent
+en charge tous plus ou moins la même fonctionnalité, ils le font par le
+biais d'interface différentes. Comme d'habitude, le navigateur le plus
+incompatible est Internet Explorer, qui ignore les standards respectés par
+la plupart des autres navigateurs. En seconde position vient Opera, qui ne
+gère pas correctement quelques évènements utiles, tels que l'évènement
+|onunload| qui se produit quand on quitte une page, ou bien qui retourne
+parfois des informations peu claires à propos des évènements du clavier.
+
+Il existe quatre actions associées aux évènements que l'ont peut vouloir
+invoquer.
+
+ * Enregistrement des gestionnaires d'évènements.
+ * Récupération de l'objet event.
+ * Extraction d'informations de cet objet.
+ * Signalement de gestion d'un évènement.
+
+Aucun d'eux ne fonctionne de la même manière sur tous les principaux
+navigateurs.
+
+---
+
+Comme exercice d'entraînement pour notre gestion d'évènements, nous allons
+ouvrir un document avec un bouton et un champ de texte. Laissez cette fenêtre
+ouverte (et liée) pour le reste du chapitre.
 
 > attach(window.open("example_events.html"));
 
 ---
 
-The first action, registering a handler, can be done by setting an
-element's |onclick| (or |onkeypress|, and so on) property. This does
-in fact work across browsers, but it has an important drawback -- you
-can only attach one handler to an element. Most of the time, one is
-enough, but there are cases, especially when a program has to be able
-to work together with other programs (which might also be adding
-handlers), that this is annoying.
+La première action, enregistrement d'un gestionnaire d'évènement, peut être
+réalisée en définissant la propriété |onclick| (ou |onkeypress|, ou…)
+d'un élément. Cela fonctionne pour tous les navigateurs, mais il existe un
+inconvénient majeur à faire cela : vous ne pouvez définir qu'un seul
+gestionnaire pour un élément. La plupart du temps, un gestionnaire est
+suffisant, mais il existe certains cas, spécialement quand un programme
+doit fonctionner avec d'autres programmes (qui peuvent également ajouter
+leurs propres gestionnaires), où cela peut être ennuyeux.
 
-@_|attachEvent|_In Internet Explorer, one can add a click handler to a
-button like this:
+@_|attachEvent|_ Dans Internet Explorer, on peut ajouter un gestionnaire de
+clic sur un bouton de cette façon :
 
-!> $("button").attachEvent("onclick", function(){print("Click!");});
+!> $("bouton").attachEvent("onclick", function(){print("Clic !");});
 
-@_|addEventListener|_On the other browsers, it goes like this:
+@_|addEventListener|_ Dans les autres navigateurs, cela fonctionne de
+cette façon:
 
-!> $("button").addEventListener("click", function(){print("Click!");},
+!> $("bouton").addEventListener("click", function(){print("Clic !");},
 !>                              false);
 
-Note how |"on"| is left off in the second case. The third argument
-to |addEventListener|, |false|, indicates that the event should
-'bubble' through the DOM tree as normal. Giving |true| instead can be
-used to give this handler priority over the handlers 'beneath' it, but
-since Internet Explorer does not support such a thing, this is rarely
-useful.
+Remarquez comment |"on"| est laissé de côté dans le second cas. Le
+troisième argument d'|addEventListener|, |false|, indique que l'évènement
+doit « remonter » normalement à travers l'arborescence DOM. Définir
+le troisième argument à |true| permet de rendre le gestionnaire prioritaire
+sur les gestionnaires « sous » lui, mais comme Internet Explorer ne
+prend pas en charge un tel mécanisme, il est rarement utilisé.
 
 ***
 
-Write a function called |registerEventHandler| to wrap the
-incompatibilities of these two models. It takes three arguments: first
-a DOM node that the handler should be attached to, then the name of
-the event type, such as |"click"| or |"keypress"|, and finally the
-handler function.
+Ecrire une fonction nommée |registerEventHandler| pour encapsuler
+les incompatibilités des deux modèles. Cette fonction possède trois
+arguments : un noeud DOM auquel le gestionnaire doit être attaché, le
+nom du type de l'évènement, comme |"click"| ou |"keypress"|, et enfin la
+fonction qui va assurer la gestion de l'évènement.
 
-To determine which method should be called, look for the methods
-themselves -- if the DOM node has a method called |attachEvent|, you
-may assume that this is the correct method. Note that this is much
-preferable to directly checking whether the browser is Internet
-Explorer. If a new browser arrives which uses Internet Explorer's
-model, or Internet Explorer suddenly switches to the standard model,
-the code will still work. Both are rather unlikely, of course, but
-doing something in a smart way never hurts.
+Pour déterminer quelle méthode doit être appelée, recherchez les méthodes
+elles-mêmes -- si le noeud DOM possède une méthode appelée |attachEvent|,
+vous pouvez supposer que c'est la bonne méthode. Remarquez qu'il est largement
+préférable de faire cela que de vérifier directement si le navigateur est
+Internet Explorer. En effet, si un nouveau navigateur, qui utilise le modèle
+d'Internet, apparaît, ou si Internet Explorer passe tout d'un coup au modèle
+standard, le code continuera à fonctionner. Les deux sont peu probables, bien
+sûr, mais faire quelque chose intelligemment n'a jamais causé de dégâts.
 
 ///
 
@@ -10195,16 +10206,16 @@ doing something in a smart way never hurts.
 >     node.attachEvent("on" + event, handler);
 > }
 >
-> registerEventHandler($("button"), "click",
->                      function(){print("Click (2)");});
+> registerEventHandler($("bouton"), "click",
+>                      function(){print("Clic (2)");});
 
-Don't fret about the long, clumsy name. Later on, we will have to add
-an extra wrapper to wrap this wrapper, and it will have a shorter
-name.
+Ne vous inquiétez pas du nom maladroit et à rallonge. Plus tard, nous
+devrons ajouter un adaptateur supplémentaire pour encapsuler cet adpatateur,
+et il aura un nom plus court.
 
-It is also possible to do this check only once, and define
-|registerEventHandler| to hold a different function depending on the
-browser. This is more efficient, but a little strange.
+Il est également possible de faire la vérification une seule fois, et de
+définir |registerEventHandler| de façon à contenir une fonction différente
+selon le navigateur. C'est plus efficace même si c'est un peu bizarre.
 
 > if (typeof document.addEventListener == "function")
 >   var registerEventHandler = function(node, event, handler) {
@@ -10217,10 +10228,10 @@ browser. This is more efficient, but a little strange.
 
 ---
 
-Removing events works very much like adding them, but this time the
-methods _|detachEvent|_ and _|removeEventListener|_ are used. Note
-that, to remove a handler, you need to have access to the function you
-attached to it.
+Supprimer des événements fonctionne quasiment comme en ajouter, mais cette
+fois,on utilise les méthodes _|detachEvent|_ and _|removeEventListener|_
+. N'oubliez pas cela : pour supprimer un gestionnaire, vous devez avoir
+accès à la fonction que vous y avez attachée.
 
 > function unregisterEventHandler(node, event, handler) {
 >   if (typeof node.removeEventListener == "function")
@@ -10231,66 +10242,68 @@ attached to it.
 
 ---
 
-Exceptions produced by event handlers can, because of technical
-limitations, not be caught by the console. Thus, they are handled by
-the browser, which might mean they get hidden in some kind of 'error
-console' somewhere, or cause a message to pop up. When you write an
-event handler and it does not seem to work, it might be silently
-aborting because it causes some kind of error.
+Les exceptions produites par les gestionnaires d'événements ne peuvent pas,
+à cause de limitations techniques, être récupérées par la console. Elles
+sont donc gérées par le navigateur, ce qui veut dire qu'elles peuvent
+être cachées quelque part dans une sorte de « console d'erreur », ou
+bien faire un apparaître un message. Lorsque vous écrivez un gestionnaire
+d'événements et qu'il ne semble pas fonctionner, il peut s'arrêter de
+fonctionner silencieusement, car il cause une erreur quelconque.
 
 ---
 
-@_|event|_Most browsers pass the _event object_ as an argument to the
-handler. Internet Explorer stores it in the top-level variable called
-|event|. When looking at JavaScript code, you will often come across
-something like |event || window.event|, which takes the local variable
-|event| or, if that is undefined, the top-level variable by that same
-name.
+@_|event|_ La plupart des navigateurs passent l'_objet évènement_ en
+argument du gestionnaire. Internet Explorer le stocke dans une variable
+de haut niveau appelé |event|. Lorsque vous regardez un code Javascript,
+vous tomberez souvent sur quelque chose comme |event || window.event|, qui
+prend la variable locale |event|, ou, si elle est définie, la variable de
+haut niveau du même nom.
 
 > function showEvent(event) {
 >   show(event || window.event);
 > }
 >
-> registerEventHandler($("textfield"), "keypress", showEvent);
+> registerEventHandler($("champtexte"), "keypress", showEvent);
 
-Type a few characters in the field, look at the objects, and shut it
-up again:
+Tapez quelques caractères dans le champ, regardez les objets, et
+débarrassez-vous en :
 
-> unregisterEventHandler($("textfield"), "keypress", showEvent);
+> unregisterEventHandler($("champtexte"), "keypress", showEvent);
 
 ---
 
-@_|onmousedown|_@_|onmouseup|_@_|onclick|_@_|ondblclick|_When the user
-clicks his mouse, three events are generated. First _|mousedown|_, at
-the moment the mouse button is pressed. Then, _|mouseup|_, at the
-moment it is released. And finally, _|click|_, to indicate something
-was clicked. When this happens two times in quick succession, a
-_|dblclick|_ (double-click) event is also generated. Note that it is
-possible for the |mousedown| and |mouseup| events to happen some time
-apart -- when the mouse button is held for a while.
+@_|onmousedown|_@_|onmouseup|_@_|onclick|_@_|ondblclick|_ Quand l'utilisateur
+clique avec sa souris, trois événements sont générés. En premier
+_|mousedown|_, au moment où le bouton est appuyé. Puis _|mouseup|_, au moment
+où il est relâché. Et enfin _|click|_, pour indiquer que quelque chose a
+été cliqué. Quand cela se répéte deux fois rapidement, un événement
+_|dblclick|_ (double-clic) est également généré. Remarquez bien qu'il
+est possible que les événements |mousedown| et |mouseup| se produisent
+avec un certain délai entre les deux -- lorsque le bouton de la souris est
+maintenu enfoncé pendant un certain temps.
 
-When you attach an event handler to, for example, a button, the fact
-that it has been clicked is often all you need to know. When the
-handler, on the other hand, is attached to a node that has children,
-clicks from the children will 'bubble' up to it, and you will want to
-find out which child has been clicked. For this purpose, event objects
-have a property called _|target|_... or |srcElement|, depending on the
-browser.
+Lorsque vous attachez un gestionnaire d'événements, par exemple, à un
+bouton, le fait qu'il a été cliqué est souvent la seule chose que vous avez
+besoin de savoir. Lorsque le gestionnaire, d'un autre côté, est attaché
+à un noeud qui a des fils, les clics sur les fils vont « remonter »
+vers lui, et vous voudrez savoir quel fils a été cliqué. Dans ce but, les
+objets événements ont une propriété nommée _|target|_... ou |srcElement|,
+en fonction du navigateur.
 
-@_|scrollTop|_@_|scrollLeft|_Another interesting piece of information
-are the precise coordinates at which the click occurred. Event objects
-related to the mouse contain _|clientX|_ and _|clientY|_ properties,
-which give the |x| and |y| coordinates of the mouse, in pixels, on the
-screen. Documents can scroll, though, so often these coordinates do
-not tell us much about the part of the document that the mouse is
-over. Some browsers provide _|pageX|_ and _|pageY|_ properties for
-this purpose, but others (guess which) do not. Fortunately, the
-information about the amount of pixels the document has been scrolled
-can be found in |document.body.scrollLeft| and
+@_|scrollTop|_@_|scrollLeft|_ Une autre information intéressante concerne
+les coordonnées précises auxquelles le clic s'est produit. Les objets
+événements concernant la souris contiennent  les propriétés _|clientX|_ and
+_|clientY|_, qui donnent les coordonnées |x| et |y| de la souris à l'écran,
+en pixels. Les documents peuvent défiler, ces informations ne nous donnent
+donc souvent pas beaucoup d'informations sur la partie du document au-dessus de
+laquelle se trouve la souris. Certains navigateurs fournissent les propriétés
+_|pageX|_ et _|pageY|_ dans ce but, mais d'autres (devinez lesquelles) ne
+les fournissent pas. Heureusement, l'information de la quantité de pixels
+du document qui a déjà défilé se trouve dans |document.body.scrollLeft| et
 |document.body.scrollTop|.
 
-This handler, attached to the whole document, intercepts all mouse
-clicks, and prints some information about them.
+Ce gestionnaire, attaché au document entier, intercepte tous les clics de
+souris, et enregistre quelques informations à leur sujet.
 
 > function reportClick(event) {
 >   event = event || window.event;
@@ -10307,92 +10320,94 @@ clicks, and prints some information about them.
 > }
 > registerEventHandler(document, "click", reportClick);
 
-And get rid of it again:
+Et débarrassez-vous en de nouveau :
 
 > unregisterEventHandler(document, "click", reportClick);
 
-Obviously, writing all these checks and workarounds is not something
-you want to do in every single event handler. In a moment, after we
-have gotten acquainted with a few more incompatibilities, we will
-write a function to 'normalise' event objects to work the same across
-browsers.
+Évidemment, écrire toutes ces vérifications et ces solutions de
+contournement n'est pas quelque chose que vous avez envie de faire dans tous
+les gestionnaires d'événements. Dans quelques instants, après avoir fait
+connaissance avec quelques incompatibilités supplémentaires, nous allons
+écrire un fonction pour « normaliser » les objets événements pour
+qu'ils fonctionnent de la même manière sur tous les naviagateurs.
 
-It is also sometimes possible to find out which mouse button was
-pressed, using the _|which|_ and _|button|_ properties of event
-objects. Unfortunately, this is very unreliable -- some browsers
-pretend mouses have only one button, others report right-clicks as
-clicks during which the control key was held down, and so on.
-
----
-
-@_|onmousemove|_@_|onmouseover|_@_|onmouseout|_Apart from clicks, we
-might also be interested in the movement of the mouse. The
-_|mousemove|_ event of a DOM node is fired whenever the mouse moves
-while it is over that element. There are also _|mouseover|_ and
-_|mouseout|_, which are fired only when the mouse enters or leaves a
-node. For events of this last type, the |target| (or |srcElement|)
-property points at the node that the event is fired for, while the
-_|relatedTarget|_ (or |toElement|, or |fromElement|) property gives
-the node that the mouse came from (for |mouseover|) or left to (for
-|mouseout|).
-
-|mouseover| and |mouseout| can be tricky when they are registered on
-an element that has child nodes. Events fired for the child nodes will
-bubble up to the parent element, so you will also see a |mouseover|
-event when the mouse enters one of the child nodes. The |target| and
-|relatedTarget| properties can be used to detect (and ignore) such
-events.
+Il est également parfois possible de déterminer quel bouton de la souris a
+été appuyé, en utilisant les propriétés _|which|_ et _|button|_ des objets
+événement. Malheureusement, on ne peut pas leur faire confiance : certains
+navigateurs prétendent que les souris n'ont qu'un bouton, d'autres signalent
+les clics droits comme des clics avec le touche control appuyée, etc.
 
 ---
 
-@_|onkeydown|_@_|onkeyup|_@_|onkeypress|_For every key that the user
-presses, three events are generated: _|keydown|_, _|keyup|_, and
-_|keypress|_. In general, you should use the first two in cases where
-you really want to know which key was pressed, for example when you
-want to do something when the arrow keys are pressed. |keypress|, on
-the other hand, is to be used when you are interested in the character
-that is being typed. The reason for this is that there is often no
-character information in |keyup| and |keydown| events, and Internet
-Explorer does not generate a |keypress| event at all for special keys
-such as the arrow keys.
+@_|onmousemove|_@_|onmouseover|_@_|onmouseout|_ En dehors des clics, on peut
+également être intéressé par les mouvements de la souris. L'événement
+_|mousemove|_ d'un noeud DOM se produit dès que la souris bouge lorsqu'elle
+est sur cet élément. Il y a aussi les événements _|mouseover|_ et
+_|mouseout|_, qui se produisent uniquement lorsque la souris entre dans un node
+ou le quitte. Pour les événements du second type, la propriété |target|
+(ou |srcElement|) indique le nœud pour lequel l'événement s'est produit,
+alors que la propriété _|relatedTarget|_ (ou |toElement|, ou |fromElement|)
+indique le noeud d'où provient (pour |mouseover|) ou vers lequel se dirige
+la souris (pour |mouseout|).
 
-Finding out which key was pressed can be quite a challenge by itself.
-For |keydown| and |keyup| events, the event object will have a
-_|keyCode|_ property, which contains a number. Most of the time, these
-codes can be used to identify keys in a reasonably browser-independant
-way. Finding out which code corresponds to which key can be done by
-simple experiments...
+|mouseover| et |mouseout| peuvent être embêtants quand ils sont enregistrés
+sur un élément qui a des nœuds-fils. Les évènements se produisant
+dans les nœuds-fils vont remonter vers l'élément parent, donc vous allez
+également recevoir une événement |mouseover| quand la souris entre dans
+l'un des nœuds-fils. Les propriétés |target| et |relatedTarget| peuvent
+être utilisées pour détecter (ou ignorer) de tels événements.
+
+---
+
+@_|onkeydown|_@_|onkeyup|_@_|onkeypress|_ Pour chaque touche pressée par
+l'utilisateur, trois événements sont générés: _|keydown|_, _|keyup|_,
+et _|keypress|_. En général, vous devez utiliser les deux premiers dans les
+cas où vous voulez vraiment savoir quelle touche a été pressée, par exemple
+lorsque vous voulez faire quelque chose lorsque les touches de direction sont
+pressées. |keypress|, d'un autre côté, doit être utilisé lorsque vous
+êtes intéressé par le caractère qui est tapé. La raison de cela est qu'il
+n'y a souvent aucune information de caractère dans les événements |keyup|
+et |keydown|, et Internet Explorer ne génère aucun événement |keypress|
+pour les touches spéciales comme les touches de direction.
+
+Déterminer quelle touche a été pressée peut être un défi en soi. Pour
+les événements |keydown| et|keyup|, l'objet événement va posséder
+une propriété _|keyCode|_ qui contient un nombre. La plupart du temps,
+ces codes peuvent être utilisés pour identifier les touches d'une façon
+plutôt indépendante du navigateur. Déterminer quel code correspond à
+quelle touche peut être réalisé avec quelques simples expériences.
 
 > function printKeyCode(event) {
 >   event = event || window.event;
 >   print("Key ", event.keyCode, " was pressed.");
 > }
 >
-> registerEventHandler($("textfield"), "keydown", printKeyCode);
+> registerEventHandler($("champtexte"), "keydown", printKeyCode);
 
-> unregisterEventHandler($("textfield"), "keydown", printKeyCode);
+> unregisterEventHandler($("champtexte"), "keydown", printKeyCode);
 
-In most browsers, a single key code corresponds to a single *physical*
-key on your keyboard. The Opera browser, however, will generate
-different key codes for some keys depending on whether shift is
-pressed or not. Even worse, some of these shift-is-pressed codes are
-the same codes that are also used for other keys -- shift-9, which on
-most keyboards is used to type a parenthesis, gets the same code as
-the down arrow, and as such is hard to distinguish from it. When this
-threatens to sabotage your programs, you can usually resolve it by
-ignoring key events that have shift pressed.
+Dans la plupart des navigateurs, un code de touche unique correspond à une
+touche *physique* unique sur votre clavier. Le navigateur Opera, toutefois,
+va générer des codes différents pour certaines touches en fonction du fait
+que la touche Maj est appuyée ou non. Pire encore, certains de ces codes
+shift-est-appuyé sont des codes qui sont également utilisés pour d'autres
+touches -- Maj-9, qui dans la plupart des claviers QWERTY est utilisé pour
+taper une parenthèse, reçoit le même code que touche de direction bas,
+et il est donc difficile de distinguer les deux. Lorsque cela risque de
+saboter vos programmes, vous pouvez en général résoudre le problème en
+ignorant les événements d'appui de touche avec la touche Maj pressée.
 
-To find out whether the shift, control, or alt key was held during a
-key or mouse event, you can look at the _|shiftKey|_, _|ctrlKey|_, and
-_|altKey|_ properties of the event object.
+Pour savoir si les touches shift, control ou alt sont appuyées lors
+d'un événement touche ou souris, vous pouvez regarder les propriétés
+_|shiftKey|_, _|ctrlKey|_, and _|altKey| de l'objet événement.
 
-For |keypress| events, you will want to know which character was
-typed. The event object will have a _|charCode|_ property, which, if
-you are lucky, contains the _Unicode_ number corresponding to the
-character that was typed, which can be converted to a 1-character
-string by using _|String.fromCharCode|_. Unfortunately, some browsers
-do not define this property, or define it as |0|, and store the
-character code in the _|keyCode|_ property instead.
+Pour les événements |keypress|, vous voudrez savoir quel caractère a
+été tapé. L'objet événement aura une propriété _|charCode|_, qui,
+si vous êtes chanceux, contiendra la valeur _Unicode_ correspondant au
+caractère qui a été tapé, qui peut être converti en une chaîne à 1 seul
+caractère en utilisant _|String.fromCharCode|_. Malheureusement, certains
+navigateurs ne définissent pas cette propriété, ou la définissent à |0|,
+et stockent à la place le code du caractère dans la propriété _|keyCode|_.
 
 > function printCharacter(event) {
 >   event = event || window.event;
@@ -10402,31 +10417,33 @@ character code in the _|keyCode|_ property instead.
 >   print("Character '", String.fromCharCode(charCode), "'");
 > }
 >
-> registerEventHandler($("textfield"), "keypress", printCharacter);
+> registerEventHandler($("champtexte"), "keypress", printCharacter);
 
-> unregisterEventHandler($("textfield"), "keypress", printCharacter);
+> unregisterEventHandler($("champtexte"), "keypress", printCharacter);
 
 ---
 
-An event handler can 'stop' the event it is handling. There are two
-different ways to do this. You can prevent the event from bubbling up
-to parent nodes and the handlers defined on those, and you can prevent
-the browser from taking the standard action associated with such an
-event. It should be noted that browsers do not always follow this --
-preventing the default behaviour for the pressing of certain 'hotkeys'
-will, on many browsers, not actually keep the browser from executing
-the normal effect of these keys.
+Un gestionnaire d'événements peut « arrêter » l'événement qu'il est
+en train de gérer. Il y a deux façons de faire cela. Vous pouvez empêcher
+l'événement de remonter dans les nœuds parents et les gestionnaires qui ont
+été définis pour eux, et vous pouvez empêcher le navigateur de réaliser
+les actions standards associés à un tel événement. Il est important de
+noter que les navigateurs ne vont pas forcément suivre vos instructions --
+empêcher les comportements par défaut lorsque l'utilisateur appuie sur
+certaines touches spéciales n'empêchera pas les navigateurs, pour la
+plupart d'entre eux, d'exécuter l'effet normal de ces touches.
 
-On most browsers, stopping event bubbling is done with the
-_|stopPropagation|_ method of the event object, and preventing default
-behaviour is done with the _|preventDefault|_ method. For Internet
-Explorer, this is done by setting the _|cancelBubble|_ property of
-this object to |true|, and the _|returnValue|_ property to |false|,
-respectively.
+Dans la plupart des navigateurs, arrêter la remontée d'un événement
+est réalisé en utilisant la méthode _|stopPropagation|_ de l'objet
+événement, et empêcher le comportement par défaut est réalisé grâce
+à la méthode _|preventDefault|_. Pour Internet Explorer, on le fait en
+définissant respsectivement la propriété _|cancelBubble|_ à |true|
+et la propriété _|returnValue|_ à |false|.
 
-And that was the last of the long list of incompatibilities that we
-will discuss in this chapter. Which means that we can finally write
-the event normaliser function and move on to more interesting things.
+Et c'était la dernière d'une longue liste d'incompatibilités dont nous
+discuterons dans ce chapitre. Cela veut donc dire que nous pouvons écrire
+la fonction de normalisation d'événements et passer à des choses plus
+intéressantes.
 
 > function normaliseEvent(event) {
 >   if (!event.stopPropagation) {
@@ -10458,12 +10475,12 @@ the event normaliser function and move on to more interesting things.
 >   return event;
 > }
 
-A _|stop|_ method is added, which cancels both the bubbling and
-the default action of the event. Some browsers already provide this,
-in which case we leave it as it is.
+Une méthode _|stop|_ a été ajoutée, qui annule à la fois la remontée
+des événements et leur action par défaut. Certains navigateurs le proposent
+déjà, dans ce cas nous le laissons tel quel.
 
-Next we can write convenient wrappers for |registerEventHandler| and
-|unregisterEventHandler|:
+Ensuite, nous pouvons écrire des adaptateurs pratiques pour
+|registerEventHandler| et |unregisterEventHandler|:
 
 > function addHandler(node, type, handler) {
 >   function wrapHandler(event) {
@@ -10477,92 +10494,94 @@ Next we can write convenient wrappers for |registerEventHandler| and
 >   unregisterEventHandler(object.node, object.type, object.handler);
 > }
 >
-> var blockQ = addHandler($("textfield"), "keypress", function(event) {
+> var blockQ = addHandler($("champtexte"), "keypress", function(event) {
 >   if (event.character.toLowerCase() == "q")
 >     event.stop();
 > });
 
-The new |addHandler| function wraps the handler function it is given
-in a new function, so it can take care of normalising the event
-objects. It returns an object that can be given to |removeHandler|
-when we want to remove this specific handler. Try typing a '|q|' in
-the text field.
+La nouvelle fonction |addHandler| encapsule dans une nouvelle fonction la
+fonction du gestionnaire qui lui est donnée, ce qui lui permet de s'occuper
+de la normalisation des objets événement. Il retourne un objet qui peut
+être passé à |removeHandler| lorsque l'on veut supprimer ce gestionnaire
+précis. Essayez de taper un |q| dans le champ texte.
 
 > removeHandler(blockQ);
 
 ---
 
-Armed with |addHandler| and the |dom| function from the last chapter,
-we are ready for more challenging feats of document-manipulation. As
-an exercise, we will implement the game known as _Sokoban_. This is
-something of a classic, but you may not have seen it before. The rules
-are this: There is a grid, made up of walls, empty space, and one or
-more 'exits'. On this grid, there are a number of crates or stones,
-and a little dude that the player controls. This dude can be moved
-horizontally and vertically into empty squares, and can push the
-boulders around, provided that there is empty space behind them. The
-goal of the game is to move a given number of boulders into the exits.
+Armé de |addHandler| et de la fonction |dom| du chapitre précédent, nous
+sommes prêts pour des possibilités plus ambitieuses de manipulation de
+document. Pour s'exercer, nous allons implémenter le jeu connu sous le nom
+de _Sokoban_. C'est un classique, mais vous ne l'avez peut-être jamais vu
+auparavant. Les règles sont les suivantes : on a une grille, faite de murs,
+d'espaces vides et d'une ou plusieurs « sorties ». Sur cette grille,
+il y a un certain nombre de caisses ou de pierres, et un petit bonhomme
+que le joueur contrôle. Ce bonhomme peut être déplacé horizontalement
+et verticalement dans les espaces vides, et peut pousser les rochers, à
+condition qu'il y ait un espace vide derrière eux. Le but du jeu et de
+déplacer un nombre donné de rochers vers les sorties.
 
-Just like the terraria from \\coo, a Sokoban level can be represented
-as text. The variable |sokobanLevels|, in the |example_events.html|
-window, contains an array of level objects. Each level has a property
-|field|, containing a textual representation of the level, and a
-property |boulders|, indicating the amount of boulders that must be
-expelled to finish the level.
+Tout comme les terraria du \\coo, un niveau de Sokoban peut être représenté
+sous forme de texte. La variable  |sokobanLevels|, dans la fenêtre
+|example_events.html|, contient un tableau d'objets 'niveau'. Chaque niveau
+a une propriété |field|, qui contient une représentation textuelle du
+niveau, et une propriété  |boulders|, qui indique la quantité de rochers
+qui doivent être expulsés pour finir le niveau.
 
 > show(sokobanLevels.length);
 > show(sokobanLevels[1].boulders);
 > forEach(sokobanLevels[1].field, print);
 
-In such a level, the |#| characters are walls, spaces are empty
-squares, |0| characters are used for for boulders, an |@| for the
-starting location of the player, and a |*| for the exit.
+Dans un niveau de ce type, les caractères  |#| sont des murs, les espaces
+sont des cases vides, les caractères |0| sont utilisés pour les rochers,
+un  |@| pour la position de départ du joueur et un |*| pour la sortie.
 
 ---
 
-But, when playing the game, we do not want to be looking at this
-textual representation. Instead, we will put a _table_ into the
-document. I made small _style-sheet_ ([sokoban.css | css/sokoban.css],
-if you are curious what it looks like) to give the cells of this table
-a fixed square size, and added it to the example document. Each of the
-cells in this table will get a background image, representing the type
-of the square (empty, wall, or exit). To show the location of the
-player and the boulders, images are added to these table cells, and
-moved to different cells as appropriate.
+Mais lorsque l'on joue, on ne veut pas voir cette représentation textuelle. A
+la place, nous allons mettre un _tableau_ dans le document. J'ai fait une
+petite  _feuille de styles_  ([sokoban.css | css/sokoban.css] si vous êtes
+curieux de savoir à quoi elle ressemble) pour donner une taille fixe aux
+cellules de ce tableau, et ajouté un document d'exemple. Chacune des cellules
+du tableau va recevoir une image de fond, représentant le type de case
+(vide, mur ou sortie). Pour montrer la position du joueur et des rochers,
+des images sont ajoutées à ces cellules et déplacées  dans d'autres
+cellules en fonction du besoin.
 
-It would be possible to use this table as the main representation of
-our data -- when we want to look whether there is a wall in a given
-square, we just inspect the background of the appropriate table cell,
-and to find the player, we just search for the image node with the
-correct |src| property. In some cases, this approach is practical, but
-for this program I chose to keep a separate data structure for the
-grid, because it makes things much more straightforward.
+On pourrait utiliser ce tableau comme représentation principale de nos
+données : pour savoir si il y a un mur dans une case donnée, il suffit
+de regarder l'image de fond de la cellule appropriée du tableau, et pour
+trouver le joueur, il suffit de chercher un nœud image avec la propriété
+|src| correcte. Dans certains cas, cette approche est pratique, mais pour
+ce programme, j'ai choisi de conserver une structure de donnés séparée
+pour la  grille, car cela rend les choses plus claires.
 
-This data structure is a two-dimensional grid of objects, representing
-the squares of the playing field. Each of the objects must store the
-type of background it has and whether there is a boulder or player
-present in that cell. It should also contain a reference to the table
-cell that is used to display it in the document, to make it easy to
-move images in and out of this table cell.
+Cette structure de données est une grille d'objets à deux dimensions,
+représentant les cases de l'aire de jeu. Chacun des objets doit stocker
+le type d'arrière-plan qu'il possède et un rocher ou le joueur présent
+dans cette case. Il doit aussi contenir une référence vers la cellule du
+tableau qui est utilisée pour l'afficher dans le document, pour faciliter
+le déplacement d'images dans et hors de la cellule du tableau.
 
-That gives us two kinds of objects -- one to hold the grid of the
-playing field, and one to represent the individual cells in this grid.
-If we want the game to also do things like moving the next level at
-the appropriate moment, and being able to reset the current level when
-you mess up, we will also need a 'controller' object, which creates or
-removes the field objects at the appropriate moment. For convenience,
-we will be using the prototype approach outlined at the end of \\coo,
-so object types are just prototypes, and the |create| method, rather
-than the |new| operator, is used to make new objects.
+Cela nous donne deux types d'objets : un pour gérer la grille de l'aire
+de jeu, et un pour représenter les cellules individuelles de la grille. Si
+nous voulons aussi que le jeu soit capable de faire des choses comme passer
+au niveau suivant au bon moment, et offrir la possibilité de réinitialiser
+le niveau en cours si vous vous êtes loupé, nous aurons également besoin
+d'un objet « contrôleur », qui crée et supprime les objets aire de
+jeu au moment approprié. Par commodité, nous utiliserons l'approche par
+prototype que nous avons décrit à la fin du \\coo, les types d'objet sont
+donc seulement des prototypes, et on utilise la méthode |create|, plutôt
+que l'opérateur |new|, pour créer de nouveaux objets.
 
 ---
 
-Let us start with the objects representing the squares of the game's
-field. They are responsible for setting the background of their cells
-correctly, and adding images as appropriate. The |img/sokoban/|
-directory contains a set of images, based on another ancient game,
-which will be used to visualise the game. For a start, the |Square|
-prototype could look like this.
+Commençons par les objets représentant les cases de l'aire de jeu. Ils
+sont chargés de la définition correcte de l'arrière-plan de leur cellule,
+et de l'ajout des images quand nécessaire. Le répertoire |img/sokoban/|
+contient un ensemble d'images, basées sur une autre ancien jeu, qui seront
+utilisées pour visualiser le jeu. Pour commencer, le prototype |Square|
+peut ressembler à ça.
 
 > var Square = {
 >   construct: function(character, tableCell) {
@@ -10571,10 +10590,10 @@ prototype could look like this.
 >       this.background = "wall";
 >     else if (character == "*")
 >       this.background = "exit";
-> 
+>
 >     this.tableCell = tableCell;
 >     this.tableCell.className = this.background;
-> 
+>
 >     this.content = null;
 >     if (character == "0")
 >       this.content = "boulder";
@@ -10587,7 +10606,7 @@ prototype could look like this.
 >       this.tableCell.appendChild(image);
 >     }
 >   },
-> 
+>
 >   hasPlayer: function() {
 >     return this.content == "player";
 >   },
@@ -10605,33 +10624,33 @@ prototype could look like this.
 > var testSquare = Square.create("@", dom("TD"));
 > show(testSquare.hasPlayer());
 
-The |character| argument to the constructor will be used to transform
-characters from the level blueprints into actual |Square| objects. To
-set the background of the cells, style-sheet classes are used (defined
-in [sokoban.css | css/sokoban.css]), which are assigned to the |td|
-elements' |className| property.
+L'argument |character| du constructeur est utilisé pour transformer les
+caractères du plan en objets |Square| réels. Pour définir l'arrière-plan
+des cellules, on utilise des classes de feuilles de styles (définies dans
+[sokoban.css | css/sokoban.css]), qui sont assignées à la propriété
+|className| des éléments |td|.
 
-The methods like |hasPlayer| and |isEmpty| are a way to 'isolate' the
-code that uses objects of this type from the internals of the objects.
-They are not strictly necessary in this case, but they will make the
-other code look better.
+Les méthodes comme |hasPlayer| et |isEmpty| sont une façon « d'isoler »
+le code qui utilise les objets de ce type, du fonctionnement interne des
+objets. Ce n'est pas absolument nécessaire dans ce cas, mais cela permettra
+de rendre le reste du code meilleur.
 
 ***
 
-Add methods |moveContent| and |clearContent| to the |Square|
-prototype. The first one takes another |Square| object as an argument,
-and moves the content of the |this| square into the argument by
-updating the |content| properties and moving the image node associated
-with this content. This will be used to move boulders and players
-around the grid. It may assume the square is not currently empty.
-|clearContent| removes the content from the square without moving it
-anywhere. Note that the |content| property for empty squares contains
-|null|.
+Ajoutez les méthodes |moveContent| et |clearContent| au prototype |Square|. Le
+premier prend un autre objet |Square| en argument, et déplace le contenu de
+la case |this| dans cet objet en mettant à jour les propriétés |content|
+et en déplaçant le nœud image associé au contenu. Cette méthode sera
+utilisée pour déplacer les rochers et le joueur à travers la grille. Elle
+peut supposer que la case n'est pas vide au moment de l'appel. |clearContent|
+supprime le contenu d'une case sans le déplacer nulle part. Notez bien que
+la propriété |content| pour les cases vides contient |null|.
 
-The |removeElement| function we defined in \\cdom is available in this
-chapter too, for your node-removing convenience. You may assume that
-the images are the only child nodes of the table cells, and can thus
-be reached through, for example, |this.tableCell.lastChild|.
+La fonction |removeElement| que nous avons définie au \\cdom est
+également disponible dans ce chapitre, pour vos besoins de suppression de
+nœud. Vous pouvez supposer que les images sont les seuls nœuds-fils des
+cellules de la table, et peuvent donc, par exemple, être atteints avec
+|this.tableCell.lastChild|.
 
 ///
 
@@ -10647,25 +10666,26 @@ be reached through, for example, |this.tableCell.lastChild|.
 
 ---
 
-The next object type will be called |SokobanField|. Its constructor is
-given an object from the |sokobanLevels| array, and is responsible for
-building both a table of DOM nodes and a grid of |Square| objects.
-This object will also take care of the details of moving the player
-and boulders around, through a |move| method that is given an argument
-indicating which way the player wants to move.
+Le type d'objet suivant sera appelé |SokobanField|. On passe à son
+contructeur un objet du tableau |sokobanLevels|, et il est en charge à
+la fois de la création d'une table de nœud DOM, mais également de la
+création d'une grille d'objets |Square|. Cet objet s'occupera également
+des détails pour déplacer le joueur et les rochers, grâce à une méthode
+|move| à laquelle on passe un argument indiquant dans quelle direction nous
+voulons déplacer le joueur.
 
-To identify the individual squares, and to indicate directions, we
-will again use the |Point| object type from \\coo, which, as you might
-remember, has an |add| method.
+Pour identifier les cases individuelles, et pour indiquer les directions,
+nous allons de nouveau utiliser le type d'objet |Point| du \\coo, qui,
+si vous vous en souvenez, a une méthode |add|.
 
-The base of the field prototype looks like this:
+La base du prototype de l'aire de jeu ressemblera à ça :
 
 > var SokobanField = {
 >   construct: function(level) {
 >     var tbody = dom("TBODY");
 >     this.squares = [];
 >     this.bouldersToGo = level.boulders;
-> 
+>
 >     for (var y = 0; y < level.field.length; y++) {
 >       var line = level.field[y];
 >       var tableRow = dom("TR");
@@ -10681,18 +10701,18 @@ The base of the field prototype looks like this:
 >       tbody.appendChild(tableRow);
 >       this.squares.push(squareRow);
 >     }
-> 
+>
 >     this.table = dom("TABLE", {"class": "sokoban"}, tbody);
 >     this.score = dom("DIV", null, "...");
 >     this.updateScore();
 >   },
-> 
+>
 >   getSquare: function(position) {
 >     return this.squares[position.y][position.x];
 >   },
 >   updateScore: function() {
->     this.score.firstChild.nodeValue = this.bouldersToGo + 
->                                       " boulders to go.";
+>     this.score.firstChild.nodeValue = this.bouldersToGo +
+>                                       " rochers restants.";
 >   },
 >   won: function() {
 >     return this.bouldersToGo <= 0;
@@ -10702,38 +10722,37 @@ The base of the field prototype looks like this:
 > var testField = SokobanField.create(sokobanLevels[0]);
 > show(testField.getSquare(new Point(10, 2)).content);
 
-The constructor goes over the lines and characters in the level, and
-stores the |Square| objects in the |squares| property. When it
-encounters the square with the player, it saves this position as
-|playerPos|, so that we can easily find the square with the player
-later on. |getSquare| is used to find a |Square| object corresponding
-to a certain |x,y| position on the field. Note that it doesn't take
-the edges of the field into account -- to avoid writing some boring
-code, we assume that the field is properly walled off, making it
-impossible to walk out of it.
+Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
+objets |Square| dans la propriété |squares|. Quand il rencontre une case
+avec le joueur, il enregistre cette position dans |playerPos|, pour qu'il soit
+facile de retrouver la case dans laquelle se trouve le joueur. |getSquare| est
+utilisé pour trouver l'objet |Square| à une position |x,y| donnée de l'aire
+de jeu. Remarquez que l'on ne tient pas compte des bords de la grille :
+pour éviter d'écrire du code ennuyeux, nous supposons que l'aire de jeu
+est correctement fermée par des murs, ce qui empêche le joueur d'en sortir.
 
-The word |"class"| in the |dom| call that makes the |table| node is
-quoted as a string. This is necessary because _|class|_ is a 'reserved
-word' in JavaScript, and may not be used as a variable or property
-name.
+Le mot |"class"| dans l'appel |dom| qui crée le noeud |table| est donné sous
+forme de chaîne . Cela est nécessaire car _|class|_ est un mot réservé
+en JavaScript, et ne doit pas être utilisé pour une variable ou un nom
+de propriété.
 
-The amount of boulders that have to be cleared to win the level (this
-may be less than the total amount of boulders on the level) is stored
-in |bouldersToGo|. Whenever a boulder is brought to the exit, we can
-subtract 1 from this, and see whether the game is won yet. To show the
-player how he is doing, we will have to show this amount somehow. For
-this purpose, a |div| element with text is used. |div| nodes are
-containers without inherent markup. The score text can be updated with
-the |updateScore| method. The |won| method will be used by the
-controller object to determine when the game is over, so the player
-can move on to the next level.
+Le nombre de rochers dont il faut se débarrasser pour réussir un niveau
+(ce nombre peut être inférieur au nombre total de rochers du niveau) est
+stocké dans |bouldersToGo|. Chaque fois qu'un rocher est amené à la sortie,
+nous pouvons en soustraire 1, et voir si la partie est gagnée. Pour montrer
+au joueur comment il s'en sort, nous devrons afficher cette valeur quelque
+part. Dans ce but, on va utiliser un élément |div| avec du texte. Les nœuds
+|div| sont des conteneurs sans balise qui leur est propre. Le texte du score
+peut être mis à jour avec la méthode |updateScore|. La méthode |won|
+sera utilisée par l'objet contrôleur pour déterminer quand la partie est
+terminée, pour que le joueur puisse passer au niveau suivant.
 
 ---
 
-If we want to actually see the playing field and the score, we will
-have to insert them into the document somehow. That is what the
-|place| method is for. We'll also add a |remove| method to make it
-easy to remove a field when we are done with it.
+Si nous voulons voir le terrain de jeu et le score, nous devrons l'insérer
+dans le document d'une manière ou d'une autre. C'est à cela que sert
+la méthode |place|. Nous allons aussi ajouter une méthode |remove| pour
+faciliter la suppression d'un niveau quand on a terminé.
 
 > SokobanField.place = function(where) {
 >   where.appendChild(this.score);
@@ -10746,21 +10765,22 @@ easy to remove a field when we are done with it.
 >
 > testField.place(document.body);
 
-If all went well, you should see a Sokoban field now.
+Si tout s'est bien passé, vous devriez maintenant voir un jeu de Sokoban.
 
 ***
 
-But this field doesn't do very much yet. Add a method called |move|.
-It takes a |Point| object specifying the move as argument (for example
-|-1,0| to move left), and takes care of moving the game elements in
-the correct way.
+Mais ce niveau ne fait pas encore grand-chose. Ajoutez une méthode appelée
+|move|. Elle prend en argument un objet |Point| décrivant le mouvement (par
+exemple |-1,0| pour se déplacer vers la gauche), et s'occupe de déplacer
+les éléments correctement.
 
-The correct way is this: The |playerPos| property can be used to
-determine where the player is trying to move. If there is a boulder
-here, look at the square behind this boulder. When there is an exit
-there, remove the boulder and update the score. When there is empty
-space there, move the boulder into it. Next, try to move the player.
-If the square he is trying to move into is not empty, ignore the move.
+Voici la démarche correcte : la propriété |playerPos| peut être utilisée
+pour déterminer où le joueur essaye de se déplacer. S'il y a un rocher à
+cet endroit-là, regardez la case derrière ce rocher. S'il y a une sortie,
+enlevez le rocher et mettez à jour le score. S'il y a un espace vide,
+déplacez le rocher dans celui-ci et essayez ensuite de bouger le joueur.
+Si la case dans laquelle il essaie de se déplacer n'est pas vide, abandonnez
+le déplacement.
 
 ///
 
@@ -10789,52 +10809,53 @@ If the square he is trying to move into is not empty, ignore the move.
 >   }
 > };
 
-By taking care of boulders first, the move code can work the same way
-when the player is moving normally and when he is pushing a boulder.
-Note how the square behind the boulder is found by adding the
-|direction| to the |playerPos| twice. Test it by moving left two
-squares:
+En s'occupant des rochers en premier, le code de déplacement peut fonctionner
+de la même façon quand un joueur se déplace normalement et quand il pousse
+un rocher.
+Remarquez comment la case derrière est trouvée en ajoutant |direction|
+à |playerPos| deux fois. Faites un test avec un déplacement vers la gauche
+de deux cases :
 
 > testField.move(new Point(-1, 0));
 > testField.move(new Point(-1, 0));
 
-If that worked, we moved a boulder into a place from which we can't
-get it out anymore, so we'd better throw this field away.
+Si cela a marché, on a déplacé un rocher dans un espace d'où on ne peut
+plus le retirer, donc on ferait mieux de se débarrasser de cette aire de jeu.
 
 > testField.remove();
 
 ---
 
-All the 'game logic' has been taken care of now, and we just need a
-controller to make it playable. The controller will be an object type
-called |SokobanGame|, which is responsible for the following things:
+On s'est occupé de toute la « logique du jeu » maintenant, et on a
+juste besoin d'un contrôleur pour que le jeu soit jouable. Le contrôleur sera
+un type d'objet appelé |SokobanGame|, qui est responsable de ce qui suit :
 
- * Preparing a place where the game field can be placed.
- * Building and removing |SokobanField| objects.
- * Capturing key events and calling the |move| method on current field with the correct argument.
- * Keeping track of the current level number and moving to the next level when a level is won.
- * Adding buttons to reset the current level or the whole game (back to level 0).
+ * Préparer un endroit où l'aire de jeu peut être placée.
+ * Construire et enlever les objets |SokobanField|.
+ * Capturer des événements d'appui de touche et appeler la méthode |move| sur le terrain actuel avec l'argument qui convient.
+ * Mettre à jour le score, et passer au niveau suivant quand un niveau est réussi.
+ * Ajouter des boutons pour réinitialiser le niveau en cours ou le jeu tout entier (retour au niveau 0).
 
-We start again with an unfinished prototype.
+On commence encore avec un prototype inachevé.
 
 > var SokobanGame = {
 >   construct: function(place) {
 >     this.level = null;
 >     this.field = null;
-> 
->     var newGame = dom("BUTTON", null, "New game");
+>
+>     var newGame = dom("BUTTON", null, "Nouvelle partie");
 >     addHandler(newGame, "click", method(this, "newGame"));
->     var reset = dom("BUTTON", null, "Reset level");
+>     var reset = dom("BUTTON", null, "Réinitialiser niveau");
 >     addHandler(reset, "click", method(this, "reset"));
 >     this.container = dom("DIV", null,
 >                          dom("H1", null, "Sokoban"),
 >                          dom("DIV", null, newGame, " ", reset));
 >     place.appendChild(this.container);
-> 
+>
 >     addHandler(document, "keydown", method(this, "keyDown"));
 >     this.newGame();
 >   },
-> 
+>
 >   newGame: function() {
 >     this.level = 0;
 >     this.reset();
@@ -10851,21 +10872,21 @@ We start again with an unfinished prototype.
 >   }
 > };
 
-The constructor builds a |div| element to hold the field, along with
-two buttons and a title. Note how |method| is used to attach methods
-on the |this| object to events.
+Le constructeur construit un élément |div| pour stocker l'aire de jeu,
+avec deux boutons et un titre. Remarquez comment |method| est utilisé pour
+attacher les méthodes de l'objet |this| à des évènements.
 
-We can put a Sokoban game into our document like this:
+On peut mettre un jeu Sokoban dans notre document de cette façon :
 
 > var sokoban = SokobanGame.create(document.body);
 
 ***
 
-All that is left to do now is filling in the key event handler.
-Replace the |keyDown| method of the prototype with one that detects
-presses of the arrow keys and, when it finds them, moves the player in
-the correct direction. The following |Dictionary| will probably come
-in handy:
+Tout ce qu'il reste à faire maintenant c'est de remplir le gestionnaire
+d'événements clavier. Remplacez la méthode |keyDown| du prototype par une
+autre qui détecte les appuis sur les touches des flèches de déplacement, et
+quand elle les trouve, déplace le joueur dans la bonne direction. |Dictionary|
+ci-dessous sera probablement utile :
 
 > var arrowKeyCodes = new Dictionary({
 >   37: new Point(-1, 0), // left
@@ -10874,14 +10895,15 @@ in handy:
 >   40: new Point(0, 1)   // down
 > });
 
-After an arrow key has been handled, check |this.field.won()| to find
-out if that was the winning move. If the player won, use |alert| to
-show a message, and go to the next level. If there is no next level
-(check |sokobanLevels.length|), restart the game instead.
+Après qu'un appui sur une touche de direction est géré, vérifiez
+|this.field.won()| pour savoir si c'était le déplacement gagnant. Si le
+joueur a gagné, utilisez |alert| pour afficher un message, et passer au niveau
+suivant. S'il n'y a pas de niveau suivant (vérifiez |sokobanLevels.length),
+redémarrez le jeu.
 
-It is probably wise to stop the events for key presses after handling
-them, otherwise pressing arrow-up and arrow-down will scroll your
-window, which is rather annoying.
+Il est probablement sage d'arrêter les événements quand des appuis sur les
+touches ont été gérés , sinon les appuis sur les flèches « haut »
+et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 
 ///
 
@@ -10891,42 +10913,45 @@ window, which is rather annoying.
 >     this.field.move(arrowKeyCodes.lookup(event.keyCode));
 >     if (this.field.won()) {
 >       if (this.level < sokobanLevels.length - 1) {
->         alert("Excellent! Going to the next level.");
+>         alert("Excellent ! Passons au niveau suivant.");
 >         this.level++;
 >         this.reset();
 >       }
 >       else {
->         alert("You win! Game over.");
+>         alert("Vous avez gagné ! Partie terminée.");
 >         this.newGame();
 >       }
 >     }
 >   }
 > };
 
-It has to be noted that capturing keys like this -- adding a handler
-to the |document| and stopping the events that you are looking for --
-is not very nice when there are other elements in the document. For
-example, try moving the cursor around in the text field at the top of
-the document. -- It won't work, you'll only move the little man in the
-Sokoban game. If a game like this were to be used in a real site, it
-is probably best to put it in a frame or window of its own, so that it
-only grabs events aimed at its own window.
+Vous devez avoir conscience  que capturer des touches de cette manière
+(ajouter un gestionnaire  d'événements à |document| et stopper les
+événements que vous recherchez)  n'est pas très élégant quand il y a
+d'autres éléments dans le document.  Par exemple, essayez de déplacer le
+curseur autour de la zone de texte en haut du document : cela ne fonctionne
+pas, vous allez juste déplacer le petit bonhomme dans le jeu Sokoban. Si
+un jeu comme celui-ci devait être utilisé dans un vrai site, il serait
+probablement mieux de le mettre dans une frame ou dans sa propre fenêtre,
+de façon à ce qu'il ne récupère que les évènements de sa propre fenêtre.
 
 ***
 
-When brought to the exit, the boulders vanish rather abrubtly. By
-modifying the |Square.clearContent| method, try to show a 'falling'
-animation for boulders that are about to be removed. Make them grow
-smaller for a moment before, and then disappear. You can use
-|style.width = "50%"|, and similarly for |style.height|, to make an
-image appear, for example, half as big as it usually is.
+Quand ils sont amenés à la sortie, les rochers disparaissent plutôt
+brusquement. En modifiant la méthode |Square.clearContent|, essayez
+d'afficher une animation de rochers « tombants » lorsqu'ils sont
+sur le point d'être enlevés. Faites-les rapetisser un moment avant, puis
+disparaître. Vous pouvez utiliser |style.width = "50%"|, et de la même
+façon |style.height|, pour afficher un image à, par exemple, la moitié
+de sa taille habituelle.
 
 ///
 
-We can use |setInterval| to handle the timing of the animation. Note
-that the method makes sure to clear the interval after it is done. If
-you don't do that, it will continue wasting your computer's time until
-the page is closed.
+On peut utiliser |setInterval| pour gérer le minutage
+de l'animation. N'oubliez pas pas que la méthode doit s'assurer que
+l'intervalle est effacé après que c'est terminé. Si vous ne le faites
+pas, il va continuer à faire perdre du temps à votre ordinateur jusqu'à
+ce que la page soit fermée.
 
 > Square.clearContent = function() {
 >   self.content = null;
@@ -10945,16 +10970,18 @@ the page is closed.
 >   }, 70);
 > };
 
-Now, if you have a few hours to waste, try finishing all levels.
+Maintenant, si vous avez un peu de temps à perdre, essayez de finir tous
+les niveaux.
 
 ---
 
-@_|onfocus|_@_|onblur|_Other event types that can be useful are
-_|focus|_ and _|blur|_, which are fired on elements that can be
-'focused', such as form inputs. |focus|, obviously, happens when you
-put the focus on the element, for example by clicking on it. |blur| is
-JavaScript-speak for 'unfocus', and is fired when the focus leaves the
-element.
+@_|onfocus|_@_|onblur|_ D'autres types d'évènements qui peuvent être
+utiles sont les évènements _|focus|_ et _|blur|_, qui sont générés sur
+des éléments qui peuvent recevoir le « focus », comme par exemple les
+champs de saisie d'un formulaire. |focus|, évidemment, se produit lorsque
+vous donnez le focus à un élément, par exemple en cliquant dessus. |blur|
+est le terme JavaScript pour « enlever le focus », et il est généré
+quand le focus est retiré d'un élément.
 
 > addHandler($("textfield"), "focus", function(event) {
 >   event.target.style.backgroundColor = "yellow";
@@ -10963,132 +10990,142 @@ element.
 >   event.target.style.backgroundColor = "";
 > });
 
-@_|onchange|_Another event related to form inputs is _|change|_. This
-is fired when the content of the input has changed... except that for
-some inputs, such as text inputs, it does not fire until the element
-is unfocused.
+@_|onchange|_ Un autre évènement lié aux entrées d'un formulaire
+est _|change|_. Il est généré quand le contenu d'une zone de saisie
+change... excepté pour certaines zones de saisie, comme les zones de texte,
+qui ne génèrent pas cet évènement avant que l'élément perde le focus.
 
 > addHandler($("textfield"), "change", function(event) {
 >   print("Content of text field changed to '",
 >         event.target.value, "'.");
 > });
 
-You can type all you want, the event will only fire when you click
-outside of the input, press tab, or unfocus it in some other way.
+Vous pouvez taper ce que vous voulez, l'événement ne sera généré que
+lorsque vous cliquerez en-dehors de la zone de texte, appuierez sur la touche
+tabulation, ou enlèverez le focus de l'élément d'une autre façon.
 
-@_|submit|_Forms also have a _|submit|_ event, which is fired when
-they submit. It can be stopped to prevent the submit from taking
-place. This gives us a *much* better way to do the form validation we
-saw in the previous chapter. You just register a |submit| handler,
-which stops the event when the content of the form is not valid. That
-way, when the user does not have JavaScript enabled, the form will
-still work, it just won't have instant validation.
+@_|submit|_ Les formulaires ont également un événement _|submit|_ , qui
+est généré quand ils sont soumis. Il peut être stoppé pour empêcher la
+soumission d'avoir lieu. Cela nous donne une façon *vraiment* meilleure  de
+valider le formulaire que celle que nous avons présentée dans le chapitre
+précédent. Vous enregistrez simplement un gestionnaire d'événements
+pour |submit| qui arrête l'événement si le contenu du formulaire n'est
+pas valide. De cette façon, lorsque JavaScript n'est pas activé pour
+l'utilisateur , le formulaire va continuer de fonctionner, il n'y aura tout
+simplement pas de validation instantanée.
 
-@_|onload|_@_|unload|_Window objects have a _|load|_ event that fires
-when the document is fully loaded, which can be useful if your script
-needs to do some kind of initialisation that has to wait until the
-whole document is present. For example, the scripts on the pages for
-this book go over the current chapter to hide solutions to exercises.
-You can't do that when the exercises are not loaded yet. There is also
-an _|unload|_ event, firing when the user leaves the document, but
-this is not properly supported by all browsers.
+@_|onload|_@_|unload|_ Les objets Window ont un événement _|load|_ qui
+est généré lorsque le document est complètement chargé, ce qui peut
+être utile si votre script doit réaliser une initialisation quelconque qui
+doit attendre que tout le document soit présent. Par exemple, les scripts
+sur les pages de ce livre parcourent le chapitre en cours pour cacher les
+solutions des exercices. Vous ne pouvez pas le faire si les exercices ne
+sont pas encore chargés. Il existe également un événement _|unload|_,
+qui est généré lorsque l'utilisateur quitte le document, mais il n'est
+pas correctement pris en charge par tous les navigateurs.
 
-@_|onresize|_Most of the time it is best to leave the laying out of a
-document to the browser, but there are effects that can only be
-produced by having a piece of JavaScript set the exact sizes of some
-nodes in a document. When you do this, make sure you also listen for
-_|resize|_ events on the window, and re-calculate the sizes of your
-element every time the window is resized.
+@_|onresize|_ La plupart du temps, il est préférable de laisser la gestion
+de la mise en page du document au navigateur, mais il existe certains effets
+qui ne peuvent être réalisés qu'avec un peu de JavaScript pour définir
+la taille précise de certains nœuds d'un document. Quand vous faites cela,
+assurez-vous que vous surveillez les événements _|resize|_ de la fenêtre,
+et re-calculez la taille de vos éléments chaque fois que la fenêtre change
+de taille.
 
 ---
 
-Finally, I have to tell you something about event handlers that you
-would rather not know. The Internet Explorer browser (which means, at
-the time of writing, the browser used by a majority of web-surfers)
-has a bug that causes values to not be cleaned up as normal: Even when
-they are no longer used, they stay in the machine's memory. This is
-known as a _memory leak_, and, once enough memory has been leaked,
-will seriously slow down a computer.
+Pour terminer, je dois vous dire quelque chose à propos des gestionnaires
+d'événements que vous préféreriez ne pas savoir. Le navigateur Internet
+Explorer (c'est-à-dire, à l'heure où j'écris ceci, le navigateur de la
+majorité des internautes) souffre d'un bug qui empêche les valeurs d'être
+nettoyées correctement : même lorsqu'elles ne sont plus utilisées,
+elles restent dans la mémoire de l'ordinateur. Ceci est connu sous le nom
+de _memory leak_ (ou _fuite mémoire_ en français), et lorsque suffisamment
+de mémoire a fui, cela peut ralentir fortement un ordinateur.
 
-When does this leaking occur? Due to a deficiency in Internet
-Explorer's _garbage collector_, the system whose purpose it is to
-reclaim unused values, when you have a DOM node that, through one of
-its properties or in a more indirect way, refers to a normal
-JavaScript object, and this object, in turn, refers back to that DOM
-node, both objects will not be collected. This has something to do
-with the fact that DOM nodes and other JavaScript objects are
-collected by different systems -- the system that cleans up DOM nodes
-will take care to leave any nodes that are still referenced by
-JavaScript objects, and vice versa for the system that collects normal
-JavaScript values.
+Quand est-ce que cette fuite se produit ? À cause d'un défaut dans le
+_garbage collector_ (ou _ramasse-miettes_ en français) d'Internet Explorer,
+le système dont le but est de récupérer les valeurs inutilisées, lorsque
+que vous avez un nœud DOM qui, à travers une des ses propriétés ou d'une
+façon plus indirecte, fait référence à un objet JavaScript normal, et que
+cet objet, en retour, fait référence à ce nœud DOM, aucun des deux objets
+ne sera ramassé par le ramasse-miettes. Cela vient du fait que les nœuds DOM
+et les autres objets JavaScript sont ramassés par différents systèmes :
+le système qui s'occupe de nettoyer les nœuds DOM fera attention de laisser
+tous les nœuds qui sont encore référencés par des objets JavaScript,
+et vice-versa pour le système qui ramasse les valeurs JavaScript normales.
 
-As the above description shows, the problem is not specifically
-related to event handlers. This code, for example, creates a bit of
-un-collectable memory:
+Comme la description ci-dessus le montre, ce problème n'est pas spécifique
+aux gestionnaires d'événements. Ce code, par exemple, crée un peu de
+mémoire qui ne peut pas être récupérée :
 
 !> var jsObject = {link: document.body};
 !> document.body.linkBack = jsObject;
 
-Even after such an Internet Explorer browser goes to a different page,
-it will still hold on to the |document.body| shown here. The reason
-this bug is often associated with event handlers is that it is
-extremely easy to make such circular links when registering a handler.
-The DOM node keeps references to its handlers, and the handler, most
-of the time, has a reference to the DOM node. Even when this reference
-is not intentionally made, JavaScript's scoping rules tend to add it
-implicitly. Consider this function:
+Même si un navigateur Internet Explorer passe à la page suivante, il
+continue à garder ce |document.body|. La raison pour laquelle ce bug
+est souvent associé aux gestionnaires d'événements vient du fait qu'il
+est extrêmement facile de créer de tels liens circulaires lorsque l'on
+enregistre un gestionnaire d'événement.
+Le nœud DOM conserve une référence sur ses gestionnaires d'événements,
+et le gestionnaire, la plupart du temps. possède une référence
+vers le nœud DOM. Même lorsque cette référence n'est pas faite
+intentionnellement, les règles de portée de JavaScript ont tendance à
+l'ajouter implicitement. Etudions cette fonction :
 
 !> function addAlerter(element) {
 !>   addHandler(element, "click", function() {
-!>     alert("Alert! ALERT!");
+!>     alert("Alerte! ALERTE!");
 !>   });
 !> }
 
-The anonymous function that is created by the |addAlerter| function
-can 'see' the |element| variable. It doesn't use it, but that does not
-matter -- just because it can see it, it will have a reference to it.
-By registering this function as an event handler on that same
-|element| object, we have created a circle.
+La fonction anonyme qui est créée par la fonction |addAlerter| peut
+'voir' la variable |element|. Elle ne l'utilise pas, mais cela n'a pas
+d'importance : simplement parce qu'elle peut la voir, elle possède une
+référence dessus. En enregistrant cette fonction comme un gestionnaire
+d'événement pour ce même objet |element|, nous avons créé un cercle.
 
-There are three ways to deal with this problem. The first approach, a
-very popular one, is to ignore it. Most scripts will only leak a
-little bit, so it takes a long time and a lot of pages before the
-problems become noticeable. And, when the problems are so subtle,
-who's going to hold *you* responsible? Programmers given to this
-approach will often searingly denounce Microsoft for their shoddy
-programming, and state that the problem is not their fault, so *they*
-shouldn't be fixing it.
+Il existe trois manières de régler ce problème. La première approche,
+qui est très populaire, est de l'ignorer. La plupart des scripts vont
+fuir très peu, il faudra donc beaucoup de temps et de pages avant que le
+problème se remarque. Et, quand les problèmes sont aussi subtils, qui
+*vous* considérera comme responsable ? Les programmeurs adeptes de cette
+approche dénonceront souvent vertement Microsoft pour cette programmation de
+mauvaise qualité, et déclareront que le problème n'est pas de leur faute,
+donc que ce n'est pas à *eux* de le réparer.
 
-Such reasoning is not entirely without merit, of course. But when half
-your users are having problems with the web-pages you make, it is hard
-to deny that there is a practical problem. Which is why people working
-on 'serious' sites usually make an attempt not to leak any memory.
-Which brings us to the second approach: Painstakingly making sure that
-no circular references between DOM objects and regular objects are
-created. This means, for example, rewriting the above handler like
-this:
+Un tel raisonnement ne manque pas de logique, bien sûr. Mais quand la
+moitié des utilisateurs ont un problème avec les pages que vous faites,
+il est difficile de nier qu'il existe un problème pratique. C'est pourquoi
+les personnes travaillant sur les sites « de qualité » essaient en
+général d'éviter les fuites mémoire. Ce qui nous amène à la deuxième
+approche : vérifier laborieusement qu'on ne crée pas de références
+circulaires entre les objets DOM et les objets normaux. Cela veut dire, par
+exemple, récrire le gestionnaire défini précédemment de cette façon :
 
 > function addAlerter(element) {
 >   addHandler(element, "click", function() {
->     alert("Alert! ALERT!");
+>     alert("Alerte! ALERTE!");
 >   });
 >   element = null;
 > }
 
-Now the |element| variable no longer points at the DOM node, and the
-handler will not leak. This approach is viable, but requires the
-programmer to *really* pay attention.
+Maintenant la variable |element| ne pointe plus sur le nœud DOM, et le
+gestionnaire n'aura pas de fuite mémoire. Cette approche est correcte,
+mais le programmeur doit vraiment faire *très* attention.
 
-The third solution, finally, is to not worry too much about creating
-leaky structures, but to make sure to clean them up when you are done
-with them. This means unregistering any event handlers when they are
-no longer needed, and registering an |onunload| event to unregister
-the handlers that are needed until the page is unloaded. It is
-possible to extend an event-registering system, like our |addHandler|
-function, to automatically do this. When taking this approach, you
-must keep in mind that event handlers are not the only possible source
-of memory leaks -- adding properties to DOM node objects can cause
-similar problems.
+En définitive la troisième solution consiste à ne pas trop s'en faire
+si l'on crée des structures qui ont des fuites, mais à s'assurer qu'on a
+bien tout nettoyé lorsqu'on a terminé de les élaborer. Ce qui implique
+de dés-enregistrer les gestionnaires d'événements quand on n'en a plus
+besoin, et d'enregistrer un événement |onunload| pour dés-enregistrer
+les gestionnaires qui sont nécessaires jusqu'à ce que la page soit
+déchargée. Il est possible d'étendre un système d'enregistrement
+d'événements, tel que notre fonction |addHandler|, pour automatiser le
+processus. En choisissant cette approche, vous devez gardez à l'esprit
+que les gestionnaires d'événements ne sont pas la seule source possible
+de fuite de mémoire — ajouter des propriétés aux objets des nœuds du
+DOM peut causer des problèmes comparables.
 
 ===================
 HTTP requests / xhr
