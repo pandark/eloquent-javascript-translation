@@ -6017,237 +6017,242 @@ blocs dans un espace limité, peut être résolu en explorant les différents
 les derniers blocs sont des culs-de-sac, et le chemin qui permet de faire
 rentrer tous les blocs dans l'espace est la solution.
 
-================================
-Object-oriented Programming / oo
-================================
+=================================
+Programmation orientée objet / oo
+=================================
 
-In the early nineties, a thing called _object-oriented programming_
-stirred up the software industry. Most of the ideas behind it were not
-really new at the time, but they had finally gained enough momentum to
-start rolling, to become fashionable. Books were being written,
-courses given, programming languages developed. All of a sudden,
-everybody was extolling the virtues of object-orientation,
-enthusiastically applying it to every problem, convincing themselves
-they had finally found the *right way to write programs*.
+Au début des années 90, une chose appelée _programmation orientée objet_
+souffla un vent nouveau sur l'industrie du logiciel. La plupart des idées
+derrière ce concept n'étaient pas vraiment nouvelles, mais elles avaient
+enfin suffisamment d'élan pour décoller, et devenir « à la mode ». Des
+livres furent écrits sur le sujet, des cours furent organisés, des langages
+de programmation développés. Tout d'un coup, tout le monde se mit à vanter
+les mérites de la programmation orientée objet, appliquant ses recettes
+à tous les problèmes avec enthousiasme, se convainquant qu'on avait enfin
+trouvé *la bonne façon d'écrire des programmes*.
 
-These things happen a lot. When a process is hard and confusing,
-people are always on the lookout for a magic solution. When something
-looking like such a solution presents itself, they are prepared to
-become devoted followers. For many programmers, even today,
-object-orientation (or their view of it) is the gospel. When a program
-is not 'truly object-oriented', whatever that means, it is considered
-decidedly inferior.
+Ces choses arrivent souvent. Quand un problème est compliqué. Les gens
+cherchent toujours une solution magique.
+Quand arrive quelque chose qui ressemble à cette solution, ils sont prêts
+à s'y jeter corps et âme. Pour de nombreux programmeurs, encore aujourd'hui,
+l'orientation objet (ou du moins la vision qu'ils en ont) est la panacée. Si
+un programme n'est pas « en pur objet », quel que soit le sens de cette
+expression, il est considéré comme résolument inférieur.
 
-Few fads have managed to stay popular for as long as this one, though.
-Object-orientation's longevity can largely be explained by the fact
-that the ideas at its core are very solid and useful. In this chapter,
-we will discuss these ideas, along with JavaScript's (rather
-eccentric) take on them. The above paragraphs are by no means meant to
-discredit these ideas. What I want to do is warn the reader against
-developing an unhealthy attachment to them.
-
----
-
-As the name suggests, object-oriented programming is related to
-objects. So far, we have used objects as loose aggregations of values,
-adding and altering their properties whenever we saw fit. In an
-object-oriented approach, objects are viewed as little worlds of their
-own, and the outside world may touch them only through a limited and
-well-defined _interface_, a number of specific methods and properties.
-The 'reached list' we used at the end of \\csearch is an example of
-this: We used only three functions, |makeReachedList|, |storeReached|,
-and |findReached| to interact with it. These three functions form an
-interface for such objects.
-
-The |Date|, |Error|, and |BinaryHeap| objects we have seen also work
-like this. Instead of providing regular functions for working with the
-objects, they provide a way to create such objects, using the |new|
-keyword, and a number of methods and properties that provide the rest
-of the interface.
+Toutefois, peu d'engouements ont duré si longtemps. La longévité de la
+programmation orientée objet peut sûrement s'expliquer par le fait que les
+idées centrales de concept sont utiles et simples. Dans ce chapitre, nous
+allons parler de ces idées et de leur application, plutôt excentrique, au
+JavaScript. Les paragraphes précédents n'étaient absolument pas destinés
+à discréditer ces idées. Mon objectif était juste d'éviter qu'on ne
+jure plus que par elles.
 
 ---
 
-One way to give an object methods is to simply attach function values
-to it.
+Comme son nom l'indique, la programmation orientée objet est centrée sur
+la notion d'objet. Depuis le début, nous avons utilisé les objets comme
+des espèces de fourre-tout plein de valeurs, où l'on ajoute ou modifie des
+propriétés à notre guise. En fait, dans une approche orientée objet, les
+objets sont vus comme des microcosmes indépendants, qui ne communiquent avec
+l'extérieur qu'à travers un nombre limité d'_interface_s, un ensemble de
+méthodes et propriétés spécifiques. La « liste des nœuds atteints »
+utilisée à la fin du \\csearch en est un exemple : nous avons utilisé
+trois fonctions, |makeReachedList|, |storeReached| et |findReached| pour
+interagir avec. Ces trois fonctions forment une interface pour ces objets.
 
-> var rabbit = {};
-> rabbit.speak = function(line) {
->   print("The rabbit says '", line, "'");
+Les objets |Date|, |Error| et |BinaryHeap| que nous avons vus fonctionnent
+également comme cela. Au lieu de fournir des fonctions classiques pour
+travailler avec ces objets, ils fournissent une manière d'être créés,
+via le mot-clé |new|, et un certain nombre de méthodes et propriétés
+qui forment le reste de l'interface.
+
+---
+
+Pour faire une méthode d'objet, il suffit de définir une variable qui
+contiendra une fonction.
+
+> var lapin = {};
+> lapin.parler = function(tirade) {
+>   print("Le lapin dit '", tirade, "'");
 > };
 >
-> rabbit.speak("Well, now you're asking me.");
+> lapin.parler("Eh bien, maintenant c'est vous qui me le demandez.");
 
-In most cases, the method will need to know *who* it should act on.
-For example, if there are different rabbits, the |speak| method must
-indicate which rabbit is speaking. For this purpose, there is a
-special variable called _|this|_, which is always present when a
-function is called, and which points at the relevant object when the
-function is called as a method. A function is called as a method when
-it is looked up as a property, and immediately called, as in
-|object.method()|.
+Dans la plupart des cas, la méthode aura besoin de savoir sur *qui*
+elle doit s'appliquer. Par exemple, s'il y a plusieurs lapins, la méthode
+|parler| doit pouvoir indiquer quel est le lapin qui parle. Pour ce faire,
+il y a une variable spéciale appelée _|this|_, qui est toujours définie
+à l'intérieur d'une fonction et qui pointe vers l'objet sur lequel la
+fonction s'applique. Une fonction est appelée une méthode quand elle est
+définie en tant que propriété d'un objet, et appelée directement comme
+dans |objet.methode()|.
 
-> function speak(line) {
->   print("The ", this.adjective, " rabbit says '", line, "'");
+> function parler(tirade) {
+>   print("Le ", this.adjectif, " lapin dit « ", tirade, " »");
 > }
-> var whiteRabbit = {adjective: "white", speak: speak};
-> var fatRabbit = {adjective: "fat", speak: speak};
+> var lapinBlanc = {adjectif: "blanc", parler: parler};
+> var grosLapin = {adjectif: "gros", parler: parler};
 >
-> whiteRabbit.speak("Oh my ears and whiskers, how late it's getting!");
-> fatRabbit.speak("I could sure use a carrot right now.");
+> lapinBlanc.parler("Par ma moustache et mes oreilles, comme il se fait tard !");
+> grosLapin.parler("J'ai bien envie d'une carotte, maintenant.");
 
 ---
 
-I can now clarify the mysterious first argument to the _|apply|_
-method, for which we always used |null| in \\cfp. This argument can be
-used to specify the object that the function must be applied to. For
-non-method functions, this is irrelevant, hence the |null|.
+Je peux maintenant clarifier la présence du mystérieux premier argument
+de la méthode _|apply|_, pour lequel nous avons toujours mis |null| dans le
+\\cfp. Cet argument peut être utilisé pour spécifier un objet sur lequel
+la fonction s'appliquera, qui prendra donc le rôle de |this|. Toutefois,
+pour les fonctions qui ne sont pas des méthodes, cela n'a pas de sens,
+d'où le |null|.
 
-> speak.apply(fatRabbit, ["Yum."]);
+> parler.apply(grosLapin, ["Miam."]);
 
-Functions also have a _|call|_ method, which is similar to |apply|,
-but you can give the arguments for the function separately instead of
-as an array:
+Les fonctions ont également une méthode _|call|_, qui se comporte comme
+|apply|, à l'exception du fait que les arguments peuvent être fournis
+séparéments, et non dans un tableau :
 
-> speak.call(fatRabbit, "Burp.");
+> parler.call(grosLapin, "Rot.");
 
 ---
 
-The _|new|_ keyword provides a convenient way of creating new objects.
-When a function is called with the word |new| in front of it, its
-_|this|_ variable will point at a *new* object, which it will
-automatically return (unless it explicitly returns something else).
-Functions used to create new objects like this are called
-_constructor_s. Here is a constructor for rabbits:
+Le mot-clé _|new|_ fournit un bon moyen de créer de nouveaux objets. Quand
+une fonction est appelée avec le mot |new| devant, sa variable _|this|_
+pointe sur un *nouvel* objet, qui sera automatiquement retourné (à moins que
+la fonction ne retourne explicitement autre chose). Les fonctions utilisées
+pour créer de nouveaux objets comme ça sont appelées des _constructeur_s. En
+voici un pour les lapins :
 
-> function Rabbit(adjective) {
->   this.adjective = adjective;
->   this.speak = function(line) {
->     print("The ", this.adjective, " rabbit says '", line, "'");
+> function Lapin(adjectif) {
+>   this.adjectif = adjectif;
+>   this.parler = function(tirade) {
+>     print("Le ", this.adjectif, " lapin dit '", tirade, "'");
 >   };
 > }
 >
-> var killerRabbit = new Rabbit("killer");
-> killerRabbit.speak("GRAAAAAAAAAH!");
+> var lapinTueur = new Lapin("tueur");
+> lapinTueur.parler("GRAAAAAAAAAH!");
 
-It is a convention, among JavaScript programmers, to start the names
-of constructors with a capital letter. This makes it easy to
-distinguish them from other functions.
+Il y a une convention, parmis les programmeurs JavaScript, qui consiste
+à faire débuter les noms de constructeurs par une lettre majuscule. Cela
+permet de mieux les reconnaîtres au milieu des autres fonctions.
 
-Why is the |new| keyword even necessary? After all, we could have
-simply written this:
+Mais pourquoi le mot clés |new| est-il nécessaire ? Après tout, nous
+aurions pu écrire simplement :
 
-> function makeRabbit(adjective) {
+> function creerLapin(adjectif) {
 >   return {
->     adjective: adjective,
->     speak: function(line) {/*etc*/}
+>     adjectif: adjectif,
+>     parler: function(tirade) {/*etc*/}
 >   };
 > }
 >
-> var blackRabbit = makeRabbit("black");
+> var lapinNoir = creerLapin("noir");
 
-But that is not entirely the same. |new| does a few things behind the
-scenes. For one thing, our |killerRabbit| has a property called
-_|constructor|_, which points at the |Rabbit| function that created
-it. |blackRabbit| also has such a property, but it points at the
-_|Object|_ function.
+Mais ce n'est pas exactement la même chose. |new| en fait discrètement
+plus. En fait, notre fonction |lapinTueur| a une propriété
+appelée _|constructor|_, qui pointe vers la fonction |Lapin| l'ayant
+créée. |lapinNoir| a également cette propriété, mais elle pointe vers
+la fonction _|Object|_.
 
-> show(killerRabbit.constructor);
-> show(blackRabbit.constructor);
-
----
-
-Where did the |constructor| property come from? It is part of the
-_prototype_ of a rabbit. Prototypes are a powerful, if somewhat
-confusing, part of the way JavaScript objects work. Every object is
-based on a prototype, which gives it a set of inherent properties. The
-simple objects we have used so far are based on the most basic
-prototype, which is associated with the |Object| constructor. In fact,
-typing |{}| is equivalent to typing |new Object()|.
-
-> var simpleObject = {};
-> show(simpleObject.constructor);
-> show(simpleObject.toString);
-
-_|toString|_ is a method that is part of the |Object| prototype. This
-means that all simple objects have a |toString| method, which converts
-them to a string. Our rabbit objects are based on the prototype
-associated with the |Rabbit| constructor. You can use a constructor's
-|prototype| property to get access to, well, their prototype:
-
-> show(Rabbit.prototype);
-> show(Rabbit.prototype.constructor);
-
-Every function automatically gets a |prototype| property, whose
-|constructor| property points back at the function. Because the rabbit
-prototype is itself an object, it is based on the |Object| prototype,
-and shares its |toString| method.
-
-> show(killerRabbit.toString == simpleObject.toString);
+> show(lapinTueur.constructor);
+> show(lapinNoir.constructor);
 
 ---
 
-Even though objects seem to share the properties of their prototype,
-this sharing is one-way. The properties of the prototype influence the
-object based on it, but the properties of this object never change the
-prototype.
+D'où vient la propriété |constructor| ? Elle fait partie du _prototype_
+d'un lapin. Les prototypes sont une partie importante du fonctionnement
+des objets en JavaScript. Chaque objet est basé sur un prototype, qui
+lui confère un ensemble de propriétés. Les objets simples que nous
+avons utilisés jusque là sont tous basés sur le plus élémentaires des
+prototypes, celui associé au constructeur |Object|. En fait, taper |{}|
+est équivalent à taper |new Object()|.
 
-The precise rules are this: When looking up the value of a property,
-JavaScript first looks at the properties that the object *itself* has.
-If there is a property that has the name we are looking for, that is
-the value we get. If there is no such property, it continues searching
-the prototype of the object, and then the prototype of the prototype,
-and so on. If no property is found, the value |undefined| is given. On
-the other hand, when *setting* the value of a property, JavaScript
-never goes to the prototype, but always sets the property in the
-object itself.
+> var objetSimple = {};
+> show(objetSimple.constructor);
+> show(objetSimple.toString);
 
-> Rabbit.prototype.teeth = "small";
-> show(killerRabbit.teeth);
-> killerRabbit.teeth = "long, sharp, and bloody";
-> show(killerRabbit.teeth);
-> show(Rabbit.prototype.teeth);
+_|toString|_ est une méthode qui fait partie du prototype |Object|. Ça
+signifie que tous les objets de base ont une méthode |toString|, qui les
+converti en chaîne de caractères. Nos objets lapin sont basés sur le
+prototype associé au constructeur |Lapin|. Il est possible d'utiliser
+la propriété |prototype| d'un constructeur pour accèder à… leur
+prototype :
 
-This does mean that the prototype can be be used at any time to add
-new properties and methods to all objects based on it. For example, it
-might become necessary for our rabbits to dance.
+> show(Lapin.prototype);
+> show(Lapin.prototype.constructor);
 
-> Rabbit.prototype.dance = function() {
->   print("The ", this.adjective, " rabbit dances a jig.");
+Chaque fonction est automatiquement munie d'une propriété |prototype|,
+dont la propriété |constructor| renvoie à la fonction. Puisque que le
+prototype « lapin » est lui-même un objet, il est basé sur le prototype
+|Object|, et partage sa méthode |toString|.
+
+> show(lapinTueur.toString == objetSimple.toString);
+
+---
+
+Même si les objets semblent partager des propriétés avec leur prototype, ce
+partage n'est qu'à sens unique. Les propriétés des prototypes influencent
+les objets basés dessus, mais les propriétés de cet objet ne changent
+jamais le prototype.
+
+Les règles sont précisément les suivantes : pour trouver la valeur d'une
+propriété, JavaScript cherche d'abord parmis les propriétés de l'objet
+*lui-même*. S'il y a une propriété qui porte le nom de l'on recherche,
+c'est sa valeur que l'on obtient. S'il n'y en a pas, la recherche se poursuit
+à travers le prototype de l'objet, et ensuite à travers le prototype du
+prototype, et ainsi de suite. Si aucune propriété n'est trouvée, c'est
+la valeur |undefined| qui est renvoyée. À l'inverse, lorsqu'on *défini*
+la valeur d'une propriété, JavaScript ne remonte jamais au prototype,
+il attribue directement la valeur à une propriété de l'objet lui-même.
+
+> Lapin.prototype.dents = "petites";
+> show(lapinTueur.dents);
+> lapinTueur.dents = "longues, pointues et sanglantes";
+> show(lapinTueur.dents);
+> show(Lapin.prototype.dents);
+
+Cela signifie que le prototype peut être utilisé pour ajouter des
+propriétés et des méthodes à tous les objets basés dessus. Par exemple,
+il se peut que nos lapins aient soudainement besoin de danser.
+
+> Lapin.prototype.danser = function() {
+>   print("Le ", this.adjectif, " lapin danse une jigue.");
 > };
 >
-> killerRabbit.dance();
+> lapinTueur.danser();
 
-And, as you might have guessed, the prototypical rabbit is the perfect
-place for values that all rabbits have in common, such as the |speak|
-method. Here is a new approach to the |Rabbit| constructor:
+Et, comme vous vous en doutez, le prototype de lapin est le meilleur
+endroit où ajouter des éléments communs à tous les lapins, comme la
+méthode |parler|. Voici donc une nouvelle approche pour notre constructeur
+de |Rabbit| :
 
-> function Rabbit(adjective) {
->   this.adjective = adjective;
+> function Lapin(adjectif) {
+>   this.adjectif = adjectif;
 > }
-> Rabbit.prototype.speak = function(line) {
->   print("The ", this.adjective, " rabbit says '", line, "'");
+> Lapin.prototype.parler = function(tirade) {
+>   print("Le ", this.adjectif, " lapin dit '", tirade, "'");
 > };
 >
-> var hazelRabbit = new Rabbit("hazel");
-> hazelRabbit.speak("Good Frith!");
+> var noisetteLeLapin = new Lapin("noisette");
+> noisetteLeLapin.parler("Good Frith!");
 
 ---
 
-The fact that all objects have a prototype and receive some properties
-from this prototype can be tricky. It means that using an object to
-store a set of things, such as the cats from \\cdata, can go wrong.
-If, for example, we wondered whether there is a cat called
-|"constructor"|, we would have checked it like this:
+Le fait que tous les objets aient leur prototype et reçoivent des propriétés
+de ce prototype peut apporter quelques complications. Ça signifie qu'utiliser
+un objet pour stocker des trucs, comme les chats du \\cdata, peut mal se
+passer. Par exemple, si nous nous étions demandé s'il y a un chat nommé
+« |constructor| », nous aurions implémenté le test suivant :
 
-> var noCatsAtAll = {};
-> if ("constructor" in noCatsAtAll)
->   print("Yes, there definitely is a cat called 'constructor'.");
+> var pasUnSeulChat = {};
+> if ("constructor" in pasUnSeulChat)
+>   print("Oui, il y a sans aucun doute un chat appelé « constructor ».");
 
-This is problematic. A related problem is that it can often be
-practical to extend the prototypes of standard constructors such as
-|Object| and |Array| with new useful functions. For example, we could
-give all objects a method called |properties|, which returns an array
-with the names of the (non-hidden) properties that the object has:
+C'est problématique. Un autre problème tiens au fait qu'il est souvent
+pratique d'étendre les prototypes des constructeurs standards comme |Object|
+ou |Array| avec de nouvelles fonctions. Par exemple, nous pouvons donner à
+tous les objets une méthode nommée |properties|, qui retourne un tableau
+contenant le nom des propriétés (non cachées) d'un objet.
 
 > Object.prototype.properties = function() {
 >   var result = [];
@@ -6259,18 +6264,19 @@ with the names of the (non-hidden) properties that the object has:
 > var test = {x: 10, y: 3};
 > show(test.properties());
 
-And that immediately shows the problem. Now that the |Object|
-prototype has a property called |properties|, looping over the
-properties of any object, using |for| and _|in|_, will also give us
-that shared property, which is generally not what we want. We are
-interested only in the properties that the object itself has.
+Et cela met tout de suite le problème en évidence. Maintenant que le
+prototype |Object| a une propriété appelée |properties|, parcourir les
+propriétés de n'importe quel objet, en utilisant |for| et _|in|_, renverra
+également cette propriété partagée, ce qui n'est généralement pas ce
+que nous souhaitons. Nous sommes seulement intéressés par les propriétés
+que l'objet a lui-même.
 
-Fortunately, there is a way to find out whether a property belongs to
-the object itself or to one of its prototypes. Unfortunately, it does
-make looping over the properties of an object a bit clumsier. Every
-object has a method called _|hasOwnProperty|_, which tells us whether
-the object has a property with a given name. Using this, we could
-rewrite our |properties| method like this:
+Heureusement, il y a un moyen de trouver si une propriété appartient à un
+objet lui-même, ou à l'un de ses prototypes. Malheureusement, cela complique
+un peu le parcours des propriétés d'un objet. Tout objet a une méthode
+appelée _|hasOwnProperty|_, qui nous indique si l'objet a une propriété
+de ce nom. En se basant sur ce mécanisme, nous pouvons ré-écrire notre
+méthode |properties| de la manière suivante :
 
 > Object.prototype.properties = function() {
 >   var result = [];
@@ -6281,88 +6287,94 @@ rewrite our |properties| method like this:
 >   return result;
 > };
 >
-> var test = {"Fat Igor": true, "Fireball": true};
+> var test = {"Gros Igor": true, "Boule de feu": true};
 > show(test.properties());
 
-@_|forEachIn|_And of course, we can abstract that into a higher-order
-function. Note that the |action| function is called with both the name
-of the property and the value it has in the object.
+@_|forEachIn|_Et bien sûr, nous pouvons abstraire cela dans une fonction
+de haut niveau. Notez que la fonction |action| est appelée avec à la fois
+le nom de la propriété et la valeur qu'elle a dans l'objet.
 
-> function forEachIn(object, action) {
->   for (var property in object) {
->     if (object.hasOwnProperty(property))
->       action(property, object[property]);
+> function forEachIn(objet, action) {
+>   for (var property in objet) {
+>     if (objet.hasOwnProperty(property))
+>       action(property, objet[property]);
 >   }
 > }
 >
-> var chimera = {head: "lion", body: "goat", tail: "snake"};
-> forEachIn(chimera, function(name, value) {
->   print("The ", name, " of a ", value, ".");
+> var chimere = {visage: "lion", corps: "chèvre", derrière: "serpent"};
+> forEachIn(chimere, function(name, value) {
+>   print("Un ", name, " de ", value, ".");
 > });
 
-But, what if we find a cat named |hasOwnProperty|? (You never know.)
-It will be stored in the object, and the next time we want to go over
-the collection of cats, calling |object.hasOwnProperty| will fail,
-because that property no longer points at a function value. This can
-be solved by doing something even uglier:
+Mais, que se passe-t-il si on rencontre un chat nommé |hasOwnProperty|
+? (on ne sait jamais.)
+Il sera stocké dans l'objet, et la tentative suivante de parcourir la
+collection de chats, utilisant |objet.hasOwnProperty|, sera un échec, car
+cette propriété ne pointera plus vers la fonction. Une façon d'éviter
+ce problème est d'agir encore plus salement :
 
-> function forEachIn(object, action) {
->   for (var property in object) {
->     if (Object.prototype.hasOwnProperty.call(object, property))
->       action(property, object[property]);
->   }
+> function forEachIn(objet, action) {
+>    for (var property in objet) {
+>        if (Object.prototype.hasOwnProperty.call(objet, property))
+>            action(property, objet[property]);
+>    }
 > }
 >
-> var test = {name: "Mordecai", hasOwnProperty: "Uh-oh"};
-> forEachIn(test, function(name, value) {
->   print("Property ", name, " = ", value);
+> var test = {name: "Mardochée", hasOwnProperty: "Oh-oh"};
+> forEachIn(test, function (name, value) {
+>    print ("Property ", name, " = ", value);
 > });
 
-(Note: This example does not currently work correctly in Internet
-Explorer 8, which apparently has some problems with overriding
-built-in prototype properties.)
+(Note : Cet exemple ne fonctionne pas pour l'instant correctement dans
+Internet Explorer 8, qui a semble-t-il des problèmes avec la redéfinition
+des propriétés intégrées.)
 
-Here, instead of using the method found in the object itself, we get
-the method from the |Object| prototype, and then use |call| to apply
-it to the right object. Unless someone actually messes with the method
-in |Object.prototype| (don't do that), this should work correctly.
-
----
-
-|hasOwnProperty| can also be used in those situations where we have
-been using the _|in|_ operator to see whether an object has a specific
-property. There is one more catch, however. We saw in \\cdata that
-some properties, such as |toString|, are 'hidden', and do not show up
-when going over properties with |for|/|in|. It turns out that browsers
-in the Gecko family (Firefox, most importantly) give every object a
-hidden property named |__proto__|, which points to the prototype of
-that object. |hasOwnProperty| will return |true| for this one, even
-though the program did not explicitly add it. Having access to the
-prototype of an object can be very convenient, but making it a
-property like that was not a very good idea. Still, Firefox is a
-widely used browser, so when you write a program for the web you have
-to be careful with this. There is a method _|propertyIsEnumerable|_,
-which returns |false| for hidden properties, and which can be used to
-filter out strange things like |__proto__|. An expression such as this
-one can be used to reliably work around this:
-
-> var object = {foo: "bar"};
-> show(Object.prototype.hasOwnProperty.call(object, "foo") &&
->      Object.prototype.propertyIsEnumerable.call(object, "foo"));
-
-Nice and simple, no? This is one of the not-so-well-designed aspects
-of JavaScript. Objects play both the role of 'values with methods',
-for which prototypes work great, and 'sets of properties', for which
-prototypes only get in the way.
+Ici, au lieu d'utiliser la méthode trouvée dans l'objet lui-même, nous
+prenons la méthode fournie par le prototype |Object|, et l'appliquons en
+utilisant |call| sur le bon objet. À moins que quelqu'un n'ait joué avec
+la méthode de |Object.prototype| (et ne faîtes pas ça), le programme
+devrait fonctionner correctement.
 
 ---
 
-Writing the above expression every time you need to check whether a
-property is present in an object is unworkable. We could put it into a
-function, but an even better approach is to write a constructor and a
-prototype specifically for situations like this, where we want to
-approach an object as just a set of properties. Because you can use it
-to look things up by name, we will call it a _|Dictionary|_.
+|hasOwnProperty| peut également être utilisée dans les situations où l'on
+utilise l'opérateur _|in|_ pour savoir si un objet contient une propriété
+particulière. Mais il y a encore une subtilité. Nous avons vu dans le
+\\cdata que certaines propriétés, comme |toString|, sont 'hidden' (NdT:
+cachées), et ne sont donc pas considérées lors du parcours des éléments
+d'un objet via une instruction |for|/|in|. Il s'avère que les navigateurs
+de la famille Gecko (Firefox principalement) donnent à chaque objet une
+propriété cachée nommée |__proto__|, qui pointe vers le prototype
+de cet objet. |hasOwnProperty| retourne |true| (NdT: vrai), pour cette
+propriété, même si le programme ne l'a pas explicitement ajoutée. Avoir
+accès au prototype d'un objet peut être très pratique, mais en faire
+une propriété comme ça n'était pas une très bonne idée. Toutefois,
+Firefox est un navigateur web très utilisé, et il convient de faire
+attention à cela quand vous écrivez des programmes pour le web. Il y a
+une méthode _|propertyIsEnumerable|_, qui retourne |false| (NdT: faux),
+pour les propriétés cachées, et peut donc être utilisé pour filtrer
+les étrangetés comme |__proto__|. Pour contourner ce problème de manière
+fiable, on peut utiliser une expression comme :
+
+> var objet = {foo: "bar"};
+> show (Object.prototype.hasOwnProperty.call(objet, "foo") &&
+>    Object.prototype.propertyIsEnumerable.call(objet, "foo"));
+
+Simple et agréable n'est-ce pas ? C'est l'un des aspects de JavaScript qui ne
+sont pas-si-bien-conçus-que-ça. Les objets jouent à la fois le role de «
+valeurs avec méthodes », qui fonctionnent très bien avec les prototypes,
+et « d'ensemble de propriétés », pour lesquels les prototypes ne font
+que déranger.
+
+---
+
+Écrire l'expression ci-dessus à chaque fois qu'on a besoin de vérifier la
+présence d'une propriété dans un objet n'est pas viable. Nous pourrions
+le mettre dans une fonction, mais une meilleur approche est encore d'écrire
+un constructeur et un prototype dédié aux situations où nous voulons
+utiliser un objet simplement comme un ensemble propriétés. Puisqu'il est
+prévu pour pouvoir y chercher des choses par leurs noms, nous l'appellerons
+un _|Dictionnaire|_.
 
 > function Dictionary(startValues) {
 >   this.values = startValues || {};
@@ -6381,115 +6393,121 @@ to look things up by name, we will call it a _|Dictionary|_.
 >   forEachIn(this.values, action);
 > };
 >
-> var colours = new Dictionary({Grover: "blue",
+> var couleurs = new Dictionary({Grover: "bleu",
 >                               Elmo: "orange",
->                               Bert: "yellow"});
-> show(colours.contains("Grover"));
-> show(colours.contains("constructor"));
-> colours.each(function(name, colour) {
->   print(name, " is ", colour);
+>                               Bart: "jaune"});
+> show(couleurs.contains("Grover"));
+> show(couleurs.contains("constructor"));
+> couleurs.each(function(name, couleur) {
+>   print(name, " est ", couleur);
 > });
 
-Now the whole mess related to approaching objects as plain sets of
-properties has been 'encapsulated' in a convenient interface: one
-constructor and four methods. Note that the |values| property of a
-|Dictionary| object is not part of this interface, it is an internal
-detail, and when you are using |Dictionary| objects you do not need to
-directly use it.
+Désormais, tous les inconvénients de l'utilisation des objets en tant
+qu'ensemble de propriétés sont « cachés » derrière une interface
+pratique : un constructeur et quatre méthodes. Notez que la propriété
+|valeurs| d'un objet |Dictionary| ne fait pas partie de son interface, ce
+n'est qu'un détail interne, et quand vous utilisez des objets |Dictionary|,
+vous n'avez pas besoin de l'utiliser directement.
 
-Whenever you write an interface, it is a good idea to add a comment
-with a quick sketch of what it does and how it should be used. This
-way, when someone, possibly yourself three months after you wrote it,
-wants to work with the interface, they can quickly see how to use it,
-and do not have to study the whole program.
+Chaque fois que vous écrivez une interface, il est utile d'y ajouter un
+commentaire retraçant rapidement ce qu'elle fait et comment l'utiliser. De
+cette manière, quand quelqu'un (éventuellement vous dans trois mois),
+souhaite travailler avec cette interface, ils peuvent se faire rapidement
+une idée de comment l'utiliser, et n'ont alors pas besoin d'étudier tout
+le programme.
 
-Most of the time, when you are designing an interface, you will soon
-find some limitations and problems in whatever you came up with, and
-change it. To prevent wasting your time, it is advisable to document
-your interfaces only *after* they have been used in a few real
-situations and proven themselves to be practical. -- Of course, this
-might make it tempting to forget about documentation altogether.
-Personally, I treat writing documentation as a 'finishing touch' to
-add to a system. When it feels ready, it is time to write something
-about it, and to see if it sounds as good in English (or whatever
-language) as it does in JavaScript (or whatever programming language).
-
----
-
-The distinction between the external interface of an object and its
-internal details is important for two reasons. Firstly, having a
-small, clearly described interface makes an object easier to use. You
-only have to keep the interface in mind, and do not have to worry
-about the rest unless you are changing the object itself.
-
-Secondly, it often turns out to be necessary or practical to change
-something about the internal implementation of an object type##, to
-make it more efficient, for example, or to fix some problem. When
-outside code is accessing every single property and detail in the
-object, you can not change any of them without also updating a lot of
-other code. If outside code only uses a small interface, you can do
-what you want, as long as you do not change the interface.
-
-## Such types are usually called 'classes' in other programming
-languages.
-
-Some people go very far in this. They will, for example, never include
-properties in the interface of object, only methods -- if their object
-type has a length, it will be accessible with the |getLength| method,
-not the |length| property. This way, if they ever want to change their
-object in such a way that it no longer has a |length| property, for
-example because it now has some internal array whose length it must
-return, they can update the function without changing the interface.
-
-My own take is that in most cases this is not worth it. Adding a
-|getLength| method which only contains |return this.length;| mostly
-just adds meaningless code, and, in most situations, I consider
-meaningless code a bigger problem than the risk of having to
-occasionally change the interface to my objects.
+La plupart du temps, quand vous concevez une nouvelle interface, vous êtes
+rapidement confrontés à des problèmes et des limitations, quelque soit
+votre sujet, et changez donc votre interface. Pour éviter de perdre du
+temps, il est conseillé de ne documenter vos interfaces *qu'après* les
+avoir expérimentées un certain temps sur des cas concrets, et qu'elles
+se soient révélées efficaces. -- Biensûr, cela pourrait augmenter la
+tentation de ne pas documenter du tout. Mais personnellement, je considère
+la documentation comme une « touche finale », à ajouter au système. Quand
+ça donne l'impression d'être prêt, c'est qu'il est temps d'écrire un peu
+sur le sujet, et de voir si ça sonne aussi bien en français (ou n'importe
+quelle autre langage vivante), qu'en JavaScript (où n'importe quel autre
+langage de programmation).
 
 ---
 
-Adding new methods to existing prototypes can be very convenient.
-Especially the |Array| and |String| prototypes in JavaScript could use
-a few more basic methods. We could, for example, replace |forEach| and
-|map| with methods on arrays, and make the |startsWith| function we
-wrote in \\cdata a method on strings.
+La distinction entre l'interface d'un objet et ses détails de fonctionnement
+internes est importante pour deux raisons. D'abord, avoir une petite interface
+bien décrite rend un objet plus facile à utiliser. Il suffit de garder
+l'interface en tête, sans plus se préoccuper du reste, à moins d'avoir
+à changer l'objet lui-même.
 
-However, if your program has to run on the same web-page as another
-program (either written by you or by someone else) which uses
-|for|/|in| naively -- the way we have been using it so far -- then
-adding things to prototypes, especially the |Object| and |Array|
-prototype, will definitely break something, because these loops will
-suddenly start seeing those new properties. For this reason, some
-people prefer not to touch these prototypes at all. Of course, if you
-are careful, and you do not expect your code to have to coexist with
-badly-written code, adding methods to standard prototypes is a
-perfectly good technique.
+Ensuite, il arrive régulièrement d'avoir à changer quelque chose dans le
+fonctionnement interne d'un type## d'objet, pour le rendre plus efficace par
+exemple, ou pour corriger un problème. Si le code extérieur a accès à
+toutes les propriétés d'un objet, il est difficile de changer le moindre
+détail sans avoir à mettre à jour tout le reste du code. Si le code
+extérieur utilise une petite interface, vous pouvez changer le fonctionnement
+interne de l'objet comme bon vous semble, tant que l'interface ne change pas.
+
+## Ces types sont souvent appelés des « classes » dans d'autres langages
+de programmation.
+
+Certaines personnes vont assez loin avec ce concept. Ils n'incluent, par
+exemple, aucune propriété dans l'interface d'un objet, et n'y autorisent que
+des méthodes -- si leur type d'objet a une longueur, elle sera accessible
+via une méthode |getLength|, et pas directement comme une propriété
+|length|. De cette manière, si jamais ils décident de modifier leur objet
+de telle manière qu'il n'a plus de propriété |length|, par exemple parce
+que la longueur à retourner devient celle d'un tableau, ils peuvent mettre
+la fonction à jour, sans changer l'interface.
+
+Mon expérience sur le sujet est que dans la plupart des cas ça n'en vaut
+pas la peine. Ajouter une méthode |getLength| qui ne contient que |return
+this.length;| ne fait qu'ajouter du code inutile, qui, dans la plupart des
+cas ajoute plein de problèmes alors que j'ai rarement l'occasion de changer
+l'interface de mes objets.
 
 ---
 
-In this chapter we are going to build a virtual terrarium, a tank with
-insects moving around in it. There will be some objects involved (this
-is, after all, the chapter on object-oriented programming). We will
-take a rather simple approach, and make the terrarium a
-two-dimensional grid, like the second map in \\csearch. On this grid
-there are a number of bugs. When the terrarium is active, all the bugs
-get a chance to take an action, such as moving, every half second.
+Ajouter de nouvelles méthodes à des prototypes existants peut être très
+utile. En particulier les prototypes de |Array| et |String| en JavaScript
+peuvent recevoir quelques méthodes basiques supplémentaires. Nous pouvons,
+par exemple, remplacer |forEach| et |map| par des méthodes sur les tableaux,
+et transformer la fonction |startsWith| que nous avons écrite au \\cdata
+en méthode sur les chaînes de caractère.
 
-Thus, we chop both time and space into units with a fixed size --
-squares for space, half seconds for time. This usually makes things
-easier to model in a program, but of course has the drawback of being
-wildly inaccurate. Fortunately, this terrarium-simulator is not
-required to be accurate in any way, so we can get away with it.
+De plus, si votre programme doit fonctionner sur la même page web qu'un autre
+programme (qu'il soit de vous ou non) qui utilise naïvement |for|/|in| --
+comme nous l'avons vu jusque là -- alors ajouter des choses aux prototypes,
+et précisément à ceux d'|Object| et |Array| aura toutes les chances de
+casser quelque chose, vu que ces boucles vont d'un coup se mettre à inclure
+les nouvelles propriétés. Du coup, certaines personnes préfèrent ne pas
+toucher du tout à ces prototypes. Mais bien sûr, si vous êtes prudent,
+et qu'il n'y a aucune raison que votre code cohabite avec un code mal écrit,
+ajouter des méthodes aux prototypes standards est une très bonne technique.
 
 ---
 
-A terrarium can be defined with a 'plan', which is an array of
-strings. We could have used a single string, but because JavaScript
-strings must stay on a single line it would have been a lot harder to
-type.
+Dans ce chapitre, nous allons fabriquer un terrarium virtuel, une boîte
+en verre avec des insectes vivant dedans. Ça impliquera de jouer avec des
+objets (ce qui tombe assez bien vu le nom du chapitre). Nous allons adopter
+une approche assez simple, en modélisant le terrarium par une grille à
+deux dimensions, comme la deuxième carte du \\csearch. Sur cette grille,
+il y a un certain nombre de bestioles. Quand le terrarium est actif, toutes
+les bébêtes ont une opportunité d'agir (comme d'effectuer un déplacement)
+toutes les demi-secondes.
 
-> var thePlan =
+Du coup, on découpe l'espace et le temps en unités de taille fixe -- des
+cases pour l'espace et des demi-secondes pour le temps. Ça rend généralement
+les choses plus simple à modéliser dans un programme, mais ça a bien sûr
+l'inconvénient d'être largement imprécis. Heureusement, ce simulateur de
+terrarium n'a pas besoin d'être précis et nous pouvons donc faire avec.
+
+---
+
+Un terrarium peut être représenté comme un « plan », défini comme
+étant un tableau de chaînes de caractères. Nous aurions pu n'utiliser
+qu'une seule chaîne de caractères, mais comme les chaînes de caractères
+JavaScript ne doivent comporter qu'une seule ligne, ça aurait été beaucoup
+plus compliqué à taper.
+
+> var lePlan =
 >   ["############################",
 >    "#      #    #      o      ##",
 >    "#                          #",
@@ -6503,38 +6521,38 @@ type.
 >    "#    #                     #",
 >    "############################"];
 
-The |"#"| characters are used to represent the walls of the terrarium
-(and the ornamental rocks lying in it), the |"o"|s represent bugs, and
-the spaces are, as you might have guessed, empty space.
+Les caractères |"#"| sont utilisés pour représenter les murs du terrarium
+(et les éléments de décors, comme les rochers au sol), les |"o"|
+représentent les bêtes et les espaces, comme vous vous en êtes sûrement
+doutés, représentent les espaces vides.
 
-Such a plan-array can be used to create a terrarium-object. This
-object keeps track of the shape and content of the terrarium, and lets
-the bugs inside move. It has four methods: Firstly |toString|, which
-converts the terrarium back to a string similar to the plan it was
-based on, so that you can see what is going on inside it. Then there
-is |step|, which allows all the bugs in the terrarium to move one
-step, if they so desire. And finally, there are |start| and |stop|,
-which control whether the terrarium is 'running'. When it is running,
-|step| is automatically called every half second, so the bugs keep
-moving.
+Un plan-tableau de ce type est approprié pour représenter un objet
+terrarium. Cet objet garde trace de la forme et du contenu du terrarium, et
+permet aux insectes à l'intérieur de bouger. Il a quatre méthodes : tout
+d'abord |toString|, qui converti le terrarium en une chaîne de caractères
+affichable, permettant d'avoir un aperçu de ce qui se passe dedans. Ensuite,
+il y a |step|, qui permet à toutes les bêtes du terrarium de se déplacer
+d'une case si elles le veulent. Et enfin il y a |start| et |stop|, qui
+contrôlent l'activité du terrarium. Lorsqu'il fonctionne, |step| est appelé
+automatiquement toutes les demi-secondes, et donc les insectes se déplacent.
 
 ***
 
-@_|Point|_The points on the grid will be represented by objects again.
-In \\csearch we used three functions, |point|, |addPoints|, and
-|samePoint| to work with points. This time, we will use a constructor
-and two methods. Write the constructor |Point|, which takes two
-arguments, the x and y coordinates of the point, and produces an
-object with |x| and |y| properties. Give the prototype of this
-constructor a method |add|, which takes another point as argument and
-returns a *new* point whose |x| and |y| are the sum of the |x| and |y|
-of the two given points. Also add a method |isEqualTo|, which takes a
-point and returns a boolean indicating whether the |this| point refers
-to the same coordinates as the given point.
+@_|Point|_Les points sur la grille représenteront également des objets. Dans
+le \\csearch nous avons utilisé trois fonctions : |point|, |ajoutePoints|
+et |pointsIdentiques| pour travailler avec les points. Cette fois, nous
+utiliserons un constructeur et deux méthodes. Écrire le constructeur
+|Point|, qui prend deux arguments, les coordonnées x et y du point, et
+produit un objet avec des propriétés |x| et |y|. Ajoutez au prototype de
+ce constructeur une méthode |ajoute|, qui prends un autre point en argument
+et retourne un *nouveau* point dont les |x| et |y| sont la somme des |x|
+et |y| des deux points donnés. Ajoutez également une méthode |estEgalA|,
+qui prend un point et renvoit un booléen, indicant si le point local (|this|)
+a les mêmes coordonnées que le point donné.
 
-Apart from the two methods, the |x| and |y| properties are also part
-of the interface of this type of objects: Code which uses point
-objects may freely retrieve and modify |x| and |y|.
+En dehors des deux méthodes, les propriétés |x| et |y| font également
+partie de l'interface de ce type d'objets : le code utilisant des objets
+de type point pourra lire et modifier librement les |x| et |y|.
 
 ///
 
@@ -6542,160 +6560,162 @@ objects may freely retrieve and modify |x| and |y|.
 >   this.x = x;
 >   this.y = y;
 > }
-> Point.prototype.add = function(other) {
->   return new Point(this.x + other.x, this.y + other.y);
+> Point.prototype.ajoute = function(autre) {
+>   return new Point(this.x + autre.x, this.y + autre.y);
 > };
-> Point.prototype.isEqualTo = function(other) {
->   return this.x == other.x && this.y == other.y;
+> Point.prototype.estEgalA = function(autre) {
+>   return this.x == autre.x && this.y == autre.y;
 > };
 >
-> show((new Point(3, 1)).add(new Point(2, 4)));
+> show((new Point(3, 1)).ajoute(new Point(2, 4)));
 
-Make sure your version of |add| leaves the |this| point intact and
-produces a new point object. A method which changes the current point
-instead would be similar to the |+=| operator, whereas this one is
-like the |+| operator.
-
----
-
-When writing objects to implement a certain program, it is not always
-very clear which functionality goes where. Some things are best
-written as methods of your objects, other things are better expressed
-as separate functions, and some things are best implemented by adding
-a new type of object. To keep things clear and organised, it is
-important to keep the amount of methods and responsibilities that an
-object type has as small as possible. When an object does too much, it
-becomes a big mess of functionality, and a formidable source of
-confusion.
-
-I said above that the terrarium object will be responsible for storing
-its contents and for letting the bugs inside it move. Firstly, note
-that it *lets* them move, it doesn't *make* them move. The bugs
-themselves will also be objects, and these objects are responsible for
-deciding what they want to do. The terrarium merely provides the
-infrastructure that asks them what to do every half second, and if
-they decide to move, it makes sure this happens.
-
-Storing the grid on which the content of the terrarium is kept can get
-quite complex. It has to define some kind of representation, ways to
-access this representation, a way to initialise the grid from a 'plan'
-array, a way to write the content of the grid to a string for the
-|toString| method, and the movement of the bugs on the grid. It would
-be nice if part of this could be moved into another object, so that
-the terrarium object itself doesn't get too big and complex.
+Assurez-vous que votre version de |ajoute| laisse le point local (|this|)
+intact et produise bien un nouvel objet Point. Une méthode qui change le
+point courant serait similaire à l'opérateur |+=|, alors qu'on le veut
+équivalent à l'opérateur |+|.
 
 ---
 
-Whenever you find yourself about to mix data representation and
-problem-specific code in one object, it is a good idea to try and put
-the data representation code into a separate type of object. In this
-case, we need to represent a grid of values, so I wrote a |Grid| type,
-which supports the operations that the terrarium will need.
+Quand on écrit des objets pour développer un programme, on ne sait
+pas toujours quelle fonctionnalité va où. Certaines choses sont mieux
+implémentées sous forme de méthodes de l'objet, d'autres mieux rangées
+dans des fonctions et d'autres encore mieux modélisées par de nouveaux
+types d'objets. Pour garder l'organisation limpide, il est important de
+garder le nombre de méthodes et de responsabilités des objets aussi petit
+que possible. Quand un objet en fait trop, il devient un gros bazar de
+fonctionnalités et une formidable source de confusions.
 
-To store the values on the grid, there are two options. One can use an
-array of arrays, like this:
+J'ai dit plus haut que l'objet terrarium serait responsable du stockage de
+son contenu et de permettre aux insectes de bouger. Tout d'abord, précisons
+qu'il ne fait que *permettre* aux insectes de bouger. Les bébêtes seront
+elles-mêmes des objets, et ces objets seront responsables de leur propres
+décisions. Le terrarium ne fournit en gros que l'infrastructure qui leur
+demande quoi faire chaque demi-seconde. Et s'il décident de bouger, il
+s'assure que ça se fasse.
 
-> var grid = [["0,0", "1,0", "2,0"],
->             ["0,1", "1,1", "2,1"]];
-> show(grid[1][2]);
+Stocker la grille sur laquelle le contenu du terrarium prend place peut vite
+se compliquer. Il faut définir une représentation, des moyens d'accéder
+à cette représentation, d'initialiser la grille depuis le « plan »
+(fourni sous forme de tableau) et de restituer le contenu de la grille
+sous la forme d'une chaîne de caractères pour la méthode |toString|,
+sans oublier le mouvement des insectes sur la grille.
 
-Or the values can all be put into a single array. In this case, the
-element at |x|,|y| can be found by getting the element at position |x
-+ y * width| in the array, where |width| is the width of the grid.
+---
 
-> var grid = ["0,0", "1,0", "2,0",
->             "0,1", "1,1", "2,1"];
-> show(grid[2 + 1 * 3]);
+Lorsque vous vous retrouvez à mélanger représentations de données
+et code spécifique à un problème donné dans un seul objet, c'est une
+bonne idée d'essayer de mettre la représentation des données dans un type
+d'objet séparé. Dans ce cas, nous avons besoin de représenter une grille
+de valeurs, j'ai donc écrit un type |Grille|, qui supporte les opérations
+dont ce terrarium aura besoin.
 
-@_|Array|_I chose the second representation, because it makes it much
-easier to initialise the array. |new Array(x)| produces a new array of
-length |x|, filled with |undefined| values.
+Pour stocker les valeurs de la grille, il y a deux options. L'une peut
+utiliser un tableau de tableaux :
 
-> function Grid(width, height) {
->   this.width = width;
->   this.height = height;
->   this.cells = new Array(width * height);
+> var grille = [["0,0", "1,0", "2,0"],
+>              ["0,1", "1,1", "2,1"]];
+> show(grille[1][2]);
+
+Ou alors les valeurs peuvent toutes être mises dans un seul tableau. Dans ce
+cas, on retrouve l'élément |x|/|y| en cherchant dans le tableau l'élément
+en position |x + y * largeur|, où |largeur| est la largeur de la grille.
+
+> var grille = ["0,0", "1,0", "2,0",
+>               "0,1", "1,1", "2,1"];
+> show(grille[2 + 1 * 3]);
+
+@_|Array|_J'ai choisi la seconde représentation, car elle simplifie
+l'initialisation du tableau. |new Array(x)| produit un nouveau tableau de
+longueur |x|, rempli de valeurs |undefined| (indéfinies).
+
+> function Grille(largeur, hauteur) {
+>   this.largeur = largeur;
+>   this.hauteur = hauteur;
+>   this.cellules = new Array(largeur * hauteur);
 > }
-> Grid.prototype.valueAt = function(point) {
->   return this.cells[point.y * this.width + point.x];
+> Grille.prototype.valeurEn = function(point) {
+>   return this.cellules[point.y * this.largeur + point.x];
 > };
-> Grid.prototype.setValueAt = function(point, value) {
->   this.cells[point.y * this.width + point.x] = value;
+> Grille.prototype.ecritValeurEn = function(point, valeur) {
+>   this.cellules[point.y * this.largeur + point.x] = valeur;
 > };
-> Grid.prototype.isInside = function(point) {
+> Grille.prototype.estDedans = function(point) {
 >   return point.x >= 0 && point.y >= 0 &&
->          point.x < this.width && point.y < this.height;
+>          point.x < this.largeur && point.y < this.hauteur;
 > };
-> Grid.prototype.moveValue = function(from, to) {
->   this.setValueAt(to, this.valueAt(from));
->   this.setValueAt(from, undefined);
+> Grille.prototype.deplaceElement = function(depuis, vers) {
+>   this.ecritValeurEn(vers, this.valeurEn(depuis));
+>   this.ecritValeurEn(depuis, undefined);
 > };
 
 ***
 
-We will also need to go over all the elements of the grid, to find the
-bugs we need to move, or to convert the whole thing to a string. To
-make this easy, we can use a higher-order function that takes an
-action as its argument. Add the method |each| to the prototype of
-|Grid|, which takes a function of two arguments as its argument. It
-calls this function for every point on the grid, giving it the point
-object for that point as its first argument, and the value that is on
-the grid at that point as second argument.
+Nous allons également avoir besoin de parcourir tous les éléments de
+la grille, pour trouver les insectes qui ont besoin de bouger, ou pour
+convertir l'ensemble en une chaîne de caractères. Pour simplifier la chose,
+nous pouvons utiliser une fonction de haut niveau qui prend une action en
+argument. Ajouter une méthode |each| au prototype de |Grille|, qui prend
+en argument une fonction à deux arguments. Elle appelle cette fonction pour
+chaque point de la grille, lui donnant l'objet point comment premier argument,
+et la valeur du point sur la grille comme deuxième argument.
 
-Go over the points starting at |0|,|0|, one row at a time, so that
-|1|,|0| is handled before |0|,|1|. This will make it easier to write
-the |toString| function of the terrarium later. (Hint: Put a |for|
-loop for the |x| coordinate inside a loop for the |y| coordinate.)
+Parcourir les points depuis |0|, |0|, une ligne à la fois, de manière
+à ce que le point |1|, |0| soit parcouru avant |0|, |1|. Cela simplifiera
+l'écriture de la fonction |toString| du terrarium après. (Indice : mettre
+une boucle |for| pour la coordonnée |x| à l'intérieur de la boucle for
+de la coordonnée |y|.)
 
-It is advisable not to muck about in the |cells| property of the grid
-object directly, but use |valueAt| to get at the values. This way, if
-we decide (for some reason) to use a different method for storing the
-values, we only have to rewrite |valueAt| and |setValueAt|, and the
-other methods can stay untouched.
+Il est conseillé de ne pas mettre son nez directement dans la propriété
+|cellules| de la grille, mais d'utiliser |valeurEn|, pour récupérer ces
+valeurs. De cette manière, si nous décidons (pour une raison ou pour une
+autre) d'utiliser une méthode différente pour pour stocker les valeurs,
+nous n'aurons qu'à ré-écrire la fonction |valeurEn| et |ecritValeurEn|,
+et les autres méthodes resterons intactes.
 
 ///
 
-> Grid.prototype.each = function(action) {
->   for (var y = 0; y < this.height; y++) {
->     for (var x = 0; x < this.width; x++) {
+> Grille.prototype.each = function(action) {
+>   for (var y = 0; y < this.hauteur; y++) {
+>     for (var x = 0; x < this.largeur; x++) {
 >       var point = new Point(x, y);
->       action(point, this.valueAt(point));
+>       action(point, this.valeurEn(point));
 >     }
 >   }
 > };
 
 ---
 
-Finally, to test the grid:
+Enfin, pour tester l'objet grille :
 
-> var testGrid = new Grid(3, 2);
-> testGrid.setValueAt(new Point(1, 0), "#");
-> testGrid.setValueAt(new Point(1, 1), "o");
-> testGrid.each(function(point, value) {
->   print(point.x, ",", point.y, ": ", value);
+> var testGrille = new Grille(3, 2);
+> testGrille.ecritValeurEn(new Point(1, 0), "#");
+> testGrille.ecritValeurEn(new Point(1, 1), "o");
+> testGrille.each(function(point, valeur) {
+>   print(point.x, ",", point.y, ": ", valeur);
 > });
 
 ---
 
-Before we can start to write a |Terrarium| constructor, we will have
-to get a bit more specific about these 'bug objects' that will be
-living inside it. Earlier, I mentioned that the terrarium will ask the
-bugs what action they want to take. This will work as follows: Each
-bug object has an |act| method which, when called, returns an
-'action'. An action is an object with a |type| property, which names
-the type of action the bug wants to take, for example |"move"|. For
-most actions, the action also contains extra information, such as the
-direction the bug wants to go.
+Avant d'écrire un nouveau constructeur |Terrarium|, nous devons être
+plus précis à propos de ces « objets insectes » qui évolueront à
+l'intérieur. Précédemment, j'ai dit que le terrarium demandera aux
+insectes quelle action ils veulent effectuer. Cela fonctionnera de la fonction
+suivante : chaque insecte aura une méthode |agit| qui, appellée, renverra
+une « action ». Une action est un objet doté d'une propriété |type|,
+nommant le type d'action que l'insecte souhaitera effectuer. Par exemple
+|"déplacement"|. La plupart des actions porteront d'autres informations,
+par exemple la direction souhaitée par l'insecte qui voudra se déplacer.
 
-Bugs are terribly myopic, they can only see the squares directly
-around them on the grid. But these they can use to base their action
-on. When the |act| method is called, it is given an object with
-information about the surroundings of the bug in question. For each of
-the eight directions, it contains a property. The property indicating
-what is above the bug is called |"n"|, for North, the one
-indicating what is above and to the left |"ne"|, for North-East, and
-so on. To look up the direction these names refer to, the following
-dictionary object is useful:
+Les insectes sont terriblement myopes, ils ne peuvent voir que les cases à
+côté d'eux sur la grille. Mais ils peuvent s'en servir pour déterminer
+leurs actions. Quand la méthode |agit| est appelée, il lui est fourni un
+objet avec des informations sur l'environnement de l'insecte en question. Il
+porte une propriété pour chacune des huit directions autour de l'insecte. La
+propriété indiquant ce qu'il y a au-dessus de l'insecte est appellé |"n"|,
+pour Nord, pour ce qu'il y a au-dessus à gauche |"ne"| pour Nord-Est,
+et ainsi de suite.
+Pour savoir quelle direction explorer selon le nom de la direction, l'objet
+dictionnaire suivant sera utile :
 
 > var directions = new Dictionary(
 >   {"n":  new Point( 0, -1),
@@ -6707,117 +6727,121 @@ dictionary object is useful:
 >    "w":  new Point(-1,  0),
 >    "nw": new Point(-1, -1)});
 >
-> show(new Point(4, 4).add(directions.lookup("se")));
+> show(new Point(4, 4).ajoute(directions.lookup("se")));
 
-When a bug decides to move, he indicates in which direction he wants
-to go by giving the resulting action object a |direction| property
-that names one of these directions. We can make a simple, stupid bug
-that always just goes south, 'towards the light', like this:
+Quand un insecte décide de se déplacer, il indique dans quelle direction il
+veut aller en renvoyant un objet action dont la propriété |direction| nomme
+laquelle de ces directions. Nous pouvons programmer un insecte primitif et
+idiot qui va toujours vers le sud, « vers la lumière », comme ceci :
 
-> function StupidBug() {};
-> StupidBug.prototype.act = function(surroundings) {
->   return {type: "move", direction: "s"};
+> function InsecteStupide() {};
+> InsecteStupide.prototype.agit = function(alentours) {
+>   return {type: "déplacement", direction: "s"};
 > };
 
 ---
 
-Now we can start on the |Terrarium| object type itself. First, its
-constructor, which takes a plan (an array of strings) as argument, and
-initialises its grid.
+Nous pouvons maintenir construire le type d'objet |Terrarium|
+lui-même. Commençons par son constructeur, qui reçoit un plan (un tableau
+de chaîne) comme argument, et initialise son objet grille.
 
-> var wall = {};
+> var mur = {};
 >
 > function Terrarium(plan) {
->   var grid = new Grid(plan[0].length, plan.length);
+>   var grille = new Grille(plan[0].length, plan.length);
 >   for (var y = 0; y < plan.length; y++) {
->     var line = plan[y];
->     for (var x = 0; x < line.length; x++) {
->       grid.setValueAt(new Point(x, y),
->                       elementFromCharacter(line.charAt(x)));
+>     var ligne = plan[y];
+>     for (var x = 0; x < ligne.length; x++) {
+>       grille.ecritValeurEn(new Point(x, y),
+>                       elementdApresCaractere(ligne.charAt(x)));
 >     }
 >   }
->   this.grid = grid;
+>   this. grille= grille;
 > }
 >
-> function elementFromCharacter(character) {
->   if (character == " ")
+> function elementdApresCaractere(caractere) {
+>   if (caractere == " ")
 >     return undefined;
->   else if (character == "#")
->     return wall;
->   else if (character == "o")
->     return new StupidBug();
+>   else if (caractere == "#")
+>     return mur;
+>   else if (caractere == "o")
+>     return new InsecteStupide();
 > }
 
-|wall| is an object that is used to mark the location of walls on the
-grid. Like a real wall, it doesn't do much, it just sits there and
-takes up space.
+|mur| est un objet utilisé pour repérer la position des murs sur la
+grille. Comme un vrai mur, il ne fait pas grand-chose, juste être quelque
+part et occuper une partie de l'espace.
 
 ---
 
-The most straightforward method of a terrarium object is |toString|,
-which transforms a terrarium into a string. To make this easier, we
-mark both the |wall| and the prototype of the |StupidBug| with a
-property |character|, which holds the character that represents them.
+La  méthode la plus évidente de l'objet terrarium est |toString|,
+qui  transforme un terrarium en chaîne de caractères. Pour faciliter
+cette  tâche, nous donnons à |mur| et au prototype de |InsecteStupide|
+une propriété |caractere|, contenant la réprésentation sous forme de
+caractère de ceux-ci.
 
-> wall.character = "#";
-> StupidBug.prototype.character = "o";
+> mur.caractere = "#";
+> InsecteStupide.prototype.caractere = "o";
 >
-> function characterFromElement(element) {
+> function caracteredApresElement(element) {
 >   if (element == undefined)
 >     return " ";
 >   else
->     return element.character;
+>     return element.caractere;
 > }
 >
-> show(characterFromElement(wall));
+> show(caracteredApresElement(mur));
 
 ***
 
-Now we can use the |each| method of the |Grid| object to build up a
-string. But to make the result readable, it would be nice to have a
-newline at the end of every row. The |x| coordinate of the positions
-on the grid can be used to determine when the end of a line is
-reached. Add a method |toString|, which takes no arguments and returns
-a string which, when given to |print|, shows a nice two-dimensional
-view of the terrarium.
+Maintenant, nous pouvons utiliser la méthode |each| de l'objet |Grille|
+pour construire une chaîne de caractères. Pour que le résultat soit
+lisible, il est préférable d'avoir un retour chariot à chaque ligne. La
+coordonnée |x| de chaque case de la grille sera utilisé pour déterminer
+si la fin d'une ligne est atteinte.
+En ajoutant une méthode |toString| qui ne prend pas d'argument et renvoie
+une chaîne de caractères, et en passant cette chaîne à |print|, nous
+obtenons une vue bi-dimensionnelle convenable du terrarium.
 
 ///
 
 > Terrarium.prototype.toString = function() {
->   var characters = [];
->   var endOfLine = this.grid.width - 1;
->   this.grid.each(function(point, value) {
->     characters.push(characterFromElement(value));
->     if (point.x == endOfLine)
->       characters.push("\n");
+>   var caracteres = [];
+>   var finDeLigne = this.grille.largeur - 1;
+>   this.grille.each(function(point, valeur) {
+>     caracteres.push(caracteredApresElement(valeur));
+>     if (point.x == finDeLigne)
+>       caracteres.push("\n");
 >   });
->   return characters.join("");
+>   return caracteres.join("");
 > };
 
-And to try it out...
+Et pour l'essayer ...
 
-> var terrarium = new Terrarium(thePlan);
+> var terrarium = new Terrarium(lePlan);
 > print(terrarium.toString());
 
 ---
 
-It is possible that, when trying to solve the above exercise, you have
-tried to access |this.grid| inside the function that you pass as an
-argument to the grid's |each| method. This will not work. Calling a
-function always results in a new |this| being defined inside that
-function, even when it is not used as a method. Thus, any |this|
-variable outside of the function will not be visible.
+Il est possible qu'en essayant de résoudre l'exercice précédent, vous
+ayez voulu accéder à |this.grille| dans le corps de la fonction passé en
+argument de la méthode |each| de l'objet grille. Cela ne peut pas fonctionner,
+car l'appel à une fonction a pour conséquence qu'à l'intérieur de cette
+fonction, |this| prend une nouvelle valeur, même si elle n'est pas utilisée
+en tant que méthode. Ainsi, aucune variable |this| à l'extérieur d'une
+fonction ne peut être visible.
 
-Sometimes it is straightforward to work around this by storing the
-information you need in a variable, like |endOfLine|, which *is*
-visible in the inner function. If you need access to the whole |this|
-object, you can store that in a variable too. The name |self| (or
-|that|) is often used for such a variable.
+Parfois, il est nécessaire de contourner ceci en stockant les informations
+dont on a besoin dans une variable, par exemple |finDeLigne|, qui elle *est*
+visible dans la fonction imbriquée. Si vous avez besoin d'accéder à la
+variable |this| d'un objet, vous pouvez la stocker dans une autre variable. Le
+nom |self| (ou |that|) est souvent utilisée pour une telle variable.
 
-But all these extra variables can get messy. Another good solution is
-to use a function similar to |partial| from \\cfp. Instead of adding
-arguments to a function, this one adds a |this| object, using the
-first argument to the function's |apply| method:
+Mais l'utilisation de ces variables en plus peut être source de confusion. Une
+autre bonne solution est d'utiliser une fonction proche de |partial| décrite
+dans le \\cfp. Au lieu d'ajouter un argument à la fonction, celle-ci passe
+l'objet |this|, par l'intermédiaire du premier argument de la méthode
+|apply| dont disposent toutes les fonctions :
 
 > function bind(func, object) {
 >   return function(){
@@ -6825,26 +6849,28 @@ first argument to the function's |apply| method:
 >   };
 > }
 >
-> var testArray = [];
-> var pushTest = bind(testArray.push, testArray);
-> pushTest("A");
-> pushTest("B");
-> show(testArray);
+> var tableauTest = [];
+> var ajouteDansTest = bind(tableauTest.push, tableauTest);
+> ajouteDansTest("A");
+> ajouteDansTest("B");
+> show(tableauTest);
 
-This way, you can |bind| an inner function to |this|, and it will have
-the same |this| as the outer function.
+De cette façon, vous pouvez lier la variable |this| d'une fonction
+imbriquée à la variable |this| de la fonction appelante, les deux |this|
+seront identiques.
 
 ***
 
-In the expression |bind(testArray.push, testArray)| the name
-|testArray| still occurs twice. Can you design a function _|method|_,
-which allows you to bind an object to one of its methods *without*
-naming the object twice?
+Dans l'expression |bind(tableauTest.push, tableauTest)| le nom |tableauTest|
+est encore utilisé deux fois. Pouvez-vous concevoir une fonction _|method|_,
+qui permet de lier un objet à une de ses méthodes *sans* nommer deux fois
+l'objet ?
 
 ///
 
-It is possible to give the name of the method as a string. This way, the
-|method| function can look up the correct function value for itself.
+Il est possible de passer à un objet une chaîne de caractères contenant
+le nom d'une de ses méthodes. De cette façon, la fonction |method| peut
+connaître le nom de la fonction à appliquer à l'objet.
 
 > function method(object, name) {
 >   return function() {
@@ -6852,135 +6878,142 @@ It is possible to give the name of the method as a string. This way, the
 >   };
 > }
 >
-> var pushTest = method(testArray, "push");
+> var ajouteDansTest = method(tableauTest, "push");
 
 ---
 
-We will need |bind| (or |method|) when implementing the |step| method
-of a terrarium. This method has to go over all the bugs on the grid,
-ask them for an action, and execute the given action. You might be
-tempted to use |each| on the grid, and just handle the bugs we come
-across. But then, when a bug moves South or East, we will come across
-it again in the same turn, and allow it to move again.
+Nous aurons besoin de |bind| (ou |method|) quand nous écrirons la méthode
+|step| de l'objet terrarium. Cette méthode devra parcourir tous les insectes
+de la grille, en leur demandant quelle action ils veulent effectuer, et en
+effectuant pour eux cette action.
+Vous pourriez être tenté d'utiliser |each| sur l'objet grille, et traiter
+les insectes un par un au fur et à mesure que vous les rencontriez. Mais
+ce faisant, si un insecte se déplaçait vers le sud ou l'est, vous le
+rencontriez à nouveau dans le même tour, et il serait à nouveau déplacé.
 
-Instead, we first gather all the bugs into an array, and then process
-them. This method gathers bugs, or other things that have an |act|
-method, and stores them in objects that also contain their current
-position:
+A la place, nous allons extraire tous les insectes vers un tableau, et
+partant de là, les traiter un par un.
+La méthode ci-dessous extrait les insectes, et même tout objet qui possède
+une méthode |agit|, et enregistre ces objets, et leurs positions respectives
+avant déplacement, dans un tableau d'objets.
 
-> Terrarium.prototype.listActingCreatures = function() {
->   var found = [];
->   this.grid.each(function(point, value) {
->     if (value != undefined && value.act)
->       found.push({object: value, point: point});
+> Terrarium.prototype.listeCreaturesEnAction = function() {
+>   var trouves = [];
+>   this.grille.each(function(point, valeur) {
+>     if (valeur != undefined && valeur.agit)
+>       trouves.push({object: valeur, point: point});
 >   });
->   return found;
+>   return trouves;
 > };
 
 ***
 
-When asking a bug to act, we must pass it an object with information
-about its current surroundings. This object will use the direction
-names we saw earlier (|"n"|, |"ne"|, etcetera) as property names. Each
-property holds a string of one character, as returned by
-|characterFromElement|, indicating what the bug can see in that
-direction.
+Lorsque l'on demande à un insecte quel déplacement veut-il faire, il faut
+lui passer un objet lui décrivant les cases alentours. Cet objet utilisera
+les noms de direction que nous avons vu précédemment (|"n"|, |"ne"|,
+et cætera) comme noms de propriétés. Chaque propriété contiendra une
+chaîne d'un caractère tel que renvoyé par |caracteredApresElement|,
+indiquant ce que peut voir l'insecte dans cette direction.
 
-Add a method |listSurroundings| to the |Terrarium| prototype. It takes
-one argument, the point at which the bug is currently standing, and
-returns an object with information about the surroundings of that
-point. When the point is at the edge of the grid, use |"#"| for the
-directions that go outside of the grid, so the bug will not try to
-move there.
+Ajouter une méthode |listeAlentours| au prototype de |Terrarium|. Elle
+prend un argument, le point où l'insecte se trouve, et renvoie un objet
+décrivant l'entourage de ce point. Quand un point se trouve à une bordure
+de la grille, utiliser |"#"| pour les directions qui débordent de la grille,
+ainsi l'insecte ne pourra s'y rendre.
 
-Hint: Do not write out all the directions, use the |each| method on
-the |directions| dictionary.
+Conseil : ne pas décrire chacune des directions, mais utiliser la méthode
+|each| sur le dictionnaire |directions|.
 
 ///
 
-> Terrarium.prototype.listSurroundings = function(center) {
->   var result = {};
->   var grid = this.grid;
->   directions.each(function(name, direction) {
->     var place = center.add(direction);
->     if (grid.isInside(place))
->       result[name] = characterFromElement(grid.valueAt(place));
+> Terrarium.prototype.listeAlentours = function(centre) {
+>   var resultat = {};
+>   var grille = this.grille;
+>   directions.each(function(nom, direction) {
+>     var place = centre.ajoute(direction);
+>     if (grille.estDedans(place))
+>       resultat[nom] = caracteredApresElement(grille.valeurEn(place));
 >     else
->       result[name] = "#";
+>       resultat[nom] = "#";
 >   });
->   return result;
+>   return resultat;
 > };
 
-Note the use of the |grid| variable to work around the |this| problem.
+Remarquez l'utilisation de la variable |grille| pour passer outre les
+difficultés liées à l'usage de |this|.
 
 ---
 
-Both above methods are not part of the external interface of a
-|Terrarium| object, they are internal details. Some languages provide
-ways to explicitly declare certain methods and properties 'private',
-and make it an error to use them from outside the object. JavaScript
-does not, so you will have to rely on comments to describe the
-interface to an object. Sometimes it can be useful to use some kind of
-naming scheme to distinguish between external and internal properties,
-for example by prefixing all internal ones with an underscore ('|_|').
-This will make accidental uses of properties that are not part of an
-object's interface easier to spot.
+Les deux méthodes ci-dessus ne font pas partie de l'interface externe de
+l'objet |Terrarium|, mais sont des détails internes à l'objet. Certains
+langages de programmation permettent de déclarer explicitement certaines
+méthodes et propriétés comme 'privées', et provoquent une erreur si on
+accède à celles-ci en dehors de l'objet.
+Ce n'est pas le cas de JavaScript, c'est pourquoi vous pourriez utiliser
+des commentaires pour décrire l'interface d'un objet.
+Parfois il est utile d'utiliser des conventions de nommage pour distinguer les
+propriétés externes et internes, par exemple en préfixant les propriétés
+internes avec un caractère souligné ('_').
+Cela permet de répérer plus facilement les utilisations accidentelles des
+propriétés qui ne font pas partie de l'interface des objets.
 
 ---
 
-Next is one more internal method, the one that will ask a bug for an
-action and carry it out. It takes an object with |object| and |point|
-properties, as returned by |listActingCreatures|, as argument. For now,
-it only knows about the |"move"| action:
+Voici encore une méthode interne, celle qui va demander à un insecte ce
+qu'il veut faire, et l'effectuer. Elle prend en argument un objet avec les
+propriétés |object| et |point|, comme le renvoie |listeCreaturesEnAction|.
+Pour le moment, elle ne reconnait que l'action |"déplacement"| :
 
-> Terrarium.prototype.processCreature = function(creature) {
->   var surroundings = this.listSurroundings(creature.point);
->   var action = creature.object.act(surroundings);
->   if (action.type == "move" && directions.contains(action.direction)) {
->     var to = creature.point.add(directions.lookup(action.direction));
->     if (this.grid.isInside(to) && this.grid.valueAt(to) == undefined)
->       this.grid.moveValue(creature.point, to);
+> Terrarium.prototype.actionnerUneCreature = function(creature) {
+>   var alentours = this.listeAlentours(creature.point);
+>   var action = creature.object.agit(alentours);
+>   if (action.type == "déplacement" && directions.contains(action.direction)) {
+>     var to = creature.point.ajoute(directions.lookup(action.direction));
+>     if (this.grille.estDedans(to) && this.grille.valeurEn(to) == undefined)
+>       this.grille.deplaceElement(creature.point, to);
 >   }
 >   else {
->     throw new Error("Unsupported action: " + action.type);
+>     throw new Error("Action invalide : " + action.type);
 >   }
 > };
 
-Note that it checks whether the chosen direction is inside of the grid
-and empty, and ignores it otherwise. This way, the bugs can ask for
-any action they like -- the action will only be carried out if it is
-actually possible. This acts as a layer of insulation between the bugs
-and the terrarium, and allows us to be less precise when writing the
-bugs' |act| methods -- for example the |StupidBug| just always travels
-South, regardless of any walls that might stand in its way.
+Remarquez que la méthode vérifie si la direction choisie amène bien à
+une case vide, dans le cas contraire, la méthode ignore le déplacement. De
+cette façon, les insectes peuvent bien demander tout ce qu'ils veulent --
+l'action ne sera effectuée que si elle est possible.
+Ce mécanisme agit comme une couche d'isolation entre les insectes et le
+terrarium, et nous autorise quelques approximations dans l'écriture des
+méthodes |agit| des insectes -- par exemple |InsecteStupide| ne se déplace
+que vers le sud, sans se demander si un mur se trouve sur son chemin.
 
 ---
 
-These three internal methods then finally allow us to write the |step|
-method, which gives all bugs a chance to do something (all elements
-with an |act| method -- we could also give the |wall| object one if we
-so desired, and make the walls walk).
+Ces trois méthodes internes vont nous permettre enfin d'écrire la méthode
+|step|, qui permettra aux insectes de faire quelque chose (et même tout
+élément doté d'une méthode |agit| -- nous pourrions tout aussi bien
+donner une telle méthode à l'objet |mur| et les murs se déplaceraient).
 
 > Terrarium.prototype.step = function() {
->   forEach(this.listActingCreatures(),
->           bind(this.processCreature, this));
+>   forEach(this.listeCreaturesEnAction(),
+>           bind(this.actionnerUneCreature, this));
 > };
 
-Now, let us make a terrarium and see whether the bugs move...
+Maintenant, construisons un terrarium et voyons les insectes se déplacer.
 
-> var terrarium = new Terrarium(thePlan);
+> var terrarium = new Terrarium(lePlan);
 > print(terrarium);
 > terrarium.step();
 > print(terrarium);
 
 ---
 
-Wait, how come the above calls |print(terrarium)| and ends up
-displaying the output of our _|toString|_ method? |print| turns its
-arguments to strings using the |String| function. Objects are turned
-to strings by calling their |toString| method, so giving your own
-object types a meaningful |toString| is a good way to make them
-readable when printed out.
+Examinons un instant l'instruction ci-dessus |print(terrarium)|, comment
+fait-elle pour renvoyer le contenu de notre méthode _|toString|_ ? |print|
+transfome les arguments qui lui sont passés en chaîne de caractère,
+en utilisant la fonction |String|. Les objets sont transformés en chaîne
+de caractères par l'appel de leur méthode |toString|, aussi, écrire une
+méthode |toString| dans nos propres objets est un bon moyen de les rendre
+lisible lors de l'appel de |print|.
 
 > Point.prototype.toString = function() {
 >   return "(" + this.x + "," + this.y + ")";
@@ -6989,25 +7022,26 @@ readable when printed out.
 
 ---
 
-As promised, |Terrarium| objects also get |start| and |stop| methods
-to start or stop their simulation. For this, we will use two functions
-provided by the browser, called _|setInterval|_ and _|clearInterval|_.
-The first is used to cause its first argument (a function, or a string
-containing JavaScript code) to be executed periodically. Its second
-argument gives the amount of milliseconds (1/1000 second) between
-invocations. It returns a value that can be given to |clearInterval|
-to stop its effect.
+Comme prévu, l'objet |Terrarium| sera doté de méthode |start| et |stop| pour
+démarrer et arrêter la simulation. Pour cela, nous utiliserons deux fonctions
+fournies par le navigateur web, appelées _|setInterval|_ et _|clearInterval|_.
+La première est utilisé dans le but que son premier argument (une fonction
+ou une chaîne de caractères contenant du code JavaScript) soit exécuté
+périodiquement. Son deuxième argument est la durée en millisecondes
+(1/1000 de seconde) entre les exécutions.
+La fonction renvoie une valeur qui pourra servir d'argument à |clearInterval|
+pour arrêter les exécutions périodiques.
 
-> var annoy = setInterval(function() {print("What?");}, 400);
+> var pénible = setInterval(function() {print("Quoi?");}, 400);
 
-And...
+Et…
 
-> clearInterval(annoy);
+> clearInterval(pénible);
 
-There are similar functions for one-shot time-based actions.
-_|setTimeout|_ causes a function or string to be executed after a
-given amount of milliseconds, and _|clearTimeout|_ cancels such an
-action.
+Il existe des fonctions proches pour exécuter une action une seule fois
+après un laps de temps. _|setTimeout|_ exécute une fonction ou une chaine
+de caractères après un délai exprimé en millisecondes, et _|clearTimeout|_
+permet d'annuler une telle action.
 
 ---
 
@@ -7025,134 +7059,138 @@ action.
 
 ---
 
-Now we have a terrarium with some simple-minded bugs, and we can run
-it. But to see what is going on, we have to repeatedly do
-|print(terrarium)|, or we won't see what is going on. That is not very
-practical. It would be nicer if it would print automatically. It would
-also look better if, instead of printing a thousand terraria below
-each other, we could update a single printout of the terrarium. For
-that second problem, this page conveniently provides a function called
-|inPlacePrinter|. It returns a function like |print| which, instead of
-adding to the output, replaces its previous output.
+A ce stade, nous avons un terrarium avec des insectes très simplistes,
+que nous pouvons faire fonctionner. Mais pour voir ce qu'il s'y passe,
+il nous faut constamment exécuter |print(terrarium)|. Ce n'est pas très
+pratique. Ce serait agréable que le contenu s'affiche automatiquement. Ce
+serait encore mieux si, au lieu d'afficher par milliers les images successives
+des terraria, nous n'ayons qu'une seule image que nous mettrions à jour.
+Pour ce dernier problème, cette page offre une fonction nommé
+|inPlacePrinter|. Elle renvoie une fonction comme |print| qui, au lieu
+d'effectuer un nouvel affichage, remplace l'affichage précédent.
 
 > var printHere = inPlacePrinter();
-> printHere("Now you see it.");
-> setTimeout(partial(printHere, "Now you don't."), 1000);
+> printHere("Actuellement vous voyez ceci.");
+> setTimeout(partial(printHere, "Plus maintenant."), 1000);
 
-To cause the terrarium to be re-printed every time it changes, we can
-modify the |step| method as follows:
+Pour que le terrarium s'affiche à chaque changement, nous modifions la
+méthode |step| comme suit:
 
 > Terrarium.prototype.step = function() {
->   forEach(this.listActingCreatures(),
->           bind(this.processCreature, this));
+>   forEach(this.listeCreaturesEnAction(),
+>           bind(this.actionnerUneCreature, this));
 >   if (this.onStep)
 >     this.onStep();
 > };
 
-Now, when an |onStep| property has been added to a terrarium, it will
-be called on every step.
+En faisant cela, si une propriété |onStep| est présente dans
+l'objet terrarium, elle est appelée à chaque étape.
 
-> var terrarium = new Terrarium(thePlan);
+> var terrarium = new Terrarium(lePlan);
 > terrarium.onStep = partial(inPlacePrinter(), terrarium);
 > terrarium.start();
 
-Note the use of |partial| -- it produces an in-place printer applied
-to the terrarium. Such a printer only takes one argument, so after
-partially applying it there are no arguments left, and it becomes a
-function of zero arguments. That is exactly what we need for the
-|onStep| property.
+Remarquez l'utilisation de |partial| -- cette méthode  |partial| renvoie une
+fonction d'affichage appliquée à l'objet terrarium. La fonction d'affichage
+ne demandant qu'un seul argument, après application partielle, nous obtenons
+une fonction sans argument. C'est exactement ce dont nous avons besoin pour
+la propriété |onStep|.
 
-Don't forget to stop the terrarium when it is no longer interesting
-(which should be pretty soon), so that it does not keep wasting your
-computer's resources:
+N'oubliez pas d'arrêter la simulation du terrarium, quand il perd de son
+intérêt (ce qui ne devrait pas tarder), pour éviter de consommer les
+ressources de votre ordinateur inutilement :
 
 > terrarium.stop();
 
 ---
 
-But who wants a terrarium with just one kind of bug, and a stupid bug
-at that? Not me. It would be nice if we could add different kinds of
-bugs. Fortunately, all we have to is to make the
-|elementFromCharacter| function more general. Right now it contains
-three cases which are typed in directly, or 'hard-coded':
+Qui voudrait d'une simulation de terrarium avec une seule sorte d'insecte,
+stupide qui plus est ? Pas moi. Ce serait judicieux si nous pouvions ajouter
+différentes sortes d'insectes. Heureusement, il nous suffit pour cela de
+rendre la fonction |elementdApresCaractere| plus générale. Pour le moment,
+elle décrit trois possibilités « codés en dur », c'est à dire de
+façon linéaire et sans flexibilité :
 
-> function elementFromCharacter(character) {
->   if (character == " ")
+> function elementdApresCaractere(caractere) {
+>   if (caractere == " ")
 >     return undefined;
->   else if (character == "#")
->     return wall;
->   else if (character == "o")
->     return new StupidBug();
+>   else if (caractere == "#")
+>     return mur;
+>   else if (caractere == "o")
+>     return new InsecteStupide();
 > }
 
-The first two cases we can leave intact, but the last one is way too
-specific. A better approach would be to store the characters and the
-corresponding bug-constructors in a dictionary, and look for them
-there:
+Les deux premiers cas reste tels quels, le dernier étant trop spécifique. Une
+meilleure approche serait de stocker les constructeurs des objets insectes et
+les caractères qui leur correspondent dans un dictionnaire, et de rechercher
+dans ce dictionnaire ces caractères :
 
-> var creatureTypes = new Dictionary();
-> creatureTypes.register = function(constructor) {
->   this.store(constructor.prototype.character, constructor);
+> var typesDeCreature = new Dictionary();
+> typesDeCreature.enregistre = function(constructor) {
+>   this.store(constructor.prototype.caractere, constructor);
 > };
 >
-> function elementFromCharacter(character) {
->   if (character == " ")
+> function elementdApresCaractere(caractere) {
+>   if (caractere == " ")
 >     return undefined;
->   else if (character == "#")
->     return wall;
->   else if (creatureTypes.contains(character))
->     return new (creatureTypes.lookup(character))();
+>   else if (caractere == "#")
+>     return mur;
+>   else if (typesDeCreature.contains(caractere))
+>     return new (typesDeCreature.lookup(caractere))();
 >   else
->     throw new Error("Unknown character: " + character);
+>     throw new Error("Caractère inconnu: " + caractere);
 > }
 
-Note how the |register| method is added to |creatureTypes| -- this is
-a dictionary object, but there is no reason why it shouldn't support
-an additional method. This method looks up the character associated
-with a constructor, and stores it in the dictionary. It should only be
-called on constructors whose prototype does actually have a
-|character| property.
+Remarquez qu'une méthode |enregistre| est ajoutée à l'objet
+|typesDeCreature| -- celui-ci est de de type dictionnaire, ce qui n'empêche en
+rien de lui ajouter une méthode. Cette fonction extrait le caractère associé
+au constructeur de l'insecte, et stocke ce caractère dans le dictionnaire.
+Cette méthode ne doit être appelée que sur des objets dont le prototype
+possède une propriété |caractere|.
 
-|elementFromCharacter| now looks up the character it is given in
-|creatureTypes|, and raises an exception when it comes across an
-unknown character.
+La fonction |elementdApresCaractere| est modifiée pour rechercher le
+caractère présent dans |typesDeCreature|, et provoque une exception si
+elle tombe sur un caractère inconnu.
 
 ---
 
-Here is a new bug type, and the call to register its character in
-|creatureTypes|:
+Voici une nouvelle sorte d'insecte, ainsi que les instructions pour enregistrer
+son caractère dans |typesDeCreature|:
 
-> function BouncingBug() {
+> function InsecteaRebond() {
 >   this.direction = "ne";
 > }
-> BouncingBug.prototype.act = function(surroundings) {
->   if (surroundings[this.direction] != " ")
+> InsecteaRebond.prototype.agit = function(alentours) {
+>   if (alentours[this.direction] != " ")
 >     this.direction = (this.direction == "ne" ? "sw" : "ne");
->   return {type: "move", direction: this.direction};
+>   return {type: "déplacement", direction: this.direction};
 > };
-> BouncingBug.prototype.character = "%";
+> InsecteaRebond.prototype.caractere = "%";
 >
-> creatureTypes.register(BouncingBug);
+> typesDeCreature.enregistre(InsecteaRebond);
 
-Can you figure out what it does?
+Pouvez-vous comprendre ce qu'il fait ?
 
-*** drunkbug
+*** insecteivre
 
-Create a bug type called |DrunkBug| which tries to move in a random
-direction every turn, never mind whether there is a wall there.
-Remember the |Math.random| trick from \\csearch.
+Créer un insecte nommé |InsecteIvre| qui essaie de se déplacer dans une
+direction quelconque à chaque tour, peu importe s'il y a un mur en face
+de lui.
+Rappelez-vous le fonctionnement de |Math.random| dans le \\csearch.
 
 ///
 
-To pick a random direction, we will need an array of direction names.
-We could of course just type |["n", "ne", ...]|, but that duplicates
-information, and duplicated information makes me nervous. We could
-also use the |each| method in |directions| to build the array, which
-is better already.
+Pour déterminer une direction de façon aléatoire, nous avons besoin
+d'un tableau avec la liste des directions. Nous pourrions juste écrire un
+tableau de cette façon : |["n", "ne", ...]|, mais cela dupliquerait des
+informations, et les duplications d'information me rendent nerveux. Nous
+pourrions également utiliser la méthode |each| sur le dictionnaire
+|directions| pour construire un nouveau tableau, ce serait déjà mieux.
 
-But there is clearly a generality to be discovered here. Getting a
-list of the property names in a dictionary sounds like a useful tool
-to have, so we add it to the |Dictionary| prototype.
+Mais vous devez comprendre qu'il y a, ici, une façon bien plus générale
+de procéder.
+Récupérer la liste des noms de propriété d'un dictionnaire est un outil
+utile, aussi, ajoutons le ou prototype de l'objet |Dictionary|.
 
 > Dictionary.prototype.names = function() {
 >   var names = [];
@@ -7162,37 +7200,38 @@ to have, so we add it to the |Dictionary| prototype.
 >
 > show(directions.names());
 
-A real neurotic programmer would immediately restore symmetry by also
-adding a |values| method, which returns a list of the values stored in
-the dictionary. But I guess that can wait until we [need it |
+Un programmeur vraiment névrosé voudrait immédiatement rétablir la
+symétrie en ajoutant une méthode |values| qui retournerait la liste des
+valeurs d'un dictionnaire. Mais je suppose que nous pouvons attendre d'en
+avoir [vraiment besoin|
 http://www.c2.com/cgi/wiki?YouArentGonnaNeedIt].
 
-Here is a way to take a random element from an array:
+Voici une façon de prendre un élément d'un tableau au hasard :
 
-> function randomElement(array) {
+> function elementAuHasard(array) {
 >   if (array.length == 0)
->     throw new Error("The array is empty.");
+>     throw new Error("Le tableau est vide.");
 >   return array[Math.floor(Math.random() * array.length)];
 > }
 >
-> show(randomElement(["heads", "tails"]));
+> show(elementAuHasard(["premier", "dernier"]));
 
-And the bug itself:
+Et l'insecte lui-même :
 
-> function DrunkBug() {};
-> DrunkBug.prototype.act = function(surroundings) {
->   return {type: "move",
->           direction: randomElement(directions.names())};
+> function InsecteIvre() {};
+> InsecteIvre.prototype.agit = function(alentours) {
+>   return {type: "déplacement",
+>           direction: elementAuHasard(directions.names())};
 > };
-> DrunkBug.prototype.character = "~";
+> InsecteIvre.prototype.caractere = "~";
 >
-> creatureTypes.register(DrunkBug);
+> typesDeCreature.enregistre(InsecteIvre);
 
 ---
 
-So, let us test out our new bugs:
+Essayons maintenant ces nouveaux insectes :
 
-> var newPlan =
+> var nouveauPlan =
 >   ["############################",
 >    "#                      #####",
 >    "#    ##                 ####",
@@ -7206,282 +7245,289 @@ So, let us test out our new bugs:
 >    "#        #######           #",
 >    "############################"];
 >
-> var terrarium = new Terrarium(newPlan);
+> var terrarium = new Terrarium(nouveauPlan);
 > terrarium.onStep = partial(inPlacePrinter(), terrarium);
 > terrarium.start();
 
-Notice the bouncing bugs bouncing off the drunk ones? Pure drama.
-Anyway, when you are done watching this fascinating show, shut it
-down:
+Vous voyez comment les insectes à rebond rebondissent sur les insectes en
+état d'ébriété ? Dramatique. De toute façon, quand vous en aurez assez
+de regarder ce spectacle fascinant, vous
+pourrez y mettre fin :
 
 > terrarium.stop();
 
 ---
 
-We now have two kinds of objects that both have an |act| method and a
-|character| property. Because they share these traits, the terrarium
-can approach them in the same way. This allows us to have all kinds of
-bugs, without changing anything about the terrarium code. This
-technique is called _polymorphism_, and it is arguably the most
-powerful aspect of object-oriented programming.
+Nous avons maintenant deux sortes d'objets possédant chacun une
+méthode |agit| et une propriété |caractere|. Comme ils partagent ces
+caractéristiques, le terrarium peut dialoguer avec eux d'une façon
+commune. Ceci nous autorise à avoir toutes sortes d'insectes, sans
+rien changer au code de l'objet terrarium. Cette technique est appelée
+_polymorphisme_, et c'est sûrement l'un des aspects les plus puissants de
+la programmation orientée objet.
 
-The basic idea of polymorphism is that when a piece of code is written
-to work with objects that have a certain interface, any kind of object
-that happens to support this interface can be plugged into the code,
-and it will just work. We already saw simple examples of this, like
-the |toString| method on objects. All objects that have a meaningful
-|toString| method can be given to |print| and other functions that
-need to convert values to strings, and the correct string will be
-produced, no matter how their |toString| method chooses to build this
-string.
+L'idée de base du polymorphisme est que lorsque qu'un morceau de programme
+est écrit pour manipuler des objets ayant une certaine interface, n'importe
+quel objet qui présente cette interface pourra être raccordé à ce morceau
+de programme, et le tout fonctionne.
+Nous avons déjà vu un exemple de cela, à savoir la méthode |toString|
+de nombreux objets.
+Tous les objets ayant une méthode |toString| pertinente peuvent être
+passés à la fonction |print|, ou tout autre fonction qui aura besoin de
+convertir un objet en chaîne de caractères, peu importe la façon dont
+cette dernière est produite.
 
-Similarly, |forEach| works on both real arrays and the pseudo-arrays
-found in the |arguments| variable, because all it needs is a |length|
-property and properties called |0|, |1|, and so on, for the elements
-of the array.
-
----
-
-To make life in the terrarium more life-like, we will add to it the
-concepts of food and reproduction. Each living thing in the terrarium
-gets a new property, |energy|, which is reduced by performing actions,
-and increased by eating things. When it has enough energy, a thing can
-reproduce##, generating a new creature of the same kind.
-
-## To keep things reasonably simple, the creatures in our terrarium
-reproduce asexually, all by themselves.
-
-If there are only bugs, wasting energy by moving around and eating
-each other, a terrarium will soon succumb to the forces of entropy,
-run out of energy, and become a lifeless wasteland. To prevent this
-from happening (too quickly, at least), we add lichen to the
-terrarium. Lichen do not move, they just use photo-synthesis to
-gather energy, and reproduce.
-
-To make this work, we will need a terrarium with a different
-|processCreature| method. We could just replace the method of to the
-|Terrarium| prototype, but we have become very attached to the
-simulation of the bouncing and drunk bugs, and we would hate to break
-our old terrarium.
-
-What we can do is create a new constructor, |LifeLikeTerrarium|, whose
-prototype is based on the |Terrarium| prototype, but which has a
-different |processCreature| method.
+De la même façon, |forEach| travaille sur de véritable objets tableau ou
+sur des objets similaires aux tableaux, |forEach| recevant cet objet tableau
+dans sa variable |arguments|, car tout ce dont cette fonction a besoin,
+ce sont des propriétés numérotées [0|, |1|, et ainsi de suite pour tous
+les éléments du tableau.
 
 ---
 
-There are a few ways to do this. We could go over the properties of
-|Terrarium.prototype|, and add them one by one to
-|LifeLikeTerrarium.prototype|. This is easy to do, and in some cases
-it is the best solution, but in this case there is a cleaner way. If
-we make the old prototype object the prototype of the new prototype
-object (you may have to re-read that a few times), it will
-automatically have all its properties.
+Pour rendre la vie dans le terrarium plus réelle, nous allons y ajouter
+les concepts de nourriture et de reproduction. Chaque créature vivante du
+terrarium reçoit une nouvelle propriété, |énergie|, qui est diminuée
+lorsqu'elle effectue une action, et augmentée lorsqu'elle mange quelque
+chose. Lorsqu'elle a suffisament d'énergie, un chose vivante peut se
+reproduire##, engendrant une nouvelle créature du même type.
 
-@_|clone|_Unfortunately, JavaScript does not have a straightforward
-way to create an object whose prototype is a certain other object. It
-is possible to write a function that does this, though, by using the
-following trick:
+## Pour rendre les choses plus simples, les créatures de notre terrarium
+se reproduiront de façon assexuée, d'elles-mêmes.
+
+S'il n'y avait que des insectes, les dépenses d'énergie de leurs
+déplacements, et le fait qu'ils se mangeraient entre eux, feraient que
+notre terrarium succomberait rapidement sous l'effet de l'entropie, serait
+à court d'énergie, et deviendrait un lieu abandonné et sans vie.
+Pour empêcher que ceci se produise (au moins, que cela ne se produise pas trop
+vite), nous ajoutons du lichen au terrarium. Les lichens ne se déplacent pas,
+ils utilisent la photosynthèse pour produire de l'énergie et se reproduire.
+
+Pour que cela fonctionne, nous aurons besoin d'un terrarium avec une méthode
+|actionnerUneCreature| différente. Nous pourrions simplement changer cette
+méthode dans le prototype de |Terrarium|, mais nous sommes très attachés
+à la simulation des insectes sauteurs et des insectes en état d'ébriété,
+et ne voulons pas casser ce premier terrarium.
+
+Ce que nous pouvons faire est écrire un nouveau constructeur,
+|TerrariumPlusVivant|, dont le prototype est basé sur le prototype de
+|Terrarium|, mais qui possède une méthode |actionnerUneCreature| différente.
+
+---
+
+Il existe plusieurs façon de faire cela. Nous pourrions énumérer les
+propriétés de |Terrarium.prototype|, et les ajouter une à une dans
+|TerrariumPlusVivant.prototype|. Ce serait simple à faire, et dans certains
+cas la meilleure solution. Mais ici nous avons une façon plus propre de
+faire. Si nous faisons du prototype du premier objet terrarium le prototype
+du nouveau terrarium (prenez le temps de bien comprendre cette phrase),
+ce nouveau Terrarium en aurait toutes les propriétés.
+
+@_|clone|_Malheureusement, JavaScript ne propose pas de moyen direct de
+créer un objet dont le prototype est celui d'un autre objet. Il est possible
+d'écrire une fonction qui fait cela, en utilisant l'astuce suivante :
 
 > function clone(object) {
->   function OneShotConstructor(){}
->   OneShotConstructor.prototype = object;
->   return new OneShotConstructor();
+>   function ConstructeurNouveauPourChaqueClone(){}
+>   ConstructeurNouveauPourChaqueClone.prototype = object;
+>   return new ConstructeurNouveauPourChaqueClone();
 > }
 
-This function uses an empty one-shot constructor, whose prototype is
-the given object. When using |new| on this constructor, it will create
-a new object based on the given object.
+Cette fonction clone déclare un constructeur nommé
+ConstructeurNouveauPourChaqueClone qui est vide et unique, dont le prototype
+est l'objet passé en argument.
+En appelant |new| sur ce constructeur, un nouvel objet est crée, basé sur
+l'objet passé en argument.
 
-> function LifeLikeTerrarium(plan) {
+> function TerrariumPlusVivant(plan) {
 >   Terrarium.call(this, plan);
 > }
-> LifeLikeTerrarium.prototype = clone(Terrarium.prototype);
-> LifeLikeTerrarium.prototype.constructor = LifeLikeTerrarium;
+> TerrariumPlusVivant.prototype = clone(Terrarium.prototype);
+> TerrariumPlusVivant.prototype.constructor = TerrariumPlusVivant;
 
-The new constructor doesn't need to do anything different from the old
-one, so it just calls the old one on the |this| object. We also have
-to restore the |constructor| property in the new prototype, or it
-would claim its constructor is |Terrarium| (which, of course, is only
-really a problem when we make use of this property, which we don't).
-
----
-
-It is now possible to replace some of the methods of the
-|LifeLikeTerrarium| object, or add new ones. We have based a new
-object type on an old one, which saved us the work of re-writing all
-the methods which are the same in |Terrarium| and |LifeLikeTerrarium|.
-This technique is called '_inheritance_'. The new type inherits the
-properties of the old type. In most cases, this means the new type
-will still support the interface of the old type, though it might also
-support a few methods that the old type does not have. This way,
-objects of the new type can be (polymorphically) used in all the
-places where objects of the old type could be used.
-
-In most programming languages with explicit support for
-object-oriented programming, inheritance is a very straightforward
-thing. In JavaScript, the language doesn't really specify a simple way
-to do it. Because of this, JavaScript programmers have invented many
-different approaches to inheritance. Unfortunately, none of them is
-quite perfect. Fortunately, such a broad range of approaches allows a
-programmer to choose the most suitable one for the problem he is
-solving, and allows certain tricks that would be utterly impossible in
-other languages.
-
-At the end of this chapter, I will show a few other ways to do
-inheritance, and the issues they have.
+Le nouveau constructeur n'a pas besoin de faire quoi que ce soit de plus que
+l'ancien, donc il se contente d'appeler l'ancien sur l'objet |this|. Il nous
+faut également restaurer la propriété |constructor| du nouveau prototype,
+sinon il clamerait que son constructeur est |Terrarium| (ce qui, bien sûr,
+n'est un problème que si on se sert de cette propriété, ce qui n'est pas
+notre cas).
 
 ---
 
-Here is the new |processCreature| method. It is big.
+Il est maintenant possible de remplacer certaines méthodes de l'objet
+|TerrariumPlusVivant|, et d'en ajouter d'autres. Nous avons un type d'objet
+basé sur un autre, ce qui nous épargne le travail de récrire toutes les
+méthodes communes à |Terrarium| et |TerrariumPlusVivant|.
+Cette  technique est appelée '_héritage_'. Le nouveau type hérite des
+propriétés de l'ancien type. Dans la plupart des cas, cela signifie que le
+nouveau type possèdera toujours l'interface de l'ancien, bien qu'il puisse
+posséder des méthodes en plus, que l'ancien n'a pas.
+De cette façon, les objets du nouveau type pourraient prendre la place
+(selon le polymorphisme) des objets de l'ancien type.
 
-> LifeLikeTerrarium.prototype.processCreature = function(creature) {
->   var surroundings = this.listSurroundings(creature.point);
->   var action = creature.object.act(surroundings);
+Dans les langages de programmation avec un support explicite de l'orientation
+objet, l'héritage est une chose très simple à mettre en oeuvre. JavaScript
+n'a pas de moyen simple de le faire.
+A cause de cela, les programmeurs en JavaScript ont inventé différentes
+approches pour le faire. Malheureusement, aucune d'entre elles n'est parfaite.
+
+A la fin de ce chapitre, je vous montrerai d'autres façons de mettre en
+œuvre l'héritage, et leurs inconvénients.
+
+---
+
+Voici une nouvelle méthode |actionnerUneCreature|. Elle est volumineuse :
+
+> TerrariumPlusVivant.prototype.actionnerUneCreature = function(creature) {
+>   var alentours = this.listeAlentours(creature.point);
+>   var action = creature.object.agit(alentours);
 >
->   var target = undefined;
->   var valueAtTarget = undefined;
+>   var cible = undefined;
+>   var elementDansCible = undefined;
 >   if (action.direction && directions.contains(action.direction)) {
 >     var direction = directions.lookup(action.direction);
->     var maybe = creature.point.add(direction);
->     if (this.grid.isInside(maybe)) {
->       target = maybe;
->       valueAtTarget = this.grid.valueAt(target);
+>     var directionSouhaitee = creature.point.ajoute(direction);
+>     if (this.grille.estDedans(directionSouhaitee )) {
+>       cible = directionSouhaitee ;
+>       elementDansCible = this.grille.valeurEn(cible);
 >     }
 >   }
 >
->   if (action.type == "move") {
->     if (target && !valueAtTarget) {
->       this.grid.moveValue(creature.point, target);
->       creature.point = target;
->       creature.object.energy -= 1;
+>   if (action.type == "déplacement") {
+>     if (cible && !elementDansCible) {
+>       this.grille.deplaceElement(creature.point, cible);
+>       creature.point = cible;
+>       creature.object.energie -= 1;
 >     }
 >   }
->   else if (action.type == "eat") {
->     if (valueAtTarget && valueAtTarget.energy) {
->       this.grid.setValueAt(target, undefined);
->       creature.object.energy += valueAtTarget.energy;
+>   else if (action.type == "manger") {
+>     if (elementDansCible && elementDansCible.energie) {
+>       this.grille.ecritValeurEn(cible, undefined);
+>       creature.object.energie += elementDansCible.energie;
 >     }
 >   }
 >   else if (action.type == "photosynthese") {
->     creature.object.energy += 1;
+>     creature.object.energie += 1;
 >   }
->   else if (action.type == "reproduce") {
->     if (target && !valueAtTarget) {
->       var species = characterFromElement(creature.object);
->       var baby = elementFromCharacter(species);
->       creature.object.energy -= baby.energy * 2;
->       if (creature.object.energy > 0)
->         this.grid.setValueAt(target, baby);
+>   else if (action.type == "reproduction") {
+>     if (cible && !elementDansCible) {
+>       var espèce = caracteredApresElement(creature.object);
+>       var bébé = elementdApresCaractere(espèce);
+>       creature.object.energie -= bébé.energie * 2;
+>       if (creature.object.energie > 0)
+>         this.grille.ecritValeurEn(cible, bébé);
 >     }
 >   }
->   else if (action.type == "wait") {
->     creature.object.energy -= 0.2;
+>   else if (action.type == "attente") {
+>     creature.object.energie -= 0.2;
 >   }
 >   else {
->     throw new Error("Unsupported action: " + action.type);
+>     throw new Error("Action invalide : " + action.type);
 >   }
 >
->   if (creature.object.energy <= 0)
->     this.grid.setValueAt(creature.point, undefined);
+>   if (creature.object.energie <= 0)
+>     this.grille.ecritValeurEn(creature.point, undefined);
 > };
 
-The function still starts by asking the creature for an action. Then,
-if the action has a |direction| property, it immediately computes
-which point on the grid this direction points to and which value is
-currently sitting there. Three of the five supported actions need to
-know this, and the code would be even uglier if they all computed it
-separately. If there is no |direction| property, or an invalid one, it
-leaves the variables |target| and |valueAtTarget| undefined.
+La fonction commence toujours par interroger les créatures pour une action.
+Ensuite, si l'action possède une propriété |direction|, la fonction
+détermine immédiatement à quel endroit de la grille cette direction
+amène, et ce qu'il y a à cet endroit. Trois des cinq actions implantées
+dans notre simulation ont besoin de savoir cela, et le code serait encore
+plus difficile à comprendre si ces calculs étaient faits à part.
+Si l'action n'a pas de propriété |direction|, ou si celle-ci est incorrecte,
+les variables |cible| et |elementDansCible| restent à leur valeur undefined.
 
-After this, it goes over all the actions. Some actions require
-additional checking before they are executed, this is done with a
-separate |if| so that if a creature, for example, tries to walk
-through a wall, we do not generate an |"Unsupported action"|
-exception.
+Après cela, toutes les actions sont passées en revue. Certaines actions
+demandent des vérifications supplémentaires avant leur exécution, ce qui
+est fait en utilisant un |if| distinct pour que si une créature cherche,
+par exemple, à passer à travers un mur, une exception |"Action invalide"|
+ne soit pas générée.
 
-Note that, in the |"reproduce"| action, the parent creature loses
-twice the energy that the newborn creature gets (childbearing is not
-easy), and the new creature is only placed on the grid if the parent
-had enough energy to produce it.
+Remarquez que dans l'action |"reproduction"|, la créature parente perd deux
+fois la quantité d'énergie reçue par la nouvelle créature (la procréation
+n'est pas une chose facile), et la nouvelle créature n'est placée sur la
+grille que si son parent a suffisant d'énergie pour l'engendrer.
 
-After the action has been performed, we check whether the creature is
-out of energy. If it is, it dies, and we remove it.
+Après qu'une action a été effectuée, nous regardons si la créature a
+encore de l'énergie. Si elle n'en a plus, elle meurt, et nous la supprimons.
 
 ---
 
-Lichen is not a very complex organism. We will use the character |"*"|
-to represent it. Make sure you have defined the |randomElement|
-function from \\edrunkbug, because it is used again here.
+Le lichen n'est pas un organisme très complexe. Nous allons utiliser le
+caractère |"*"| pour le représenter. Vérifiez que vous avez bien défini
+la fonction |elementAuHasard| pour l'\\einsecteivre, car elle sera utilisée
+de nouveau ici.
 
 > function Lichen() {
->   this.energy = 5;
+>   this.energie = 5;
 > }
-> Lichen.prototype.act = function(surroundings) {
->   var emptySpace = findDirections(surroundings, " ");
->   if (this.energy >= 13 && emptySpace.length > 0)
->     return {type: "reproduce", direction: randomElement(emptySpace)};
->   else if (this.energy < 20)
+> Lichen.prototype.agit = function(alentours) {
+>   var espaceVide = chercheDirections(alentours, " ");
+>   if (this.energie >= 13 && espaceVide.length > 0)
+>     return {type: "reproduction", direction: elementAuHasard(espaceVide)};
+>   else if (this.energie < 20)
 >     return {type: "photosynthese"};
 >   else
->     return {type: "wait"};
+>     return {type: "attente"};
 > };
-> Lichen.prototype.character = "*";
+> Lichen.prototype.caractere = "*";
 >
-> creatureTypes.register(Lichen);
+> typesDeCreature.enregistre(Lichen);
 >
-> function findDirections(surroundings, wanted) {
->   var found = [];
+> function chercheDirections(alentours, directionSouhaite) {
+>   var trouve = [];
 >   directions.each(function(name) {
->     if (surroundings[name] == wanted)
->       found.push(name);
+>     if (alentours[name] == directionSouhaite)
+>       trouve.push(name);
 >   });
->   return found;
+>   return trouve;
 > }
 
-Lichen do not grow bigger than 20 energy, or they would get *huge*
-when they are surrounded by other lichen and have no room to
-reproduce.
+Les lichens ne grandissent jamais au delà de 20 unités d'énergie, sinon
+ils seraient trop imposants, quand, encerclés par d'autre lichens, ils
+n'ont plus de place pour se reproduire.
 
 ***
 
-Create a |LichenEater| creature. It starts with an energy of |10|, and
-behaves in the following way:
+Créez une créature dévoreuse de lichens, |MangeuseLichen|. Elle commence
+avec |10| unités d'énergie, et agit de la façon suivante :
 
- * When it has an energy of 30 or more, and there is room near it, it reproduces.
- * Otherwise, if there are lichen nearby, it eats a random one.
- * Otherwise, if there is space to move, it moves into a random nearby empty square.
- * Otherwise, it waits.
+ * Quand elle a 30 ou plus d'énergie et une case vide près d'elle, elle se reproduit.
+ * Sinon, s'il y a du lichen près d'elle, elle en mange un, choisi aléatoirement.
+ * Sinon, s'il y a la place de se bouger, elle va vers une cases vides aléatoire.
+ * Sinon elle attend.
 
-Use |findDirections| and |randomElement| to check the surroundings and
-to pick directions. Give the lichen-eater |"c"| as its character
-(pac-man).
+Utiliser les fonctions |chercheDirections| et |elementAuHasard| pour
+déterminer le contenu de l'entourage de la créature, et faire des choix
+aléatoires. Donner à cette créature le caractère |"c"| (pour faire penser
+à pac-man).
 
 ///
 
-> function LichenEater() {
->   this.energy = 10;
+> function MangeuseLichen() {
+>   this.energie = 10;
 > }
-> LichenEater.prototype.act = function(surroundings) {
->   var emptySpace = findDirections(surroundings, " ");
->   var lichen = findDirections(surroundings, "*");
+> MangeuseLichen.prototype.agit = function(alentours) {
+>   var espaceVide = chercheDirections(alentours, " ");
+>   var lichen = chercheDirections(alentours, "*");
 >
->   if (this.energy >= 30 && emptySpace.length > 0)
->     return {type: "reproduce", direction: randomElement(emptySpace)};
+>   if (this.energie >= 30 && espaceVide.length > 0)
+>     return {type: "reproduction", direction: elementAuHasard(espaceVide)};
 >   else if (lichen.length > 0)
->     return {type: "eat", direction: randomElement(lichen)};
->   else if (emptySpace.length > 0)
->     return {type: "move", direction: randomElement(emptySpace)};
+>     return {type: "manger", direction: elementAuHasard(lichen)};
+>   else if (espaceVide.length > 0)
+>     return {type: "déplacement", direction: elementAuHasard(espaceVide)};
 >   else
->     return {type: "wait"};
+>     return {type: "attente"};
 > };
-> LichenEater.prototype.character = "c";
+> MangeuseLichen.prototype.caractere = "c";
 >
-> creatureTypes.register(LichenEater);
+> typesDeCreature.enregistre(MangeuseLichen);
 
 ---
 
-And try it out.
+Et pour l'essayer.
 
 > var lichenPlan =
 >   ["############################",
@@ -7497,180 +7543,190 @@ And try it out.
 >    "#*****     ###***       *###",
 >    "############################"];
 >
-> var terrarium = new LifeLikeTerrarium(lichenPlan);
+> var terrarium = new TerrariumPlusVivant(lichenPlan);
 > terrarium.onStep = partial(inPlacePrinter(), terrarium);
 > terrarium.start();
 
-Most likely, you will see the lichen quickly over-grow a large part of
-the terrarium, after which the abundance of food makes the eaters so
-numerous that they wipe out all the lichen, and thus themselves. Ah,
-tragedy of nature.
+La plupart du temps, vous devriez voir le lichen envahir rapidement le
+terrarium, cette abondance de nourriture provoquera une abondance de créatures
+voraces, si nombreuses qu'elle finiront par épuiser les ressources en lichen,
+et enfin s'épuiser elles-mêmes. La nature est si tragique.
 
 > terrarium.stop();
 
 ---
 
-Having the inhabitants of your terrarium go extinct after a few
-minutes is kind of depressing. To deal with this, we have to teach our
-lichen-eaters about long-term sustainable farming. By making them only
-eat if they see at least two lichen nearby, no matter how hungry they
-are, they will never exterminate the lichen. This requires some
-discipline, but the result is a biotope that does not destroy itself.
-Here is a new |act| method -- the only change is that it now only eats
-when |lichen.length| is at least two.
+Constater que les occupants de votre terrarium disparaissent après quelques
+minutes est un peu déprimant. Pour y faire face, nous allons éduquer nos
+créatures dévoreuses de lichen au principe de l'agriculture raisonnée. En
+faisant qu'elles ne mangent du lichen que si elles sont à proximité de
+deux d'entre eux, quel que soit l'état de leur faim, elles ne pourront plus
+exterminer le lichen. Cela demande de la discipline, mais le résultat est
+un biotope qui ne s'autodétruit pas.
+Voici une nouvelle méthode |agit| -- le seul changement est que l'action
+de manger ne se fait que si |lichen.length| est au moins égal à 2.
 
-> LichenEater.prototype.act = function(surroundings) {
->   var emptySpace = findDirections(surroundings, " ");
->   var lichen = findDirections(surroundings, "*");
+> MangeuseLichen.prototype.agit = function(alentours) {
+>   var espaceVide = chercheDirections(alentours, " ");
+>   var lichen = chercheDirections(alentours, "*");
 >
->   if (this.energy >= 30 && emptySpace.length > 0)
->     return {type: "reproduce", direction: randomElement(emptySpace)};
+>   if (this.energie >= 30 && espaceVide.length > 0)
+>     return {type: "reproduction", direction: elementAuHasard(espaceVide)};
 >   else if (lichen.length > 1)
->     return {type: "eat", direction: randomElement(lichen)};
->   else if (emptySpace.length > 0)
->     return {type: "move", direction: randomElement(emptySpace)};
+>     return {type: "manger", direction: elementAuHasard(lichen)};
+>   else if (espaceVide.length > 0)
+>     return {type: "déplacement", direction: elementAuHasard(espaceVide)};
 >   else
->     return {type: "wait"};
+>     return {type: "attente"};
 > };
 
-Run the above |lichenPlan| terrarium again, and see how it goes.
-Unless you are very lucky, the lichen-eaters will probably still go
-extinct after a while, because, in a time of mass starvation, they
-crawl aimlessly back and forth through empty space, instead of finding
-the lichen that is sitting just around the corner.
+Faites fonctionner la simulation du terrarium |lichenPlan| à nouveau
+et constatez son évolution. A moins d'être très chanceux, vous allez
+probablement constater l'extinction des créatures dévoreuses au bout
+d'un certain temps, parce que lorsque survient la famine, ces créatures
+se déplacent de façon désordonnée, au lieu de rechercher le lichen qui
+n'est pas très loin d'elles.
 
 ***
 
-Find a way to modify the |LichenEater| to be more likely to survive.
-Do not cheat -- |this.energy += 100| is cheating. If you rewrite the
-constructor, do not forget to re-register it in the |creatureTypes|
-dictionary, or the terrarium will continue to use the old constructor.
+Chercher un moyen de rendre la créature |MangeuseLichen| plus apte à la
+survie. Ne trichez pas -- une  instruction |this.energie += 100| serait
+de la triche. Si vous ré-écrivez  le constructeur, n'oubliez pas de
+l'enregistrer à nouveau dans le  dictionnaire |typesDeCreature|, sinon le
+terrarium continuerait d'utiliser  l'ancien constructeur.
 
 ///
 
-One approach would be to reduce the randomness of its movement. By
-always picking a random direction, it will often move back and forth
-without getting anywhere. By remembering the last direction it went,
-and preferring that direction, the eater will waste less time, and
-find food faster.
+Une approche serait de restreindre le caractère aléatoire des
+déplacements. En choisissant systématiquement une direction aléatoire,
+elles reviennent très souvent sur leurs pas, sans rien trouver à manger. En
+se rappelant de la direction d'où elles viennent, et en privilégiant
+cette direction, elles dépenseraient moins de temps et trouveraient plus
+facilement de la nourriture.
 
-> function CleverLichenEater() {
->   this.energy = 10;
+> function MangeuseLichenHabile() {
+>   this.energie = 10;
 >   this.direction = "ne";
 > }
-> CleverLichenEater.prototype.act = function(surroundings) {
->   var emptySpace = findDirections(surroundings, " ");
->   var lichen = findDirections(surroundings, "*");
+> MangeuseLichenHabile.prototype.agit = function(alentours) {
+>   var espaceVide = chercheDirections(alentours, " ");
+>   var lichen = chercheDirections(alentours, "*");
 >
->   if (this.energy >= 30 && emptySpace.length > 0) {
->     return {type: "reproduce",
->             direction: randomElement(emptySpace)};
+>   if (this.energie >= 30 && espaceVide.length > 0) {
+>     return {type: "reproduction",
+>             direction: elementAuHasard(espaceVide)};
 >   }
 >   else if (lichen.length > 1) {
->     return {type: "eat",
->             direction: randomElement(lichen)};
+>     return {type: "manger",
+>             direction: elementAuHasard(lichen)};
 >   }
->   else if (emptySpace.length > 0) {
->     if (surroundings[this.direction] != " ")
->       this.direction = randomElement(emptySpace);
->     return {type: "move",
+>   else if (espaceVide.length > 0) {
+>     if (alentours[this.direction] != " ")
+>       this.direction = elementAuHasard(espaceVide);
+>     return {type: "déplacement",
 >             direction: this.direction};
 >   }
 >   else {
->     return {type: "wait"};
+>     return {type: "attente"};
 >   }
 > };
-> CleverLichenEater.prototype.character = "c";
+> MangeuseLichenHabile.prototype.caractere = "c";
 >
-> creatureTypes.register(CleverLichenEater);
+> typesDeCreature.enregistre(MangeuseLichenHabile);
 
-Try it out using the previous terrarium-plan.
+Essayez-la avec le plan de terrarium précédent.
 
 ***
 
-A one-link food chain is still a bit rudimentary. Can you write a new
-creature, |LichenEaterEater| (character |"@"|), which survives by
-eating lichen-eaters? Try to find a way to make it fit in the
-ecosystem without dying out too quickly. Modify the |lichenPlan| array
-to include a few of these, and try them out.
+Une chaîne alimentaire à un seul maillon est un peu rudimentaire. Pouvez-vous
+écrire une nouvelle créature, nommée |MangeuseMangeuseLichen|, (avec
+un caractère |"@"|), qui survit en mangeant des dévoreuses de lichens
+? Trouver également un moyen pour cette nouvelle créature de s'intégrer dans
+l'écosystème sans qu'elles ne s'éteignent trop vite. Modifiez le tableau
+|lichenPlan| pour inclure quelques-unes d'entre elles, et essayez le tout.
 
 ///
 
-You are on your own here. I failed to find a really good way to
-prevent these creatures from either going extinct right away or
-gobbling up all lichen-eaters and then going extinct. The trick of
-only eating when it spots two pieces of food doesn't work very well
-for them, because their food moves around so much it is rare to find
-two in one place. What does seem to help is making the eater-eater
-really fat (high energy), so that it can survive times when
-lichen-eaters are scarce, and only reproduces slowly, which prevents
-it from exterminating its food source too quickly.
+C'est maintenant à vous de jouer, je n'ai pas trouvé de moyen véritablement
+efficace d'empêcher ces créatures de s'éteindre immédiatement ou
+d'engloutir tous les dévoreuses de lichen, et de s'éteindre ensuite.
+L'astuce qui consiste à autoriser une créature à ne manger que lorsque
+deux unités de nourriture sont à proximité ne fonctionnent pas très bien
+pour elles, car, leur nourriture étant souvent en déplacement, il est rare
+d'en trouver deux à proximité l'une de l'autre.
+Rendre les dévoreuses de dévoreuses très grasses (avec beaucoup d'énergie)
+à quelque efficacité, car elles peuvent survivre lorsque les dévoreuses
+de lichen se font rare et se reproduisent doucement, ce qui empêche une
+raréfaction trop rapide de leur nourriture.
 
-The lichen and eaters go through a periodic movement -- sometimes
-lichen are abundant, which causes a lot of eaters to be born, which
-causes the lichen to become scarce, which causes the eaters to starve,
-which causes the lichen to become abundant, and so on. You could try
-to make the lichen-eater-eaters 'hibernate' (use the |"wait"| action
-for a while), when they fail to find food for a few turns. If you
-choose the right amount of turns for this hibernation, or have them
-wake up automatically when they smell lots of food, this could be a
-good strategy.
-
----
-
-That concludes our discussion of terraria. The rest of the chapter is
-devoted to a more in-depth look at inheritance, and the problems
-related to inheritance in JavaScript.
+Les lichens et les créatures qui les mangent sont dans un mouvement
+périodique -- parfois les lichens sont abondants, ce qui provoque beaucoup
+de naissance de mangeurs de lichen, ce qui provoque ensuite une rareté du
+lichen, puis la rareté des mangeurs de lichen, enfin le lichen prospère
+à nouveau, et ainsi de suite.
+Vous pouvez essayer de faire 'hiberner' les mangeurs de mangeurs de lichen
+(utiliser l'action |"attente"| un certain temps), quand ils n'ont rien à
+manger pour quelques tours.
+Une stratégie serait de trouver la bonne durée d'hibernation, en nombre
+de tours, ou de leur donner un moyen de se réveiller lorsqu'ils sentent
+beaucoup de nourriture.
 
 ---
 
-First, some theory. Students of object-oriented programming can often
-be heard having lengthy, subtle discussions about correct and
-incorrect uses of inheritance. It is important to bear in mind that
-inheritance, in the end, is just a trick that allows lazy##
-programmers to write less code. Thus, the question of whether
-inheritance is being used correctly boils down to the question of
-whether the resulting code works correctly and avoids useless
-repetitions. Still, the principles used by these students provide a
-good way to start thinking about inheritance.
-
-## Laziness, for a programmer, is not necessarily a sin. The kind of
-people who will industriously do the same thing over and over again
-tend to make great assembly-line workers and lousy programmers.
-
-Inheritance is the creation of a new type of objects, the
-'_sub-type_', based on an existing type, the '_super-type_'. The
-sub-type starts with all the properties and methods of the super-type,
-it inherits them, and then modifies a few of these, and optionally
-adds new ones. Inheritance is best used when the thing modelled by the
-sub-type can be said to *be* an object of the super-type.
-
-Thus, a |Piano| type could be a sub-type of an |Instrument| type,
-because a piano *is* an instrument. Because a piano has a whole array
-of keys, one might be tempted to make |Piano| a sub-type of |Array|,
-but a piano *is* no array, and implementing it like that is bound to
-lead to all kinds of silliness. For example, a piano also has pedals.
-Why would |piano[0]| give me the first key, and not the first pedal?
-The situation is, of course, that a piano *has* keys, so it would be
-better to give it a property |keys|, and possibly another property
-|pedals|, both holding arrays.
-
-It is possible for a sub-type to be the super-type of yet another
-sub-type. Some problems are best solved by building a complex family
-tree of types. You have to take care not to get too inheritance-happy,
-though. Overuse of inheritance is a great way to make a program into a
-big ugly mess.
+Ceci termine notre discussion sur les terraria. Le reste de ce chapitre
+est dédié à une exploration en profondeur du concept d'héritage, et les
+problèmes liés à l'héritage en JavaScript.
 
 ---
 
-The working of the |new| keyword and the |prototype| property of
-constructors suggest a certain way of using objects. For simple
-objects, such as the terrarium-creatures, this way works rather well.
-Unfortunately, when a program starts to make serious use of
-inheritance, this approach to objects quickly becomes clumsy. Adding
-some functions to take care of common operations can make things a
-little smoother. Many people define, for example, |inherit| and
-|method| methods on objects.
+Maintenant, un peu de théorie. Les étudiants qui abordent la programmation
+orientée objet sont souvent confrontés à des discussions longues et
+pleines de subtilité sur les façons correctes et incorrectes d'utiliser
+l'héritage. Il est important de garder à l'esprit qu'au bout du compte,
+l'héritage est un moyen pour des programmeurs paresseux## d'écrire moins de
+code. Ainsi, la question de savoir si l'héritage est correctement utilisé se
+résume à la question de savoir si le code produit fonctionne correctement
+et n'a pas de répétition inutile. Pour autant, les principes discutés
+par ces étudiants sont aussi une bonne façon d'aborder l'héritage.
+
+## La paresse, pour un programmeur, n'est pas forcement un péché. Les
+personnes qui, laborieusement, font et refont toujours les mêmes choses
+tendent à être de bon travailleurs à la chaine et de mauvais programmeurs.
+
+L'héritage est la création de nouveaux types d'objet, les '_sous-types_',
+basés sur des types existants, les '_super-types_'. Le sous-type commence
+avec la totalité des propriétés et des méthodes du super-type, il hérite
+de lui, ensuite, il en modifie quelques uns, éventuellement en ajoute.
+L'héritage est mieux utilisé quand les objets décrit par le sous-type
+peuvent être considéré comme *étant* également des objets du super-type.
+
+Ainsi, un type |Piano| peut être un sous-type du type |Instrument|, parce
+qu'un piano *est* un instrument. Comme un piano a un tableau de touches,
+on peut être tenté de faire de |Piano| un sous-type de |Array|, mais un
+piano *n'est pas* un tableau de touches, et l'implémenter de cette façon
+entrainerait plein de choses idiotes. Par exemple, un piano a aussi des
+pédales. Pourquoi |piano[0]| me renvoie la première touche, et pas la
+première pédale ?
+La situation est que, évidemment, le piano *possède* des touches, il est
+donc meilleur de lui donner une propriété |touches|, et éventuellement
+une autre propriété |pédales|, ces deux propriétés étant des tableaux.
+
+Il est possible pour un sous-type d'être le super-type d'un autre
+sous-type. Certains problèmes sont mieux résolus en construisant un
+arbre complexe de types. Prenez garde à ne pas être trop enthousiaste
+avec l'héritage. Une utilisation abusive de l'héritage est un bon moyen
+de transformer un programme en un bazar monstrueux.
+
+---
+
+Le fonctionnement du mot-clé |new| et la propriété |prototype| d'un
+constructeur suggèrent une certaine façon d'utiliser les objets. Pour des
+objets simple, comme les créatures du terrarium, cette façon fonctionne bien.
+Malheureusement, quand un programme utilise l'héritage de façon plus
+développé, cette approche de la programmation objet devient pesante. Ajouter
+des fonctions pour prendre en charge les opérations les plus courantes
+peut rendre les choses plus fluides. De nombreuses personnes définissent,
+par exemple, des méthodes |inherit| et |method| sur les objets.
 
 > Object.prototype.inherit = function(baseConstructor) {
 >   this.prototype = clone(baseConstructor.prototype);
@@ -7680,55 +7736,55 @@ little smoother. Many people define, for example, |inherit| and
 >   this.prototype[name] = func;
 > };
 >
-> function StrangeArray(){}
-> StrangeArray.inherit(Array);
-> StrangeArray.method("push", function(value) {
+> function TableauEtrange(){}
+> TableauEtrange.inherit(Array);
+> TableauEtrange.method("push", function(value) {
 >   Array.prototype.push.call(this, value);
 >   Array.prototype.push.call(this, value);
 > });
 >
-> var strange = new StrangeArray();
+> var strange = new TableauEtrange();
 > strange.push(4);
 > show(strange);
 
-If you search the web for the words 'JavaScript' and 'inheritance',
-you will come across scores of different variations on this, some of
-them quite a lot more complex and clever than the above.
+Si vous chercher sur internet les mots « JavaScript » et
+« héritage », vous trouverez de nombreuses variantes de ces fonctions,
+certaines sont plus complexes et plus subtiles que celles ci-dessus.
 
-Note how the |push| method written here uses the |push| method from
-the prototype of its parent type. This is something that is done often
-when using inheritance -- a method in the sub-type internally uses a
-method of the super-type, but extends it somehow.
-
----
-
-The biggest problem with this basic approach is the duality between
-constructors and prototypes. Constructors take a very central role,
-they are the things that give an object type its name, and when you
-need to get at a prototype, you have to go to the constructor and take
-its |prototype| property.
-
-Not only does this lead to a *lot* of typing (|"prototype"| is 9
-letters), it is also confusing. We had to write an empty, useless
-constructor for |StrangeArray| in the example above. Quite a few
-times, I have found myself accidentally adding methods to a
-constructor instead of its prototype, or trying to call |Array.slice|
-when I really meant |Array.prototype.slice|. As far as I am concerned,
-the prototype itself is the most important aspect of an object type,
-and the constructor is just an extension of that, a special kind of
-method.
+Remarquez comment la méthode |push| écrite ici utilise la méthode |push|
+du prototype de son type parent. C'est quelque chose qui se fait fréquemment
+lors de l'utilisation de l'héritage -- une méthode du sous-type utilise
+en interne une méthode du super-type, mais en la modifiant d'une manière
+ou d'une autre.
 
 ---
 
-With a few simple helper methods added to |Object.prototype|, it is
-possible to create an alternative approach to objects and inheritance.
-In this approach, a type is represented by its prototype, and we will
-use capitalised variables to store these prototypes. When it needs to
-do any 'constructing' work, this is done by a method called
-|construct|. We add a method called |create| to the |Object|
-prototype, which is used in place of the |new| keyword. It clones the
-object, and calls its |construct| method, if there is such a method,
-giving it the arguments that were passed to |create|.
+La plus grande difficulté dans cette approche simpliste est la dualité
+entre les constructeurs et les prototypes. Les constructeurs ont un rôle
+vraiment central, ils sont le moyen par lequel les objets prennent leur nom,
+et quand vous avez besoin d'accéder à un prototype, vous devez passer par
+le constructeur et sa propriété prototype.
+
+Cela ajoute *beaucoup* de frappes au clavier (|"prototype"| prend 9 lettres),
+mais c'est aussi déroutant. Nous avons eu besoin d'écrire un constructeur
+vide et inutile pour |TableauEtrange| dans l'exemple précédent. Quelquefois,
+il m'est arrivé d'ajouter par erreur des méthodes à un constructeur au lieu
+de son prototype, ou d'essayer d'appeler |Array.slice| alors que je voulais
+appeler |Array.prototype.slice|. Autant que je sache, le prototype lui-même
+est l'aspect le plus important d'un type d'objet, et le constructeur n'est
+qu'une extension de cela, une méthode spéciale.
+
+---
+
+En ajoutant quelques méthodes simples d'aide à |Object.prototype|, il devient
+possible de créer une approche alternative aux objets et à l'héritage. Dans
+cette approche, un type est représenté par son prototype, et nous allons
+utiliser des variables en majuscule pour stocker ces prototypes. Quand il faut
+faire un peu de travail de « construction », cela est réalisé par une
+méthode appelée |construct|. Nous ajoutons une méthode appelée |create|
+au prototype |Object|, qui est utilisée à la place du mot-clé |new|. Elle
+clone l'objet, et appelle sa méthode |construct|, si une telle méthode
+existe, en lui passant en argument ceux qui ont été passés à |create|.
 
 > Object.prototype.create = function() {
 >   var object = clone(this);
@@ -7737,11 +7793,11 @@ giving it the arguments that were passed to |create|.
 >   return object;
 > };
 
-Inheritance can be done by cloning a prototype object and adding or
-replacing some of its properties. We also provide a convenient
-shorthand for this, an |extend| method, which clones the object it is
-applied to and adds to this clone the properties in the object that it
-is given as an argument.
+L'héritage peut être réalisé en clonant un objet prototype et en ajoutant
+ou remplaçant certaines de ses propriétés. Nous fournissons également
+une aide pratique pour réaliser cela, une méthode |extend|, qui clone
+l'objet sur lequel on l'appelle et qui ajoute à ce clone les propriétés
+de l'objet qui lui est donné en argument.
 
 > Object.prototype.extend = function(properties) {
 >   var result = clone(this);
@@ -7751,100 +7807,101 @@ is given as an argument.
 >   return result;
 > };
 
-In a case where it is not safe to mess with the |Object| prototype,
-these can of course be implemented as regular (non-method) functions.
+Dans le cas où il n'est pas prudent de tripoter le prototype |Object|,
+cela peut bien évidemment être implémenté avec des fonctions classiques
+(pas des méthodes).
 
 ---
 
-An example. If you are old enough, you may at one time have played a
-'text adventure' game, where you move through a virtual world by
-typing commands, and get textual descriptions of the things around you
-and the actions you perform. Now those were games!
+Voici un exemple, si vous êtes suffisamment vieux, vous avez peut-être
+déjà joué à un jeu d'aventure en mode texte, où vous vous déplaciez
+dans un monde virtuel en tapant au clavier des commandes, et obteniez des
+réponses sous forme de texte décrivant ce qu'il y avait autour de vous et
+les actions que vous effectuiez. Ces jeux ont eu leur temps.
 
-We could write the prototype for an item in such a game like this.
+Nous pouvons écrire un prototype pour un élément d'un jeu de ce type.
 
-> var Item = {
+> var Produit = {
 >   construct: function(name) {
 >     this.name = name;
 >   },
 >   inspect: function() {
->     print("it is ", this.name, ".");
+>     print("C'est ", this.name, ".");
 >   },
 >   kick: function() {
->     print("klunk!");
+>     print("Blang !");
 >   },
 >   take: function() {
->     print("you can not lift ", this.name, ".");
+>     print("Vous ne pouvez pas soulever ", this.name, ".");
 >   }
 > };
 >
-> var lantern = Item.create("the brass lantern");
+> var lantern = Produit.create("La lanterne en laiton");
 > lantern.kick();
 
-Inherit from it like this...
+Héritons de ce type de cette façon…
 
-> var DetailedItem = Item.extend({
+> var ProduitDetaille = Produit.extend({
 >   construct: function(name, details) {
->     Item.construct.call(this, name);
+>     Produit.construct.call(this, name);
 >     this.details = details;
 >   },
 >   inspect: function() {
->     print("you see ", this.name, ", ", this.details, ".");
+>     print("vous voyez ", this.name, ", ", this.details, ".");
 >   }
 > });
 >
-> var giantSloth = DetailedItem.create(
->   "the giant sloth",
->   "it is quietly hanging from a tree, munching leaves");
-> giantSloth.inspect();
+> var paresseuxGeant = ProduitDetaille.create(
+>   "le paresseux geant",
+>   "il s'accroche tranquillement sur un arbre en grignotant des feuilles");
+> paresseuxGeant.inspect();
 
-Leaving out the compulsory |prototype| part makes things like calling
-|Item.construct| from |DetailedItem|'s constructor slightly simpler.
-Note that it would be a bad idea to just do |this.name = name| in
-|DetailedItem.construct|. This duplicates a line. Sure, duplicating
-the line is shorter than calling the |Item.construct| function, but if
-we end up adding something to this constructor later, we have to add
-it in two places.
+Laisser de côté la partie obligatoire du |prototype| rend légérment plus
+simples les choses comme l'appel à |Produit.construct| depuis le constructeur
+de |ProduitDetaille|. Remarquez que ce serait une mauvaise idée d'écrire
+simplement |this.name = name| dans |ProduitDetaille.construct|. Cela duplique
+une ligne. Bien sûr, dupliquer une ligne est plus court qu'appeler la fonction
+|Produit.construct| mais si on se retrouve à ajouter plus tard quelque chose
+dans le constructeur, nous devrons l'ajouter à deux endroits différents.
 
 ---
 
-Most of the time, a sub-type's constructor should start by calling the
-constructor of the super-type. This way, it starts with a valid object
-of the super-type, which it can then extend. In this new approach to
-prototypes, types that need no constructor can leave it out. They will
-automatically inherit the constructor of their super-type.
+La plupart du temps, le constructeur d'un sous-type commencera par appeler le
+constructeur du super-type. De cette façon, il démarre avec un objet valide
+du super-type, qu'il peut alors étendre. Dans cette nouvelle approche des
+prototypes, les types qui n'ont pas besoin de constructeurs peuvent les laisser
+tomber. Ils hériteront automatiquement du constructeur de leur super-type.
 
-> var SmallItem = Item.extend({
+> var PetitProduit = Produit.extend({
 >   kick: function() {
->     print(this.name, " flies across the room.");
+>     print(this.name, " vole à travers la pièce.");
 >   },
 >   take: function() {
->     // (imagine some code that moves the item to your pocket here)
->     print("you take ", this.name, ".");
+>     // (imaginer ici du code qui déplace l'objet dans votre poche)
+>     print("vous avez pris ", this.name, ".");
 >   }
 > });
 >
-> var pencil = SmallItem.create("the red pencil");
+> var pencil = PetitProduit.create("le stylo rouge");
 > pencil.take();
 
-Even though |SmallItem| does not define its own constructor, creating
-it with a |name| argument works, because it inherited the constructor
-from the |Item| prototype.
+Même si |PetitProduit| ne définit pas son propre constructeur, le créer
+avec un argument |name| fonctionne, car il hérite du constructeur du
+prototype |Produit|.
 
 ---
 
-JavaScript has an operator called _|instanceof|_, which can be used to
-determine whether an object is based on a certain prototype. You give
-it the object on the left hand side, and a constructor on the right
-hand side, and it returns a boolean, |true| if the constructor's
-|prototype| property is the direct or indirect prototype of the
-object, and |false| otherwise.
+JavaScript possède un opérateur appelé _|instanceof|_, qui peut être
+utilisé pour déterminer si un objet est basé sur un certain prototype. Vous
+lui donnez l'objet du côté gauche, et le constructeur du côté droit, et
+il renvoie un booléen, |true| si la propriété |prototype| du constructeur
+est le prototype direct ou indirect de l'objet, et |false| sinon.
 
-When you are not using regular constructors, using this operator
-becomes rather clumsy -- it expects a constructor function as its
-second argument, but we only have prototypes. A trick similar to the
-|clone| function can be used to get around it: We use a 'fake
-constructor', and apply |instanceof| to it.
+Lorsque vous utilisez des constructeurs normaux, utiliser cet opérateur
+devient plutôt maladroit : il attend la fonction constructeur comme
+deuxième argument, mais nous avons seulement des prototypes. Une astuce
+similaire à la fonction |clone| peut être utilisée pour éviter cela . Nous
+utilisons un « faux constructeur », et nous lui appliquons |instanceof|.
 
 > Object.prototype.hasPrototype = function(prototype) {
 >   function DummyConstructor() {}
@@ -7852,34 +7909,35 @@ constructor', and apply |instanceof| to it.
 >   return this instanceof DummyConstructor;
 > };
 >
-> show(pencil.hasPrototype(Item));
-> show(pencil.hasPrototype(DetailedItem));
+> show(pencil.hasPrototype(Produit));
+> show(pencil.hasPrototype(ProduitDetaille));
 
 ---
 
-Next, we want to make a small item that has a detailed description. It
-seems like this item would have to inherit both from |DetailedItem|
-and |SmallItem|. JavaScript does not allow an object to have multiple
-prototypes, and even if it did, the problem would not be quite that
-easy to solve. For example, if |SmallItem| would, for some reason,
-also define an |inspect| method, which |inspect| method should the new
-prototype use?
+Ensuite, nous voulons créer un petit élément qui posséde une description
+détaillée. Il semblerait que cet élément devrait hériter à la fois de
+|ProduitDetaille| et |PetitProduit|. JavaScript ne permet pas à un objet
+d'avoir plusieurs prototypes, et même s'il le permettait, le problème
+ne serait pas simple à résoudre. Par exemple, si |PetitProduit| voulait,
+pour une raison quelconque, définir aussi une méthode |inspect|, quelle
+méthode |inspect| ce nouveau prototype devrait-il utiliser ?
 
-Deriving an object type from more than one parent type is called
-_multiple inheritance_. Some languages chicken out and forbid it
-altogether, others define complicated schemes for making it work in a
-well-defined and practical way. It is possible to implement a decent
-multiple-inheritance framework in JavaScript. In fact there are, as
-usual, multiple good approaches to this. But they all are too complex
-to be discussed here. Instead, I will show a very simple approach
-which suffices in most cases.
+Dériver un type d'objet de plus d'un type parent est appelé _héritage
+multiple_. Certains langages se dégonflent et l'interdisent totalement,
+d'autres définissent des systèmes compliqués pour le faire marcher d'une
+manière pratique et bien définie. Il est possible d'implémenter un framework
+de multi-héritage décent en JavaScript. En fait, il y a, comme d'habitude,
+de nombreuses bonnes façons pour réaliser cela. Mais elles sont toutes
+trop compliquées pour en discuter ici. À la place, je vais vous montrer
+une approche très simple qui est suffisante dans la plupart des cas.
 
 ---
 
-A _mix-in_ is a specific kind of prototype which can be 'mixed into'
-other prototypes. |SmallItem| can be seen as such a prototype. By
-copying its |kick| and |take| methods into another prototype, we mix
-smallness into this prototype.
+Un _mix-in_ (que l'on pourrait traduire par mélange en français) est un type
+spécifique de prototype qui peut être « incorporé » dans d'autres
+prototypes. |PetitProduit| peut être vu comme un de ces prototypes. En
+copiant les méthodes |kick| et |take| dans un autre prototype, nous allons
+incorporé la petitesse dans ce prototype.
 
 > function mixInto(object, mixIn) {
 >   forEachIn(mixIn, function(name, value) {
@@ -7887,80 +7945,82 @@ smallness into this prototype.
 >   });
 > };
 >
-> var SmallDetailedItem = clone(DetailedItem);
-> mixInto(SmallDetailedItem, SmallItem);
+> var PetitProduitDetaille = clone(ProduitDetaille);
+> mixInto(PetitProduitDetaille, PetitProduit);
 >
-> var deadMouse = SmallDetailedItem.create(
->   "Fred the mouse",
->   "he is dead");
+> var deadMouse = PetitProduitDetaille.create(
+>   "Fred la souris",
+>   "Il est mort");
 > deadMouse.inspect();
 > deadMouse.kick();
 
-Remember that |forEachIn| only goes over the object's *own*
-properties, so it will copy |kick| and |take|, but not the constructor
-that |SmallItem| inherited from |Item|.
+Rappelez-vous que |forEachIn| parcourt uniquement les *propres* propriétés
+de l'objet, il copiera donc |kick| and |take|, mais pas le constructeur que
+|PetitProduit| a hérité de |Produit|.
 
 ---
 
-Mixing prototypes gets more complex when the mix-in has a constructor,
-or when some of its methods 'clash' with methods in the prototype that
-it is mixed into. Sometimes, it is workable to do a 'manual mix-in'.
-Say we have a prototype |Monster|, which has its own constructor, and
-we want to mix that with |DetailedItem|.
+Mélanger les prototypes devient plus complexe quand le mix-in a un
+constructeur, ou quand certaines de ses méthodes entre en « collision »
+avec les méthodes du prototype dans lequel il est incorporé. Parfois, il
+est possible de faire un « mélange manuel ». Disons que nous avons
+un prototpye |Monstre|, qui a son propre constructeur, et nous voulons le
+mélanger avec |ProduitDetaille|.
 
-> var Monster = Item.extend({
+> var Monstre = Produit.extend({
 >   construct: function(name, dangerous) {
->     Item.construct.call(this, name);
+>     Produit.construct.call(this, name);
 >     this.dangerous = dangerous;
 >   },
 >   kick: function() {
 >     if (this.dangerous)
->       print(this.name, " bites your head off.");
+>       print(this.name, " arrache votre tête avec ses dents.");
 >     else
->       print(this.name, " runs away, weeping.");
+>       print(this.name, " fuit en pleurant.");
 >   }
 > });
 >
-> var DetailedMonster = DetailedItem.extend({
+> var MonstreDetaille = ProduitDetaille.extend({
 >   construct: function(name, description, dangerous) {
->     DetailedItem.construct.call(this, name, description);
->     Monster.construct.call(this, name, dangerous);
+>     ProduitDetaille.construct.call(this, name, description);
+>     Monstre.construct.call(this, name, dangerous);
 >   },
->   kick: Monster.kick
+>   kick: Monstre.kick
 > });
 >
-> var giantSloth = DetailedMonster.create(
->   "the giant sloth",
->   "it is quietly hanging from a tree, munching leaves",
+> var paresseuxGeant = MonstreDetaille.create(
+>   "le paresseux geant",
+>   "il s'accroche tranquillement sur un arbre en grignotant des feuilles",
 >   true);
-> giantSloth.kick();
+> paresseuxGeant.kick();
 
-But note that this causes |Item| constructor to be called twice when
-creating a |DetailedMonster| -- once through the |DetailedItem|
-constructor, and once through the |Monster| constructor. In this case
-there is not much harm done, but there are situations where this would
-cause a problem.
+Mais remarquez que cela conduit à appeler deux fois le constructeur de
+|Produit| lorsqu'on crée un |MonstreDetaille| : une fois à travers le
+constructeur de |ProduitDetaille|, et une fois à travers le constructeur
+de |Monstre|. Dans ce cas, il n'y a pas trop de dégâts, mais il existe
+des situations dans lesquelles cela pourrait poser problème.
 
 ---
 
-But don't let those complications discourage you from making use of
-inheritance. Multiple inheritance, though extremely useful in some
-situations, can be safely ignored most of the time. This is why
-languages like Java get away with forbidding multiple inheritance. And
-if, at some point, you find that you really need it, you can search
-the web, do some research, and figure out an approach that works for
-your situation.
+Mais ne laissez pas ces complications vous décourager d'utiliser
+l'héritage. Les héritages multiples, même s'ils sont très utiles dans
+certaines situations, peuvent être ignorés sans problème la plupart du
+temps. C'est la raison pour laquelle certains langages comme Java s'en sortent
+en interdisant les héritages multiples. Et si, à un moment, vous pensez que
+vous en avez vraiment besoin, vous pouvez chercher sur Internet, faire quelques
+recherches, et trouver une approche qui fonctionne dans votre situation.
 
-Now that I think about it, JavaScript would probably be a great
-environment for building a text adventure. The ability to change the
-behaviour of objects at will, which is what prototypical inheritance
-gives us, is very well suited for this. If you have an object
-|hedgehog|, which has the unique habit of rolling up when it is
-kicked, you can just change its |kick| method.
+Maintenant que j'y pense, JavaScript serait probablement un fabuleux
+environnement de développement pour les aventures en mode texte. Cette
+capacité à modifier le comportement des objets à volonté, qui est ce que
+nous offre l'héritage par prototype, est très bien adapté à cela. Si vous
+avez un objet |hedgehog| (hérisson), qui a la capacité unique de rouler
+quand on lui tape dedans, vous pouvez simplement changer sa méthode |kick|.
 
-Unfortunately, the text adventure went the way of the vinyl record
-and, while once very popular, is nowadays only played by a small
-population of [enthusiasts | http://groups.google.com/group/rec.arts.int-fiction/topics].
+Malheureusement, les aventures en mode texte ont suivi le même chemin que
+les disques vinyls, alors qu'ils étaient populaires à une époque, ils
+ne sont joués de nos jours que par une petite population d'[enthousiates |
+http://groups.google.com/group/rec.arts.int-fiction/topics].
 
 =======================
 Modularity / modularity
