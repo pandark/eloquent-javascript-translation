@@ -299,9 +299,12 @@ findExercise chapters tag = info
                  of ((c, (Exercise _ n _ _)):_) -> ((fileName c) ++ "#exercise" ++ (show n), "exercice " ++ (show (num c)) ++ "." ++ (show n))
 
 typeName c = case (ctype c)
-             of Normal -> "chapter"
-                Appendix -> "appendix"
-fileName c = (typeName c) ++ (show (num c)) ++ ".html"
+             of Normal -> "chapitre"
+                Appendix -> "appendice"
+fileTypeName c = case (ctype c)
+                of Normal -> "chapter"
+                   Appendix -> "appendix"
+fileName c = (fileTypeName c) ++ (show (num c)) ++ ".html"
                     
 outputPath = "web/"
 imgPath = "img/"
