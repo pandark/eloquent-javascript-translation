@@ -9479,77 +9479,77 @@ sur un site « sérieux », c'est une bonne idée de commencer avec un
 simple système HTML qui fonctionne et ensuite d'ajouter des bidouilles non
 essentielles et des trucs pratiques avec JavaScript.
 
-===============================
-The Document-Object Model / dom
-===============================
+================================
+Le modèle d'objet-document / dom
+================================
 
-In \\cweb we saw JavaScript objects referring to |form| and |input|
-tags from the HTML document. Such objects are part of a structure
-called the _Document-Object Model_ (_DOM_). Every tag of the document
-is represented in this model, and can be looked up and interacted
-with.
+Dans le \\cweb nous avons vu les objets JavaScript qui font référence aux
+balises |form| et |input| du document HTML. De tels objets font partie d'une
+structure appelée le _Document-Object Model_ (_DOM_). Chaque élément du
+document est représenté dans ce modèle, on peut l'examiner et interagir
+avec lui.
 
-HTML documents have what is called a hierarchical structure. Each
-element (or tag) except the top |<html>| tag is contained in another
-element, its parent. This element can in turn contain child elements.
-You can visualise this as a kind of family tree:
+Les documents HTML ont ce qu'on peut appeler une structure
+hiérarchique. Chaque élément (ou balise) à l'exception de la balise de
+premier niveau |<html>| est contenu dans un autre élément, son parent. Cet
+élément peut en retour contenir d'autres éléments.
+Vous pouvez vous le représenter comme une sorte d'arbre généalogique.
 
 [[html.png]]
 
-The document-object model is based on such a view of the document.
-Note that the tree contains two types of elements: Nodes, which are
-shown as blue boxes, and pieces of simple text. The pieces of text, as
-we will see, work somewhat different than the other elements. For one
-thing, they never have children.
+Le modèle document-objet est basé sur une telle vue du document.
+Veuillez noter que l'arbre contient deux types d'éléments : les nœuds,
+représentés comme des boîtes bleues et de simples morceaux de texte. Les
+morceaux de texte sont comme nous le verrons assez différents des autres
+éléments. L'une de ces différences est qu'ils n'ont jamais d'enfants.
 
-Open the file |example_alchemy.html|, which contains the document
-shown in the picture, and attach the console to it.
+Ouvrez le fichier |example_alchemy.html| qui contient le document présenté
+dans l'image et attachez-y la console.
 
 > attach(window.open("example_alchemy.html"));
 
-@_|document.documentElement|_The object for the root of the document
-tree, the |html| node, can be reached through the |documentElement|
-property of the |document| object. Most of the time, we need access to
-the |body| part of the document instead, which is at
-_|document.body|_.
+@_|document.documentElement|_L'objet de la racine de l'arbre document,
+le nœud |html|, peut-être atteint via la propriété |documentElement|
+de l'objet |document|. La plupart du temps, nous avons plutôt besoin de la
+partie |body| du document qui se trouve à _|document.body|_.
 
 ---
 
-The links between these nodes are available as properties of the node
-objects. Every DOM object has a _|parentNode|_ property, which refers
-to the object in which it is contained, if any. These parents also
-have links pointing back to their children, but because there can be
-more than one child, these are stored in a pseudo-array called
-_|childNodes|_.
+Les liens entre ces nœuds sont disponibles sous forme de propriétés de
+l'objet nœud. Chaque objet DOM possède une propriété _|parentNode|_ qui
+fait référence à l'objet dans lequel il est contenu, si objet il y a. Ces
+parents ont aussi des liens pointant vers leurs enfants. Mais parce qu'il
+peut y avoir plusieurs enfants, ils sont stockés dans un pseudo-tableau
+appelé _|childNodes|_.
 
 > show(document.body);
 > show(document.body.parentNode);
 > show(document.body.childNodes.length);
 
-For convenience, there are also links called _|firstChild|_ and
-_|lastChild|_, pointing at the first and last child inside a node, or
-|null| when there are no children.
+Par commodité, il y a aussi des liens appelés _|firstChild|_ et
+_|lastChild|_, pointant respectivement au premier et au dernier enfant à
+l'intérieur d'un nœud ou |null| quand il n'y a pas d'enfant.
 
 > show(document.documentElement.firstChild);
 > show(document.documentElement.lastChild);
 
-Finally, there are properties called _|nextSibling|_ and
-_|previousSibling|_, which point at the nodes sitting 'next' to a node
--- nodes that are children of the same parent, coming before or after
-the current node. Again, when there is no such sibling, the value of
-these properties is |null|.
+Enfin, il y a des propriétés nommées _|nextSibling|_ et _|previousSibling|_,
+qui pointent vers les nœuds présents aux côtés d'un autre nœud --
+les nœuds qui sont des enfants du même parent, venant avant ou après le
+nœud courant. Encore une fois, lorsque ces nœuds ne sont pas présents,
+la valeur de ces propriétés est |null|.
 
 > show(document.body.previousSibling);
 > show(document.body.nextSibling);
 
 ---
 
-To find out whether a node represents a simple piece of text or an
-actual HTML node, we can look at its _|nodeType|_ property. This
-contains a number, |1| for regular nodes and |3| for text nodes. There
-are actually other kinds of objects with a |nodeType|, such as the
-|document| object, which has |9|, but the most common use for this
-property is distinguishing between text nodes and other nodes.
+Pour savoir si un nœud représente un simple morceau de texte ou un nœud
+HTML, nous pouvons jeter un œil à sa propriété _|nodeType|_. Elle
+contiendra un nombre, |1| pour un nœud classique et |3| pour un nœud
+texte. Il existe en fait d'autres sortes d'objets qui possèdent un |nodeType|,
+comme l'objet |document| qui vaudra |9|, mais l'usage le plus commun de cette
+propriété est la distinction entre les nœuds textes et les autres nœuds.
 
 > function isTextNode(node) {
 >   return node.nodeType == 3;
@@ -9558,15 +9558,15 @@ property is distinguishing between text nodes and other nodes.
 > show(isTextNode(document.body));
 > show(isTextNode(document.body.firstChild.firstChild));
 
-Regular nodes have a property called _|nodeName|_, indicating the type
-of HTML tag that they represent. Text nodes, on the other hand, have a
-_|nodeValue|_, containing their text content.
+Les nœuds classiques ont une propriété appelée _|nodeName|_, indiquant
+le type de balise HTML qu'ils représentent. En revanche les nœuds textes
+ont une _|nodeValue|_, ayant pour valeur leur contenu texte.
 
 > show(document.body.firstChild.nodeName);
 > show(document.body.firstChild.firstChild.nodeValue);
 
-The |nodeName|s are always capitalised, which is something you need to
-take into account if you ever want to compare them to something.
+Les |nodeName|s sont toujours mis en majuscules, c'est quelque chose qui doit
+être pris en compte si jamais vous voulez les comparer à quoi que ce soit.
 
 > function isImage(node) {
 >   return !isTextNode(node) && node.nodeName == "IMG";
@@ -9576,13 +9576,13 @@ take into account if you ever want to compare them to something.
 
 ***
 
-Write a function |asHTML| which, when given a DOM node, produces a
-string representing the HTML text for that node and its children. You
-may ignore attributes, just show nodes as |<nodename>|. The
-|escapeHTML| function from \\cregexp is available to properly escape
-the content of text nodes.
+Écrivez une fonction |asHTML| qui, appelée avec un nœud DOM, produira une
+chaîne représentant le texte HTML de ce nœud et de ses éléments. Vous
+pouvez ignorer les attributs, afficher juste les nœuds comme |<nodename>|. La
+fonction |escapeHTML| du \\cregexp est disponible afin d'échapper correctement
+le contenu des nœuds textes.
 
-Hint: Recursion!
+Indice : Récursion!
 
 ///
 
@@ -9601,94 +9601,98 @@ Hint: Recursion!
 
 ---
 
-Nodes, in fact, already have something similar to |asHTML|. Their
-_|innerHTML|_ property can be used to retrieve the HTML text *inside*
-of the node, without the tags for the node itself. Some browsers also
-support |outerHTML|, which does include the node itself, but not all
-of them.
+En réalité, les nœuds ont déjà quelque chose de similaire à
+|asHTML|. Leur propriété _|innerHTML|_ peut être utilisée afin de
+récupérer le texte HTML *à l'intérieur* du nœud, sans les balises du
+nœud en question. Quelques navigateurs Web, mais pas tous, prennent aussi
+en charge la propriété |outerHTML|, qui inclut le nœud lui-même.
 
 > print(document.body.innerHTML);
 
-Some of these properties can also be modified. Setting the |innerHTML|
-of a node or the |nodeValue| of a text-node will change its content.
-Note that, in the first case, the given string is interpreted as HTML,
-while in the second case it is interpreted as plain text.
+Certaines de ces propriétés peuvent aussi être modifiées. Modifier
+le |innerHTML| d'un nœud ou la |nodeValue| d'un nœud texte changera son
+contenu. À noter que dans le premier cas, la chaîne donnée est interprétée
+comme du HTML alors que dans le second cas elle est interprétée comme du
+simple texte.
 
 > document.body.firstChild.firstChild.nodeValue =
->   "Chapter 1: The deep significance of the bottle";
+>   "Chapter 1 : La grande importance de la bouteille";
 
-Or ...
+Ou…
 
 > document.body.firstChild.innerHTML =
->   "Did you know the 'blink' tag yet? <blink>Joy!</blink>";
+>   "Connaissiez-vous déjà la balise « blink » ? <blink>Oh joie !</blink>";
 
 ---
 
-We have been accessing nodes by going through a series of |firstChild|
-and |lastChild| properties. This can work, but it is verbose and easy
-to break -- if we add another node at the start of our document,
-|document.body.firstChild| no longer refers to the |h1| element, and
-code which assumes it does will go wrong. On top of that, some
-browsers will add text-nodes for things like spaces and newlines
-between tags, while others do not, so that the exact layout of the DOM
-tree can vary.
+Nous avons accédé à des nœuds au travers d'une série de propriétés
+|firstChild| et |lastChild|. Cela peut fonctionner, mais c'est assez verbeux
+et facilement cassable -- si nous ajoutons un autre nœud au début de notre
+document, |document.body.firstChild| ne pointera plus sur l'élément |h1|
+et si le code prétend le contraire il se trompe. En plus de cela, certains
+navigateurs Web ajouteront des nœuds textes pour des choses comme les
+espaces et les retours à la ligne entre les balises alors que d'autres
+non. La représentation exacte de l'arbre DOM peut varier.
 
-An alternative to this is to give elements that you need to have
-access to an |id| attribute. In the example page, the picture has an
-id |"picture"|, and we can use this to look it up.
+Comme alternative, il vous est possible de donner un attribut |id| aux
+éléments auxquels vous avez besoin d'accéder. Dans la page d'exemple,
+l'image à un id |"image"|, nous pouvons l'utiliser pour retrouver l'image.
 
-> var picture = document.getElementById("picture");
-> show(picture.src);
-> picture.src = "img/ostrich.png";
+> var image = document.getElementById("image");
+> show(image.src);
+> image.src = "img/ostrich.png";
 
-@_|document.getElementById|_When typing |getElementById|, note that
-the last letter is lowercase. Also, when typing it a lot, beware of
-carpal-tunnel syndrome. Because |document.getElementById| is a
-ridiculously long name for a very common operation, it has become a
-convention among JavaScript programmers to aggressively abbreviate it
-to _|$|_. |$|, as you might remember, is considered a letter by
-JavaScript, and is thus a valid variable name.
+@_|document.getElementById|_Quand vous tapez |getElementById|, notez
+que la dernière lettre est en minuscule. Faites donc attention,
+lorsque vous le taperez souvent, au syndrome du canal carpien. Parce que
+|document.getElementById| est un nom ridiculement long pour une opération
+aussi commune, l'abréger par _|$|_ est devenu une convention au sein
+des développeurs Javascript.|$|, comme vous vous en souvenez peut-être,
+est considéré comme une lettre par Javascript et c'est donc un nom de
+variable valide.
 
 > function $(id) {
 >   return document.getElementById(id);
 > }
-> show($("picture"));
+> show($("image"));
 
-DOM nodes also have a method _|getElementsByTagName|_ (another nice,
-short name), which, when given a tag name, returns an array of all
-nodes of that type contained in the node it was called on.
+Les nœuds DOM ont aussi une méthode _|getElementsByTagName|_ (un autre nom
+sympa et court), qui appelée avec un nom de balise, retourne un tableau de
+tous les nœuds de ce type contenu dans le nœud sur lequel la méthode a
+été appelée.
 
 > show(document.body.getElementsByTagName("BLINK")[0]);
 
 ---
 
-Another thing we can do with these DOM nodes is creating new ones
-ourselves. This makes it possible to add pieces to a document at will,
-which can be used to create some interesting effects. Unfortunately,
-the interface for doing this is extremely clumsy. But that can be
-remedied with some helper functions.
+Une autre chose que nous pouvons faire avec ces nœuds est d'en
+créer de nouveaux nous-même. Cela rend possible l'ajout d'éléments
+dans un document, qui pourront être utilisés pour créer des effets
+intéressants. Malheureusement l'interface permettant cela est extrêmement mal
+fichue. Mais il est possible de remédier à cela avec des fonctions d'aide.
 
-@_|document.createElement|_@_|document.createTextNode|_The |document|
-object has |createElement| and |createTextNode| methods. The first is
-used to create regular nodes, the second, as the name suggests,
-creates text nodes.
+@_|document.createElement|_@_|document.createTextNode|_L'objet |document|
+possède les méthodes |createElement| et |createTextNode|. La première
+est utilisée pour créer un nœud classique, la seconde, comme son nom le
+suggère, pour créer un nœud texte.
 
 > var secondHeader = document.createElement("H1");
-> var secondTitle = document.createTextNode("Chapter 2: Deep magic");
+> var secondTitle = document.createTextNode("Chapitre 2 : Magie intense");
 
-Next, we'll want to put the title name into the |h1| element, and then
-add the element to the document. The simplest way to do this is the
-_|appendChild|_ method, which can be called on every (non-text) node.
+Nous voulons ensuite mettre le titre dans l'élément |h1|, puis ajouter cet
+élément au document. Le moyen le plus simple de le faire est la méthode
+_|appendChild|_ qui peut-être appelée sur chaque nœud qui n'est pas un
+nœud texte.
 
 > secondHeader.appendChild(secondTitle);
 > document.body.appendChild(secondHeader);
 
-Often, you will also want to give these new nodes some attributes. For
-example, an |img| (image) tag is rather useless without an |src|
-property telling the browser which image it should show. Most
-attributes can be approached directly as properties of the DOM nodes,
-but there are also methods _|setAttribute|_ and _|getAttribute|_,
-which are used to access attributes in a more general way:
+Souvent, vous voudrez aussi ajouter des attributs à ces nouveaux  nœuds . Par
+exemple, une balise |img| (image) est plutôt inutile sans la propriété
+|src| qui dit au navigateur quelle image il doit afficher. La plupart des
+attributs peuvent être retrouvés directement comme des propriétés du nœud
+DOM mais il y a aussi les méthodes _|setAttribute|_ et _|getAttribute|_,
+qui sont utilisées pour accéder aux attributs de façon plus générale :
 
 > var newImage = document.createElement("IMG");
 > newImage.setAttribute("src", "img/Hiva Oa.png");
@@ -9697,25 +9701,25 @@ which are used to access attributes in a more general way:
 
 ---
 
-But, when we want to build more than a few simple nodes, it gets very
-tiresome to create every single node with a call to
-|document.createElement| or |document.createTextNode|, and then add
-its attributes and child nodes one by one. Fortunately, it is not hard
-to write a function to do most of the work for us. Before we do so,
-there is one little detail to take care of -- the |setAttribute|
-method, while working fine on most browsers, does not always work on
-Internet Explorer. The names of a few HTML attributes already have a
-special meaning in JavaScript, and thus the corresponding object
-properties got an adjusted name. Specifically, the |class| attribute
-becomes _|className|_, |for| becomes |htmlFor|, and |checked| is
-renamed to |defaultChecked|. On Internet Explorer, |setAttribute| and
-|getAttribute| also work with these adjusted names, instead of the
-original HTML names, which can be confusing. On top of that the
-_|style|_ attribute, which, along with |class|, will be discussed
-later in this chapter, can not be set with |setAttribute| on that
-browser.
+Mais, lorsque l'on veut créer davantage que quelques nœuds simples
+, il devient assez assommant de créer chaque nœud avec un appel vers
+|document.createElement| ou |document.createTextNode|, et ensuite d'y ajouter
+les attributs et les éléments un par un. Heureusement, il n'est pas trop
+difficile d'écrire une fonction qui ferait le plus gros du travail pour
+nous. Avant de s'y mettre, il y a un petit détail qu'il faut prendre
+en compte : la méthode |setAttribute|, qui fonctionne correctement
+sur la plupart des navigateurs, ne fonctionne pas toujours sur Internet
+Explorer. Les noms de certains attributs HTML ont déjà un sens particulier
+en JavaScript, de ce fait, la propriété de l'objet correspondant obtient un
+nom ajusté. Plus spécifiquement, l'attribut |class| devient _|className|_,
+|for| devient |htmlFor| et |checked| est renommé en |defaultChecked|. Sur
+Internet Explorer, |setAttribute| et |getAttribute| fonctionnent aussi
+avec ces noms ajustés, à la place des noms HTML originaux ce qui peut
+être source de confusion. En plus de cela l'attribut _|style|_, qui sera
+abordé plus tard dans ce chapitre avec |class|, ne peut être défini avec
+|setAttribute| sur ce navigateur.
 
-A workaround would look something like this:
+Une solution de contournement pourrait ressembler à quelque chose comme ça :
 
 > function setNodeAttribute(node, attribute, value) {
 >   if (attribute == "class")
@@ -9730,11 +9734,12 @@ A workaround would look something like this:
 >     node.setAttribute(attribute, value);
 > }
 
-For every case where Internet Explorer deviates from other browsers,
-it does something that works in all cases. Don't worry about the
-details -- this is the kind of ugly trick that we'd rather not need,
-but which non-conforming browsers force us to write. Having this, it
-is possible to write a simple function for building DOM elements.
+À chaque fois qu'Internet Explorer dévie du comportement des autres
+navigateurs, il fait quelque chose qui fonctionne dans tous les cas. Ne
+vous inquiétez pas des détails, c'est ce genre d'astuces sales dont nous
+aimerions ne pas avoir besoin mais que les navigateurs non conformes nous
+obligent à écrire. Considérant ceci, il est possible d'écrire une simple
+fonction pour créer des éléments DOM.
 
 > function dom(name, attributes) {
 >   var node = document.createElement(name);
@@ -9752,52 +9757,52 @@ is possible to write a simple function for building DOM elements.
 >   return node;
 > }
 >
-> var newParagraph = 
->   dom("P", null, "A paragraph with a ",
->       dom("A", {href: "http://en.wikipedia.org/wiki/Alchemy"},
->           "link"),
->       " inside of it.");
+> var newParagraph =
+>   dom("P", null, "Un paragraphe avec un ",
+>       dom("A", {href: "http://fr.wikipedia.org/wiki/Alchimie"},
+>           "lien"),
+>       " à l'intérieur.");
 > document.body.appendChild(newParagraph);
 
-The _|dom|_ function creates a DOM node. Its first argument gives the
-tag name of the node, its second argument is an object containing the
-attributes of the node, or |null| when no attributes are needed. After
-that, any amount of arguments may follow, and these are added to the
-node as child nodes. When strings appear here, they are first put into
-a text node.
+La fonction _|dom|_ crée un arbre DOM. Son premier argument donne le nom de
+la balise du nœud, son second argument est un objet contenant l'attribut du
+nœud, ou |null| quand aucun attribut n'est requis. Après quoi, n'importe
+quel nombre d'arguments peut suivre et ils seront ajoutés au nœud comme
+enfants nœuds. Quand des chaînes apparaissent ici, elles sont ajoutées
+dans un nœud texte.
 
 ---
 
-|appendChild| is not the only way nodes can be inserted into another
-node. When the new node should not appear at the end of its parent,
-the _|insertBefore|_ method can be used to place it in front of
-another child node. It takes the new node as a first argument, and the
-existing child as second argument.
+|appendChild| n'est pas le seul moyen d'insérer des nœuds dans un autre
+nœud. Quand le nouveau nœud ne doit pas apparaître à la fin de son parent,
+la méthode _|insertBefore|_ peut-être utilisée pour le placer avant un
+autre nœud enfant. Elle prend le nouveau nœud comme premier argument et
+l'élément existant comme second argument.
 
 > var link = newParagraph.childNodes[1];
-> newParagraph.insertBefore(dom("STRONG", null, "great "), link);
+> newParagraph.insertBefore(dom("STRONG", null, "super "), link);
 
-If a node that already has a |parentNode| is placed somewhere, it is
-automatically removed from its current position -- nodes can not exist
-in the document in more than one place.
+Si un nœud possèdant déjà un |parentNode| est placé ailleurs, il est
+automatiquement supprimé de sa position actuelle -- les nœuds ne peuvent
+pas exister dans le document à plus d'un endroit à la fois.
 
-When a node must be replaced by another one, use the _|replaceChild|_
-method, which again takes the new node as first argument and the
-existing one as second argument.
+Quand un nœud doit être remplacé par un autre, utilisez la méthode
+_|replaceChild|_, qui prend encore le nouveau nœud comme premier argument
+et le nœud existant comme second argument.
 
-> newParagraph.replaceChild(document.createTextNode("lousy "),
+> newParagraph.replaceChild(document.createTextNode("mauvais "),
 >                           newParagraph.childNodes[1]);
 
-And, finally, there is _|removeChild|_ to remove a child node. Note
-that this is called on the *parent* of the node to be removed, giving
-the child as argument.
+Et finalement, il y a _|removeChild|_ pour supprimer un nœud enfant. À
+noter que cette méthode doit être appelée sur le *parent* du nœud à
+supprimer, en lui donnant l'enfant comme argument.
 
 > newParagraph.removeChild(newParagraph.childNodes[1]);
 
 ***
 
-Write the convenient function _|removeElement|_ which removes the DOM
-node it is given as an argument from its parent node.
+Écrivez la fonction utile _|removeElement|_ qui supprime de son nœud parent
+le nœud DOM donné en paramètre
 
 ///
 
@@ -9810,54 +9815,54 @@ node it is given as an argument from its parent node.
 
 ---
 
-When creating new nodes and moving nodes around it is necessary to be
-aware of the following rule: Nodes are not allowed to be inserted into
-another document from the one in which they were created. This means
-that if you have extra frames or windows open, you can not take a
-piece of the document from one and move it to another, and nodes
-created with methods on one |document| object must stay in that
-document. Some browsers, notably Firefox, do not enforce this
-restriction, and thus a program which violates it will work fine in
-those browsers but break on others.
+Pendant la création de nœud et le déplacement de nœuds, il est nécessaire
+de prendre en compte la règle suivante : les nœuds ne sont pas autorisés
+à être insérés dans un autre document que celui dans lequel ils ont
+été créés. Ce qui veut dire que si vous avez des pages ou des fenêtres
+supplémentaires ouvertes, vous ne pouvez pas prendre un fragment de document
+de l'un pour le placer dans un autre et que les nœuds créés avec les
+méthodes d'un objet |document| doivent rester dans ce document. Certains
+navigateurs, notamment Firefox, n'appliquent pas cette restriction, de
+ce fait un programme qui la viole pourra fonctionner correctement dans ce
+navigateur mais pas dans d'autres.
 
 ---
 
-An example of something useful that can be done with this |dom|
-function is a program that takes JavaScript objects and summarises
-them in a _table_. Tables, in HTML, are created with a set of tags
-starting with |t|s, something like this:
+Un exemple de quelque chose d'utile qui peut être fait avec cette fonction
+|dom| est un programme qui prend des objets JavaScript et en fait un résumé
+dans un _tableau_. Les tableaux, en HTML, sont créés avec un ensemble de
+balises commençant par |t|, quelque chose comme :
 
 ] <table>
 ]   <tbody>
-]     <tr> <th>Tree </th> <th>Flowers</th> </tr>
-]     <tr> <td>Apple</td> <td>White  </td> </tr>
-]     <tr> <td>Coral</td> <td>Red    </td> </tr>
-]     <tr> <td>Pine </td> <td>None   </td> </tr>
+]     <tr> <th>Arbre  </th> <th>Fleurs  </th> </tr>
+]     <tr> <td>Pommier</td> <td>Blanches</td> </tr>
+]     <tr> <td>Corail </td> <td>Rouges  </td> </tr>
+]     <tr> <td>Pin    </td> <td>Aucune  </td> </tr>
 ]   </tbody>
 ] </table>
 
-Each |tr| element is a row of the table. |th| and |td| elements are
-the cells of the table, |td|s are normal data cells, |th| cells are
-'header' cells, which will be displayed in a slightly more prominent
-way. The |tbody| (table body) tag does not have to be included when a
-table is written as HTML, but when building a table from DOM nodes it
-should be added, because Internet Explorer refuses to display tables
-created without a |tbody|.
+Chaque élément |tr| est une ligne du tableau. Les éléments |th| et |td|
+sont les cellules du tableau, |td| pour des cellules normales, |th| pour les
+cellules d'en-tête qui seront affichées dans un style plus visible. La balise
+|tbody| (table body) n'a pas à être incluse quand un tableau est écrit en
+HTML, mais s'il est construit avec des nœuds DOM, elle doit être ajoutée
+car Internet Explorer refuse d'afficher les tableaux créés sans |tbody|.
 
 ***
 
-The function |makeTable| takes two arrays as arguments. The first
-contains the JavaScript objects that it should summarise, and the
-second contains strings, which name the columns of the table and the
-properties of the objects that should be shown in these columns. For
-example, the following will produce the table above:
+La fonction |makeTable| prend deux tableaux en arguments. Le premier contient
+les objets JavaScript qu'il doit récapituler et le second contient des
+chaînes, qui nomment les colonnes du tableau et les propriétés des objets
+qui doivent être affichées dans ces colonnes. Ce qui suit devrait produire
+le tableau ci-dessus :
 
-!> makeTable([{Tree: "Apple", Flowers: "White"},
-!>            {Tree: "Coral", Flowers: "Red"},
-!>            {Tree: "Pine",  Flowers: "None"}],
-!>           ["Tree", "Flowers"]);
+!> makeTable([{Arbre: "Pommier", Fleurs: "Blanches"},
+!>            {Arbre: "Corail", Fleurs: "Rouges"},
+!>            {Arbre: "Pin",  Fleurs: "Aucune"}],
+!>           ["Arbre", "Fleurs"]);
 
-Write this function.
+Écrivez cettte fonction.
 
 ///
 
@@ -9883,34 +9888,39 @@ Write this function.
 >                       ["nodeType", "tagName"]);
 > document.body.appendChild(table);
 
-Do not forget to convert the values from the objects to strings before
-adding them to the table -- our |dom| function only understands
-strings and DOM nodes.
+N'oubliez par de convertir les valeurs des objets en chaînes avant de les
+ajouter au tableau -- notre fonction |dom| comprend seulement les chaînes
+et les nœuds DOM.
 
 ---
 
-Closely tied to HTML and the document-object model is the topic of
-_style-sheet_s. It is a big topic, and I will not discuss it entirely,
-but some understanding of style-sheets is necessary for a lot of
-interesting JavaScript techniques, so we will go over the basics.
+Le sujet des _feuilles de style_ est étroitement lié à HTML et au
+modèle document-objet. C'est un vaste sujet et je ne l'aborderai pas
+entièrement. Mais quelques notions sur les feuilles de styles sont
+nécessaires pour beaucoup de techniques intéressantes  en Javascript,
+nous allons donc en voir les rudiments.
 
-In old-fashioned HTML, the only way to change the appearance of
-elements in a document was to give them extra attributes or to wrap
-them in extra tags, such as |center| to center them horizontally, or
-|font| to change the font style or colour. Most of the time, this meant
-that if you wanted the paragraphs or the tables in your document to
-look a certain way, you had to add a bunch of attributes and tags to
-*every single one of them*. This quickly adds a lot of noise to such
-documents, and makes them very painful to write or change by hand.
+Aux débuts de l'HTML, le seul moyen de changer l'apparence des éléments
+dans un document était de leur donner des attributs supplémentaires ou de
+les contenir dans des balises supplémentaires. Comme |center| qui permet
+de centrer les éléments horizontalement ou |font| pour changer le style
+ou la couleur de la police. La plupart du temps, cela veut dire que si vous
+vouliez que les paragraphes ou les tableaux de votre document apparaissent
+d'une certaine façon, vous deviez ajouter un ensemble d'attributs et de
+balises à *chacun des éléments*. Cela a rapidement ajouté beaucoup
+de « bruits parasites » aux documents et les a rendus particulièrement
+compliqués à écrire ou à modifier à la main.
 
-Of course, people being the inventive monkeys they are, someone came
-up with a solution. Style-sheets are a way to make statements like 'in
-this document, all paragraphs use the Comic Sans font, and are purple,
-and all tables have a thick green border'. You specify them once, at
-the top of the document or in a separate file, and they affect the
-whole document. Here, for example, is a style-sheet to make headers 22
-points big and centered, and make paragraphs use the font and colour
-mentioned earlier, when they are of the 'ugly' class.
+Évidemment, les gens étant des singes ingénieux, quelqu'un a proposé une
+solution. Les feuilles de style sont un moyen de déclarer quelque chose comme
+« Dans ce document, tous les paragraphes utiliseront la police Comic Sans
+et seront mauves et tous les tableaux auront une fine bordure verte ». Vous
+spécifiez ces règles une fois pour toutes, en haut du document ou dans un
+fichier séparé et elles affecteront le document entier. Voici, pour exemple,
+une feuille de style permettant d'afficher les en-têtes centrés avec une
+taille de 22 points et de faire en sorte que les paragraphes utilisent la
+police et la couleur mentionnées plus haut quand ils appartiennent à la
+classe « moche ».
 
 ] <style type="text/css">
 ]   h1 {
@@ -9918,146 +9928,150 @@ mentioned earlier, when they are of the 'ugly' class.
 ]     text-align: center;
 ]   }
 ]
-]   p.ugly {
+]   p.moche{
 ]     font-family: Comic Sans MS;
 ]     color: purple;
 ]   }
 ] </style>
 
-Classes are a concept related to styles. If you have different kinds
-of paragraphs, ugly ones and nice ones for example, setting the style
-for all |p| elements is not what you want, so _class_es can be used to
-distinguish between them. The above style will only be applied to
-paragraphs like this:
+Les classes sont un concept lié aux syles. Si vous avez différentes sortes
+de paragraphes, des moches et des jolis par exemple, et que vous ne voulez
+pas attribuer le style à tous les éléments |p|, alors les _classes_
+peuvent être utilisées pour les distinguer. Le style précédent ne sera
+appliqué qu'aux paragraphes comme :
 
-] <p class="ugly">Mirror, mirror...</p>
+] <p class="moche">Miroir, miroir...</p>
 
-And this is also the meaning of the _|className|_ property which was
-briefly mentioned for the |setNodeAttribute| function. The _|style|_
-attribute can be used to add a piece of style directly to an element.
-For example, this gives our image a solid border 4 pixels ('px') wide.
+Et c'est aussi le sens de la propriété _|className|_ qui était brièvement
+mentionnée dans la fonction |setNodeAttribute|. L'attribut _|style|_ peut
+être utilisé afin d'ajouter des éléments de styles directement à un
+élément. Par exemple, ceci donne pour notre image une bordure en trait
+continu de 4 pixels ('px').
 
-> setNodeAttribute($("picture"), "style",
+> setNodeAttribute($("image"), "style",
 >                  "border-width: 4px; border-style: solid;");
 
 ---
 
-There is much more to styles: Some styles are inherited by child nodes
-from parent nodes, and interfere with each other in complex and
-interesting ways, but for the purpose of DOM programming, the most
-important thing to know is that each DOM node has a |style| property,
-which can be used to manipulate the style of that node, and that there
-are a few kinds of styles that can be used to make nodes do
-extraordinary things.
+On peut aller bien plus loin avec les styles : certains sont hérités
+par les nœuds enfants de leurs nœuds parents et interfèrent les uns avec
+les autres de façon complexe et intéressante, mais en ce qui concerne
+la programmation DOM, la chose la plus importante à savoir est que chaque
+nœud DOM possède une propriété |style|, qui peut être utilisée pour
+manipuler le style de ce nœud et qu'il y a quelques styles qui peuvent
+être utilisés pour que les nœuds fassent des choses extraordinaires.
 
-This |style| property refers to an object, which has properties for
-all the possible elements of the style. We can, for example, make the
-picture's border green.
+Cette propriété |style| fait référence à un objet, qui possède des
+propriétés pour chaque élément de ce style. Nous pouvons par exemple
+décider que la bordure de l'image sera verte.
 
-> $("picture").style.borderColor = "green";
-> show($("picture").style.borderColor);
+> $("image").style.borderColor = "green";
+> show($("image").style.borderColor);
 
-Note that in style-sheets, the words are separated by hyphens, as in
-|border-color|, while in JavaScript, capital letters are used to mark
-the different words, as in |borderColor|.
+Veuillez noter que dans les feuilles de style, les mots sont séparés
+par des traits d'unions comme dans |border-color|, alors qu'en JavaScript,
+les lettres majuscules sont utilisées pour séparer les différents mots,
+comme dans |borderColor|.
 
-A very practical kind of style is |display: none|. This can be used to
-temporarily hide a node: When _|style.display|_ is |"none"|, the element
-does not appear at all to the viewer of the document, even though it
-does exist. Later, |display| can be set to the empty string, and the
-element will re-appear.
+Un exemple de style très pratique est |display: none|. Il peut être utilisé
+pour temporairement cacher un nœud : quand _|style.display|_ est |"none"|,
+l'élément n'apparaît plus du tout à la personne qui visualise le document,
+même s'il existe. Plus tard, |display| peut être affecté d'une chaîne
+vide et l'élément ré-apparaîtra.
 
-> $("picture").style.display = "none";
+> $("image").style.display = "none";
 
-And, to get our picture back:
+Et pour faire revenir notre image :
 
-> $("picture").style.display = "";
+> $("image").style.display = "";
 
 ---
 
-Another set of style types that can be abused in interesting ways are
-those related to positioning. In a simple HTML document, the browser
-takes care of determining the screen positions of all the elements --
-each element is put next to or below the elements that come before it,
-and nodes (generally) do not overlap.
+Il existe d'autres types de style dont on peut user et abuser de façon
+intéressante, ceux liés au positionnement. Dans un simple document HTML,
+le navigateur s'occupe de déterminer la position de l'écran et de tous les
+éléments -- chaque élément est mis à la suite ou au-dessous de l'élément
+qui le précède et les nœuds ne se chevauchent pas (en général).
 
-@_|style.position|_When its |position| style is set to |"absolute"|, a
-node is taken out of the normal document 'flow'. It no longer takes up
-room in the document, but sort of floats above it. The |left| and
-|top| styles can then be used to influence its position. This can be
-used for various purposes, from making a node obnoxiously follow the
-mouse cursor to making 'windows' open on top of the rest of the
-document.
+@_|style.position|_Quand son style |position| est à |"absolute"|, un
+nœud est retiré du flux normal du document. Il n'a plus sa place dans
+le document mais en quelque sorte au-dessus de lui. Les styles |left| et
+|top| peuvent ensuite être utilisés pour influencer sa position. Ceux-ci
+peuvent être utilisés pour de nombreux usages, que ce soit pour faire un
+nœud qui suivrait obstinément le curseur de la souris ou pour faire des
+« fenêtres » qui s'ouvriraient au-dessus du reste du document.
 
-> $("picture").style.position = "absolute";
+> $("image").style.position = "absolute";
 > var angle = 0;
 > var spin = setInterval(function() {
 >   angle += 0.1;
->   $("picture").style.left = (100 + 100 * Math.cos(angle)) + "px";
->   $("picture").style.top = (100 + 100 * Math.sin(angle)) + "px";
+>   $("image").style.left = (100 + 100 * Math.cos(angle)) + "px";
+>   $("image").style.top = (100 + 100 * Math.sin(angle)) + "px";
 > }, 100);
 
-If you aren't familiar with goniometry, just believe me when I tell
-you that the cosine and sine stuff is used to build coordinates lying
-on the outline of a circle. Ten times per second, the angle at which
-we place the picture is changed, and new coordinates are computed. It
-is a common error, when setting styles like this, to forget to append
-|"px"| to your value. In most cases, setting a style to a number
-without a unit does not work, so you must add |"px"| for pixels, |"%"|
-for percent, |"em"| for 'ems' (the width of an |M| character), or
-|"pt"| for points.
+Si vous n'êtes pas familier avec la goniométrie, faites-moi confiance quand
+je vous dis que le cosinus et le sinus sont utilisés pour construire des
+coordonnées reposant sur le contour d'un cercle. Dix fois par seconde, l'angle
+sur lequel on a placé l'image est modifié et les nouvelles coordonnées
+sont calculées. C'est une erreur commune lorsqu'on attribue des styles
+comme cela d'oublier d'ajouter |'px'| à la valeur. Dans la plupart des cas,
+attribuer un nombre sans unité à un style ne fonctionne pas donc vous devez
+ajouter |'px'| pour pixels, |'%'| pour pourcentage, |'em'| pour « ems »
+(la largeur d'un caractère |M|) ou encore |'pt'| pour points.
 
-(Now put the image to rest again...)
+(Maintenant, mettons une image pour nous reposer encore…)
 
 > clearInterval(spin);
 
-The place that is treated as 0,0 for the purpose of these positions
-depends on the place of the node in the document. When it is placed
-inside another node that has |position: absolute| or |position:
-relative|, the top left of this node is used. Otherwise, you get the
-top left corner of the document.
+L'emplacement qui est traité comme 0,0 pour ces positions dépend de la
+place du nœud dans le document. Lorsqu'il est placé à l'intérieur d'un
+autre nœud qui a |position: absolute| ou |position: relative|, le coin
+supérieur gauche de ce nœud est utilisé. Sinon, c'est le coin supérieur
+gauche du document.
 
 ---
 
-@_|style.width|_@_|style.height|_One last aspect of DOM nodes that is
-fun to play with is their size. There are style types called |width|
-and |height|, which can be used to set the absolute size of an
-element.
+@_|style.width|_@_|style.height|_Un dernier aspect des nœuds DOM avec lequel
+il est sympa de jouer est leur taille. Il existe des types de style nommés
+|width| (largeur) et |height| (hauteur), qui sont utilisés pour définir
+la taille absolue d'un élément.
 
-> $("picture").style.width = "400px";
-> $("picture").style.height = "200px";
+> $("image").style.width = "400px";
+> $("image").style.height = "200px";
 
-But, when you need to accurately set the size of an element, there is
-an tricky problem to take into account. Some browsers, in some
-circumstances, take these sizes to mean the outside size of the
-object, including any border and internal padding. Other browsers, in
-other circumstances, use the size of the space inside of the object
-instead, and do not count the width of borders and padding. Thus, if
-you set the size of an object that has a border or a padding, it will
-not always appear the same size.
+Mais lorsque vous avez besoin de définir précisément la taille d'un
+élément, il y a un problème épineux à prendre en compte. Certains
+navigateurs, dans certaines circonstances, considèrent que ces tailles
+correspondent à la taille extérieure de l'objet, incluant les bordures et
+les marges intérieures. D'autres navigateurs, dans d'autres circonstances,
+ne tiennent pas compte de la largeur des bordures et des marges. Ainsi,
+si vous définissez la taille d'un objet qui a une bordure ou une marge,
+il n'apparaîtra pas toujours à la même taille.
 
-Fortunately, you can inspect the inner and outer size of a node,
-which, when you really need to accurately size something, can be used
-to compensate for browser behaviour. The _|offsetWidth|_ and
-_|offsetHeight|_ properties give you the outer size of your element
-(the space it takes up in the document), while the _|clientWidth|_ and
-_|clientHeight|_ properties give the space inside of it, if any.
+Heureusement, vous pouvez examiner la taille intérieure et extérieure du
+nœud, ce qui, si vous avez vraiment besoin de définir précisément la
+taille de quelque chose, peut être utilisé pour compenser le comportement
+du navigateur. Les propriétés _|offsetWidth|_ et _|offsetHeight|_ vous
+donnent la taille extérieure de votre élément (la place qu'il occupe dans
+le document), tandis que les propriétés _|clientWidth|_ et _|clientHeight|_
+vous donnent la place à l'intérieur de l'objet, s'il y en a.
 
-> print("Outer size: ", $("picture").offsetWidth,
->       " by ", $("picture").offsetHeight, " pixels.");
-> print("Inner size: ", $("picture").clientWidth,
->       " by ", $("picture").clientHeight, " pixels.");
+> print("Outer size: ", $("image").offsetWidth,
+>       " by ", $("image").offsetHeight, " pixels.");
+> print("Inner size: ", $("image").clientWidth,
+>       " by ", $("image").clientHeight, " pixels.");
 
 ---
 
-If you've followed through with all the examples in this chapter, and
-maybe did a few extra things by yourself, you will have completely
-mutilated the poor little document that we started with. Now let me
-moralise for a moment and tell you that you do not want to do this to
-real pages. The temptation to add all kinds of moving bling-bling will
-at times be strong. Resist it, or your pages shall surely become
-unreadable or even, if you go far enough, induce the occasional
-seizure.
+Si vous avez consciencieusement suivi et utilisé tous les exemples
+de ce chapitre et peut-être effectué vous-même quelques expériences
+supplémentaires, vous aurez complètement saccagé le malheureux document
+initial qui nous a servi de point de départ. Laissez-moi vous faire les
+gros yeux une minute et vous dire de  ne surtout pas faire subir le même
+traitement à de vraies pages. Parfois la tentation sera grande d'ajouter
+des tas de choses  bling-bling et qui bougent. Retenez-vous, sinon vos pages
+deviendront certainement illisibles ou même, si vous allez assez loin,
+pourraient provoquer de temps en temps une crise d'épilepsie.
 
 ======================
 Browser Events / event
