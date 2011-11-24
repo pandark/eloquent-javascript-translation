@@ -2100,65 +2100,65 @@ Bien sûr, un inconvénient est qu'il est aussi possible de donner un nombre
 incorrect d'arguments aux fonctions qui doivent en recevoir un nombre fixe,
 comme |alert|, et de ne pas en être prévenu.
 
-==========================================
-Data structures: Objects and Arrays / data
-==========================================
+=================================================
+Structures de données : objets et tableaux / data
+=================================================
 
-This chapter will be devoted to solving a few simple problems. In the
-process, we will discuss two new types of values, arrays and objects,
-and look at some techniques related to them.
+Ce chapitre sera consacré à la résolution de quelques problèmes simples. En
+chemin, nous allons étudier deux nouveaux types de valeurs, les tableaux
+et les objets, et étudier quelques techniques les concernant.
 
-Consider the following situation: Your crazy aunt Emily, who is
-rumoured to have over fifty cats living with her (you never managed to
-count them), regularly sends you e-mails to keep you up to date on her
-exploits. They usually look like this:
+Considérons la situation suivante : votre tante Émilie l'excentrique,
+dont la rumeur dit qu'elle vit avec cinquante chats (en fait personne n'arrive
+à les compter), vous envoie régulièrement des e-mails pour vous tenir au
+courant de ses exploits. Ils sont de la forme suivante :
 
-| Dear nephew,
-| 
-| Your mother told me you have taken up skydiving. Is this true? You
-| watch yourself, young man! Remember what happened to my husband? And
-| that was only from the second floor!
+| Mon cher neveu,
+| Ta mère m'a dit que tu as commencé à faire du parachutisme. Est-ce
+| que c'est vrai ? Fais attention à toi, mon garçon ! Souviens-toi de
+| ce qui est arrivé à mon mari et ce n'était que du deuxième étage !
 |
-| Anyway, things are very exciting here. I have spent all week trying to
-| get the attention of Mr. Drake, the nice gentleman who moved in next
-| door, but I think he is afraid of cats. Or allergic to them? I am
-| going to try putting Fat Igor on his shoulder next time I see him,
-| very curious what will happen.
+| En tout cas, les choses sont très intéressantes de mon côté. J'ai
+| passé toute la semaine à essayer d'obtenir l'attention de Mr. Drake,
+| le sympathique monsieur qui a emménagé à côté, mais je pense qu'il a
+| peur des chats. À moins qu'il n'y soit allergique ? À la prochaine
+| rencontre, je vais essayer de poser Igor Le Gros sur son épaule. Je
+| suis curieuse de voir le résultat.
 |
-| Also, the scam I told you about is going better than expected. I have
-| already gotten back five 'payments', and only one complaint. It is
-| starting to make me feel a bit bad though. And you are right that it
-| is probably illegal in some way.
-| 
-| (... etc ...)
+| Par ailleurs, l'escroquerie dont je t'avais parlé fonctionne mieux
+| que je pensais. J'ai déjà récupéré cinq « paiements » et seulement
+| une seule plainte. Mais j'ai quelques remords malgré tout. Et tu as
+| sans doute raison de dire que c'est probablement illégal d'une
+| manière ou d'une autre.
 |
-| Much love,
-| Aunt Emily
+| (…etc.)
 |
-| died 27/04/2006: Black Leclère
+| Grosses bises, Tante Émilie
 |
-| born 05/04/2006 (mother Lady Penelope): Red Lion, Doctor Hobbles the
-| 3rd, Little Iroquois
+| Décès le 27/04/2006 : Black Leclère
+|
+| Nés le 05/04/2006 (mère Lady Pénélope) : Lion Rouge,
+| Docteur Hobbles III, Petit Iroquois
 
-To humour the old dear, you would like to keep track of the genealogy
-of her cats, so you can add things like "P.S. I hope Doctor Hobbles
-the 2nd enjoyed his birthday this Saturday!", or "How is old Lady
-Penelope doing? She's five years old now, isn't she?", preferably
-without accidentally asking about dead cats. You are in the possession
-of a large quantity of old e-mails from your aunt, and fortunately she
-is very consistent in always putting information about the cats'
-births and deaths at the end of her mails in precisely the same
-format.
+Pour amuser cette vieille dame, vous voudriez garder une trace de la
+généalogie de ses chats, pour pouvoir ajouter des commentaires comme
+« P.-S. J'espère que Docteur Hobbles II a bien fêté son anniversaire
+samedi ! », ou bien « Comment va cette vieille Lady Pénélope ? Elle
+a cinq ans maintenant, n'est-ce pas ? », en évitant de préférence de
+demander des nouvelles des chats décédés. Vous avez une grande quantité
+de vieux emails de votre tante et, par chance, elle est très constante dans
+sa manière de donner les renseignements sur les naissances et décès des
+chats à la fin de ses e-mails, toujours dans le même format.
 
-You are hardly inclined to go through all those mails by hand.
-Fortunately, we were just in need of an example problem, so we will
-try to work out a program that does the work for us. For a start, we
-write a program that gives us a list of cats that are still alive
-after the last e-mail.
+Vous n'avez pas envie de parcourir à la main tous ces messages. Heureusement,
+nous avions justement besoin d'un exemple, nous allons donc écrire un
+programme qui va faire le travail pour nous. Pour commencer, nous allons
+écrire un programme qui va nous donner la liste des chats qui sont toujours
+vivants à la fin du dernier e-mail.
 
-Before you ask, at the start of the correspondence, aunt Emily had
-only a single cat: Spot. (She was still rather conventional in those
-days.)
+Avant que vous ne posiez la question, au début de cette correspondance,
+la tante Émilie n'avait qu'un seul chat : Spot (elle était encore assez
+conformiste à cette époque).
 
 ---
 
@@ -2166,386 +2166,408 @@ days.)
 
 ---
 
-It usually pays to have some kind of clue what one's program is going
-to do before starting to type. Here's a plan:
+Il est généralement préférable d'avoir une idée de départ sur ce que
+va faire un programme avant de se mettre à l'écrire… Voici le plan :
 
- 1. Start with a set of cat names that has only "Spot" in it.
- 2. Go over every e-mail in our archive, in chronological order.
- 3. Look for paragraphs that start with "born" or "died".
- 4. Add the names from paragraphs that start with "born" to our set of names.
- 5. Remove the names from paragraphs that start with "died" from our set.
+ 1. Commencer avec un ensemble de noms de chats ne comprenant que « Spot ».
+ 2. Parcourir chaque e-mail dans l'archive dans l'ordre chronologique.
+ 3. Chercher les paragraphes qui commencent par « Nés le » ou « Décès le ».
+ 4. Ajouter les noms trouvés dans les paragraphes qui commencent par « Nés le » à l'ensemble de noms.
+ 5. Supprimer les noms de chats trouvés dans les paragraphes qui commencent par « Décès le » de notre ensemble.
 
-Where taking the names from a paragraph goes like this:
+On extraira les noms d'un paragraphe de la façon suivante :
 
- 1. Find the colon in the paragraph.
- 2. Take the part after this colon.
- 3. Split this part into separate names by looking for commas.
+ 1. Trouver les deux-points (:) dans le paragraphe.
+ 2. Prendre la partie après ce signe.
+ 3. Dans cette partie, séparer les noms en cherchant les virgules.
 
-It may require some suspension of disbelief to accept that aunt Emily
-always used this exact format, and that she never forgot or misspelled
-a name, but that is just how your aunt is.
+Cet énoncé d'exercice peut rendre nécessaire d'oublier quelques instants
+les exceptions possibles et d'accepter aveuglément que tante Émilie utilise
+toujours le même format d'écriture, qu'elle n'oublie jamais un nom de chat,
+ni ne fait de faute de frappe. Mais votre tante est comme ça et ça tombe
+bien pour nous.
 
 ---
 
-First, let me tell you about _properties_. A lot of JavaScript values
-have other values associated with them. These associations are called
-properties. Every string has a property called _|length|_, which refers
-to a number, the amount of characters in that string.
+D'abord, je vais vous expliquer les _propriété_s. Beaucoup de valeurs en
+Javascript ont d'autres valeurs qui leur sont associées. Ces associations
+sont appelées propriétés. Chaque chaîne de caractères a une propriété
+appelée _|length|_, (longueur), qui correspond à un nombre, la quantité
+de caractères dans cette chaîne.
 
-@_|[]|_Properties can be accessed in two ways:
+On peut accéder aux @_|[]|_propriétés de deux manières :
 
-> var text = "purple haze";
+> var text = "brume pourpre";
 > show(text["length"]);
 > show(text.length);
 
-The second way is a shorthand for the first, and it only works when
-the name of the property would be a valid variable name -- when it
-doesn't have any spaces or symbols in it and does not start with a
-digit character.
+La deuxième manière est un raccourci de la première et ne fonctionne
+que lorsque le nom de la propriété s'écrit comme un nom de variable
+-- lorsqu'il n'y a pas d'espace ou de symbole et lorsqu'elle ne commence
+pas par un chiffre.
 
-The values |null| and |undefined| do not have any properties. Trying
-to read properties from such a value produces an error. Try the
-following code, if only to get an idea about the kind of error-message
-your browser produces in such a case (which, for some browsers, can be
-rather cryptic).
+Les valeurs |null| et |undefined| n'ont pas de propriété. Essayez de lire des
+propriétés de ces valeurs donnera une erreur. Essayez le code suivant, juste
+pour voir le type de message d'erreur que votre navigateur va retourner dans ce
+cas de figure (dans certains navigateurs, ce message sera assez mystérieux).
 
-!> var nothing = null;
-!> show(nothing.length);
-
----
-
-The properties of a string value can not be changed. There are quite a
-few more than just |length|, as we will see, but you are not allowed
-to add or remove any.
-
-This is different with values of the type _object_. Their main role is
-to hold other values. They have, you could say, their own set of
-tentacles in the form of properties. You are free to modify these,
-remove them, or add new ones.
-
-@_|{}|_An object can be written like this:
-
-> var cat = {colour: "grey", name: "Spot", size: 46};
-> cat.size = 47;
-> show(cat.size);
-> delete cat.size;
-> show(cat.size);
-> show(cat);
-
-Like variables, each property attached to an object is labelled by a
-string. The first statement creates an object in which the property
-|"colour"| holds the string |"grey"|, the property |"name"| is attached
-to the string |"Spot"|, and the property |"size"| refers to the number
-|46|. The second statement gives the property named |size| a new
-value, which is done in the same way as modifying a variable.
-
-The keyword _|delete|_ cuts off properties. Trying to read a
-non-existent property gives the value |undefined|.
-
-If a property that does not yet exist is set with the _|=|_ operator,
-it is added to the object.
-
-> var empty = {};
-> empty.notReally = 1000;
-> show(empty.notReally);
-
-Properties whose names are not valid variable names have to be quoted
-when creating the object, and approached using brackets:
-
-> var thing = {"gabba gabba": "hey", "5": 10};
-> show(thing["5"]);
-> thing["5"] = 20;
-> show(thing[2 + 3]);
-> delete thing["gabba gabba"];
-
-As you can see, the part between the brackets can be any expression.
-It is converted to a string to determine the property name it refers
-to. One can even use variables to name properties:
-
-> var propertyName = "length";
-> var text = "mainline";
-> show(text[propertyName]);
-
-The operator _|in|_ can be used to test whether an object has a
-certain property. It produces a boolean.
-
-> var chineseBox = {};
-> chineseBox.content = chineseBox;
-> show("content" in chineseBox);
-> show("content" in chineseBox.content);
+!> var rienDuTout = null;
+!> show(rienDuTout.length);
 
 ---
 
-When object values are shown on the console, they can be clicked to
-inspect their properties. This changes the output window to an
-'inspect' window. The little 'x' at the top-right can be used to
-return to the output window, and the left-arrow can be used to go back
-to the properties of the previously inspected object.
+Les propriétés d'une chaîne de caractères ne peuvent pas être
+changées. Elles sont plus nombreuses que la seule longueur |length|,
+comme nous allons le voir, mais vous ne pouvez ajouter ni supprimer aucune
+propriété.
 
-> show(chineseBox);
+C'est différent avec les valeurs du type _object_. Leur rôle principal est
+de conserver d'autres valeurs. Ils ont, en quelque sorte, leur propre jeu
+de « tentacules » sous forme de propriétés. Vous pouvez les modifier,
+les supprimer ou en ajouter de nouvelles.
+
+@_|{}|_Un objet peut s'écrire de la façon suivante :
+
+> var chat = {couleur: "gris", nom: "Spot", taille: 46};
+> chat.taille = 47;
+> show(chat.taille);
+> delete chat.taille;
+> show(chat.taille);
+> show(chat);
+
+Comme les variables, chaque propriété attachée à un objet a un nom
+sous forme d'une chaîne de caractères. La première instruction crée un
+objet dans lequel la propriété |"couleur"| contient la chaîne |"gris"|,
+la propriété |"nom"| est liée à la chaîne |"Spot"|, et la propriété
+|"taille"| fait référence au nombre |46|. La deuxième ligne modifie la
+propriété |taille| en lui donnant une nouvelle valeur, ce qui se fait de
+la même manière que pour la modification d'une variable.
+
+Le mot-clé _|delete|_ supprime les propriétés. Essayez de lire une
+propriété qui n'existe pas donnera la valeur |undefined|.
+
+Si une propriété qui n'existe pas encore est affectée avec l'opérateur
+_|=|_, elle est ajoutée à l'objet.
+
+> var vide = {};
+> vide.plusVraiment = 1000;
+> show(vide.plusVraiment);
+
+Les propriétés dont le nom ne pourrait pas être une variable doivent être
+mises entre guillemets au moment de la création de l'objet et utilisées
+avec des parenthèses :
+
+> var truc = {"gabba gabba": "hey", "5": 10};
+> show(truc["5"]);
+> truc["5"] = 20;
+> show(truc[2 + 3]);
+> delete truc["gabba gabba"];
+
+Comme vous pouvez le voir, on peut mettre n'importe quelle expression entre
+les parenthèses. Elle sera convertie dans une chaîne pour définir le nom
+de la propriété. On peut aussi utiliser des variables pour donner un nom
+à une propriété :
+
+> var nomDePropriete = "length";
+> var texte = "grandeLigne ";
+> show(texte[nomDePropriete]);
+
+L'opérateur _|in|_ peut servir à tester si un objet possède une certaine
+propriété. Son résultat est un booléen.
+
+> var poupeeRusse = {};
+> poupeeRusse.contenu = poupeeRusse;
+> show("contenu" in poupeeRusse);
+> show("contenu" in poupeeRusse.contenu);
+
+---
+
+Quand les valeurs d'un objet sont affichées sur la  console, on peut cliquer
+à la souris pour inspecter leurs propriétés. La  fenêtre de sortie
+devient une fenêtre « inspecteur ». Le petit « x » en  haut
+à droite s'utilise pour retourner à la fenêtre de sortie et la  flèche
+gauche permet de retourner aux propriétés de l'objet inspecté.
+
+> show(poupeeRusse);
 
 ***
 
-The solution for the cat problem talks about a 'set' of names. A _set_
-is a collection of values in which no value may occur more than once.
-If names are strings, can you think of a way to use an object to
-represent a set of names?
+La solution pour le problème des chats passe par un ensemble de noms. Un
+ensemble (ou « _set_ ») est un groupe de valeurs dans lequel aucune
+valeur ne peut apparaître plus d'une fois. Si les noms de chats sont des
+chaînes de caractères, pouvez-vous imaginer une façon pour qu'un objet
+devienne un ensemble de noms ?
 
-Show how a name can be added to this set, how one can be removed, and
-how you can check whether a name occurs in it.
+Écrivez maintenant la façon dont un nom peut être ajouté à cet ensemble,
+comment on peut le supprimer et comment on peut vérifier si un certain nom
+est bien présent dans l'ensemble.
 
 ///
 
-This can be done by storing the content of the set as the properties
-of an object. Adding a name is done by setting a property by that name
-to a value, any value. Removing a name is done by deleting this
-property. The |in| operator can be used to determine whether a certain
-name is part of the set##.
+Une solution consiste à mémoriser le contenu de l'ensemble sous la forme
+de propriétés d'un objet. Pour ajouter un nom, on crée une propriété
+avec ce nom en lui affectant une valeur, n'importe laquelle. Pour supprimer
+un nom, on supprimera la propriété de l'objet. L'opérateur |in| sera
+utilisé pour savoir si une certaine propriété fait partie de l'ensemble##.
 
-## There are a few subtle problems with this approach, which will be
-discussed and solved in \\coo. For this chapter, it works well enough.
+## Il y a quelques problèmes subtils avec cette approche dont nous
+parlerons et que nous résoudrons dans le \\coo. On ne s'en occupera pas
+pour ce chapitre.
 
 > var set = {"Spot": true};
-> // Add "White Fang" to the set
-> set["White Fang"] = true;
-> // Remove "Spot"
+> // Ajoute "Croc Blanc" à l'ensemble
+> set["Croc Blanc"] = true;
+> // Supprime "Spot"
 > delete set["Spot"];
-> // See if "Asoka" is in the set
+> // Regarde si "Asoka" est dans l'ensemble
 > show("Asoka" in set);
 
 ---
 
-@_mutability_Object values, apparently, can change. The types of
-values discussed in \\cbasics are all immutable, it is impossible to
-change an existing value of those types. You can combine them and
-derive new values from them, but when you take a specific string
-value, the text inside it can not change. With objects, on the other
-hand, the content of a value can be modified by changing its
-properties.
+Les valeurs des @_mutability_objets peuvent apparemment changer. Les types
+de valeurs vues dans le \\cbasics sont toutes invariables, il n'est pas
+possible de changer une valeur existante pour ces types de données. Vous
+pouvez les associer ou en tirer de nouvelles valeurs, mais lorsque vous
+prenez une chaîne de caractères particulière, le texte à l'intérieur
+ne peut pas être modifié. Avec les objets, d'un autre côté, le contenu
+d'une valeur peut être modifié en changeant ses propriétés.
 
-When we have two numbers, |120| and |120|, they can for all practical
-purposes be considered the precise same number. With objects, there is
-a difference between having two references to the same object and
-having two different objects that contain the same properties.
-Consider the following code:
+Lorsque nous considérons deux nombres, |120| et |120|, il est possible dans
+tous les cas pratiques de les considérer comme des nombres identiques. Avec
+des objets, il y a une différence importante entre avoir deux « références
+» du même objet et avoir deux objets distincts qui possèdent les mêmes
+propriétés. Considérons le code suivant :
 
-> var object1 = {value: 10};
-> var object2 = object1;
-> var object3 = {value: 10};
+> var objet1 = {valeur: 10};
+> var objet2 = objet1;
+> var objet3 = {valeur: 10};
 >
-> show(object1 == object2);
-> show(object1 == object3);
+> show(objet1 == object2);
+> show(objet1 == object3);
 >
-> object1.value = 15;
-> show(object2.value);
-> show(object3.value);
+> objet1.valeur = 15;
+> show(objet2.valeur);
+> show(objet3.valeur);
 
-|object1| and |object2| are two variables grasping the *same* value.
-There is only one actual object, which is why changing |object1| also
-changes the value of |object2|. The variable |object3| points to
-another object, which initially contains the same properties as
-|object1|, but lives a separate life.
+|objet1| et |objet2| sont deux variables attachées à la *même* valeur. Il
+n'y a en fait qu'un seul objet, c'est pourquoi en changeant |objet1| on
+change également la valeur de |objet2|. La variable |objet3| pointe vers
+un autre objet qui contient au départ la même propriété que |objet1|
+mais elle a une existence distincte.
 
-JavaScript's _|==|_ operator, when comparing objects, will only return
-|true| if both values given to it are the precise same value.
-Comparing different objects with identical contents will give |false|.
-This is useful in some situations, but impractical in others.
+L'opérateur JavaScript _|==|_, lorsqu'il compare des objets, ne retournera
+la valeur booléenne |true| que si chacune des valeurs qu'on lui donne à
+comparer sont exactement les mêmes. Comparer des objets différents ayant des
+contenus identiques donnera le résultat |false|. C'est utile dans certaines
+situations, mais peu adapté à d'autres.
 
 ---
 
-Object values can play a lot of different roles. Behaving like a set
-is only one of those. We will see a few other roles in this chapter,
-and \\coo shows another important way of using objects.
+Les valeurs d'un objet peuvent jouer de nombreux rôles. Se comporter comme
+un ensemble n'est que l'un d'entre eux. Nous allons voir d'autres utilisations
+dans ce chapitre et le \\coo montrera d'autres façons importantes d'utiliser
+les objets.
 
-In the plan for the cat problem -- in fact, call it an *algorithm*,
-not a plan, that makes it sound like we know what we are talking about
--- in the algorithm, it talks about going over all the e-mails in an
-archive. What does this archive look like? And where does it come
-from?
+Dans le plan d'action pour le problème des chats — en fait, appelons-le
+un *algorithme* au lieu d'un plan, cela nous donne l'impression qu'on sait
+de quoi on parle — dans l'algorithme, on parle de parcourir chaque e-mail
+contenu dans une archive. Mais comment se présente cette archive ? Et
+d'où vient-elle ?
 
-Do not worry about the second question for now. \\Cxhr talks about
-some ways to import data into your programs, but for now you will find
-that the e-mails are just magically there. Some magic is really easy,
-inside computers.
+Ne vous inquiétez pas de la deuxième question pour le moment. Le \\cxhr
+explique quelques-unes des possibilités pour importer des données dans
+vos programmes. Pour l'instant, on dira que les e-mails sont déjà là,
+comme par magie. La magie est parfois très facile, avec les ordinateurs.
 
 ---
 
-The way in which the archive is stored is still an interesting
-question. It contains a number of e-mails. An e-mail can be a string,
-that should be obvious. The whole archive could be put into one huge
-string, but that is hardly practical. What we want is a collection of
-separate strings.
+La façon dont l'archive est enregistrée reste une question pertinente. Elle
+contient quantité d'e-mails. Un e-mail peut être vu comme une chaîne de
+caractères, c'est évident. Toute l'archive pourrait être mise dans une
+énorme chaîne de caractères mais ce ne serait pas pratique. Ce qu'il nous
+faut, c'est une structure de chaînes de caractères distinctes.
 
-Collections of things are what objects are used for. One could make an
-object like this:
+Les objets sont justement utilisés pour structurer des choses. On pourrait
+très bien créer un objet comme celui-ci :
 
-> var mailArchive = {"the first e-mail": "Dear nephew, ...",
->                    "the second e-mail": "..."
->                    /* and so on ... */};
+> var archiveMail = {"le premier e-mail": "Cher neveu, …",
+>                    "le deuxième e-mail": "…"
+>                    /* et ainsi de suite… */};
 
-But that makes it hard to go over the e-mails from start to end -- how
-does the program guess the name of these properties? This can be
-solved by more predictable property names:
+Mais parcourir les e-mails du début à la fin serait difficile — comment
+le programme peut-il deviner le nom de ces propriétés ? La solution est
+d'utiliser des noms de propriétés plus prévisibles :
 
-> var mailArchive = {0: "Dear nephew, ... (mail number 1)",
->                    1: "(mail number 2)",
->                    2: "(mail number 3)"};
+> var archiveMail = {0: "Cher neveu, … (mail numéro 1)",
+>                    1: "(mail numéro 2)",
+>                    2: "(mail numéro 3)"};
 >
-> for (var current = 0; current in mailArchive; current++)
->   print("Processing e-mail #", current, ": ", mailArchive[current]);
+> for (var courant = 0; courant in archiveMail; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveMail[courant]);
 
-Luck has it that there is a special kind of objects specifically for
-this kind of use. They are called _array_s, and they provide some
-conveniences, such as a _|length|_ property that contains the amount
-of values in the array, and a number of operations useful for this
-kind of collection.
+La chance veut qu'il existe un type d'objet particulier qui corresponde
+exactement à ce type de besoin. Ce sont les @_array_tableaux et ils
+fournissent des commodités très utiles, comme par exemple _|length|_
+(longueur), une propriété qui contient le nombre d'éléments dans le
+tableau et bien d'autres fonctions utiles pour ce type de structure.
 
-@_|[]|_New arrays can be created using brackets (|[| and |]|):
+@_|[]|_Pour créer de nouveaux tableaux on utilise des crochets (|[| et |]|):
 
-> var mailArchive = ["mail one", "mail two", "mail three"];
+> var archiveMail = ["mail un", "mail deux", "mail trois"];
 >
-> for (var current = 0; current < mailArchive.length; current++)
->   print("Processing e-mail #", current, ": ", mailArchive[current]);
+> for (var courant = 0; courant < archiveMail.length; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveMail[courant]);
 
-In this example, the numbers of the elements are not specified
-explicitly anymore. The first one automatically gets the number 0, the
-second the number 1, and so on.
+Dans cet exemple, le nombre d'éléments n'est plus spécifié
+explicitement. Le premier a automatiquement le numéro 0, le deuxième le
+numéro 1 et ainsi de suite.
 
-Why start at 0? People tend to start counting from 1. As unintuitive
-as it seems, numbering the elements in a collection from 0 is often
-more practical. Just go with it for now, it will grow on you.
+Pourquoi commencer à 0 ? Dans la vie courante on compte d'habitude à
+partir de 1. Aussi étrange que cela paraisse, la numérotation à partir
+de 0 est souvent plus pratique pour programmer. Faites avec pour l'instant,
+vous allez vous y faire.
 
-Starting at element 0 also means that in a collection with |X|
-elements, the last element can be found at position |X - 1|. This is
-why the |for| loop in the example checks for |current <
-mailArchive.length|. There is no element at position
-|mailArchive.length|, so as soon as |current| has that value, we stop
-looping.
+Commencer par l'élément 0 veut aussi dire que dans une structure qui
+a |X| éléments, le dernier élément sera trouvé à la position |X -
+1|. C'est pourquoi la boucle |for| dans notre exemple teste la valeur
+|current < mailArchive.length|. Il n'y a pas d'élément à la position
+|mailArchive.length|, donc dès que |current| atteint cette valeur, on
+arrête la boucle.
 
 *** range
 
-Write a function |range| that takes one argument, a positive number,
-and returns an array containing all numbers from 0 up to and including
-the given number.
+Écrivez une fonction nommée |série| qui prend un argument, un nombre
+positif et retourne un tableau contenant chaque nombre de 0 jusqu'au nombre
+donné en paramètre inclus.
 
-An empty array can be created by simply typing |[]|. Also remember
-that adding properties to an object, and thus also to an array, can be
-done by assigning them a value with the |=| operator. The |length|
-property is automatically updated when elements are added.
+Un tableau vide peut être créé en tapant simplement |[]|. Souvenez-vous que
+pour ajouter des propriétés à un tableau, comme pour un objet, il suffit
+d'affecter une valeur à la propriété avec l'opérateur |=|. La propriété
+|length| est mise à jour automatiquement quand des éléments sont ajoutés.
 
 ///
 
-> function range(upto) {
->   var result = [];
->   for (var i = 0; i <= upto; i++)
->     result[i] = i;
->   return result;
+> function serie(max) {
+>   var resultat = [];
+>   for (var i = 0; i <= max; i++)
+>     resultat[i] = i;
+>   return resultat;
 > }
-> show(range(4));
+> show(serie(4));
 
-Instead of naming the loop variable |counter| or |current|, as I have
-been doing so far, it is now called simply |i|. Using single letters,
-usually |i|, |j|, or |k| for loop variables is a widely spread habit
-among programmers. It has its origin mostly in laziness: We'd rather
-type one character than seven, and names like |counter| and |current|
-do not really clarify the meaning of the variable much.
+Au lieu de nommer la variable de boucle |compteur| ou |courant|, comme je l'ai
+fait jusqu'à présent, elle s'appelle désormais simplement |i|. L'utilisation
+d'une seule lettre, habituellement |i|, |j| ou |k| pour les variables de boucle
+est une habitude très répandue en programmation. Son origine tient presque
+à de la paresse : on préfère taper un caractère que sept et des noms
+comme |counter| et |current| ne donnent pas forcément plus d'informations
+sur la variable.
 
-If a program uses too many meaningless single-letter variables, it can
-become unbelievably confusing. In my own programs, I try to only do
-this in a few common cases. Small loops are one of these cases. If the
-loop contains another loop, and that one also uses a variable named
-|i|, the inner loop will modify the variable that the outer loop is
-using, and everything will break. One could use |j| for the inner
-loop, but in general, when the body of a loop is big, you should come
-up with a variable name that has some clear meaning.
+Si un programme utilise trop souvent des variables à un seul caractère, sans
+explication, il peut devenir très difficile à comprendre. Dans mes propres
+programmes, j'essaie de me limiter à quelques cas de figures seulement. Les
+petites boucles font partie de ces cas. Si la boucle contient une autre
+boucle et que celle-ci utilise aussi une variable appelée |i|, la boucle
+intérieure va modifier la variable dont se sert la première boucle, et rien
+ne va fonctionner. Ou pourrait utiliser |j| pour la boucle intérieure, mais
+en général, lorsque le corps d'une boucle est grand, vous devriez utiliser
+un nom de variable ayant une signification utile pour la compréhension.
 
 ---
 
-Both string and array objects contain, in addition to the |length|
-property, a number of properties that refer to function values.
+Les chaînes de caractères et les objets « tableaux » contiennent tous
+deux, outre la propriété |length|, un certain nombre d'autres propriétés
+qui font référence à des fonctions.
 
 > var doh = "Doh";
 > print(typeof doh.toUpperCase);
 > print(doh.toUpperCase());
 
-Every string has a _|toUpperCase|_ property. When called, it will
-return a copy of the string, in which all letters have been converted
-to uppercase. There is also _|toLowerCase|_. Guess what that does.
+Chaque chaîne de caractères a une propriété _|toUpperCase|_. Lorsqu'elle
+est appelée, elle retourne une copie de la chaîne, transformée avec chaque
+lettre en majuscule. Il y a aussi l'équivalent _|toLowerCase|_. Devinez
+le résultat…
 
-Notice that, even though the call to |toUpperCase| does not pass any
-arguments, the function does somehow have access to the string
-|"Doh"|, the value of which it is a property. How this works precisely
-is described in \\coo.
+Remarquez que même si l'appel de |toUpperCase| se fait sans arguments,
+la fonction a malgré tout accès au contenu de la chaîne de caractères
+|"Doh"|, la valeur dont elle est une propriété. La façon dont cela
+fonctionne est décrite dans le \\coo.
 
-Properties that contain functions are generally called _method_s, as
-in '|toUpperCase| is a method of a string object'.
+Les propriétés qui se comportent comme des fonctions sont généralement
+appelées @_methode_méthodes, comme pour « |toUpperCase| qui est une
+méthode des objets de type chaîne de caractères ».
 
-> var mack = [];
-> mack.push("Mack");
-> mack.push("the");
-> mack.push("Knife");
-> show(mack.join(" "));
-> show(mack.pop());
-> show(mack);
+> var flipper = [];
+> flipper.push("Flipper");
+> flipper.push("le");
+> flipper.push("dauphin");
+> show(flipper.join(" "));
+> show(flipper.pop());
+> show(flipper);
 
-The method _|push|_, which is associated with arrays, can be used to
-add values to it. It could have been used in the last exercise, as an
-alternative to |result[i] = i|. Then there is _|pop|_, the opposite of
-|push|: it takes off and returns the last value in the array. _|join|_
-builds a single big string from an array of strings. The parameter it
-is given is pasted between the values in the array.
+La méthode _|push|_, associée aux tableaux, peut être utilisée pour
+ajouter des valeurs à ceux-ci. Nous aurions pu l'utiliser dans l'exercice
+précédent, à la place de |resultat[i] = i|. Il y a aussi la méthode
+_|pop|_, complémentaire de |push| : elle supprime le dernier élément
+d'un tableau et retourne sa valeur. _|join|_ construit une seule chaîne de
+caractères à partir d'un tableau de chaînes de caractères. Le paramètre
+utilisé avec cette méthode sera inséré entre chaque valeur du tableau,
+avant l'assemblage de la chaîne de caractères finale.
 
 ---
 
-Coming back to those cats, we now know that an array would be a good
-way to store the archive of e-mails. On this page, the function
-|retrieveMails| can be used to (magically) get hold of this array.
-Going over them to process them one after another is no rocket science
-anymore either:
+Revenons à nos chats : nous savons maintenant qu'utiliser un tableau
+serait une bonne idée pour ranger les archives des e-mails. Sur cette page,
+la fonction |recupererMails| sera utilisée pour récupérer (magiquement)
+ce tableau. Parcourir les emails qu'il contient pour les traiter un par un
+devient simple comme un jeu d'enfant :
 
-> var mailArchive = retrieveMails();
+> var archiveMail = recupererMails();
 >
-> for (var i = 0; i < mailArchive.length; i++) {
->   var email = mailArchive[i];
->   print("Processing e-mail #", i);
->   // Do more things...
+> for (var i = 0; i < archiveMail.length; i++) {
+>   var email = archiveMail[i];
+>   print("Traitement de l'e-mail #", i);
+>   // Faire plus de choses…
 > }
 
-We have also decided on a way to represent the set of cats that are
-alive. The next problem, then, is to find the paragraphs in an e-mail
-that start with |"born"| or |"died"|.
+Nous avons également décidé d'une manière de représenter un ensemble
+de chats vivants. Le problème qui reste à traiter, cependant, est celui
+de détecter des paragraphes d'un e-mail qui contiennent |"Nés le"|  ou
+|"Décès le"|.
 
 ---
 
-The first question that comes up is what exactly a paragraph is. In
-this case, the string value itself can't help us much: JavaScript's
-concept of text does not go any deeper than the 'sequence of
-characters' idea, so we must define paragraphs in those terms.
+La première question qui vient à l'esprit est de savoir ce qu'est un
+paragraphe au juste. Dans ce cas, la valeur de la chaîne elle-même n'est
+pas d'une grande utilité : le concept du texte en JavaScript ne va guère
+plus loin que l'idée de « suite de caractères », si bien que nous
+devons définir les paragraphes de cette façon.
 
-Earlier, we saw that there is such a thing as a newline character.
-These are what most people use to split paragraphs. We consider a
-paragraph, then, to be a part of an e-mail that starts at a newline
-character or at the start of the content, and ends at the next newline
-character or at the end of the content.
+Nous avons vu plus haut qu'il existe une chose qui s'appelle un caractère
+de fin de ligne. C'est ce que la plupart des gens utilisent pour séparer les
+paragraphes. Nous considérons donc un paragraphe comme une partie de mail qui
+commence par un caractère saut de ligne ou au début du contenu du message
+et se termine au caractère saut de ligne suivant ou bien à la fin du contenu.
 
-And we don't even have to write the algorithm for splitting a string
-into paragraphs ourselves. Strings already have a method named
-_|split|_, which is (almost) the opposite of the |join| method of
-arrays. It splits a string into an array, using the string given as
-its argument to determine in which places to cut.
+Et nous n'avons même pas à écrire nous-mêmes l'algorithme pour scinder
+une chaîne en paragraphes. Les chaînes ont déjà une méthode appelée
+_|split|_,  qui est (pratiquement) l'inverse de la méthode |join| pour les
+tableaux. Elle découpe une chaîne en un tableau en utilisant la chaîne
+fournie comme argument pour déterminer à quel endroit opérer les divisions
+en paragraphes.
 
-> var words = "Cities of the Interior";
+> var words = "Les villes de l'arrière-pays";
 > show(words.split(" "));
 
-Thus, cutting on newlines (|"\n"|), can be used to split an e-mail
-into paragraphs.
+Ainsi, découper avec des caractères saut de ligne (|"\n"|) est une méthode
+utilisable pour diviser un e-mail en paragraphes.
 
 ***
 
-|split| and |join| are not precisely each other's inverse.
-|string.split(x).join(x)| always produces the original value, but
-|array.join(x).split(x)| does not. Can you give an example of an array
-where |.join(" ").split(" ")| produces a different value?
+|split| et |join| ne sont pas exactement l'inverse l'une de
+l'autre. |string.split(x).join(x)| produit toujours la valeur originale,
+mais pas  |array.join(x).split(x)|. Pouvez-vous donner un exemple de tableau
+dans  lequel |.join(" ").split(" ")| produit une valeur différente ?
 
 ///
 
@@ -2554,37 +2576,38 @@ where |.join(" ").split(" ")| produces a different value?
 
 ---
 
-Paragraphs that do not start with either "born" or "died" can be
-ignored by the program. How do we test whether a string starts with a
-certain word? The method _|charAt|_ can be used to get a specific
-character from a string. |x.charAt(0)| gives the first character, |1|
-is the second one, and so on. One way to check whether a string starts
-with "born" is:
+Les paragraphes qui ne commencent ni par « Nés le » ni par
+« Décès le » peuvent être ignorés par le programme. Comment peut-on
+tester si une chaîne commence par un mot particulier ? On peut utiliser
+la méthode _|charAt|_ pour obtenir un caractère particulier dans une chaîne.
+|x.charAt(0)| donne le premier caractère, |1| est le deuxième et ainsi de
+suite. Voici une façon de vérifier si une chaîne commence par « Nés
+le» :
 
-> var paragraph = "born 15-11-2003 (mother Spot): White Fang";
-> show(paragraph.charAt(0) == "b" && paragraph.charAt(1) == "o" &&
->      paragraph.charAt(2) == "r" && paragraph.charAt(3) == "n");
+> var paragraphe = "Nés le  15/11/2003 (mère Spot) : Croc Blanc";
+> show(paragraphe.charAt(0) == "N" && paragraphe.charAt(1) == "é" &&
+>      paragraphe.charAt(2) == "s" && paragraphe.charAt(3) == " " &&
+>      paragraphe.charAt(4) == "l" && paragraphe.charAt(5) == "e") ;
 
-But that gets a bit clumsy -- imagine checking for a word of ten
-characters. There is something to be learned here though: when a line
-gets ridiculously long, it can be spread over multiple lines. The
-result can be made easier to read by lining up the start of the new
-line with the first element on the original line that plays a similar
-role.
+Mais cela devient un peu pénible -- imaginez que vous devez vérifier la
+présence d'un mot de 30 caractères. On peut cependant en tirer une leçon
+utile : si une ligne est démesurément longue, on peut l'étendre sur
+plusieurs lignes. Le résultat peut être plus facile à lire en alignant
+le début d'une nouvelle ligne avec la ligne originale jouant le même rôle
 
-Strings also have a method called _|slice|_. It copies out a piece of
-the string, starting from the character at the position given by the
-first argument, and ending before (not including) the character at the
-position given by the second one. This allows the check to be written
-in a shorter way.
+Les chaînes possèdent également une méthode nommée _|slice|_. Elle permet
+de copier un morceau de la chaîne de caractères, en commençant par le
+caractère à la position donnée par le premier argument, et se terminant
+avant le caractère (non inclus) à la position donnée par le second
+argument. Cela permet de vérifier une chaîne de caractères en peu de lignes.
 
-> show(paragraph.slice(0, 4) == "born");
+> show(paragraphe.slice(0, 12) == "Nés le");
 
 ***
 
-Write a function called |startsWith| that takes two arguments, both
-strings. It returns |true| when the first argument starts with the
-characters in the second argument, and |false| otherwise.
+Écrivez une fonction nommée |startWith| qui prend deux arguments, tous les
+deux des chaînes de caractères. Elle renvoie |true| quand le premier argument
+commence avec les caractères du second arguments, sinon elle renvoie |false|.
 
 ///
 
@@ -2596,54 +2619,57 @@ characters in the second argument, and |false| otherwise.
 
 ---
 
-What happens when |charAt| or |slice| are used to take a piece of a
-string that does not exist? Will the |startsWith| I showed still work
-when the pattern is longer than the string it is matched against?
+Que se passe-t-il quand |charAt| ou |slice| sont utilisés pour prendre un
+fragment de chaîne qui n'existe pas ? Est-ce que le |startsWith| que j'ai
+montré va encore fonctionner si le la chaîne recherchée est plus longue
+que celle dans laquelle on cherche ?
 
 > show("Pip".charAt(250));
 > show("Nop".slice(1, 10));
 
-|charAt| will return |""| when there is no character at the given
-position, and |slice| will simply leave out the part of the new
-string that does not exist.
+|charAt| va renvoyer |""| s'il n'existe pas de caractère à la position
+donnée et |slice| va tout simplement laisser tomber la partie de la nouvelle
+chaîne qui n'existe pas.
 
-So yes, that version of |startsWith| works. When |startsWith("Idiots",
-"Most honoured colleagues")| is called, the call to |slice| will,
-because |string| does not have enough characters, always return a
-string that is shorter than |pattern|. Because of that, the comparison
-with |==| will return |false|, which is correct.
+Cela confirme que cette version de |startWith| fonctionne. Quand la fonction
+|startsWith("Idiots","Mes très chers collègues")| est appelée, l'appel
+à |slice| renverra toujours une chaîne plus courte que |pattern|, parce
+que |string| ne comporte pas assez de caractères. C'est pour cette raison
+que la comparaison avec |==| renverra |false|, ce qui est correct.
 
-It helps to always take a moment to consider abnormal (but valid)
-inputs for a program. These are usually called _corner case_s, and it
-is very common for programs that work perfectly on all the 'normal'
-inputs to screw up on corner cases.
+C'est une bonne idée de toujours consacrer un moment pour prendre en
+considération les entrées aberrantes (mais valides) dans un programme. On
+les appelle en général des cas imprévus et il est très fréquent qu'un
+programme qui tourne à merveille avec toutes les entrées « normales »
+se plante complètement avec des cas imprévus.
 
 ---
 
-The only part of the cat-problem that is still unsolved is the
-extraction of names from a paragraph. The algorithm was this:
+La seule partie de notre problème de chats qui ne soit pas encore résolue
+est l'extraction des noms d'un paragraphe. L'algorithme était le suivant :
 
- 1. Find the colon in the paragraph.
- 2. Take the part after this colon.
- 3. Split this part into separate names by looking for commas.
+ 1. Trouver le deux-points (:) dans le paragraphe.
+ 2. Prendre la partie après ce signe.
+ 3. Dans cette partie, séparer les noms en cherchant les virgules.
 
-This has to happen both for paragraphs that start with |"died"|, and
-paragraphs that start with |"born"|. It would be a good idea to put it
-into a function, so that the two pieces of code that handle these
-different kinds of paragraphs can both use it.
+Il faut reproduire cela à la fois pour les paragraphes qui commencent par
+|Décés le| et ceux qui commencent par |Nés le|. Ce serait une bonne idée
+de le mettre dans une fonction, de sorte que les deux parties de code qui
+gèrent les différentes sortes de paragraphes puissent l'utiliser.
 
 ***
 
-Can you write a function |catNames| that takes a paragraph as an
-argument and returns an array of names?
+Savez-vous écrire une fonction |nomChats| qui prenne un paragraphe comme
+argument et renvoie un tableau de noms ?
 
-Strings have an _|indexOf|_ method that can be used to find the
-(first) position of a character or sub-string within that string. Also,
-when |slice| is given only one argument, it will return the part of
-the string from the given position all the way to the end.
+Les chaînes ont une méthode _|indexOf|_que l'on peut utiliser pour trouver la
+(première) position d'un caractère ou une sous-chaîne à l'intérieur d'une
+chaîne. De même si on ne donne qu'un seul argument à |slice|, elle renverra
+la partie de la chaîne depuis la première position jusqu'à son extrémité.
 
-It can be helpful to use the console to 'explore' functions. For
-example, type |"foo: bar".indexOf(":")| and see what you get.
+Il peut être pratique d'utiliser la console pour « explorer » les
+fonctions. Par exemple, tapez |"foo: bar".indexOf(":")| et voyez ce qui
+se passe.
 
 ///
 
@@ -2651,24 +2677,24 @@ example, type |"foo: bar".indexOf(":")| and see what you get.
 >   var colon = paragraph.indexOf(":");
 >   return paragraph.slice(colon + 2).split(", ");
 > }
-> 
-> show(catNames("born 20/09/2004 (mother Yellow Bess): " +
+>
+> show(catNames("Nés le 20/09/2004 (de mère Yellow Bess): " +
 >               "Doctor Hobbles the 2nd, Noog"));
 
-The tricky part, which the original description of the algorithm
-ignored, is dealing with spaces after the colon and the commas.
-The |+ 2| used when slicing the string is needed to leave out the
-colon itself and the space after it. The argument to |split| contains
-both a comma and a space, because that is what the names are really
-separated by, rather than just a comma.
+La partie la plus délicate qui est ignorée par la description originale
+de l'algorithme, est le traitement des espaces après les deux-points
+et les virgules. Le |+2|, utilisé pour le découpage de chaînes, est
+nécessaire pour laisser de côté le deux-points lui-même et l'espace qui
+le suit. L'argument pour |split| contient à la fois une virgule et un espace,
+parce que ce sont les séparateurs de noms, plutôt que par une simple virgule.
 
-This function does not do any checking for problems. We assume, in
-this case, that the input is always correct.
+Cette fonction n'effectue aucune vérification de problèmes éventuels. Nous
+faisons comme si, dans ce cas précis, l'entrée était toujours correcte.
 
 ---
 
-All that remains now is putting the pieces together. One way to do
-that looks like this:
+Tout ce qui nous reste à faire maintenant, c'est de rassembler les pièces
+du puzzle. Voici une façon de s'y prendre :
 
 > var mailArchive = retrieveMails();
 > var livingCats = {"Spot": true};
@@ -2678,12 +2704,12 @@ that looks like this:
 >   for (var paragraph = 0;
 >        paragraph < paragraphs.length;
 >        paragraph++) {
->     if (startsWith(paragraphs[paragraph], "born")) {
+>     if (startsWith(paragraphs[paragraph], "Nés le")) {
 >       var names = catNames(paragraphs[paragraph]);
 >       for (var name = 0; name < names.length; name++)
 >         livingCats[names[name]] = true;
 >     }
->     else if (startsWith(paragraphs[paragraph], "died")) {
+>     else if (startsWith(paragraphs[paragraph], "Décès le")) {
 >       var names = catNames(paragraphs[paragraph]);
 >       for (var name = 0; name < names.length; name++)
 >         delete livingCats[names[name]];
@@ -2693,35 +2719,37 @@ that looks like this:
 >
 > show(livingCats);
 
-That is quite a big dense chunk of code. We'll look into making it a
-bit lighter in a moment. But first let us look at our results. We know
-how to check whether a specific cat survives:
+Voilà un bloc de code assez copieux et dense. Nous allons voir tout de
+suite comment l'alléger un peu. Mais d'abord jetons un coup d'œil aux
+résultats. Nous savons comment vérifier si un chat particulier a survécu :
 
 > if ("Spot" in livingCats)
->   print("Spot lives!");
+>   print("Spot est vivant !");
 > else
->   print("Good old Spot, may she rest in peace.");
+>   print("Ce bon vieux Spot, qu'il repose en paix.");
 
-But how do we list all the cats that are alive? The _|in|_ keyword has
-a somewhat different meaning when it is used together with |for|:
+Mais comment allons-nous faire pour dresser la liste de tous les chats
+vivants ? Le mot-clé _|in|_ a une signification légèrement différente
+lorsqu'il est utilisé avec |for| :
 
 > for (var cat in livingCats)
 >   print(cat);
 
-A loop like that will go over the names of the properties in an
-object, which allows us to enumerate all the names in our set.
+Une boucle comme celle-là va parcourir les noms des propriétés d'un objet,
+ce qui nous permettra d'énumérer tous les noms de notre ensemble.
 
 ---
 
-Some pieces of code look like an impenetrable jungle. The example
-solution to the cat problem suffers from this. One way to make some
-light shine through it is to just add some strategic blank lines. This
-makes it look better, but doesn't really solve the problem.
+Certaines parties de code ressemble à une jungle impénétrable. L'exemple
+de solution pour le problème des chats souffre de ce défaut. Une façon
+de ménager des clairières consiste tout simplement à ajouter des lignes
+vides. Cela améliore la lisibilité, mais ne résout pas véritablement
+le problème.
 
-What is needed here is to break the code up. We already wrote two
-helper functions, |startsWith| and |catNames|, which both take care of
-a small, understandable part of the problem. Let us continue doing
-this.
+Ce qu'il nous faut ici, c'est casser le code. Nous avons déjà écrit deux
+fonctions d'aide, |startsWith| et |catNames|, qui toutes deux résolvent
+une petite partie du problème de façon compréhensible. Continuons sur
+cette lancée.
 
 > function addToSet(set, values) {
 >   for (var i = 0; i < values.length; i++)
@@ -2733,9 +2761,9 @@ this.
 >     delete set[values[i]];
 > }
 
-These two functions take care of the adding and removing of names from
-the set. That already cuts out the two most inner loops from the
-solution:
+Ces deux fonctions traitent de l'ajout et de la suppression des noms dans
+l'ensemble. Ce qui supprime déjà les deux plus importantes boucles internes
+de la solution :
 
 > var livingCats = {Spot: true};
 >
@@ -2744,45 +2772,46 @@ solution:
 >   for (var paragraph = 0;
 >        paragraph < paragraphs.length;
 >        paragraph++) {
->     if (startsWith(paragraphs[paragraph], "born"))
+>     if (startsWith(paragraphs[paragraph], "Nés le"))
 >       addToSet(livingCats, catNames(paragraphs[paragraph]));
->     else if (startsWith(paragraphs[paragraph], "died"))
+>     else if (startsWith(paragraphs[paragraph], "Décès le"))
 >       removeFromSet(livingCats, catNames(paragraphs[paragraph]));
 >   }
 > }
 
-Quite an improvement, if I may say so myself.
+C'est un sacré progrès, si je peux me permettre.
+Pourquoi |addToSet| et |removeFromSet| prennent-ils l'ensemble comme
+argument ? Ils pourraient utiliser la variable |livingCats| directement,
+s'ils le voulaient. La raison, c'est que de cette façon elles ne sont pas
+totalement liées à notre problème. Si |addToSet| changeait directement
+|livingCats|, il faudrait l'appeler |addCatsToCatSet| (ajouter des chats à
+l'ensemble des chats) ou quelque chose comme ça. Tel que nous l'utilisons,
+c'est un outil utile pour des cas plus généraux.
 
-Why do |addToSet| and |removeFromSet| take the set as an argument?
-They could use the variable |livingCats| directly, if they wanted to.
-The reason is that this way they are not completely tied to our
-current problem. If |addToSet| directly changed |livingCats|, it would
-have to be called |addCatsToCatSet|, or something similar. The way it
-is now, it is a more generally useful tool.
+Même si nous ne devions jamais utiliser ces fonctions pour quoi que ce
+soit d'autre, ce qui est très probable, il est utile de les décrire de
+cette façon. Car elles se « suffisent à elles-même », on peut les
+lire et les comprendre, sans avoir besoin de connaître une variable externe
+nommée |livingCats|.
 
-Even if we are never going to use these functions for anything else,
-which is quite probable, it is useful to write them like this. Because
-they are 'self sufficient', they can be read and understood on their
-own, without needing to know about some external variable called
-|livingCats|.
-
-The functions are not pure: They change the object passed as their
-|set| argument. This makes them slightly trickier than real pure
-functions, but still a lot less confusing than functions that run amok
-and change any value or variable they please.
+Les fonctions ne sont pas pures : elles modifient l'objet qui a été passé
+en premier argument (|set|). Cela rend les choses un peu plus délicates
+qu'avec des fonctions pures mais c'est déjà beaucoup moins perturbant que
+des fonctions qui perdent les pédales et modifient les valeurs de variables
+comme ça leur chante.
 
 ---
 
-We continue breaking the algorithm into pieces:
+Nous continuons à découper l'algorithme en petites unités :
 
 > function findLivingCats() {
 >   var mailArchive = retrieveMails();
 >   var livingCats = {"Spot": true};
 >
 >   function handleParagraph(paragraph) {
->     if (startsWith(paragraph, "born"))
+>     if (startsWith(paragraph, "Nés le"))
 >       addToSet(livingCats, catNames(paragraph));
->     else if (startsWith(paragraph, "died"))
+>     else if (startsWith(paragraph, "Décès le"))
 >       removeFromSet(livingCats, catNames(paragraph));
 >   }
 >
@@ -2797,133 +2826,141 @@ We continue breaking the algorithm into pieces:
 > var howMany = 0;
 > for (var cat in findLivingCats())
 >   howMany++;
-> print("There are ", howMany, " cats.");
+> print("Il y a ", howMany, " chats.");
 
-The whole algorithm is now encapsulated by a function. This means that
-it does not leave a mess after it runs: |livingCats| is now a local
-variable in the function, instead of a top-level one, so it only
-exists while the function runs. The code that needs this set can call
-|findLivingCats| and use the value it returns.
+La totalité de l'algoritme est encapsulée dans une fonction. Cela signifie
+qu'elle ne laisse rien traîner en vrac derrière elle après exécution :
+|livingCats| est maintenant une variable locale dans la fonction et non plus
+une variable globale, si bien qu'elle n'existe que pendant que la fonction
+s'exécute. Le code qui a besoin de cet ensemble peut appeler |findLivingCats|
+et utiliser la valeur qu'il renvoie.
 
-It seemed to me that making |handleParagraph| a separate function also
-cleared things up. But this one is so closely tied to the
-cat-algorithm that it is meaningless in any other situation. On top of
-that, it needs access to the |livingCats| variable. Thus, it is a
-perfect candidate to be a function-inside-a-function. When it lives
-inside |findLivingCats|, it is clear that it is only relevant there,
-and it has access to the variables of its parent function.
+Il me semble que faire de |handleParagraph| une fonction distincte peut
+aussi clarifier les choses. Mais celle-ci est si étroitement liée à
+l'algorithme-des-chats qu'elle n'aurait aucun sens dans une autre situation. De
+plus, elle a besoin d'accéder à la variable |livingCats|. C'est donc
+une candidate parfaite pour devenir une fonction à l'intérieur d'une
+fonction. Quand elle existe à l'intérieur de |findLivingCats|, il est
+clair qu'elle n'est pertinente que là et qu'elle a accès aux variables de
+sa fonction parente.
 
-This solution is actually *bigger* than the previous one. Still, it is
-tidier and I hope you'll agree that it is easier to read.
+Cette solution est en fait plus *grande* que la précédente. Mais elle est
+plus propre et j'espère que vous reconnaîtrez qu'elle est plus lisible.
 
 ---
 
-The program still ignores a lot of the information that is contained
-in the e-mails. There are birth-dates, dates of death, and the names
-of mothers in there.
+Le programme ignore encore un grand nombre d'informations qui sont incluses
+dans les mails. Il s'agit des dates de naissance, de mort et des noms
+des mères.
 
-To start with the dates: What would be a good way to store a date? We
-could make an object with three properties, |year|, |month|, and
-|day|, and store numbers in them.
+Commençons avec les dates : quelle pourrait être la meilleure façon
+de stocker une date ? Nous pourrions créer un objet avec ces trois
+propriétés,  |year|, |month|, et |day| et stocker ensuite des nombres
+à l'intérieur.
 
 > var when = {year: 1980, month: 2, day: 1};
 
-But JavaScript already provides a kind of object for this purpose.
-Such an object can be created by using the keyword _|new|_:
+Mais JavaScript fournit déjà une sorte d'objet pour cela.
+Un tel objet peut être créé en utilisant le mot-clé _|new|_:
 
 > var when = new Date(1980, 1, 1);
 > show(when);
 
-Just like the notation with braces and colons we have already
-seen, |new| is a way to create object values. Instead of specifying
-all the property names and values, a function is used to build up the
-object. This makes it possible to define a kind of standard procedure
-for creating objects. Functions like this are called _constructor_s,
-and in \\coo we will see how to write them.
+Tout comme la notation avec les accolades et les deux-points que nous avons
+déjà vue, |new| est une façon de créer des valeurs d'un objet. Au lieu
+de préciser tous les noms de propriétés et les valeurs, une fonction est
+utilisée pour créer l'objet. Cela rend possible de définir une sorte de
+procédure standard pour créer des objets. Les fonctions comme celle-là
+s'appellent _constructeur_s et nous verrons comment les écrire dans \\coo.
 
-The _|Date|_ constructor can be used in different ways.
+Le constructeur  _|Date|_ peut être utilisé de différentes manières
 
 > show(new Date());
 > show(new Date(1980, 1, 1));
 > show(new Date(2007, 2, 30, 8, 20, 30));
 
-As you can see, these objects can store a time of day as well as a
-date. When not given any arguments, an object representing the current
-time and date is created. Arguments can be given to ask for a specific
-date and time. The order of the arguments is year, month, day, hour,
-minute, second, milliseconds. These last four are optional, they
-become 0 when not given.
+Comme vous pouvez le voir, ces objets peuvent enregistrer l'heure d'un
+jour aussi bien qu'une date. Quand aucun argument n'est précisé, un objet
+réprésentant l'heure et la date actuelles est créé. Des arguments peuvent
+être précisés pour stocker une heure et une date précises. L'ordre des
+arguments est l'année, le mois, le jour, l'heure, la minute, la seconde puis
+la milliseconde. Les quatre derniers arguments sont optionnels et définis
+à 0 s'il ne sont pas précisés.
 
-The month numbers these objects use go from 0 to 11, which can be
-confusing. Especially since day numbers *do* start from 1.
-
----
-
-The content of a |Date| object can be inspected with a number of
-|get...| methods.
-
-> var today = new Date();
-> print("Year: ", today.getFullYear(), ", month: ",
->       today.getMonth(), ", day: ", today.getDate());
-> print("Hour: ", today.getHours(), ", minutes: ",
->       today.getMinutes(), ", seconds: ", today.getSeconds());
-> print("Day of week: ", today.getDay());
-
-All of these, except for |getDay|, also have a |set...| variant that
-can be used to change the value of the date object.
-
-Inside the object, a date is represented by the amount of milliseconds
-it is away from January 1st 1970. You can imagine this is quite a
-large number.
-
-> var today = new Date();
-> show(today.getTime());
-
-A very useful thing to do with dates is comparing them.
-
-> var wallFall = new Date(1989, 10, 9);
-> var gulfWarOne = new Date(1990, 6, 2);
-> show(wallFall < gulfWarOne);
-> show(wallFall == wallFall);
-> // but
-> show(wallFall == new Date(1989, 10, 9));
-
-Comparing dates with |<|, |>|, |<=|, and |>=| does exactly what you
-would expect. When a date object is compared to itself with |==| the
-result is |true|, which is also good. But when _|==|_ is used to
-compare a date object to a different, equal date object, we get
-|false|. Huh?
-
-As mentioned earlier, |==| will return |false| when comparing two
-different objects, even if they contain the same properties. This is a
-bit clumsy and error-prone here, since one would expect |>=| and |==|
-to behave in a more or less similar way. Testing whether two dates are
-equal can be done like this:
-
-> var wallFall1 = new Date(1989, 10, 9),
-      wallFall2 = new Date(1989, 10, 9);
-> show(wallFall1.getTime() == wallFall2.getTime());
+Pour décrire les mois, on utilise la numérotation de 0 à 11, qui peut
+provoquer une confusion. Surtout que les nombres définissant les jours
+commencent eux à 1.
 
 ---
 
-In addition to a date and time, |Date| objects also contain
-information about a _timezone_. When it is one o'clock in Amsterdam,
-it can, depending on the time of year, be noon in London, and seven in
-the morning in New York. Such times can only be compared when you take
-their time zones into account. The _|getTimezoneOffset|_ function of a
-|Date| can be used to find out how many minutes it differs from GMT
-(Greenwich Mean Time).
+Le contenu de l'objet |Date|  peut être inspecté avec un nombre de
+méthodes |get…|.
+
+> var today = new Date();
+> print("Année : ", today.getFullYear(), ", mois : ",
+>       today.getMonth(), ", jour : ", today.getDate());
+> print("Heure : ", today.getHours(), ", minutes : ",
+>       today.getMinutes(), ", secondes: ", today.getSeconds());
+> print("Jour de la semaine : ", today.getDay());
+
+Tous ces éléments, expecté la méthode |getDay|, ont une variable |set...|
+qui peut être utilisée pour modifier la valeur de l'objet date.
+
+Dans l'objet, une date est représentée par la somme de millisecondes
+cumulée depuis le 1er Janvier 1970. Vous pouvez imaginer que c'est un nombre
+assez impressionnant.
+
+> var  aujourdhui = new Date();
+> show(aujourdhui.getTile());
+
+Une chose très utile à faire avec les dates, c'est de les comparer.
+
+> var chuteDuMur = new Date(1989, 10, 9);
+> var premiereGuerreDuGolf = new Date (1990, 6, 2);
+> show(chuteDuMur < premiereGuerreDuGolf);
+> show(chuteDuMur == chuteDuMur);
+> // mais
+> show(chuteDuMur == new Date(1989, 10, 9));
+
+Comparer les dates avec |<|, |>|, |<=| et |>=| remplit exactement l'office
+que nous voulons en faire. Quand un objet date est comparé avec lui-même,
+le résultat est |true|, ce qui est bien également. Mais quand _|==|_ est
+utilisé pour comparer un objet date à un autre objet date différent mais
+de même valeur, on obtient |false|. Etrange, non ?
+
+Comme précisé plus tôt, |==| retournera la valeur [false| lors de la
+comparaison de deux éléments différents, même si ces deux éléments
+contiennent les mêmes propriétés. Ceci est un peu maladroit et sujet
+à erreur, puisqu''on s'attendrait à ce que |>=| et |==| aient le même
+comportement. Pour tester si deux dates sont égales, peut être fait de
+cette manière :
+
+> var chuteDuMur1 = new Date(1989, 10, 9),
+chuteduMur2 = new Date(1989, 10 ,9);
+> show(chuteDuMur1.getTime() == chuteDuMur2.getTime());
+
+---
+
+---
+
+Au-delà de la date et l'heure, l'objet |Date| contient aussi des informations
+sur le _fuseau horaire_. Quand il est une heure à Amsterdam, en fonction
+de la période de l'année il peut être midi à Londres et sept heures du
+matin à New York. De telles heures ne peuvent être rapprochées que si vous
+prenez les fuseaux horaires en compte. La fonction _|getTimezoneOffset|_
+d'une |Date| peut être utilisée pour trouver de combien de minutes elle
+s'éloigne du GMT (Heure du méridien de Greenwich)
 
 > var now = new Date();
 > print(now.getTimezoneOffset());
 
 ***
 
-] "died 27/04/2006: Black Leclère"
+] "Décès le 27/04/2006 : Black Leclère"
 
-The date part is always in the exact same place of a paragraph. How
-convenient. Write a function |extractDate| that takes such a paragraph
-as its argument, extracts the date, and returns it as a date object.
+La partie date est toujours exactement à la mëme place du paragraphe. Comme
+c'est pratique. Écrivez une fonction |extractDate| qui prend un tel paragraphe
+pour argument, extrait la date et le renvoit sous la forme d'un objet date.
 
 ///
 
@@ -2935,88 +2972,91 @@ as its argument, extracts the date, and returns it as a date object.
 >                   numberAt(5, 2));
 > }
 >
-> show(extractDate("died 27-04-2006: Black Leclère"));
+> show(extractDate("Décès le 27-04-2006 : Black Leclère"));
 
-It would work without the calls to |Number|, but as mentioned earlier,
-I prefer not to use strings as if they are numbers. The inner function
-was introduced to prevent having to repeat the |Number| and |slice|
-part three times.
+Cela ne marcherait pas sans les appels à |Number|, mais comme je l'ai
+expliqué plus haut, je préfère ne pas utiliser de chaînes comme si elles
+étaient des nombres. La fonction interne a été introduite pour éviter
+d'avoir à répéter trois fois les parties |Number| et |slice|.
 
-Note the |- 1| for the month number. Like most people, Aunt Emily
-counts her months from 1, so we have to adjust the value before giving
-it to the |Date| constructor. (The day number does not have this
-problem, since |Date| objects count days in the usual human way.)
+Notez le |-1| pour le numéro du mois. Comme la plupart des gens, tante Émilie
+compte les mois à partir de 1, nous devons donc ajuster cette valeur avant
+de donner la |Date| au constructeur (le numéro du jour ne relève pas du
+même problème, puisque les objets |Date| compte les jours de la façon
+humaine habituelle).
 
-In \\cregexp we will see a more practical and robust way of extracting
-pieces from strings that have a fixed structure.
-
----
-
-Storing cats will work differently from now on. Instead of just
-putting the value |true| into the set, we store an object with
-information about the cat. When a cat dies, we do not remove it from
-the set, we just add a property |death| to the object to store the
-date on which the creature died.
-
-This means our |addToSet| and |removeFromSet| functions have become
-useless. Something similar is needed, but it must also store
-birth-dates and, later, the mother's name.
-
-> function catRecord(name, birthdate, mother) {
->   return {name: name, birth: birthdate, mother: mother};
-> }
->
-> function addCats(set, names, birthdate, mother) {
->   for (var i = 0; i < names.length; i++)
->     set[names[i]] = catRecord(names[i], birthdate, mother);
-> }
-> function deadCats(set, names, deathdate) {
->   for (var i = 0; i < names.length; i++)
->     set[names[i]].death = deathdate;
-> }
-
-|catRecord| is a separate function for creating these storage objects.
-It might be useful in other situations, such as creating the object
-for Spot. 'Record' is a term often used for objects like this, which
-are used to group a limited number of values.
+Dans le \\cregexp,, nous verrons une façon plus pratique et plus sûre
+d'extraire des parties de chaînes qui ont une structure déterminée.
 
 ---
 
-So let us try to extract the names of the mother cats from the
-paragraphs.
+Stocker des chats est une opération qui va se dérouler différemment
+à partir de maintenant. Au lieu de simplement mettre la valeur |true| sur
+l'ensemble, nous stockons un objet avec les informations sur le chat. Lorsqu'un
+chat meurt, nous ne le supprimons pas de l'ensemble, nous ajoutons simplement
+la propriété |death| à l'objet pour stocker la date à laquelle le pauvre
+animal a trépassé.
 
-] "born 15/11/2003 (mother Spot): White Fang"
+Cela signifie que nos fonctions |addToSet| et |removeFromSet| sont devenues
+inutiles. Quelque chose de comparable est nécessaire, mais il s'agit de
+stocker aussi les dates de naissance et par la suite, les noms des mères.
 
-One way to do this would be...
-
-> function extractMother(paragraph) {
->   var start = paragraph.indexOf("(mother ") + "(mother ".length;
->   var end = paragraph.indexOf(")");
->   return paragraph.slice(start, end);
+> function catRecord(nom, dateAnniversaire, mere) {
+>   return {nom: nom, naissance: dateNaissance, mere: mere};
 > }
 >
-> show(extractMother("born 15/11/2003 (mother Spot): White Fang"));
+> function addCats(set, noms, dateNaissance, mere) {
+>   for (var i = 0; i < noms.length; i++)
+>     set[names[i]] = catRecord(noms[i], dateNaissance, mere);
+> }
+> function deadCats(set, noms, dateDeces) {
+>   for (var i = 0; i < noms.length; i++)
+>     set[names[i]].deces = dateDeces;
+> }
 
-Notice how the start position has to be adjusted for the length of
-|"(mother "|, because |indexOf| returns the position of the start of
-the pattern, not its end.
+|catRecord| est une fonction distincte pour créer ces objets de stockage. Elle
+pourrait être utile dans d'autres situations, telles que la création d'un
+objet pour Spot. « Record » (« enregistrement » en français)
+est le terme qu'on emploie couramment pour des objets de ce type, qui sont
+utilisés pour regrouper un nombre limité de valeurs.
+
+---
+
+Essayons donc maintenant d'extraire les noms des mamans chats qui se trouvent
+dans des paragraphes.
+
+] "né le 15/11/2003 (mère : Spot): Croc Blanc"
+
+Voici un moyen d'obtenir cela…
+
+> function extractMother(paragraphe) {
+>   var start = paragraphe.indexOf("(mère ") + "(mère ".length;
+>   var end = paragraphe.indexOf(")");
+>   return paragraphe.slice(start, end);
+> }
+>
+> show(extractMother("Nés le 15/11/2003 (mère Spot): Croc Blanc"));
+
+Notez comment la position de départ a dû être ajustée à la longueur de
+|"(mère "|, parce que |indexOf| renvoie la position initiale de la chaîne
+et non la finale.
 
 ***
 
-The thing that |extractMother| does can be expressed in a more general
-way. Write a function |between| that takes three arguments, all of
-which are strings. It will return the part of the first argument that
-occurs between the patterns given by the second and the third
-arguments.
+Ce que fait |extractMother| peut être exprimé d'une façon plus
+générale. Écrivez une fonction |between| qui prend trois arguments,
+qui seront tous des chaînes. Elle renverra la partie du premier argument
+qui apparaît entre les chaînes fournies par le deuxième et le troisième
+argument.
 
-So |between("born 15/11/2003 (mother Spot): White Fang", "(mother ",
-")")| gives |"Spot"|.
+Ainsi, |between("Nés le 15/11/2003 (mère Spot): Croc Blanc", "(mère ",
+")")|  donne |"Spot"|.
 
-|between("bu ] boo [ bah ] gzz", "[ ", " ]")| returns |"bah"|.
+|between("bu ] boo [ bah ] gzz", "[ ", " ]")| renvoie |"bah"|.
 
-To make that second test work, it can be useful to know that |indexOf|
-can be given a second, optional parameter that specifies at which
-point it should start searching.
+Pour faire marcher ce deuxième test, il peut être utile de savoir qu'on
+peut attribuer à |indexOf| un second paramètre facultatif qui précise à
+partir de quel point doit commencer la recherche.
 
 ///
 
@@ -3029,8 +3069,8 @@ point it should start searching.
 
 ---
 
-Having |between| makes it possible to express extractMother in a
-simpler way:
+Avoir la fonction |between| rend possible l'expression de extractMother de
+façon plus simple :
 
 > function extractMother(paragraph) {
 >   return between(paragraph, "(mother ", ")");
@@ -3038,18 +3078,18 @@ simpler way:
 
 ---
 
-The new, improved cat-algorithm looks like this:
+Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 
 > function findCats() {
 >   var mailArchive = retrieveMails();
 >   var cats = {"Spot": catRecord("Spot", new Date(1997, 2, 5),
->               "unknown")};
+>               "inconnue")};
 >
 >   function handleParagraph(paragraph) {
->     if (startsWith(paragraph, "born"))
+>     if (startsWith(paragraph, "Nés le"))
 >       addCats(cats, catNames(paragraph), extractDate(paragraph),
 >               extractMother(paragraph));
->     else if (startsWith(paragraph, "died"))
+>     else if (startsWith(paragraph, "Décès le"))
 >       deadCats(cats, catNames(paragraph), extractDate(paragraph));
 >   }
 >
@@ -3063,8 +3103,9 @@ The new, improved cat-algorithm looks like this:
 >
 > var catData = findCats();
 
-Having that extra data allows us to finally have a clue about the cats
-aunt Emily talks about. A function like this could be useful:
+Avoir ces données supplémentaires nous permet d'avoir finalement une idée
+plus précise des chats dont parle tante Émilie. Une fonction comme celle-ci
+pourrait être utile :
 
 > function formatDate(date) {
 >   return date.getDate() + "/" + (date.getMonth() + 1) +
@@ -3073,36 +3114,37 @@ aunt Emily talks about. A function like this could be useful:
 >
 > function catInfo(data, name) {
 >   if (!(name in data))
->     return "No cat by the name of " + name + " is known.";
+>     return "Aucun chat s'appelant " + name + " n'a été trouvé.";
 >
 >   var cat = data[name];
->   var message = name + ", born " + formatDate(cat.birth) +
->                 " from mother " + cat.mother;
+>   var message = name + ", né le " + formatDate(cat.birth) +
+>                 " de la mère " + cat.mother;
 >   if ("death" in cat)
->     message += ", died " + formatDate(cat.death);
+>     message += ", mort le " + formatDate(cat.death);
 >   return message + ".";
 > }
 >
-> print(catInfo(catData, "Fat Igor"));
+> print(catInfo(catData, "Igor Le Gros"));
 
-The first |return| statement in |catInfo| is used as an escape hatch.
-If there is no data about the given cat, the rest of the function is
-meaningless, so we immediately return a value, which prevents the rest
-of the code from running.
+La première instruction |return| dans |catInfo| est utilisée comme issue de
+secours. Si aucune donnée n'est fournie sur un chat particulier, le reste
+de la fonction est dépourvu de sens, nous renvoyons donc immédiatement
+une valeur qui empêche le reste du code de s'exécuter.
 
-In the past, certain groups of programmers considered functions that
-contain multiple |return| statements sinful. The idea was that this
-made it hard to see which code was executed and which code was not.
-Other techniques, which will be discussed in \\cerror, have made the
-reasons behind this idea more or less obsolete, but you might still
-occasionally come across someone who will criticise the use of
-'shortcut' return statements.
+Dans le passé, certains groupes de programmeurs considéraient comme
+malsaines les fonctions contenant de multiples instructions |return|. Selon
+eux, cela rendait difficile de voir quel code était exécuté et quel code
+ne l'était pas.
+D'autres techniques, qui seront abordées dans le \\cerror, ont rendu
+cet argument plus ou moins obsolète, mais vous pouvez toujours tomber à
+l'occasion sur quelqu'un qui critiquera l'utilisation de raccourcis avec
+l'instruction |return|.
 
 ***
 
-The |formatDate| function used by |catInfo| does not add a zero before
-the month and the day part when these are only one digit long. Write a
-new version that does this.
+La fonction |formatDate| utilisée par |catInfo| n'ajoute pas de zéro avant
+la partie mois et jour quand ce sont des nombres à un seul chiffre. Écrivez
+une nouvelle version qui fera cela.
 
 ///
 
@@ -3120,8 +3162,8 @@ new version that does this.
 
 ***
 
-Write a function |oldestCat| which, given an object containing cats as
-its argument, returns the name of the oldest living cat.
+Écrivez une fonction |oldestCat| qui, étant donné un objet ayant des
+chats comme arguments, renvoie le nom du plus vieux chat vivant.
 
 ///
 
@@ -3130,7 +3172,7 @@ its argument, returns the name of the oldest living cat.
 >
 >   for (var name in data) {
 >     var cat = data[name];
->     if (!("death" in cat) &&
+>     if (!("deces" in cat) &&
 >         (oldest == null || oldest.birth > cat.birth))
 >       oldest = cat;
 >   }
@@ -3143,43 +3185,45 @@ its argument, returns the name of the oldest living cat.
 >
 > print(oldestCat(catData));
 
-The condition in the |if| statement might seem a little intimidating.
-It can be read as 'only store the current cat in the variable |oldest|
-if it is not dead, and |oldest| is either |null| or a cat that was
-born after the current cat'.
+La condition donnée avec la commande |if| pourrait paraître un peu intimidante.
+On peut la lire comme : «  ne stocker le chat courant dans la variable
+|oldest| que s'il n'est pas mort, et |oldest| est soit |null| soit un chat
+qui est né après le chat en cours ».
 
-Note that this function returns |null| when there are no living cats
-in |data|. What does your solution do in that case?
+Notez que cette fonction renvoie |null| quand il n'existe aucun chat vivant
+dans |data|. Que devient notre solution dans cas ?
 
 ---
 
-Now that we are familiar with arrays, I can show you something
-related. Whenever a function is called, a special variable named
-_|arguments|_ is added to the environment in which the function body
-runs. This variable refers to an object that resembles an array. It
-has a property |0| for the first argument, |1| for the second, and so
-on for every argument the function was given. It also has a _|length|_
-property.
+Maintenant que vous êtes familiarisé avec les tableaux, je peux vous montrer
+quelque chose de lié. Quel que soit le nom d'une fonction, une variable
+spéciale nommée _|arguments|_ est ajoutée à l'environnement dans lequel
+le corps de la fonction tourne. Cette variable se réfère à un objet qui
+ressemble à un tableau. Il a la propriété |0| pour le premier argument,
+|1| pour le second, et ainsi de suite pour chaque argument donné par la
+fonction. Il possède également une propriété _|length|_.
 
-This object is not a real array though, it does not have methods like
-|push|, and it does not automatically update its |length| property
-when you add something to it. Why not, I never really found out, but
-this is something one needs to be aware of.
+Cependant, cet objet n'est pas véritablement un tableau, il ne possède pas
+de méthodes telles que |push| et il ne met pas pas à jour automatiquement sa
+propriété |length| quand vous lui ajoutez quelque chose. Pourquoi n'est-ce
+pas le cas ? Je n'ai jamais vraiment compris l'utilité de tout cela, mais
+c'est quelque chose dont vous devez avoir connaissance.
 
-> function argumentCounter() {
->   print("You gave me ", arguments.length, " arguments.");
+> function compteurArgument() {
+print("Vous m'avez donné", arguments.length, "arguments.");
 > }
-> argumentCounter("Death", "Famine", "Pestilence");
+> compteurArgument("Mort", "Famine", "Fléau");
 
-Some functions can take any number of arguments, like |print| does.
-These typically loop over the values in the |arguments| object to do
-something with them. Others can take optional arguments which, when
-not given by the caller, get some sensible default value.
+Certaines fonctions peuvent prendre un certain nombre d'arguments, comme par
+exemple la fonction |print|. Cette fonction particulière opére une boucle sur
+les valeurs des |arguments| d'un objet pour en faire quelque chose. Les autres
+peuvent prendre des arguments de manière optionnelle qui sont initialisés
+à une valeur par défaut sensée si l'utilisateur ne fournit pas de valeur.
 
-> function add(number, howmuch) {
->   if (arguments.length < 2)
->     howmuch = 1;
->   return number + howmuch;
+> function add(nombre, combien) {
+>    if (arguments.length < 2)
+>      combien = 1;
+>    return nombre + combien ;
 > }
 >
 > show(add(6));
@@ -3187,40 +3231,42 @@ not given by the caller, get some sensible default value.
 
 ***
 
-Extend the |range| function from \\erange to take a second, optional
-argument. If only one argument is given, it behaves as earlier and
-produces a range from 0 to the given number. If two arguments are
-given, the first indicates the start of the range, the second the end.
+Étendez la fonction |serie| de l'\\erange pour prendre un second argument,
+optionnel. Si un seul argument est donné à la fonction, elle se comporte
+comme précédemment et produit une série commençant à 0 jusqu'au nombre
+donné. Si deux arguments sont donnés, le premier indique le début de la
+série, le second la fin.
 
 ///
 
-> function range(start, end) {
+> function serie(debut, fin) {
 >   if (arguments.length < 2) {
->     end = start;
->     start = 0;
+>     fin = debut;
+>     debut = 0;
 >   }
->   var result = [];
->   for (var i = start; i <= end; i++)
->     result.push(i);
->   return result;
+>   var resultat = [];
+>   for (var i = debut; i <= fin; i++)
+>     resultat.push(i);
+>   return resultat;
 > }
 >
-> show(range(4));
-> show(range(2, 4));
+> show(serie(4));
+> show(serie(2, 4));
 
-The optional argument does not work precisely like the one in the
-|add| example above. When it is not given, the first argument takes
-the role of |end|, and |start| becomes |0|.
+L'argument optionnel ne fonctionne pas exactement comme le premier, dans
+l'exemple |add| ci-dessus. Quand il n'est pas précisé, le premier argument
+prend le rôle de |fin| et |debut| devient |0|.
 
 ***
 
-You may remember this line of code from the introduction:
+Vous devez vous rappeler de la ligne de code cité en introduction :
 
-!> print(sum(range(1, 10)));
+!> print(sum(serie(1, 10)));
 
-We have |range| now. All we need to make this line work is a |sum|
-function. This function takes an array of numbers, and returns their
-sum. Write it, it should be easy.
+Nous avons la fonction |range| maintenant. Tout ce que nous avons besoin
+pour faire fonctionner cette ligne est une fonction |sum|. Cette fonction
+prend un tableau de nombre en arguments et retourne leur somme. Écrivez-la,
+ce devrait être simple.
 
 ///
 
@@ -3231,93 +3277,95 @@ sum. Write it, it should be easy.
 >   return total;
 > }
 >
-> print(sum(range(1, 10)));
+> print(sum(serie(1, 10)));
 
 ---
 
-The previous chapter showed the functions |Math.max| and |Math.min|.
-With what you know now, you will notice that these are really the
-properties |max| and |min| of the object stored under the name
-_|Math|_. This is another role that objects can play: A warehouse
-holding a number of related values.
+Le chapitre précédent nous a permis d'étudier les fonctions |Math.max|
+et |Math.min|. Avec ce que vous connaissez maintenant, vous pourrez noter
+que |max| et |min| sont déjà les propriétés d'un objet enregistré sous
+le nom de |Math|. Voici un autre rôle que les objets peuvent jouer :
+celui d'entrepôt pour un grand nombre de valeurs liées.
 
-There are quite a lot of values inside |Math|, if they would all have
-been placed directly into the global environment they would, as it is
-called, pollute it. The more names have been taken, the more likely
-one is to accidentally overwrite the value of some variable. For
-example, it is not a far shot to want to name something |max|.
+Il y a beaucoup de valeurs dans |Math|, si elles avaient été placées
+directement dans l'environnement global,  elles l'auraient, comme on dit,
+pollué. Plus il y a de noms utilisés, plus il est probable d'écraser par
+accident la valeur d'une variable. Par exemple, il n'est pas incongru de
+vouloir nommer une variable |max|.
 
-Most languages will stop you, or at least warn you, when you are
-defining a variable with a name that is already taken. Not JavaScript.
+La plupart des langages vous arrêteront, ou du moins vous alerteront,
+quand vous définirez une variable avec un nom déjà utilisé par
+l'environnement. Pas JavaScript.
 
-In any case, one can find a whole outfit of mathematical functions and
-constants inside |Math|. All the trigonometric functions are there --
-|cos|, |sin|, |tan|, |acos|, |asin|, |atan|. π and e, which are
-written with all capital letters (|PI| and |E|), which was, at one
-time, a fashionable way to indicate something is a constant. |pow| is
-a good replacement for the |power| functions we have been writing, it
-also accepts negative and fractional exponents. |sqrt| takes square
-roots. |max| and |min| can give the maximum or minimum of two values.
-@_|Math.round|_@_|Math.floor|_@_|Math.ceil|_|round|, |floor|, and
-|ceil| will round numbers to the closest whole number, the whole
-number below it, and the whole number above it respectively.
+Dans tous les cas, on peut trouver tout un ensemble de fonctions mathématiques
+et de constantes dans |Math|. Toutes les fonctions trigonométriques sont
+présentes : |cos|, |sin|, |tan|, |acos|, |asin| et |atan|. π et e, qui sont
+écrits en capitales (|PI| et |E|), ce qui était à une époque une façon
+très à la mode d'indiquer que quelque chose est une constante. |pow| est un
+bon moyen de substitution des fonctions |puissance| que nous avons écrites,
+il accepte les exposants négatifs et fractionnels. |sqrt| extrait la racine
+carrée d'un nombre. |max| et |min| peuvent donner le maximum ou le minimum de
+deux valeurs. @_|Math.round|_@_|Math.floor|_@_|Math.ceil|_|round|, |floor|,
+et |ceil| vont respectivement arrondir un nombre à l'entier le plus proche,
+à l'entier inférieur et supérieur le plus proche.
 
-There are a number of other values in |Math|, but this text is an
-introduction, not a _reference_. References are what you look at when
-you suspect something exists in the language, but need to find out
-what it is called or how it works exactly. Unfortunately, there is no
-one comprehensive complete reference for JavaScript. This is mostly
-because its current form is the result of a chaotic process of
-different browsers adding different extensions at different times. The
-ECMA standard document that was mentioned in the introduction provides
-a solid documentation of the basic language, but is more or less
-unreadable. For things like the |Math| object and other elementary
-functionality, a rather good reference can be found [here |
+Il existe un grand nombre d'autres valeurs dans |Math|, mais ce texte est
+une introduction, pas une _référence_. Les références sont ce que vous
+consultez lorsque vous soupçonnez qu'il existe quelque chose dans un langage,
+mais avez besoin de savoir comment ça s'appelle ou comment ça marche au
+juste. Malheureusement, il n'existe aucune référence totalement exhaustive
+pour le JavaScript. C'est essentiellement parce que sa forme courante est la
+résultante d'un processus chaotique pendant lequel différents navigateurs
+lui ont ajouté diverses extensions à différentes périodes. Le document
+standard ECMA, mentionné dans l'introduction, fournit une solide documentation
+du langage de base, mais il est plus ou moins lisible. Pour les choses comme
+l'objet |Math| et autres fonctions élémentaires, on peut trouver une bonne
+source de référence [ici
 http://www.webreference.com/javascript/reference/core_ref/contents.html].
-The old documentation from Netscape, which can still be found at
-[Sun's website | http://download.oracle.com/docs/cd/E19957-01/816-6408-10/], can also be
-helpful, but is outdated and not entirely correct anymore.
+L'ancienne documentation de Netscape, que l'on peut encore trouver sur le
+[site de Sun | http://docs.sun.com/source/816-6408-10], peut encore être
+utile, mais elle est dépassée et n'est plus complètement correcte.
+[NdT] Le site de [Mozilla dédié aux
+développeurs|https://developer.mozilla.org/en/JavaScript] regroupe de
+nombreuses informations à jour.
 
 ---
 
-Maybe you already thought of a way to find out what is available in
-the |Math| object:
+Vous avez peut-être déjà pensé à un moyen de découvrir ce qui est
+disponible avec l'objet |Math| :
 
 > for (var name in Math)
 >   print(name);
 
-But alas, nothing appears. Similarly, when you do this:
+Mais hélas, rien n'apparaît. De même, quand vous faites ceci :
 
 > for (var name in ["Huey", "Dewey", "Loui"])
 >   print(name);
 
-You only see |0|, |1|, and |2|, not |length|, or |push|, or |join|,
-which are definitely also in there. Apparently, some properties of
-objects are hidden@_hidden properties_. There is a good reason for
-this: All objects have a few methods, for example _|toString|_, which
-converts the object into some kind of relevant string, and you do not
-want to see those when you are, for example, looking for the cats that
-you stored in the object.
+Vous ne voyez que |0|, |1|, et |2|, pas |length|, ni |push|, ou |join|,
+qui s'y trouvent pourtant bel et bien. Apparemment, certaines propriétés
+des objets sont cachées@_propriétés cachées_. Il y a une bonne raison à
+ça : tous les objets ont quelques méthodes, par exemple  _|toString|_
+qui convertit l'objet en une sorte de chaîne pertinente, mais vous ne
+souhaiterez sûrement pas les voir quand vous êtes par exemple, à la
+recherche des chats que vous avez stockés dans l'objet.
 
-Why the properties of |Math| are hidden is unclear to me. Someone
-probably wanted it to be a mysterious kind of object.
+Pourquoi les propriétés de |Math| sont-elles cachées ? Ce n'est pas
+très clair pour moi. Il y a sûrement quelqu'un qui a voulu en faire un
+type d'objet mystérieux.
 
-All properties your programs add to objects are visible. There is no
-way to make them hidden, which is unfortunate because, as we will see
-in \\coo, it would be nice to be able to add methods to objects
-without having them show up in our |for|/|in| loops.
+Toutes les propriétés que vos programmes ajoutent aux objets sont
+visibles. Il n'y a pas moyen de les cacher, ce qui est regrettable parce que,
+comme vous le verrez dans le \\coo, il serait sympa d'ajouter des méthodes
+aux objets sans avoir à les rendre visibles dans des boucles |for|/|in|.
 
 ---
 
-@_read-only properties_Some properties are read-only, you can get
-their value but not change it. For example, the properties of a string
-value are all read-only.
+@_propriétés en lecture seule_Certaines propriétés sont en lecture seule,
+vous pouvez récupérer leur valeur mais pas la modifier. Par exemple,
+les propriétés d'une valeur de chaîne sont toutes en lecture seule.
 
-Other properties can be 'active'. Changing them
-causes *things* to happen. For example, lowering the length of an
-array causes excess elements to be discarded:
-
-> var array = ["Heaven", "Earth", "Man"];
+> var array = ["Ciel", "Terre", "Homme"];
 > array.length = 2;
 > show(array);
 
