@@ -169,7 +169,7 @@ function initEnvironment(win, output, callback) {
     htmlTable.push(String(html));
     var result = window.open("view.html?id=" + (htmlTable.length - 1));
     if (!result)
-      alert("There seems to be a popup-blocker stopping this page from opening new windows. Try turning it off first.");
+      alert("Il semble qu'un bloqueur de fenêtres popup empêche cette page d'ouvrir de nouvelles fenêtres. Essayez d'abord de le désactiver.");
     return result;
   };
 
@@ -208,7 +208,7 @@ function makeFrame(place, init) {
 
   var fdoc = frame.contentWindow.document;
   fdoc.open();
-  fdoc.write("<html><head><title>Default</title></head><body style=\"border-width: 0\"></body></html>");
+  fdoc.write("<html><head><title>Par défault</title></head><body style=\"border-width: 0\"></body></html>");
   fdoc.close();
 
   if (init) {
@@ -226,7 +226,7 @@ function checkAppVersion(minimum){
   return parts.length > 0 && Number(parts[0]) >= minimum;
 }
 var useJSEditor = true;
-// No CodeMirror for iOS
+// Pas de CodeMirror pour iOS
 if (/AppleWebKit/.test(navigator.userAgent) && /iP[oa]d|iPhone/.test(navigator.userAgent)) useJSEditor = false;
 
 function Buffer(name, content, where){
@@ -572,7 +572,7 @@ function Console(param) {
   function runCode(code, showResult) {
     if (self.env && !self.env.__ENV) {
       self.env = baseEnv;
-      self.env.print("Lost attached window, detaching.");
+      self.env.print("La fenêtre associée a été perdue, dissociation.");
     }
 
     if (streaming || !self.env) {
@@ -684,7 +684,7 @@ function Console(param) {
       if (self.env == win) {
         var title = self.env.document.title;
         setEnvironment(baseEnv);
-        self.env.print("Detaching from window '", title || "[unnamed]", "'.");
+        self.env.print("Dissocié de la fenêtre '", title || "[sans nom]", "'.");
       }
     }
     function attach() {
@@ -694,7 +694,7 @@ function Console(param) {
       var unload = connect(win, "onunload", detach);
       connect(window, "onunload", function(){disconnect(unload);});
       setEnvironment(win);
-      self.env.print("Attaching to window '", win.document.title || "[unnamed]", "'.");
+      self.env.print("Associé à la fenêtre '", win.document.title || "[sans nom]", "'.");
     }
 
     if (isAccessibleWindow(win)) {
@@ -706,7 +706,7 @@ function Console(param) {
         attach();
     }
     else {
-      self.env.print("Not an accessible window.");
+      self.env.print("Ce n'est pas une fenêtre accessible.");
     }
   }
 
@@ -1035,8 +1035,8 @@ function initCodeList() {
   var div = $("code");
   forEach(keys(code), function(ch) {
     var expand = SPAN({style: "cursor: pointer; font-size: 80%;"}, "\u25b6"),
-        runAll = SPAN({style: "cursor: pointer; font-size: 70%; font-weight: normal;"}, "[run all]");
-    div.appendChild(H1(null, "Chapter " + ch + " ", runAll, " ", expand));
+        runAll = SPAN({style: "cursor: pointer; font-size: 70%; font-weight: normal;"}, "[exécuter tout]");
+    div.appendChild(H1(null, "Chapitre " + ch + " ", runAll, " ", expand));
     var block = div.appendChild(DIV({"class": "chapterblock", style: "display: none;"}));
     connect(expand, "onclick", function() {
       if (expand.firstChild.nodeValue == "\u25b6") { // expand
