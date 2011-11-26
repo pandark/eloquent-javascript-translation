@@ -6724,9 +6724,9 @@ dictionnaire suivant sera utile :
 >    "e":  new Point( 1,  0),
 >    "se": new Point( 1,  1),
 >    "s":  new Point( 0,  1),
->    "sw": new Point(-1,  1),
->    "w":  new Point(-1,  0),
->    "nw": new Point(-1, -1)});
+>    "so": new Point(-1,  1),
+>    "o":  new Point(-1,  0),
+>    "no": new Point(-1, -1)});
 >
 > show(new Point(4, 4).ajoute(directions.lookup("se")));
 
@@ -7163,7 +7163,7 @@ son caractère dans |typesDeCreature|:
 > }
 > InsecteaRebond.prototype.agit = function(alentours) {
 >   if (alentours[this.direction] != " ")
->     this.direction = (this.direction == "ne" ? "sw" : "ne");
+>     this.direction = (this.direction == "ne" ? "so" : "ne");
 >   return {type: "déplacement", direction: this.direction};
 > };
 > InsecteaRebond.prototype.caractere = "%";
