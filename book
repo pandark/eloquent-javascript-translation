@@ -2601,7 +2601,7 @@ caractère à la position donnée par le premier argument, et se terminant
 avant le caractère (non inclus) à la position donnée par le second
 argument. Cela permet de vérifier une chaîne de caractères en peu de lignes.
 
-> show(paragraphe.slice(0, 12) == "Nés le");
+> show(paragraphe.slice(0, 6) == "Nés le");
 
 ***
 
