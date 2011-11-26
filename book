@@ -2587,7 +2587,7 @@ le» :
 > var paragraphe = "Né le  15/11/2003 (mère Spot) : Croc Blanc";
 > show(paragraphe.charAt(0) == "N" && paragraphe.charAt(1) == "é" &&
 >      paragraphe.charAt(2) == " " && paragraphe.charAt(3) == "l" &&
->      paragraphe.charAt(4) == "e" ;
+>      paragraphe.charAt(4) == "e");
 
 Mais cela devient un peu pénible -- imaginez que vous devez vérifier la
 présence d'un mot de 30 caractères. On peut cependant en tirer une leçon
