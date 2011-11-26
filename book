@@ -7215,7 +7215,7 @@ Voici une façon de prendre un élément d'un tableau au hasard :
 >   return array[Math.floor(Math.random() * array.length)];
 > }
 >
-> show(elementAuHasard(["premier", "dernier"]));
+> show(elementAuHasard(["face", "pile"]));
 
 Et l'insecte lui-même :
 
