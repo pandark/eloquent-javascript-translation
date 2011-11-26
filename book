@@ -848,7 +848,7 @@ peut être invoqué en utilisant le nom défini pour la fonction. Dans un
 navigateur, la variable _|alert|_ est reliée à une fonction qui ouvre une
 petite fenêtre avec un message. Elle s'utilise comme ceci :
 
-> alert("De plus, vos cheveux sont en feu.");
+> alert("Au fait, vos cheveux sont en feu.");
 
 @_|()|_Quand on exécute le code d'une fonction, on dit qu'on l'_invoque_ ou
 qu'on l'_appelle_. La notation pour faire ça utilise des parenthèses. Chaque
@@ -1698,7 +1698,7 @@ Si aucune instruction |return| n'est trouvée, la fonction renvoie |undefined|
 >   alert(message + " !!");
 > }
 >
-> crier("Yow");
+> crier("Youpi");
 
 ---
 
