@@ -2010,10 +2010,10 @@ peut aussi écrire d'une façon plus verbeuse de la façon suivante :
 Même si les définitions de fonctions interviennent comme des instructions au
 milieu du reste du programme, elles ne font pas partie de la même chronologie.
 
-> print("On dit que dans le futur ", futur());
+> print("Le futur dit : ", futur());
 >
 > function futur() {
->   return "nous n'aurons toujours pas de voitures volantes.";
+>   return "Nous n'avons TOUJOURS pas de voitures volantes.";
 > }
 
 Ce qui se passe c'est que l'ordinateur examine toutes les définitions de
