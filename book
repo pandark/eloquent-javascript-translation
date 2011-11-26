@@ -2390,7 +2390,7 @@ faut, c'est une structure de chaînes de caractères distinctes.
 Les objets sont justement utilisés pour structurer des choses. On pourrait
 très bien créer un objet comme celui-ci :
 
-> var archiveMail = {"le premier e-mail": "Cher neveu, …",
+> var archiveDeMails = {"le premier e-mail": "Cher neveu, …",
 >                    "le deuxième e-mail": "…"
 >                    /* et ainsi de suite… */};
 
@@ -2398,12 +2398,12 @@ Mais parcourir les e-mails du début à la fin serait difficile — comment
 le programme peut-il deviner le nom de ces propriétés ? La solution est
 d'utiliser des noms de propriétés plus prévisibles :
 
-> var archiveMail = {0: "Cher neveu, … (mail numéro 1)",
+> var archiveDeMails = {0: "Cher neveu, … (mail numéro 1)",
 >                    1: "(mail numéro 2)",
 >                    2: "(mail numéro 3)"};
 >
-> for (var courant = 0; courant in archiveMail; courant++)
->   print("Traitement de l'e-mail #", courant, ": ", archiveMail[courant]);
+> for (var courant = 0; courant in archiveDeMails; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveDeMails[courant]);
 
 La chance veut qu'il existe un type d'objet particulier qui corresponde
 exactement à ce type de besoin. Ce sont les @_array_tableaux et ils
@@ -2413,10 +2413,10 @@ tableau et bien d'autres fonctions utiles pour ce type de structure.
 
 @_|[]|_Pour créer de nouveaux tableaux on utilise des crochets (|[| et |]|):
 
-> var archiveMail = ["mail un", "mail deux", "mail trois"];
+> var archiveDeMails = ["mail un", "mail deux", "mail trois"];
 >
-> for (var courant = 0; courant < archiveMail.length; courant++)
->   print("Traitement de l'e-mail #", courant, ": ", archiveMail[courant]);
+> for (var courant = 0; courant < archiveDeMails.length; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveDeMails[courant]);
 
 Dans cet exemple, le nombre d'éléments n'est plus spécifié
 explicitement. Le premier a automatiquement le numéro 0, le deuxième le
@@ -2430,8 +2430,8 @@ vous allez vous y faire.
 Commencer par l'élément 0 veut aussi dire que dans une structure qui
 a |X| éléments, le dernier élément sera trouvé à la position |X -
 1|. C'est pourquoi la boucle |for| dans notre exemple teste la valeur
-|current < mailArchive.length|. Il n'y a pas d'élément à la position
-|mailArchive.length|, donc dès que |current| atteint cette valeur, on
+|current < archiveDeMails.length|. Il n'y a pas d'élément à la position
+|archiveDeMails.length|, donc dès que |current| atteint cette valeur, on
 arrête la boucle.
 
 *** range
@@ -2518,14 +2518,14 @@ avant l'assemblage de la chaîne de caractères finale.
 
 Revenons à nos chats : nous savons maintenant qu'utiliser un tableau
 serait une bonne idée pour ranger les archives des e-mails. Sur cette page,
-la fonction |recupererMails| sera utilisée pour récupérer (magiquement)
+la fonction |recupererLesMails| sera utilisée pour récupérer (magiquement)
 ce tableau. Parcourir les emails qu'il contient pour les traiter un par un
 devient simple comme un jeu d'enfant :
 
-> var archiveMail = recupererMails();
+> var archiveDeMails = recupererLesMails();
 >
-> for (var i = 0; i < archiveMail.length; i++) {
->   var email = archiveMail[i];
+> for (var i = 0; i < archiveDeMails.length; i++) {
+>   var email = archiveDeMails[i];
 >   print("Traitement de l'e-mail #", i);
 >   // Faire plus de choses…
 > }
@@ -2696,11 +2696,11 @@ faisons comme si, dans ce cas précis, l'entrée était toujours correcte.
 Tout ce qui nous reste à faire maintenant, c'est de rassembler les pièces
 du puzzle. Voici une façon de s'y prendre :
 
-> var mailArchive = retrieveMails();
+> var archiveDeMails = recupererLesMails();
 > var livingCats = {"Spot": true};
 >
-> for (var mail = 0; mail < mailArchive.length; mail++) {
->   var paragraphs = mailArchive[mail].split("\n");
+> for (var mail = 0; mail < archiveDeMails.length; mail++) {
+>   var paragraphs = archiveDeMails[mail].split("\n");
 >   for (var paragraph = 0;
 >        paragraph < paragraphs.length;
 >        paragraph++) {
@@ -2767,8 +2767,8 @@ de la solution :
 
 > var livingCats = {Spot: true};
 >
-> for (var mail = 0; mail < mailArchive.length; mail++) {
->   var paragraphs = mailArchive[mail].split("\n");
+> for (var mail = 0; mail < archiveDeMails.length; mail++) {
+>   var paragraphs = archiveDeMails[mail].split("\n");
 >   for (var paragraph = 0;
 >        paragraph < paragraphs.length;
 >        paragraph++) {
@@ -2805,7 +2805,7 @@ comme ça leur chante.
 Nous continuons à découper l'algorithme en petites unités :
 
 > function findLivingCats() {
->   var mailArchive = retrieveMails();
+>   var archiveDeMails = recupererLesMails();
 >   var livingCats = {"Spot": true};
 >
 >   function handleParagraph(paragraph) {
@@ -2815,8 +2815,8 @@ Nous continuons à découper l'algorithme en petites unités :
 >       removeFromSet(livingCats, catNames(paragraph));
 >   }
 >
->   for (var mail = 0; mail < mailArchive.length; mail++) {
->     var paragraphs = mailArchive[mail].split("\n");
+>   for (var mail = 0; mail < archiveDeMails.length; mail++) {
+>     var paragraphs = archiveDeMails[mail].split("\n");
 >     for (var i = 0; i < paragraphs.length; i++)
 >       handleParagraph(paragraphs[i]);
 >   }
@@ -3081,7 +3081,7 @@ façon plus simple :
 Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 
 > function findCats() {
->   var mailArchive = retrieveMails();
+>   var archiveDeMails = recupererLesMails();
 >   var cats = {"Spot": catRecord("Spot", new Date(1997, 2, 5),
 >               "inconnue")};
 >
@@ -3093,8 +3093,8 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >       deadCats(cats, catNames(paragraph), extractDate(paragraph));
 >   }
 >
->   for (var mail = 0; mail < mailArchive.length; mail++) {
->     var paragraphs = mailArchive[mail].split("\n");
+>   for (var mail = 0; mail < archiveDeMails.length; mail++) {
+>     var paragraphs = archiveDeMails[mail].split("\n");
 >     for (var i = 0; i < paragraphs.length; i++)
 >       handleParagraph(paragraphs[i]);
 >   }
@@ -3849,13 +3849,13 @@ passé à |forEach| directement.
 
 Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
-!> var paragraphs = mailArchive[mail].split("\n");
+!> var paragraphs = archiveDeMails[mail].split("\n");
 !> for (var i = 0; i < paragraphs.length; i++)
 !>   handleParagraph(paragraphs[i]);
 
 Il peut maintenant être écrit de la façon suivante :
 
-!>  forEach(mailArchive[mail].split("\n"), handleParagraph);
+!>  forEach(archiveDeMails[mail].split("\n"), handleParagraph);
 
 Au final, une construction plus abstraite (ou « de plus haut niveau »)
 correspond à plus d'informations et à moins de bruits parasites : Le
