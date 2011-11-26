@@ -4986,7 +4986,7 @@ route, chacun étant doté de propriétés désignant ses deux extrémités
 et sa longueur.
 
 > var routes = [{point1: "Point Kiukiu", point2: "Hanaiapa", length: 19},
->              {point1: "Point Kiukiu", point2: "Mt Feani", length: 15}
+>              {point1: "Point Kiukiu", point2: "Mont Feani", length: 15}
 >              /* and so on */];
 
 Cependant, il s'avère que lorsque le programme essaiera de déterminer
@@ -5003,7 +5003,7 @@ liste directement. Par exemple, utiliser un objet qui associe les noms de
 lieux avec la liste des panneaux :
 
 > var routes = {"Point Kiukiu": [{to: "Hanaiapa", distance: 19},
->                               {to: "Mt Feani", distance: 15},
+>                               {to: "Mont Feani", distance: 15},
 >                               {to: "Taaoa", distance: 15}],
 >              "Taaoa": [/* et cetera */]};
 
@@ -5049,7 +5049,7 @@ peut supposer que le tableau existe déjà et entrer la nouvelle route dedans.
 Maintenant, les informations de la carte ressemblent à ceci :
 
 > creerRoute("Point Kiukiu", "Hanaiapa", 19);
-> creerRoute("Point Kiukiu", "Mt Feani", 15);
+> creerRoute("Point Kiukiu", "Mont Feani", 15);
 > creerRoute("Point Kiukiu", "Taaoa", 15);
 > // ...
 
@@ -5082,14 +5082,14 @@ de l'équation |i = i + 2|,  comme vous vous rappelez sans doute.
 
 > var routes = {};
 > creerRoutes("Point Kiukiu", "Hanaiapa", 19,
->           "Mt Feani", 15, "Taaoa", 15);
-> creerRoutes("Airport", "Hanaiapa", 6, "Mt Feani", 5,
->           "Atuona", 4, "Mt Ootua", 11);
-> creerRoutes("Mt Temetiu", "Mt Feani", 8, "Taaoa", 4);
+>           "Mont Feani", 15, "Taaoa", 15);
+> creerRoutes("Airport", "Hanaiapa", 6, "Mont Feani", 5,
+>           "Atuona", 4, "Mont Ootua", 11);
+> creerRoutes("Mont Temetiu", "Mont Feani", 8, "Taaoa", 4);
 > creerRoutes("Atuona", "Taaoa", 3, "Hanakee pearl lodge", 1);
-> creerRoutes("Cemetery", "Hanakee pearl lodge", 6, "Mt Ootua", 5);
-> creerRoutes("Hanapaoa", "Mt Ootua", 3);
-> creerRoutes("Puamua", "Mt Ootua", 13, "Point Teohotepapapa", 14);
+> creerRoutes("Cemetery", "Hanakee pearl lodge", 6, "Mont Ootua", 5);
+> creerRoutes("Hanapaoa", "Mont Ootua", 3);
+> creerRoutes("Puamua", "Mont Ootua", 13, "Point Teohotepapapa", 14);
 >
 > show(routes["Airport"]);
 
@@ -5157,7 +5157,7 @@ du joueur :
 >   return chemin;
 > }
 >
-> show(routeDuJoueur("Hanaiapa", "Mt Feani"));
+> show(routeDuJoueur("Hanaiapa", "Mont Feani"));
 
 À chaque branche de la route, le joueur lance son dé pour décider quelle
 route il va prendre. Si le dé le renvoie à son lieu de départ, ainsi
@@ -5379,7 +5379,7 @@ est une manière normale de modéliser ce phénomène.
 > }
 >
 > show(itinerairesPossibles("Point Teohotepapapa", "Point Kiukiu").length);
-> show(itinerairesPossibles("Hanapaoa", "Mt Ootua"));
+> show(itinerairesPossibles("Hanapaoa", "Mont Ootua"));
 
 La fonction renvoie un tableau d'objets itinéraire, chacun
 contenant un tableau de lieux parcourus par l'itinéraire et une
