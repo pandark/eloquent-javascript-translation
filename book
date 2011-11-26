@@ -2342,8 +2342,8 @@ propriétés. Considérons le code suivant :
 > var objet2 = objet1;
 > var objet3 = {valeur: 10};
 >
-> show(objet1 == object2);
-> show(objet1 == object3);
+> show(objet1 == objet2);
+> show(objet1 == objet3);
 >
 > objet1.valeur = 15;
 > show(objet2.valeur);
