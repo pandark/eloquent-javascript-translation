@@ -441,9 +441,9 @@ recyclés pour fabriquer la génération suivante de valeurs.
 
 ---
 
-Les valeurs de type nombre, nommées _number_ en JavaScript sont, comme vous
-l'avez peut-être déduit, des valeurs numériques. Elles sont écrites de
-la manière dont sont habituellement écrits les nombres :
+Les valeurs de type _nombre_ (number) sont, comme vous l'aurez peut-être
+déduit, des valeurs numériques. Elles sont écrites de la manière dont
+sont habituellement écrits les nombres :
 
 >> 144
 
@@ -524,7 +524,7 @@ en JavaScript :
 
 Les symboles _|+|_ et _|*|_ sont appelés des opérateurs. Le premier
 correspond à l'addition et le second à la multiplication. Placer un
-opérateur entre deux valeurs le fera s'appliquer @_applying_ à ces deux
+opérateur entre deux valeurs le fera s'appliquer @_application_ à ces deux
 valeurs et produire une nouvelle valeur.
 
 L'exemple veut-il dire « ajouter 4 et 100 puis multiplier le résultat par
@@ -555,26 +555,26 @@ cas de doute, ajoutez simplement des parenthèses.
 Il y a encore un opérateur arithmétique qui vous est sûrement moins
 familier. Le symbole _|%|_ est utilisé pour représenter l'opération
 _modulo_. |X| modulo |Y| est le reste de la division de |X| par |Y|. Par
-exemple |314 % 100| vaut |14|, |10 % 3| vaut |1| et |144 % 12| vaut |0|. Modulo
-a le même ordre de priorité que la multiplication et la division.
+exemple |314 % 100| vaut |14|, |10 % 3| vaut |1| et |144 % 12| vaut |0|.
+Modulo a le même ordre de priorité que la multiplication et la division.
 
 ---
 
-Le type de données suivant est la chaîne de caractères. Elle est nommée
-« _string_ » en anglais et donc en JavaScript. Son utilisation n'est pas
-aussi évidente à deviner d'après son nom que pour « number », mais
-elle remplit également un rôle très basique. Les chaînes de caractères
-sont utilisées pour représenter du texte, le nom est censé venir du fait
-qu'il enchaîne un groupe de caractères ensemble. Les chaînes de caractères
-sont écrites en insérant leur contenu entre des guillemets :
+Le type de données suivant est la _chaîne de caractères_ (string). Son
+utilisation n'est pas aussi évidente à deviner d'après son nom que pour
+« number », mais elle remplit également un rôle très basique. Les chaînes
+de caractères sont utilisées pour représenter du texte, le nom est censé
+venir du fait qu'il enchaîne un groupe de caractères ensemble. Les
+chaînes de caractères sont écrites en insérant leur contenu entre des
+guillemets :
 
 >> "Colmater mon bateau avec du chewing-gum."
 
 On peut mettre pratiquement tout ce qu'on veut entre des guillemets et
 le JavaScript fera la conversion en une valeur de type |string|. Mais pour
 certains caractères c'est un peu tordu. Vous pouvez imaginer à quel point il
-est délicat de mettre des guillemets entre guillemets. Les sauts de lignes
-@_newline_, comme vous en faites en appuyant sur Entrée, ne peuvent pas
+est délicat de mettre des guillemets entre guillemets. Les @_saut de ligne_
+sauts de lignes, comme vous en faites en appuyant sur Entrée, ne peuvent pas
 non plus être mis entre guillemets, la chaîne doit tenir sur une seule ligne.
 
 Pour mettre de tels caractères dans une chaîne, on emploie l'astuce
@@ -623,9 +623,10 @@ de caractères spécifiant le type d'une valeur.
 
 Les autres opérateurs que nous avons vus opèrent toujours sur deux valeurs,
 |typeof| sur une seul. Les opérateurs qui utilisent deux valeurs sont appelés
-des _opérateurs binaires_ alors que ceux qui n'en n'utilisent qu'une sont
-des _opérateurs unaires_. Le @_|-|_signe moins peut être utilisé aussi
-bien comme un opérateur binaire que comme un unaire :
+des @_opérateur binaire_opérateurs binaires alors que ceux qui n'en
+n'utilisent qu'une sont des @_opérateur unaire_opérateurs unaires. Le
+@_|-|_signe moins peut être utilisé aussi bien comme un opérateur binaire
+que comme un unaire :
 
 >> - (10 - 2)
 
@@ -761,7 +762,7 @@ valeur, mais une instruction ne vaudra quelque chose que si elle change un
 peu le monde. Elle peut imprimer quelque chose à l'écran -- ce qui compte
 comme un changement du monde -- ou elle peut modifier l'état interne du
 programme de telle sorte que cela affecte les instructions qui suivent. Ces
-modifications sont appelées « _effets de bord_ ». Les instructions de
+modifications sont appelées « @_effet de bord_effets de bord ». Les instructions de
 l'exemple ci-dessus ne renvoient que les valeurs |1| et |true| puis les
 jettent au récupérateur de bits##. Ceci ne laisse aucune trace dans ce
 monde et ça n'a aucun effet de bord.
@@ -841,17 +842,17 @@ aille sur une nouvelle page.
 ---
 
 Beaucoup de valeurs fournies par l'environnement standard sont de type
-« _function_ ». Une fonction est une partie de programme contenue dans
-une valeur.
-Généralement, cette portion de programme fait quelque chose d'utile qui
-peut être invoqué en utilisant le nom défini pour la fonction. Dans un
-navigateur, la variable _|alert|_ est reliée à une fonction qui ouvre une
-petite fenêtre avec un message. Elle s'utilise comme ceci :
+« function » @_fonction_. Une fonction est une partie de programme contenue
+dans une valeur. Généralement, cette portion de programme fait quelque
+chose d'utile qui peut être invoqué en utilisant le nom défini pour la
+fonction. Dans un navigateur, la variable _|alert|_ est reliée à une
+fonction qui ouvre une petite fenêtre avec un message. Elle s'utilise
+comme ceci :
 
 > alert("Au fait, vos cheveux sont en feu.");
 
-@_|()|_Quand on exécute le code d'une fonction, on dit qu'on l'_invoque_ ou
-qu'on l'_appelle_. La notation pour faire ça utilise des parenthèses. Chaque
+@_|()|_Quand on exécute le code d'une fonction, on dit qu'on l'@_invocation_invoque ou
+qu'on l'_appel_le. La notation pour faire ça utilise des parenthèses. Chaque
 expression qui produit une valeur peut être invoquée en utilisant des
 parenthèses après son nom. La chaîne de caractères entre parenthèses est
 donnée à la fonction qui l'utilise en tant que texte pour l'afficher dans la
@@ -870,7 +871,7 @@ deux arguments et retourne le plus grand des deux :
 > alert(Math.max(2, 4));
 
 @_|Math.min|_Quand une fonction produit une valeur, on dit qu'elle
-la _retourne_. Parce qu'il n'y a que les expressions qui produisent des
+la _retour_ne. Parce qu'il n'y a que les expressions qui produisent des
 valeurs, les appels de fonctions peuvent être utilisés comme une partie
 d'une expression plus longue :
 
@@ -934,7 +935,7 @@ s'en douter, exécutées une à la fois de haut en bas.
 > print("Votre nombre est la racine carrée de " +
 >       (leNombre * leNombre));
 
-La fonction _|Number|_ converti une valeur en un nombre, ce qui est
+La fonction _|Number|_ converti une valeur en nombre, ce qui est
 nécessaire dans notre cas parce que le résultat de |prompt| est une chaîne
 de caractères. Il existe des fonctions similaires appelées _|String|_
 et _|Boolean|_ qui convertissent des valeurs dans ces types.
@@ -1133,8 +1134,8 @@ de cet apparent manque de cohérence.
 
 Notez que les noms ayant une signification spéciale tels que |var|, |while|
 et |for| ne peuvent pas être utilisés en tant que noms de variables. Ils
-sont appelés _mots-clés_. Il y a également un certain nombre de @_mot
-réservé_mots qui sont « réservés pour l'utilisation » dans de futures
+sont appelés @_mot-clé_mots-clés. Il y a également un certain nombre de
+@_mot réservé_mots qui sont « réservés pour l'utilisation » dans de futures
 versions de JavaScript. Ceux-ci ne sont également officiellement pas
 autorisés à être utilisés comme noms de variables, bien que certains
 navigateurs les autorisent. La liste complète est assez longue :
@@ -1852,9 +1853,8 @@ Au-delà du fait que différentes fonctions peuvent contenir des variables de
 même nom sans qu'elles ne se mélangent, ces règles de portée permettent
 également aux fonctions de s'appeler *elles-mêmes* sans que ça ne
 pose de problèmes. Une fonction qui s'appelle elle-même est qualifiée
-de récursive. @_récursion_La récursion permet de donner certaines
-définitions intéressantes. Jetez un coup d'œil à cette implémentation
-de |puissance| :
+de récursive. La _récursion_ permet de donner certaines définitions
+intéressantes. Jetez un coup d'œil à cette implémentation de |puissance| :
 
 > function puissance(base, exposant) {
 >   if (exposant == 0)
@@ -2221,10 +2221,10 @@ changées. Elles sont plus nombreuses que la seule longueur |length|,
 comme nous allons le voir, mais vous ne pouvez ajouter ni supprimer aucune
 propriété.
 
-C'est différent avec les valeurs du type _object_. Leur rôle principal est
-de conserver d'autres valeurs. Ils ont, en quelque sorte, leur propre jeu
-de « tentacules » sous forme de propriétés. Vous pouvez les modifier,
-les supprimer ou en ajouter de nouvelles.
+C'est différent avec les valeurs du type @_objet_object. Leur rôle
+principal est de conserver d'autres valeurs. Ils ont, en quelque sorte,
+leur propre jeu de « tentacules » sous forme de propriétés. Vous pouvez
+les modifier, les supprimer ou en ajouter de nouvelles.
 
 @_|{}|_Un objet peut s'écrire de la façon suivante :
 
@@ -2324,7 +2324,7 @@ pour ce chapitre.
 
 ---
 
-Les valeurs des @_mutability_objets peuvent apparemment changer. Les types
+Les valeurs des @_mutabilité_objets peuvent apparemment changer. Les types
 de valeurs vues dans le \\cbasics sont toutes invariables, il n'est pas
 possible de changer une valeur existante pour ces types de données. Vous
 pouvez les associer ou en tirer de nouvelles valeurs, mais lorsque vous
@@ -2406,7 +2406,7 @@ d'utiliser des noms de propriétés plus prévisibles :
 >   print("Traitement de l'e-mail #", courant, ": ", archiveDeMails[courant]);
 
 La chance veut qu'il existe un type d'objet particulier qui corresponde
-exactement à ce type de besoin. Ce sont les @_array_tableaux et ils
+exactement à ce type de besoin. Ce sont les _tableau_x et ils
 fournissent des commodités très utiles, comme par exemple _|length|_
 (longueur), une propriété qui contient le nombre d'éléments dans le
 tableau et bien d'autres fonctions utiles pour ce type de structure.
@@ -2494,8 +2494,8 @@ la fonction a malgré tout accès au contenu de la chaîne de caractères
 fonctionne est décrite dans le \\coo.
 
 Les propriétés qui se comportent comme des fonctions sont généralement
-appelées @_methode_méthodes, comme pour « |toUpperCase| qui est une
-méthode des objets de type chaîne de caractères ».
+appelées _méthode_s, comme pour « |toUpperCase| qui est une méthode des
+objets de type chaîne de caractères ».
 
 > var flipper = [];
 > flipper.push("Flipper");
@@ -3344,7 +3344,7 @@ Mais hélas, rien n'apparaît. De même, quand vous faites ceci :
 
 Vous ne voyez que |0|, |1|, et |2|, pas |length|, ni |push|, ou |join|,
 qui s'y trouvent pourtant bel et bien. Apparemment, certaines propriétés
-des objets sont cachées@_propriétés cachées_. Il y a une bonne raison à
+des objets sont cachées@_propriété cachée_. Il y a une bonne raison à
 ça : tous les objets ont quelques méthodes, par exemple  _|toString|_
 qui convertit l'objet en une sorte de chaîne pertinente, mais vous ne
 souhaiterez sûrement pas les voir quand vous êtes par exemple, à la
@@ -3361,7 +3361,7 @@ aux objets sans avoir à les rendre visibles dans des boucles |for|/|in|.
 
 ---
 
-@_propriétés en lecture seule_Certaines propriétés sont en lecture seule,
+@_propriété en lecture seule_Certaines propriétés sont en lecture seule,
 vous pouvez récupérer leur valeur mais pas la modifier. Par exemple,
 les propriétés d'une valeur de chaîne sont toutes en lecture seule.
 
@@ -3507,13 +3507,13 @@ arrêter ce que l'on est en train de faire, et de revenir immédiatement à
 un endroit où le problème peut être réglé.
 
 Nous avons de la chance. Beaucoup de langages de programmation fournissent
-de tels mécanismes. C'est ce qu'on appelle généralement _la gestion
+de tels mécanismes. C'est ce qu'on appelle généralement la _gestion
 des exceptions_.
 
 ---
 
 La théorie derrière la gestion des exceptions fonctionne ainsi : il est
-possible pour le code de _lever_ (ou _jeter_) une _exception_, qui est une
+possible pour le code de _relever_ (ou _lancer) une _exception_, qui est une
 valeur. Quand on lève une exception, cela ressemble parfois à un retour de
 fonction boosté aux stéroïdes : on ne sort pas simplement de la fonction
 en cours, mais aussi des fonctions appellantes, en remontant à la fonction
@@ -3525,7 +3525,7 @@ dans cette pile, en renvoyant tous les contextes des appels qu'elle rencontre.
 Si elles descendaient sans s'arrêter jusqu'au bas de la pile, les exceptions
 ne seraient pas d'un grand intérêt, elles fourniraient juste un moyen
 original de détruire le programme. Heureusement, il est possible de dresser
-des obstacles aux exceptions le long de la pile. Ceux-ci « _attrapent_ »
+des obstacles aux exceptions le long de la pile. Ceux-ci « @_intercepter_interceptent »
 l'exception quand elle descend, et ils peuvent s'en charger, après quoi
 le programme continue de fonctionner normalement à partir du point où
 l'exception a été attrapée.
@@ -3873,11 +3873,12 @@ tableau » et de rendre celui-ci abstrait. Les « trous » dans cet algorithme
 (ici : que faire pour chacun des éléments du tableau), sont comblés
 par des fonctions passées à la fonction algorithme.
 
-Les fonctions qui opèrent sur d'autres fonctions sont appelées _fonctions
-d'ordre supérieur_. En opérant sur d'autres fonctions, elles peuvent décrire
-des actions à un niveau supérieur. La fonction |makeAddFunction| dans le
-\\cfunctions est aussi une fonction d'ordre supérieur. Au lieu de prendre
-une valeur de fonction comme argument, elle construit une nouvelle fonction.
+Les fonctions qui opèrent sur d'autres fonctions sont appelées @_fonction
+d'ordre supérieur_fonctions d'ordre supérieur. En opérant sur d'autres
+fonctions, elles peuvent décrire des actions à un niveau supérieur. La
+fonction |makeAddFunction| dans le \\cfunctions est aussi une fonction
+d'ordre supérieur. Au lieu de prendre une valeur de fonction comme
+argument, elle construit une nouvelle fonction.
 
 Les fonctions d'ordre supérieur peuvent être utilisées pour généraliser
 de nombreux algorithmes que des fonctions classiques ne peuvent pas facilement
@@ -5188,7 +5189,7 @@ chemin *le plus court* pour aller d'un point à un autre, il nous faut donc
 utiliser une autre méthode.
 
 Une approche très simple est de résoudre un tel problème par la méthode
-dite « _générer et tester_' ». Il faut :
+dite « _essais et erreurs_ ». Il faut :
 
  1. Générer toutes les routes possibles.
  2. Dans cet ensemble, trouver le plus court chemin qui connecte le point de départ au point d'arrivée.
@@ -7359,7 +7360,7 @@ Il est maintenant possible de remplacer certaines méthodes de l'objet
 |TerrariumPlusVivant|, et d'en ajouter d'autres. Nous avons un type d'objet
 basé sur un autre, ce qui nous épargne le travail de récrire toutes les
 méthodes communes à |Terrarium| et |TerrariumPlusVivant|.
-Cette  technique est appelée '_héritage_'. Le nouveau type hérite des
+Cette  technique est appelée « _héritage_ ». Le nouveau type hérite des
 propriétés de l'ancien type. Dans la plupart des cas, cela signifie que le
 nouveau type possèdera toujours l'interface de l'ancien, bien qu'il puisse
 posséder des méthodes en plus, que l'ancien n'a pas.
@@ -7694,8 +7695,8 @@ par ces étudiants sont aussi une bonne façon d'aborder l'héritage.
 personnes qui, laborieusement, font et refont toujours les mêmes choses
 tendent à être de bon travailleurs à la chaine et de mauvais programmeurs.
 
-L'héritage est la création de nouveaux types d'objet, les '_sous-types_',
-basés sur des types existants, les '_super-types_'. Le sous-type commence
+L'héritage est la création de nouveaux types d'objet, les « @_sous-type_sous-types »,
+basés sur des types existants, les « @_super-type_super-types ». Le sous-type commence
 avec la totalité des propriétés et des méthodes du super-type, il hérite
 de lui, ensuite, il en modifie quelques uns, éventuellement en ajoute.
 L'héritage est mieux utilisé quand les objets décrit par le sous-type
@@ -7934,11 +7935,10 @@ une approche très simple qui est suffisante dans la plupart des cas.
 
 ---
 
-Un _mix-in_ (que l'on pourrait traduire par mélange en français) est un type
-spécifique de prototype qui peut être « incorporé » dans d'autres
-prototypes. |PetitProduit| peut être vu comme un de ces prototypes. En
-copiant les méthodes |kick| et |take| dans un autre prototype, nous allons
-incorporé la petitesse dans ce prototype.
+Un _mix-in_ est un type spécifique de prototype qui peut être « incorporé »
+à l'intérieur d'autres prototypes. |PetitProduit| peut être considéré
+comme un de ces prototypes. En copiant ses méthodes |kick| et |take| dans
+un autre prototype, nous allons incorporé la petitesse dans ce prototype.
 
 > function mixInto(object, mixIn) {
 >   forEachIn(mixIn, function(name, value) {
@@ -8052,7 +8052,7 @@ découper ce programme en modules pourrait être :
  * |Dictionary| qui contient le type dictionaire et dépend de |FunctionalTools|.
  * Enfin, le module |Terrarium| qui dépend de |ObjectTools| et |Dictionary|.
 
-Quand un module _dépend_ d'un autre module, il utilise des fonctions ou
+Quand un module @_dépendance_dépend d'un autre module, il utilise des fonctions ou
 des variables de ce module et fonctionne uniquement si le premier module
 est chargé.
 
@@ -8500,7 +8500,7 @@ la date. Plus loin, dans le \\cfp, nous avons vu des bouts de code assez
 laids destinés à chercher certains types de caractères dans une chaîne,
 par exemple ceux qui devaient être échappés en HTML.
 
-@_regular expression_Les expressions régulières constituent un langage qui
+@_expression régulière_Les expressions régulières constituent un langage qui
 décrit les structures des chaînes. Il s'agit d'un petit langage spécifique
 mais qui est inclus dans le JavaScript (comme dans beaucoup d'autres langages
 de programmation, d'une façon ou d'une autre). Il n'est pas très lisible --
@@ -9075,8 +9075,8 @@ propre et plus souple de modifier un document, mais occasionnellement,
 ---
 
 Une autre application populaire du JavaScript dans les pages web tourne
-autour des _form_. Dans les cas où vous ne seriez pas tout à fait sûr du
-rôle des « formulaires », laissez moi vous présenter un rapide résumé.
+autour des _formulaire_s. Dans les cas où vous ne seriez pas tout à fait sûr du
+rôle des « formulaires », laissez moi vous présenter un résumé rapide.
 
 Une requête HTTP élémentaire est une simple requête pour un fichier. Quand
 ce fichier n'est pas vraiment un fichier passif, mais un programme côté
@@ -9486,7 +9486,7 @@ Le modèle d'objet-document / dom
 
 Dans le \\cweb nous avons vu les objets JavaScript qui font référence aux
 balises |form| et |input| du document HTML. De tels objets font partie d'une
-structure appelée le _Document-Object Model_ (_DOM_). Chaque élément du
+structure appelée le _modèle d'objet-document_ (_DOM_). Chaque élément du
 document est représenté dans ce modèle, on peut l'examiner et interagir
 avec lui.
 
@@ -9895,7 +9895,7 @@ et les nœuds DOM.
 
 ---
 
-Le sujet des _feuilles de style_ est étroitement lié à HTML et au
+Le sujet des @_feuille de style_feuilles de style est étroitement lié à HTML et au
 modèle document-objet. C'est un vaste sujet et je ne l'aborderai pas
 entièrement. Mais quelques notions sur les feuilles de styles sont
 nécessaires pour beaucoup de techniques intéressantes  en Javascript,
@@ -9937,7 +9937,7 @@ classe « moche ».
 
 Les classes sont un concept lié aux syles. Si vous avez différentes sortes
 de paragraphes, des moches et des jolis par exemple, et que vous ne voulez
-pas attribuer le style à tous les éléments |p|, alors les _classes_
+pas attribuer le style à tous les éléments |p|, alors les _classe_s
 peuvent être utilisées pour les distinguer. Le style précédent ne sera
 appliqué qu'aux paragraphes comme :
 
@@ -10106,7 +10106,7 @@ le navigateur va attendre que celui-ci se termine avant d'appeler le
 gestionnaire suivant. Cela vaut aussi pour du code qui est déclenché d'une
 autre manière, comme avec |setTimeout|. Dans le jargon de la programmation,
 le navigateur JavaScript gére une _tâche unique_ à la fois, il n'y a
-jamais deux _tâches_ fonctionnant au même instant. Dans la plupart des cas,
+jamais deux _tâche_s fonctionnant au même instant. Dans la plupart des cas,
 c'est une bonne chose. Il est très facile d'obtenir des résultats étranges
 quand plusieurs choses sont traitées au même instant.
 
@@ -10541,7 +10541,7 @@ un  |@| pour la position de départ du joueur et un |*| pour la sortie.
 
 Mais lorsque l'on joue, on ne veut pas voir cette représentation textuelle. A
 la place, nous allons mettre un _tableau_ dans le document. J'ai fait une
-petite  _feuille de styles_  ([sokoban.css | css/sokoban.css] si vous êtes
+petite _feuille de style_  ([sokoban.css | css/sokoban.css] si vous êtes
 curieux de savoir à quoi elle ressemble) pour donner une taille fixe aux
 cellules de ce tableau, et ajouté un document d'exemple. Chacune des cellules
 du tableau va recevoir une image de fond, représentant le type de case
@@ -11041,16 +11041,16 @@ Explorer (c'est-à-dire, à l'heure où j'écris ceci, le navigateur de la
 majorité des internautes) souffre d'un bug qui empêche les valeurs d'être
 nettoyées correctement : même lorsqu'elles ne sont plus utilisées,
 elles restent dans la mémoire de l'ordinateur. Ceci est connu sous le nom
-de _memory leak_ (ou _fuite mémoire_ en français), et lorsque suffisamment
-de mémoire a fui, cela peut ralentir fortement un ordinateur.
+de _fuite mémoire_ et lorsque suffisamment de mémoire a fui, cela peut
+ralentir fortement un ordinateur.
 
 Quand est-ce que cette fuite se produit ? À cause d'un défaut dans le
-_garbage collector_ (ou _ramasse-miettes_ en français) d'Internet Explorer,
-le système dont le but est de récupérer les valeurs inutilisées, lorsque
-que vous avez un nœud DOM qui, à travers une des ses propriétés ou d'une
-façon plus indirecte, fait référence à un objet JavaScript normal, et que
-cet objet, en retour, fait référence à ce nœud DOM, aucun des deux objets
-ne sera ramassé par le ramasse-miettes. Cela vient du fait que les nœuds DOM
+_ramasse-miettes_ d'Internet Explorer, le système dont le but est de
+récupérer les valeurs inutilisées, lorsque que vous avez un nœud DOM
+qui, à travers une des ses propriétés ou d'une façon plus indirecte,
+fait référence à un objet JavaScript normal, et que cet objet, en
+retour, fait référence à ce nœud DOM, aucun des deux objets ne sera
+ramassé par le ramasse-miettes. Cela vient du fait que les nœuds DOM
 et les autres objets JavaScript sont ramassés par différents systèmes :
 le système qui s'occupe de nettoyer les nœuds DOM fera attention de laisser
 tous les nœuds qui sont encore référencés par des objets JavaScript,
@@ -11146,7 +11146,7 @@ HTTP utilisée est 1.1 (la version 1.0 est encore utilisée et fonctionne
 légèrement différemment). La ligne |Host| et |User-Agent| suivent un même
 modèle : elles commencent par un mot qui identifie l'information qu'elle
 contient, suivi par deux points et l'information elle-même. Ces lignes
-sont appelées « en-têtes » (_en-têtes_). L'en-tête |User-Agent|
+sont appelées « _en-têtes_ ». L'en-tête |User-Agent|
 dit au serveur quel navigateur (ou autre type de programme) a lancé
 la requête. D'autres en-têtes sont souvent utilisés tout le long, par
 exemple pour déclarer quels types de documents le client peut comprendre,
@@ -11669,10 +11669,10 @@ de telles méthodes avec |with(this) {…}|, et ainsi ne pas avoir à écrire
 Tas binaires / binaryheap
 +++++++++++++++++++++++++
 
-Dans le \\csearch, le _binary heap_ (ou _tas binaire_ en français) était
-introduit comme une méthode pour stocker une collection d'objets d'une
-façon que le plus petit élément soit rapidement trouvé. Comme promis,
-cet appendice va expliquer les détails derrière cette structure de données.
+Dans le \\csearch, le _tas binaire_ était introduit comme une méthode
+pour stocker une collection d'objets d'une façon que le plus petit
+élément soit rapidement trouvé. Comme promis, cet appendice va
+expliquer les détails derrière cette structure de données.
 
 Etudions de nouveau le problème à résoudre. L'algorithme A* créait une
 grande quantité de petits objets, et devait les conserver dans une 'liste
