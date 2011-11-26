@@ -2624,8 +2624,8 @@ fragment de chaîne qui n'existe pas ? Est-ce que le |startsWith| que j'ai
 montré va encore fonctionner si le la chaîne recherchée est plus longue
 que celle dans laquelle on cherche ?
 
-> show("Pip".charAt(250));
-> show("Nop".slice(1, 10));
+> show("Ouai".charAt(250));
+> show("Nan".slice(1, 10));
 
 |charAt| va renvoyer |""| s'il n'existe pas de caractère à la position
 donnée et |slice| va tout simplement laisser tomber la partie de la nouvelle
