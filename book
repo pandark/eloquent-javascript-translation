@@ -3617,7 +3617,7 @@ lever des exceptions. Par exemple :
 >   print(Sasquatch);
 > }
 > catch (error) {
->   print("A: " + error.message);
+>   print("Intercepté : " + error.message);
 > }
 
 Dans des cas comme celui-là, des objets spéciaux de type erreur sont
@@ -4558,7 +4558,7 @@ est un bon moyen de construire du HTML. Quand elles veulent, par exemple,
 un lien vers un site où l'on peut jouer au jeu de Go, elles font ceci :
 
 > var url = "http://www.gokgs.com/";
-> var texte = "Jouer au Go!";
+> var texte = "Jouez au Go !";
 > var texteLien = "<a href=\"" + url + "\">" + texte + "</a>";
 > print(texteLien);
 
@@ -4578,7 +4578,7 @@ Les objets en JavaScript permettent de modéliser cela facilement :
 
 > var objetLien= {nom: "a",
 >                   attributs: {href: "http://www.gokgs.com/"},
->                   contenu: ["Jouer au Go!"]};
+>                   contenu: ["Jouez au Go !"]};
 
 Chaque élément HTML possède une propriété |nom|, contenant le nom de la
 balise qu'il représente. Quand il a des attributs, il possède également
@@ -4726,7 +4726,7 @@ pour les rassembler à la fin, une seule grande chaîne sera créée.
 
 Ainsi, essayons notre outil de génération de HTML...
 
-> print(renduHTML(lien("http://www.nedroid.com", "Dessins !")));
+> print(renduHTML(lien("http://www.nedroid.com", "Des dessins !")));
 
 Cela semble fonctionner.
 
@@ -7852,7 +7852,7 @@ Héritons de ce type de cette façon…
 > });
 >
 > var paresseuxGeant = ProduitDetaille.create(
->   "le paresseux geant",
+>   "le paresseux géant",
 >   "il s'accroche tranquillement sur un arbre en grignotant des feuilles");
 > paresseuxGeant.inspect();
 
@@ -7878,7 +7878,7 @@ tomber. Ils hériteront automatiquement du constructeur de leur super-type.
 >   },
 >   take: function() {
 >     // (imaginer ici du code qui déplace l'objet dans votre poche)
->     print("vous avez pris ", this.name, ".");
+>     print("vous prenez ", this.name, ".");
 >   }
 > });
 >
@@ -7950,7 +7950,7 @@ incorporé la petitesse dans ce prototype.
 >
 > var deadMouse = PetitProduitDetaille.create(
 >   "Fred la souris",
->   "Il est mort");
+>   "il est mort");
 > deadMouse.inspect();
 > deadMouse.kick();
 
@@ -7989,7 +7989,7 @@ mélanger avec |ProduitDetaille|.
 > });
 >
 > var paresseuxGeant = MonstreDetaille.create(
->   "le paresseux geant",
+>   "le paresseux géant",
 >   "il s'accroche tranquillement sur un arbre en grignotant des feuilles",
 >   true);
 > paresseuxGeant.kick();
@@ -8527,7 +8527,7 @@ chaîne. Nous pouvions faire ainsi :
 
 > var asteriskOrBrace = /[\{\*]/;
 > var story =
->   "Nous avons remarqué le *grand paresseux*, pendu à une énorme branche.";
+>   "Nous avons remarqué le *paresseux géant*, pendu à une énorme branche.";
 > show(story.search(asteriskOrBrace));
 
 Les caractères |[| et |]| ont une signification particulière dans les
@@ -8656,7 +8656,7 @@ mettant entre parenthèses. Ce qui nous permet d'utiliser |*| et autres  sur
 plus d'un caractère. Par exemple :
 
 > var cartoonCrying = /boo(hoo+)+/i;
-> show("C'est alors qu'il s'exclama 'Boohoooohoohooo'".search(cartoonCrying));
+> show("Il s'exclama alors « Boohoooohoohooo »".search(cartoonCrying));
 
 D'où vient le |i| à la fin de cette expression régulière ? Après le
 slash fermant, une option peut être ajoutée à une expression régulière. Un
@@ -8769,7 +8769,7 @@ chaque partie entre parenthèses du motif.
 >   }
 >   else if (amount == 0) {
 >     unit = unit + "s";
->     amount = "no";
+>     amount = "aucun";
 >   }
 >   return amount + " " + unit;
 > }
