@@ -1718,7 +1718,7 @@ là, on la cherche dans l'environnement global. Cela permet à une variable
 >   alert(value);
 > }
 >
-> alertIsPrint("Troglodytes");
+> alertEstPrint("Troglodytes");
 
 Les variables dans cet environnement local sont visibles seulement pour le
 code à l'intérieur de la fonction. Si cette fonction appelle une autre
