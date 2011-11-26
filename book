@@ -2269,7 +2269,7 @@ de la propriété. On peut aussi utiliser des variables pour donner un nom
 à une propriété :
 
 > var nomDePropriete = "length";
-> var texte = "grandeLigne ";
+> var texte = "grandeLigne";
 > show(texte[nomDePropriete]);
 
 L'opérateur _|in|_ peut servir à tester si un objet possède une certaine
