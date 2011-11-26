@@ -6089,10 +6089,10 @@ définie en tant que propriété d'un objet, et appelée directement comme
 dans |objet.methode()|.
 
 > function parler(tirade) {
->   print("Le ", this.adjectif, " lapin dit « ", tirade, " »");
+>   print("Le lapin ", this.adjectif, " dit « ", tirade, " »");
 > }
 > var lapinBlanc = {adjectif: "blanc", parler: parler};
-> var grosLapin = {adjectif: "gros", parler: parler};
+> var grosLapin = {adjectif: "gras", parler: parler};
 >
 > lapinBlanc.parler("Par ma moustache et mes oreilles, comme il se fait tard !");
 > grosLapin.parler("J'ai bien envie d'une carotte, maintenant.");
@@ -6126,12 +6126,12 @@ voici un pour les lapins :
 > function Lapin(adjectif) {
 >   this.adjectif = adjectif;
 >   this.parler = function(tirade) {
->     print("Le ", this.adjectif, " lapin dit '", tirade, "'");
+>     print("Le lapin ", this.adjectif, " dit '", tirade, "'");
 >   };
 > }
 >
 > var lapinTueur = new Lapin("tueur");
-> lapinTueur.parler("GRAAAAAAAAAH!");
+> lapinTueur.parler("GRAAAAAAAAAH !");
 
 Il y a une convention, parmis les programmeurs JavaScript, qui consiste
 à faire débuter les noms de constructeurs par une lettre majuscule. Cela
@@ -6217,7 +6217,7 @@ propriétés et des méthodes à tous les objets basés dessus. Par exemple,
 il se peut que nos lapins aient soudainement besoin de danser.
 
 > Lapin.prototype.danser = function() {
->   print("Le ", this.adjectif, " lapin danse une jigue.");
+>   print("Le lapin ", this.adjectif, " danse une jigue.");
 > };
 >
 > lapinTueur.danser();
@@ -6231,7 +6231,7 @@ de |Rabbit| :
 >   this.adjectif = adjectif;
 > }
 > Lapin.prototype.parler = function(tirade) {
->   print("Le ", this.adjectif, " lapin dit '", tirade, "'");
+>   print("Le lapin ", this.adjectif, " dit '", tirade, "'");
 > };
 >
 > var noisetteLeLapin = new Lapin("noisette");
