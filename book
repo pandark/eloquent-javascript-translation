@@ -2679,7 +2679,7 @@ se passe.
 > }
 >
 > show(catNames("Nés le 20/09/2004 (de mère Yellow Bess): " +
->               "Doctor Hobbles the 2nd, Noog"));
+>               "Docteur Hobbles II, Noog"));
 
 La partie la plus délicate qui est ignorée par la description originale
 de l'algorithme, est le traitement des espaces après les deux-points
