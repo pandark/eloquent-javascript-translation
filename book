@@ -10984,10 +10984,10 @@ vous donnez le focus à un élément, par exemple en cliquant dessus. |blur|
 est le terme JavaScript pour « enlever le focus », et il est généré
 quand le focus est retiré d'un élément.
 
-> addHandler($("textfield"), "focus", function(event) {
+> addHandler($("champtexte"), "focus", function(event) {
 >   event.target.style.backgroundColor = "yellow";
 > });
-> addHandler($("textfield"), "blur", function(event) {
+> addHandler($("champtexte"), "blur", function(event) {
 >   event.target.style.backgroundColor = "";
 > });
 
@@ -10996,7 +10996,7 @@ est _|change|_. Il est généré quand le contenu d'une zone de saisie
 change... excepté pour certaines zones de saisie, comme les zones de texte,
 qui ne génèrent pas cet évènement avant que l'élément perde le focus.
 
-> addHandler($("textfield"), "change", function(event) {
+> addHandler($("champtexte"), "change", function(event) {
 >   print("Content of text field changed to '",
 >         event.target.value, "'.");
 > });
