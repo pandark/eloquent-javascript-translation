@@ -3427,7 +3427,7 @@ fonction |between| :
 
 Si le |start| et le |end| donnés n'apparaissent pas dans la chaîne, |indexOf|
 renverra |-1| et cette version de |between| retournera des absurdités :
-|between("Ta mère !", "{-", "-}")| renvoie |"a mère"|.
+|between("Île déserte", "{-", "-}")| renvoie |"le désert"|.
 
 Quand le programme s’exécute et que la fonction est appelée ainsi,
 le code qui l'a appelé obtiendra une chaîne, comme prévu, et continuera
