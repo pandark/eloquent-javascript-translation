@@ -660,7 +660,7 @@ minuscule) vaut |true| et les caractères non alphabétiques (« |!| »,
 principe sur lequel repose la comparaison est le standard _Unicode_. Ce
 dernier assigne un nombre à potentiellement tout caractère dont on peut
 avoir besoin, y compris les caractères spéciaux de langues comme le grec,
-l'arabe, le japonais, le tamoul, etc. Disposer de tels nombres est bien
+l'arabe, le japonais, le tamoul, et ainsi de suite. Disposer de tels nombres est bien
 pratique pour stocker des chaînes de caractères dans un ordinateur --
 vous pouvez les représenter comme une série de nombres. En comparant les
 chaînes, le JavaScript se contente de comparer les nombres associés aux
@@ -728,7 +728,7 @@ Il n'est pas toujours évident de savoir si des parenthères sont
 nécessaires. En pratique, on peut généralement s'en sortir en sachant que
 parmi tous les opérateurs rencontrés, |||| a la priorité la plus basse,
 viennent ensuite, dans l'ordre, |&&| puis les opérateurs de comparaisons
-(|>|, |==|, etc.) et enfin tout le reste. Ceci a été déterminé de telle
+(|>|, |==|, et cætera) et enfin tout le reste. Ceci a été déterminé de telle
 sorte que, dans les cas simples, on ne doive utiliser les parenthèses que
 si elles sont strictement nécessaires.
 
@@ -5286,7 +5286,7 @@ appelée _|any|_ (ou quelquefois |some|). Elle ressemble à ceci :
 et les soumet à une fonction de test. La première fois qu'elle renvoie
 une valeur comme |true|, cette valeur est renvoyée. Sinon, elle retourne
 |false|. Appeler |any(test, array)| est plus ou moins équivalent à
-|test(array[0]) || test(array[1]) || …| etc.
+|test(array[0]) || test(array[1]) || …| et cætera.
 
 ---
 
@@ -6145,7 +6145,7 @@ aurions pu écrire simplement :
 > function creerLapin(adjectif) {
 >   return {
 >     adjectif: adjectif,
->     parler: function(tirade) {/*etc*/}
+>     parler: function(tirade) {/*etc.*/}
 >   };
 > }
 >
@@ -10337,7 +10337,8 @@ Il est également parfois possible de déterminer quel bouton de la souris a
 été appuyé, en utilisant les propriétés _|which|_ et _|button|_ des objets
 événement. Malheureusement, on ne peut pas leur faire confiance : certains
 navigateurs prétendent que les souris n'ont qu'un bouton, d'autres signalent
-les clics droits comme des clics avec le touche control appuyée, etc.
+les clics droits comme des clics avec le touche control appuyée, et ainsi
+de suite.
 
 ---
 
