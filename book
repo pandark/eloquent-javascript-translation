@@ -4818,7 +4818,7 @@ un titre de document, renvoie un document HTML.
 >   return renduHTML(documentHtml(titre, corps));
 > }
 >
-> viewHTML(renduFichier(recluseFile(), "The Book of Programming"));
+> viewHTML(renduFichier(recluseFile(), "Le livre de programmation"));
 
 La méthode _|concat|_ des objets de type tableau sert à concaténer un
 tableau avec un autre, tout comme l'opérateur |+| le fait avec les chaînes
