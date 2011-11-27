@@ -2114,30 +2114,31 @@ dont la rumeur dit qu'elle vit avec cinquante chats (en fait personne n'arrive
 courant de ses exploits. Ils sont de la forme suivante :
 
 | Mon cher neveu,
-| Ta mère m'a dit que tu as commencé à faire du parachutisme. Est-ce
-| que c'est vrai ? Fais attention à toi, mon garçon ! Souviens-toi de
-| ce qui est arrivé à mon mari et ce n'était que du deuxième étage !
+| Ta mère m'a dit que tu t'es mis au parachutisme. Est-ce que c'est
+| vrai ? Fais bien attention à toi, jeune homme ! Tu te souviens de
+| ce qui est arrivé à mon mari ? Et c'était seulement du deuxième
+| étage !
 |
-| En tout cas, les choses sont très intéressantes de mon côté. J'ai
-| passé toute la semaine à essayer d'obtenir l'attention de Mr. Drake,
-| le sympathique monsieur qui a emménagé à côté, mais je pense qu'il a
-| peur des chats. À moins qu'il n'y soit allergique ? À la prochaine
-| rencontre, je vais essayer de poser Igor Le Gros sur son épaule. Je
-| suis curieuse de voir le résultat.
+| Quoi qu'il en soit, les choses sont très intéressantes de mon côté. J'ai
+| passé toute la semaine à essayer d'attirer l'attention de M. Drake,
+| le gentil monsieur qui a emménagé juste à côté, mais je pense qu'il a
+| peur des chats. À moins qu'il n'y soit allergique ? Je vais essayer de
+| poser Gros Igor sur son épaule la prochaine fois qu'il vient. Je suis
+| curieuse de voir le résultat.
 |
-| Par ailleurs, l'escroquerie dont je t'avais parlé fonctionne mieux
-| que je pensais. J'ai déjà récupéré cinq « paiements » et seulement
-| une seule plainte. Mais j'ai quelques remords malgré tout. Et tu as
-| sans doute raison de dire que c'est probablement illégal d'une
-| manière ou d'une autre.
+| Par ailleurs, l'arnaque dont je t'ai parlé fonctionne mieux que prévu.
+| J'ai déjà récupéré cinq « paiements » et seulement une seule réclamation.
+| Je commence malgré tout à avoir quelques remords. Et puis tu as sans
+| doute raison, ça doit être illégal d'une manière ou d'une autre.
 |
-| (…etc.)
+| (… etc. …)
 |
-| Grosses bises, Tante Émilie
+| Grosses bises,
+| Tante Émilie
 |
 | Mort le 27/04/2006 : Black Leclère
 |
-| Né le 05/04/2006 (mère Lady Pénélope) : Lion Rouge,
+| Né le 05/04/2006 (mère, Lady Pénélope) : Lion Rouge,
 | Docteur Hobbles III, Petit Iroquois
 
 Pour amuser cette vieille dame, vous voudriez garder une trace de la
@@ -2390,7 +2391,7 @@ faut, c'est une structure de chaînes de caractères distinctes.
 Les objets sont justement utilisés pour structurer des choses. On pourrait
 très bien créer un objet comme celui-ci :
 
-> var archiveDeMails = {"le premier e-mail": "Cher neveu, …",
+> var archiveDeMails = {"le premier e-mail": "Mon cher neveu, …",
 >                    "le deuxième e-mail": "…"
 >                    /* et ainsi de suite… */};
 
@@ -2398,7 +2399,7 @@ Mais parcourir les e-mails du début à la fin serait difficile — comment
 le programme peut-il deviner le nom de ces propriétés ? La solution est
 d'utiliser des noms de propriétés plus prévisibles :
 
-> var archiveDeMails = {0: "Cher neveu, … (mail numéro 1)",
+> var archiveDeMails = {0: "Mon cher neveu, … (mail numéro 1)",
 >                    1: "(mail numéro 2)",
 >                    2: "(mail numéro 3)"};
 >
@@ -2584,7 +2585,7 @@ la méthode _|charAt|_ pour obtenir un caractère particulier dans une chaîne.
 suite. Voici une façon de vérifier si une chaîne commence par « Né
 le» :
 
-> var paragraphe = "Né le  15/11/2003 (mère Spot) : Croc Blanc";
+> var paragraphe = "Né le  15/11/2003 (mère, Spot) : Croc Blanc";
 > show(paragraphe.charAt(0) == "N" && paragraphe.charAt(1) == "é" &&
 >      paragraphe.charAt(2) == " " && paragraphe.charAt(3) == "l" &&
 >      paragraphe.charAt(4) == "e");
@@ -2678,8 +2679,8 @@ se passe.
 >   return paragraph.slice(colon + 2).split(", ");
 > }
 >
-> show(catNames("Né le 20/09/2004 (de mère Yellow Bess): " +
->               "Docteur Hobbles II, Noog"));
+> show(catNames("Né le 20/09/2004 (mère, Bess la Jaune): " +
+>               "Docteur Hobbles II, Kaïra"));
 
 La partie la plus délicate qui est ignorée par la description originale
 de l'algorithme, est le traitement des espaces après les deux-points
@@ -3025,20 +3026,20 @@ utilisés pour regrouper un nombre limité de valeurs.
 Essayons donc maintenant d'extraire les noms des mamans chats qui se trouvent
 dans des paragraphes.
 
-] "né le 15/11/2003 (mère : Spot): Croc Blanc"
+] "né le 15/11/2003 (mère, Spot): Croc Blanc"
 
 Voici un moyen d'obtenir cela…
 
 > function extractMother(paragraphe) {
->   var start = paragraphe.indexOf("(mère ") + "(mère ".length;
+>   var start = paragraphe.indexOf("(mère, ") + "(mère, ".length;
 >   var end = paragraphe.indexOf(")");
 >   return paragraphe.slice(start, end);
 > }
 >
-> show(extractMother("Né le 15/11/2003 (mère Spot): Croc Blanc"));
+> show(extractMother("Né le 15/11/2003 (mère, Spot): Croc Blanc"));
 
 Notez comment la position de départ a dû être ajustée à la longueur de
-|"(mère "|, parce que |indexOf| renvoie la position initiale de la chaîne
+|"(mère, "|, parce que |indexOf| renvoie la position initiale de la chaîne
 et non la finale.
 
 ***
@@ -3049,7 +3050,7 @@ qui seront tous des chaînes. Elle renverra la partie du premier argument
 qui apparaît entre les chaînes fournies par le deuxième et le troisième
 argument.
 
-Ainsi, |between("Né le 15/11/2003 (mère Spot): Croc Blanc", "(mère ",
+Ainsi, |between("Né le 15/11/2003 (mère, Spot): Croc Blanc", "(mère, ",
 ")")|  donne |"Spot"|.
 
 |between("bu ] boo [ bah ] gzz", "[ ", " ]")| renvoie |"bah"|.
@@ -6289,7 +6290,7 @@ méthode |properties| de la manière suivante :
 >   return result;
 > };
 >
-> var test = {"Gros Igor": true, "Boule de feu": true};
+> var test = {"Gros Igor": true, "Boule de Feu": true};
 > show(test.properties());
 
 @_|forEachIn|_Et bien sûr, nous pouvons abstraire cela dans une fonction
@@ -8573,12 +8574,12 @@ et b) très difficiles à lire.
 
 Écrivez une expression régulière qui retrouve une date au format
 |"XX/XX/XXXX"|, dans laquelle les |X| sont des chiffres. Essayez sur cette
-chaîne |"né le 15/11/2003 (mère Spot): Croc Blanc"|.
+chaîne |"né le 15/11/2003 (mère, Spot): Croc Blanc"|.
 
 ///
 
 > var datePattern = /\d\d\/\d\d\/\d\d\d\d/;
-> show("né le 15/11/2003 (mère Spot): Croc Blanc".search(datePattern));
+> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(datePattern));
 
 ---
 
@@ -8625,7 +8626,7 @@ fois indiqué par le deuxième. De manière similaire, |{2,}| signifie deux
 occurrences ou plus tandis que |{,4}| signifie quatre occurrences ou moins.
 
 > var datePattern = /\d{1,2}\/\d\d?\/\d{4}/;
-> show("né le 15/11/2003 (mère Spot): Croc Blanc".search(datePattern));
+> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(datePattern));
 
 Les parties |/\d{1,2}/| et |/\d\d?/| signifient toutes deux « un ou deux
 chiffres ».
@@ -8715,7 +8716,7 @@ les dates dans lesquelles le jour ou le mois sont écrits avec un seul chiffre.
 >                   Number(found[1]));
 > }
 >
-> show(extractDate("né le 5/2/2007 (mère Noog): Long-ear Johnson"));
+> show(extractDate("né le 5/2/2007 (mère, Kaïra): Johnson Longues Oreilles"));
 
 Cette version est légèrement plus longue que la précédente mais elle a
 l'avantage de vérifier effectivement ce qui est fait et de faire retentir la
