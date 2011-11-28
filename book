@@ -3002,7 +3002,7 @@ Cela signifie que nos fonctions |addToSet| et |removeFromSet| sont devenues
 inutiles. Quelque chose de comparable est nécessaire, mais il s'agit de
 stocker aussi les dates de naissance et par la suite, les noms des mères.
 
-> function catRecord(nom, dateAnniversaire, mere) {
+> function catRecord(nom, dateNaissance, mere) {
 >   return {nom: nom, naissance: dateNaissance, mere: mere};
 > }
 >
