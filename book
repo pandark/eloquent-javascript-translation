@@ -2937,7 +2937,7 @@ comportement. Pour tester si deux dates sont égales, peut être fait de
 cette manière :
 
 > var chuteDuMur1 = new Date(1989, 10, 9),
-chuteduMur2 = new Date(1989, 10 ,9);
+> chuteduMur2 = new Date(1989, 10 ,9);
 > show(chuteDuMur1.getTime() == chuteDuMur2.getTime());
 
 ---
