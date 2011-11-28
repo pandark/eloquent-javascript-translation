@@ -2912,7 +2912,7 @@ cumulée depuis le 1er Janvier 1970. Vous pouvez imaginer que c'est un nombre
 assez impressionnant.
 
 > var  aujourdhui = new Date();
-> show(aujourdhui.getTile());
+> show(aujourdhui.getTime());
 
 Une chose très utile à faire avec les dates, c'est de les comparer.
 
