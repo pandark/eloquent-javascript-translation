@@ -2969,8 +2969,8 @@ pour argument, extrait la date et le renvoit sous la forme d'un objet date.
 >   function numberAt(start, length) {
 >     return Number(paragraph.slice(start, start + length));
 >   }
->   return new Date(numberAt(11, 4), numberAt(8, 2) - 1,
->                   numberAt(5, 2));
+>   return new Date(numberAt(14, 4), numberAt(11, 2) - 1,
+>                   numberAt(8, 2));
 > }
 >
 > show(extractDate("Mort le 27-04-2006 : Black Leclère"));
