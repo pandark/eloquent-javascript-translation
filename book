@@ -347,9 +347,8 @@ Pour les bouts de code plus importants, ceux qui s'étendent sur plusieurs
 lignes et que vous voulez conserver un peu, le champ de droite peut être
 utilisé. Le bouton « Lancer » est utilisé pour exécuter les programmes
 écrits dans ce champ. Il est possible d'avoir plusieurs programmes ouverts en
-même temps. Utilisez les boutons « Nouveau » et « Charger » pour
-ajouter un nouveau programme (vide ou depuis un fichier sur le web). Quand il
-y a plus d'un programme ouvert, le menu après le bouton « Lancer » peut
+même temps. Utilisez le bouton « Nouveau » pour ouvrir un nouveau programme.
+Quand il y a plus d'un programme ouvert, le menu après le bouton « Lancer » peut
 être utilisé pour choisir lequel est affiché. Le bouton « Fermer »,
 comme vous pouvez vous en douter, ferme un programme.
 
