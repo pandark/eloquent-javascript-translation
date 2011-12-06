@@ -1290,9 +1290,9 @@ boucle. Cela signifie qu'elle est dépendante de l'instruction |break| qui
 est à l'intérieur pour pouvoir s'arrêter. Le même programme aurait pu
 s'écrire aussi simplement…
 
-> for (var current = 20; current % 7 != 0; current++)
+> for (var courant = 20; courant % 7 != 0; courant++)
 >   ;
-> print(current);
+> print(courant);
 
 Dans ce cas, le corps de la boucle est vide. Un point-virgule isolé peut
 être utilisé pour produire une instruction vide. Ici, le seul effet de la
