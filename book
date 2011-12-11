@@ -1713,9 +1713,9 @@ est contrôlé en premier, et ensuite, seulement si la variable n'existe pas
 là, on la cherche dans l'environnement global. Cela permet à une variable
 à l'intérieur d'une fonction de _masquer_ une variable globale du même nom.
 
-> function alertEstPrint(value) {
+> function alertEstPrint(valeur) {
 >   var alert = print;
->   alert(value);
+>   alert(valeur);
 > }
 >
 > alertEstPrint("Troglodytes");
