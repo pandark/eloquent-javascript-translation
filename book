@@ -2985,7 +2985,7 @@ de donner la |Date| au constructeur (le numéro du jour ne relève pas du
 même problème, puisque les objets |Date| compte les jours de la façon
 humaine habituelle).
 
-Dans le \\cregexp,, nous verrons une façon plus pratique et plus sûre
+Dans le \\cregexp, nous verrons une façon plus pratique et plus sûre
 d'extraire des parties de chaînes qui ont une structure déterminée.
 
 ---
