@@ -1816,15 +1816,15 @@ des variables venant d'une fonction l'englobant, une fonction interne peut
 besoin de plusieurs fonctions différentes mais similaires, l'une d'entre
 elles ajoutant 2 à son argument, l'autre ajoutant 5 et ainsi de suite.
 
-> function makeAddFunction(quantite) {
+> function creerFonctionAjouter(quantite) {
 >   function ajouter(nombre) {
 >     return nombre + quantite;
 >   }
 >   return ajouter;
 > }
 >
-> var ajouterDeux = makeAddFunction(2);
-> var ajouterCinq = makeAddFunction(5);
+> var ajouterDeux = creerFonctionAjouter(2);
+> var ajouterCinq = creerFonctionAjouter(5);
 > show(ajouterDeux(1) + ajouterCinq(1));
 
 Pour vous rendre compte de cela, vous ne devez pas considérer que les
@@ -1834,16 +1834,16 @@ c'est assez évident. Mais une fonction définie à l'intérieur d'une autre
 fonction conserve l'accès à l'environnement existant dans cette fonction
 à l'instant où elle a été définie.
 
-Par conséquent, la fonction |add| de l'exemple au-dessus, qui est crée
-lorsque |makeAddFunction| est appelée, capture un environnement dans lequel
-|amount| a une certaine valeur. Il empaquette cet environnement avec le
-calcul |return number + amount| à l'intérieur d'une valeur qui est alors
+Par conséquent, la fonction |ajouter| de l'exemple au-dessus, qui est crée
+lorsque |creerFonctionAjouter| est appelée, capture un environnement dans lequel
+|quantite| a une certaine valeur. Il empaquette cet environnement avec le
+calcul |return nombre + quantite| à l'intérieur d'une valeur qui est alors
 retournée depuis la fonction extérieur.
 
-Lorsque cette fonction renvoyée (|addTwo| ou |addFive|) est appelée, un
-nouvel environnement — dans lequel la variable |number| a une valeur —
+Lorsque cette fonction renvoyée (|ajouterDeux| ou |aujouterCinq|) est appelée, un
+nouvel environnement — dans lequel la variable |nombre| a une valeur —
 est créé comme un sous-environnement de l'environnement capturé (dans
-lequel |amount| a une valeur). Ces deux valeurs sont ajoutées, et le
+lequel |quantite| a une valeur). Ces deux valeurs sont ajoutées, et le
 résultat est renvoyé.
 
 ---
@@ -2042,15 +2042,15 @@ structure générale de |var add = 22;| et donc nécessite un point-virgule.
 
 Ce type de valeur est appelé _fonction anonyme_, parce que la fonction
 définie n'a alors pas de nom. Parfois il est inutile de donner un nom aux
-fonctions, comme dans l'exemple précédant de |makeAddFunction| :
+fonctions, comme dans l'exemple précédant de |creerFonctionAjouter| :
 
-> function makeAddFunction(amount) {
->   return function (number) {
->     return number + amount;
+> function creerFonctionAjouter(quantite) {
+>   return function (nombre) {
+>     return nombre + quantite;
 >   };
 > }
 
-Puisque dans la première version de |makeAddFunction|, la fonction |add| n'a
+Puisque dans la première version de |creerFonctionAjouter|, la fonction |ajouter| n'a
 servi qu'une fois, le nom n'est pas nécessaire et nous pouvons directement
 retourner la valeur de la fonction.
 
@@ -3876,7 +3876,7 @@ par des fonctions passées à la fonction algorithme.
 Les fonctions qui opèrent sur d'autres fonctions sont appelées @_fonction
 d'ordre supérieur_fonctions d'ordre supérieur. En opérant sur d'autres
 fonctions, elles peuvent décrire des actions à un niveau supérieur. La
-fonction |makeAddFunction| dans le \\cfunctions est aussi une fonction
+fonction |creerFonctionAjouter| dans le \\cfunctions est aussi une fonction
 d'ordre supérieur. Au lieu de prendre une valeur de fonction comme
 argument, elle construit une nouvelle fonction.
 
@@ -4851,7 +4851,7 @@ ces fonctions :
 
 Nous pouvons donc écrire |reduce(op["+"], 0, [1, 2, 3, 4, 5])| pour faire la
 somme d'un tableau. Mais que se passe-t-il si nous avons besoin de quelque
-chose comme |equals| ou |makeAddFunction|, dans lequel un des arguments a
+chose comme |equals| ou |creerFonctionAjouter|, dans lequel un des arguments a
 déjà cette valeur ? Dans ce cas nous voilà revenus à l'écriture d'une
 nouvelle fonction.
 
