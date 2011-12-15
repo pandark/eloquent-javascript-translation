@@ -8196,7 +8196,7 @@ tel que |FunctionalTools|, l'interface est généralement constituée de
 toutes les fonctions qui sont définies dans le module. Dans d'autres cas,
 l'interface du module n'est qu'une petite partie des fonctions définies
 à l'intérieur. Par exemple, notre système de manuscrit-vers-HTML dans
-le \\cfp n'a besoin d'interface que pour une seule fonction, |renderFile|
+le \\cfp n'a besoin d'interface que pour une seule fonction, |renduFichier|
 (le sous-système pour créer le HTML serait un module distinct).
 
 Pour les modules qui ne définissent qu'un seul type d'objet, comme
