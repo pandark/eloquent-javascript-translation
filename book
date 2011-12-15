@@ -1418,13 +1418,13 @@ dans beaucoup de situations d'omettre les comparaisons explicites. Si on
 sait qu'une variable contient une chaîne de caractères ou |null|, elle
 peut être utilisée pour une vérification de façon très simple…
 
-> var maybeNull = null;
-> // …code mystérieux qui pourrait affecter une chaîne à maybeNull…
-> if (maybeNull)
->   print("maybeNull possède une valeur");
+> var peutEtreNull = null;
+> // …code mystérieux qui pourrait affecter une chaîne à peutEtreNull…
+> if (peutEtreNull)
+>   print("peutEtreNull possède une valeur");
 
 Notons l'exception où le code mystérieux affecterait la valeur |""| à
-|maybeNull|. Une chaîne vide est fausse, donc rien ne sera affiché. Cette
+|peutEtreNull|. Une chaîne vide est fausse, donc rien ne sera affiché. Cette
 méthode peut donc être *mauvaise*, en fonction de ce que vous voulez
 faire. C'est donc souvent une bonne idée d'ajouter |=== null| ou |=== false|
 dans des cas comme celui-ci, pour éviter des erreurs subtiles. Ce commentaire
