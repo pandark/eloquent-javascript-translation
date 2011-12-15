@@ -2056,7 +2056,7 @@ retourner la valeur de la fonction.
 
 ***
 
-Écrivez une fonction |greaterThan|, qui prend un nombre en argument
+Écrivez une fonction |plusGrandQue|, qui prend un nombre en argument
 et retourne une fonction qui représente un test. Quand cette nouvelle
 fonction est appelée avec un simple nombre comme argument, elle retourne
 un booléen : |true| si le nombre donné est plus grand que le nombre
@@ -2064,14 +2064,14 @@ utilisé pour créer la fonction, et |false| sinon.
 
 ///
 
-> function greaterThan(x) {
+> function plusGrandQue(x) {
 >   return function(y) {
 >     return y > x;
 >   };
 > }
 >
-> var greaterThanTen = greaterThan(10);
-> show(greaterThanTen(9));
+> var plusGrandQueDix = plusGrandQue(10);
+> show(plusGrandQueDix(9));
 
 ---
 
