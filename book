@@ -2031,14 +2031,14 @@ attendue, il est considéré comme une expression qui produit une valeur de
 type fonction. Les fonctions créées de cette façon n'ont même pas besoin
 d'être nommées (bien qu'il soit autorisé de le faire).
 
-> var add = function(a, b) {
+> var ajoute = function(a, b) {
 >   return a + b;
 > };
-> show(add(5, 5));
+> show(ajoute(5, 5));
 
-Notez le point-virgule après la définition de |add|. Les définitions
+Notez le point-virgule après la définition de |ajoute|. Les définitions
 normales de fonctions n'en ont pas besoin, mais cette instruction a la
-structure générale de |var add = 22;| et donc nécessite un point-virgule.
+structure générale de |var ajoute = 22;| et donc nécessite un point-virgule.
 
 Ce type de valeur est appelé _fonction anonyme_, parce que la fonction
 définie n'a alors pas de nom. Parfois il est inutile de donner un nom aux
