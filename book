@@ -2659,7 +2659,7 @@ gèrent les différentes sortes de paragraphes puissent l'utiliser.
 
 ***
 
-Savez-vous écrire une fonction |nomChats| qui prenne un paragraphe comme
+Savez-vous écrire une fonction |nomDesChats| qui prenne un paragraphe comme
 argument et renvoie un tableau de noms ?
 
 Les chaînes ont une méthode _|indexOf|_que l'on peut utiliser pour trouver la
@@ -2673,12 +2673,12 @@ se passe.
 
 ///
 
-> function catNames(paragraph) {
->   var colon = paragraph.indexOf(":");
->   return paragraph.slice(colon + 2).split(", ");
+> function nomDesChats(paragraphe) {
+>   var deuxPoints = paragraphe.indexOf(":");
+>   return paragraphe.slice(deuxPoints + 2).split(", ");
 > }
 >
-> show(catNames("Né le 20/09/2004 (mère, Bess la Jaune): " +
+> show(nomDesChats("Né le 20/09/2004 (mère, Bess la Jaune): " +
 >               "Docteur Hobbles II, Kaïra"));
 
 La partie la plus délicate qui est ignorée par la description originale
@@ -2697,33 +2697,33 @@ Tout ce qui nous reste à faire maintenant, c'est de rassembler les pièces
 du puzzle. Voici une façon de s'y prendre :
 
 > var archiveDeMails = recupererLesMails();
-> var livingCats = {"Spot": true};
+> var chatsVivants = {"Spot": true};
 >
 > for (var mail = 0; mail < archiveDeMails.length; mail++) {
->   var paragraphs = archiveDeMails[mail].split("\n");
->   for (var paragraph = 0;
->        paragraph < paragraphs.length;
->        paragraph++) {
->     if (startsWith(paragraphs[paragraph], "Né le")) {
->       var names = catNames(paragraphs[paragraph]);
->       for (var name = 0; name < names.length; name++)
->         livingCats[names[name]] = true;
+>   var paragraphes = archiveDeMails[mail].split("\n");
+>   for (var paragraphe = 0;
+>        paragraphe < paragraphes.length;
+>        paragraphe++) {
+>     if (startsWith(paragraphes[paragraphe], "Né le")) {
+>       var noms = nomDesChats(paragraphes[paragraphe]);
+>       for (var nom = 0; nom < noms.length; nom++)
+>         chatsVivants[noms[nom]] = true;
 >     }
->     else if (startsWith(paragraphs[paragraph], "Mort le")) {
->       var names = catNames(paragraphs[paragraph]);
->       for (var name = 0; name < names.length; name++)
->         delete livingCats[names[name]];
+>     else if (startsWith(paragraphes[paragraphe], "Mort le")) {
+>       var noms = nomDesChats(paragraphes[paragraphe]);
+>       for (var nom = 0; nom < noms.length; noms++)
+>         delete chatsVivants[noms[nom]];
 >     }
 >   }
 > }
 >
-> show(livingCats);
+> show(chatsVivants);
 
 Voilà un bloc de code assez copieux et dense. Nous allons voir tout de
 suite comment l'alléger un peu. Mais d'abord jetons un coup d'œil aux
 résultats. Nous savons comment vérifier si un chat particulier a survécu :
 
-> if ("Spot" in livingCats)
+> if ("Spot" in chatsVivants)
 >   print("Spot est vivant !");
 > else
 >   print("Ce bon vieux Spot, qu'il repose en paix.");
@@ -2732,8 +2732,8 @@ Mais comment allons-nous faire pour dresser la liste de tous les chats
 vivants ? Le mot-clé _|in|_ a une signification légèrement différente
 lorsqu'il est utilisé avec |for| :
 
-> for (var cat in livingCats)
->   print(cat);
+> for (var chat in chatsVivants)
+>   print(chat);
 
 Une boucle comme celle-là va parcourir les noms des propriétés d'un objet,
 ce qui nous permettra d'énumérer tous les noms de notre ensemble.
@@ -2747,7 +2747,7 @@ vides. Cela améliore la lisibilité, mais ne résout pas véritablement
 le problème.
 
 Ce qu'il nous faut ici, c'est casser le code. Nous avons déjà écrit deux
-fonctions d'aide, |startsWith| et |catNames|, qui toutes deux résolvent
+fonctions d'aide, |startsWith| et |nomDesChats|, qui toutes deux résolvent
 une petite partie du problème de façon compréhensible. Continuons sur
 cette lancée.
 
@@ -2765,26 +2765,26 @@ Ces deux fonctions traitent de l'ajout et de la suppression des noms dans
 l'ensemble. Ce qui supprime déjà les deux plus importantes boucles internes
 de la solution :
 
-> var livingCats = {Spot: true};
+> var chatsVivants = {Spot: true};
 >
 > for (var mail = 0; mail < archiveDeMails.length; mail++) {
->   var paragraphs = archiveDeMails[mail].split("\n");
->   for (var paragraph = 0;
->        paragraph < paragraphs.length;
->        paragraph++) {
->     if (startsWith(paragraphs[paragraph], "Né le"))
->       addToSet(livingCats, catNames(paragraphs[paragraph]));
->     else if (startsWith(paragraphs[paragraph], "Mort le"))
->       removeFromSet(livingCats, catNames(paragraphs[paragraph]));
+>   var paragraphes = archiveDeMails[mail].split("\n");
+>   for (var paragraphe = 0;
+>        paragraphe < paragraphes.length;
+>        paragraphe++) {
+>     if (startsWith(paragraphes[paragraphe], "Né le"))
+>       addToSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
+>     else if (startsWith(paragraphes[paragraphe], "Mort le"))
+>       removeFromSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
 >   }
 > }
 
 C'est un sacré progrès, si je peux me permettre.
 Pourquoi |addToSet| et |removeFromSet| prennent-ils l'ensemble comme
-argument ? Ils pourraient utiliser la variable |livingCats| directement,
+argument ? Ils pourraient utiliser la variable |chatsVivants| directement,
 s'ils le voulaient. La raison, c'est que de cette façon elles ne sont pas
 totalement liées à notre problème. Si |addToSet| changeait directement
-|livingCats|, il faudrait l'appeler |addCatsToCatSet| (ajouter des chats à
+|chatsVivants|, il faudrait l'appeler |addCatsToCatSet| (ajouter des chats à
 l'ensemble des chats) ou quelque chose comme ça. Tel que nous l'utilisons,
 c'est un outil utile pour des cas plus généraux.
 
@@ -2792,7 +2792,7 @@ Même si nous ne devions jamais utiliser ces fonctions pour quoi que ce
 soit d'autre, ce qui est très probable, il est utile de les décrire de
 cette façon. Car elles se « suffisent à elles-même », on peut les
 lire et les comprendre, sans avoir besoin de connaître une variable externe
-nommée |livingCats|.
+nommée |chatsVivants|.
 
 Les fonctions ne sont pas pures : elles modifient l'objet qui a été passé
 en premier argument (|set|). Cela rend les choses un peu plus délicates
@@ -2804,43 +2804,43 @@ comme ça leur chante.
 
 Nous continuons à découper l'algorithme en petites unités :
 
-> function findLivingCats() {
+> function chercheChatsVivants() {
 >   var archiveDeMails = recupererLesMails();
->   var livingCats = {"Spot": true};
+>   var chatsVivants = {"Spot": true};
 >
->   function handleParagraph(paragraph) {
->     if (startsWith(paragraph, "Né le"))
->       addToSet(livingCats, catNames(paragraph));
->     else if (startsWith(paragraph, "Mort le"))
->       removeFromSet(livingCats, catNames(paragraph));
+>   function traiteParagraphe(paragraphe) {
+>     if (startsWith(paragraphe, "Né le"))
+>       addToSet(chatsVivants, nomDesChats(paragraphe));
+>     else if (startsWith(paragraphe, "Mort le"))
+>       removeFromSet(chatsVivants, nomDesChats(paragraphe));
 >   }
 >
 >   for (var mail = 0; mail < archiveDeMails.length; mail++) {
->     var paragraphs = archiveDeMails[mail].split("\n");
->     for (var i = 0; i < paragraphs.length; i++)
->       handleParagraph(paragraphs[i]);
+>     var paragraphes = archiveDeMails[mail].split("\n");
+>     for (var i = 0; i < paragraphes.length; i++)
+>       traiteParagraphe(paragraphes[i]);
 >   }
->   return livingCats;
+>   return chatsVivants;
 > }
 >
-> var howMany = 0;
-> for (var cat in findLivingCats())
->   howMany++;
-> print("Il y a ", howMany, " chats.");
+> var combien = 0;
+> for (var chat in chercheChatsVivants())
+>   combien++;
+> print("Il y a ", combien, " chats.");
 
 La totalité de l'algoritme est encapsulée dans une fonction. Cela signifie
 qu'elle ne laisse rien traîner en vrac derrière elle après exécution :
-|livingCats| est maintenant une variable locale dans la fonction et non plus
+|chatsVivants| est maintenant une variable locale dans la fonction et non plus
 une variable globale, si bien qu'elle n'existe que pendant que la fonction
-s'exécute. Le code qui a besoin de cet ensemble peut appeler |findLivingCats|
+s'exécute. Le code qui a besoin de cet ensemble peut appeler |chercheChatsVivants|
 et utiliser la valeur qu'il renvoie.
 
-Il me semble que faire de |handleParagraph| une fonction distincte peut
+Il me semble que faire de |traiteParagraphe| une fonction distincte peut
 aussi clarifier les choses. Mais celle-ci est si étroitement liée à
 l'algorithme-des-chats qu'elle n'aurait aucun sens dans une autre situation. De
-plus, elle a besoin d'accéder à la variable |livingCats|. C'est donc
+plus, elle a besoin d'accéder à la variable |chatsVivants|. C'est donc
 une candidate parfaite pour devenir une fonction à l'intérieur d'une
-fonction. Quand elle existe à l'intérieur de |findLivingCats|, il est
+fonction. Quand elle existe à l'intérieur de |chercheChatsVivants|, il est
 clair qu'elle n'est pertinente que là et qu'elle a accès aux variables de
 sa fonction parente.
 
@@ -3001,20 +3001,20 @@ Cela signifie que nos fonctions |addToSet| et |removeFromSet| sont devenues
 inutiles. Quelque chose de comparable est nécessaire, mais il s'agit de
 stocker aussi les dates de naissance et par la suite, les noms des mères.
 
-> function catRecord(nom, dateNaissance, mere) {
+> function enregistrementChat(nom, dateNaissance, mere) {
 >   return {nom: nom, naissance: dateNaissance, mere: mere};
 > }
 >
-> function addCats(set, noms, dateNaissance, mere) {
+> function ajouteChats(set, noms, dateNaissance, mere) {
 >   for (var i = 0; i < noms.length; i++)
->     set[names[i]] = catRecord(noms[i], dateNaissance, mere);
+>     set[noms[i]] = enregistrementChat(noms[i], dateNaissance, mere);
 > }
-> function deadCats(set, noms, dateDeces) {
+> function chatsDecedes(set, noms, dateDeces) {
 >   for (var i = 0; i < noms.length; i++)
->     set[names[i]].deces = dateDeces;
+>     set[noms[i]].décès = dateDeces;
 > }
 
-|catRecord| est une fonction distincte pour créer ces objets de stockage. Elle
+|enregistrementChat| est une fonction distincte pour créer ces objets de stockage. Elle
 pourrait être utile dans d'autres situations, telles que la création d'un
 objet pour Spot. « Record » (« enregistrement » en français)
 est le terme qu'on emploie couramment pour des objets de ce type, qui sont
@@ -3073,35 +3073,35 @@ Avoir la fonction |between| rend possible l'expression de extractMother de
 façon plus simple :
 
 > function extractMother(paragraph) {
->   return between(paragraph, "(mother ", ")");
+>   return between(paragraph, "(mère ", ")");
 > }
 
 ---
 
 Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 
-> function findCats() {
+> function chercheChats() {
 >   var archiveDeMails = recupererLesMails();
->   var cats = {"Spot": catRecord("Spot", new Date(1997, 2, 5),
+>   var chats = {"Spot": enregistrementChat("Spot", new Date(1997, 2, 5),
 >               "inconnue")};
 >
->   function handleParagraph(paragraph) {
->     if (startsWith(paragraph, "Né le"))
->       addCats(cats, catNames(paragraph), extractDate(paragraph),
->               extractMother(paragraph));
->     else if (startsWith(paragraph, "Mort le"))
->       deadCats(cats, catNames(paragraph), extractDate(paragraph));
+>   function traiteParagraphe(paragraphe) {
+>     if (startsWith(paragraphe, "Né le"))
+>       ajouteChats(chats, nomDesChats(paragraphe), extractDate(paragraphe),
+>               extractMother(paragraphe));
+>     else if (startsWith(paragraphe, "Mort le"))
+>       chatsDecedes(chats, nomDesChats(paragraphe), extractDate(paragraphe));
 >   }
 >
 >   for (var mail = 0; mail < archiveDeMails.length; mail++) {
->     var paragraphs = archiveDeMails[mail].split("\n");
->     for (var i = 0; i < paragraphs.length; i++)
->       handleParagraph(paragraphs[i]);
+>     var paragraphes = archiveDeMails[mail].split("\n");
+>     for (var i = 0; i < paragraphes.length; i++)
+>       traiteParagraphe(paragraphes[i]);
 >   }
->   return cats;
+>   return chats;
 > }
 >
-> var catData = findCats();
+> var tousLesChats = chercheChats();
 
 Avoir ces données supplémentaires nous permet d'avoir finalement une idée
 plus précise des chats dont parle tante Émilie. Une fonction comme celle-ci
@@ -3112,21 +3112,21 @@ pourrait être utile :
 >          "/" + date.getFullYear();
 > }
 >
-> function catInfo(data, name) {
->   if (!(name in data))
->     return "Aucun chat s'appelant " + name + " n'a été trouvé.";
+> function renseignementSurChat(data, nom) {
+>   if (!(nom in data))
+>     return "Aucun chat s'appelant " + nom + " n'a été trouvé.";
 >
->   var cat = data[name];
->   var message = name + ", né le " + formatDate(cat.birth) +
->                 " de la mère " + cat.mother;
->   if ("death" in cat)
->     message += ", mort le " + formatDate(cat.death);
+>   var chat = data[nom];
+>   var message = nom + ", né le " + formatDate(chat.naissance) +
+>                 " de la mère " + chat.mere;
+>   if ("décès" in chat)
+>     message += ", décédé le " + formatDate(chat.décès);
 >   return message + ".";
 > }
 >
-> print(catInfo(catData, "Igor Le Gros"));
+> print(renseignementSurChat(tousLesChats, "Igor Le Gros"));
 
-La première instruction |return| dans |catInfo| est utilisée comme issue de
+La première instruction |return| dans |renseignementSurChat| est utilisée comme issue de
 secours. Si aucune donnée n'est fournie sur un chat particulier, le reste
 de la fonction est dépourvu de sens, nous renvoyons donc immédiatement
 une valeur qui empêche le reste du code de s'exécuter.
@@ -3142,7 +3142,7 @@ l'instruction |return|.
 
 ***
 
-La fonction |formatDate| utilisée par |catInfo| n'ajoute pas de zéro avant
+La fonction |formatDate| utilisée par |renseignementSurChat| n'ajoute pas de zéro avant
 la partie mois et jour quand ce sont des nombres à un seul chiffre. Écrivez
 une nouvelle version qui fera cela.
 
@@ -3162,28 +3162,28 @@ une nouvelle version qui fera cela.
 
 ***
 
-Écrivez une fonction |oldestCat| qui, étant donné un objet ayant des
+Écrivez une fonction |lePlusVieuxChat| qui, étant donné un objet ayant des
 chats comme arguments, renvoie le nom du plus vieux chat vivant.
 
 ///
 
-> function oldestCat(data) {
->   var oldest = null;
+> function lePlusVieuxChat(data) {
+>   var lePlusVieux = null;
 >
->   for (var name in data) {
->     var cat = data[name];
->     if (!("deces" in cat) &&
->         (oldest == null || oldest.birth > cat.birth))
->       oldest = cat;
+>   for (var nom in data) {
+>     var chat = data[nom];
+>     if (!("décès" in chat) &&
+>         (lePlusVieux == null || lePlusVieux.naissance > chat.naissance))
+>       lePlusVieux = chat;
 >   }
 >
->   if (oldest == null)
+>   if (lePlusVieux == null)
 >     return null;
 >   else
->     return oldest.name;
+>     return lePlusVieux.nom;
 > }
 >
-> print(oldestCat(catData));
+> print(lePlusVieuxChat(tousLesChats));
 
 La condition donnée avec la commande |if| pourrait paraître un peu intimidante.
 On peut la lire comme : «  ne stocker le chat courant dans la variable
@@ -3849,13 +3849,13 @@ passé à |forEach| directement.
 
 Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
-!> var paragraphs = archiveDeMails[mail].split("\n");
-!> for (var i = 0; i < paragraphs.length; i++)
-!>   handleParagraph(paragraphs[i]);
+!> var paragraphes = archiveDeMails[mail].split("\n");
+!> for (var i = 0; i < paragraphes.length; i++)
+!>   traiteParagraphe(paragraphs[i]);
 
 Il peut maintenant être écrit de la façon suivante :
 
-!>  forEach(archiveDeMails[mail].split("\n"), handleParagraph);
+!>  forEach(archiveDeMails[mail].split("\n"), traiteParagraphe);
 
 Au final, une construction plus abstraite (ou « de plus haut niveau »)
 correspond à plus d'informations et à moins de bruits parasites : Le
