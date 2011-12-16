@@ -6059,7 +6059,7 @@ objets sont vus comme des microcosmes indépendants, qui ne communiquent avec
 l'extérieur qu'à travers un nombre limité d'_interface_s, un ensemble de
 méthodes et propriétés spécifiques. La « liste des nœuds atteints »
 utilisée à la fin du \\csearch en est un exemple : nous avons utilisé
-trois fonctions, |makeReachedList|, |storeReached| et |findReached| pour
+trois fonctions, |creeListePointsAtteints|, |enregistrePointAtteint| et |cherchePointAtteint| pour
 interagir avec. Ces trois fonctions forment une interface pour ces objets.
 
 Les objets |Date|, |Error| et |BinaryHeap| que nous avons vus fonctionnent
