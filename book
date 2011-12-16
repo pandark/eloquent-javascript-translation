@@ -1418,13 +1418,13 @@ dans beaucoup de situations d'omettre les comparaisons explicites. Si on
 sait qu'une variable contient une chaîne de caractères ou |null|, elle
 peut être utilisée pour une vérification de façon très simple…
 
-> var maybeNull = null;
-> // …code mystérieux qui pourrait affecter une chaîne à maybeNull…
-> if (maybeNull)
->   print("maybeNull possède une valeur");
+> var peutEtreNull = null;
+> // …code mystérieux qui pourrait affecter une chaîne à peutEtreNull…
+> if (peutEtreNull)
+>   print("peutEtreNull possède une valeur");
 
 Notons l'exception où le code mystérieux affecterait la valeur |""| à
-|maybeNull|. Une chaîne vide est fausse, donc rien ne sera affiché. Cette
+|peutEtreNull|. Une chaîne vide est fausse, donc rien ne sera affiché. Cette
 méthode peut donc être *mauvaise*, en fonction de ce que vous voulez
 faire. C'est donc souvent une bonne idée d'ajouter |=== null| ou |=== false|
 dans des cas comme celui-ci, pour éviter des erreurs subtiles. Ce commentaire
@@ -1514,7 +1514,7 @@ comme cela ? Cela s'avère très pratique. Considérons l'exemple suivant :
 Si l'utilisateur presse « Annuler » ou ferme la fenêtre de dialogue sans
 donner de nom, la variable |input| prendra la valeur |null| ou |""|. Ces deux
 donneront |false| en essayant de convertir en booléen. L'expression |input ||
-"cher ami"| peut être lue dans ce cas commme « la valeur de la variable
+"cher ami"| peut être lue dans ce cas comme « la valeur de la variable
 |input|, sinon la chaîne |"cher ami"| ». C'est une manière simple de
 fournir une valeur de secours.
 
@@ -2031,14 +2031,14 @@ attendue, il est considéré comme une expression qui produit une valeur de
 type fonction. Les fonctions créées de cette façon n'ont même pas besoin
 d'être nommées (bien qu'il soit autorisé de le faire).
 
-> var add = function(a, b) {
+> var ajoute = function(a, b) {
 >   return a + b;
 > };
-> show(add(5, 5));
+> show(ajoute(5, 5));
 
-Notez le point-virgule après la définition de |add|. Les définitions
+Notez le point-virgule après la définition de |ajoute|. Les définitions
 normales de fonctions n'en ont pas besoin, mais cette instruction a la
-structure générale de |var add = 22;| et donc nécessite un point-virgule.
+structure générale de |var ajoute = 22;| et donc nécessite un point-virgule.
 
 Ce type de valeur est appelé _fonction anonyme_, parce que la fonction
 définie n'a alors pas de nom. Parfois il est inutile de donner un nom aux
@@ -2056,7 +2056,7 @@ retourner la valeur de la fonction.
 
 ***
 
-Écrivez une fonction |greaterThan|, qui prend un nombre en argument
+Écrivez une fonction |plusGrandQue|, qui prend un nombre en argument
 et retourne une fonction qui représente un test. Quand cette nouvelle
 fonction est appelée avec un simple nombre comme argument, elle retourne
 un booléen : |true| si le nombre donné est plus grand que le nombre
@@ -2064,14 +2064,14 @@ utilisé pour créer la fonction, et |false| sinon.
 
 ///
 
-> function greaterThan(x) {
+> function plusGrandQue(x) {
 >   return function(y) {
 >     return y > x;
 >   };
 > }
 >
-> var greaterThanTen = greaterThan(10);
-> show(greaterThanTen(9));
+> var plusGrandQueDix = plusGrandQue(10);
+> show(plusGrandQueDix(9));
 
 ---
 
@@ -8196,7 +8196,7 @@ tel que |FunctionalTools|, l'interface est généralement constituée de
 toutes les fonctions qui sont définies dans le module. Dans d'autres cas,
 l'interface du module n'est qu'une petite partie des fonctions définies
 à l'intérieur. Par exemple, notre système de manuscrit-vers-HTML dans
-le \\cfp n'a besoin d'interface que pour une seule fonction, |renderFile|
+le \\cfp n'a besoin d'interface que pour une seule fonction, |renduFichier|
 (le sous-système pour créer le HTML serait un module distinct).
 
 Pour les modules qui ne définissent qu'un seul type d'objet, comme
