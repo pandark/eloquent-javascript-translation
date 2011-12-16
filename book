@@ -1964,26 +1964,26 @@ puis en ajoutant deux fois 5. Par contre, on ne peut pas obtenir le nombre 15.
 
 Voici la solution :
 
-> function chercheSequence(objectif) {
->   function cherche(debut, historique) {
+> function trouverSequence(objectif) {
+>   function trouver(debut, historique) {
 >     if (debut == objectif)
 >       return historique;
 >     else if (debut > objectif)
 >       return null;
 >     else
->       return cherche(debut + 5, "(" + historique + " + 5)") ||
->              cherche(debut * 3, "(" + historique + " * 3)");
+>       return trouver(debut + 5, "(" + historique + " + 5)") ||
+>              trouver(debut * 3, "(" + historique + " * 3)");
 >   }
->   return cherche(1, "1");
+>   return trouver(1, "1");
 > }
 >
-> print(chercheSequence(24));
+> print(trouverSequence(24));
 
 Notez que le programme ne trouve pas forcément la plus *courte* suite
 d'opérations, il estime avoir rempli sa mission dès qu'il trouve une
 combinaison quelconque d'opérations.
 
-La fonction interne |cherche|, en s'appelant elle-même de deux façons
+La fonction interne |trouver|, en s'appelant elle-même de deux façons
 différentes, explore à la fois la possibilité d'ajouter 5 au nombre
 courant et celle de le multiplier par 3. Quand le nombre voulu est trouvé,
 elle renvoie la chaîne |historique|, qui est utilisée pour enregistrer tous
@@ -1998,9 +1998,9 @@ L'utilisation de l'opérateur |||| dans l'exemple peut être compris comme
 peut aussi écrire d'une façon plus verbeuse de la façon suivante :
 
 !> else {
-!>   var trouve = cherche(debut + 5, "(" + historique + " + 5)");
+!>   var trouve = trouver(debut + 5, "(" + historique + " + 5)");
 !>   if (trouve == null)
-!>     trouve = cherche(debut * 3, historique + " * 3");
+!>     trouve = trouver(debut * 3, historique + " * 3");
 !>   return trouve;
 !> }
 
