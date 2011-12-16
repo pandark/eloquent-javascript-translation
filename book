@@ -2031,14 +2031,14 @@ attendue, il est considéré comme une expression qui produit une valeur de
 type fonction. Les fonctions créées de cette façon n'ont même pas besoin
 d'être nommées (bien qu'il soit autorisé de le faire).
 
-> var ajoute = function(a, b) {
+> var ajouter = function(a, b) {
 >   return a + b;
 > };
-> show(ajoute(5, 5));
+> show(ajouter(5, 5));
 
-Notez le point-virgule après la définition de |ajoute|. Les définitions
+Notez le point-virgule après la définition de |ajouter|. Les définitions
 normales de fonctions n'en ont pas besoin, mais cette instruction a la
-structure générale de |var ajoute = 22;| et donc nécessite un point-virgule.
+structure générale de |var ajouter = 22;| et donc nécessite un point-virgule.
 
 Ce type de valeur est appelé _fonction anonyme_, parce que la fonction
 définie n'a alors pas de nom. Parfois il est inutile de donner un nom aux
@@ -2804,11 +2804,11 @@ comme ça leur chante.
 
 Nous continuons à découper l'algorithme en petites unités :
 
-> function chercheChatsVivants() {
+> function trouverChatsVivants() {
 >   var archiveDeMails = recupererLesMails();
 >   var chatsVivants = {"Spot": true};
 >
->   function traiteParagraphe(paragraphe) {
+>   function traiterParagraphe(paragraphe) {
 >     if (startsWith(paragraphe, "Né le"))
 >       addToSet(chatsVivants, nomDesChats(paragraphe));
 >     else if (startsWith(paragraphe, "Mort le"))
@@ -2818,13 +2818,13 @@ Nous continuons à découper l'algorithme en petites unités :
 >   for (var mail = 0; mail < archiveDeMails.length; mail++) {
 >     var paragraphes = archiveDeMails[mail].split("\n");
 >     for (var i = 0; i < paragraphes.length; i++)
->       traiteParagraphe(paragraphes[i]);
+>       traiterParagraphe(paragraphes[i]);
 >   }
 >   return chatsVivants;
 > }
 >
 > var combien = 0;
-> for (var chat in chercheChatsVivants())
+> for (var chat in trouverChatsVivants())
 >   combien++;
 > print("Il y a ", combien, " chats.");
 
@@ -2832,15 +2832,15 @@ La totalité de l'algoritme est encapsulée dans une fonction. Cela signifie
 qu'elle ne laisse rien traîner en vrac derrière elle après exécution :
 |chatsVivants| est maintenant une variable locale dans la fonction et non plus
 une variable globale, si bien qu'elle n'existe que pendant que la fonction
-s'exécute. Le code qui a besoin de cet ensemble peut appeler |chercheChatsVivants|
+s'exécute. Le code qui a besoin de cet ensemble peut appeler |trouverChatsVivants|
 et utiliser la valeur qu'il renvoie.
 
-Il me semble que faire de |traiteParagraphe| une fonction distincte peut
+Il me semble que faire de |traiterParagraphe| une fonction distincte peut
 aussi clarifier les choses. Mais celle-ci est si étroitement liée à
 l'algorithme-des-chats qu'elle n'aurait aucun sens dans une autre situation. De
 plus, elle a besoin d'accéder à la variable |chatsVivants|. C'est donc
 une candidate parfaite pour devenir une fonction à l'intérieur d'une
-fonction. Quand elle existe à l'intérieur de |chercheChatsVivants|, il est
+fonction. Quand elle existe à l'intérieur de |trouverChatsVivants|, il est
 clair qu'elle n'est pertinente que là et qu'elle a accès aux variables de
 sa fonction parente.
 
@@ -3005,7 +3005,7 @@ stocker aussi les dates de naissance et par la suite, les noms des mères.
 >   return {nom: nom, naissance: dateNaissance, mere: mere};
 > }
 >
-> function ajouteChats(set, noms, dateNaissance, mere) {
+> function ajouterChats(set, noms, dateNaissance, mere) {
 >   for (var i = 0; i < noms.length; i++)
 >     set[noms[i]] = enregistrementChat(noms[i], dateNaissance, mere);
 > }
@@ -3080,14 +3080,14 @@ façon plus simple :
 
 Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 
-> function chercheChats() {
+> function trouverChats() {
 >   var archiveDeMails = recupererLesMails();
 >   var chats = {"Spot": enregistrementChat("Spot", new Date(1997, 2, 5),
 >               "inconnue")};
 >
->   function traiteParagraphe(paragraphe) {
+>   function traiterParagraphe(paragraphe) {
 >     if (startsWith(paragraphe, "Né le"))
->       ajouteChats(chats, nomDesChats(paragraphe), extractDate(paragraphe),
+>       ajouterChats(chats, nomDesChats(paragraphe), extractDate(paragraphe),
 >               extractMother(paragraphe));
 >     else if (startsWith(paragraphe, "Mort le"))
 >       chatsDecedes(chats, nomDesChats(paragraphe), extractDate(paragraphe));
@@ -3096,12 +3096,12 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >   for (var mail = 0; mail < archiveDeMails.length; mail++) {
 >     var paragraphes = archiveDeMails[mail].split("\n");
 >     for (var i = 0; i < paragraphes.length; i++)
->       traiteParagraphe(paragraphes[i]);
+>       traiterParagraphe(paragraphes[i]);
 >   }
 >   return chats;
 > }
 >
-> var tousLesChats = chercheChats();
+> var tousLesChats = trouverChats();
 
 Avoir ces données supplémentaires nous permet d'avoir finalement une idée
 plus précise des chats dont parle tante Émilie. Une fonction comme celle-ci
@@ -3851,11 +3851,11 @@ Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
 !> var paragraphes = archiveDeMails[mail].split("\n");
 !> for (var i = 0; i < paragraphes.length; i++)
-!>   traiteParagraphe(paragraphs[i]);
+!>   traiterParagraphe(paragraphs[i]);
 
 Il peut maintenant être écrit de la façon suivante :
 
-!>  forEach(archiveDeMails[mail].split("\n"), traiteParagraphe);
+!>  forEach(archiveDeMails[mail].split("\n"), traiterParagraphe);
 
 Au final, une construction plus abstraite (ou « de plus haut niveau »)
 correspond à plus d'informations et à moins de bruits parasites : Le
@@ -5360,12 +5360,12 @@ pas un simple itinéraire, il se ramifie. À cause de cela, la _récursion_
 est une manière normale de modéliser ce phénomène.
 
 > function itinerairesPossibles(depart, arrivee) {
->   function chercheItineraires(itineraire) {
+>   function trouverItineraires(itineraire) {
 >     function pasParcouru(route) {
 >       return !member(itineraire.lieux, route.arrivee);
 >     }
 >     function continueItineraire(route) {
->       return chercheItineraires({lieux: itineraire.lieux.concat([route.arrivee]),
+>       return trouverItineraires({lieux: itineraire.lieux.concat([route.arrivee]),
 >                          length: itineraire.length + route.distance});
 >     }
 >
@@ -5376,7 +5376,7 @@ est une manière normale de modéliser ce phénomène.
 >       return flatten(map(continueItineraire, filter(pasParcouru,
 >                                                routesDepuis(fin))));
 >   }
->   return chercheItineraires({lieux: [depart], length: 0});
+>   return trouverItineraires({lieux: [depart], length: 0});
 > }
 >
 > show(itinerairesPossibles("Point Teohotepapapa", "Point Kiukiu").length);
@@ -5384,7 +5384,7 @@ est une manière normale de modéliser ce phénomène.
 
 La fonction renvoie un tableau d'objets itinéraire, chacun
 contenant un tableau de lieux parcourus par l'itinéraire et une
-longueur. |chercheItineraires| continue un itinéraire récursivement,
+longueur. |trouverItineraires| continue un itinéraire récursivement,
 renvoyant un tableau avec toutes les extensions possibles de cette
 route. Quand la fin de l'intinéraire est le lieu défini comme lieu de
 fin, il retourne juste l'itinéraire, sachant que continuer l'itinéraire
@@ -5405,7 +5405,7 @@ s'appeler lui-même (via |continueItineraire|) ? Non, à un certain moment,
 toutes les routes iront à des lieux déjà traversés par l'itinéraire, et
 le résultat de |filter| sera un tableau vide. Cartographier un tableau vide
 renvoie un tableau vide, l'écraser renvoie également un tableau vide. Donc
-appeler |chercheItineraires| dans une impasse entraîne un tableau vide,
+appeler |trouverItineraires| dans une impasse entraîne un tableau vide,
 qui signifie « il n'y a aucun moyen de continuer cet itinéraire ».
 
 Veuillez noter que les lieux sont ajoutés à des itinéraires en utilisant
@@ -5559,7 +5559,7 @@ sur de tels objets :
 >   return {x: x, y: y};
 > }
 >
-> function ajoutePoints(a, b) {
+> function ajouterPoints(a, b) {
 >   return point(a.x + b.x, a.y + b.y);
 > }
 >
@@ -5567,7 +5567,7 @@ sur de tels objets :
 >   return a.x == b.x && a.y == b.y;
 > }
 >
-> show(pointsIdentiques(ajoutePoints(point(10, 10), point(4, -2)),
+> show(pointsIdentiques(ajouterPoints(point(10, 10), point(4, -2)),
 >                point(14, 8)));
 
 ***
@@ -5594,7 +5594,7 @@ autant qu'on sache, le bord de la carte pourrait bien être le bord du monde.
 >   var directions = [point(-1, 0), point(1, 0), point(0, -1),
 >                     point(0, 1), point(-1, -1), point(-1, 1),
 >                     point(1, 1), point(1, -1)];
->   return filter(dansLaCarte, map(partial(ajoutePoints, depart),
+>   return filter(dansLaCarte, map(partial(ajouterPoints, depart),
 >                                directions));
 > }
 >
@@ -5825,8 +5825,8 @@ Nous allons utiliser un tas binaire pour stocker la liste ouverte. Quelle
 structure serait la bonne pour la liste des nœuds atteints ? Cette
 liste sera utilisée pour chercher des routes, en lui passant un
 couple |x|, |y| de coordonnées. Rapidement de préférence. Ecrivez
-trois fonctions |creeListePointsAtteints|, |enregistrePointAtteint|, et
-|cherchePointAtteint|. La première crée la structure de données ; la
+trois fonctions |creerListePointsParcourus|, |stockerPointsParcourus|, et
+|trouverPointsParcourus|. La première crée la structure de données ; la
 seconde, étant donnée une liste de nœuds atteints, un point, et une route,
 stocke cette route; la dernière, étant donné une liste de nœuds atteints
 et un point, retourne une route ou |undefined| pour indiquer qu'aucune route
@@ -5840,11 +5840,11 @@ comme nom de propriété pour l'objet extérieur, et l'autre, |y|, pour l'objet
 intérieur. Cela va nécessiter un peu de tenue de compte pour gérer le fait
 que, parfois, l'objet intérieur que nous recherchons n'existe pas (encore).
 
-> function creeListePointsAtteints() {
+> function creerListePointsParcourus() {
 >   return {};
 > }
 >
-> function enregistrePointAtteint(liste, point, itineraire) {
+> function stockerPointsParcourus(liste, point, itineraire) {
 >   var listeInterne = liste[point.x];
 >   if (listeInterne == undefined) {
 >     listeInterne = {};
@@ -5853,7 +5853,7 @@ que, parfois, l'objet intérieur que nous recherchons n'existe pas (encore).
 >   listeInterne[point.y] = itineraire;
 > }
 >
-> function cherchePointAtteint(liste, point) {
+> function trouverPointsParcourus(liste, point) {
 >   var listeInterne = liste[point.x];
 >   if (listeInterne == undefined)
 >     return undefined;
@@ -5869,15 +5869,15 @@ un objet unique.
 >   return point.x + "-" + point.y;
 > }
 >
-> function creeListePointsAtteints() {
+> function creerListePointsParcourus() {
 >   return {};
 > }
 >
-> function enregistrePointAtteint(liste, point, itineraire) {
+> function stockerPointsParcourus(liste, point, itineraire) {
 >   liste[pointID(point)] = itineraire;
 > }
 >
-> function cherchePointAtteint(liste, point) {
+> function trouverPointsParcourus(liste, point) {
 >   return liste[pointID(point)];
 > }
 
@@ -5900,9 +5900,9 @@ en utilisant |new| et qui ont des méthodes pour les manipuler.
 
 Nous avons donc enfin notre vrai fonction de recherche de chemin :
 
-> function chercheItineraire(depart, arrivee) {
+> function trouverItineraire(depart, arrivee) {
 >   var listeOuverte = new BinaryHeap(scoreItineraire);
->   var pointsAtteints = creeListePointsAtteints();
+>   var pointsParcourus = creerListePointsParcourus();
 >
 >   function scoreItineraire(itineraire) {
 >     if (itineraire.score == undefined)
@@ -5910,11 +5910,11 @@ Nous avons donc enfin notre vrai fonction de recherche de chemin :
 >                     itineraire.longueur;
 >     return itineraire.score;
 >   }
->   function ajouteItineraireOuvert(itineraire) {
+>   function ajouterItineraireOuvert(itineraire) {
 >     listeOuverte.push(itineraire);
->     enregistrePointAtteint(pointsAtteints, itineraire.point, itineraire);
+>     stockerPointsParcourus(pointsParcourus, itineraire.point, itineraire);
 >   }
->   ajouteItineraireOuvert({point: depart, longueur: 0});
+>   ajouterItineraireOuvert({point: depart, longueur: 0});
 >
 >   while (listeOuverte.size() > 0) {
 >     var itineraire = listeOuverte.pop();
@@ -5922,13 +5922,13 @@ Nous avons donc enfin notre vrai fonction de recherche de chemin :
 >       return itineraire;
 >
 >     forEach(directionsPossible(itineraire.point), function(direction) {
->       var itineraireConnu = cherchePointAtteint(pointsAtteints, direction);
+>       var itineraireConnu = trouverPointsParcourus(pointsParcourus, direction);
 >       var nouvelleLongueur = itineraire.longueur +
 >                       distancePonderee(itineraire.point, direction);
 >       if (!itineraireConnu || itineraireConnu.longueur > nouvelleLongueur){
 >         if (itineraireConnu)
 >           listeOuverte.remove(itineraireConnu);
->         ajouteItineraireOuvert({point: direction,
+>         ajouterItineraireOuvert({point: direction,
 >                       from: itineraire,
 >                       longueur: nouvelleLongueur});
 >       }
@@ -5943,7 +5943,7 @@ la fonction de calcul de score passée au tas binaire. Remarquez comment
 il stocke ses résultats dans l'objet route, pour éviter d'avoir à le
 recalculer plusieurs fois.
 
-|ajouteItineraireOuvert| est une fonction commode pour ajouter une nouvelle
+|ajouterItineraireOuvert| est une fonction commode pour ajouter une nouvelle
 route à la fois à la liste ouverte et à la liste des nœuds atteints. On
 l'utilise immédiatement pour ajouter le début de la route. Remarquez que
 les objets route ont roujours une propriétés |point|, qui stocke le point
@@ -5989,7 +5989,7 @@ façon non-récursive et utilisant une structure de données qui stocke les
 
 Bien, essayons notre recherche de route :
 
-> var route = chercheItineraire(point(0, 0), point(19, 19));
+> var route = trouverItineraire(point(0, 0), point(19, 19));
 
 Si vous avez exécuter tout le code depuis le début du chapitre, et que
 vous n'avez pas introduit d'erreurs, cet appel, même si cela peut prendre
@@ -6004,8 +6004,8 @@ Vous pouvez également passer plusieurs routes à |showRoute|, ce qui peut
 être utile si, par exemple, vous voulez planifier un itinéraire touristique,
 qui doit inclure le magnifique point de vue en |11|, |17|.
 
-> showRoute(chercheItineraire(point(0, 0), point(11, 17)),
->           chercheItineraire(point(11, 17), point(19, 19)));
+> showRoute(trouverItineraire(point(0, 0), point(11, 17)),
+>           trouverItineraire(point(11, 17), point(19, 19)));
 
 ---
 
@@ -6059,8 +6059,9 @@ objets sont vus comme des microcosmes indépendants, qui ne communiquent avec
 l'extérieur qu'à travers un nombre limité d'_interface_s, un ensemble de
 méthodes et propriétés spécifiques. La « liste des nœuds atteints »
 utilisée à la fin du \\csearch en est un exemple : nous avons utilisé
-trois fonctions, |creeListePointsAtteints|, |enregistrePointAtteint| et |cherchePointAtteint| pour
-interagir avec. Ces trois fonctions forment une interface pour ces objets.
+trois fonctions, |creerListePointsParcourus|, |stockerPointsParcourus| et
+|trouverPointsParcourus| pour interagir avec elle. Ces trois fonctions
+forment une interface pour cette sorte d'objets.
 
 Les objets |Date|, |Error| et |BinaryHeap| que nous avons vus fonctionnent
 également comme cela. Au lieu de fournir des fonctions classiques pour
@@ -6541,12 +6542,12 @@ automatiquement toutes les demi-secondes, et donc les insectes se déplacent.
 ***
 
 @_|Point|_Les points sur la grille représenteront également des objets. Dans
-le \\csearch nous avons utilisé trois fonctions : |point|, |ajoutePoints|
+le \\csearch nous avons utilisé trois fonctions : |point|, |ajouterPoints|
 et |pointsIdentiques| pour travailler avec les points. Cette fois, nous
 utiliserons un constructeur et deux méthodes. Écrire le constructeur
 |Point|, qui prend deux arguments, les coordonnées x et y du point, et
 produit un objet avec des propriétés |x| et |y|. Ajoutez au prototype de
-ce constructeur une méthode |ajoute|, qui prends un autre point en argument
+ce constructeur une méthode |ajouter|, qui prends un autre point en argument
 et retourne un *nouveau* point dont les |x| et |y| sont la somme des |x|
 et |y| des deux points donnés. Ajoutez également une méthode |estEgalA|,
 qui prend un point et renvoit un booléen, indicant si le point local (|this|)
@@ -6562,16 +6563,16 @@ de type point pourra lire et modifier librement les |x| et |y|.
 >   this.x = x;
 >   this.y = y;
 > }
-> Point.prototype.ajoute = function(autre) {
+> Point.prototype.ajouter = function(autre) {
 >   return new Point(this.x + autre.x, this.y + autre.y);
 > };
 > Point.prototype.estEgalA = function(autre) {
 >   return this.x == autre.x && this.y == autre.y;
 > };
 >
-> show((new Point(3, 1)).ajoute(new Point(2, 4)));
+> show((new Point(3, 1)).ajouter(new Point(2, 4)));
 
-Assurez-vous que votre version de |ajoute| laisse le point local (|this|)
+Assurez-vous que votre version de |ajouter| laisse le point local (|this|)
 intact et produise bien un nouvel objet Point. Une méthode qui change le
 point courant serait similaire à l'opérateur |+=|, alors qu'on le veut
 équivalent à l'opérateur |+|.
@@ -6729,7 +6730,7 @@ dictionnaire suivant sera utile :
 >    "o":  new Point(-1,  0),
 >    "no": new Point(-1, -1)});
 >
-> show(new Point(4, 4).ajoute(directions.lookup("se")));
+> show(new Point(4, 4).ajouter(directions.lookup("se")));
 
 Quand un insecte décide de se déplacer, il indique dans quelle direction il
 veut aller en renvoyant un objet action dont la propriété |direction| nomme
@@ -6852,9 +6853,9 @@ l'objet |this|, par l'intermédiaire du premier argument de la méthode
 > }
 >
 > var tableauTest = [];
-> var ajouteDansTest = bind(tableauTest.push, tableauTest);
-> ajouteDansTest("A");
-> ajouteDansTest("B");
+> var ajouterDansTest = bind(tableauTest.push, tableauTest);
+> ajouterDansTest("A");
+> ajouterDansTest("B");
 > show(tableauTest);
 
 De cette façon, vous pouvez lier la variable |this| d'une fonction
@@ -6880,7 +6881,7 @@ connaître le nom de la fonction à appliquer à l'objet.
 >   };
 > }
 >
-> var ajouteDansTest = method(tableauTest, "push");
+> var ajouterDansTest = method(tableauTest, "push");
 
 ---
 
@@ -6932,7 +6933,7 @@ Conseil : ne pas décrire chacune des directions, mais utiliser la méthode
 >   var resultat = {};
 >   var grille = this.grille;
 >   directions.each(function(nom, direction) {
->     var place = centre.ajoute(direction);
+>     var place = centre.ajouter(direction);
 >     if (grille.estDedans(place))
 >       resultat[nom] = caracteredApresElement(grille.valeurEn(place));
 >     else
@@ -6970,7 +6971,7 @@ Pour le moment, elle ne reconnait que l'action |"déplacement"| :
 >   var alentours = this.listeAlentours(creature.point);
 >   var action = creature.object.agit(alentours);
 >   if (action.type == "déplacement" && directions.contains(action.direction)) {
->     var to = creature.point.ajoute(directions.lookup(action.direction));
+>     var to = creature.point.ajouter(directions.lookup(action.direction));
 >     if (this.grille.estDedans(to) && this.grille.valeurEn(to) == undefined)
 >       this.grille.deplaceElement(creature.point, to);
 >   }
@@ -7388,7 +7389,7 @@ Voici une nouvelle méthode |actionnerUneCreature|. Elle est volumineuse :
 >   var elementDansCible = undefined;
 >   if (action.direction && directions.contains(action.direction)) {
 >     var direction = directions.lookup(action.direction);
->     var directionSouhaitee = creature.point.ajoute(direction);
+>     var directionSouhaitee = creature.point.ajouter(direction);
 >     if (this.grille.estDedans(directionSouhaitee )) {
 >       cible = directionSouhaitee ;
 >       elementDansCible = this.grille.valeurEn(cible);
@@ -7465,7 +7466,7 @@ de nouveau ici.
 >   this.energie = 5;
 > }
 > Lichen.prototype.agit = function(alentours) {
->   var espaceVide = chercheDirections(alentours, " ");
+>   var espaceVide = trouverDirections(alentours, " ");
 >   if (this.energie >= 13 && espaceVide.length > 0)
 >     return {type: "reproduction", direction: elementAuHasard(espaceVide)};
 >   else if (this.energie < 20)
@@ -7477,7 +7478,7 @@ de nouveau ici.
 >
 > typesDeCreature.enregistre(Lichen);
 >
-> function chercheDirections(alentours, directionSouhaite) {
+> function trouverDirections(alentours, directionSouhaite) {
 >   var trouve = [];
 >   directions.each(function(name) {
 >     if (alentours[name] == directionSouhaite)
@@ -7500,7 +7501,7 @@ avec |10| unités d'énergie, et agit de la façon suivante :
  * Sinon, s'il y a la place de se bouger, elle va vers une cases vides aléatoire.
  * Sinon elle attend.
 
-Utiliser les fonctions |chercheDirections| et |elementAuHasard| pour
+Utiliser les fonctions |trouverDirections| et |elementAuHasard| pour
 déterminer le contenu de l'entourage de la créature, et faire des choix
 aléatoires. Donner à cette créature le caractère |"c"| (pour faire penser
 à pac-man).
@@ -7511,8 +7512,8 @@ aléatoires. Donner à cette créature le caractère |"c"| (pour faire penser
 >   this.energie = 10;
 > }
 > MangeuseLichen.prototype.agit = function(alentours) {
->   var espaceVide = chercheDirections(alentours, " ");
->   var lichen = chercheDirections(alentours, "*");
+>   var espaceVide = trouverDirections(alentours, " ");
+>   var lichen = trouverDirections(alentours, "*");
 >
 >   if (this.energie >= 30 && espaceVide.length > 0)
 >     return {type: "reproduction", direction: elementAuHasard(espaceVide)};
@@ -7569,8 +7570,8 @@ Voici une nouvelle méthode |agit| -- le seul changement est que l'action
 de manger ne se fait que si |lichen.length| est au moins égal à 2.
 
 > MangeuseLichen.prototype.agit = function(alentours) {
->   var espaceVide = chercheDirections(alentours, " ");
->   var lichen = chercheDirections(alentours, "*");
+>   var espaceVide = trouverDirections(alentours, " ");
+>   var lichen = trouverDirections(alentours, "*");
 >
 >   if (this.energie >= 30 && espaceVide.length > 0)
 >     return {type: "reproduction", direction: elementAuHasard(espaceVide)};
@@ -7611,8 +7612,8 @@ facilement de la nourriture.
 >   this.direction = "ne";
 > }
 > MangeuseLichenHabile.prototype.agit = function(alentours) {
->   var espaceVide = chercheDirections(alentours, " ");
->   var lichen = chercheDirections(alentours, "*");
+>   var espaceVide = trouverDirections(alentours, " ");
+>   var lichen = trouverDirections(alentours, "*");
 >
 >   if (this.energie >= 30 && espaceVide.length > 0) {
 >     return {type: "reproduction",
