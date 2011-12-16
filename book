@@ -3124,7 +3124,7 @@ pourrait être utile :
 >   return message + ".";
 > }
 >
-> print(renseignementSurChat(tousLesChats, "Igor Le Gros"));
+> print(renseignementSurChat(tousLesChats, "Gros Igor"));
 
 La première instruction |return| dans |renseignementSurChat| est utilisée comme issue de
 secours. Si aucune donnée n'est fournie sur un chat particulier, le reste
