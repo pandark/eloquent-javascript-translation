@@ -6459,11 +6459,11 @@ de telle manière qu'il n'a plus de propriété |length|, par exemple parce
 que la longueur à retourner devient celle d'un tableau, ils peuvent mettre
 la fonction à jour, sans changer l'interface.
 
-Mon expérience sur le sujet est que dans la plupart des cas ça n'en vaut
-pas la peine. Ajouter une méthode |getLength| qui ne contient que |return
-this.length;| ne fait qu'ajouter du code inutile, qui, dans la plupart des
-cas ajoute plein de problèmes alors que j'ai rarement l'occasion de changer
-l'interface de mes objets.
+D'après mon point de vue personnel, dans la plupart des cas cela n'en vaut
+pas la peine. Ajouter une méthode |getLength| ne contenant que |return
+this.length;| est essentiellement un ajout de code inutile. En règle
+générale, je considère le code inutile plus problèmatique que la necessité
+de modifier de temps à autre l'interface de mes objets.
 
 ---
 
