@@ -3073,7 +3073,7 @@ Avoir la fonction |between| rend possible l'expression de extractMother de
 façon plus simple :
 
 > function extractMother(paragraph) {
->   return between(paragraph, "(mère ", ")");
+>   return between(paragraph, "(mère, ", ")");
 > }
 
 ---
