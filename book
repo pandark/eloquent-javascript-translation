@@ -3210,7 +3210,7 @@ pas le cas ? Je n'ai jamais vraiment compris l'utilité de tout cela, mais
 c'est quelque chose dont vous devez avoir connaissance.
 
 > function compteurArgument() {
-> print("Vous m'avez donné", arguments.length, "arguments.");
+> print("Vous m'avez donné ", arguments.length, " arguments.");
 > }
 > compteurArgument("Mort", "Famine", "Fléau");
 
