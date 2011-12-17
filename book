@@ -2958,7 +2958,7 @@ s'éloigne du GMT (Heure du méridien de Greenwich)
 
 ] "Mort le 27/04/2006 : Black Leclère"
 
-La partie date est toujours exactement à la mëme place du paragraphe. Comme
+La partie date est toujours exactement à la même place du paragraphe. Comme
 c'est pratique. Écrivez une fonction |extractDate| qui prend un tel paragraphe
 pour argument, extrait la date et le renvoit sous la forme d'un objet date.
 
