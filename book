@@ -3220,14 +3220,14 @@ les valeurs des |arguments| d'un objet pour en faire quelque chose. Les autres
 peuvent prendre des arguments de manière optionnelle qui sont initialisés
 à une valeur par défaut sensée si l'utilisateur ne fournit pas de valeur.
 
-> function add(nombre, combien) {
+> function ajouter(nombre, combien) {
 >    if (arguments.length < 2)
 >      combien = 1;
 >    return nombre + combien ;
 > }
 >
-> show(add(6));
-> show(add(6, 4));
+> show(ajouter(6));
+> show(ajouter(6, 4));
 
 ***
 
@@ -3254,7 +3254,7 @@ série, le second la fin.
 > show(serie(2, 4));
 
 L'argument optionnel ne fonctionne pas exactement comme le premier, dans
-l'exemple |add| ci-dessus. Quand il n'est pas précisé, le premier argument
+l'exemple |ajouter| ci-dessus. Quand il n'est pas précisé, le premier argument
 prend le rôle de |fin| et |debut| devient |0|.
 
 ***
