@@ -3029,13 +3029,13 @@ dans des paragraphes.
 
 Voici un moyen d'obtenir cela…
 
-> function extractMother(paragraphe) {
+> function extraireNomMere(paragraphe) {
 >   var start = paragraphe.indexOf("(mère, ") + "(mère, ".length;
 >   var end = paragraphe.indexOf(")");
 >   return paragraphe.slice(start, end);
 > }
 >
-> show(extractMother("Né le 15/11/2003 (mère, Spot): Croc Blanc"));
+> show(extraireNomMere("Né le 15/11/2003 (mère, Spot): Croc Blanc"));
 
 Notez comment la position de départ a dû être ajustée à la longueur de
 |"(mère, "|, parce que |indexOf| renvoie la position initiale de la chaîne
@@ -3043,7 +3043,7 @@ et non la finale.
 
 ***
 
-Ce que fait |extractMother| peut être exprimé d'une façon plus
+Ce que fait |extraireNomMere| peut être exprimé d'une façon plus
 générale. Écrivez une fonction |between| qui prend trois arguments,
 qui seront tous des chaînes. Elle renverra la partie du premier argument
 qui apparaît entre les chaînes fournies par le deuxième et le troisième
@@ -3069,10 +3069,10 @@ partir de quel point doit commencer la recherche.
 
 ---
 
-Avoir la fonction |between| rend possible l'expression de extractMother de
+Avoir la fonction |between| rend possible l'expression de extraireNomMere de
 façon plus simple :
 
-> function extractMother(paragraph) {
+> function extraireNomMere(paragraph) {
 >   return between(paragraph, "(mère, ", ")");
 > }
 
@@ -3088,7 +3088,7 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >   function traiterParagraphe(paragraphe) {
 >     if (startsWith(paragraphe, "Né le"))
 >       ajouterChats(chats, nomDesChats(paragraphe), extractDate(paragraphe),
->               extractMother(paragraphe));
+>               extraireNomMere(paragraphe));
 >     else if (startsWith(paragraphe, "Mort le"))
 >       chatsDecedes(chats, nomDesChats(paragraphe), extractDate(paragraphe));
 >   }
