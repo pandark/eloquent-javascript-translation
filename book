@@ -2896,12 +2896,12 @@ commencent eux à 1.
 Le contenu de l'objet |Date|  peut être inspecté avec un nombre de
 méthodes |get…|.
 
-> var today = new Date();
-> print("Année : ", today.getFullYear(), ", mois : ",
->       today.getMonth(), ", jour : ", today.getDate());
-> print("Heure : ", today.getHours(), ", minutes : ",
->       today.getMinutes(), ", secondes: ", today.getSeconds());
-> print("Jour de la semaine : ", today.getDay());
+> var aujourdhui = new Date();
+> print("Année : ", aujourdhui.getFullYear(), ", mois : ",
+>       aujourdhui.getMonth(), ", jour : ", aujourdhui.getDate());
+> print("Heure : ", aujourdhui.getHours(), ", minutes : ",
+>       aujourdhui.getMinutes(), ", secondes: ", aujourdhui.getSeconds());
+> print("Jour de la semaine : ", aujourdhui.getDay());
 
 Tous ces éléments, expecté la méthode |getDay|, ont une variable |set...|
 qui peut être utilisée pour modifier la valeur de l'objet date.
