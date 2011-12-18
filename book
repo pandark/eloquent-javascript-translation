@@ -2858,13 +2858,13 @@ de stocker une date ? Nous pourrions créer un objet avec ces trois
 propriétés,  |year|, |month|, et |day| et stocker ensuite des nombres
 à l'intérieur.
 
-> var when = {year: 1980, month: 2, day: 1};
+> var quand = {year: 1980, month: 2, day: 1};
 
 Mais JavaScript fournit déjà une sorte d'objet pour cela.
 Un tel objet peut être créé en utilisant le mot-clé _|new|_:
 
-> var when = new Date(1980, 1, 1);
-> show(when);
+> var quand = new Date(1980, 1, 1);
+> show(quand);
 
 Tout comme la notation avec les accolades et les deux-points que nous avons
 déjà vue, |new| est une façon de créer des valeurs d'un objet. Au lieu
