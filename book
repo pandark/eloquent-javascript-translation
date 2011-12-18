@@ -3334,13 +3334,13 @@ nombreuses informations à jour.
 Vous avez peut-être déjà pensé à un moyen de découvrir ce qui est
 disponible avec l'objet |Math| :
 
-> for (var name in Math)
->   print(name);
+> for (var nom in Math)
+>   print(nom);
 
 Mais hélas, rien n'apparaît. De même, quand vous faites ceci :
 
-> for (var name in ["Huey", "Dewey", "Loui"])
->   print(name);
+> for (var nom in ["Huey", "Dewey", "Loui"])
+>   print(nom);
 
 Vous ne voyez que |0|, |1|, et |2|, pas |length|, ni |push|, ou |join|,
 qui s'y trouvent pourtant bel et bien. Apparemment, certaines propriétés
