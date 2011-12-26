@@ -2858,13 +2858,13 @@ de stocker une date ? Nous pourrions créer un objet avec ces trois
 propriétés,  |year|, |month|, et |day| et stocker ensuite des nombres
 à l'intérieur.
 
-> var when = {year: 1980, month: 2, day: 1};
+> var quand = {year: 1980, month: 2, day: 1};
 
 Mais JavaScript fournit déjà une sorte d'objet pour cela.
 Un tel objet peut être créé en utilisant le mot-clé _|new|_:
 
-> var when = new Date(1980, 1, 1);
-> show(when);
+> var quand = new Date(1980, 1, 1);
+> show(quand);
 
 Tout comme la notation avec les accolades et les deux-points que nous avons
 déjà vue, |new| est une façon de créer des valeurs d'un objet. Au lieu
@@ -2896,12 +2896,12 @@ commencent eux à 1.
 Le contenu de l'objet |Date|  peut être inspecté avec un nombre de
 méthodes |get…|.
 
-> var today = new Date();
-> print("Année : ", today.getFullYear(), ", mois : ",
->       today.getMonth(), ", jour : ", today.getDate());
-> print("Heure : ", today.getHours(), ", minutes : ",
->       today.getMinutes(), ", secondes: ", today.getSeconds());
-> print("Jour de la semaine : ", today.getDay());
+> var aujourdhui = new Date();
+> print("Année : ", aujourdhui.getFullYear(), ", mois : ",
+>       aujourdhui.getMonth(), ", jour : ", aujourdhui.getDate());
+> print("Heure : ", aujourdhui.getHours(), ", minutes : ",
+>       aujourdhui.getMinutes(), ", secondes: ", aujourdhui.getSeconds());
+> print("Jour de la semaine : ", aujourdhui.getDay());
 
 Tous ces éléments, expecté la méthode |getDay|, ont une variable |set...|
 qui peut être utilisée pour modifier la valeur de l'objet date.
@@ -2958,7 +2958,7 @@ s'éloigne du GMT (Heure du méridien de Greenwich)
 
 ] "Mort le 27/04/2006 : Black Leclère"
 
-La partie date est toujours exactement à la mëme place du paragraphe. Comme
+La partie date est toujours exactement à la même place du paragraphe. Comme
 c'est pratique. Écrivez une fonction |extractDate| qui prend un tel paragraphe
 pour argument, extrait la date et le renvoit sous la forme d'un objet date.
 
@@ -3029,13 +3029,13 @@ dans des paragraphes.
 
 Voici un moyen d'obtenir cela…
 
-> function extractMother(paragraphe) {
+> function extraireNomMere(paragraphe) {
 >   var start = paragraphe.indexOf("(mère, ") + "(mère, ".length;
 >   var end = paragraphe.indexOf(")");
 >   return paragraphe.slice(start, end);
 > }
 >
-> show(extractMother("Né le 15/11/2003 (mère, Spot): Croc Blanc"));
+> show(extraireNomMere("Né le 15/11/2003 (mère, Spot): Croc Blanc"));
 
 Notez comment la position de départ a dû être ajustée à la longueur de
 |"(mère, "|, parce que |indexOf| renvoie la position initiale de la chaîne
@@ -3043,7 +3043,7 @@ et non la finale.
 
 ***
 
-Ce que fait |extractMother| peut être exprimé d'une façon plus
+Ce que fait |extraireNomMere| peut être exprimé d'une façon plus
 générale. Écrivez une fonction |between| qui prend trois arguments,
 qui seront tous des chaînes. Elle renverra la partie du premier argument
 qui apparaît entre les chaînes fournies par le deuxième et le troisième
@@ -3069,11 +3069,11 @@ partir de quel point doit commencer la recherche.
 
 ---
 
-Avoir la fonction |between| rend possible l'expression de extractMother de
+Avoir la fonction |between| rend possible l'expression de extraireNomMere de
 façon plus simple :
 
-> function extractMother(paragraph) {
->   return between(paragraph, "(mère ", ")");
+> function extraireNomMere(paragraph) {
+>   return between(paragraph, "(mère, ", ")");
 > }
 
 ---
@@ -3088,7 +3088,7 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >   function traiterParagraphe(paragraphe) {
 >     if (startsWith(paragraphe, "Né le"))
 >       ajouterChats(chats, nomDesChats(paragraphe), extractDate(paragraphe),
->               extractMother(paragraphe));
+>               extraireNomMere(paragraphe));
 >     else if (startsWith(paragraphe, "Mort le"))
 >       chatsDecedes(chats, nomDesChats(paragraphe), extractDate(paragraphe));
 >   }
@@ -3210,7 +3210,7 @@ pas le cas ? Je n'ai jamais vraiment compris l'utilité de tout cela, mais
 c'est quelque chose dont vous devez avoir connaissance.
 
 > function compteurArgument() {
-> print("Vous m'avez donné", arguments.length, "arguments.");
+> print("Vous m'avez donné ", arguments.length, " arguments.");
 > }
 > compteurArgument("Mort", "Famine", "Fléau");
 
@@ -3220,14 +3220,14 @@ les valeurs des |arguments| d'un objet pour en faire quelque chose. Les autres
 peuvent prendre des arguments de manière optionnelle qui sont initialisés
 à une valeur par défaut sensée si l'utilisateur ne fournit pas de valeur.
 
-> function add(nombre, combien) {
+> function ajouter(nombre, combien) {
 >    if (arguments.length < 2)
 >      combien = 1;
 >    return nombre + combien ;
 > }
 >
-> show(add(6));
-> show(add(6, 4));
+> show(ajouter(6));
+> show(ajouter(6, 4));
 
 ***
 
@@ -3254,7 +3254,7 @@ série, le second la fin.
 > show(serie(2, 4));
 
 L'argument optionnel ne fonctionne pas exactement comme le premier, dans
-l'exemple |add| ci-dessus. Quand il n'est pas précisé, le premier argument
+l'exemple |ajouter| ci-dessus. Quand il n'est pas précisé, le premier argument
 prend le rôle de |fin| et |debut| devient |0|.
 
 ***
@@ -3334,13 +3334,13 @@ nombreuses informations à jour.
 Vous avez peut-être déjà pensé à un moyen de découvrir ce qui est
 disponible avec l'objet |Math| :
 
-> for (var name in Math)
->   print(name);
+> for (var nom in Math)
+>   print(nom);
 
 Mais hélas, rien n'apparaît. De même, quand vous faites ceci :
 
-> for (var name in ["Huey", "Dewey", "Loui"])
->   print(name);
+> for (var nom in ["Huey", "Dewey", "Loui"])
+>   print(nom);
 
 Vous ne voyez que |0|, |1|, et |2|, pas |length|, ni |push|, ou |join|,
 qui s'y trouvent pourtant bel et bien. Apparemment, certaines propriétés
