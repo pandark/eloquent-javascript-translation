@@ -3318,16 +3318,9 @@ pour le JavaScript. C'est essentiellement parce que sa forme courante est la
 résultante d'un processus chaotique pendant lequel différents navigateurs
 lui ont ajouté diverses extensions à différentes périodes. Le document
 standard ECMA, mentionné dans l'introduction, fournit une solide documentation
-du langage de base, mais il est plus ou moins lisible. Pour les choses comme
-l'objet |Math| et autres fonctions élémentaires, on peut trouver une bonne
-source de référence [ici
-http://www.webreference.com/javascript/reference/core_ref/contents.html].
-L'ancienne documentation de Netscape, que l'on peut encore trouver sur le
-[site de Sun | http://docs.sun.com/source/816-6408-10], peut encore être
-utile, mais elle est dépassée et n'est plus complètement correcte.
-[NdT] Le site de [Mozilla dédié aux
-développeurs|https://developer.mozilla.org/en/JavaScript] regroupe de
-nombreuses informations à jour.
+du langage de base, mais il est plus ou moins lisible.
+Pour la plupart de vos questions, vous pouvez compter sur le [Mozilla Developer
+Network | https://developer.mozilla.org/fr/JavaScript/ ].
 
 ---
 
