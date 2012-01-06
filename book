@@ -3443,7 +3443,7 @@ code appelant |between| veut savoir si tout s'est bien passé ? Sur le
 moment, il ne peut le dire, sauf à refaire tout le travail qu'a effectué
 |between| et à vérifier le résultat de |between| par rapport au sien. Ce
 qui n'est pas bien. Une solution serait de faire renvoyer par |between|
-une valeur spéciale telle que |false| ou [undefined| quand elle échoue.
+une valeur spéciale telle que |false| ou |undefined| quand elle échoue.
 
 > function between(string, start, end) {
 >   var startAt = string.indexOf(start);
