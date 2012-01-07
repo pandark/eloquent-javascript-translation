@@ -3622,10 +3622,10 @@ du problème. Vous pouvez lever des objets similaires en utilisant le mot-clé
 
 ---
 
-Quand une exception descend tout en bas de la pile sans être attraée, elle
+Quand une exception descend tout en bas de la pile sans être traitée, elle
 est prise en charge par l'environnement. Ce que cela signifie diffère selon
 les différents navigateurs, quelquefois une description de l'erreur est
-écrite sous la forme d'une entrée de  journal, d'autres fois une fenêtre
+écrite sous la forme d'une entrée de journal, d'autres fois une fenêtre
 décrivant l'erreur apparaît.
 
 Les erreurs générées par le code entré dans la console sur cette page
