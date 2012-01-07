@@ -3474,17 +3474,17 @@ la médaille. D'abord, que se passe-t-il si la fonction peut déjà renvoyer
 toutes sortes de valeurs possibles ? Par exemple, prenons cette fonction
 qui récupère le dernier élément d'un tableau :
 
-> function lastElement(array) {
->   if (array.length > 0)
->     return array[array.length - 1];
+> function dernierElement(tableau) {
+>   if (tableau.length > 0)
+>     return tableau[tableau.length - 1];
 >   else
 >     return undefined;
 > }
 >
-> show(lastElement([1, 2, undefined]));
+> show(dernierElement([1, 2, undefined]));
 
 Le tableau avait-il un dernier élément ? En regardant la valeur que
-renvoie |lastElement|, c'est impossible à dire.
+renvoie |dernierElement|, c'est impossible à dire.
 
 Le second problème quand on renvoie des valeurs spéciales, c'est que
 cela peut conduire à créer pas mal de bazar. Si une partie de code
