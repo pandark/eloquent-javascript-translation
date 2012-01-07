@@ -3389,11 +3389,11 @@ de façon bien définie et propre.
 Il est important de décider de quelle catégorie un certain problème peut
 relever. Par exemple, reprenons notre ancienne fonction |puissance| :
 
-> function puissance(base, exponent) {
->   var result = 1;
->   for (var count = 0; count < exponent; count++)
->     result *= base;
->   return result;
+> function puissance(base, exposant) {
+>   var resultat = 1;
+>   for (var compteur = 0; compteur < exposant; compteur++)
+>     resultat *= base;
+>   return resultat;
 > }
 
 Quand un geek essaie d'appeler |puissance("Lapin", 4)|, c'est de toute
