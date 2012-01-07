@@ -3461,10 +3461,10 @@ Vous pouvez voir que les vérifications d'erreurs ne rendent généralement
 pas les fonctions plus jolies. Mais maintenant, le code qui appelle |between|
 peut faire quelque chose comme :
 
-> var input = prompt("Dites-moi quelque chose", "");
-> var parenthesized = between(input, "(", ")");
-> if (parenthesized != undefined)
->   print("Vous avez mis entre parenthèses '", parenthesized, "'.");
+> var saisie = prompt("Dites-moi quelque chose", "");
+> var entreParentheses = between(saisie, "(", ")");
+> if (entreParentheses != undefined)
+>   print("Vous avez mis entre parenthèses '", entreParentheses, "'.");
 
 ---
 
