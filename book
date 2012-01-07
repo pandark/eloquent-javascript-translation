@@ -3525,22 +3525,22 @@ l'exception a été attrapée.
 
 Un exemple :
 
-> function lastElement(array) {
->   if (array.length > 0)
->     return array[array.length - 1];
+> function dernierElement(tableau) {
+>   if (tableau.length > 0)
+>     return tableau[tableau.length - 1];
 >   else
 >     throw "Impossible de prendre le dernier élément d'un tableau vide.";
 > }
 >
-> function lastElementPlusTen(array) {
->   return lastElement(array) + 10;
+> function dernierElementPlusDix(tableau) {
+>   return dernierElement(tableau) + 10;
 > }
 >
 > try {
->   print(lastElementPlusTen([]));
+>   print(dernierElementPlusDix([]));
 > }
-> catch (error) {
->   print("Une erreur est survenue : ", error);
+> catch (erreur) {
+>   print("Une erreur est survenue : ", erreur);
 > }
 
 _|throw|_ est le mot-clé qui est utilisé pour lever l'exception. Le mot-clé
@@ -3549,8 +3549,8 @@ levée dans le code du bloc suivant ce _|try|_, le bloc _|catch|_ sera
 exécuté. La variable nommée entre parenthèses après le mot |catch|
 est le nom donné à la valeur d'exception à l'intérieur du bloc.
 
-On remarque que la fonction |LastelementPlusTen| ignore complètement la
-possibilité que |LastElement| puisse ne pas fonctionner. C'est là le grand
+On remarque que la fonction |dernierElementPlusDix| ignore complètement la
+possibilité que |dernierElement| puisse ne pas fonctionner. C'est là le grand
 avantage des exceptions, un code pour s'occuper de l'erreur n'est nécessaire
 qu'au moment où l'erreur survient, et à l'endroit où on s'en occupe. Les
 fonctions sur le chemin peuvent tout ignorer à ce sujet.
