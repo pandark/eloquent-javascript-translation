@@ -3642,46 +3642,46 @@ dans une fonction récursive. Voici une fonction un peu bizarre qui détermine
 si un objet, ainsi que les autres objets stockés à l'intérieur, contiennent
 au moins sept valeurs |true| :
 
-> var FoundSeven = {};
+> var SeptValeursTrue = {};
 >
-> function hasSevenTruths(object) {
->   var counted = 0;
+> function contientSeptValeursTrue(objet) {
+>   var compte = 0;
 >
->   function count(object) {
->     for (var name in object) {
->       if (object[name] === true) {
->         counted++;
->         if (counted == 7)
->           throw FoundSeven;
+>   function compter(objet) {
+>     for (var nom in objet) {
+>       if (objet[nom] === true) {
+>         compte++;
+>         if (compte == 7)
+>           throw SeptValeursTrue;
 >       }
->       else if (typeof object[name] == "object") {
->         count(object[name]);
+>       else if (typeof objet[nom] == "object") {
+>         compter(objet[nom]);
 >       }
 >     }
 >   }
 >
 >   try {
->     count(object);
+>     compter(objet);
 >     return false;
 >   }
 >   catch (exception) {
->     if (exception != FoundSeven)
+>     if (exception != SeptValeursTrue)
 >       throw exception;
 >     return true;
 >   }
 > }
 
-La fonction interne |count| est appelée récursivement pour chaque objet qui
-fait partie d'un argument. Quand la variable |counted| atteint sept, il n'y
+La fonction interne |compter| est appelée récursivement pour chaque objet qui
+fait partie d'un argument. Quand la variable |compte| atteint sept, il n'y
 a aucun intérêt à continuer de compter, mais se contenter de remonter de
-l'appel courant à |count| ne va pas nécessairement arrêter l'énumération,
-comme il pourrait y avoir plusieurs appels derrière. Donc ce que l'on fait
+l'appel courant à |compter| ne va pas nécessairement arrêter l'énumération,
+car il pourrait y avoir plusieurs appels derrière. Donc ce que l'on fait
 c'est juste lever une exception, ce qui obligera le contrôleur à rejeter
 tout appel, et à se rendre au bloc |catch|.
 
 Mais se contenter de retourner |true| dans le cas d'une exception n'est
 pas correct. Quelque chose peut mal se passer, donc on vérifie d'abord si
-l'exception est l'objet |FoundSeven|, créé spécifiquement dans ce but. Si
+l'exception est l'objet |SeptValeursTrue|, créé spécifiquement dans ce but. Si
 ce n'est pas le cas, ce bloc |catch| ne sait pas comment s'en occuper,
 donc il la lève encore.
 
@@ -3691,8 +3691,8 @@ s'occupe seulement des exceptions qu'il sait traiter. Lever des exceptions de
 type chaîne de caractères, comme certains exemples de ce chapitre le font,
 est rarement une bonne idée, car cela rend difficile de reconnaître le type
 de l'exception. Une meilleure idée consiste à utiliser des valeurs uniques,
-comme l'objet |FoundSeven|, ou d'introduire un nouveau type d'objets, comme
-cela a été décrit dans le \\coo.
+comme l'objet |SeptValeursTrue|, ou d'introduire un nouveau type d'objets, comme
+décrit dans le \\coo.
 
 ================================
 Programmation fonctionnelle / fp
