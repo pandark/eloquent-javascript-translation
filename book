@@ -8517,13 +8517,13 @@ les expressions régulières peuvent effectuer quelques petites choses que les
 chaînes ne peuvent pas faire. Pour commencer elles permettent à certains
 de leurs éléments de coïncider sur plus d'un seul caractère. Dans le
 \\cfp, quand nous avons extrait les balises pour un document, nous avons eu
-besoin de trouver la première astérisque ou parenthèse ouvrante dans une
+besoin de trouver la première astérisque ou accolade ouvrante dans une
 chaîne. Nous pouvions faire ainsi :
 
-> var asteriskOrBrace = /[\{\*]/;
-> var story =
+> var asterisqueOuAccoladeOuvrante = /[\{\*]/;
+> var histoire =
 >   "Nous avons remarqué le *paresseux géant*, pendu à une énorme branche.";
-> show(story.search(asteriskOrBrace));
+> show(histoire.search(asterisqueOuAccoladeOuvrante));
 
 Les caractères |[| et |]| ont une signification particulière dans les
 expressions régulières. Lorsqu'ils encadrent d'autres caractères, ils
@@ -8547,8 +8547,8 @@ un « d » échappé (|\d|) signifie un chiffre, un « w » échappé
 un souligné, pour certaines raisons) et un « s » échappé (|\s|) est
 équivalent aux caractères d'espaces (tabulation, retour chariot, espace).
 
-> var digitSurroundedBySpace = /\s\d\s/;
-> show("1a 2 3d".search(digitSurroundedBySpace));
+> var chiffreEncadreeParDesEspaces = /\s\d\s/;
+> show("1a 2 3d".search(chiffreEncadreeParDesEspaces));
 
 Les caractères « d », « w » et « s » echappés peuvent être
 remplacés par la lettre capitale correspondante pour avoir la signification
@@ -8607,8 +8607,8 @@ comporte de la même façon mais a besoin que le motif apparaisse au moins
 une fois. Un point d'interrogation (|?|) rend l'élément facultatif --
 il peut apparaître une fois ou aucune.
 
-> var parenthesizedText = /\(.*\)/;
-> show("Ses (celles du paresseux) griffes étaient gigantesques!".search(parenthesizedText));
+> var texteEntreParentheses = /\(.*\)/;
+> show("Ses (celles du paresseux) griffes étaient gigantesques!".search(texteEntreParentheses));
 
 Lorsque c'est nécessaire, des accolades peuvent être utilisées pour
 préciser le nombre de fois où un élément peut apparaître. Un nombre
@@ -8635,23 +8635,23 @@ le dernier point, peut contenir des caractères alphanumériques et doit
 
 ///
 
-> var mailAddress = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
+> var adresseEmail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
 >
-> show(mailAddress.test("kenny@test.net"));
-> show(mailAddress.test("J'ai envyoé un mail à kenny@tets.nets, mais ça mrache pas !"));
-> show(mailAddress.test("le_paresseux_geant@gmail.com"));
+> show(adresseEmail.test("kenny@test.net"));
+> show(adresseEmail.test("J'ai envyoé un mail à kenny@tets.nets, mais ça marche pas !"));
+> show(adresseEmail.test("le_paresseux_geant@gmail.com"));
 
 Les |\b| au début et à la fin du motif permettent de s'assurer que la
 deuxième chaîne de caractères ne correspond pas.
 
 ---
 
-Des   parties d'une expression régulière peuvent être rassemblées en les
-mettant entre parenthèses. Ce qui nous permet d'utiliser |*| et autres  sur
+Des  parties d'une expression régulière peuvent être rassemblées en les
+mettant entre parenthèses. Ce qui nous permet d'utiliser |*| et autres sur
 plus d'un caractère. Par exemple :
 
-> var cartoonCrying = /boo(hoo+)+/i;
-> show("Il s'exclama alors « Boohoooohoohooo »".search(cartoonCrying));
+> var criFaconCartoon = /boo(hoo+)+/i;
+> show("Il s'exclama alors « Boohoooohoohooo »".search(criFaconCartoon));
 
 D'où vient le |i| à la fin de cette expression régulière ? Après le
 slash fermant, une option peut être ajoutée à une expression régulière. Un
@@ -8662,8 +8662,8 @@ majuscule dans la chaîne de caractères.
 Un caractère barre verticale (|||) est utilisé pour permettre à un motif
 d'avoir le choix entre deux éléments. Par exemple :
 
-> var holyCow = /(sacred|holy) (cow|bovine|bull|taurus)/i;
-> show(holyCow.test("Sacred bovine!"));
+> var vacheSacree = /(vache|boeuf|taureau) (sacré|sacrée|saint|sainte)/i;
+> show(vacheSacree.test("Vache sacrée !"));
 
 ---
 
@@ -8686,9 +8686,9 @@ exemple, lorsqu'il y a des parties du motif entre parenthèses, celles qui
 correspondent sont également ajoutées au tableau. Souvent, cela facilite
 grandement l'extraction de fragments de chaînes.
 
-> var parenthesized = prompt("Dites-moi quelque chose", "").match(/\((.*)\)/);
-> if (parenthesized != null)
->   print("Vous avez mis entre parenthèses '", parenthesized[1], "'");
+> var entreParentheses = prompt("Dites-moi quelque chose", "").match(/\((.*)\)/);
+> if (entreParentheses != null)
+>   print("Vous avez mis entre parenthèses '", entreParentheses[1], "'");
 
 ***
 
@@ -8737,8 +8737,8 @@ de personnes, un nom par ligne, au format «nom, prénom ». Nous voulons
 inverser l'ordre des informations et supprimer la virgule, pour obtenir un
 simple format « prénom, nom »
 
-> var names = "Picasso, Pablo\nGauguin, Paul\nVan Gogh, Vincent";
-> print(names.replace(/([\w ]+), ([\w ]+)/g, "$2 $1"));
+> var noms = "Picasso, Pablo\nGauguin, Paul\nVan Gogh, Vincent";
+> print(noms.replace(/([\w ]+), ([\w ]+)/g, "$2 $1"));
 
 Le |$1| et le |$2| de la chaîne de remplacement, font référence aux
 parties entre parenthèses dans le motif. |$1| est remplacée par le texte
