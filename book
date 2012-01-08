@@ -8571,8 +8571,8 @@ chaîne |"né le 15/11/2003 (mère, Spot): Croc Blanc"|.
 
 ///
 
-> var datePattern = /\d\d\/\d\d\/\d\d\d\d/;
-> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(datePattern));
+> var motifDate = /\d\d\/\d\d\/\d\d\d\d/;
+> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(motifDate));
 
 ---
 
@@ -8618,15 +8618,15 @@ le nombre de fois indiqué par le premier nombre et au maximum le nombre de
 fois indiqué par le deuxième. De manière similaire, |{2,}| signifie deux
 occurrences ou plus tandis que |{,4}| signifie quatre occurrences ou moins.
 
-> var datePattern = /\d{1,2}\/\d\d?\/\d{4}/;
-> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(datePattern));
+> var motifDate = /\d{1,2}\/\d\d?\/\d{4}/;
+> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(motifDate));
 
 Les parties |/\d{1,2}/| et |/\d\d?/| signifient toutes deux « un ou deux
 chiffres ».
 
 ***
 
-Écrivez un motif qui correspond avec les adresses mail. Pour simplifier,
+Écrivez un motif qui correspond avec les adresses email. Pour simplifier,
 considérez que les parties avant et après le |@| peuvent contenir seulement
 des caractères alphanumériques et des caractères |.| et |-| (point et
 tiret), tandis que la dernière partie de l'adresse, le code du pays après
@@ -8824,14 +8824,14 @@ de mots est d'utiliser une expression régulière. Si nous mettons notre liste
 de mots dans un tableau, nous pourrons construire l'expression régulière
 de la façon suivante :
 
-> var badWords = ["primate", "singe", "simien", "gorille", "evolution"];
-> var pattern = new RegExp(badWords.join("|"), "i");
-> function isAcceptable(text) {
->   return !pattern.test(text);
+> var motsInterdits = ["primate", "singe", "simien", "gorille", "evolution"];
+> var motif = new RegExp(motsInterdits.join("|"), "i");
+> function estAcceptable(texte) {
+>   return !motif.test(texte);
 > }
 >
-> show(isAcceptable("Henry Kissinger a reçu le prix Nobel de la paix en 1973."));
-> show(isAcceptable("Ça suffit avec ces histoires de singes."));
+> show(estAcceptable("Henry Kissinger a reçu le prix Nobel de la paix en 1973."));
+> show(estAcceptable("Ça suffit avec ces histoires de singes."));
 
 Nous pourrions ajouter des motifs |\b| autour des mots, pour que les
 choses à propos de Henry Kissinger ne soient pas considérées comme
@@ -8848,8 +8848,8 @@ effet, en principe, les antislashs sont supprimés quand une chaîne est
 interprétée, tous les antislashs qui doivent se trouver dans l'expression
 régulière elle-même doivent donc être échappés :
 
-> var digits = new RegExp("\\d+");
-> show(digits.test("101"));
+> var chiffres = new RegExp("\\d+");
+> show(chiffres.test("101"));
 
 ---
 
