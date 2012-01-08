@@ -8757,20 +8757,20 @@ similaires aux valeurs trouvées dans les tableaux renvoyés par |match| :
 le premier est la correspondance complète, puis vient un argument pour
 chaque partie entre parenthèses du motif.
 
-> function eatOne(match, amount, unit) {
->   amount = Number(amount) - 1;
->   if (amount == 1) {
->     unit = unit.slice(0, unit.length - 1);
+> function mangeUnDeChaque(match, quantite, unite) {
+>   quantite = Number(quantite) - 1;
+>   if (quantite == 1) {
+>     unite = unite.slice(0, unite.length - 1);
 >   }
->   else if (amount == 0) {
->     unit = unit + "s";
->     amount = "aucun";
+>   else if (quantite == 0) {
+>     unite = unite + "s";
+>     quantite = "aucun";
 >   }
->   return amount + " " + unit;
+>   return quantite + " " + unite;
 > }
 >
-> var stock = "1 citron, 2 choux, et 101 oeufs";
-> stock = stock.replace(/(\d+) (\w+)/g, eatOne);
+> var stock = "1 citron, 2 carottes, et 101 oeufs";
+> stock = stock.replace(/(\d+) (\w+)/g, mangeUnDeChaque);
 >
 > print(stock);
 
