@@ -3559,28 +3559,28 @@ Enfin, presque.
 
 ---
 
-Réfléchissez un instant à ceci : une fonction |processThing| veut
-déclarer une variable globale |currentThing| pour pointer vers quelque
+Réfléchissez un instant à ceci : une fonction |faireDesTrucs| veut
+déclarer une variable globale |trucEnCours| pour pointer vers quelque
 chose de spécifique pendant que son corps exécute, de manière à ce que
 d'autres fonctions puissent également y avoir accès. Normalement, vous
 passeriez simplement cette chose comme un argument, mais imaginons l'espace
 d'un instant que ce n'est pas possible en pratique. Quand la fonction se
-termine, |currentThing| devrait être redéfinie avec une valeur |null|.
+termine, |trucEnCours| devrait être redéfinie avec une valeur |null|.
 
-> var currentThing = null;
+> var trucEnCours = null;
 >
-> function processThing(thing) {
->   if (currentThing != null)
+> function faireDesTrucs(unTruc) {
+>   if (trucEnCours != null)
 >     throw "Oh non ! Nous sommes déjà en train d'exécuter quelque chose !";
 >
->   currentThing = thing;
->   /* do complicated processing… */
->   currentThing = null;
+>   trucEnCours = unTruc;
+>   /* faire des choses compliqués… */
+>   trucEnCours = null;
 > }
 
 Mais que ce se passerait-il si cette opération compliquée lève une exception
-? Dans ce cas, l'appel à |processThing| sera rejeté en dehors de la pile par
-l'exception, et |currentThing| n'aura pas de valeur redéfinie comme |null|.
+? Dans ce cas, l'appel à |faireDesTrucs| sera rejeté en dehors de la pile par
+l'exception, et |trucEnCours| n'aura pas de valeur redéfinie comme |null|.
 
 Les instructions |try| peuvent aussi être suivies par un mot-clé _|finally|_,
 ce qui veut dire « quoi qu'il arrive, exécutez ce code après avoir
@@ -3588,16 +3588,16 @@ essayé d'exécuter ce code dans un bloc |try| ». Si une fonction doit
 nettoyer quelque chose, le code qui effectue ce nettoyage doit en général
 être inséré dans un bloc |finally| :
 
-> function processThing(thing) {
->   if (currentThing != null)
+> function faireDesTrucs(unTruc) {
+>   if (trucEnCours != null)
 >     throw "Oh non ! Nous sommes déjà en train d'exécuter quelque chose !";
 >
->   currentThing = thing;
+>   trucEnCours = unTruc;
 >   try {
->     /* do complicated processing... */
+>     /* faire des choses compliqués… */
 >   }
 >   finally {
->     currentThing = null;
+>     trucEnCours = null;
 >   }
 > }
 
@@ -3609,8 +3609,8 @@ lever des exceptions. Par exemple :
 > try {
 >   print(Sasquatch);
 > }
-> catch (error) {
->   print("Intercepté : " + error.message);
+> catch (erreur) {
+>   print("Intercepté : " + erreur.message);
 > }
 
 Dans des cas comme celui-là, des objets spéciaux de type erreur sont
