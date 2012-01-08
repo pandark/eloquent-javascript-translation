@@ -8776,35 +8776,35 @@ chaque partie entre parenthèses du motif.
 
 ***
 
-Cette dernière astuce peut être utilisée pour rendre plus efficaces les
-echappeurs HTML vus dans le \\cfp. Vous vous souvenez peut-être qu'ils
-ressemblaient à ça :
+Cette dernière astuce peut être utilisée pour rendre plus efficace la
+fonction d'échappement HTML vu dans le \\cfp. Vous vous souvenez
+peut-être qu'elle ressemblait à cela :
 
-> function escapeHTML(text) {
->   var replacements = [["&", "&amp;"], ["\"", "&quot;"],
->                       ["<", "&lt;"], [">", "&gt;"]];
->   forEach(replacements, function(replace) {
->     text = text.replace(replace[0], replace[1]);
+> function echappeHTML(texte) {
+>   var remplacements = [[/&/g, "&amp;"], [/"/g, "&quot;"],
+>                       [/</g, "&lt;"], [/>/g, "&gt;"]];
+>   forEach(remplacements, function(remplacement) {
+>     texte = texte.replace(remplacement[0], remplacement[1]);
 >   });
->   return text;
+>   return texte;
 > }
 
-Écrivez une nouvelle fonction |escapeHTML|, qui fasse la même chose,
+Écrivez une nouvelle fonction |echappeHTML|, qui fasse la même chose,
 mais qui n'appelle |replace| qu'une seule fois.
 
 ///
 
-> function escapeHTML(text) {
->   var replacements = {"<": "&lt;", ">": "&gt;",
+> function echappeHTML(texte) {
+>   var remplacements = {"<": "&lt;", ">": "&gt;",
 >                       "&": "&amp;", "\"": "&quot;"};
->   return text.replace(/[<>&"]/g, function(character) {
->     return replacements[character];
+>   return texte.replace(/[<>&"]/g, function(caractere) {
+>     return remplacements[caractere];
 >   });
 > }
 >
-> print(escapeHTML("Le tag pour le pré-formatage s'écrit \"<pre>\"."));
+> print(echappeHTML("Le tag pour le pré-formatage s'écrit \"<pre>\"."));
 
-L'objet |replacements| est un moyen rapide d'associer chaque caractère
+L'objet |remplacements| est un moyen rapide d'associer chaque caractère
 à sa version échappée. L'utiliser ainsi ne pose pas de problème
 (c'est-à-dire aucun objet |Dictionary| n'est nécessaire) parce que les
 seules propriétés qui seront utilisées sont celles qui correspondent avec
