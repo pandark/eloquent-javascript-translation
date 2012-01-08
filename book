@@ -2959,20 +2959,20 @@ s'éloigne du GMT (Heure du méridien de Greenwich)
 ] "Mort le 27/04/2006 : Black Leclère"
 
 La partie date est toujours exactement à la même place du paragraphe. Comme
-c'est pratique. Écrivez une fonction |extractDate| qui prend un tel paragraphe
-pour argument, extrait la date et le renvoit sous la forme d'un objet date.
+c'est pratique. Écrivez une fonction |extraireDate| qui prend un tel paragraphe
+pour argument, extrait la date et la renvoit sous la forme d'un objet date.
 
 ///
 
-> function extractDate(paragraph) {
->   function numberAt(start, length) {
->     return Number(paragraph.slice(start, start + length));
+> function extraireDate(paragraphe) {
+>   function nombreEnPosition(position, longueur) {
+>     return Number(paragraphe.slice(position, position + longueur));
 >   }
->   return new Date(numberAt(14, 4), numberAt(11, 2) - 1,
->                   numberAt(8, 2));
+>   return new Date(nombreEnPosition(14, 4), nombreEnPosition(11, 2) - 1,
+>                   nombreEnPosition(8, 2));
 > }
 >
-> show(extractDate("Mort le 27-04-2006 : Black Leclère"));
+> show(extraireDate("Mort le 27-04-2006 : Black Leclère"));
 
 Cela ne marcherait pas sans les appels à |Number|, mais comme je l'ai
 expliqué plus haut, je préfère ne pas utiliser de chaînes comme si elles
@@ -3087,10 +3087,10 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >
 >   function traiterParagraphe(paragraphe) {
 >     if (startsWith(paragraphe, "Né le"))
->       ajouterChats(chats, nomDesChats(paragraphe), extractDate(paragraphe),
+>       ajouterChats(chats, nomDesChats(paragraphe), extraireDate(paragraphe),
 >               extraireNomMere(paragraphe));
 >     else if (startsWith(paragraphe, "Mort le"))
->       chatsDecedes(chats, nomDesChats(paragraphe), extractDate(paragraphe));
+>       chatsDecedes(chats, nomDesChats(paragraphe), extraireDate(paragraphe));
 >   }
 >
 >   for (var mail = 0; mail < archiveDeMails.length; mail++) {
@@ -8692,7 +8692,7 @@ grandement l'extraction de fragments de chaînes.
 
 ***
 
-Réécrivez la fonction |extractDate| que nous avons écrite dans le
+Réécrivez la fonction |extraireDate| que nous avons écrite dans le
 \\cdata. Lorsqu'on lui donne une chaîne à traiter, cette fonction cherche
 quelque chose qui suit le format de date que nous avons vu précédemment. Si
 elle peut retrouver une telle date, elle met la valeur dans l'objet
@@ -8701,15 +8701,15 @@ les dates dans lesquelles le jour ou le mois sont écrits avec un seul chiffre.
 
 ///
 
-> function extractDate(string) {
->   var found = string.match(/(\d\d?)\/(\d\d?)\/(\d{4})/);
->   if (found == null)
->     throw new Error("Aucune date trouvée dans '" + string + "'.");
->   return new Date(Number(found[3]), Number(found[2]) - 1,
->                   Number(found[1]));
+> function extraireDate(chaine) {
+>   var trouves = chaine.match(/(\d\d?)\/(\d\d?)\/(\d{4})/);
+>   if (trouves == null)
+>     throw new Error("Aucune date trouvée dans '" + chaine + "'.");
+>   return new Date(Number(trouves[3]), Number(trouves[2]) - 1,
+>                   Number(trouves[1]));
 > }
 >
-> show(extractDate("né le 5/2/2007 (mère, Kaïra): Johnson Longues Oreilles"));
+> show(extraireDate("né le 5/2/2007 (mère, Kaïra): Johnson Longues Oreilles"));
 
 Cette version est légèrement plus longue que la précédente mais elle a
 l'avantage de vérifier effectivement ce qui est fait et de faire retentir la
