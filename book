@@ -2197,9 +2197,9 @@ de caractères dans cette chaîne.
 
 On peut accéder aux @_|[]|_propriétés de deux manières :
 
-> var text = "brume pourpre";
-> show(text["length"]);
-> show(text.length);
+> var texte = "brume pourpre";
+> show(texte["length"]);
+> show(texte.length);
 
 La deuxième manière est un raccourci de la première et ne fonctionne
 que lorsque le nom de la propriété s'écrit comme un nom de variable
@@ -2994,7 +2994,7 @@ Stocker des chats est une opération qui va se dérouler différemment
 à partir de maintenant. Au lieu de simplement mettre la valeur |true| sur
 l'ensemble, nous stockons un objet avec les informations sur le chat. Lorsqu'un
 chat meurt, nous ne le supprimons pas de l'ensemble, nous ajoutons simplement
-la propriété |death| à l'objet pour stocker la date à laquelle le pauvre
+la propriété |deces| à l'objet pour stocker la date à laquelle le pauvre
 animal a trépassé.
 
 Cela signifie que nos fonctions |addToSet| et |removeFromSet| sont devenues
@@ -3072,8 +3072,8 @@ partir de quel point doit commencer la recherche.
 Avoir la fonction |between| rend possible l'expression de extraireNomMere de
 façon plus simple :
 
-> function extraireNomMere(paragraph) {
->   return between(paragraph, "(mère, ", ")");
+> function extraireNomMere(paragraphe) {
+>   return between(paragraphe, "(mère, ", ")");
 > }
 
 ---
@@ -3186,8 +3186,8 @@ chats comme arguments, renvoie le nom du plus vieux chat vivant.
 > print(lePlusVieuxChat(tousLesChats));
 
 La condition donnée avec la commande |if| pourrait paraître un peu intimidante.
-On peut la lire comme : «  ne stocker le chat courant dans la variable
-|oldest| que s'il n'est pas mort, et |oldest| est soit |null| soit un chat
+On peut la lire comme : «  ne stocker le chat en cours dans la variable
+|lePlusVieux| que s'il n'est pas mort, et si |lePlusVieux| est soit |null| soit un chat
 qui est né après le chat en cours ».
 
 Notez que cette fonction renvoie |null| quand il n'existe aucun chat vivant
@@ -3263,7 +3263,7 @@ Vous devez vous rappeler de la ligne de code cité en introduction :
 
 !> print(sum(serie(1, 10)));
 
-Nous avons la fonction |range| maintenant. Tout ce que nous avons besoin
+Nous avons la fonction |serie| maintenant. Tout ce que nous avons besoin
 pour faire fonctionner cette ligne est une fonction |sum|. Cette fonction
 prend un tableau de nombre en arguments et retourne leur somme. Écrivez-la,
 ce devrait être simple.
@@ -8388,7 +8388,7 @@ simplement dire qu'elles sont mal conçues et on peut facilement y remédier
 en les scindant en plusieurs fonctions plus modestes. Mais dans d'autres cas,
 il n'y a pas de contournement possible. En particulier si ces arguments ont
 une valeur « par défaut » significative. Nous pourrions par exemple
-écrire encore une version étendue de |range|.
+écrire encore une version étendue de |serie|.
 
 > function serie(debut, fin, pas, longueur) {
 >   if (pas == undefined)
