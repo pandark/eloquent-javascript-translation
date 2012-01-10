@@ -2436,7 +2436,7 @@ arrête la boucle.
 
 *** range
 
-Écrivez une fonction nommée |série| qui prend un argument, un nombre
+Écrivez une fonction nommée |serie| qui prend un argument, un nombre
 positif et retourne un tableau contenant chaque nombre de 0 jusqu'au nombre
 donné en paramètre inclus.
 
@@ -3011,7 +3011,7 @@ stocker aussi les dates de naissance et par la suite, les noms des mères.
 > }
 > function chatsDecedes(set, noms, dateDeces) {
 >   for (var i = 0; i < noms.length; i++)
->     set[noms[i]].décès = dateDeces;
+>     set[noms[i]].deces = dateDeces;
 > }
 
 |enregistrementChat| est une fonction distincte pour créer ces objets de stockage. Elle
@@ -3119,8 +3119,8 @@ pourrait être utile :
 >   var chat = data[nom];
 >   var message = nom + ", né le " + formatDate(chat.naissance) +
 >                 " de la mère " + chat.mere;
->   if ("décès" in chat)
->     message += ", décédé le " + formatDate(chat.décès);
+>   if ("deces" in chat)
+>     message += ", décédé le " + formatDate(chat.deces);
 >   return message + ".";
 > }
 >
@@ -3172,7 +3172,7 @@ chats comme arguments, renvoie le nom du plus vieux chat vivant.
 >
 >   for (var nom in data) {
 >     var chat = data[nom];
->     if (!("décès" in chat) &&
+>     if (!("deces" in chat) &&
 >         (lePlusVieux == null || lePlusVieux.naissance > chat.naissance))
 >       lePlusVieux = chat;
 >   }
