@@ -11642,15 +11642,15 @@ dans un programme réel, mais j'ai vu d'autres personnes l'utiliser, il peut
 donc être utile de savoir ce que c'est. Le code utilisant |with| ressemble
 à cela :
 
-> var scope = "outside";
-> var object = {name: "Ignatius", scope: "inside"};
-> with(object) {
->   print("Name == ", name, ", scope == ", scope);
->   name = "Raoul";
->   var newVariable = 49;
+> var pointDeVue = "extérieur";
+> var objet = {nom: "Ignatius", pointDeVue: "intérieur"};
+> with(objet) {
+>   print("Nom == ", nom, ", point de vue == ", pointDeVue);
+>   nom = "Raoul";
+>   var nouvelleVariable = 49;
 > }
-> show(object.name);
-> show(newVariable);
+> show(objet.nom);
+> show(nouvelleVariable);
 
 A l'intérieur du bloc, les  propriétés de l'objet passé à |with|
 agissent comme des variables. Des  variables nouvellement introduites ne
