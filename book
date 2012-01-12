@@ -11584,14 +11584,14 @@ une boucle spécifique, les boucles peuvent être _label_lisée. Un label est
 un nom (n'importe quel nom de variable fera l'affaire), suivi de deux points
 (|:|).
 
-> outer: for (var coteA = 1; coteA < 10; coteA++) {
->   inner: for (var coteB = 1; coteB < 10; coteB++) {
+> exterieur: for (var coteA = 1; coteA < 10; coteA++) {
+>   interieur: for (var coteB = 1; coteB < 10; coteB++) {
 >     var hypotenuse = Math.sqrt(coteA * coteA + coteB * coteB);
 >     if (hypotenuse % 1 == 0) {
 >       print("Un triangle rectangle avec ses côtés adjacents à l'angle droit de longueurs ",
 >             coteA, " et ", coteB, " a une hypoténuse de ",
 >             hypotenuse, ".");
->       break outer;
+>       break exterieur;
 >     }
 >   }
 > }
