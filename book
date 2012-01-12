@@ -780,16 +780,16 @@ celles-ci, et la nouvelle valeur doit être utilisée immédiatement ou
 elle disparaîtra. Pour « attraper » et conserver des valeurs, JavaScript
 fournit un mécanisme appelé la _variable_.
 
-> var epuisette = 5 * 5;
+> var attrape = 5 * 5;
 
 Une variable possède toujours un nom et elle peut pointer vers une valeur et
-la conserver. L'instruction ci-dessus crée une variable appelée |epuisette|
+la conserver. L'instruction ci-dessus crée une variable appelée |attrape|
 et l'utilise pour conserver le nombre produit par la multiplication de |5|
 par |5|.
 
 Après avoir exécuté le programme ci-dessus, vous pouvez entrer le mot
-|epuisette| dans la console et cela ressortira la valeur |25| à votre place. Le
-nom d'une variable est utilisé pour récupérer sa valeur. |epuisette + 1|
+|attrape| dans la console et cela ressortira la valeur |25| à votre place. Le
+nom d'une variable est utilisé pour récupérer sa valeur. |attrape + 1|
 fonctionne également. Un nom de variable peut être utilisé comme expression
 et ainsi faire partie de plus grandes expressions.
 
@@ -810,7 +810,7 @@ liées pour toujours. Vous pouvez utiliser l'opérateur |=| à tout moment
 sur une variable existante pour lui enlever sa valeur actuelle et la faire
 pointer sur une nouvelle valeur.
 
-> epuisette = 4 * 4;
+> attrape = 4 * 4;
 
 ---
 
