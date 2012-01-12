@@ -11604,8 +11604,8 @@ quelque chose d'utile, mais la syntaxe JavaScript utilisée pour cela (qui
 est empruntée au langage de programmation C) est si bizarre et moche que
 je préfère en général utiliser une chaîne de |if| à la place.
 
-> function weatherAdvice(weather) {
->   switch(weather) {
+> function conseilMeteo(meteo) {
+>   switch(meteo) {
 >     case "pluvieux":
 >       print("Pensez à prendre un parapluie.");
 >       break;
@@ -11615,12 +11615,12 @@ je préfère en général utiliser une chaîne de |if| à la place.
 >       print("Allez dehors.");
 >       break;
 >     default:
->       print("Type de temps inconnu : ", weather);
+>       print("Type de temps inconnu : ", meteo);
 >       break;
 >   }
 > }
 >
-> weatherAdvice("ensoleillé");
+> conseilMeteo("ensoleillé");
 
 A l'intérieur du bloc ouvert par |switch|, vous pouvez écrire un certain
 nombre de labels |case|. Le programme sautera au label qui correspond à la
