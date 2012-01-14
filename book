@@ -9642,7 +9642,7 @@ que la dernière lettre est en minuscule. Faites donc attention,
 lorsque vous le taperez souvent, au syndrome du canal carpien. Parce que
 |document.getElementById| est un nom ridiculement long pour une opération
 aussi commune, l'abréger par _|$|_ est devenu une convention au sein
-des développeurs Javascript.|$|, comme vous vous en souvenez peut-être,
+des développeurs Javascript. |$|, comme vous vous en souvenez peut-être,
 est considéré comme une lettre par Javascript et c'est donc un nom de
 variable valide.
 
