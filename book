@@ -9081,8 +9081,8 @@ de fichier dans la requête. Pour cela, les requêtes HTTP sont autorisées
 ] http://www.google.com/search?q=empire%20aztec
 
 Après le fichier (|/search|), l'URL continue avec un point d'interrogation,
-suivi de paramètres. Cette requête a un paramètre, nommé |q| (pour
-'query'/requête on présume), dont la valeur est |empire aztec|. La partie
+suivi de paramètres. Cette requête a un paramètre, nommé |q| (vraisemblablement
+pour 'query', c'est à dire requête), dont la valeur est |empire aztec|. La partie
 |%20| correspond à un espace. Il y a nombre de caractères qui peuvent
 apparaître dans ces valeurs, comme les espaces, les esperluettes ou les
 points d'interrogation. Ceux-ci sont remplacés par un |%| suivi par une
