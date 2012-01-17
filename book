@@ -9098,9 +9098,9 @@ JavaScript fournit les fonctions _|encodeURIComponent|_ et
 _|decodeURIComponent|_ pour ajouter ces codes aux textes et également
 les enlever.
 
-> var encodé = encodeURIComponent("empire aztec");
-> show(encodé);
-> show(decodeURIComponent(encodé));
+> var encode = encodeURIComponent("empire aztec");
+> show(encode);
+> show(decodeURIComponent(encode));
 
 Quand une requête contient plus d'un paramètre, ils sont séparés par
 une esperluette, comme dans...
