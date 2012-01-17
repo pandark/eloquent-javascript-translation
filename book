@@ -10581,44 +10581,44 @@ peut ressembler à ça.
 
 > var Carreau = {
 >   construct: function(caractere, celluleDeTable) {
->     this.background = "empty";
+>     this.arrierePlan = "empty";
 >     if (caractere == "#")
->       this.background = "wall";
+>       this.arrierePlan = "wall";
 >     else if (caractere == "*")
->       this.background = "exit";
+>       this.arrierePlan = "exit";
 >
 >     this.celluleDeTable = celluleDeTable;
->     this.celluleDeTable.className = this.background;
+>     this.celluleDeTable.className = this.arrierePlan;
 >
->     this.content = null;
+>     this.contenu = null;
 >     if (caractere == "0")
->       this.content = "boulder";
+>       this.contenu = "boulder";
 >     else if (caractere == "@")
->       this.content = "player";
+>       this.contenu = "player";
 >
->     if (this.content != null) {
+>     if (this.contenu != null) {
 >       var image = dom("IMG", {src: "img/sokoban/" +
->                                    this.content + ".gif"});
+>                                    this.contenu + ".gif"});
 >       this.celluleDeTable.appendChild(image);
 >     }
 >   },
 >
->   hasPlayer: function() {
->     return this.content == "player";
+>   aUnJoueur: function() {
+>     return this.contenu == "player";
 >   },
->   hasBoulder: function() {
->     return this.content == "boulder";
+>   aUnRocher: function() {
+>     return this.contenu == "boulder";
 >   },
->   isEmpty: function() {
->     return this.content == null && this.background == "empty";
+>   estVide: function() {
+>     return this.contenu == null && this.arrierePlan == "empty";
 >   },
->   isExit: function() {
->     return this.background == "exit";
+>   estUneSortie: function() {
+>     return this.arrierePlan == "exit";
 >   }
 > };
 >
-> var testSquare = Carreau.create("@", dom("TD"));
-> show(testSquare.hasPlayer());
+> var carreauDeTest = Carreau.create("@", dom("TD"));
+> show(carreauDeTest.aUnJoueur());
 
 L'argument |caractere| du constructeur est utilisé pour transformer les
 caractères du plan en objets |Carreau| réels. Pour définir l'arrière-plan
@@ -10626,7 +10626,7 @@ des cellules, on utilise des classes de feuilles de styles (définies dans
 [sokoban.css | css/sokoban.css]), qui sont assignées à la propriété
 |className| des éléments |td|.
 
-Les méthodes comme |hasPlayer| et |isEmpty| sont une façon « d'isoler »
+Les méthodes comme |aUnJoueur| et |estVide| sont une façon « d'isoler »
 le code qui utilise les objets de ce type, du fonctionnement interne des
 objets. Ce n'est pas absolument nécessaire dans ce cas, mais cela permettra
 de rendre le reste du code meilleur.
@@ -10635,12 +10635,12 @@ de rendre le reste du code meilleur.
 
 Ajoutez les méthodes |moveContent| et |clearContent| au prototype |Carreau|. Le
 premier prend un autre objet |Carreau| en argument, et déplace le contenu de
-la case |this| dans cet objet en mettant à jour les propriétés |content|
+la case |this| dans cet objet en mettant à jour les propriétés |contenu|
 et en déplaçant le nœud image associé au contenu. Cette méthode sera
 utilisée pour déplacer les rochers et le joueur à travers la grille. Elle
 peut supposer que la case n'est pas vide au moment de l'appel. |clearContent|
 supprime le contenu d'une case sans le déplacer nulle part. Notez bien que
-la propriété |content| pour les cases vides contient |null|.
+la propriété |contenu| pour les cases vides contient |null|.
 
 La fonction |removeElement| que nous avons définie au \\cdom est
 également disponible dans ce chapitre, pour vos besoins de suppression de
@@ -10651,12 +10651,12 @@ cellules de la table, et peuvent donc, par exemple, être atteints avec
 ///
 
 > Carreau.moveContent = function(target) {
->   target.content = this.content;
->   this.content = null;
+>   target.contenu = this.contenu;
+>   this.contenu = null;
 >   target.celluleDeTable.appendChild(this.celluleDeTable.lastChild);
 > };
 > Carreau.clearContent = function() {
->   this.content = null;
+>   this.contenu = null;
 >   removeElement(this.celluleDeTable.lastChild);
 > };
 
@@ -10691,7 +10691,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >         rangeeDeTable.appendChild(celluleDeTable);
 >         var carreau = Carreau.create(ligne.charAt(x), celluleDeTable);
 >         rangeeDeCarreaux.push(carreau);
->         if (carreau.hasPlayer())
+>         if (carreau.aUnJoueur())
 >           this.playerPos = new Point(x, y);
 >       }
 >       tbody.appendChild(rangeeDeTable);
@@ -10716,7 +10716,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 > };
 >
 > var testField = TerrainSokoban.create(sokobanLevels[0]);
-> show(testField.getSquare(new Point(10, 2)).content);
+> show(testField.getSquare(new Point(10, 2)).contenu);
 
 Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
 objets |Carreau| dans la propriété |carreaux|. Quand il rencontre une case
@@ -10734,7 +10734,7 @@ de propriété.
 
 Le nombre de rochers dont il faut se débarrasser pour réussir un niveau
 (ce nombre peut être inférieur au nombre total de rochers du niveau) est
-stocké dans |bouldersToGo|. Chaque fois qu'un rocher est amené à la sortie,
+stocké dans |rochersRestants|. Chaque fois qu'un rocher est amené à la sortie,
 nous pouvons en soustraire 1, et voir si la partie est gagnée. Pour montrer
 au joueur comment il s'en sort, nous devrons afficher cette valeur quelque
 part. Dans ce but, on va utiliser un élément |div| avec du texte. Les nœuds
@@ -10786,12 +10786,12 @@ le déplacement.
 >   var targetSquare = this.getSquare(targetPos);
 >
 >   // Possibly pushing a boulder
->   if (targetSquare.hasBoulder()) {
+>   if (targetSquare.aUnRocher()) {
 >     var pushTarget = this.getSquare(targetPos.add(direction));
->     if (pushTarget.isEmpty()) {
+>     if (pushTarget.estVide()) {
 >       targetSquare.moveContent(pushTarget);
 >     }
->     else if (pushTarget.isExit()) {
+>     else if (pushTarget.estUneSortie()) {
 >       targetSquare.moveContent(pushTarget);
 >       pushTarget.clearContent();
 >       this.rochersRestants--;
@@ -10799,7 +10799,7 @@ le déplacement.
 >     }
 >   }
 >   // Moving the player
->   if (targetSquare.isEmpty()) {
+>   if (targetSquare.estVide()) {
 >     playerSquare.moveContent(targetSquare);
 >     this.playerPos = targetPos;
 >   }
@@ -10950,7 +10950,7 @@ pas, elles vont continuer à faire perdre du temps à votre ordinateur jusqu'à
 ce que la page soit fermée.
 
 > Carreau.clearContent = function() {
->   self.content = null;
+>   self.contenu = null;
 >   var image = this.celluleDeTable.lastChild;
 >   var size = 100;
 >
