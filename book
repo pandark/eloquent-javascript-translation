@@ -10662,7 +10662,7 @@ cellules de la table, et peuvent donc, par exemple, être atteints avec
 
 ---
 
-Le type d'objet suivant sera appelé |SokobanField|. On passe à son
+Le type d'objet suivant sera appelé |TerrainSokoban|. On passe à son
 contructeur un objet du tableau |sokobanLevels|, et il est en charge à
 la fois de la création d'une table de nœud DOM, mais également de la
 création d'une grille d'objets |Square|. Cet objet s'occupera également
@@ -10676,50 +10676,50 @@ si vous vous en souvenez, a une méthode |add|.
 
 La base du prototype de l'aire de jeu ressemblera à ça :
 
-> var SokobanField = {
->   construct: function(level) {
+> var TerrainSokoban = {
+>   construct: function(niveau) {
 >     var tbody = dom("TBODY");
->     this.squares = [];
->     this.bouldersToGo = level.boulders;
+>     this.carreaux = [];
+>     this.rochersRestants = niveau.boulders;
 >
->     for (var y = 0; y < level.field.length; y++) {
->       var line = level.field[y];
->       var tableRow = dom("TR");
->       var squareRow = [];
->       for (var x = 0; x < line.length; x++) {
->         var tableCell = dom("TD");
->         tableRow.appendChild(tableCell);
->         var square = Square.create(line.charAt(x), tableCell);
->         squareRow.push(square);
->         if (square.hasPlayer())
+>     for (var y = 0; y < niveau.field.length; y++) {
+>       var ligne = niveau.field[y];
+>       var rangeeDeTable = dom("TR");
+>       var rangeeDeCarreaux = [];
+>       for (var x = 0; x < ligne.length; x++) {
+>         var celluleDeTable = dom("TD");
+>         rangeeDeTable.appendChild(celluleDeTable);
+>         var carreau = Square.create(ligne.charAt(x), celluleDeTable);
+>         rangeeDeCarreaux.push(carreau);
+>         if (carreau.hasPlayer())
 >           this.playerPos = new Point(x, y);
 >       }
->       tbody.appendChild(tableRow);
->       this.squares.push(squareRow);
+>       tbody.appendChild(rangeeDeTable);
+>       this.carreaux.push(rangeeDeCarreaux);
 >     }
 >
 >     this.table = dom("TABLE", {"class": "sokoban"}, tbody);
 >     this.score = dom("DIV", null, "...");
->     this.updateScore();
+>     this.miseaJourScore();
 >   },
 >
 >   getSquare: function(position) {
->     return this.squares[position.y][position.x];
+>     return this.carreaux[position.y][position.x];
 >   },
->   updateScore: function() {
->     this.score.firstChild.nodeValue = this.bouldersToGo +
+>   miseaJourScore: function() {
+>     this.score.firstChild.nodeValue = this.rochersRestants +
 >                                       " rochers restants.";
 >   },
->   won: function() {
->     return this.bouldersToGo <= 0;
+>   aGagne: function() {
+>     return this.rochersRestants <= 0;
 >   }
 > };
 >
-> var testField = SokobanField.create(sokobanLevels[0]);
+> var testField = TerrainSokoban.create(sokobanLevels[0]);
 > show(testField.getSquare(new Point(10, 2)).content);
 
 Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
-objets |Square| dans la propriété |squares|. Quand il rencontre une case
+objets |Square| dans la propriété |carreaux|. Quand il rencontre une case
 avec le joueur, il enregistre cette position dans |playerPos|, pour qu'il soit
 facile de retrouver la case dans laquelle se trouve le joueur. |getSquare| est
 utilisé pour trouver l'objet |Square| à une position |x,y| donnée de l'aire
@@ -10739,7 +10739,7 @@ nous pouvons en soustraire 1, et voir si la partie est gagnée. Pour montrer
 au joueur comment il s'en sort, nous devrons afficher cette valeur quelque
 part. Dans ce but, on va utiliser un élément |div| avec du texte. Les nœuds
 |div| sont des conteneurs sans balise qui leur est propre. Le texte du score
-peut être mis à jour avec la méthode |updateScore|. La méthode |won|
+peut être mis à jour avec la méthode |miseaJourScore|. La méthode |aGagne|
 sera utilisée par l'objet contrôleur pour déterminer quand la partie est
 terminée, pour que le joueur puisse passer au niveau suivant.
 
@@ -10750,11 +10750,11 @@ dans le document d'une manière ou d'une autre. C'est à cela que sert
 la méthode |place|. Nous allons aussi ajouter une méthode |remove| pour
 faciliter la suppression d'un niveau quand on a terminé.
 
-> SokobanField.place = function(where) {
+> TerrainSokoban.place = function(where) {
 >   where.appendChild(this.score);
 >   where.appendChild(this.table);
 > };
-> SokobanField.remove = function() {
+> TerrainSokoban.remove = function() {
 >   removeElement(this.score);
 >   removeElement(this.table);
 > };
@@ -10780,7 +10780,7 @@ le déplacement.
 
 ///
 
-> SokobanField.move = function(direction) {
+> TerrainSokoban.move = function(direction) {
 >   var playerSquare = this.getSquare(this.playerPos);
 >   var targetPos = this.playerPos.add(direction);
 >   var targetSquare = this.getSquare(targetPos);
@@ -10794,8 +10794,8 @@ le déplacement.
 >     else if (pushTarget.isExit()) {
 >       targetSquare.moveContent(pushTarget);
 >       pushTarget.clearContent();
->       this.bouldersToGo--;
->       this.updateScore();
+>       this.rochersRestants--;
+>       this.miseaJourScore();
 >     }
 >   }
 >   // Moving the player
@@ -10827,7 +10827,7 @@ juste besoin d'un contrôleur pour que le jeu soit jouable. Le contrôleur sera
 un type d'objet appelé |SokobanGame|, qui est responsable de ce qui suit :
 
  * Préparer un endroit où l'aire de jeu peut être placée.
- * Construire et enlever les objets |SokobanField|.
+ * Construire et enlever les objets |TerrainSokoban|.
  * Capturer des événements d'appui de touche et appeler la méthode |move| sur le terrain actuel avec l'argument qui convient.
  * Mettre à jour le score, et passer au niveau suivant quand un niveau est réussi.
  * Ajouter des boutons pour réinitialiser le niveau en cours ou le jeu tout entier (retour au niveau 0).
@@ -10859,7 +10859,7 @@ On commence encore avec un prototype inachevé.
 >   reset: function() {
 >     if (this.field)
 >       this.field.remove();
->     this.field = SokobanField.create(sokobanLevels[this.level]);
+>     this.field = TerrainSokoban.create(sokobanLevels[this.level]);
 >     this.field.place(this.container);
 >   },
 >
@@ -10892,7 +10892,7 @@ ci-dessous sera probablement utile :
 > });
 
 Après qu'un appui sur une touche de direction est géré, vérifiez
-|this.field.won()| pour savoir si c'était le déplacement gagnant. Si le
+|this.field.aGagne()| pour savoir si c'était le déplacement gagnant. Si le
 joueur a gagné, utilisez |alert| pour afficher un message, et passer au niveau
 suivant. S'il n'y a pas de niveau suivant (vérifiez |sokobanLevels.length),
 redémarrez le jeu.
@@ -10907,7 +10907,7 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 >   if (arrowKeyCodes.contains(event.keyCode)) {
 >     event.stop();
 >     this.field.move(arrowKeyCodes.lookup(event.keyCode));
->     if (this.field.won()) {
+>     if (this.field.aGagne()) {
 >       if (this.level < sokobanLevels.length - 1) {
 >         alert("Excellent ! Passons au niveau suivant.");
 >         this.level++;
