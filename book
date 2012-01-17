@@ -10943,10 +10943,10 @@ de sa taille habituelle.
 
 ///
 
-On peut utiliser |setInterval| pour gérer le minutage
-de l'animation. N'oubliez pas pas que la méthode doit s'assurer que
-l'intervalle est effacé après que c'est terminé. Si vous ne le faites
-pas, il va continuer à faire perdre du temps à votre ordinateur jusqu'à
+On peut utiliser |setInterval| pour gérer le rythme
+de l'animation. N'oubliez pas que la méthode doit s'assurer que les exécutions
+à intervalle régulier sont désactivées à la fin de l'animation. Si vous ne le faites
+pas, elles vont continuer à faire perdre du temps à votre ordinateur jusqu'à
 ce que la page soit fermée.
 
 > Square.clearContent = function() {
