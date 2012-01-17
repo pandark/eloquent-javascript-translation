@@ -10576,30 +10576,30 @@ Commençons par les objets représentant les cases de l'aire de jeu. Ils
 sont chargés de la définition correcte de l'arrière-plan de leur cellule,
 et de l'ajout des images quand nécessaire. Le répertoire |img/sokoban/|
 contient un ensemble d'images, basées sur une autre ancien jeu, qui seront
-utilisées pour visualiser le jeu. Pour commencer, le prototype |Square|
+utilisées pour visualiser le jeu. Pour commencer, le prototype |Carreau|
 peut ressembler à ça.
 
-> var Square = {
->   construct: function(character, tableCell) {
+> var Carreau = {
+>   construct: function(caractere, celluleDeTable) {
 >     this.background = "empty";
->     if (character == "#")
+>     if (caractere == "#")
 >       this.background = "wall";
->     else if (character == "*")
+>     else if (caractere == "*")
 >       this.background = "exit";
 >
->     this.tableCell = tableCell;
->     this.tableCell.className = this.background;
+>     this.celluleDeTable = celluleDeTable;
+>     this.celluleDeTable.className = this.background;
 >
 >     this.content = null;
->     if (character == "0")
+>     if (caractere == "0")
 >       this.content = "boulder";
->     else if (character == "@")
+>     else if (caractere == "@")
 >       this.content = "player";
 >
 >     if (this.content != null) {
 >       var image = dom("IMG", {src: "img/sokoban/" +
 >                                    this.content + ".gif"});
->       this.tableCell.appendChild(image);
+>       this.celluleDeTable.appendChild(image);
 >     }
 >   },
 >
@@ -10617,11 +10617,11 @@ peut ressembler à ça.
 >   }
 > };
 >
-> var testSquare = Square.create("@", dom("TD"));
+> var testSquare = Carreau.create("@", dom("TD"));
 > show(testSquare.hasPlayer());
 
-L'argument |character| du constructeur est utilisé pour transformer les
-caractères du plan en objets |Square| réels. Pour définir l'arrière-plan
+L'argument |caractere| du constructeur est utilisé pour transformer les
+caractères du plan en objets |Carreau| réels. Pour définir l'arrière-plan
 des cellules, on utilise des classes de feuilles de styles (définies dans
 [sokoban.css | css/sokoban.css]), qui sont assignées à la propriété
 |className| des éléments |td|.
@@ -10633,8 +10633,8 @@ de rendre le reste du code meilleur.
 
 ***
 
-Ajoutez les méthodes |moveContent| et |clearContent| au prototype |Square|. Le
-premier prend un autre objet |Square| en argument, et déplace le contenu de
+Ajoutez les méthodes |moveContent| et |clearContent| au prototype |Carreau|. Le
+premier prend un autre objet |Carreau| en argument, et déplace le contenu de
 la case |this| dans cet objet en mettant à jour les propriétés |content|
 et en déplaçant le nœud image associé au contenu. Cette méthode sera
 utilisée pour déplacer les rochers et le joueur à travers la grille. Elle
@@ -10646,18 +10646,18 @@ La fonction |removeElement| que nous avons définie au \\cdom est
 également disponible dans ce chapitre, pour vos besoins de suppression de
 nœud. Vous pouvez supposer que les images sont les seuls nœuds-fils des
 cellules de la table, et peuvent donc, par exemple, être atteints avec
-|this.tableCell.lastChild|.
+|this.celluleDeTable.lastChild|.
 
 ///
 
-> Square.moveContent = function(target) {
+> Carreau.moveContent = function(target) {
 >   target.content = this.content;
 >   this.content = null;
->   target.tableCell.appendChild(this.tableCell.lastChild);
+>   target.celluleDeTable.appendChild(this.celluleDeTable.lastChild);
 > };
-> Square.clearContent = function() {
+> Carreau.clearContent = function() {
 >   this.content = null;
->   removeElement(this.tableCell.lastChild);
+>   removeElement(this.celluleDeTable.lastChild);
 > };
 
 ---
@@ -10665,7 +10665,7 @@ cellules de la table, et peuvent donc, par exemple, être atteints avec
 Le type d'objet suivant sera appelé |TerrainSokoban|. On passe à son
 contructeur un objet du tableau |sokobanLevels|, et il est en charge à
 la fois de la création d'une table de nœud DOM, mais également de la
-création d'une grille d'objets |Square|. Cet objet s'occupera également
+création d'une grille d'objets |Carreau|. Cet objet s'occupera également
 des détails pour déplacer le joueur et les rochers, grâce à une méthode
 |move| à laquelle on passe un argument indiquant dans quelle direction nous
 voulons déplacer le joueur.
@@ -10689,7 +10689,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >       for (var x = 0; x < ligne.length; x++) {
 >         var celluleDeTable = dom("TD");
 >         rangeeDeTable.appendChild(celluleDeTable);
->         var carreau = Square.create(ligne.charAt(x), celluleDeTable);
+>         var carreau = Carreau.create(ligne.charAt(x), celluleDeTable);
 >         rangeeDeCarreaux.push(carreau);
 >         if (carreau.hasPlayer())
 >           this.playerPos = new Point(x, y);
@@ -10719,10 +10719,10 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 > show(testField.getSquare(new Point(10, 2)).content);
 
 Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
-objets |Square| dans la propriété |carreaux|. Quand il rencontre une case
+objets |Carreau| dans la propriété |carreaux|. Quand il rencontre une case
 avec le joueur, il enregistre cette position dans |playerPos|, pour qu'il soit
 facile de retrouver la case dans laquelle se trouve le joueur. |getSquare| est
-utilisé pour trouver l'objet |Square| à une position |x,y| donnée de l'aire
+utilisé pour trouver l'objet |Carreau| à une position |x,y| donnée de l'aire
 de jeu. Remarquez que l'on ne tient pas compte des bords de la grille :
 pour éviter d'écrire du code ennuyeux, nous supposons que l'aire de jeu
 est correctement fermée par des murs, ce qui empêche le joueur d'en sortir.
@@ -10934,7 +10934,7 @@ de façon à ce qu'il ne récupère que les évènements de sa propre fenêtre.
 ***
 
 Quand ils sont amenés à la sortie, les rochers disparaissent plutôt
-brusquement. En modifiant la méthode |Square.clearContent|, essayez
+brusquement. En modifiant la méthode |Carreau.clearContent|, essayez
 d'afficher une animation de rochers « tombants » lorsqu'ils sont
 sur le point d'être enlevés. Faites-les rapetisser un moment avant, puis
 disparaître. Vous pouvez utiliser |style.width = "50%"|, et de la même
@@ -10949,9 +10949,9 @@ de l'animation. N'oubliez pas que la méthode doit s'assurer que les exécutions
 pas, elles vont continuer à faire perdre du temps à votre ordinateur jusqu'à
 ce que la page soit fermée.
 
-> Square.clearContent = function() {
+> Carreau.clearContent = function() {
 >   self.content = null;
->   var image = this.tableCell.lastChild;
+>   var image = this.celluleDeTable.lastChild;
 >   var size = 100;
 >
 >   var animate = setInterval(function() {
