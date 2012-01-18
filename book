@@ -10633,12 +10633,12 @@ de rendre le reste du code meilleur.
 
 ***
 
-Ajoutez les méthodes |moveContent| et |clearContent| au prototype |Carreau|. Le
+Ajoutez les méthodes |deplaceContenu| et |effaceContenu| au prototype |Carreau|. Le
 premier prend un autre objet |Carreau| en argument, et déplace le contenu de
 la case |this| dans cet objet en mettant à jour les propriétés |contenu|
 et en déplaçant le nœud image associé au contenu. Cette méthode sera
 utilisée pour déplacer les rochers et le joueur à travers la grille. Elle
-peut supposer que la case n'est pas vide au moment de l'appel. |clearContent|
+peut supposer que la case n'est pas vide au moment de l'appel. |effaceContenu|
 supprime le contenu d'une case sans le déplacer nulle part. Notez bien que
 la propriété |contenu| pour les cases vides contient |null|.
 
@@ -10650,12 +10650,12 @@ cellules de la table, et peuvent donc, par exemple, être atteints avec
 
 ///
 
-> Carreau.moveContent = function(target) {
->   target.contenu = this.contenu;
+> Carreau.deplaceContenu = function(carreauCible) {
+>   carreauCible.contenu = this.contenu;
 >   this.contenu = null;
->   target.celluleDeTable.appendChild(this.celluleDeTable.lastChild);
+>   carreauCible.celluleDeTable.appendChild(this.celluleDeTable.lastChild);
 > };
-> Carreau.clearContent = function() {
+> Carreau.effaceContenu = function() {
 >   this.contenu = null;
 >   removeElement(this.celluleDeTable.lastChild);
 > };
@@ -10703,7 +10703,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >     this.miseaJourScore();
 >   },
 >
->   getSquare: function(position) {
+>   lireCarreau: function(position) {
 >     return this.carreaux[position.y][position.x];
 >   },
 >   miseaJourScore: function() {
@@ -10715,13 +10715,13 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >   }
 > };
 >
-> var testField = TerrainSokoban.create(sokobanLevels[0]);
-> show(testField.getSquare(new Point(10, 2)).contenu);
+> var terrainDeTest = TerrainSokoban.create(sokobanLevels[0]);
+> show(terrainDeTest.lireCarreau(new Point(10, 2)).contenu);
 
 Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
 objets |Carreau| dans la propriété |carreaux|. Quand il rencontre une case
 avec le joueur, il enregistre cette position dans |playerPos|, pour qu'il soit
-facile de retrouver la case dans laquelle se trouve le joueur. |getSquare| est
+facile de retrouver la case dans laquelle se trouve le joueur. |lireCarreau| est
 utilisé pour trouver l'objet |Carreau| à une position |x,y| donnée de l'aire
 de jeu. Remarquez que l'on ne tient pas compte des bords de la grille :
 pour éviter d'écrire du code ennuyeux, nous supposons que l'aire de jeu
@@ -10747,26 +10747,26 @@ terminée, pour que le joueur puisse passer au niveau suivant.
 
 Si nous voulons voir le terrain de jeu et le score, nous devrons l'insérer
 dans le document d'une manière ou d'une autre. C'est à cela que sert
-la méthode |place|. Nous allons aussi ajouter une méthode |remove| pour
+la méthode |place|. Nous allons aussi ajouter une méthode |enlever| pour
 faciliter la suppression d'un niveau quand on a terminé.
 
-> TerrainSokoban.place = function(where) {
->   where.appendChild(this.score);
->   where.appendChild(this.table);
+> TerrainSokoban.place = function(ouPlacer) {
+>   ouPlacer.appendChild(this.score);
+>   ouPlacer.appendChild(this.table);
 > };
-> TerrainSokoban.remove = function() {
+> TerrainSokoban.enlever = function() {
 >   removeElement(this.score);
 >   removeElement(this.table);
 > };
 >
-> testField.place(document.body);
+> terrainDeTest.place(document.body);
 
 Si tout s'est bien passé, vous devriez maintenant voir un jeu de Sokoban.
 
 ***
 
 Mais ce niveau ne fait pas encore grand-chose. Ajoutez une méthode appelée
-|move|. Elle prend en argument un objet |Point| décrivant le mouvement (par
+|deplacer|. Elle prend en argument un objet |Point| décrivant le mouvement (par
 exemple |-1,0| pour se déplacer vers la gauche), et s'occupe de déplacer
 les éléments correctement.
 
@@ -10780,27 +10780,27 @@ le déplacement.
 
 ///
 
-> TerrainSokoban.move = function(direction) {
->   var playerSquare = this.getSquare(this.playerPos);
+> TerrainSokoban.deplacer = function(direction) {
+>   var playerSquare = this.lireCarreau(this.playerPos);
 >   var targetPos = this.playerPos.add(direction);
->   var targetSquare = this.getSquare(targetPos);
+>   var targetSquare = this.lireCarreau(targetPos);
 >
->   // Possibly pushing a boulder
+>   // Tente de déplacer un rocher
 >   if (targetSquare.aUnRocher()) {
->     var pushTarget = this.getSquare(targetPos.add(direction));
+>     var pushTarget = this.lireCarreau(targetPos.add(direction));
 >     if (pushTarget.estVide()) {
->       targetSquare.moveContent(pushTarget);
+>       targetSquare.deplaceContenu(pushTarget);
 >     }
 >     else if (pushTarget.estUneSortie()) {
->       targetSquare.moveContent(pushTarget);
->       pushTarget.clearContent();
+>       targetSquare.deplaceContenu(pushTarget);
+>       pushTarget.effaceContenu();
 >       this.rochersRestants--;
 >       this.miseaJourScore();
 >     }
 >   }
->   // Moving the player
+>   // Déplace le joueur
 >   if (targetSquare.estVide()) {
->     playerSquare.moveContent(targetSquare);
+>     playerSquare.deplaceContenu(targetSquare);
 >     this.playerPos = targetPos;
 >   }
 > };
@@ -10812,13 +10812,13 @@ Remarquez comment la case derrière est trouvée en ajoutant |direction|
 à |playerPos| deux fois. Faites un test avec un déplacement vers la gauche
 de deux cases :
 
-> testField.move(new Point(-1, 0));
-> testField.move(new Point(-1, 0));
+> terrainDeTest.deplacer(new Point(-1, 0));
+> terrainDeTest.deplacer(new Point(-1, 0));
 
 Si cela a marché, on a déplacé un rocher dans un espace d'où on ne peut
 plus le retirer, donc on ferait mieux de se débarrasser de cette aire de jeu.
 
-> testField.remove();
+> terrainDeTest.enlever();
 
 ---
 
@@ -10828,7 +10828,7 @@ un type d'objet appelé |SokobanGame|, qui est responsable de ce qui suit :
 
  * Préparer un endroit où l'aire de jeu peut être placée.
  * Construire et enlever les objets |TerrainSokoban|.
- * Capturer des événements d'appui de touche et appeler la méthode |move| sur le terrain actuel avec l'argument qui convient.
+ * Capturer des événements d'appui de touche et appeler la méthode |deplacer| sur le terrain actuel avec l'argument qui convient.
  * Mettre à jour le score, et passer au niveau suivant quand un niveau est réussi.
  * Ajouter des boutons pour réinitialiser le niveau en cours ou le jeu tout entier (retour au niveau 0).
 
@@ -10858,7 +10858,7 @@ On commence encore avec un prototype inachevé.
 >   },
 >   reset: function() {
 >     if (this.field)
->       this.field.remove();
+>       this.field.enlever();
 >     this.field = TerrainSokoban.create(sokobanLevels[this.level]);
 >     this.field.place(this.container);
 >   },
@@ -10906,7 +10906,7 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 > SokobanGame.keyDown = function(event) {
 >   if (arrowKeyCodes.contains(event.keyCode)) {
 >     event.stop();
->     this.field.move(arrowKeyCodes.lookup(event.keyCode));
+>     this.field.deplacer(arrowKeyCodes.lookup(event.keyCode));
 >     if (this.field.aGagne()) {
 >       if (this.level < sokobanLevels.length - 1) {
 >         alert("Excellent ! Passons au niveau suivant.");
@@ -10934,7 +10934,7 @@ de façon à ce qu'il ne récupère que les évènements de sa propre fenêtre.
 ***
 
 Quand ils sont amenés à la sortie, les rochers disparaissent plutôt
-brusquement. En modifiant la méthode |Carreau.clearContent|, essayez
+brusquement. En modifiant la méthode |Carreau.effaceContenu|, essayez
 d'afficher une animation de rochers « tombants » lorsqu'ils sont
 sur le point d'être enlevés. Faites-les rapetisser un moment avant, puis
 disparaître. Vous pouvez utiliser |style.width = "50%"|, et de la même
@@ -10949,7 +10949,7 @@ de l'animation. N'oubliez pas que la méthode doit s'assurer que les exécutions
 pas, elles vont continuer à faire perdre du temps à votre ordinateur jusqu'à
 ce que la page soit fermée.
 
-> Carreau.clearContent = function() {
+> Carreau.effaceContenu = function() {
 >   self.contenu = null;
 >   var image = this.celluleDeTable.lastChild;
 >   var size = 100;
