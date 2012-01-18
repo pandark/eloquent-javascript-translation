@@ -10992,7 +10992,7 @@ change... excepté pour certaines zones de saisie, comme les zones de texte,
 qui ne génèrent pas cet évènement avant que l'élément perde le focus.
 
 > addHandler($("champtexte"), "change", function(event) {
->   print("Content of text field changed to '",
+>   print("Contenu de la zone de texte changé en '",
 >         event.target.value, "'.");
 > });
 
