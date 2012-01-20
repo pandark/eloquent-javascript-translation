@@ -10836,8 +10836,8 @@ On commence encore avec un prototype inachevé.
 
 > var JeuSokoban = {
 >   construct: function(place) {
->     this.level = null;
->     this.field = null;
+>     this.niveau = null;
+>     this.terrain = null;
 >
 >     var nouveauJeu = dom("BUTTON", null, "Nouvelle partie");
 >     addHandler(nouveauJeu, "click", method(this, "nouveauJeu"));
@@ -10853,14 +10853,14 @@ On commence encore avec un prototype inachevé.
 >   },
 >
 >   nouveauJeu: function() {
->     this.level = 0;
+>     this.niveau = 0;
 >     this.reinitialiserNiveau();
 >   },
 >   reinitialiserNiveau: function() {
->     if (this.field)
->       this.field.enlever();
->     this.field = TerrainSokoban.create(sokobanLevels[this.level]);
->     this.field.place(this.container);
+>     if (this.terrain)
+>       this.terrain.enlever();
+>     this.terrain = TerrainSokoban.create(sokobanLevels[this.niveau]);
+>     this.terrain.place(this.container);
 >   },
 >
 >   touchePressee: function(event) {
@@ -10892,7 +10892,7 @@ ci-dessous sera probablement utile :
 > });
 
 Après qu'un appui sur une touche de direction est géré, vérifiez
-|this.field.aGagne()| pour savoir si c'était le déplacement gagnant. Si le
+|this.terrain.aGagne()| pour savoir si c'était le déplacement gagnant. Si le
 joueur a gagné, utilisez |alert| pour afficher un message, et passer au niveau
 suivant. S'il n'y a pas de niveau suivant (vérifiez |sokobanLevels.length),
 redémarrez le jeu.
@@ -10906,11 +10906,11 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 > JeuSokoban.touchePressee = function(event) {
 >   if (codesTouchesFleches.contains(event.keyCode)) {
 >     event.stop();
->     this.field.deplacer(codesTouchesFleches.lookup(event.keyCode));
->     if (this.field.aGagne()) {
->       if (this.level < sokobanLevels.length - 1) {
+>     this.terrain.deplacer(codesTouchesFleches.lookup(event.keyCode));
+>     if (this.terrain.aGagne()) {
+>       if (this.niveau < sokobanLevels.length - 1) {
 >         alert("Excellent ! Passons au niveau suivant.");
->         this.level++;
+>         this.niveau++;
 >         this.reinitialiserNiveau();
 >       }
 >       else {
