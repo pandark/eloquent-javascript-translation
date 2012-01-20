@@ -10692,7 +10692,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >         var carreau = Carreau.create(ligne.charAt(x), celluleDeTable);
 >         rangeeDeCarreaux.push(carreau);
 >         if (carreau.aUnJoueur())
->           this.playerPos = new Point(x, y);
+>           this.positionDuJoueur = new Point(x, y);
 >       }
 >       tbody.appendChild(rangeeDeTable);
 >       this.carreaux.push(rangeeDeCarreaux);
@@ -10720,7 +10720,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 
 Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
 objets |Carreau| dans la propriété |carreaux|. Quand il rencontre une case
-avec le joueur, il enregistre cette position dans |playerPos|, pour qu'il soit
+avec le joueur, il enregistre cette position dans |positionDuJoueur|, pour qu'il soit
 facile de retrouver la case dans laquelle se trouve le joueur. |lireCarreau| est
 utilisé pour trouver l'objet |Carreau| à une position |x,y| donnée de l'aire
 de jeu. Remarquez que l'on ne tient pas compte des bords de la grille :
@@ -10750,9 +10750,9 @@ dans le document d'une manière ou d'une autre. C'est à cela que sert
 la méthode |place|. Nous allons aussi ajouter une méthode |enlever| pour
 faciliter la suppression d'un niveau quand on a terminé.
 
-> TerrainSokoban.place = function(ouPlacer) {
->   ouPlacer.appendChild(this.score);
->   ouPlacer.appendChild(this.table);
+> TerrainSokoban.place = function(ou) {
+>   ou.appendChild(this.score);
+>   ou.appendChild(this.table);
 > };
 > TerrainSokoban.enlever = function() {
 >   removeElement(this.score);
@@ -10770,7 +10770,7 @@ Mais ce niveau ne fait pas encore grand-chose. Ajoutez une méthode appelée
 exemple |-1,0| pour se déplacer vers la gauche), et s'occupe de déplacer
 les éléments correctement.
 
-Voici la démarche correcte : la propriété |playerPos| peut être utilisée
+Voici la démarche correcte : la propriété |positionDuJoueur| peut être utilisée
 pour déterminer où le joueur essaye de se déplacer. S'il y a un rocher à
 cet endroit-là, regardez la case derrière ce rocher. S'il y a une sortie,
 enlevez le rocher et mettez à jour le score. S'il y a un espace vide,
@@ -10781,27 +10781,27 @@ le déplacement.
 ///
 
 > TerrainSokoban.deplacer = function(direction) {
->   var playerSquare = this.lireCarreau(this.playerPos);
->   var targetPos = this.playerPos.add(direction);
->   var targetSquare = this.lireCarreau(targetPos);
+>   var carreauDuJoueur = this.lireCarreau(this.positionDuJoueur);
+>   var positionSouhaitee = this.positionDuJoueur.add(direction);
+>   var carreauSouhaite = this.lireCarreau(positionSouhaitee);
 >
 >   // Tente de déplacer un rocher
->   if (targetSquare.aUnRocher()) {
->     var pushTarget = this.lireCarreau(targetPos.add(direction));
->     if (pushTarget.estVide()) {
->       targetSquare.deplaceContenu(pushTarget);
+>   if (carreauSouhaite.aUnRocher()) {
+>     var carreauOuPousserUnRocher = this.lireCarreau(positionSouhaitee.add(direction));
+>     if (carreauOuPousserUnRocher.estVide()) {
+>       carreauSouhaite.deplaceContenu(carreauOuPousserUnRocher);
 >     }
->     else if (pushTarget.estUneSortie()) {
->       targetSquare.deplaceContenu(pushTarget);
->       pushTarget.effaceContenu();
+>     else if (carreauOuPousserUnRocher.estUneSortie()) {
+>       carreauSouhaite.deplaceContenu(carreauOuPousserUnRocher);
+>       carreauOuPousserUnRocher.effaceContenu();
 >       this.rochersRestants--;
 >       this.miseaJourScore();
 >     }
 >   }
 >   // Déplace le joueur
->   if (targetSquare.estVide()) {
->     playerSquare.deplaceContenu(targetSquare);
->     this.playerPos = targetPos;
+>   if (carreauSouhaite.estVide()) {
+>     carreauDuJoueur.deplaceContenu(carreauSouhaite);
+>     this.positionDuJoueur = positionSouhaitee;
 >   }
 > };
 
@@ -10809,7 +10809,7 @@ En s'occupant des rochers en premier, le code de déplacement peut fonctionner
 de la même façon quand un joueur se déplace normalement et quand il pousse
 un rocher.
 Remarquez comment la case derrière est trouvée en ajoutant |direction|
-à |playerPos| deux fois. Faites un test avec un déplacement vers la gauche
+à |positionDuJoueur| deux fois. Faites un test avec un déplacement vers la gauche
 de deux cases :
 
 > terrainDeTest.deplacer(new Point(-1, 0));
