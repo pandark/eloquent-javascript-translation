@@ -10580,15 +10580,15 @@ utilisées pour visualiser le jeu. Pour commencer, le prototype |Carreau|
 peut ressembler à ça.
 
 > var Carreau = {
->   construct: function(caractere, celluleDeTable) {
+>   construct: function(caractere, celluleDeTableau) {
 >     this.arrierePlan = "empty";
 >     if (caractere == "#")
 >       this.arrierePlan = "wall";
 >     else if (caractere == "*")
 >       this.arrierePlan = "exit";
 >
->     this.celluleDeTable = celluleDeTable;
->     this.celluleDeTable.className = this.arrierePlan;
+>     this.celluleDeTableau = celluleDeTableau;
+>     this.celluleDeTableau.className = this.arrierePlan;
 >
 >     this.contenu = null;
 >     if (caractere == "0")
@@ -10599,7 +10599,7 @@ peut ressembler à ça.
 >     if (this.contenu != null) {
 >       var image = dom("IMG", {src: "img/sokoban/" +
 >                                    this.contenu + ".gif"});
->       this.celluleDeTable.appendChild(image);
+>       this.celluleDeTableau.appendChild(image);
 >     }
 >   },
 >
@@ -10646,18 +10646,18 @@ La fonction |removeElement| que nous avons définie au \\cdom est
 également disponible dans ce chapitre, pour vos besoins de suppression de
 nœud. Vous pouvez supposer que les images sont les seuls nœuds-fils des
 cellules de la table, et peuvent donc, par exemple, être atteints avec
-|this.celluleDeTable.lastChild|.
+|this.celluleDeTableau.lastChild|.
 
 ///
 
 > Carreau.deplaceContenu = function(carreauCible) {
 >   carreauCible.contenu = this.contenu;
 >   this.contenu = null;
->   carreauCible.celluleDeTable.appendChild(this.celluleDeTable.lastChild);
+>   carreauCible.celluleDeTableau.appendChild(this.celluleDeTableau.lastChild);
 > };
 > Carreau.effaceContenu = function() {
 >   this.contenu = null;
->   removeElement(this.celluleDeTable.lastChild);
+>   removeElement(this.celluleDeTableau.lastChild);
 > };
 
 ---
@@ -10678,27 +10678,27 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 
 > var TerrainSokoban = {
 >   construct: function(niveau) {
->     var tbody = dom("TBODY");
+>     var corpsDeTableau = dom("TBODY");
 >     this.carreaux = [];
 >     this.rochersRestants = niveau.boulders;
 >
 >     for (var y = 0; y < niveau.field.length; y++) {
 >       var ligne = niveau.field[y];
->       var rangeeDeTable = dom("TR");
+>       var rangeeDeTableau = dom("TR");
 >       var rangeeDeCarreaux = [];
 >       for (var x = 0; x < ligne.length; x++) {
->         var celluleDeTable = dom("TD");
->         rangeeDeTable.appendChild(celluleDeTable);
->         var carreau = Carreau.create(ligne.charAt(x), celluleDeTable);
+>         var celluleDeTableau = dom("TD");
+>         rangeeDeTableau.appendChild(celluleDeTableau);
+>         var carreau = Carreau.create(ligne.charAt(x), celluleDeTableau);
 >         rangeeDeCarreaux.push(carreau);
 >         if (carreau.aUnJoueur())
 >           this.positionDuJoueur = new Point(x, y);
 >       }
->       tbody.appendChild(rangeeDeTable);
+>       corpsDeTableau.appendChild(rangeeDeTableau);
 >       this.carreaux.push(rangeeDeCarreaux);
 >     }
 >
->     this.table = dom("TABLE", {"class": "sokoban"}, tbody);
+>     this.table = dom("TABLE", {"class": "sokoban"}, corpsDeTableau);
 >     this.score = dom("DIV", null, "...");
 >     this.miseaJourScore();
 >   },
@@ -10824,7 +10824,7 @@ plus le retirer, donc on ferait mieux de se débarrasser de cette aire de jeu.
 
 On s'est occupé de toute la « logique du jeu » maintenant, et on a
 juste besoin d'un contrôleur pour que le jeu soit jouable. Le contrôleur sera
-un type d'objet appelé |SokobanGame|, qui est responsable de ce qui suit :
+un type d'objet appelé |JeuSokoban|, qui est responsable de ce qui suit :
 
  * Préparer un endroit où l'aire de jeu peut être placée.
  * Construire et enlever les objets |TerrainSokoban|.
@@ -10834,36 +10834,36 @@ un type d'objet appelé |SokobanGame|, qui est responsable de ce qui suit :
 
 On commence encore avec un prototype inachevé.
 
-> var SokobanGame = {
+> var JeuSokoban = {
 >   construct: function(place) {
 >     this.level = null;
 >     this.field = null;
 >
->     var newGame = dom("BUTTON", null, "Nouvelle partie");
->     addHandler(newGame, "click", method(this, "newGame"));
->     var reset = dom("BUTTON", null, "Réinitialiser niveau");
->     addHandler(reset, "click", method(this, "reset"));
+>     var nouveauJeu = dom("BUTTON", null, "Nouvelle partie");
+>     addHandler(nouveauJeu, "click", method(this, "nouveauJeu"));
+>     var reinitialiserNiveau = dom("BUTTON", null, "Réinitialiser niveau");
+>     addHandler(reinitialiserNiveau, "click", method(this, "reinitialiserNiveau"));
 >     this.container = dom("DIV", null,
 >                          dom("H1", null, "Sokoban"),
->                          dom("DIV", null, newGame, " ", reset));
+>                          dom("DIV", null, nouveauJeu, " ", reinitialiserNiveau));
 >     place.appendChild(this.container);
 >
->     addHandler(document, "keydown", method(this, "keyDown"));
->     this.newGame();
+>     addHandler(document, "keydown", method(this, "touchePressee"));
+>     this.nouveauJeu();
 >   },
 >
->   newGame: function() {
+>   nouveauJeu: function() {
 >     this.level = 0;
->     this.reset();
+>     this.reinitialiserNiveau();
 >   },
->   reset: function() {
+>   reinitialiserNiveau: function() {
 >     if (this.field)
 >       this.field.enlever();
 >     this.field = TerrainSokoban.create(sokobanLevels[this.level]);
 >     this.field.place(this.container);
 >   },
 >
->   keyDown: function(event) {
+>   touchePressee: function(event) {
 >     // To be filled in
 >   }
 > };
@@ -10874,21 +10874,21 @@ attacher les méthodes de l'objet |this| à des évènements.
 
 On peut mettre un jeu Sokoban dans notre document de cette façon :
 
-> var sokoban = SokobanGame.create(document.body);
+> var sokoban = JeuSokoban.create(document.body);
 
 ***
 
 Tout ce qu'il reste à faire maintenant c'est de remplir le gestionnaire
-d'événements clavier. Remplacez la méthode |keyDown| du prototype par une
+d'événements clavier. Remplacez la méthode |touchePressee| du prototype par une
 autre qui détecte les appuis sur les touches des flèches de déplacement, et
 quand elle les trouve, déplace le joueur dans la bonne direction. |Dictionary|
 ci-dessous sera probablement utile :
 
 > var arrowKeyCodes = new Dictionary({
->   37: new Point(-1, 0), // left
->   38: new Point(0, -1), // up
->   39: new Point(1, 0),  // right
->   40: new Point(0, 1)   // down
+>   37: new Point(-1, 0), // gauche
+>   38: new Point(0, -1), // haut
+>   39: new Point(1, 0),  // droite
+>   40: new Point(0, 1)   // bas
 > });
 
 Après qu'un appui sur une touche de direction est géré, vérifiez
@@ -10903,7 +10903,7 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 
 ///
 
-> SokobanGame.keyDown = function(event) {
+> JeuSokoban.touchePressee = function(event) {
 >   if (arrowKeyCodes.contains(event.keyCode)) {
 >     event.stop();
 >     this.field.deplacer(arrowKeyCodes.lookup(event.keyCode));
@@ -10911,11 +10911,11 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 >       if (this.level < sokobanLevels.length - 1) {
 >         alert("Excellent ! Passons au niveau suivant.");
 >         this.level++;
->         this.reset();
+>         this.reinitialiserNiveau();
 >       }
 >       else {
 >         alert("Vous avez gagné ! Partie terminée.");
->         this.newGame();
+>         this.nouveauJeu();
 >       }
 >     }
 >   }
@@ -10943,7 +10943,7 @@ de sa taille habituelle.
 
 ///
 
-On peut utiliser |setInterval| pour gérer le rythme
+On peut utiliser |setInterval| pour gérer le déroulement
 de l'animation. N'oubliez pas que la méthode doit s'assurer que les exécutions
 à intervalle régulier sont désactivées à la fin de l'animation. Si vous ne le faites
 pas, elles vont continuer à faire perdre du temps à votre ordinateur jusqu'à
@@ -10951,16 +10951,16 @@ ce que la page soit fermée.
 
 > Carreau.effaceContenu = function() {
 >   self.contenu = null;
->   var image = this.celluleDeTable.lastChild;
+>   var image = this.celluleDeTableau.lastChild;
 >   var size = 100;
 >
->   var animate = setInterval(function() {
+>   var deroulementAnimation = setInterval(function() {
 >     size -= 10;
 >     image.style.width = size + "%";
 >     image.style.height = size + "%";
 >
 >     if (size < 60) {
->       clearInterval(animate);
+>       clearInterval(deroulementAnimation);
 >       removeElement(image);
 >     }
 >   }, 70);
