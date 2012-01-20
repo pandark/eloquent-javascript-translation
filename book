@@ -10884,7 +10884,7 @@ autre qui détecte les appuis sur les touches des flèches de déplacement, et
 quand elle les trouve, déplace le joueur dans la bonne direction. |Dictionary|
 ci-dessous sera probablement utile :
 
-> var arrowKeyCodes = new Dictionary({
+> var codesTouchesFleches = new Dictionary({
 >   37: new Point(-1, 0), // gauche
 >   38: new Point(0, -1), // haut
 >   39: new Point(1, 0),  // droite
@@ -10904,9 +10904,9 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 ///
 
 > JeuSokoban.touchePressee = function(event) {
->   if (arrowKeyCodes.contains(event.keyCode)) {
+>   if (codesTouchesFleches.contains(event.keyCode)) {
 >     event.stop();
->     this.field.deplacer(arrowKeyCodes.lookup(event.keyCode));
+>     this.field.deplacer(codesTouchesFleches.lookup(event.keyCode));
 >     if (this.field.aGagne()) {
 >       if (this.level < sokobanLevels.length - 1) {
 >         alert("Excellent ! Passons au niveau suivant.");
