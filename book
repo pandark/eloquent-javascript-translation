@@ -10367,7 +10367,7 @@ et |keydown|, et Internet Explorer ne génère aucun événement |keypress|
 pour les touches spéciales comme les touches de direction.
 
 Déterminer quelle touche a été pressée peut être un défi en soi. Pour
-les événements |keydown| et|keyup|, l'objet événement va posséder
+les événements |keydown| et |keyup|, l'objet événement va posséder
 une propriété _|keyCode|_ qui contient un nombre. La plupart du temps,
 ces codes peuvent être utilisés pour identifier les touches d'une façon
 plutôt indépendante du navigateur. Déterminer quel code correspond à
@@ -10395,7 +10395,7 @@ ignorant les événements d'appui de touche avec la touche Maj pressée.
 
 Pour savoir si les touches shift, control ou alt sont appuyées lors
 d'un événement touche ou souris, vous pouvez regarder les propriétés
-_|shiftKey|_, _|ctrlKey|_, and _|altKey| de l'objet événement.
+_|shiftKey|_, _|ctrlKey|_, et _|altKey|_ de l'objet événement.
 
 Pour les événements |keypress|, vous voudrez savoir quel caractère a
 été tapé. L'objet événement aura une propriété _|charCode|_, qui,
