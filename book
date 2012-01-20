@@ -2910,7 +2910,7 @@ Dans l'objet, une date est représentée par la somme de millisecondes
 cumulée depuis le 1er Janvier 1970. Vous pouvez imaginer que c'est un nombre
 assez impressionnant.
 
-> var  aujourdhui = new Date();
+> var aujourdhui = new Date();
 > show(aujourdhui.getTime());
 
 Une chose très utile à faire avec les dates, c'est de les comparer.
@@ -2951,8 +2951,8 @@ prenez les fuseaux horaires en compte. La fonction _|getTimezoneOffset|_
 d'une |Date| peut être utilisée pour trouver de combien de minutes elle
 s'éloigne du GMT (Heure du méridien de Greenwich)
 
-> var now = new Date();
-> print(now.getTimezoneOffset());
+> var maintenant = new Date();
+> print(maintenant.getTimezoneOffset());
 
 ***
 
