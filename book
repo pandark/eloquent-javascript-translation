@@ -10051,10 +10051,10 @@ donnent la taille extérieure de votre élément (la place qu'il occupe dans
 le document), tandis que les propriétés _|clientWidth|_ et _|clientHeight|_
 vous donnent la place à l'intérieur de l'objet, s'il y en a.
 
-> print("Outer size: ", $("image").offsetWidth,
->       " by ", $("image").offsetHeight, " pixels.");
-> print("Inner size: ", $("image").clientWidth,
->       " by ", $("image").clientHeight, " pixels.");
+> print("Dimension extérieure: ", $("image").offsetWidth,
+>       " sur ", $("image").offsetHeight, " pixels.");
+> print("Dimension intérieure: ", $("image").clientWidth,
+>       " sur ", $("image").clientHeight, " pixels.");
 
 ---
 
