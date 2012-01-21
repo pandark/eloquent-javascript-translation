@@ -2571,8 +2571,8 @@ dans  lequel |.join(" ").split(" ")| produit une valeur différente ?
 
 ///
 
-> var array = ["a", "b", "c d"];
-> show(array.join(" ").split(" "));
+> var tableau = ["a", "b", "c d"];
+> show(tableau.join(" ").split(" "));
 
 ---
 
@@ -3360,9 +3360,9 @@ aux objets sans avoir à les rendre visibles dans des boucles |for|/|in|.
 vous pouvez récupérer leur valeur mais pas la modifier. Par exemple,
 les propriétés d'une valeur de chaîne sont toutes en lecture seule.
 
-> var array = ["Ciel", "Terre", "Homme"];
-> array.length = 2;
-> show(array);
+> var tableau = ["Ciel", "Terre", "Homme"];
+> tableau.length = 2;
+> show(tableau);
 
 ===========================
 Gestion des erreurs / error
