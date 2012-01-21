@@ -2135,9 +2135,9 @@ courant de ses exploits. Ils sont de la forme suivante :
 | Grosses bises,
 | Tante Émilie
 |
-| Mort le 27/04/2006 : Black Leclère
+| Décédé le 27/04/2006 : Black Leclère
 |
-| Né le 05/04/2006 (mère, Lady Pénélope) : Lion Rouge,
+| Est né le 05/04/2006 (mère, Lady Pénélope) : Lion Rouge,
 | Docteur Hobbles III, Petit Iroquois
 
 Pour amuser cette vieille dame, vous voudriez garder une trace de la
@@ -2171,9 +2171,9 @@ va faire un programme avant de se mettre à l'écrire… Voici le plan :
 
  1. Commencer avec un ensemble de noms de chats ne comprenant que « Spot ».
  2. Parcourir chaque e-mail dans l'archive dans l'ordre chronologique.
- 3. Chercher les paragraphes qui commencent par « Né le » ou « Mort le ».
- 4. Ajouter les noms trouvés dans les paragraphes qui commencent par « Né le » à l'ensemble de noms.
- 5. Supprimer les noms de chats trouvés dans les paragraphes qui commencent par « Mort le » de notre ensemble.
+ 3. Chercher les paragraphes qui commencent par « Est né le » ou « Décédé le ».
+ 4. Ajouter les noms trouvés dans les paragraphes qui commencent par « Est né le » à l'ensemble de noms.
+ 5. Supprimer les noms de chats trouvés dans les paragraphes qui commencent par « Décédé le » de notre ensemble.
 
 On extraira les noms d'un paragraphe de la façon suivante :
 
@@ -2532,8 +2532,8 @@ devient simple comme un jeu d'enfant :
 
 Nous avons également décidé d'une manière de représenter un ensemble
 de chats vivants. Le problème qui reste à traiter, cependant, est celui
-de détecter des paragraphes d'un e-mail qui contiennent |"Né le"|  ou
-|"Mort le"|.
+de détecter des paragraphes d'un e-mail qui contiennent |"Est né le"|  ou
+|"Décédé le"|.
 
 ---
 
@@ -2577,17 +2577,19 @@ dans  lequel |.join(" ").split(" ")| produit une valeur différente ?
 ---
 
 Les paragraphes qui ne commencent ni par « Né le » ni par
-« Mort le » peuvent être ignorés par le programme. Comment peut-on
+« Décédé le » peuvent être ignorés par le programme. Comment peut-on
 tester si une chaîne commence par un mot particulier ? On peut utiliser
 la méthode _|charAt|_ pour obtenir un caractère particulier dans une chaîne.
 |x.charAt(0)| donne le premier caractère, |1| est le deuxième et ainsi de
 suite. Voici une façon de vérifier si une chaîne commence par « Né
 le» :
 
-> var paragraphe = "Né le  15/11/2003 (mère, Spot) : Croc Blanc";
-> show(paragraphe.charAt(0) == "N" && paragraphe.charAt(1) == "é" &&
->      paragraphe.charAt(2) == " " && paragraphe.charAt(3) == "l" &&
->      paragraphe.charAt(4) == "e");
+> var paragraphe = "Est né le 15/11/2003 (mère, Spot) : Croc Blanc";
+> show(paragraphe.charAt(0) == "E" && paragraphe.charAt(1) == "s" &&
+>      paragraphe.charAt(2) == "t" && paragraphe.charAt(3) == " " &&
+>      paragraphe.charAt(4) == "n" && paragraphe.charAt(5) == "é" &&
+>      paragraphe.charAt(6) == " " && paragraphe.charAt(7) == "l" &&
+>      paragraphe.charAt(8) == "e");
 
 Mais cela devient un peu pénible -- imaginez que vous devez vérifier la
 présence d'un mot de 30 caractères. On peut cependant en tirer une leçon
@@ -2601,7 +2603,7 @@ caractère à la position donnée par le premier argument, et se terminant
 avant le caractère (non inclus) à la position donnée par le second
 argument. Cela permet de vérifier une chaîne de caractères en peu de lignes.
 
-> show(paragraphe.slice(0, 6) == "Né le");
+> show(paragraphe.slice(0, 9) == "Est né le");
 
 ***
 
@@ -2653,7 +2655,7 @@ est l'extraction des noms d'un paragraphe. L'algorithme était le suivant :
  3. Dans cette partie, séparer les noms en cherchant les virgules.
 
 Il faut reproduire cela à la fois pour les paragraphes qui commencent par
-|Décés le| et ceux qui commencent par |Né le|. Ce serait une bonne idée
+|Décés le| et ceux qui commencent par |Est né le|. Ce serait une bonne idée
 de le mettre dans une fonction, de sorte que les deux parties de code qui
 gèrent les différentes sortes de paragraphes puissent l'utiliser.
 
@@ -2678,7 +2680,7 @@ se passe.
 >   return paragraphe.slice(deuxPoints + 2).split(", ");
 > }
 >
-> show(nomDesChats("Né le 20/09/2004 (mère, Bess la Jaune): " +
+> show(nomDesChats("Est né le 20/09/2004 (mère, Bess la Jaune): " +
 >               "Docteur Hobbles II, Kaïra"));
 
 La partie la plus délicate qui est ignorée par la description originale
@@ -2704,12 +2706,12 @@ du puzzle. Voici une façon de s'y prendre :
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
->     if (startsWith(paragraphes[paragraphe], "Né le")) {
+>     if (startsWith(paragraphes[paragraphe], "Est né le")) {
 >       var noms = nomDesChats(paragraphes[paragraphe]);
 >       for (var nom = 0; nom < noms.length; nom++)
 >         chatsVivants[noms[nom]] = true;
 >     }
->     else if (startsWith(paragraphes[paragraphe], "Mort le")) {
+>     else if (startsWith(paragraphes[paragraphe], "Décédé le")) {
 >       var noms = nomDesChats(paragraphes[paragraphe]);
 >       for (var nom = 0; nom < noms.length; noms++)
 >         delete chatsVivants[noms[nom]];
@@ -2772,9 +2774,9 @@ de la solution :
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
->     if (startsWith(paragraphes[paragraphe], "Né le"))
+>     if (startsWith(paragraphes[paragraphe], "Est né le"))
 >       addToSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
->     else if (startsWith(paragraphes[paragraphe], "Mort le"))
+>     else if (startsWith(paragraphes[paragraphe], "Décédé le"))
 >       removeFromSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
 >   }
 > }
@@ -2809,9 +2811,9 @@ Nous continuons à découper l'algorithme en petites unités :
 >   var chatsVivants = {"Spot": true};
 >
 >   function traiterParagraphe(paragraphe) {
->     if (startsWith(paragraphe, "Né le"))
+>     if (startsWith(paragraphe, "Est né le"))
 >       addToSet(chatsVivants, nomDesChats(paragraphe));
->     else if (startsWith(paragraphe, "Mort le"))
+>     else if (startsWith(paragraphe, "Décédé le"))
 >       removeFromSet(chatsVivants, nomDesChats(paragraphe));
 >   }
 >
@@ -2956,7 +2958,7 @@ s'éloigne du GMT (Heure du méridien de Greenwich)
 
 ***
 
-] "Mort le 27/04/2006 : Black Leclère"
+] "Décédé le 27/04/2006 : Black Leclère"
 
 La partie date est toujours exactement à la même place du paragraphe. Comme
 c'est pratique. Écrivez une fonction |extraireDate| qui prend un tel paragraphe
@@ -2968,11 +2970,11 @@ pour argument, extrait la date et la renvoit sous la forme d'un objet date.
 >   function nombreEnPosition(position, longueur) {
 >     return Number(paragraphe.slice(position, position + longueur));
 >   }
->   return new Date(nombreEnPosition(14, 4), nombreEnPosition(11, 2) - 1,
->                   nombreEnPosition(8, 2));
+>   return new Date(nombreEnPosition(16, 4), nombreEnPosition(13, 2) - 1,
+>                   nombreEnPosition(10, 2));
 > }
 >
-> show(extraireDate("Mort le 27-04-2006 : Black Leclère"));
+> show(extraireDate("Décédé le 27-04-2006 : Black Leclère"));
 
 Cela ne marcherait pas sans les appels à |Number|, mais comme je l'ai
 expliqué plus haut, je préfère ne pas utiliser de chaînes comme si elles
@@ -3025,7 +3027,7 @@ utilisés pour regrouper un nombre limité de valeurs.
 Essayons donc maintenant d'extraire les noms des mamans chats qui se trouvent
 dans des paragraphes.
 
-] "né le 15/11/2003 (mère, Spot): Croc Blanc"
+] "Est né le 15/11/2003 (mère, Spot): Croc Blanc"
 
 Voici un moyen d'obtenir cela…
 
@@ -3035,7 +3037,7 @@ Voici un moyen d'obtenir cela…
 >   return paragraphe.slice(start, end);
 > }
 >
-> show(extraireNomMere("Né le 15/11/2003 (mère, Spot): Croc Blanc"));
+> show(extraireNomMere("Est né le 15/11/2003 (mère, Spot): Croc Blanc"));
 
 Notez comment la position de départ a dû être ajustée à la longueur de
 |"(mère, "|, parce que |indexOf| renvoie la position initiale de la chaîne
@@ -3049,7 +3051,7 @@ qui seront tous des chaînes. Elle renverra la partie du premier argument
 qui apparaît entre les chaînes fournies par le deuxième et le troisième
 argument.
 
-Ainsi, |between("Né le 15/11/2003 (mère, Spot): Croc Blanc", "(mère, ",
+Ainsi, |between("Est né le 15/11/2003 (mère, Spot): Croc Blanc", "(mère, ",
 ")")|  donne |"Spot"|.
 
 |between("bu ] boo [ bah ] gzz", "[ ", " ]")| renvoie |"bah"|.
@@ -3086,10 +3088,10 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >               "inconnue")};
 >
 >   function traiterParagraphe(paragraphe) {
->     if (startsWith(paragraphe, "Né le"))
+>     if (startsWith(paragraphe, "Est né le"))
 >       ajouterChats(chats, nomDesChats(paragraphe), extraireDate(paragraphe),
 >               extraireNomMere(paragraphe));
->     else if (startsWith(paragraphe, "Mort le"))
+>     else if (startsWith(paragraphe, "Décédé le"))
 >       chatsDecedes(chats, nomDesChats(paragraphe), extraireDate(paragraphe));
 >   }
 >
@@ -3117,7 +3119,7 @@ pourrait être utile :
 >     return "Aucun chat s'appelant " + nom + " n'a été trouvé.";
 >
 >   var chat = data[nom];
->   var message = nom + ", né le " + formatDate(chat.naissance) +
+>   var message = nom + ", est né le " + formatDate(chat.naissance) +
 >                 " de la mère " + chat.mere;
 >   if ("deces" in chat)
 >     message += ", décédé le " + formatDate(chat.deces);
@@ -8567,12 +8569,12 @@ et b) très difficiles à lire.
 
 Écrivez une expression régulière qui retrouve une date au format
 |"XX/XX/XXXX"|, dans laquelle les |X| sont des chiffres. Essayez sur cette
-chaîne |"né le 15/11/2003 (mère, Spot): Croc Blanc"|.
+chaîne |"Est né le 15/11/2003 (mère, Spot): Croc Blanc"|.
 
 ///
 
 > var motifDate = /\d\d\/\d\d\/\d\d\d\d/;
-> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(motifDate));
+> show("Est né le 15/11/2003 (mère, Spot): Croc Blanc".search(motifDate));
 
 ---
 
@@ -8619,7 +8621,7 @@ fois indiqué par le deuxième. De manière similaire, |{2,}| signifie deux
 occurrences ou plus tandis que |{,4}| signifie quatre occurrences ou moins.
 
 > var motifDate = /\d{1,2}\/\d\d?\/\d{4}/;
-> show("né le 15/11/2003 (mère, Spot): Croc Blanc".search(motifDate));
+> show("Est né le 15/11/2003 (mère, Spot): Croc Blanc".search(motifDate));
 
 Les parties |/\d{1,2}/| et |/\d\d?/| signifient toutes deux « un ou deux
 chiffres ».
@@ -8709,7 +8711,7 @@ les dates dans lesquelles le jour ou le mois sont écrits avec un seul chiffre.
 >                   Number(trouves[1]));
 > }
 >
-> show(extraireDate("né le 5/2/2007 (mère, Kaïra): Johnson Longues Oreilles"));
+> show(extraireDate("Est né le 5/2/2007 (mère, Kaïra): Johnson Longues Oreilles"));
 
 Cette version est légèrement plus longue que la précédente mais elle a
 l'avantage de vérifier effectivement ce qui est fait et de faire retentir la
