@@ -7325,9 +7325,9 @@ ce nouveau Terrarium en aurait toutes les propriétés.
 créer un objet dont le prototype est celui d'un autre objet. Il est possible
 d'écrire une fonction qui fait cela, en utilisant l'astuce suivante :
 
-> function clone(object) {
+> function clone(objet) {
 >   function ConstructeurNouveauPourChaqueClone(){}
->   ConstructeurNouveauPourChaqueClone.prototype = object;
+>   ConstructeurNouveauPourChaqueClone.prototype = objet;
 >   return new ConstructeurNouveauPourChaqueClone();
 > }
 
