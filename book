@@ -10332,7 +10332,7 @@ Il est également parfois possible de déterminer quel bouton de la souris a
 été appuyé, en utilisant les propriétés _|which|_ et _|button|_ des objets
 événement. Malheureusement, on ne peut pas leur faire confiance : certains
 navigateurs prétendent que les souris n'ont qu'un bouton, d'autres signalent
-les clics droits comme des clics avec le touche control appuyée, et ainsi
+les clics droits comme des clics avec la touche control appuyée, et ainsi
 de suite.
 
 ---
