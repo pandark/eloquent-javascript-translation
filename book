@@ -10492,7 +10492,7 @@ Ensuite, nous pouvons écrire des adaptateurs pratiques pour
 >   unregisterEventHandler(object.node, object.type, object.handler);
 > }
 >
-> var blockQ = addHandler($("champtexte"), "keypress", function(event) {
+> var blocageLettreQ = addHandler($("champtexte"), "keypress", function(event) {
 >   if (event.character.toLowerCase() == "q")
 >     event.stop();
 > });
@@ -10503,7 +10503,7 @@ de la normalisation des objets événement. Il retourne un objet qui peut
 être passé à |removeHandler| lorsque l'on veut supprimer ce gestionnaire
 précis. Essayez de taper un |q| dans le champ texte.
 
-> removeHandler(blockQ);
+> removeHandler(blocageLettreQ);
 
 ---
 
