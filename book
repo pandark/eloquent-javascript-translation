@@ -10101,7 +10101,7 @@ même temps. Si du code JavaScript est encore en train de fonctionner,
 le navigateur va attendre que celui-ci se termine avant d'appeler le
 gestionnaire suivant. Cela vaut aussi pour du code qui est déclenché d'une
 autre manière, comme avec |setTimeout|. Dans le jargon de la programmation,
-le navigateur JavaScript gére une _tâche unique_ à la fois, il n'y a
+le navigateur JavaScript gère une _tâche unique_ à la fois, il n'y a
 jamais deux _tâche_s fonctionnant au même instant. Dans la plupart des cas,
 c'est une bonne chose. Il est très facile d'obtenir des résultats étranges
 quand plusieurs choses sont traitées au même instant.
