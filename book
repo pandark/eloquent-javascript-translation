@@ -10122,7 +10122,7 @@ cela signifie que le lien va être suivi.
 Donc comme vous pouvez le voir, les évènements sont simples. La seule
 chose compliquée à leur propos est que, bien que les navigateurs prennent
 en charge tous plus ou moins la même fonctionnalité, ils le font par le
-biais d'interface différentes. Comme d'habitude, le navigateur le plus
+biais d'interfaces différentes. Comme d'habitude, le navigateur le plus
 incompatible est Internet Explorer, qui ignore les standards respectés par
 la plupart des autres navigateurs. En seconde position vient Opera, qui ne
 gère pas correctement quelques évènements utiles, tels que l'évènement
@@ -10896,7 +10896,7 @@ ci-dessous sera probablement utile :
 Après qu'un appui sur une touche de direction est géré, vérifiez
 |this.terrain.aGagne()| pour savoir si c'était le déplacement gagnant. Si le
 joueur a gagné, utilisez |alert| pour afficher un message, et passer au niveau
-suivant. S'il n'y a pas de niveau suivant (vérifiez |sokobanLevels.length),
+suivant. S'il n'y a pas de niveau suivant (vérifiez |sokobanLevels.length|),
 redémarrez le jeu.
 
 Il est probablement sage d'arrêter les événements quand des appuis sur les
