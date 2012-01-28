@@ -2556,8 +2556,8 @@ tableaux. Elle découpe une chaîne en un tableau en utilisant la chaîne
 fournie comme argument pour déterminer à quel endroit opérer les divisions
 en paragraphes.
 
-> var words = "Les villes de l'arrière-pays";
-> show(words.split(" "));
+> var mots = "Les villes de l'arrière-pays";
+> show(mots.split(" "));
 
 Ainsi, découper avec des caractères saut de ligne (|"\n"|) est une méthode
 utilisable pour diviser un e-mail en paragraphes.
