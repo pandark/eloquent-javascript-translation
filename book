@@ -3941,12 +3941,12 @@ algorithme qui est habituellement appelé _|reduce|_ ou |fold| :
 >   return base;
 > }
 >
-> function add(a, b) {
+> function ajouter(a, b) {
 >   return a + b;
 > }
 >
 > function sum(numbers) {
->   return reduce(add, 0, numbers);
+>   return reduce(ajouter, 0, numbers);
 > }
 
 |reduce| convertit un tableau en une seule valeur en ayant recours de
@@ -4831,7 +4831,7 @@ pour gérer ce jeu de fonctions de base.
 
 Lorsqu'on utilise des fonctions d'ordre supérieur, il est souvent agaçant
 que les opérateurs ne soient pas des fonctions en JavaScript. Nous avons
-eu besoin des fonctions |add| ou |equals| à différents endroits. Les
+eu besoin des fonctions |ajouter| ou |equals| à différents endroits. Les
 réécrire à chaque fois est fastidieux, n'est-ce pas ? Aussi, à partir de
 maintenant, nous supposons l'existence d'un objet nommé |op|, qui contient
 ces fonctions :
