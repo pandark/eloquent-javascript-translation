@@ -6542,9 +6542,9 @@ et |pointsIdentiques| pour travailler avec les points. Cette fois, nous
 utiliserons un constructeur et deux méthodes. Écrire le constructeur
 |Point|, qui prend deux arguments, les coordonnées x et y du point, et
 produit un objet avec des propriétés |x| et |y|. Ajoutez au prototype de
-ce constructeur une méthode |ajouter|, qui prends un autre point en argument
+ce constructeur une méthode |add|, qui prends un autre point en argument
 et retourne un *nouveau* point dont les |x| et |y| sont la somme des |x|
-et |y| des deux points donnés. Ajoutez également une méthode |estEgalA|,
+et |y| des deux points donnés. Ajoutez également une méthode |isEqualTo|,
 qui prend un point et renvoit un booléen, indicant si le point local (|this|)
 a les mêmes coordonnées que le point donné.
 
@@ -6558,16 +6558,16 @@ de type point pourra lire et modifier librement les |x| et |y|.
 >   this.x = x;
 >   this.y = y;
 > }
-> Point.prototype.ajouter = function(autre) {
+> Point.prototype.add = function(autre) {
 >   return new Point(this.x + autre.x, this.y + autre.y);
 > };
-> Point.prototype.estEgalA = function(autre) {
+> Point.prototype.isEqualTo = function(autre) {
 >   return this.x == autre.x && this.y == autre.y;
 > };
 >
-> show((new Point(3, 1)).ajouter(new Point(2, 4)));
+> show((new Point(3, 1)).add(new Point(2, 4)));
 
-Assurez-vous que votre version de |ajouter| laisse le point local (|this|)
+Assurez-vous que votre version de |add| laisse le point local (|this|)
 intact et produise bien un nouvel objet Point. Une méthode qui change le
 point courant serait similaire à l'opérateur |+=|, alors qu'on le veut
 équivalent à l'opérateur |+|.
@@ -6725,7 +6725,7 @@ dictionnaire suivant sera utile :
 >    "o":  new Point(-1,  0),
 >    "no": new Point(-1, -1)});
 >
-> show(new Point(4, 4).ajouter(directions.lookup("se")));
+> show(new Point(4, 4).add(directions.lookup("se")));
 
 Quand un insecte décide de se déplacer, il indique dans quelle direction il
 veut aller en renvoyant un objet action dont la propriété |direction| nomme
@@ -6928,7 +6928,7 @@ Conseil : ne pas décrire chacune des directions, mais utiliser la méthode
 >   var resultat = {};
 >   var grille = this.grille;
 >   directions.each(function(nom, direction) {
->     var place = centre.ajouter(direction);
+>     var place = centre.add(direction);
 >     if (grille.estDedans(place))
 >       resultat[nom] = caracteredApresElement(grille.valeurEn(place));
 >     else
@@ -6966,7 +6966,7 @@ Pour le moment, elle ne reconnait que l'action |"déplacement"| :
 >   var alentours = this.listeAlentours(creature.point);
 >   var action = creature.object.agit(alentours);
 >   if (action.type == "déplacement" && directions.contains(action.direction)) {
->     var to = creature.point.ajouter(directions.lookup(action.direction));
+>     var to = creature.point.add(directions.lookup(action.direction));
 >     if (this.grille.estDedans(to) && this.grille.valeurEn(to) == undefined)
 >       this.grille.deplaceElement(creature.point, to);
 >   }
@@ -7384,7 +7384,7 @@ Voici une nouvelle méthode |actionnerUneCreature|. Elle est volumineuse :
 >   var elementDansCible = undefined;
 >   if (action.direction && directions.contains(action.direction)) {
 >     var direction = directions.lookup(action.direction);
->     var directionSouhaitee = creature.point.ajouter(direction);
+>     var directionSouhaitee = creature.point.add(direction);
 >     if (this.grille.estDedans(directionSouhaitee )) {
 >       cible = directionSouhaitee ;
 >       elementDansCible = this.grille.valeurEn(cible);
