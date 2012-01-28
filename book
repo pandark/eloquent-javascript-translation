@@ -440,7 +440,7 @@ recyclés pour fabriquer la génération suivante de valeurs.
 
 ---
 
-Les valeurs de type _nombre_ (number) sont, comme vous l'aurez peut-être
+Les valeurs de type _nombre_ sont, comme vous l'aurez peut-être
 déduit, des valeurs numériques. Elles sont écrites de la manière dont
 sont habituellement écrits les nombres :
 
@@ -796,7 +796,7 @@ et ainsi faire partie de plus grandes expressions.
 Le mot-clé _|var|_ est utilisé pour créer des variables. Le nom de la
 variable suit |var|. Les noms de variable peuvent être à peu près n'importe
 quel mot, mais ils ne peuvent pas contenir d'espaces. Les chiffres peuvent
-faire partie du nom de variable, |catch22| est un nom valide, mais le nom
+faire partie du nom de variable, |attrape22| est un nom valide, mais le nom
 ne doit pas commencer par un chiffre. Les caractères « |$| » et « |_|
 » peuvent être utilisés dans les noms comme s'ils étaient des lettres,
 ainsi |$_$| est un nom de variable correct.
@@ -1349,7 +1349,7 @@ Une autre solution, probablement meilleure mais sans |break|, est la suivante 
 ---
 
 Dans la solution de l'exercice précédent il y a une instruction |var
-answer;|. Elle crée une variable appelée |answer|, mais ne lui donne pas de
+reponse;|. Elle crée une variable appelée |reponse|, mais ne lui donne pas de
 valeur. Que se passe-t'il alors lorsqu'on prend la valeur de cette variable ?
 
 > var variableMystere;
@@ -1416,14 +1416,14 @@ compteront comme faux.
 Le fait que toutes les autres valeurs soient converties en |true| permet
 dans beaucoup de situations d'omettre les comparaisons explicites. Si on
 sait qu'une variable contient une chaîne de caractères ou |null|, elle
-peut être utilisée pour une vérification de façon très simple…
+peut être utilisée dans une vérification de façon très simple…
 
 > var peutEtreNull = null;
 > // …code mystérieux qui pourrait affecter une chaîne à peutEtreNull…
 > if (peutEtreNull)
 >   print("peutEtreNull possède une valeur");
 
-Notons l'exception où le code mystérieux affecterait la valeur |""| à
+…à l'exception du cas où ce code mystérieux affecterait la valeur |""| à
 |peutEtreNull|. Une chaîne vide est fausse, donc rien ne sera affiché. Cette
 méthode peut donc être *mauvaise*, en fonction de ce que vous voulez
 faire. C'est donc souvent une bonne idée d'ajouter |=== null| ou |=== false|
