@@ -3263,23 +3263,23 @@ prend le rôle de |fin| et |debut| devient |0|.
 
 Vous devez vous rappeler de la ligne de code cité en introduction :
 
-!> print(sum(serie(1, 10)));
+!> print(somme(serie(1, 10)));
 
 Nous avons la fonction |serie| maintenant. Tout ce que nous avons besoin
-pour faire fonctionner cette ligne est une fonction |sum|. Cette fonction
+pour faire fonctionner cette ligne est une fonction |somme|. Cette fonction
 prend un tableau de nombre en arguments et retourne leur somme. Écrivez-la,
 ce devrait être simple.
 
 ///
 
-> function sum(numbers) {
+> function somme(nombres) {
 >   var total = 0;
->   for (var i = 0; i < numbers.length; i++)
->     total += numbers[i];
+>   for (var i = 0; i < nombres.length; i++)
+>     total += nombres[i];
 >   return total;
 > }
 >
-> print(sum(serie(1, 10)));
+> print(somme(serie(1, 10)));
 
 ---
 
@@ -3819,14 +3819,14 @@ une valeur de type fonction :
 Et en utilisant une fonction anonyme, quelque chose comme une boucle |for|
 peut être écrite avec moins de détails inutiles.
 
-> function sum(numbers) {
+> function somme(nombres) {
 >   var total = 0;
->   forEach(numbers, function (number) {
->      total += number;
+>   forEach(nombres, function (nombre) {
+>      total += nombre;
 >   });
 >   return total;
 > }
-> show(sum([1, 10, 100]));
+> show(somme([1, 10, 100]));
 
 Remarquez que la variable |total| est visible à l'intérieur de la fonction
 anonyme, à cause des règles de portée des variables. Remarquez également
@@ -3854,7 +3854,7 @@ Il peut maintenant être écrit de la façon suivante :
 
 Au final, une construction plus abstraite (ou « de plus haut niveau »)
 correspond à plus d'informations et à moins de bruits parasites : Le
-code dans la fonction |sum| se lit « *pour chaque nombre dans la liste
+code dans la fonction |somme| se lit « *pour chaque nombre dans la liste
 des nombres, ajouter ce nombre au total* », plutôt que : « *il y a une
 variable qui commence à 0, et elle compte un par un jusqu'à atteindre le
 nombre d'élément d'un tableau de nombres et à chaque valeur de cette
@@ -3931,7 +3931,7 @@ n'ont pas cet inconvénient, ce sont toujours de vraies fonctions.
 ---
 
 Jetons un œil maintenant à quelques algorithmes plus simples qui sont
-reliés aux tableaux. La fonction |sum| est en fait une variante d'un
+reliés aux tableaux. La fonction |somme| est en fait une variante d'un
 algorithme qui est habituellement appelé _|reduce|_ ou |fold| :
 
 > function reduce(combine, base, array) {
@@ -3945,13 +3945,13 @@ algorithme qui est habituellement appelé _|reduce|_ ou |fold| :
 >   return a + b;
 > }
 >
-> function sum(numbers) {
->   return reduce(ajouter, 0, numbers);
+> function somme(nombres) {
+>   return reduce(ajouter, 0, nombres);
 > }
 
 |reduce| convertit un tableau en une seule valeur en ayant recours de
 manière répétée à une fonction qui combine un élément du tableau
-avec une valeur de base. C'est exactement ce que fait la fonction |sum|,
+avec une valeur de base. C'est exactement ce que fait la fonction |somme|,
 donc elle peut être raccourcie par l'utilisation de |reduce|... sauf que
 l'addition est un opérateur et non une fonction dans JavaScript, donc on
 doit d'abord la mettre dans une fonction.
