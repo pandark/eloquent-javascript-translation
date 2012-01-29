@@ -222,7 +222,7 @@ comment construire des choses telles que |somme| et |serie|.
 
 Un bon langage de programmation aide le programmeur en lui fournissant une
 manière plus abstraite de s'exprimer. Il masque les détails inintéressants,
-procure des composants de base pratiques (comme la |while|) et, la plupart
+procure des composants de base pratiques (comme la construction |while|) et, la plupart
 du temps, permet au programmeur d'ajouter lui-même de telles briques (comme
 les opérations |somme| et |serie|).
 
