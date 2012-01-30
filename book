@@ -3609,7 +3609,7 @@ Beaucoup d'erreurs de programmation obligent l'environnement JavaScript à
 lever des exceptions. Par exemple :
 
 > try {
->   print(Sasquatch);
+>   print(Yeti);
 > }
 > catch (erreur) {
 >   print("Intercepté : " + erreur.message);
