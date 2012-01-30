@@ -2607,23 +2607,23 @@ argument. Cela permet de vérifier une chaîne de caractères en peu de lignes.
 
 ***
 
-Écrivez une fonction nommée |startWith| qui prend deux arguments, tous les
+Écrivez une fonction nommée |chaineCommencePar| qui prend deux arguments, tous les
 deux des chaînes de caractères. Elle renvoie |true| quand le premier argument
 commence avec les caractères du second arguments, sinon elle renvoie |false|.
 
 ///
 
-> function startsWith(string, pattern) {
+> function chaineCommencePar(string, pattern) {
 >   return string.slice(0, pattern.length) == pattern;
 > }
 >
-> show(startsWith("rotation", "rot"));
+> show(chaineCommencePar("rotation", "rot"));
 
 ---
 
 Que se passe-t-il quand |charAt| ou |slice| sont utilisés pour prendre un
-fragment de chaîne qui n'existe pas ? Est-ce que le |startsWith| que j'ai
-montré va encore fonctionner si le la chaîne recherchée est plus longue
+fragment de chaîne qui n'existe pas ? Est-ce que la fonction |chaineCommencePar| que j'ai
+montrée va encore fonctionner si la chaîne recherchée est plus longue
 que celle dans laquelle on cherche ?
 
 > show("Ouai".charAt(250));
@@ -2633,8 +2633,8 @@ que celle dans laquelle on cherche ?
 donnée et |slice| va tout simplement laisser tomber la partie de la nouvelle
 chaîne qui n'existe pas.
 
-Cela confirme que cette version de |startWith| fonctionne. Quand la fonction
-|startsWith("Idiots","Mes très chers collègues")| est appelée, l'appel
+Cela confirme que cette version de |chaineCommencePar| fonctionne. Quand la fonction
+|chaineCommencePar("Idiots","Mes très chers collègues")| est appelée, l'appel
 à |slice| renverra toujours une chaîne plus courte que |pattern|, parce
 que |string| ne comporte pas assez de caractères. C'est pour cette raison
 que la comparaison avec |==| renverra |false|, ce qui est correct.
@@ -2706,12 +2706,12 @@ du puzzle. Voici une façon de s'y prendre :
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
->     if (startsWith(paragraphes[paragraphe], "Est né le")) {
+>     if (chaineCommencePar(paragraphes[paragraphe], "Est né le")) {
 >       var noms = nomDesChats(paragraphes[paragraphe]);
 >       for (var nom = 0; nom < noms.length; nom++)
 >         chatsVivants[noms[nom]] = true;
 >     }
->     else if (startsWith(paragraphes[paragraphe], "Décédé le")) {
+>     else if (chaineCommencePar(paragraphes[paragraphe], "Décédé le")) {
 >       var noms = nomDesChats(paragraphes[paragraphe]);
 >       for (var nom = 0; nom < noms.length; noms++)
 >         delete chatsVivants[noms[nom]];
@@ -2749,7 +2749,7 @@ vides. Cela améliore la lisibilité, mais ne résout pas véritablement
 le problème.
 
 Ce qu'il nous faut ici, c'est casser le code. Nous avons déjà écrit deux
-fonctions d'aide, |startsWith| et |nomDesChats|, qui toutes deux résolvent
+fonctions d'aide, |chaineCommencePar| et |nomDesChats|, qui toutes deux résolvent
 une petite partie du problème de façon compréhensible. Continuons sur
 cette lancée.
 
@@ -2774,9 +2774,9 @@ de la solution :
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
->     if (startsWith(paragraphes[paragraphe], "Est né le"))
+>     if (chaineCommencePar(paragraphes[paragraphe], "Est né le"))
 >       addToSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
->     else if (startsWith(paragraphes[paragraphe], "Décédé le"))
+>     else if (chaineCommencePar(paragraphes[paragraphe], "Décédé le"))
 >       removeFromSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
 >   }
 > }
@@ -2811,9 +2811,9 @@ Nous continuons à découper l'algorithme en petites unités :
 >   var chatsVivants = {"Spot": true};
 >
 >   function traiterParagraphe(paragraphe) {
->     if (startsWith(paragraphe, "Est né le"))
+>     if (chaineCommencePar(paragraphe, "Est né le"))
 >       addToSet(chatsVivants, nomDesChats(paragraphe));
->     else if (startsWith(paragraphe, "Décédé le"))
+>     else if (chaineCommencePar(paragraphe, "Décédé le"))
 >       removeFromSet(chatsVivants, nomDesChats(paragraphe));
 >   }
 >
@@ -3088,10 +3088,10 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >               "inconnue")};
 >
 >   function traiterParagraphe(paragraphe) {
->     if (startsWith(paragraphe, "Est né le"))
+>     if (chaineCommencePar(paragraphe, "Est né le"))
 >       ajouterChats(chats, nomDesChats(paragraphe), extraireDate(paragraphe),
 >               extraireNomMere(paragraphe));
->     else if (startsWith(paragraphe, "Décédé le"))
+>     else if (chaineCommencePar(paragraphe, "Décédé le"))
 >       chatsDecedes(chats, nomDesChats(paragraphe), extraireDate(paragraphe));
 >   }
 >
@@ -6467,7 +6467,7 @@ Ajouter de nouvelles méthodes à des prototypes existants peut être très
 utile. En particulier les prototypes de |Array| et |String| en JavaScript
 peuvent recevoir quelques méthodes basiques supplémentaires. Nous pouvons,
 par exemple, remplacer |forEach| et |map| par des méthodes sur les tableaux,
-et transformer la fonction |startsWith| que nous avons écrite au \\cdata
+et transformer la fonction |chaineCommencePar| que nous avons écrite au \\cdata
 en méthode sur les chaînes de caractère.
 
 De plus, si votre programme doit fonctionner sur la même page web qu'un autre
