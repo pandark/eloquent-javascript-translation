@@ -3046,15 +3046,15 @@ et non la finale.
 ***
 
 Ce que fait |extraireNomMere| peut être exprimé d'une façon plus
-générale. Écrivez une fonction |between| qui prend trois arguments,
+générale. Écrivez une fonction |extraireChaineEntre| qui prend trois arguments,
 qui seront tous des chaînes. Elle renverra la partie du premier argument
 qui apparaît entre les chaînes fournies par le deuxième et le troisième
 argument.
 
-Ainsi, |between("Est né le 15/11/2003 (mère, Spot): Croc Blanc", "(mère, ",
+Ainsi, |extraireChaineEntre("Est né le 15/11/2003 (mère, Spot): Croc Blanc", "(mère, ",
 ")")|  donne |"Spot"|.
 
-|between("bu ] boo [ bah ] gzz", "[ ", " ]")| renvoie |"bah"|.
+|extraireChaineEntre("bu ] boo [ bah ] gzz", "[ ", " ]")| renvoie |"bah"|.
 
 Pour faire marcher ce deuxième test, il peut être utile de savoir qu'on
 peut attribuer à |indexOf| un second paramètre facultatif qui précise à
@@ -3062,20 +3062,20 @@ partir de quel point doit commencer la recherche.
 
 ///
 
-> function between(string, start, end) {
->   var startAt = string.indexOf(start) + start.length;
->   var endAt = string.indexOf(end, startAt);
->   return string.slice(startAt, endAt);
+> function extraireChaineEntre(chaine, debut, fin) {
+>   var indexDebut = chaine.indexOf(debut) + debut.length;
+>   var indexFin = chaine.indexOf(fin, indexDebut);
+>   return chaine.slice(indexDebut, indexFin);
 > }
-> show(between("bu ] boo [ bah ] gzz", "[ ", " ]"));
+> show(extraireChaineEntre("bu ] boo [ bah ] gzz", "[ ", " ]"));
 
 ---
 
-Avoir la fonction |between| rend possible l'expression de extraireNomMere de
+Avoir la fonction |extraireChaineEntre| rend possible l'expression de extraireNomMere de
 façon plus simple :
 
 > function extraireNomMere(paragraphe) {
->   return between(paragraphe, "(mère, ", ")");
+>   return extraireChaineEntre(paragraphe, "(mère, ", ")");
 > }
 
 ---
@@ -3411,17 +3411,17 @@ d'arguments acceptables dans un commentaire.
 
 Si une fonction rencontre un problème qu'elle ne peut résoudre par
 elle-même, que doit-elle faire ? Dans le \\cdata, nous avons écrit la
-fonction |between| :
+fonction |extraireChaineEntre| :
 
-> function between(string, start, end) {
->   var startAt = string.indexOf(start) + start.length;
->   var endAt = string.indexOf(end, startAt);
->   return string.slice(startAt, endAt);
+> function extraireChaineEntre(chaine, debut, fin) {
+>   var indexDebut = chaine.indexOf(debut) + debut.length;
+>   var indexFin = chaine.indexOf(fin, indexDebut);
+>   return chaine.slice(indexDebut, indexFin);
 > }
 
 Si le |start| et le |end| donnés n'apparaissent pas dans la chaîne, |indexOf|
-renverra |-1| et cette version de |between| retournera des absurdités :
-|between("Île déserte", "{-", "-}")| renvoie |"le désert"|.
+renverra |-1| et cette version de |extraireChaineEntre| retournera des absurdités :
+|extraireChaineEntre("Île déserte", "{-", "-}")| renvoie |"le désert"|.
 
 Quand le programme s’exécute et que la fonction est appelée ainsi,
 le code qui l'a appelé obtiendra une chaîne, comme prévu, et continuera
@@ -3441,30 +3441,30 @@ et de la rendre plus moche pour qu'elle puisse traiter des cas problématiques.
 
 Mais la plupart du temps, les fonctions qui échouent « silencieusement »
 sont difficiles à utiliser, et même dangereuses. Que se passe-t-il si le
-code appelant |between| veut savoir si tout s'est bien passé ? Sur le
+code appelant |extraireChaineEntre| veut savoir si tout s'est bien passé ? Sur le
 moment, il ne peut le dire, sauf à refaire tout le travail qu'a effectué
-|between| et à vérifier le résultat de |between| par rapport au sien. Ce
-qui n'est pas bien. Une solution serait de faire renvoyer par |between|
+|extraireChaineEntre| et à vérifier le résultat de |extraireChaineEntre| par rapport au sien. Ce
+qui n'est pas bien. Une solution serait de faire renvoyer par |extraireChaineEntre|
 une valeur spéciale telle que |false| ou |undefined| quand elle échoue.
 
-> function between(string, start, end) {
->   var startAt = string.indexOf(start);
->   if (startAt == -1)
+> function extraireChaineEntre(chaine, debut, fin) {
+>   var indexDebut = chaine.indexOf(debut);
+>   if (indexDebut == -1)
 >     return undefined;
->   startAt += start.length;
->   var endAt = string.indexOf(end, startAt);
->   if (endAt == -1)
+>   indexDebut += debut.length;
+>   var indexFin = chaine.indexOf(fin, indexDebut);
+>   if (indexFin == -1)
 >     return undefined;
 >
->   return string.slice(startAt, endAt);
+>   return chaine.slice(indexDebut, indexFin);
 > }
 
 Vous pouvez voir que les vérifications d'erreurs ne rendent généralement
-pas les fonctions plus jolies. Mais maintenant, le code qui appelle |between|
+pas les fonctions plus jolies. Mais maintenant, le code qui appelle |extraireChaineEntre|
 peut faire quelque chose comme :
 
 > var saisie = prompt("Dites-moi quelque chose", "");
-> var entreParentheses = between(saisie, "(", ")");
+> var entreParentheses = extraireChaineEntre(saisie, "(", ")");
 > if (entreParentheses != undefined)
 >   print("Vous avez mis entre parenthèses '", entreParentheses, "'.");
 
@@ -3490,10 +3490,10 @@ renvoie |dernierElement|, c'est impossible à dire.
 
 Le second problème quand on renvoie des valeurs spéciales, c'est que
 cela peut conduire à créer pas mal de bazar. Si une partie de code
-appelle |between| dix fois, elle doit vérifier dix fois si |undefined|
-a été retourné. De même, si une fonction appelle |between|, mais n'a
+appelle |extraireChaineEntre| dix fois, elle doit vérifier dix fois si |undefined|
+a été retourné. De même, si une fonction appelle |extraireChaineEntre|, mais n'a
 pas de stratégie gérer un éventuel échec, elle devra vérifier la valeur
-renvoyée par |between|, et si c'est |undefined|, cette fonction peut alors
+renvoyée par |extraireChaineEntre|, et si c'est |undefined|, cette fonction peut alors
 renvoyer |undefined| ou une autre valeur spéciale à sa fonction appelante,
 qui à son tour vérifiera cette valeur.
 
