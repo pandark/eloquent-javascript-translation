@@ -3974,7 +3974,7 @@ Puis, écrivez une fonction |count| de plus haut niveau qui accepte un tableau
 et une fonction de tests en tant qu'arguments, et qui donne en retour le
 nombre d'éléments dans le tableau pour lesquels la fonction de test a
 renvoyé |true|.
-Intégrez de nouveau |compterLesZeros| en utilisant cette fonction.
+Ecrivez de nouveau |compterLesZeros| en utilisant cette fonction.
 
 ///
 
