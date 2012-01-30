@@ -3056,7 +3056,7 @@ Ainsi, |extraireChaineEntre("Est né le 15/11/2003 (mère, Spot): Croc Blanc", "
 
 |extraireChaineEntre("bu ] boo [ bah ] gzz", "[ ", " ]")| renvoie |"bah"|.
 
-Pour faire marcher ce deuxième test, il peut être utile de savoir qu'on
+Pour faire marcher ce deuxième exemple, il peut être utile de savoir qu'on
 peut attribuer à |indexOf| un second paramètre facultatif qui précise à
 partir de quel point doit commencer la recherche.
 
