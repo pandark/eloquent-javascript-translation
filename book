@@ -3967,22 +3967,22 @@ la ressemblance avec un bloc |for| normal.
 
 ***
 
-Écrivez une fonction |countZeroes| qui prend un tableau de nombres en argument
+Écrivez une fonction |compterLesZeros| qui prend un tableau de nombres en argument
 et qui renvoie le nombre de zéro qui sont rencontrés. Utilisez |reduce|.
 
 Puis, écrivez une fonction |count| de plus haut niveau qui accepte un tableau
 et une fonction de tests en tant qu'arguments, et qui donne en retour le
 nombre d'éléments dans le tableau pour lesquels la fonction de test a
 renvoyé |true|.
-Intégrez de nouveau |countZeroes| en utilisant cette fonction.
+Intégrez de nouveau |compterLesZeros| en utilisant cette fonction.
 
 ///
 
-> function countZeroes(array) {
->   function counter(total, element) {
+> function compterLesZeros(tableau) {
+>   function compteur(total, element) {
 >     return total + (element === 0 ? 1 : 0);
 >   }
->   return reduce(counter, 0, array);
+>   return reduce(compteur, 0, tableau);
 > }
 
 @_|?:|_ La partie bizarre, celle avec le point d'interrogation et les
@@ -4002,7 +4002,7 @@ les conditions, la simple utilisation de |if| et |else| est habituellement
 plus lisible.
 
 Voici la solution qui utilise une fonction |count|, avec une fonction qui
-inclut des tests d'égalité afin d'avoir au final une fonction |countZeroes|
+inclut des tests d'égalité afin d'avoir au final une fonction |compterLesZeros|
 encore plus courte.
 
 > function count(test, array) {
@@ -4015,8 +4015,8 @@ encore plus courte.
 >   return function(element) {return x === element;};
 > }
 >
-> function countZeroes(array) {
->   return count(equals(0), array);
+> function compterLesZeros(tableau) {
+>   return count(equals(0), tableau);
 > }
 
 ---
