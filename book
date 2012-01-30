@@ -2613,8 +2613,8 @@ commence avec les caractères du second arguments, sinon elle renvoie |false|.
 
 ///
 
-> function chaineCommencePar(string, pattern) {
->   return string.slice(0, pattern.length) == pattern;
+> function chaineCommencePar(chaine, motif) {
+>   return chaine.slice(0, motif.length) == motif;
 > }
 >
 > show(chaineCommencePar("rotation", "rot"));
