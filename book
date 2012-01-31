@@ -2753,14 +2753,14 @@ fonctions d'aide, |chaineCommencePar| et |nomDesChats|, qui toutes deux résolve
 une petite partie du problème de façon compréhensible. Continuons sur
 cette lancée.
 
-> function addToSet(set, values) {
->   for (var i = 0; i < values.length; i++)
->     set[values[i]] = true;
+> function ajouterAuSet(set, valeurs) {
+>   for (var i = 0; i < valeurs.length; i++)
+>     set[valeurs[i]] = true;
 > }
 >
-> function removeFromSet(set, values) {
->   for (var i = 0; i < values.length; i++)
->     delete set[values[i]];
+> function enleverDuSet(set, valeurs) {
+>   for (var i = 0; i < valeurs.length; i++)
+>     delete set[valeurs[i]];
 > }
 
 Ces deux fonctions traitent de l'ajout et de la suppression des noms dans
@@ -2775,19 +2775,19 @@ de la solution :
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
 >     if (chaineCommencePar(paragraphes[paragraphe], "Est né le"))
->       addToSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
+>       ajouterAuSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
 >     else if (chaineCommencePar(paragraphes[paragraphe], "Décédé le"))
->       removeFromSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
+>       enleverDuSet(chatsVivants, nomDesChats(paragraphes[paragraphe]));
 >   }
 > }
 
 C'est un sacré progrès, si je peux me permettre.
-Pourquoi |addToSet| et |removeFromSet| prennent-ils l'ensemble comme
+Pourquoi |ajouterAuSet| et |enleverDuSet| prennent-ils l'ensemble comme
 argument ? Ils pourraient utiliser la variable |chatsVivants| directement,
 s'ils le voulaient. La raison, c'est que de cette façon elles ne sont pas
-totalement liées à notre problème. Si |addToSet| changeait directement
-|chatsVivants|, il faudrait l'appeler |addCatsToCatSet| (ajouter des chats à
-l'ensemble des chats) ou quelque chose comme ça. Tel que nous l'utilisons,
+totalement liées à notre problème. Si |ajouterAuSet| changeait directement
+|chatsVivants|, il faudrait l'appeler |ajouterChatsDansEnsembleDeChats|
+ou quelque chose comme ça. Tel que nous l'utilisons,
 c'est un outil utile pour des cas plus généraux.
 
 Même si nous ne devions jamais utiliser ces fonctions pour quoi que ce
@@ -2812,9 +2812,9 @@ Nous continuons à découper l'algorithme en petites unités :
 >
 >   function traiterParagraphe(paragraphe) {
 >     if (chaineCommencePar(paragraphe, "Est né le"))
->       addToSet(chatsVivants, nomDesChats(paragraphe));
+>       ajouterAuSet(chatsVivants, nomDesChats(paragraphe));
 >     else if (chaineCommencePar(paragraphe, "Décédé le"))
->       removeFromSet(chatsVivants, nomDesChats(paragraphe));
+>       enleverDuSet(chatsVivants, nomDesChats(paragraphe));
 >   }
 >
 >   for (var mail = 0; mail < archiveDeMails.length; mail++) {
@@ -2999,7 +2999,7 @@ chat meurt, nous ne le supprimons pas de l'ensemble, nous ajoutons simplement
 la propriété |deces| à l'objet pour stocker la date à laquelle le pauvre
 animal a trépassé.
 
-Cela signifie que nos fonctions |addToSet| et |removeFromSet| sont devenues
+Cela signifie que nos fonctions |ajouterAuSet| et |enleverDuSet| sont devenues
 inutiles. Quelque chose de comparable est nécessaire, mais il s'agit de
 stocker aussi les dates de naissance et par la suite, les noms des mères.
 
