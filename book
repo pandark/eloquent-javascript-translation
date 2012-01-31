@@ -3846,7 +3846,7 @@ Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
 !> var paragraphes = archiveDeMails[mail].split("\n");
 !> for (var i = 0; i < paragraphes.length; i++)
-!>   traiterParagraphe(paragraphs[i]);
+!>   traiterParagraphe(paragraphes[i]);
 
 Il peut maintenant être écrit de la façon suivante :
 
