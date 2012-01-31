@@ -11517,7 +11517,7 @@ lui donne comme second argument avec le contenu. Quand un troisième argument
 est passé, il sert à indiquer une erreur — un code d'état différent
 de |200|.
 
-Pour pouvoir faire des requêtes plus complexes, on peut s'arranger pour pour
+Pour pouvoir faire des requêtes plus complexes, on peut s'arranger pour
 que la fonction accepte des paramètres supplémentaires pour préciser la
 méthode (|GET| ou |POST|), une chaîne facultative pour l'envoyer comme
 donnée, une façon d'ajouter des en-têtes supplémentaires et ainsi de
