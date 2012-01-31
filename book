@@ -4890,12 +4890,12 @@ La raison pour laquelle |map| prend son argument de fonction avant
 l'organisation du tableau est qu'il est souvent utile d'appliquer partiellement
 map en lui attribuant une fonction. Ce qui donne à la fonction davantage
 de puissance, elle n'opère plus sur une seule valeur mais sur un tableau
-de valeurs. Par exemple, si vous avez un tableau de tableau de nombres,
+de valeurs. Par exemple, si vous avez un tableau de tableaux de nombres,
 et que vous voulez les mettre tous au carré, vous procédez ainsi :
 
-> function square(x) {return x * x;}
+> function nombreAuCarre(x) {return x * x;}
 >
-> show(map(partial(map, square), [[10, 100], [12, 16], [0, 1]]));
+> show(map(partial(map, nombreAuCarre), [[10, 100], [12, 16], [0, 1]]));
 
 ---
 
