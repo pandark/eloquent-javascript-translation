@@ -7742,9 +7742,9 @@ par exemple, des méthodes |inherit| et |method| sur les objets.
 >   Array.prototype.push.call(this, value);
 > });
 >
-> var strange = new TableauEtrange();
-> strange.push(4);
-> show(strange);
+> var etrange = new TableauEtrange();
+> etrange.push(4);
+> show(etrange);
 
 Si vous chercher sur internet les mots « JavaScript » et
 « héritage », vous trouverez de nombreuses variantes de ces fonctions,
