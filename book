@@ -2671,7 +2671,8 @@ la partie de la chaîne depuis la première position jusqu'à son extrémité.
 
 Il peut être pratique d'utiliser la console pour « explorer » les
 fonctions. Par exemple, tapez |"foo: bar".indexOf(":")| et voyez ce qui
-se passe.
+se passe. (NdT: les mots |foo| et |bar| n'ont pas de signification précise,
+et illustrent parfois des exemples de code).
 
 ///
 
@@ -6358,8 +6359,6 @@ fiable, on peut utiliser une expression comme :
 > show (Object.prototype.hasOwnProperty.call(objet, "foo") &&
 >    Object.prototype.propertyIsEnumerable.call(objet, "foo"));
 
-(NdT: les mots |foo| et |bar| n'ont pas de signification précise et servent ici à
-illustrer la déclaration d'un objet).
 Simple et agréable n'est-ce pas ? C'est l'un des aspects de JavaScript qui ne
 sont pas-si-bien-conçus-que-ça. Les objets jouent à la fois le role de «
 valeurs avec méthodes », qui fonctionnent très bien avec les prototypes,
