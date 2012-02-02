@@ -7835,8 +7835,8 @@ Nous pouvons écrire un prototype pour un élément d'un jeu de ce type.
 >   }
 > };
 >
-> var lantern = Produit.create("La lanterne en laiton");
-> lantern.kick();
+> var lanterne = Produit.create("La lanterne en laiton");
+> lanterne.kick();
 
 Héritons de ce type de cette façon…
 
@@ -7881,8 +7881,8 @@ tomber. Ils hériteront automatiquement du constructeur de leur super-type.
 >   }
 > });
 >
-> var pencil = PetitProduit.create("le stylo rouge");
-> pencil.take();
+> var stylo = PetitProduit.create("le stylo rouge");
+> stylo.take();
 
 Même si |PetitProduit| ne définit pas son propre constructeur, le créer
 avec un argument |name| fonctionne, car il hérite du constructeur du
@@ -7908,8 +7908,8 @@ utilisons un « faux constructeur », et nous lui appliquons |instanceof|.
 >   return this instanceof DummyConstructor;
 > };
 >
-> show(pencil.hasPrototype(Produit));
-> show(pencil.hasPrototype(ProduitDetaille));
+> show(stylo.hasPrototype(Produit));
+> show(stylo.hasPrototype(ProduitDetaille));
 
 ---
 
