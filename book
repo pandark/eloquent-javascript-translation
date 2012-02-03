@@ -3792,7 +3792,7 @@ la programmation orientée objet, qui est le sujet du \\coo.
 
 Il y a un détail fâcheux, si vous avez un peu de goût, qui doit commencer à
 vous embêter, c'est la répétition incessante de boucles |for| dans certaines
-matrices : |for (var i = 0; i < something.length; i++) ...|. Est-ce qu'on
+matrices : |for (var i = 0; i < quelqueChose.length; i++) ...|. Est-ce qu'on
 peut en faire une abstraction ?
 
 Le problème, c'est que si beaucoup de fonctions prennent juste des valeurs,
