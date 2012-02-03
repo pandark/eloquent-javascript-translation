@@ -3800,6 +3800,10 @@ les combinent et donnent un résultat, une telle boucle contient un bout
 de code qu'elle doit exécuter. Il est facile d'écrire une fonction qui
 s'occupe d'une matrice et affiche chaque élément :
 
+(NdT : A partir de maintenant vous trouverez du code en anglais, notamment les fonctions
+proches de la console javascript, tel que |printArray|, dans un soucis d'unité,
+ainsi que les algorithmes fondamentaux, car vous les retrouverez dans la littérature ou dans d'autres programmes, la plupart du temps, sous cette forme.)
+
 > function printArray(array) {
 >   for (var i = 0; i < array.length; i++)
 >     print(array[i]);
