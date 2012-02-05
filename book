@@ -4361,7 +4361,7 @@ vous comprendrez que cela fera l'affaire :
 Ecrire une fonction |transformeParagraphe| qui, recevant un paragraphe sous
 forme de chaîne en argument, détermine si ce paragraphe est un entête. S'il
 l'est, enlever les caractères « % » et les compter. Cette fonction renvoie
-un objet doté de 2 propriétés, |content| contenant le texte du paragraphe,
+un objet doté de 2 propriétés, |contenu| contenant le texte du paragraphe,
 et |type|, qui contient le tag qui devra entourer le paragraphe, |"p"| pour
 des paragraphes proprement dit, |"h1"| pour les entêtes avec un seul « %
 », et |"hX"| pour les entêtes avec |X| « % » caractères.
@@ -4379,7 +4379,7 @@ de rechercher un caractère précis dans les caractères qui la composent.
 >   }
 >
 >   return {type: (entete == 0 ? "p" : "h" + entete),
->           content: paragraphe};
+>           contenu: paragraphe};
 > }
 >
 > show(transformeParagraphe(paragraphes[0]));
