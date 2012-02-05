@@ -2797,8 +2797,8 @@ cette façon. Car elles se « suffisent à elles-même », on peut les
 lire et les comprendre, sans avoir besoin de connaître une variable externe
 nommée |chatsVivants|.
 
-Les fonctions ne sont pas pures : elles modifient l'objet qui a été passé
-en premier argument (|set|). Cela rend les choses un peu plus délicates
+Ces fonctions ne sont pas pures : elles modifient l'objet |set| qui a été passé
+en premier argument. Cela rend les choses un peu plus délicates
 qu'avec des fonctions pures mais c'est déjà beaucoup moins perturbant que
 des fonctions qui perdent les pédales et modifient les valeurs de variables
 comme ça leur chante.
