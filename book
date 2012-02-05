@@ -7950,11 +7950,11 @@ un autre prototype, nous allons incorporé la petitesse dans ce prototype.
 > var PetitProduitDetaille = clone(ProduitDetaille);
 > mixInto(PetitProduitDetaille, PetitProduit);
 >
-> var deadMouse = PetitProduitDetaille.create(
+> var sourisMorte = PetitProduitDetaille.create(
 >   "Fred la souris",
 >   "il est mort");
-> deadMouse.inspect();
-> deadMouse.kick();
+> sourisMorte.inspect();
+> sourisMorte.kick();
 
 Rappelez-vous que |forEachIn| parcourt uniquement les *propres* propriétés
 de l'objet, il copiera donc |kick| and |take|, mais pas le constructeur que
