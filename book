@@ -3842,7 +3842,7 @@ fonction _|forEach|_ et le point virgule est nécessaire car cet appel est
 une instruction.
 
 Vous obtenez une variable liée à l'élément en cours dans le tableau,
-|number|, aussi vous n'avez plus besoin d'utiliser |numbers[i]|. Et quand ce
+|nombre|, aussi vous n'avez plus besoin d'utiliser |nombres[i]|. Et quand ce
 tableau est créé par l'évaluation d'une expression quelconque, il n'y a
 pas besoin de le stocker dans une variable car cette expression peut être
 passé à |forEach| directement.
