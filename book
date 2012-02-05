@@ -8016,7 +8016,7 @@ Maintenant que j'y pense, JavaScript serait probablement un fabuleux
 environnement de développement pour les aventures en mode texte. Cette
 capacité à modifier le comportement des objets à volonté, qui est ce que
 nous offre l'héritage par prototype, est très bien adapté à cela. Si vous
-avez un objet |hedgehog| (hérisson), qui a la capacité unique de rouler
+avez un objet |herisson|, qui a la capacité unique de rouler
 quand on lui tape dedans, vous pouvez simplement changer sa méthode |kick|.
 
 Malheureusement, les aventures en mode texte ont suivi le même chemin que
