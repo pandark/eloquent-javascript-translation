@@ -2460,7 +2460,7 @@ fait jusqu'à présent, elle s'appelle désormais simplement |i|. L'utilisation
 d'une seule lettre, habituellement |i|, |j| ou |k| pour les variables de boucle
 est une habitude très répandue en programmation. Son origine tient presque
 à de la paresse : on préfère taper un caractère que sept et des noms
-comme |counter| et |current| ne donnent pas forcément plus d'informations
+comme |compteur| et |courant| ne donnent pas forcément plus d'informations
 sur la variable.
 
 Si un programme utilise trop souvent des variables à un seul caractère, sans
