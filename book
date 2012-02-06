@@ -8329,11 +8329,11 @@ simple objet dont les propriétés sont les fonctions et les valeurs qu'il
 exporte. Par exemple…
 
 > var HTML = {
->   balise: function(nom, contenu, proprietes) {
+>   tag: function(nom, contenu, proprietes) {
 >     return {name: nom, properties: proprietes, content: contenu};
 >   },
 >   lien: function(cible, texte) {
->     return HTML.balise("a", [texte], {href: cible});
+>     return HTML.tag("a", [texte], {href: cible});
 >   }
 >   /* ... beaucoup d'autres fonctions produisant du HTML ... */
 > };
