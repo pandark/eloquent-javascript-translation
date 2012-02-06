@@ -11247,10 +11247,10 @@ expérience sont utilisés aussi souvent pour des requêtes non-XML.
 Maintenant que nous avons notre objet HTTP, nous pouvons l'utiliser pour
 fabriquer une requête.
 
-> var request = makeHttpObject();
-> request.open("GET", "files/fruit.txt", false);
-> request.send(null);
-> print(request.responseText);
+> var requete = makeHttpObject();
+> requete.open("GET", "files/fruit.txt", false);
+> requete.send(null);
+> print(requete.responseText);
 
 La méthode _|open|_ est utilisée pour configurer la requête. Dans ce
 cas, nous choisissons de fabriquer une requête |GET| pour notre fichier
@@ -11272,8 +11272,8 @@ caractères contenant tous les en-têtes. Ceux-ci peuvent être utiles
 en certaines occasions pour obtenir des informations supplémentaires sur
 le document.
 
-> print(request.getAllResponseHeaders());
-> show(request.getResponseHeader("Date"));
+> print(requete.getAllResponseHeaders());
+> show(requete.getResponseHeader("Date"));
 
 Si pour une quelconque raison, vous voulez ajouter des en-têtes à la
 requête qui est envoyée au serveur, vous pouvez utiliser la méthode
@@ -11286,8 +11286,8 @@ l'indiquera immédiatement. Par exemple, |404| signifie que le fichier que
 vous avez demandé n'existe pas. Le _|statusText|_ contient une description
 légèrement moins énigmatique de l'état.
 
-> show(request.status);
-> show(request.statusText);
+> show(requete.status);
+> show(requete.statusText);
 
 Lorsque vous voulez vérifier si une requête a fonctionné, comparer |status|
 avec |200| est en général suffisant. En théorie, le serveur pourrait
@@ -11323,13 +11323,13 @@ Lorsque le troisième argument de |open| est |true|, la requête est définie
 pour être « _asynchrone_ ». Cela signifie que |send| rendra la main
 immédiatement pendant que la requête se fera en arrière-plan.
 
-> request.open("GET", "files/fruit.xml", true);
-> request.send(null);
-> show(request.responseText);
+> requete.open("GET", "files/fruit.xml", true);
+> requete.send(null);
+> show(requete.responseText);
 
 Mais attendez un moment, et…
 
-> print(request.responseText);
+> print(requete.responseText);
 
 « Attendez un moment » peut être implémenté avec |setTimeout|
 ou quelque chose du même genre, mais il existe un meilleur moyen. Un objet
@@ -11346,11 +11346,11 @@ soit appelé dessus. Appeler |open| le passe à |1| (« ouvert »). Appeler
 répond, il passe à |3| (« réception »). Enfin, |4| signifie
 « chargé ».
 
-> request.open("GET", "files/fruit.xml", true);
-> request.send(null);
-> request.onreadystatechange = function() {
->   if (request.readyState == 4)
->     show(request.responseText.length);
+> requete.open("GET", "files/fruit.xml", true);
+> requete.send(null);
+> requete.onreadystatechange = function() {
+>   if (requete.readyState == 4)
+>     show(requete.responseText.length);
 > };
 
 ---
@@ -11363,7 +11363,7 @@ spécifiques au HTML telles que |style| ou |innerHTML|. |responseXML|
 nous fournit un objet document dont la propriété |documentElement| fait
 référence à la balise extérieure du document XML.
 
-> var catalog = request.responseXML.documentElement;
+> var catalog = requete.responseXML.documentElement;
 > show(catalog.childNodes.length);
 
 De tels documents XML peuvent être utilisés pour échanger des informations
@@ -11385,11 +11385,11 @@ objet JavaScript ou un tableau, pouvant lui-même contenir d'autres objets,
 des tableaux, des chaînes de caractères, des nombres, des booléens ou la
 valeur null. Par exemple, regardez |fruit.json| :
 
-> request.open("GET", "files/fruit.json", true);
-> request.send(null);
-> request.onreadystatechange = function() {
->   if (request.readyState == 4)
->     print(request.responseText);
+> requete.open("GET", "files/fruit.json", true);
+> requete.send(null);
+> requete.onreadystatechange = function() {
+>   if (requete.readyState == 4)
+>     print(requete.responseText);
 > };
 
 Un morceau de texte comme celui-ci peut être converti en valeur JavaScript
@@ -11401,7 +11401,7 @@ et engendrer une erreur.
 > function evalJSON(json) {
 >   return eval("(" + json + ")");
 > }
-> var fruit = evalJSON(request.responseText);
+> var fruit = evalJSON(requete.responseText);
 > show(fruit);
 
 Lorsque vous exécutez |eval| sur un morceau de texte, vous devez garder à
