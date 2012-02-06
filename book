@@ -11363,8 +11363,8 @@ spécifiques au HTML telles que |style| ou |innerHTML|. |responseXML|
 nous fournit un objet document dont la propriété |documentElement| fait
 référence à la balise extérieure du document XML.
 
-> var catalog = requete.responseXML.documentElement;
-> show(catalog.childNodes.length);
+> var catalogue = requete.responseXML.documentElement;
+> show(catalogue.childNodes.length);
 
 De tels documents XML peuvent être utilisés pour échanger des informations
 structurées avec le serveur. Leur forme — des balises contenant d'autres
