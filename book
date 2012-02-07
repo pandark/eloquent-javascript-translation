@@ -7825,44 +7825,44 @@ les actions que vous effectuiez. Ces jeux ont eu leur temps.
 Nous pouvons écrire un prototype pour un élément d'un jeu de ce type.
 
 > var Produit = {
->   construct: function(name) {
->     this.name = name;
+>   construct: function(nom) {
+>     this.nom = nom;
 >   },
->   inspect: function() {
->     print("C'est ", this.name, ".");
+>   examiner: function() {
+>     print("C'est ", this.nom, ".");
 >   },
->   kick: function() {
+>   frapper: function() {
 >     print("Blang !");
 >   },
->   take: function() {
->     print("Vous ne pouvez pas soulever ", this.name, ".");
+>   prendre: function() {
+>     print("Vous ne pouvez pas soulever ", this.nom, ".");
 >   }
 > };
 >
 > var lanterne = Produit.create("La lanterne en laiton");
-> lanterne.kick();
+> lanterne.frapper();
 
 Héritons de ce type de cette façon…
 
 > var ProduitDetaille = Produit.extend({
->   construct: function(name, details) {
->     Produit.construct.call(this, name);
+>   construct: function(nom, details) {
+>     Produit.construct.call(this, nom);
 >     this.details = details;
 >   },
->   inspect: function() {
->     print("vous voyez ", this.name, ", ", this.details, ".");
+>   examiner: function() {
+>     print("vous voyez ", this.nom, ", ", this.details, ".");
 >   }
 > });
 >
 > var paresseuxGeant = ProduitDetaille.create(
 >   "le paresseux géant",
 >   "il s'accroche tranquillement sur un arbre en grignotant des feuilles");
-> paresseuxGeant.inspect();
+> paresseuxGeant.examiner();
 
 Laisser de côté la partie obligatoire du |prototype| rend légérment plus
 simples les choses comme l'appel à |Produit.construct| depuis le constructeur
 de |ProduitDetaille|. Remarquez que ce serait une mauvaise idée d'écrire
-simplement |this.name = name| dans |ProduitDetaille.construct|. Cela duplique
+simplement |this.nom = nom| dans |ProduitDetaille.construct|. Cela duplique
 une ligne. Bien sûr, dupliquer une ligne est plus court qu'appeler la fonction
 |Produit.construct| mais si on se retrouve à ajouter plus tard quelque chose
 dans le constructeur, nous devrons l'ajouter à deux endroits différents.
@@ -7876,20 +7876,20 @@ prototypes, les types qui n'ont pas besoin de constructeurs peuvent les laisser
 tomber. Ils hériteront automatiquement du constructeur de leur super-type.
 
 > var PetitProduit = Produit.extend({
->   kick: function() {
->     print(this.name, " vole à travers la pièce.");
+>   frapper: function() {
+>     print(this.nom, " vole à travers la pièce.");
 >   },
->   take: function() {
+>   prendre: function() {
 >     // (imaginer ici du code qui déplace l'objet dans votre poche)
->     print("vous prenez ", this.name, ".");
+>     print("vous prenez ", this.nom, ".");
 >   }
 > });
 >
 > var stylo = PetitProduit.create("le stylo rouge");
-> stylo.take();
+> stylo.prendre();
 
 Même si |PetitProduit| ne définit pas son propre constructeur, le créer
-avec un argument |name| fonctionne, car il hérite du constructeur du
+avec un argument |nom| fonctionne, car il hérite du constructeur du
 prototype |Produit|.
 
 ---
@@ -7922,8 +7922,8 @@ détaillée. Il semblerait que cet élément devrait hériter à la fois de
 |ProduitDetaille| et |PetitProduit|. JavaScript ne permet pas à un objet
 d'avoir plusieurs prototypes, et même s'il le permettait, le problème
 ne serait pas simple à résoudre. Par exemple, si |PetitProduit| voulait,
-pour une raison quelconque, définir aussi une méthode |inspect|, quelle
-méthode |inspect| ce nouveau prototype devrait-il utiliser ?
+pour une raison quelconque, définir aussi une méthode |examiner|, quelle
+méthode |examiner| ce nouveau prototype devrait-il utiliser ?
 
 Dériver un type d'objet de plus d'un type parent est appelé _héritage
 multiple_. Certains langages se dégonflent et l'interdisent totalement,
@@ -7938,8 +7938,8 @@ une approche très simple qui est suffisante dans la plupart des cas.
 
 Un _mix-in_ est un type spécifique de prototype qui peut être « incorporé »
 à l'intérieur d'autres prototypes. |PetitProduit| peut être considéré
-comme un de ces prototypes. En copiant ses méthodes |kick| et |take| dans
-un autre prototype, nous allons incorporé la petitesse dans ce prototype.
+comme un de ces prototypes. En copiant ses méthodes |frapper| et |prendre| dans
+un autre prototype, nous allons incorporer la petitesse dans ce prototype.
 
 > function mixInto(object, mixIn) {
 >   forEachIn(mixIn, function(name, value) {
@@ -7953,11 +7953,11 @@ un autre prototype, nous allons incorporé la petitesse dans ce prototype.
 > var sourisMorte = PetitProduitDetaille.create(
 >   "Fred la souris",
 >   "il est mort");
-> sourisMorte.inspect();
-> sourisMorte.kick();
+> sourisMorte.examiner();
+> sourisMorte.frapper();
 
 Rappelez-vous que |forEachIn| parcourt uniquement les *propres* propriétés
-de l'objet, il copiera donc |kick| and |take|, mais pas le constructeur que
+de l'objet, il copiera donc |frapper| et |prendre|, mais pas le constructeur que
 |PetitProduit| a hérité de |Produit|.
 
 ---
@@ -7970,31 +7970,31 @@ un prototpye |Monstre|, qui a son propre constructeur, et nous voulons le
 mélanger avec |ProduitDetaille|.
 
 > var Monstre = Produit.extend({
->   construct: function(name, dangerous) {
->     Produit.construct.call(this, name);
->     this.dangerous = dangerous;
+>   construct: function(nom, estDangereux) {
+>     Produit.construct.call(this, nom);
+>     this.estDangereux = estDangereux;
 >   },
->   kick: function() {
->     if (this.dangerous)
->       print(this.name, " arrache votre tête avec ses dents.");
+>   frapper: function() {
+>     if (this.estDangereux)
+>       print(this.nom, " arrache votre tête avec ses dents.");
 >     else
->       print(this.name, " fuit en pleurant.");
+>       print(this.nom, " fuit en pleurant.");
 >   }
 > });
 >
 > var MonstreDetaille = ProduitDetaille.extend({
->   construct: function(name, description, dangerous) {
->     ProduitDetaille.construct.call(this, name, description);
->     Monstre.construct.call(this, name, dangerous);
+>   construct: function(nom, description, estDangereux) {
+>     ProduitDetaille.construct.call(this, nom, description);
+>     Monstre.construct.call(this, nom, estDangereux);
 >   },
->   kick: Monstre.kick
+>   frapper: Monstre.frapper
 > });
 >
 > var paresseuxGeant = MonstreDetaille.create(
 >   "le paresseux géant",
 >   "il s'accroche tranquillement sur un arbre en grignotant des feuilles",
 >   true);
-> paresseuxGeant.kick();
+> paresseuxGeant.frapper();
 
 Mais remarquez que cela conduit à appeler deux fois le constructeur de
 |Produit| lorsqu'on crée un |MonstreDetaille| : une fois à travers le
@@ -8017,7 +8017,7 @@ environnement de développement pour les aventures en mode texte. Cette
 capacité à modifier le comportement des objets à volonté, qui est ce que
 nous offre l'héritage par prototype, est très bien adapté à cela. Si vous
 avez un objet |herisson|, qui a la capacité unique de rouler
-quand on lui tape dedans, vous pouvez simplement changer sa méthode |kick|.
+quand on lui tape dedans, vous pouvez simplement changer sa méthode |frapper|.
 
 Malheureusement, les aventures en mode texte ont suivi le même chemin que
 les disques vinyls, alors qu'ils étaient populaires à une époque, ils
