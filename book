@@ -9618,7 +9618,7 @@ comme du HTML alors que dans le second cas elle est interprétée comme du
 simple texte.
 
 > document.body.firstChild.firstChild.nodeValue =
->   "Chapter 1 : La grande importance de la bouteille";
+>   "Chapitre 1 : La grande importance de la bouteille";
 
 Ou…
 
@@ -9678,16 +9678,16 @@ possède les méthodes |createElement| et |createTextNode|. La première
 est utilisée pour créer un nœud classique, la seconde, comme son nom le
 suggère, pour créer un nœud texte.
 
-> var secondHeader = document.createElement("H1");
-> var secondTitle = document.createTextNode("Chapitre 2 : Magie intense");
+> var deuxiemeEntete = document.createElement("H1");
+> var deuxiemeChapitre = document.createTextNode("Chapitre 2 : Magie intense");
 
 Nous voulons ensuite mettre le titre dans l'élément |h1|, puis ajouter cet
 élément au document. Le moyen le plus simple de le faire est la méthode
 _|appendChild|_ qui peut-être appelée sur chaque nœud qui n'est pas un
 nœud texte.
 
-> secondHeader.appendChild(secondTitle);
-> document.body.appendChild(secondHeader);
+> deuxiemeEntete.appendChild(deuxiemeChapitre);
+> document.body.appendChild(deuxiemeEntete);
 
 Souvent, vous voudrez aussi ajouter des attributs à ces nouveaux  nœuds . Par
 exemple, une balise |img| (image) est plutôt inutile sans la propriété
@@ -9696,10 +9696,10 @@ attributs peuvent être retrouvés directement comme des propriétés du nœud
 DOM mais il y a aussi les méthodes _|setAttribute|_ et _|getAttribute|_,
 qui sont utilisées pour accéder aux attributs de façon plus générale :
 
-> var newImage = document.createElement("IMG");
-> newImage.setAttribute("src", "img/Hiva Oa.png");
-> document.body.appendChild(newImage);
-> show(newImage.getAttribute("src"));
+> var nouvelleImage = document.createElement("IMG");
+> nouvelleImage.setAttribute("src", "img/Hiva Oa.png");
+> document.body.appendChild(nouvelleImage);
+> show(nouvelleImage.getAttribute("src"));
 
 ---
 
@@ -9759,12 +9759,12 @@ fonction pour créer des éléments DOM.
 >   return node;
 > }
 >
-> var newParagraph =
+> var nouveauParagraphe =
 >   dom("P", null, "Un paragraphe avec un ",
 >       dom("A", {href: "http://fr.wikipedia.org/wiki/Alchimie"},
 >           "lien"),
 >       " à l'intérieur.");
-> document.body.appendChild(newParagraph);
+> document.body.appendChild(nouveauParagraphe);
 
 La fonction _|dom|_ crée un arbre DOM. Son premier argument donne le nom de
 la balise du nœud, son second argument est un objet contenant l'attribut du
@@ -9781,8 +9781,8 @@ la méthode _|insertBefore|_ peut-être utilisée pour le placer avant un
 autre nœud enfant. Elle prend le nouveau nœud comme premier argument et
 l'élément existant comme second argument.
 
-> var link = newParagraph.childNodes[1];
-> newParagraph.insertBefore(dom("STRONG", null, "super "), link);
+> var lien = nouveauParagraphe.childNodes[1];
+> nouveauParagraphe.insertBefore(dom("STRONG", null, "super "), lien);
 
 Si un nœud possèdant déjà un |parentNode| est placé ailleurs, il est
 automatiquement supprimé de sa position actuelle -- les nœuds ne peuvent
@@ -9792,14 +9792,14 @@ Quand un nœud doit être remplacé par un autre, utilisez la méthode
 _|replaceChild|_, qui prend encore le nouveau nœud comme premier argument
 et le nœud existant comme second argument.
 
-> newParagraph.replaceChild(document.createTextNode("mauvais "),
->                           newParagraph.childNodes[1]);
+> nouveauParagraphe.replaceChild(document.createTextNode("mauvais "),
+>                           nouveauParagraphe.childNodes[1]);
 
 Et finalement, il y a _|removeChild|_ pour supprimer un nœud enfant. À
 noter que cette méthode doit être appelée sur le *parent* du nœud à
 supprimer, en lui donnant l'enfant comme argument.
 
-> newParagraph.removeChild(newParagraph.childNodes[1]);
+> nouveauParagraphe.removeChild(nouveauParagraphe.childNodes[1]);
 
 ***
 
@@ -9813,7 +9813,7 @@ le nœud DOM donné en paramètre
 >     node.parentNode.removeChild(node);
 > }
 >
-> removeElement(newParagraph);
+> removeElement(nouveauParagraphe);
 
 ---
 
