@@ -11062,8 +11062,8 @@ Comme la description ci-dessus le montre, ce problème n'est pas spécifique
 aux gestionnaires d'événements. Ce code, par exemple, crée un peu de
 mémoire qui ne peut pas être récupérée :
 
-!> var unObjetJavaScript = {link: document.body};
-!> document.body.linkBack = unObjetJavaScript;
+!> var unObjetJavaScript = {lien: document.body};
+!> document.body.lienRetour = unObjetJavaScript;
 
 Même si un navigateur Internet Explorer passe à la page suivante, il
 continue à garder ce |document.body|. La raison pour laquelle ce bug
