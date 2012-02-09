@@ -7859,11 +7859,11 @@ Héritons de ce type de cette façon…
 >   "il s'accroche tranquillement sur un arbre en grignotant des feuilles");
 > paresseuxGeant.examiner();
 
-Laisser de côté la partie obligatoire du |prototype| rend légérment plus
+Laisser de côté la partie obligatoire du |prototype| rend légèrement plus
 simples les choses comme l'appel à |Produit.construct| depuis le constructeur
 de |ProduitDetaille|. Remarquez que ce serait une mauvaise idée d'écrire
 simplement |this.nom = nom| dans |ProduitDetaille.construct|. Cela duplique
-une ligne. Bien sûr, dupliquer une ligne est plus court qu'appeler la fonction
+une ligne. Bien sûr, dupliquer cette ligne est plus court qu'appeler la fonction
 |Produit.construct| mais si on se retrouve à ajouter plus tard quelque chose
 dans le constructeur, nous devrons l'ajouter à deux endroits différents.
 
