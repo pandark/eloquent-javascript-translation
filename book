@@ -6343,8 +6343,8 @@ devrait fonctionner correctement.
 |hasOwnProperty| peut également être utilisée dans les situations où l'on
 utilise l'opérateur _|in|_ pour savoir si un objet contient une propriété
 particulière. Mais il y a encore une subtilité. Nous avons vu dans le
-\\cdata que certaines propriétés, comme |toString|, sont 'hidden' (NdT:
-cachées), et ne sont donc pas considérées lors du parcours des éléments
+\\cdata que certaines propriétés, comme |toString|, sont 'cachées',
+et ne sont donc pas considérées lors du parcours des éléments
 d'un objet via une instruction |for|/|in|. Il s'avère que les navigateurs
 de la famille Gecko (Firefox principalement) donnent à chaque objet une
 propriété cachée nommée |__proto__|, qui pointe vers le prototype
