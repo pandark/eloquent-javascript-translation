@@ -7965,8 +7965,8 @@ de l'objet, il copiera donc |frapper| et |prendre|, mais pas le constructeur que
 Mélanger les prototypes devient plus complexe quand le mix-in a un
 constructeur, ou quand certaines de ses méthodes entre en « collision »
 avec les méthodes du prototype dans lequel il est incorporé. Parfois, il
-est possible de faire un « mélange manuel ». Disons que nous avons
-un prototpye |Monstre|, qui a son propre constructeur, et nous voulons le
+est possible de faire un mix-in « manuellement ». Disons que nous avons
+un prototype |Monstre|, qui a son propre constructeur, et nous voulons le
 mélanger avec |ProduitDetaille|.
 
 > var Monstre = Produit.extend({
