@@ -6348,13 +6348,13 @@ cachées), et ne sont donc pas considérées lors du parcours des éléments
 d'un objet via une instruction |for|/|in|. Il s'avère que les navigateurs
 de la famille Gecko (Firefox principalement) donnent à chaque objet une
 propriété cachée nommée |__proto__|, qui pointe vers le prototype
-de cet objet. |hasOwnProperty| retourne |true| (NdT: vrai), pour cette
+de cet objet. |hasOwnProperty| retourne |true|, pour cette
 propriété, même si le programme ne l'a pas explicitement ajoutée. Avoir
 accès au prototype d'un objet peut être très pratique, mais en faire
 une propriété comme ça n'était pas une très bonne idée. Toutefois,
 Firefox est un navigateur web très utilisé, et il convient de faire
 attention à cela quand vous écrivez des programmes pour le web. Il y a
-une méthode _|propertyIsEnumerable|_, qui retourne |false| (NdT: faux),
+une méthode _|propertyIsEnumerable|_, qui retourne |false|,
 pour les propriétés cachées, et peut donc être utilisé pour filtrer
 les étrangetés comme |__proto__|. Pour contourner ce problème de manière
 fiable, on peut utiliser une expression comme :
