@@ -10018,7 +10018,7 @@ sur lequel on a placé l'image est modifié et les nouvelles coordonnées
 sont calculées. C'est une erreur commune lorsqu'on attribue des styles
 comme cela d'oublier d'ajouter |'px'| à la valeur. Dans la plupart des cas,
 attribuer un nombre sans unité à un style ne fonctionne pas donc vous devez
-ajouter |'px'| pour pixels, |'%'| pour pourcentage, |'em'| pour « ems »
+ajouter |'px'| pour pixels, |'%'| pour pourcentage, |'em'| pour cadratin
 (la largeur d'un caractère |M|) ou encore |'pt'| pour points.
 
 (Maintenant, mettons une image pour nous reposer encore…)
