@@ -2494,8 +2494,8 @@ la fonction a malgré tout accès au contenu de la chaîne de caractères
 fonctionne est décrite dans le \\coo.
 
 Les propriétés qui se comportent comme des fonctions sont généralement
-appelées _méthode_s, comme pour « |toUpperCase| qui est une méthode des
-objets de type chaîne de caractères ».
+appelées _méthode_s, ainsi, |toUpperCase| est une méthode des
+chaînes de caractères.
 
 > var flipper = [];
 > flipper.push("Flipper");
