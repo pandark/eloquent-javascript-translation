@@ -4634,7 +4634,7 @@ de chaîne. Mais construire cette chaîne a partir des structures de données
 que nous aurons construites sera facile. L'aspect important dont il faut se
 souvenir est de transformer les caractères spéciaux de notre document…
 
-> function echappeHTML(texte) {
+> function escapeHTML(texte) {
 >   var remplacements = [[/&/g, "&amp;"], [/"/g, "&quot;"],
 >                       [/</g, "&lt;"], [/>/g, "&gt;"]];
 >   forEach(remplacements, function(remplacement) {
@@ -4647,7 +4647,7 @@ La méthode |replace| des objets chaînes créé une nouvelle chaîne dans
 laquelle toutes les occurrences du motif passé en premier en premier argument
 sont remplacées par le second argument, ainsi |"Borobudur".replace(/r/g,
 "k")| donne |"Bokobuduk"|. Ne vous souciez pas ici de la syntaxe des motifs,
-cela sera vu au \\cregexp. La fonction |echappeHTML| stocke les différents
+cela sera vu au \\cregexp. La fonction |escapeHTML| stocke les différents
 motifs à remplacer dans un tableau, aussi, il suffit d'énumérer à l'aide
 d'une boucle chacun de ces motifs pour les appliquer un par un.
 
@@ -4677,7 +4677,7 @@ une fonction récursive comme celle-ci :
 >     if (attributs) {
 >       for (var nom in attributs)
 >         resultat.push(" " + nom + "=\"" +
->                     echappeHTML(attributs[nom]) + "\"");
+>                     escapeHTML(attributs[nom]) + "\"");
 >     }
 >     return resultat.join("");
 >   }
@@ -4685,7 +4685,7 @@ une fonction récursive comme celle-ci :
 >   function rendu(element) {
 >     // Element texte
 >     if (typeof element == "string") {
->       pieces.push(echappeHTML(element));
+>       pieces.push(escapeHTML(element));
 >     }
 >     // Balise vide
 >     else if (!element.contenu || element.contenu.length == 0) {
@@ -8787,7 +8787,7 @@ Cette dernière astuce peut être utilisée pour rendre plus efficace la
 fonction d'échappement HTML vu dans le \\cfp. Vous vous souvenez
 peut-être qu'elle ressemblait à cela :
 
-> function echappeHTML(texte) {
+> function escapeHTML(texte) {
 >   var remplacements = [[/&/g, "&amp;"], [/"/g, "&quot;"],
 >                       [/</g, "&lt;"], [/>/g, "&gt;"]];
 >   forEach(remplacements, function(remplacement) {
@@ -8796,12 +8796,12 @@ peut-être qu'elle ressemblait à cela :
 >   return texte;
 > }
 
-Écrivez une nouvelle fonction |echappeHTML|, qui fasse la même chose,
+Écrivez une nouvelle fonction |escapeHTML|, qui fasse la même chose,
 mais qui n'appelle |replace| qu'une seule fois.
 
 ///
 
-> function echappeHTML(texte) {
+> function escapeHTML(texte) {
 >   var remplacements = {"<": "&lt;", ">": "&gt;",
 >                       "&": "&amp;", "\"": "&quot;"};
 >   return texte.replace(/[<>&"]/g, function(caractere) {
@@ -8809,7 +8809,7 @@ mais qui n'appelle |replace| qu'une seule fois.
 >   });
 > }
 >
-> print(echappeHTML("Le tag pour le pré-formatage s'écrit \"<pre>\"."));
+> print(escapeHTML("Le tag pour le pré-formatage s'écrit \"<pre>\"."));
 
 L'objet |remplacements| est un moyen rapide d'associer chaque caractère
 à sa version échappée. L'utiliser ainsi ne pose pas de problème
