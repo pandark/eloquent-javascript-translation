@@ -2475,7 +2475,7 @@ un nom de variable ayant une signification utile pour la compréhension.
 
 ---
 
-Les chaînes de caractères et les objets « tableaux » contiennent tous
+Les objets chaînes de caractères et tableaux contiennent tous
 deux, outre la propriété |length|, un certain nombre d'autres propriétés
 qui font référence à des fonctions.
 
@@ -2495,7 +2495,7 @@ fonctionne est décrite dans le \\coo.
 
 Les propriétés qui se comportent comme des fonctions sont généralement
 appelées _méthode_s, ainsi, |toUpperCase| est une méthode des
-chaînes de caractères.
+objets chaînes de caractères.
 
 > var flipper = [];
 > flipper.push("Flipper");
