@@ -4148,9 +4148,9 @@ en chemin.
 
 La console JavaScript a une fonction |viewHTML| qui peut être utilisée
 pour voir des documents HTML. J'ai stocké le document de l'exemple ci-dessus
-dans |stroustrupQuote|, on peut donc le voir en exécutant ce code :
+dans |citationDeBjarneStroustrup|, on peut donc le voir en exécutant ce code :
 
-> viewHTML(stroustrupQuote);
+> viewHTML(citationDeBjarneStroustrup);
 
 Si vous avez un genre de bloqueur de fenêtres pop-up installé ou intégré
 dans votre navigateur, il interférera probablement avec |viewHTML|, qui
@@ -4344,7 +4344,7 @@ vous lancer un défi, essayer de modifier le programme pour qu'il prenne en
 charge les marquages « imbriqués ».
 
 Le manuscrit complet, sous forme de chaine, est disponible sur cette page
-en appelant la fonction |recluseFile|.
+en appelant la fonction |fichierDeErmite|.
 
 ---
 
@@ -4353,7 +4353,7 @@ résultat de deux retours-chariots consécutifs et, si vous vous rappelez
 que les chaînes disposent d'une méthode |split|, comme vu dans \\cdata,
 vous comprendrez que cela fera l'affaire :
 
-> var paragraphes = recluseFile().split("\n\n");
+> var paragraphes = fichierDeErmite().split("\n\n");
 > print("Trouvé ", paragraphes.length, " paragraphes.");
 
 ***
@@ -4389,7 +4389,7 @@ de rechercher un caractère précis dans les caractères qui la composent.
 C'est là que nous pouvons essayer la fonction |map| citée précédemment.
 
 > var paragraphes = map(transformeParagraphe,
->                      recluseFile().split("\n\n"));
+>                      fichierDeErmite().split("\n\n"));
 
 Et *boum*, nous avons un tableau de paragraphes proprement triés. Nous
 sommes allés un peu vite, nous avons oublié l'étape 3 de l'algorithme:
@@ -4818,7 +4818,7 @@ un titre de document, renvoie un document HTML.
 >   return renduHTML(documentHtml(titre, corps));
 > }
 >
-> viewHTML(renduFichier(recluseFile(), "Le livre de la programmation"));
+> viewHTML(renduFichier(fichierDeErmite(), "Le livre de la programmation"));
 
 La méthode _|concat|_ des objets de type tableau sert à concaténer un
 tableau avec un autre, tout comme l'opérateur |+| le fait avec les chaînes
