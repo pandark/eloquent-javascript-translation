@@ -5171,7 +5171,7 @@ et 1. Essayez de l'appeler un certain nombre de fois à la console, vous verrez
 qu'il vous donnera (fort probablement)  un nombre différent à chaque fois. La
 fonction |randomInteger| multiplie ce nombre par l'argument qui lui est donné
 et arrondie le résultat au chiffre inférieur avec |Math.floor|. Ainsi par
-exemple, |entierAuHasard(3)| renverra les chiffres |0[, |1| ou |2|.
+exemple, |entierAuHasard(3)| renverra les chiffres |0|, |1| ou |2|.
 
 ## Les ordinateurs sont des machines déterministes : elles réagissent
 tout le temps de la même manière aux données qu'elles reçoivent, et ne
