@@ -10525,15 +10525,15 @@ condition qu'il y ait un espace vide derrière eux. Le but du jeu et de
 déplacer un nombre donné de rochers vers les sorties.
 
 Tout comme les terraria du \\coo, un niveau de Sokoban peut être représenté
-sous forme de texte. La variable  |sokobanLevels|, dans la fenêtre
+sous forme de texte. La variable  |niveauxSokoban|, dans la fenêtre
 |example_events.html|, contient un tableau d'objets 'niveau'. Chaque niveau
-a une propriété |field|, qui contient une représentation textuelle du
-niveau, et une propriété  |boulders|, qui indique la quantité de rochers
+a une propriété |terrain|, qui contient une représentation textuelle du
+niveau, et une propriété  |rochers|, qui indique la quantité de rochers
 qui doivent être expulsés pour finir le niveau.
 
-> show(sokobanLevels.length);
-> show(sokobanLevels[1].boulders);
-> forEach(sokobanLevels[1].field, print);
+> show(niveauxSokoban.length);
+> show(niveauxSokoban[1].rochers);
+> forEach(niveauxSokoban[1].terrain, print);
 
 Dans un niveau de ce type, les caractères  |#| sont des murs, les espaces
 sont des cases vides, les caractères |0| sont utilisés pour les rochers,
@@ -10670,7 +10670,7 @@ cellules de la table, et peuvent donc, par exemple, être atteints avec
 ---
 
 Le type d'objet suivant sera appelé |TerrainSokoban|. On passe à son
-contructeur un objet du tableau |sokobanLevels|, et il est en charge à
+contructeur un objet du tableau |niveauxSokoban|, et il est en charge à
 la fois de la création d'une table de nœud DOM, mais également de la
 création d'une grille d'objets |Carreau|. Cet objet s'occupera également
 des détails pour déplacer le joueur et les rochers, grâce à une méthode
@@ -10687,10 +10687,10 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >   construct: function(niveau) {
 >     var corpsDeTableau = dom("TBODY");
 >     this.carreaux = [];
->     this.rochersRestants = niveau.boulders;
+>     this.rochersRestants = niveau.rochers;
 >
->     for (var y = 0; y < niveau.field.length; y++) {
->       var ligne = niveau.field[y];
+>     for (var y = 0; y < niveau.terrain.length; y++) {
+>       var ligne = niveau.terrain[y];
 >       var rangeeDeTableau = dom("TR");
 >       var rangeeDeCarreaux = [];
 >       for (var x = 0; x < ligne.length; x++) {
@@ -10722,7 +10722,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 >   }
 > };
 >
-> var terrainDeTest = TerrainSokoban.create(sokobanLevels[0]);
+> var terrainDeTest = TerrainSokoban.create(niveauxSokoban[0]);
 > show(terrainDeTest.lireCarreau(new Point(10, 2)).contenu);
 
 Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
@@ -10866,7 +10866,7 @@ On commence encore avec un prototype inachevé.
 >   reinitialiserNiveau: function() {
 >     if (this.terrain)
 >       this.terrain.enlever();
->     this.terrain = TerrainSokoban.create(sokobanLevels[this.niveau]);
+>     this.terrain = TerrainSokoban.create(niveauxSokoban[this.niveau]);
 >     this.terrain.place(this.container);
 >   },
 >
@@ -10901,7 +10901,7 @@ ci-dessous sera probablement utile :
 Après qu'un appui sur une touche de direction est géré, vérifiez
 |this.terrain.aGagne()| pour savoir si c'était le déplacement gagnant. Si le
 joueur a gagné, utilisez |alert| pour afficher un message, et passer au niveau
-suivant. S'il n'y a pas de niveau suivant (vérifiez |sokobanLevels.length|),
+suivant. S'il n'y a pas de niveau suivant (vérifiez |niveauxSokoban.length|),
 redémarrez le jeu.
 
 Il est probablement sage d'arrêter les événements quand des appuis sur les
@@ -10915,7 +10915,7 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 >     event.stop();
 >     this.terrain.deplacer(codesTouchesFleches.lookup(event.keyCode));
 >     if (this.terrain.aGagne()) {
->       if (this.niveau < sokobanLevels.length - 1) {
+>       if (this.niveau < niveauxSokoban.length - 1) {
 >         alert("Excellent ! Passons au niveau suivant.");
 >         this.niveau++;
 >         this.reinitialiserNiveau();

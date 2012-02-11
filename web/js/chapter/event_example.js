@@ -1,8 +1,8 @@
 // Sokoban levels based on those in the Nethack game
 // (http://www.nethack.org).
 
-var sokobanLevels = [
-  {field: ["######  ##### ",
+var niveauxSokoban = [
+  {terrain: ["######  ##### ",
            "#    #  #   # ",
            "# 0  #### 0 # ",
            "# 0 @    0  # ",
@@ -14,9 +14,9 @@ var sokobanLevels = [
            "      ## 0   #",
            "      #*0 0  #",
            "      ########"],
-   boulders: 10},
+   rochers: 10},
   
-  {field: ["###########   ",
+  {terrain: ["###########   ",
            "#    #    #   ",
            "#  00#00 @#   ",
            "#     0   #   ",
@@ -28,9 +28,9 @@ var sokobanLevels = [
            "# 000#0  0 ###",
            "#    #  0 0 *#",
            "##############"],
-   boulders: 20},
+   rochers: 20},
                                          
-  {field: ["##########    ",
+  {terrain: ["##########    ",
            "#@      *#    ",
            "#       ##    ",
            "####### ######",
@@ -48,9 +48,9 @@ var sokobanLevels = [
            "#        #    ",
            "#   ######    ",
            "#####         "],
-   boulders: 16},
+   rochers: 16},
 
-  {field: [" ####         ",
+  {terrain: [" ####         ",
            "## @########  ",
            "#          #  ",
            "# 0#####0# #  ",
@@ -64,9 +64,9 @@ var sokobanLevels = [
            "#  0      ####",
            "#####  #  #   ",
            "    #######   "],
-   boulders: 12},
+   rochers: 12},
 
-  {field: ["######    #####",
+  {terrain: ["######    #####",
            "#  #*##  ##   #",
            "#     #### 0  #",
            "# 00  #  #  0 #",
@@ -80,7 +80,7 @@ var sokobanLevels = [
            "     # 0   #   ",
            "     #@ #  #   ",
            "     #######   "],
-   boulders: 18}];
+   rochers: 18}];
 
 function Point(x, y) {
   this.x = x;
