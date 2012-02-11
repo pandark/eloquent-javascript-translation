@@ -5511,12 +5511,12 @@ Pour essayer, nous utiliserons une grille de 20 sur 20 en guise de carte :
 Ce que vous voyez là est une carte en relief d'un terrain montagneux. Les
 points jaunes représentent les pics, et les zones bleues, les vallées. La
 zone est divisée en carrés de 100 mètres de côté. Nous disposons d'une
-fonction |heightAt|, qui peut nous donner l'altitude en mètres, de n'importe
+fonction |altitudeEn|, qui peut nous donner l'altitude en mètres, de n'importe
 quel carré de cette carte, dans laquelle les carrés sont représentés
 par des objets avec des propriétés |x| et |y|.
 
-> print(heightAt({x: 0, y: 0}));
-> print(heightAt({x: 11, y: 18}));
+> print(altitudeEn({x: 0, y: 0}));
+> print(altitudeEn({x: 11, y: 18}));
 
 ---
 
@@ -5534,7 +5534,7 @@ considère que monter est deux fois plus pénible que descendre.
 ## Si si, je vous assure.
 
 > function distancePonderee(pointA, pointB) {
->   var differenceHauteur = heightAt(pointB) - heightAt(pointA);
+>   var differenceHauteur = altitudeEn(pointB) - altitudeEn(pointA);
 >   var facteurElevation = (differenceHauteur < 0 ? 1 : 2);
 >   var distanceaPlat = (pointA.x == pointB.x || pointA.y == pointB.y ? 100 : 141);
 >   return distanceaPlat + facteurElevation * Math.abs(differenceHauteur);
