@@ -10307,7 +10307,7 @@ du document qui a déjà défilé se trouve dans |document.body.scrollLeft| et
 Ce gestionnaire, attaché au document entier, intercepte tous les clics de
 souris, et enregistre quelques informations à leur sujet.
 
-> function reportClick(event) {
+> function afficherClic(event) {
 >   event = event || window.event;
 >   var target = event.target || event.srcElement;
 >   var pageX = event.pageX, pageY = event.pageY;
@@ -10320,11 +10320,11 @@ souris, et enregistre quelques informations à leur sujet.
 >         ". Elément concerné:");
 >   show(target);
 > }
-> registerEventHandler(document, "click", reportClick);
+> registerEventHandler(document, "click", afficherClic);
 
 Et débarrassez-vous en de nouveau :
 
-> unregisterEventHandler(document, "click", reportClick);
+> unregisterEventHandler(document, "click", afficherClic);
 
 Évidemment, écrire toutes ces vérifications et ces solutions de
 contournement n'est pas quelque chose que vous avez envie de faire dans tous
@@ -10380,14 +10380,14 @@ ces codes peuvent être utilisés pour identifier les touches d'une façon
 plutôt indépendante du navigateur. Déterminer quel code correspond à
 quelle touche peut être réalisé avec quelques simples expériences.
 
-> function printKeyCode(event) {
+> function afficherCodeTouche(event) {
 >   event = event || window.event;
 >   print("La touche ", event.keyCode, " a été pressée.");
 > }
 >
-> registerEventHandler($("champtexte"), "keydown", printKeyCode);
+> registerEventHandler($("champtexte"), "keydown", afficherCodeTouche);
 
-> unregisterEventHandler($("champtexte"), "keydown", printKeyCode);
+> unregisterEventHandler($("champtexte"), "keydown", afficherCodeTouche);
 
 Dans la plupart des navigateurs, un code de touche unique correspond à une
 touche *physique* unique sur votre clavier. Le navigateur Opera, toutefois,
@@ -10412,7 +10412,7 @@ caractère en utilisant _|String.fromCharCode|_. Malheureusement, certains
 navigateurs ne définissent pas cette propriété, ou la définissent à |0|,
 et stockent à la place le code du caractère dans la propriété _|keyCode|_.
 
-> function printCharacter(event) {
+> function afficherCaractere(event) {
 >   event = event || window.event;
 >   var charCode = event.charCode;
 >   if (charCode == undefined || charCode === 0)
@@ -10420,9 +10420,9 @@ et stockent à la place le code du caractère dans la propriété _|keyCode|_.
 >   print("Caractère '", String.fromCharCode(charCode), "'");
 > }
 >
-> registerEventHandler($("champtexte"), "keypress", printCharacter);
+> registerEventHandler($("champtexte"), "keypress", afficherCaractere);
 
-> unregisterEventHandler($("champtexte"), "keypress", printCharacter);
+> unregisterEventHandler($("champtexte"), "keypress", afficherCaractere);
 
 ---
 
