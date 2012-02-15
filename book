@@ -3804,9 +3804,9 @@ s'occupe d'une matrice et affiche chaque élément :
 proches de la console javascript, tel que |printArray|, dans un soucis d'unité,
 ainsi que les algorithmes fondamentaux, car vous les retrouverez dans la littérature ou dans d'autres programmes, la plupart du temps, sous cette forme.)
 
-> function printArray(array) {
->   for (var i = 0; i < array.length; i++)
->     print(array[i]);
+> function printArray(tableau) {
+>   for (var i = 0; i < tableau.length; i++)
+>     print(tableau[i]);
 > }
 
 Mais qu'est-ce qu'on fait si on veut faire autre chose qu'afficher ? Puisque
@@ -3814,9 +3814,9 @@ Mais qu'est-ce qu'on fait si on veut faire autre chose qu'afficher ? Puisque
 les fonctions sont aussi des valeurs, on peut fournir notre action comme
 une valeur de type fonction :
 
-> function forEach(array, action) {
->   for (var i = 0; i < array.length; i++)
->     action(array[i]);
+> function forEach(tableau, action) {
+>   for (var i = 0; i < tableau.length; i++)
+>     action(tableau[i]);
 > }
 >
 > forEach(["Wampeter", "Foma", "Granfalloon"], print);
@@ -3939,9 +3939,9 @@ Jetons un œil maintenant à quelques algorithmes plus simples qui sont
 reliés aux tableaux. La fonction |somme| est en fait une variante d'un
 algorithme qui est habituellement appelé _|reduce|_ ou |fold| :
 
-> function reduce(combine, base, array) {
->   forEach(array, function (element) {
->     base = combine(base, element);
+> function reduce(combiner, base, tableau) {
+>   forEach(tableau, function (element) {
+>     base = combiner(base, element);
 >   });
 >   return base;
 > }
@@ -4010,10 +4010,10 @@ Voici la solution qui utilise une fonction |count|, avec une fonction qui
 inclut des tests d'égalité afin d'avoir au final une fonction |compterLesZeros|
 encore plus courte.
 
-> function count(test, array) {
+> function count(test, tableau) {
 >   return reduce(function(total, element) {
 >     return total + (test(element) ? 1 : 0);
->   }, 0, array);
+>   }, 0, tableau);
 > }
 >
 > function equals(x) {
@@ -4032,12 +4032,12 @@ fonction sur chaque élément, tout comme |forEach|. Mais au lieu de rejeter
 les valeurs de retour de la fonction, il construit un nouveau tableau pour
 chacune de ses valeurs.
 
-> function map(func, array) {
->   var result = [];
->   forEach(array, function (element) {
->     result.push(func(element));
+> function map(func, tableau) {
+>   var resultat = [];
+>   forEach(tableau, function (element) {
+>     resultat.push(func(element));
 >   });
->   return result;
+>   return resultat;
 > }
 >
 > show(map(Math.round, [0.01, 2, 9.89, Math.PI]));
@@ -4846,7 +4846,7 @@ ces fonctions :
 >   "==": function(a, b){return a == b;},
 >   "===": function(a, b){return a === b;},
 >   "!": function(a){return !a;}
->   /* and so on */
+>   /* et ainsi de suite */
 > };
 
 Nous pouvons donc écrire |reduce(op["+"], 0, [1, 2, 3, 4, 5])| pour faire la
@@ -4861,17 +4861,17 @@ un certain nombre de ces arguments et traite des arguments supplémentaires
 passés après ces arguments fixes. Vous pourrez le faire en utilisant de
 façon créative la méthode |apply| d'une fonction :
 
-> function asArray(quasiArray, start) {
->   var result = [];
->   for (var i = (start || 0); i < quasiArray.length; i++)
->     result.push(quasiArray[i]);
->   return result;
+> function asArray(quasimentUnTableau, debut) {
+>   var resultat = [];
+>   for (var i = (debut || 0); i < quasimentUnTableau.length; i++)
+>     resultat.push(quasimentUnTableau[i]);
+>   return resultat;
 > }
 >
 > function partial(func) {
->   var fixedArgs = asArray(arguments, 1);
+>   var argumentsFixes = asArray(arguments, 1);
 >   return function(){
->     return func.apply(null, fixedArgs.concat(asArray(arguments)));
+>     return func.apply(null, argumentsFixes.concat(asArray(arguments)));
 >   };
 > }
 
