@@ -4988,7 +4988,7 @@ et sa longueur.
 
 > var routes = [{point1: "Point Kiukiu", point2: "Hanaiapa", length: 19},
 >              {point1: "Point Kiukiu", point2: "Mont Feani", length: 15}
->              /* and so on */];
+>              /* et ainsi de suite */];
 
 Cependant, il s'avère que lorsque le programme essaiera de déterminer
 une route, il aura très souvent besoin de consulter une liste de tous les
@@ -5212,13 +5212,13 @@ par la suite) sera conservé comme un tableau de noms, et quand le voyageur
 arrivera à un nouveau lieu, l'algorithme appellera |member| pour vérifier si
 le voyageur est déjà passé par cet endroit. Cela peut ressembler à ça :
 
-> function member(array, value) {
->   var found = false;
->   forEach(array, function(element) {
->     if (element === value)
->       found = true;
+> function member(tableau, valeur) {
+>   var trouve = false;
+>   forEach(tableau, function(element) {
+>     if (element === valeur)
+>       trouve = true;
 >   });
->   return found;
+>   return trouve;
 > }
 >
 > print(member([6, 7, "Bordeaux"], 7));
@@ -5234,10 +5234,10 @@ reconnaissse certains types d'exceptions comme une un signal pour un arrêt
 
 > var Break = {toString: function() {return "Break";}};
 >
-> function forEach(array, action) {
+> function forEach(tableau, action) {
 >   try {
->     for (var i = 0; i < array.length; i++)
->       action(array[i]);
+>     for (var i = 0; i < tableau.length; i++)
+>       action(tableau[i]);
 >   }
 >   catch (exception) {
 >     if (exception != Break)
@@ -5266,17 +5266,17 @@ mais ce serait vraiment spécifique à notre problème et plutôt confus. Ce
 dont nous avons vraiment besoin c'est d'une nouvelle fonction de haut niveau,
 appelée _|any|_ (ou quelquefois |some|). Elle ressemble à ceci :
 
-> function any(test, array) {
->   for (var i = 0; i < array.length; i++) {
->     var found = test(array[i]);
->     if (found)
->       return found;
+> function any(test, tableau) {
+>   for (var i = 0; i < tableau.length; i++) {
+>     var trouve = test(tableau[i]);
+>     if (trouve)
+>       return trouve;
 >   }
 >   return false;
 > }
 >
-> function member(array, value) {
->   return any(partial(op["==="], value), array);
+> function member(tableau, valeur) {
+>   return any(partial(op["==="], valeur), tableau);
 > }
 >
 > print(member(["Peur", "Répugnance"], "Rejet"));
@@ -5284,18 +5284,18 @@ appelée _|any|_ (ou quelquefois |some|). Elle ressemble à ceci :
 |any| parcourt tous les éléments d'un tableau, de gauche à droite,
 et les soumet à une fonction de test. La première fois qu'elle renvoie
 une valeur comme |true|, cette valeur est renvoyée. Sinon, elle retourne
-|false|. Appeler |any(test, array)| est plus ou moins équivalent à
-|test(array[0]) || test(array[1]) || …| et cætera.
+|false|. Appeler |any(test, tableau)| est plus ou moins équivalent à
+|test(tableau[0]) || test(tableau[1]) || …| et cætera.
 
 ---
 
 Tout comme |&&| est le pendant de ||||, |any| a son pendant, appelé _|every|_:
 
-> function every(test, array) {
->   for (var i = 0; i < array.length; i++) {
->     var found = test(array[i]);
->     if (!found)
->       return found;
+> function every(test, tableau) {
+>   for (var i = 0; i < tableau.length; i++) {
+>     var trouve = test(tableau[i]);
+>     if (!trouve)
+>       return trouve;
 >   }
 >   return true;
 > }
@@ -5308,19 +5308,19 @@ Une autre fonction dont nous aurons besoin est |flatten|. Cette fonction
 prend un tableau de tableaux et met les éléments des tableaux dans un
 unique grand tableau.
 
->   function flatten(arrays) {
->     var result = [];
->     forEach(arrays, function (array) {
->       forEach(array, function (element){result.push(element);});
+>   function flatten(tableaux) {
+>     var resultat = [];
+>     forEach(tableaux, function (tableau) {
+>       forEach(tableau, function (element){resultat.push(element);});
 >     });
->     return result;
+>     return resultat;
 >   }
 
 La même chose pourrait être faite en utilisant la méthode |concat| et un
 genre de |reduce|, mais ceci serait moins efficace. De la même manière,
 concaténer ensemble des chaînes de caractères à de nombreuses reprises
 est plus lent que les mettre dans un tableau puis appeler la méthode
-|join|. Concaténer ensemble des tableaux  de maniére répétée produit
+|join|. Concaténer ensemble des tableaux  de manière répétée produit
 beaucoup de tableaux intermédiaires et inutiles.
 
 ***
@@ -5335,13 +5335,13 @@ valeurs de l'ancien tableau pour lequel la fonction donnée retourne |true|
 
 ///
 
-> function filter(test, array) {
->   var result = [];
->   forEach(array, function (element) {
+> function filter(test, tableau) {
+>   var resultat = [];
+>   forEach(tableau, function (element) {
 >     if (test(element))
->       result.push(element);
+>       resultat.push(element);
 >   });
->   return result;
+>   return resultat;
 > }
 >
 > show(filter(partial(op[">"], 5), [0, 4, 8, 12]));
@@ -5446,22 +5446,22 @@ n'est trouvé.
 
 Voici donc la méthode très fonctionnelle et qui abstrait tout ce que l'on peut :
 
-> function minimise(func, array) {
->   var minScore = null;
->   var found = null;
->   forEach(array, function(element) {
+> function minimise(func, tableau) {
+>   var plusPetitScore = null;
+>   var trouve = null;
+>   forEach(tableau, function(element) {
 >     var score = func(element);
->     if (minScore == null || score < minScore) {
->       minScore = score;
->       found = element;
+>     if (plusPetitScore == null || score < plusPetitScore) {
+>       plusPetitScore = score;
+>       trouve = element;
 >     }
 >   });
->   return found;
+>   return trouve;
 > }
 >
-> function getProperty(propName) {
->   return function(object) {
->     return object[propName];
+> function getProperty(nomDePropriete) {
+>   return function(objet) {
+>     return objet[nomDePropriete];
 >   };
 > }
 >
@@ -5746,12 +5746,12 @@ donner celui qui a été ajouté (avec la méthode |push|) en dernier.
 >   return x;
 > }
 >
-> var heap = new BinaryHeap(identity);
-> forEach([2, 4, 5, 1, 6, 3], function(number) {
->   heap.push(number);
+> var tasBinaire = new BinaryHeap(identity);
+> forEach([2, 4, 5, 1, 6, 3], function(nombre) {
+>   tasBinaire.push(nombre);
 > });
-> while (heap.size() > 0)
->   show(heap.pop());
+> while (tasBinaire.size() > 0)
+>   show(tasBinaire.pop());
 
 L'\\cbinaryheap traite de l'implémentation de la structure de données, ce
 qui est assez intéressant. Après avoir lu le \\coo, vous pourriez vouloir
