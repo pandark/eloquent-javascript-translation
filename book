@@ -6258,10 +6258,10 @@ tous les objets une méthode nommée |properties|, qui retourne un tableau
 contenant le nom des propriétés (non cachées) d'un objet.
 
 > Object.prototype.properties = function() {
->   var result = [];
+>   var resultat = [];
 >   for (var property in this)
->     result.push(property);
->   return result;
+>     resultat.push(property);
+>   return resultat;
 > };
 >
 > var test = {x: 10, y: 3};
@@ -6282,12 +6282,12 @@ de ce nom. En se basant sur ce mécanisme, nous pouvons ré-écrire notre
 méthode |properties| de la manière suivante :
 
 > Object.prototype.properties = function() {
->   var result = [];
+>   var resultat = [];
 >   for (var property in this) {
 >     if (this.hasOwnProperty(property))
->       result.push(property);
+>       resultat.push(property);
 >   }
->   return result;
+>   return resultat;
 > };
 >
 > var test = {"Gros Igor": true, "Boule de Feu": true};
@@ -6305,8 +6305,8 @@ le nom de la propriété et la valeur qu'elle a dans l'objet.
 > }
 >
 > var chimere = {visage: "lion", corps: "chèvre", derrière: "serpent"};
-> forEachIn(chimere, function(name, value) {
->   print("Un ", name, " de ", value, ".");
+> forEachIn(chimere, function(nom, valeur) {
+>   print("Un ", nom, " de ", valeur, ".");
 > });
 
 Mais, que se passe-t-il si on rencontre un chat nommé |hasOwnProperty|
@@ -6324,8 +6324,8 @@ ce problème est d'agir encore plus salement :
 > }
 >
 > var test = {name: "Mardochée", hasOwnProperty: "Oh-oh"};
-> forEachIn(test, function (name, value) {
->    print ("Property ", name, " = ", value);
+> forEachIn(test, function (nom, valeur) {
+>    print ("Property ", nom, " = ", valeur);
 > });
 
 (Note : Cet exemple ne fonctionne pas pour l'instant correctement dans
@@ -6377,23 +6377,23 @@ le mettre dans une fonction, mais une meilleur approche est encore d'écrire
 un constructeur et un prototype dédié aux situations où nous voulons
 utiliser un objet simplement comme un ensemble propriétés. Puisqu'il est
 prévu pour pouvoir y chercher des choses par leurs noms, nous l'appellerons
-un _|Dictionnaire|_.
+_|Dictionary|_ (dictionnaire).
 
-> function Dictionary(startValues) {
->   this.values = startValues || {};
+> function Dictionary(valeursInitiales) {
+>   this.valeurs = valeursInitiales || {};
 > }
-> Dictionary.prototype.store = function(name, value) {
->   this.values[name] = value;
+> Dictionary.prototype.store = function(nom, valeur) {
+>   this.valeurs[nom] = valeur;
 > };
-> Dictionary.prototype.lookup = function(name) {
->   return this.values[name];
+> Dictionary.prototype.lookup = function(nom) {
+>   return this.valeurs[nom];
 > };
-> Dictionary.prototype.contains = function(name) {
->   return Object.prototype.hasOwnProperty.call(this.values, name) &&
->     Object.prototype.propertyIsEnumerable.call(this.values, name);
+> Dictionary.prototype.contains = function(nom) {
+>   return Object.prototype.hasOwnProperty.call(this.valeurs, nom) &&
+>     Object.prototype.propertyIsEnumerable.call(this.valeurs, nom);
 > };
 > Dictionary.prototype.each = function(action) {
->   forEachIn(this.values, action);
+>   forEachIn(this.valeurs, action);
 > };
 >
 > var couleurs = new Dictionary({Grover: "bleu",
@@ -6401,8 +6401,8 @@ un _|Dictionnaire|_.
 >                               Bart: "jaune"});
 > show(couleurs.contains("Grover"));
 > show(couleurs.contains("constructor"));
-> couleurs.each(function(name, couleur) {
->   print(name, " est ", couleur);
+> couleurs.each(function(nom, couleur) {
+>   print(nom, " est ", couleur);
 > });
 
 Désormais, tous les inconvénients de l'utilisation des objets en tant
@@ -6846,9 +6846,9 @@ dans le \\cfp. Au lieu d'ajouter un argument à la fonction, celle-ci passe
 l'objet |this|, par l'intermédiaire du premier argument de la méthode
 |apply| dont disposent toutes les fonctions :
 
-> function bind(func, object) {
+> function bind(func, objet) {
 >   return function(){
->     return func.apply(object, arguments);
+>     return func.apply(objet, arguments);
 >   };
 > }
 >
@@ -6875,9 +6875,9 @@ Il est possible de passer à un objet une chaîne de caractères contenant
 le nom d'une de ses méthodes. De cette façon, la fonction |method| peut
 connaître le nom de la fonction à appliquer à l'objet.
 
-> function method(object, name) {
+> function method(objet, nom) {
 >   return function() {
->     object[name].apply(object, arguments);
+>     objet[nom].apply(objet, arguments);
 >   };
 > }
 >
@@ -7129,8 +7129,8 @@ les caractères qui leur correspondent dans un dictionnaire, et de rechercher
 dans ce dictionnaire ces caractères :
 
 > var typesDeCreature = new Dictionary();
-> typesDeCreature.enregistre = function(constructor) {
->   this.store(constructor.prototype.caractere, constructor);
+> typesDeCreature.enregistre = function(constructeurDeInsecte) {
+>   this.store(constructeurDeInsecte.prototype.caractere, constructeurDeInsecte);
 > };
 >
 > function elementdApresCaractere(caractere) {
@@ -7196,9 +7196,9 @@ Récupérer la liste des noms de propriété d'un dictionnaire est un outil
 utile, aussi, ajoutons le ou prototype de l'objet |Dictionary|.
 
 > Dictionary.prototype.names = function() {
->   var names = [];
->   this.each(function(name, value) {names.push(name);});
->   return names;
+>   var noms = [];
+>   this.each(function(nom, valeur) {noms.push(nom);});
+>   return noms;
 > };
 >
 > show(directions.names());
@@ -7211,10 +7211,10 @@ http://www.c2.com/cgi/wiki?YouArentGonnaNeedIt].
 
 Voici une façon de prendre un élément d'un tableau au hasard :
 
-> function elementAuHasard(array) {
->   if (array.length == 0)
+> function elementAuHasard(tableau) {
+>   if (tableau.length == 0)
 >     throw new Error("Le tableau est vide.");
->   return array[Math.floor(Math.random() * array.length)];
+>   return tableau[Math.floor(Math.random() * tableau.length)];
 > }
 >
 > show(elementAuHasard(["face", "pile"]));
@@ -7414,11 +7414,12 @@ Voici une nouvelle méthode |actionnerUneCreature|. Elle est volumineuse :
 >   }
 >   else if (action.type == "reproduction") {
 >     if (cible && !elementDansCible) {
->       var espèce = caracteredApresElement(creature.object);
->       var bébé = elementdApresCaractere(espèce);
->       creature.object.energie -= bébé.energie * 2;
+>       var espece = caracteredApresElement(creature.object);
+>       var nouvelleCreature = elementdApresCaractere(espece);
+>       //la créature parente perd 2 fois la quantité d'énergie de la créature naissante
+>       creature.object.energie -= nouvelleCreature.energie * 2;
 >       if (creature.object.energie > 0)
->         this.grille.ecritValeurEn(cible, bébé);
+>         this.grille.ecritValeurEn(cible, nouvelleCreature);
 >     }
 >   }
 >   else if (action.type == "attente") {
@@ -7731,19 +7732,19 @@ des fonctions pour prendre en charge les opérations les plus courantes
 peut rendre les choses plus fluides. De nombreuses personnes définissent,
 par exemple, des méthodes |inherit| et |method| sur les objets.
 
-> Object.prototype.inherit = function(baseConstructor) {
->   this.prototype = clone(baseConstructor.prototype);
+> Object.prototype.inherit = function(constructeurDeBase) {
+>   this.prototype = clone(constructeurDeBase.prototype);
 >   this.prototype.constructor = this;
 > };
-> Object.prototype.method = function(name, func) {
->   this.prototype[name] = func;
+> Object.prototype.method = function(nom, func) {
+>   this.prototype[nom] = func;
 > };
 >
 > function TableauEtrange(){}
 > TableauEtrange.inherit(Array);
-> TableauEtrange.method("push", function(value) {
->   Array.prototype.push.call(this, value);
->   Array.prototype.push.call(this, value);
+> TableauEtrange.method("push", function(valeur) {
+>   Array.prototype.push.call(this, valeur);
+>   Array.prototype.push.call(this, valeur);
 > });
 >
 > var etrange = new TableauEtrange();
@@ -7790,10 +7791,10 @@ clone l'objet, et appelle sa méthode |construct|, si une telle méthode
 existe, en lui passant en argument ceux qui ont été passés à |create|.
 
 > Object.prototype.create = function() {
->   var object = clone(this);
->   if (typeof object.construct == "function")
->     object.construct.apply(object, arguments);
->   return object;
+>   var objet = clone(this);
+>   if (typeof objet.construct == "function")
+>     objet.construct.apply(objet, arguments);
+>   return objet;
 > };
 
 L'héritage peut être réalisé en clonant un objet prototype et en ajoutant
@@ -7803,11 +7804,11 @@ l'objet sur lequel on l'appelle et qui ajoute à ce clone les propriétés
 de l'objet qui lui est donné en argument.
 
 > Object.prototype.extend = function(properties) {
->   var result = clone(this);
->   forEachIn(properties, function(name, value) {
->     result[name] = value;
+>   var resultat = clone(this);
+>   forEachIn(properties, function(nom, valeur) {
+>     resultat[nom] = valeur;
 >   });
->   return result;
+>   return resultat;
 > };
 
 Dans le cas où il n'est pas prudent de tripoter le prototype |Object|,
@@ -7907,9 +7908,9 @@ similaire à la fonction |clone| peut être utilisée pour éviter cela . Nous
 utilisons un « faux constructeur », et nous lui appliquons |instanceof|.
 
 > Object.prototype.hasPrototype = function(prototype) {
->   function DummyConstructor() {}
->   DummyConstructor.prototype = prototype;
->   return this instanceof DummyConstructor;
+>   function FauxConstructeur() {}
+>   FauxConstructeur.prototype = prototype;
+>   return this instanceof FauxConstructeur;
 > };
 >
 > show(stylo.hasPrototype(Produit));
@@ -7942,8 +7943,8 @@ comme un de ces prototypes. En copiant ses méthodes |frapper| et |prendre| dans
 un autre prototype, nous allons incorporer la petitesse dans ce prototype.
 
 > function mixInto(object, mixIn) {
->   forEachIn(mixIn, function(name, value) {
->     object[name] = value;
+>   forEachIn(mixIn, function(nom, valeur) {
+>     object[nom] = valeur;
 >   });
 > };
 >
