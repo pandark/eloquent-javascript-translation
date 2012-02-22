@@ -8765,7 +8765,7 @@ similaires aux valeurs trouvées dans les tableaux renvoyés par |match| :
 le premier est la correspondance complète, puis vient un argument pour
 chaque partie entre parenthèses du motif.
 
-> function mangeUnDeChaque(match, quantite, unite) {
+> function mangeUnDeChaque(correspondance, quantite, unite) {
 >   quantite = Number(quantite) - 1;
 >   if (quantite == 1) {
 >     unite = unite.slice(0, unite.length - 1);
