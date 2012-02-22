@@ -9554,8 +9554,8 @@ texte. Il existe en fait d'autres sortes d'objets qui possèdent un |nodeType|,
 comme l'objet |document| qui vaudra |9|, mais l'usage le plus commun de cette
 propriété est la distinction entre les nœuds textes et les autres nœuds.
 
-> function isTextNode(node) {
->   return node.nodeType == 3;
+> function isTextNode(noeud) {
+>   return noeud.nodeType == 3;
 > }
 >
 > show(isTextNode(document.body));
@@ -9571,8 +9571,8 @@ ont une _|nodeValue|_, ayant pour valeur leur contenu texte.
 Les |nodeName|s sont toujours mis en majuscules, c'est quelque chose qui doit
 être pris en compte si jamais vous voulez les comparer à quoi que ce soit.
 
-> function isImage(node) {
->   return !isTextNode(node) && node.nodeName == "IMG";
+> function isImage(noeud) {
+>   return !isTextNode(noeud) && noeud.nodeName == "IMG";
 > }
 >
 > show(isImage(document.body.lastChild));
@@ -9589,15 +9589,15 @@ Indice : Récursion!
 
 ///
 
-> function asHTML(node) {
->   if (isTextNode(node))
->     return escapeHTML(node.nodeValue);
->   else if (node.childNodes.length == 0)
->     return "<" + node.nodeName + "/>";
+> function asHTML(noeud) {
+>   if (isTextNode(noeud))
+>     return escapeHTML(noeud.nodeValue);
+>   else if (noeud.childNodes.length == 0)
+>     return "<" + noeud.nodeName + "/>";
 >   else
->     return "<" + node.nodeName + ">" +
->            map(asHTML, node.childNodes).join("") +
->            "</" + node.nodeName + ">";
+>     return "<" + noeud.nodeName + ">" +
+>            map(asHTML, noeud.childNodes).join("") +
+>            "</" + noeud.nodeName + ">";
 > }
 >
 > print(asHTML(document.body));
@@ -9724,17 +9724,17 @@ abordé plus tard dans ce chapitre avec |class|, ne peut être défini avec
 
 Une solution de contournement pourrait ressembler à quelque chose comme ça :
 
-> function setNodeAttribute(node, attribute, value) {
->   if (attribute == "class")
->     node.className = value;
->   else if (attribute == "checked")
->     node.defaultChecked = value;
->   else if (attribute == "for")
->     node.htmlFor = value;
->   else if (attribute == "style")
->     node.style.cssText = value;
+> function setNodeAttribute(noeud, attribut, valeur) {
+>   if (attribut == "class")
+>     noeud.className = valeur;
+>   else if (attribut == "checked")
+>     noeud.defaultChecked = valeur;
+>   else if (attribut == "for")
+>     noeud.htmlFor = valeur;
+>   else if (attribut == "style")
+>     noeud.style.cssText = valeur;
 >   else
->     node.setAttribute(attribute, value);
+>     noeud.setAttribute(attribut, valeur);
 > }
 
 À chaque fois qu'Internet Explorer dévie du comportement des autres
@@ -9744,20 +9744,20 @@ aimerions ne pas avoir besoin mais que les navigateurs non conformes nous
 obligent à écrire. Considérant ceci, il est possible d'écrire une simple
 fonction pour créer des éléments DOM.
 
-> function dom(name, attributes) {
->   var node = document.createElement(name);
->   if (attributes) {
->     forEachIn(attributes, function(name, value) {
->       setNodeAttribute(node, name, value);
+> function dom(nom, attributs) {
+>   var noeud = document.createElement(nom);
+>   if (attributs) {
+>     forEachIn(attributs, function(nom, valeur) {
+>       setNodeAttribute(noeud, nom, valeur);
 >     });
 >   }
 >   for (var i = 2; i < arguments.length; i++) {
->     var child = arguments[i];
->     if (typeof child == "string")
->       child = document.createTextNode(child);
->     node.appendChild(child);
+>     var noeudEnfant = arguments[i];
+>     if (typeof noeudEnfant == "string")
+>       noeudEnfant = document.createTextNode(noeudEnfant);
+>     noeud.appendChild(noeudEnfant);
 >   }
->   return node;
+>   return noeud;
 > }
 >
 > var nouveauParagraphe =
@@ -9809,9 +9809,9 @@ le nœud DOM donné en paramètre
 
 ///
 
-> function removeElement(node) {
->   if (node.parentNode)
->     node.parentNode.removeChild(node);
+> function removeElement(noeud) {
+>   if (noeud.parentNode)
+>     noeud.parentNode.removeChild(noeud);
 > }
 >
 > removeElement(nouveauParagraphe);
@@ -9869,22 +9869,22 @@ le tableau ci-dessus :
 
 ///
 
-> function makeTable(data, columns) {
->   var headRow = dom("TR");
->   forEach(columns, function(name) {
->     headRow.appendChild(dom("TH", null, name));
+> function makeTable(donnees, colonnes) {
+>   var ligneEntete = dom("TR");
+>   forEach(colonnes, function(nom) {
+>     ligneEntete.appendChild(dom("TH", null, nom));
 >   });
 >
->   var body = dom("TBODY", null, headRow);
->   forEach(data, function(object) {
->     var row = dom("TR");
->     forEach(columns, function(name) {
->       row.appendChild(dom("TD", null, String(object[name])));
+>   var corps = dom("TBODY", null, ligneEntete);
+>   forEach(donnees, function(objet) {
+>     var ligne = dom("TR");
+>     forEach(colonnes, function(nom) {
+>       ligne.appendChild(dom("TD", null, String(objet[nom])));
 >     });
->     body.appendChild(row);
+>     corps.appendChild(ligne);
 >   });
 >
->   return dom("TABLE", null, body);
+>   return dom("TABLE", null, corps);
 > }
 >
 > var table = makeTable(document.body.childNodes,
