@@ -5434,9 +5434,9 @@ que ce que |itinerairesPossibles| produit.
 >   return itineraireLePlusCourtTrouve;
 > }
 
-Le point épineux quand on « minimise » ou « maximise » des algorithmes
-est qu'il ne faut pas tout massacrer quand un tableau vide est renvoyé comme
-résultat. Dans notre cas, on sait qu'il y aura au moins une route entre 2
+Le point épineux dans les algorithmes de « minimisation » ou de « maximisation »
+est qu'il ne faut pas tout massacrer quand un tableau vide est passé à un tel algorithme.
+Dans notre cas, on sait qu'il y aura au moins une route entre 2
 lieux donnés, donc nous pouvons simplement ignorer ce problème. Mais ce
 raisonnement est un peu léger. Que faire si la route entre Puamua et le Mont
 Ootua, qui est escarpée et boueuse, est emportée par une pluie torrentielle
@@ -5444,7 +5444,7 @@ Ootua, qui est escarpée et boueuse, est emportée par une pluie torrentielle
 il faut que la fonction renvoie une valeur |null| quand aucun itinéraire
 n'est trouvé.
 
-Voici donc la méthode très fonctionnelle et qui abstrait tout ce que l'on peut :
+Voici donc une approche très "programmation fonctionnelle", aussi abstraite que possible :
 
 > function minimise(func, tableau) {
 >   var plusPetitScore = null;
