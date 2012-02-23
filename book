@@ -6415,8 +6415,8 @@ vous n'avez pas besoin de l'utiliser directement.
 Chaque fois que vous écrivez une interface, il est utile d'y ajouter un
 commentaire retraçant rapidement ce qu'elle fait et comment l'utiliser. De
 cette manière, quand quelqu'un (éventuellement vous dans trois mois),
-souhaite travailler avec cette interface, ils peuvent se faire rapidement
-une idée de comment l'utiliser, et n'ont alors pas besoin d'étudier tout
+souhaite travailler avec cette interface, il peut se faire rapidement
+une idée de comment l'utiliser, et n'a alors pas besoin d'étudier tout
 le programme.
 
 La plupart du temps, quand vous concevez une nouvelle interface, vous êtes
