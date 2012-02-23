@@ -11210,7 +11210,7 @@ XMLHttpRequest()|. Les versions plus anciennes d'Internet Explorer
 qui inventa originellement cette technique nécessitent de faire |new
 ActiveXObject("Msxml2.XMLHTTP")|, ou pour des versions encore plus anciennes
 |new ActiveXObject("Microsoft.XMLHTTP")|. _|ActiveXObject|_ est l'interface
-d'Internet Explorer pour diverses sortes d'additions au navigateur. Nous
+d'Internet Explorer à différentes spécificités de ce navigateur. Nous
 sommes déjà habitués à écrire des fonctions pour prendre en charge les
 incompatibilités, alors faisons le encore une fois :
 
