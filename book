@@ -10093,7 +10093,7 @@ actionné. Ceci est un gestionnaire d'évènement simple.
 
 La manière dont les évènements du navigateur fonctionnent est
 fondamentalement très simple. Il est possible d'enregistrer des gestionnaires
-pour des types d'évènements et des noeuds DOM spécifiques. Quel que soit le
+pour des types d'évènements et des nœuds DOM spécifiques. Quel que soit le
 moment de l'_évènement_, le gestionnaire de cet évènement, s'il existe, est
 appelé. Pour certains évènements, comme des touches de clavier pressées,
 le fait que l'évènement se soit produit n'est pas suffisant, il faut aussi
@@ -10187,12 +10187,12 @@ prend pas en charge un tel mécanisme, il est rarement utilisé.
 
 Ecrire une fonction nommée |registerEventHandler| pour encapsuler
 les incompatibilités des deux modèles. Cette fonction possède trois
-arguments : un noeud DOM auquel le gestionnaire doit être attaché, le
+arguments : un nœud DOM auquel le gestionnaire doit être attaché, le
 nom du type de l'évènement, comme |"click"| ou |"keypress"|, et enfin la
 fonction qui va assurer la gestion de l'évènement.
 
 Pour déterminer quelle méthode doit être appelée, recherchez les méthodes
-elles-mêmes -- si le noeud DOM possède une méthode appelée |attachEvent|,
+elles-mêmes -- si le nœud DOM possède une méthode appelée |attachEvent|,
 vous pouvez supposer que c'est la bonne méthode. Remarquez qu'il est largement
 préférable de faire cela que de vérifier directement si le navigateur est
 Internet Explorer. En effet, si un nouveau navigateur, qui utilise le modèle
@@ -10288,7 +10288,7 @@ maintenu enfoncé pendant un certain temps.
 Lorsque vous attachez un gestionnaire d'événements, par exemple, à un
 bouton, le fait qu'il a été cliqué est souvent la seule chose que vous avez
 besoin de savoir. Lorsque le gestionnaire, d'un autre côté, est attaché
-à un noeud qui a des fils, les clics sur les fils vont « remonter »
+à un nœud qui a des fils, les clics sur les fils vont « remonter »
 vers lui, et vous voudrez savoir quel fils a été cliqué. Dans ce but, les
 objets événements ont une propriété nommée _|target|_... ou |srcElement|,
 en fonction du navigateur.
@@ -10345,13 +10345,13 @@ de suite.
 
 @_|onmousemove|_@_|onmouseover|_@_|onmouseout|_ En dehors des clics, on peut
 également être intéressé par les mouvements de la souris. L'événement
-_|mousemove|_ d'un noeud DOM se produit dès que la souris bouge lorsqu'elle
+_|mousemove|_ d'un nœud DOM se produit dès que la souris bouge lorsqu'elle
 est sur cet élément. Il y a aussi les événements _|mouseover|_ et
 _|mouseout|_, qui se produisent uniquement lorsque la souris entre dans un node
 ou le quitte. Pour les événements du second type, la propriété |target|
 (ou |srcElement|) indique le nœud pour lequel l'événement s'est produit,
 alors que la propriété _|relatedTarget|_ (ou |toElement|, ou |fromElement|)
-indique le noeud d'où provient (pour |mouseover|) ou vers lequel se dirige
+indique le nœud d'où provient (pour |mouseover|) ou vers lequel se dirige
 la souris (pour |mouseout|).
 
 |mouseover| et |mouseout| peuvent être embêtants quand ils sont enregistrés
@@ -10735,7 +10735,7 @@ de jeu. Remarquez que l'on ne tient pas compte des bords de la grille :
 pour éviter d'écrire du code ennuyeux, nous supposons que l'aire de jeu
 est correctement fermée par des murs, ce qui empêche le joueur d'en sortir.
 
-Le mot |"class"| dans l'appel |dom| qui crée le noeud |table| est donné sous
+Le mot |"class"| dans l'appel |dom| qui crée le nœud |table| est donné sous
 forme de chaîne . Cela est nécessaire car _|class|_ est un mot réservé
 en JavaScript, et ne doit pas être utilisé pour une variable ou un nom
 de propriété.
