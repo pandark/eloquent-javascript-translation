@@ -9562,13 +9562,13 @@ propriété est la distinction entre les nœuds textes et les autres nœuds.
 > show(isTextNode(document.body.firstChild.firstChild));
 
 Les nœuds classiques ont une propriété appelée _|nodeName|_, indiquant
-le type de balise HTML qu'ils représentent. En revanche les nœuds textes
-ont une _|nodeValue|_, ayant pour valeur leur contenu texte.
+le type de balise HTML qu'ils représentent. En revanche, les nœuds textes
+ont une propriété _|nodeValue|_, ayant pour valeur leur contenu texte.
 
 > show(document.body.firstChild.nodeName);
 > show(document.body.firstChild.firstChild.nodeValue);
 
-Les |nodeName|s sont toujours mis en majuscules, c'est quelque chose qui doit
+Les propriétés |nodeName| sont toujours mises en majuscules, c'est quelque chose qui doit
 être pris en compte si jamais vous voulez les comparer à quoi que ce soit.
 
 > function isImage(noeud) {
