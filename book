@@ -10202,11 +10202,11 @@ sûr, mais faire quelque chose intelligemment n'a jamais causé de dégâts.
 
 ///
 
-> function registerEventHandler(node, event, handler) {
->   if (typeof node.addEventListener == "function")
->     node.addEventListener(event, handler, false);
+> function registerEventHandler(noeud, event, handler) {
+>   if (typeof noeud.addEventListener == "function")
+>     noeud.addEventListener(event, handler, false);
 >   else
->     node.attachEvent("on" + event, handler);
+>     noeud.attachEvent("on" + event, handler);
 > }
 >
 > registerEventHandler($("bouton"), "click",
@@ -10221,12 +10221,12 @@ définir |registerEventHandler| de façon à contenir une fonction différente
 selon le navigateur. C'est plus efficace même si c'est un peu bizarre.
 
 > if (typeof document.addEventListener == "function")
->   var registerEventHandler = function(node, event, handler) {
->     node.addEventListener(event, handler, false);
+>   var registerEventHandler = function(noeud, event, handler) {
+>     noeud.addEventListener(event, handler, false);
 >   };
 > else
->   var registerEventHandler = function(node, event, handler) {
->     node.attachEvent("on" + event, handler);
+>   var registerEventHandler = function(noeud, event, handler) {
+>     noeud.attachEvent("on" + event, handler);
 >   };
 
 ---
@@ -10236,11 +10236,11 @@ fois,on utilise les méthodes _|detachEvent|_ and _|removeEventListener|_
 . N'oubliez pas cela : pour supprimer un gestionnaire, vous devez avoir
 accès à la fonction que vous y avez attachée.
 
-> function unregisterEventHandler(node, event, handler) {
->   if (typeof node.removeEventListener == "function")
->     node.removeEventListener(event, handler, false);
+> function unregisterEventHandler(noeud, event, handler) {
+>   if (typeof noeud.removeEventListener == "function")
+>     noeud.removeEventListener(event, handler, false);
 >   else
->     node.detachEvent("on" + event, handler);
+>     noeud.detachEvent("on" + event, handler);
 > }
 
 ---
@@ -10486,16 +10486,16 @@ déjà, dans ce cas nous le laissons tel quel.
 Ensuite, nous pouvons écrire des adaptateurs pratiques pour
 |registerEventHandler| et |unregisterEventHandler|:
 
-> function addHandler(node, type, handler) {
+> function addHandler(noeud, type, handler) {
 >   function wrapHandler(event) {
 >     handler(normaliseEvent(event || window.event));
 >   }
->   registerEventHandler(node, type, wrapHandler);
->   return {node: node, type: type, handler: wrapHandler};
+>   registerEventHandler(noeud, type, wrapHandler);
+>   return {noeud: noeud, type: type, handler: wrapHandler};
 > }
 >
-> function removeHandler(object) {
->   unregisterEventHandler(object.node, object.type, object.handler);
+> function removeHandler(objet) {
+>   unregisterEventHandler(objet.noeud, objet.type, objet.handler);
 > }
 >
 > var blocageLettreQ = addHandler($("champtexte"), "keypress", function(event) {
