@@ -11784,7 +11784,7 @@ du tas.
 
 ---
 
-Voici le code complet de l'implémtentation du tas binaire. Deux choses sont
+Voici le code complet de l'implémentation du tas binaire. Deux choses sont
 à noter. Premièrement, au lieu de comparer directement les éléments mis
 dans le tas, une fonction (|scoreFunction|) est appliquée en premier lieu,
 ce qui permet de stocker des éléments qui ne peuvent pas être comparés
