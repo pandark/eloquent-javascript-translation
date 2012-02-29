@@ -10310,7 +10310,7 @@ souris, et enregistre quelques informations à leur sujet.
 
 > function afficherClic(event) {
 >   event = event || window.event;
->   var target = event.target || event.srcElement;
+>   var elementConcerne = event.target || event.srcElement;
 >   var pageX = event.pageX, pageY = event.pageY;
 >   if (pageX == undefined) {
 >     pageX = event.clientX + document.body.scrollLeft;
@@ -10319,7 +10319,7 @@ souris, et enregistre quelques informations à leur sujet.
 >
 >   print("Clic de souris en position ", pageX, ", ", pageY,
 >         ". Elément concerné:");
->   show(target);
+>   show(elementConcerne);
 > }
 > registerEventHandler(document, "click", afficherClic);
 
@@ -10415,10 +10415,10 @@ et stockent à la place le code du caractère dans la propriété _|keyCode|_.
 
 > function afficherCaractere(event) {
 >   event = event || window.event;
->   var charCode = event.charCode;
->   if (charCode == undefined || charCode === 0)
->     charCode = event.keyCode;
->   print("Caractère '", String.fromCharCode(charCode), "'");
+>   var codeCaractere = event.charCode;
+>   if (codeCaractere == undefined || codeCaractere === 0)
+>     codeCaractere = event.keyCode;
+>   print("Caractère '", String.fromCharCode(codeCaractere), "'");
 > }
 >
 > registerEventHandler($("champtexte"), "keypress", afficherCaractere);
