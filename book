@@ -10872,7 +10872,7 @@ On commence encore avec un prototype inachevé.
 >   },
 >
 >   touchePressee: function(event) {
->     // To be filled in
+>     // à compléter
 >   }
 > };
 
