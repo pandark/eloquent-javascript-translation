@@ -10487,11 +10487,11 @@ Ensuite, nous pouvons écrire des adaptateurs pratiques pour
 |registerEventHandler| et |unregisterEventHandler|:
 
 > function addHandler(noeud, type, handler) {
->   function wrapHandler(event) {
+>   function handlerAvecNormalisation(event) {
 >     handler(normaliseEvent(event || window.event));
 >   }
->   registerEventHandler(noeud, type, wrapHandler);
->   return {noeud: noeud, type: type, handler: wrapHandler};
+>   registerEventHandler(noeud, type, handlerAvecNormalisation);
+>   return {noeud: noeud, type: type, handler: handlerAvecNormalisation};
 > }
 >
 > function removeHandler(objet) {
