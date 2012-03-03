@@ -11786,7 +11786,7 @@ du tas.
 
 Voici le code complet de l'implémentation du tas binaire. Deux choses sont
 à noter. Premièrement, au lieu de comparer directement les éléments mis
-dans le tas, une fonction (|scoreFunction|) est appliquée en premier lieu,
+dans le tas, une fonction (|fonctionScore|) est appliquée en premier lieu,
 ce qui permet de stocker des éléments qui ne peuvent pas être comparés
 directement.
 
@@ -11794,45 +11794,45 @@ Deuxièmement, comme les tableaux JavaScript commencent en |0|, et que
 les calculs parents/fils utilisent un système qui démarre en |1|, il y a
 quelques calculs bizarres pour compenser cette différence.
 
-> function BinaryHeap(scoreFunction){
->   this.content = [];
->   this.scoreFunction = scoreFunction;
+> function BinaryHeap(fonctionScore){
+>   this.contenu = [];
+>   this.fonctionScore = fonctionScore;
 > }
 >
 > BinaryHeap.prototype = {
 >   push: function(element) {
 >     // Ajouter le nouvel élément à la fin du tableau.
->     this.content.push(element);
+>     this.contenu.push(element);
 >     // L'autoriser à remonter.
->     this.bubbleUp(this.content.length - 1);
+>     this.bubbleUp(this.contenu.length - 1);
 >   },
 >
 >   pop: function() {
 >     // Stocker le premier élément, pour pouvoir le renvoyer plus tard
->     var result = this.content[0];
+>     var resultat = this.contenu[0];
 >     // Récupérer l'élément à la fin du tableau.
->     var end = this.content.pop();
+>     var fin = this.contenu.pop();
 >     // S'il reste au moins un élément,
 >     // mettre le dernier élément au début et le faire descendre
->     if (this.content.length > 0) {
->       this.content[0] = end;
+>     if (this.contenu.length > 0) {
+>       this.contenu[0] = fin;
 >       this.sinkDown(0);
 >     }
->     return result;
+>     return resultat;
 >   },
 >
->   remove: function(node) {
->     var len = this.content.length;
+>   remove: function(noeud) {
+>     var longueur = this.contenu.length;
 >     // Pour supprimer une valeur,
 >     // nous devons parcourir le tableau pour la trouver
->     for (var i = 0; i < len; i++) {
->       if (this.content[i] == node) {
+>     for (var i = 0; i < longueur; i++) {
+>       if (this.contenu[i] == noeud) {
 >         // Comme on l'a trouvé, on répéte le processus vu dans 'pop'
 >         // pour boucher le trou
->         var end = this.content.pop();
->         if (i != len - 1) {
->           this.content[i] = end;
->           if (this.scoreFunction(end) < this.scoreFunction(node))
+>         var end = this.contenu.pop();
+>         if (i != longueur - 1) {
+>           this.contenu[i] = end;
+>           if (this.fonctionScore(end) < this.fonctionScore(noeud))
 >             this.bubbleUp(i);
 >           else
 >             this.sinkDown(i);
@@ -11844,21 +11844,21 @@ quelques calculs bizarres pour compenser cette différence.
 >   },
 >
 >   size: function() {
->     return this.content.length;
+>     return this.contenu.length;
 >   },
 >
 >   bubbleUp: function(n) {
 >     // On va chercher l'élément qui doit être déplacé
->     var element = this.content[n];
+>     var element = this.contenu[n];
 >     // Quand il est à 0, un élément ne peut pas remonter plus haut
 >     while (n > 0) {
 >       // Calculer l'index du parent de l'élément, et aller le chercher.
 >       var parentN = Math.floor((n + 1) / 2) - 1,
->           parent = this.content[parentN];
+>           parent = this.contenu[parentN];
 >       // Echanger les éléments si le parent est plus grand.
->       if (this.scoreFunction(element) < this.scoreFunction(parent)) {
->         this.content[parentN] = element;
->         this.content[n] = parent;
+>       if (this.fonctionScore(element) < this.fonctionScore(parent)) {
+>         this.contenu[parentN] = element;
+>         this.contenu[n] = parent;
 >         // Mettre à jour 'n' pour continuer à la nouvelle position.
 >         n = parentN;
 >       }
@@ -11872,38 +11872,38 @@ quelques calculs bizarres pour compenser cette différence.
 >
 >   sinkDown: function(n) {
 >     // Récupérer l'élément cible et son score.
->     var length = this.content.length,
->         element = this.content[n],
->         elemScore = this.scoreFunction(element);
+>     var longueur = this.contenu.length,
+>         element = this.contenu[n],
+>         scoreElement = this.fonctionScore(element);
 >
 >     while(true) {
 >       // Calculer les indices des éléments fils.
->       var child2N = (n + 1) * 2, child1N = child2N - 1;
+>       var fils2N = (n + 1) * 2, fils1N = fils2N - 1;
 >       // On utilise cela pour stocker la nouvelle position de l'élément,
 >.      // s'il y en a une.
->       var swap = null;
+>       var aEchanger = null;
 >       // Si le premier fils existe (est à l'intérieur du tableau)...
->       if (child1N < length) {
+>       if (fils1N < longueur) {
 >         // On le récupère et on calcule son score.
->         var child1 = this.content[child1N],
->             child1Score = this.scoreFunction(child1);
+>         var fils1 = this.contenu[fils1N],
+>             scoreFils1 = this.fonctionScore(fils1);
 >         // Si le score est plus petit que celui de notre élément, on doit échanger
->         if (child1Score < elemScore)
->           swap = child1N;
+>         if (scoreFils1 < scoreElement)
+>           aEchanger = fils1N;
 >       }
 >       // Faire les mêmes vérifications pour l'autre fils.
->       if (child2N < length) {
->         var child2 = this.content[child2N],
->             child2Score = this.scoreFunction(child2);
->         if (child2Score < (swap == null ? elemScore : child1Score))
->           swap = child2N;
+>       if (fils2N < longueur) {
+>         var fils2 = this.contenu[fils2N],
+>             scoreFils2 = this.fonctionScore(fils2);
+>         if (scoreFils2 < (aEchanger == null ? scoreElement : scoreFils1))
+>           aEchanger = fils2N;
 >       }
 >
 >       // Si l'élément doit être déplacé, on échange et on continue.
->       if (swap != null) {
->         this.content[n] = this.content[swap];
->         this.content[swap] = element;
->         n = swap;
+>       if (aEchanger != null) {
+>         this.contenu[n] = this.contenu[aEchanger];
+>         this.contenu[aEchanger] = element;
+>         n = aEchanger;
 >       }
 >       // Sinon, on a fini.
 >       else {
