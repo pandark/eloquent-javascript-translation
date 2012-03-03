@@ -11216,11 +11216,11 @@ incompatibilités, alors faisons le encore une fois :
 
 > function makeHttpObject() {
 >   try {return new XMLHttpRequest();}
->   catch (error) {}
+>   catch (erreur) {}
 >   try {return new ActiveXObject("Msxml2.XMLHTTP");}
->   catch (error) {}
+>   catch (erreur) {}
 >   try {return new ActiveXObject("Microsoft.XMLHTTP");}
->   catch (error) {}
+>   catch (erreur) {}
 >
 >   throw new Error("La création de l'objet pour les requêtes HTTP n'a pas pu avoir lieu.");
 > }
@@ -11443,40 +11443,40 @@ parle de navigateurs Web.
 
 ///
 
-> function serializeJSON(value) {
->   function isArray(value) {
->     return /^\s*function Array/.test(String(value.constructor));
+> function serializeJSON(valeur) {
+>   function isArray(valeur) {
+>     return /^\s*function Array/.test(String(valeur.constructor));
 >   }
 >
->   function serializeArray(value) {
->     return "[" + map(serializeJSON, value).join(", ") + "]";
+>   function serializeArray(valeur) {
+>     return "[" + map(serializeJSON, valeur).join(", ") + "]";
 >   }
->   function serializeObject(value) {
->     var properties = [];
->     forEachIn(value, function(name, value) {
->       properties.push(serializeString(name) + ": " +
->                       serializeJSON(value));
+>   function serializeObject(valeur) {
+>     var proprietes = [];
+>     forEachIn(valeur, function(nom, valeur) {
+>       proprietes.push(serializeString(nom) + ": " +
+>                       serializeJSON(valeur));
 >     });
->     return "{" + properties.join(", ") + "}";
+>     return "{" + proprietes.join(", ") + "}";
 >   }
->   function serializeString(value) {
->     var special =
+>   function serializeString(valeur) {
+>     var caracteresSpeciaux =
 >       {"\"": "\\\"", "\\": "\\\\", "\f": "\\f", "\b": "\\b",
 >        "\n": "\\n", "\t": "\\t", "\r": "\\r", "\v": "\\v"};
->     var escaped = value.replace(/[\"\\\f\b\n\t\r\v]/g,
->                                 function(c) {return special[c];});
->     return "\"" + escaped + "\"";
+>     var valeurAvecEchappements = valeur.replace(/[\"\\\f\b\n\t\r\v]/g,
+>                                 function(c) {return caracteresSpeciaux[c];});
+>     return "\"" + valeurAvecEchappements + "\"";
 >   }
 >
->   var type = typeof value;
->   if (type == "object" && isArray(value))
->     return serializeArray(value);
+>   var type = typeof valeur;
+>   if (type == "object" && isArray(valeur))
+>     return serializeArray(valeur);
 >   else if (type == "object")
->     return serializeObject(value);
+>     return serializeObject(valeur);
 >   else if (type == "string")
->     return serializeString(value);
+>     return serializeString(valeur);
 >   else
->     return String(value);
+>     return String(valeur);
 > }
 >
 > print(serializeJSON(fruit));
@@ -11490,7 +11490,7 @@ de résultat.
 
 Notez également que les noms de propriétés sont entre guillemets comme
 des chaînes. Pour certaines d'entre elles ce n'est pas nécessaire, mais
-c'est préféraable pour ceux qui incluent des espaces et d'autres choses
+c'est préférable pour ceux qui incluent des espaces et d'autres choses
 curieuses, donc le code joue la sécurité et met tout entre guillemets.
 
 ---
@@ -11500,16 +11500,16 @@ entendu, répéter à chaque fois le même rituel |open|, |send|,
 |onreadystatechange|. Voilà à quoi peut ressembler une fonction
 encapsulatrice très simple :
 
-> function simpleHttpRequest(url, success, failure) {
->   var request = makeHttpObject();
->   request.open("GET", url, true);
->   request.send(null);
->   request.onreadystatechange = function() {
->     if (request.readyState == 4) {
->       if (request.status == 200)
->         success(request.responseText);
->       else if (failure)
->         failure(request.status, request.statusText);
+> function simpleHttpRequest(url, succes, echec) {
+>   var requete = makeHttpObject();
+>   requete.open("GET", url, true);
+>   requete.send(null);
+>   requete.onreadystatechange = function() {
+>     if (requete.readyState == 4) {
+>       if (requete.status == 200)
+>         succes(requete.responseText);
+>       else if (echec)
+>         echec(requete.status, requete.statusText);
 >     }
 >   };
 > }
