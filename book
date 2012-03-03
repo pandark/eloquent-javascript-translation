@@ -11731,7 +11731,7 @@ cette image :
 
 L'élément |1| du tableau est la racine de l'arbre, les éléments |2| et
 |3| sont ses fils, et d'une façon générale, l'élément |X| du tableau a
-comme fils les élements |X * 2| and |X * 2 + 1|. Vous pouvez voir pourquoi
+comme fils les élements |X * 2| et |X * 2 + 1|. Vous pouvez voir pourquoi
 cette structure est appelée 'tas' . Remarquez que ce tableau commence à |1|
 alors que les tableaux JavaScript commence à |0|. Le tas conserve toujours
 son plus petit élément en |1|, et s'assure que pour tout élément du tableau
