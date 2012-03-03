@@ -2190,7 +2190,7 @@ bien pour nous.
 ---
 
 D'abord, je vais vous expliquer les _propriété_s. Beaucoup de valeurs en
-Javascript ont d'autres valeurs qui leur sont associées. Ces associations
+JavaScript ont d'autres valeurs qui leur sont associées. Ces associations
 sont appelées propriétés. Chaque chaîne de caractères a une propriété
 appelée _|length|_, (longueur), qui correspond à un nombre, la quantité
 de caractères dans cette chaîne.
@@ -3801,7 +3801,7 @@ de code qu'elle doit exécuter. Il est facile d'écrire une fonction qui
 s'occupe d'une matrice et affiche chaque élément :
 
 (NdT : A partir de maintenant vous trouverez du code en anglais, notamment les fonctions
-proches de la console javascript, tel que |printArray|, dans un soucis d'unité,
+proches de la console JavaScript, tel que |printArray|, dans un soucis d'unité,
 ainsi que les algorithmes fondamentaux, car vous les retrouverez dans la littérature ou dans d'autres programmes, la plupart du temps, sous cette forme.)
 
 > function printArray(tableau) {
@@ -4085,7 +4085,7 @@ Hyper Texte). Un document HTML est entièrement en texte. Parce qu'il doit
 être capable d'exprimer la structure de ce texte et de spécifier quelle
 donnée du texte est un titre, quelle partie du texte est en violet et
 ainsi de suite, quelques caractères ont un sens spécial, un peu comme les
-antislash (\) dans les chaînes Javascript. Les signes « inférieur »
+antislash (\) dans les chaînes JavaScript. Les signes « inférieur »
 et « supérieur » sont utilisés pour créer des « _balise_s »
 (NdT: ou tags). Une balise apporte de l'information supplémentaire sur le
 document. Elle peut fonctionner de manière autonome par exemple pour indiquer
@@ -8076,7 +8076,7 @@ précisément à quel module appartient le code.
 @_|script|_Les navigateurs chargent des fichiers JavaScript quand ils
 rencontrent une balise |<script>| avec un attribut |src| dans le HTML de la
 page web. L'extension |.js| est utilisée habituellement pour les fichiers
-contenant du code Javascript. Dans la console, on fournit un raccourci pour
+contenant du code JavaScript. Dans la console, on fournit un raccourci pour
 charger des fichiers grâce à la fonction |load|.
 
 > load("FunctionalTools.js");
@@ -9650,8 +9650,8 @@ que la dernière lettre est en minuscule. Faites donc attention,
 lorsque vous le taperez souvent, au syndrome du canal carpien. Parce que
 |document.getElementById| est un nom ridiculement long pour une opération
 aussi commune, l'abréger par _|$|_ est devenu une convention au sein
-des développeurs Javascript. |$|, comme vous vous en souvenez peut-être,
-est considéré comme une lettre par Javascript et c'est donc un nom de
+des développeurs JavaScript. |$|, comme vous vous en souvenez peut-être,
+est considéré comme une lettre par JavaScript et c'est donc un nom de
 variable valide.
 
 > function $(id) {
@@ -9900,7 +9900,7 @@ et les nœuds DOM.
 Le sujet des @_feuille de style_feuilles de style est étroitement lié à HTML et au
 modèle document-objet. C'est un vaste sujet et je ne l'aborderai pas
 entièrement. Mais quelques notions sur les feuilles de styles sont
-nécessaires pour beaucoup de techniques intéressantes  en Javascript,
+nécessaires pour beaucoup de techniques intéressantes en JavaScript,
 nous allons donc en voir les rudiments.
 
 Aux débuts de l'HTML, le seul moyen de changer l'apparence des éléments
