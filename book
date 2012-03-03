@@ -10257,7 +10257,7 @@ fonctionner silencieusement, car il cause une erreur quelconque.
 
 @_|event|_ La plupart des navigateurs passent l'_objet évènement_ en
 argument du gestionnaire. Internet Explorer le stocke dans une variable
-de haut niveau appelé |event|. Lorsque vous regardez un code Javascript,
+de haut niveau appelé |event|. Lorsque vous regarderez du code JavaScript,
 vous tomberez souvent sur quelque chose comme |event || window.event|, qui
 prend la variable locale |event|, ou, si elle est définie, la variable de
 haut niveau du même nom.
