@@ -206,6 +206,11 @@ créer une valeur temporaire et de la comparer à zéro. C'était un petit
 détail stupide, et le pouvoir des langages de programmation est justement
 qu'ils règlent pour nous ce genre de choses accessoires.
 
+(NdT : |while| n'est pas traduit car c'est un mot du langage JavaScript.
+|print| n'est quant à lui pas traduit car c'est un des différents mots
+que vous retrouverez souvent en anglais dans la littérature ou dans
+d'autres programmes.)
+
 Finalement, voici à quoi pourrait ressembler le programme si nous nous étions
 arrangés pour que les opérations |serie| et |somme| soient disponibles,
 la première créant une collection de nombres dans une série tandis que
@@ -3799,10 +3804,6 @@ Le problème, c'est que si beaucoup de fonctions prennent juste des valeurs,
 les combinent et donnent un résultat, une telle boucle contient un bout
 de code qu'elle doit exécuter. Il est facile d'écrire une fonction qui
 s'occupe d'une matrice et affiche chaque élément :
-
-(NdT : A partir de maintenant vous trouverez du code en anglais, notamment les fonctions
-proches de la console JavaScript, tel que |printArray|, dans un soucis d'unité,
-ainsi que les algorithmes fondamentaux, car vous les retrouverez dans la littérature ou dans d'autres programmes, la plupart du temps, sous cette forme.)
 
 > function printArray(tableau) {
 >   for (var i = 0; i < tableau.length; i++)
