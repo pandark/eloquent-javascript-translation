@@ -10233,8 +10233,8 @@ selon le navigateur. C'est plus efficace même si c'est un peu bizarre.
 ---
 
 Supprimer des événements fonctionne quasiment comme en ajouter, mais cette
-fois,on utilise les méthodes _|detachEvent|_ and _|removeEventListener|_
-. N'oubliez pas cela : pour supprimer un gestionnaire, vous devez avoir
+fois, on utilise les méthodes _|detachEvent|_ et _|removeEventListener|_.
+N'oubliez pas cela : pour supprimer un gestionnaire, vous devez avoir
 accès à la fonction que vous y avez attachée.
 
 > function unregisterEventHandler(noeud, event, handler) {
