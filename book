@@ -6228,7 +6228,7 @@ il se peut que nos lapins aient soudainement besoin de danser.
 Et, comme vous vous en doutez, le prototype de lapin est le meilleur
 endroit où ajouter des éléments communs à tous les lapins, comme la
 méthode |parler|. Voici donc une nouvelle approche pour notre constructeur
-de |Rabbit| :
+de |Lapin| :
 
 > function Lapin(adjectif) {
 >   this.adjectif = adjectif;
