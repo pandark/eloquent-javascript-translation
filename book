@@ -6716,7 +6716,7 @@ leurs actions. Quand la méthode |agit| est appelée, il lui est fourni un
 objet avec des informations sur l'environnement de l'insecte en question. Il
 porte une propriété pour chacune des huit directions autour de l'insecte. La
 propriété indiquant ce qu'il y a au-dessus de l'insecte est appellé |"n"|,
-pour Nord, pour ce qu'il y a au-dessus à gauche |"ne"| pour Nord-Est,
+pour Nord, pour ce qu'il y a au-dessus à droite |"ne"|, pour Nord-Est,
 et ainsi de suite.
 Pour savoir quelle direction explorer selon le nom de la direction, l'objet
 dictionnaire suivant sera utile :
