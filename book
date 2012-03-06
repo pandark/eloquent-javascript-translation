@@ -3289,7 +3289,7 @@ ce devrait être simple.
 
 ---
 
-Le chapitre précédent nous a permis d'étudier les fonctions |Math.max|
+Le \\cbasics nous a permis d'étudier les fonctions |Math.max|
 et |Math.min|. Avec ce que vous connaissez maintenant, vous pourrez noter
 que |max| et |min| sont déjà les propriétés d'un objet enregistré sous
 le nom de |Math|. Voici un autre rôle que les objets peuvent jouer :
