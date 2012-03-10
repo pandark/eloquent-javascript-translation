@@ -5392,7 +5392,7 @@ fin, il retourne juste l'itinéraire, sachant que continuer l'itinéraire
 serait absurde. Si c'est un autre lieu, il faut donc continuer. La
 ligne contenant |flatten|/|map|/|filter| est probablement la plus dure à
 appréhender. Voilà ce qu'elle dit : « Prend toutes les routes partant
-de ce lieu, en te débarassant de celles qui vont à des endroits que nous
+de ce lieu, en te débarrassant de celles qui vont à des endroits que nous
 avons déjà visités. Continue chacune de ces routes, ce qui donnera pour
 chacune d'entre elles un tableau d'itinéraires finis, puis met toutes ces
 routes dans un grand tableau renvoyé en résultat ».
