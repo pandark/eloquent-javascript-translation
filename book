@@ -6422,7 +6422,7 @@ le programme.
 
 La plupart du temps, quand vous concevez une nouvelle interface, vous êtes
 rapidement confrontés à des problèmes et des limitations, quelque soit
-votre sujet, et changez donc votre interface. Pour éviter de perdre du
+votre sujet, et changez en conséquence votre interface. Pour éviter de perdre du
 temps, il est conseillé de ne documenter vos interfaces *qu'après* les
 avoir expérimentées un certain temps sur des cas concrets, et qu'elles
 se soient révélées efficaces. -- Biensûr, cela pourrait augmenter la
@@ -7771,7 +7771,7 @@ et quand vous avez besoin d'accéder à un prototype, vous devez passer par
 le constructeur et sa propriété prototype.
 
 Cela ajoute *beaucoup* de frappes au clavier (|"prototype"| prend 9 lettres),
-mais c'est aussi déroutant. Nous avons eu besoin d'écrire un constructeur
+de plus, c'est déroutant. Nous avons eu besoin d'écrire un constructeur
 vide et inutile pour |TableauEtrange| dans l'exemple précédent. Quelquefois,
 il m'est arrivé d'ajouter par erreur des méthodes à un constructeur au lieu
 de son prototype, ou d'essayer d'appeler |Array.slice| alors que je voulais
