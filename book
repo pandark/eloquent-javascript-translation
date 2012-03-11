@@ -5774,7 +5774,7 @@ donne quelque chose comme ça :
 [[objectchain.png]]
 
 Les cercles couleur cyan sont les objet utiles, et les lignes sont les
-propriétés. L'objet |A| est le debut de la route ici. L'objet |B| est
+propriétés. L'objet |A| est le début de la route ici. L'objet |B| est
 utilisé pour construire un nouveau tracé qui se prolonge après |A|. Quand on
 doit plus tard reconstruire une route, on peut se reposer sur ces propriétés
 pour trouver tous les points par où la route est passée. On remarque que
