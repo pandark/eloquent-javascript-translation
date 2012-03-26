@@ -2982,7 +2982,7 @@ pour argument, extrait la date et la renvoit sous la forme d'un objet date.
 >
 > show(extraireDate("Décédé le 27-04-2006 : Black Leclère"));
 
-Cela ne marcherait pas sans les appels à |Number|, mais comme je l'ai
+Cela marcherait sans les appels à |Number|, mais comme je l'ai
 expliqué plus haut, je préfère ne pas utiliser de chaînes comme si elles
 étaient des nombres. La fonction interne a été introduite pour éviter
 d'avoir à répéter trois fois les parties |Number| et |slice|.
@@ -3366,6 +3366,10 @@ aux objets sans avoir à les rendre visibles dans des boucles |for|/|in|.
 vous pouvez récupérer leur valeur mais pas la modifier. Par exemple,
 les propriétés d'une valeur de chaîne sont toutes en lecture seule.
 
+D'autres propriétés sont 'actives'. Modifier leur valeur a des conséquences.
+Par exemple, le fait de diminuer la longueur d'un tableau provoque la disparition
+des éléments en trop:
+
 > var tableau = ["Ciel", "Terre", "Homme"];
 > tableau.length = 2;
 > show(tableau);
@@ -3498,7 +3502,7 @@ Le second problème quand on renvoie des valeurs spéciales, c'est que
 cela peut conduire à créer pas mal de bazar. Si une partie de code
 appelle |extraireChaineEntre| dix fois, elle doit vérifier dix fois si |undefined|
 a été retourné. De même, si une fonction appelle |extraireChaineEntre|, mais n'a
-pas de stratégie gérer un éventuel échec, elle devra vérifier la valeur
+pas de stratégie pour gérer un éventuel échec, elle devra vérifier la valeur
 renvoyée par |extraireChaineEntre|, et si c'est |undefined|, cette fonction peut alors
 renvoyer |undefined| ou une autre valeur spéciale à sa fonction appelante,
 qui à son tour vérifiera cette valeur.
@@ -3514,7 +3518,7 @@ des exceptions_.
 ---
 
 La théorie derrière la gestion des exceptions fonctionne ainsi : il est
-possible pour le code de _relever_ (ou _lancer) une _exception_, qui est une
+possible pour le code de _lever_ (ou _lancer) une _exception_, qui est une
 valeur. Quand on lève une exception, cela ressemble parfois à un retour de
 fonction boosté aux stéroïdes : on ne sort pas simplement de la fonction
 en cours, mais aussi des fonctions appellantes, en remontant à la fonction
