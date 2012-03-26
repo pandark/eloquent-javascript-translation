@@ -2982,7 +2982,7 @@ pour argument, extrait la date et la renvoit sous la forme d'un objet date.
 >
 > show(extraireDate("Décédé le 27-04-2006 : Black Leclère"));
 
-Cela ne marcherait pas sans les appels à |Number|, mais comme je l'ai
+Cela marcherait sans les appels à |Number|, mais comme je l'ai
 expliqué plus haut, je préfère ne pas utiliser de chaînes comme si elles
 étaient des nombres. La fonction interne a été introduite pour éviter
 d'avoir à répéter trois fois les parties |Number| et |slice|.
