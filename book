@@ -3366,6 +3366,10 @@ aux objets sans avoir à les rendre visibles dans des boucles |for|/|in|.
 vous pouvez récupérer leur valeur mais pas la modifier. Par exemple,
 les propriétés d'une valeur de chaîne sont toutes en lecture seule.
 
+D'autres propriétés sont 'actives'. Modifier leur valeur a des conséquences.
+Par exemple, le fait de diminuer la longueur d'un tableau provoque la disparition
+des éléments en trop:
+
 > var tableau = ["Ciel", "Terre", "Homme"];
 > tableau.length = 2;
 > show(tableau);
