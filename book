@@ -3502,7 +3502,7 @@ Le second problème quand on renvoie des valeurs spéciales, c'est que
 cela peut conduire à créer pas mal de bazar. Si une partie de code
 appelle |extraireChaineEntre| dix fois, elle doit vérifier dix fois si |undefined|
 a été retourné. De même, si une fonction appelle |extraireChaineEntre|, mais n'a
-pas de stratégie gérer un éventuel échec, elle devra vérifier la valeur
+pas de stratégie pour gérer un éventuel échec, elle devra vérifier la valeur
 renvoyée par |extraireChaineEntre|, et si c'est |undefined|, cette fonction peut alors
 renvoyer |undefined| ou une autre valeur spéciale à sa fonction appelante,
 qui à son tour vérifiera cette valeur.
