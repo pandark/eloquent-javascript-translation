@@ -6425,16 +6425,16 @@ une idée de comment l'utiliser, et n'a alors pas besoin d'étudier tout
 le programme.
 
 La plupart du temps, quand vous concevez une nouvelle interface, vous êtes
-rapidement confrontés à des problèmes et des limitations, quelque soit
-votre sujet, et changez en conséquence votre interface. Pour éviter de perdre du
+rapidement confrontés à des problèmes et des limitations dans ce que vous
+aviez prévu. En conséquence, vous changez votre interface. Pour éviter de perdre du
 temps, il est conseillé de ne documenter vos interfaces *qu'après* les
 avoir expérimentées un certain temps sur des cas concrets, et qu'elles
-se soient révélées efficaces. -- Biensûr, cela pourrait augmenter la
+se soient révélées efficaces. -- Bien sûr, cela pourrait augmenter la
 tentation de ne pas documenter du tout. Mais personnellement, je considère
 la documentation comme une « touche finale », à ajouter au système. Quand
 ça donne l'impression d'être prêt, c'est qu'il est temps d'écrire un peu
 sur le sujet, et de voir si ça sonne aussi bien en français (ou n'importe
-quelle autre langage vivante), qu'en JavaScript (où n'importe quel autre
+quelle autre langue vivante), qu'en JavaScript (où n'importe quel autre
 langage de programmation).
 
 ---
@@ -7865,8 +7865,8 @@ Héritons de ce type de cette façon…
 >   "il s'accroche tranquillement sur un arbre en grignotant des feuilles");
 > paresseuxGeant.examiner();
 
-Laisser de côté la partie obligatoire du |prototype| rend légèrement plus
-simples les choses comme l'appel à |Produit.construct| depuis le constructeur
+Laisser de côté l'utilisation de |prototype| rend les choses un peu plus simple,
+comme l'appel à |Produit.construct| depuis le constructeur
 de |ProduitDetaille|. Remarquez que ce serait une mauvaise idée d'écrire
 simplement |this.nom = nom| dans |ProduitDetaille.construct|. Cela duplique
 une ligne. Bien sûr, dupliquer cette ligne est plus court qu'appeler la fonction
