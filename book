@@ -6091,9 +6091,9 @@ elle doit s'appliquer. Par exemple, s'il y a plusieurs lapins, la méthode
 |parler| doit pouvoir indiquer quel est le lapin qui parle. Pour ce faire,
 il y a une variable spéciale appelée _|this|_, qui est toujours définie
 à l'intérieur d'une fonction et qui pointe vers l'objet sur lequel la
-fonction s'applique. Une fonction est appelée une méthode quand elle est
-définie en tant que propriété d'un objet, et appelée directement comme
-dans |objet.methode()|.
+fonction s'applique. Une fonction est appelée comme une méthode quand elle est
+définie en tant que propriété d'un objet, et appelée directement comme ceci :
+|objet.methode()|.
 
 > function parler(tirade) {
 >   print("Le lapin ", this.adjectif, " dit « ", tirade, " »");
