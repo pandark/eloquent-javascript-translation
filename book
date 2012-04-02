@@ -349,9 +349,9 @@ pouvez utiliser les touches flèche vers le haut et flèche vers le bas pour
 revenir aux commandes que vous avez saisies précédemment.
 
 Pour les bouts de code plus importants, ceux qui s'étendent sur plusieurs
-lignes et que vous voulez conserver un peu, le champ de droite peut être
-utilisé. Le bouton « Lancer » est utilisé pour exécuter les programmes
-écrits dans ce champ. Il est possible d'avoir plusieurs programmes ouverts en
+lignes et que vous voulez conserver un peu, la zone de droite peut être
+utilisée. Le bouton « Lancer » est utilisé pour exécuter les programmes
+écrits dans cette zone. Il est possible d'avoir plusieurs programmes ouverts en
 même temps. Utilisez le bouton « Nouveau » pour ouvrir un nouveau tampon vide
 Quand il y a plus d'un programme ouvert, le menu après le bouton « Lancer »
 peut être utilisé pour choisir lequel est affiché. Le bouton « Fermer »,
@@ -1079,7 +1079,7 @@ complexes de code. Quand les lignes sont indentées, la forme visuelle du
 code correspond à la forme des blocs. Je préfère utiliser deux espaces
 pour chaque nouveau bloc, mais les goûts varient.
 
-Le champ dans la console où vous pouvez taper des programmes ajoutera
+La zone de la console où vous pouvez taper des programmes ajoutera
 automatiquement ces espaces. Ça peut sembler pénible au début, mais
 quand vous écrirez beaucoup de code, vous verrez que c'est un gain de
 temps important. Appuyer sur la touche « tab » réindentra la ligne
