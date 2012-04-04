@@ -6183,7 +6183,7 @@ _|toString|_ est une méthode qui fait partie du prototype |Object|. Ça
 signifie que tous les objets de base ont une méthode |toString|, qui les
 converti en chaîne de caractères. Nos objets lapin sont basés sur le
 prototype associé au constructeur |Lapin|. Il est possible d'utiliser
-la propriété |prototype| d'un constructeur pour accèder à… leur
+la propriété |prototype| d'un constructeur pour accéder à… leur
 prototype :
 
 > show(Lapin.prototype);
@@ -6555,7 +6555,7 @@ produit un objet avec des propriétés |x| et |y|. Ajoutez au prototype de
 ce constructeur une méthode |add|, qui prends un autre point en argument
 et retourne un *nouveau* point dont les |x| et |y| sont la somme des |x|
 et |y| des deux points donnés. Ajoutez également une méthode |isEqualTo|,
-qui prend un point et renvoit un booléen, indicant si le point local (|this|)
+qui prend un point et renvoit un booléen, indiquant si le point local (|this|)
 a les mêmes coordonnées que le point donné.
 
 En dehors des deux méthodes, les propriétés |x| et |y| font également
@@ -6579,8 +6579,8 @@ de type point pourra lire et modifier librement les |x| et |y|.
 
 Assurez-vous que votre version de |add| laisse le point local (|this|)
 intact et produise bien un nouvel objet Point. Une méthode qui change le
-point courant serait similaire à l'opérateur |+=|, alors qu'on le veut
-équivalent à l'opérateur |+|.
+point courant serait similaire à l'opérateur |+=|, alors qu'on la veut
+équivalente à l'opérateur |+|.
 
 ---
 
