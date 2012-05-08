@@ -1290,7 +1290,7 @@ trouve le premier nombre supérieur à 20 et divisible par 7 :
 > }
 > print(courant);
 
-La structure |for| n'a pas de mécanisme qui vérifie quand terminer la
+La structure |for| présentée ci-dessus n'a pas de mécanisme qui vérifie quand terminer la
 boucle. Cela signifie qu'elle est dépendante de l'instruction |break| qui
 est à l'intérieur pour pouvoir s'arrêter. Le même programme aurait pu
 s'écrire aussi simplement…
