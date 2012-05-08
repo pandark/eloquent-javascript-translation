@@ -10017,7 +10017,7 @@ nœud qui suivrait obstinément le curseur de la souris ou pour faire des
 >   $("image").style.top = (100 + 100 * Math.sin(angle)) + "px";
 > }, 100);
 
-Si vous n'êtes pas familier avec la goniométrie, faites-moi confiance quand
+Si vous n'êtes pas familier avec la trigonométrie, faites-moi confiance quand
 je vous dis que le cosinus et le sinus sont utilisés pour construire des
 coordonnées reposant sur le contour d'un cercle. Dix fois par seconde, l'angle
 sur lequel on a placé l'image est modifié et les nouvelles coordonnées
