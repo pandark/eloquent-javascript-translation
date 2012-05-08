@@ -6256,7 +6256,7 @@ passer. Par exemple, si nous nous étions demandé s'il y a un chat nommé
 > if ("constructor" in pasUnSeulChat)
 >   print("Oui, il y a sans aucun doute un chat appelé « constructor ».");
 
-C'est problématique. Un autre problème tiens au fait qu'il est souvent
+C'est problématique. Un autre problème tient au fait qu'il est souvent
 pratique d'étendre les prototypes des constructeurs standards comme |Object|
 ou |Array| avec de nouvelles fonctions. Par exemple, nous pouvons donner à
 tous les objets une méthode nommée |properties|, qui retourne un tableau
