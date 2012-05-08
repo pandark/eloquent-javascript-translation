@@ -6369,7 +6369,7 @@ fiable, on peut utiliser une expression comme :
 >    Object.prototype.propertyIsEnumerable.call(objet, "foo"));
 
 Simple et agréable n'est-ce pas ? C'est l'un des aspects de JavaScript qui ne
-sont pas-si-bien-conçus-que-ça. Les objets jouent à la fois le role de «
+sont pas-si-bien-conçus-que-ça. Les objets jouent à la fois le rôle de «
 valeurs avec méthodes », qui fonctionnent très bien avec les prototypes,
 et « d'ensemble de propriétés », pour lesquels les prototypes ne font
 que déranger.
