@@ -4892,7 +4892,8 @@ Notez également qu'il faut stocker les |arguments| de la fonction externe
 ne peut pas les voir (elle a sa propre variable |arguments|, qui masque
 celle de la fonction externe).
 
-Maintenant |equals(10)| peut s'écrire |partial(op["=="], 10)|.
+Maintenant |equals(10)| pourrait s'écrire |partial(op["=="], 10)|, sans
+nécessiter de fonction |equals| particulière. Et vous pouvez faire ceci :
 
 > show(map(partial(op["+"], 1), [0, 2, 4, 6, 8, 10]));
 
