@@ -846,19 +846,19 @@ aille sur une nouvelle page.
 ---
 
 Beaucoup de valeurs fournies par l'environnement standard sont de type
-« function » @_fonction_. Une fonction est une partie de programme contenue
+« function » (fonction)@_fonction_. Une fonction est une partie de programme contenue
 dans une valeur. Généralement, cette portion de programme fait quelque
 chose d'utile qui peut être invoqué en utilisant le nom défini pour la
-fonction. Dans un navigateur, la variable _|alert|_ est reliée à une
+fonction. Dans un navigateur, la variable _|alert|_ contient une
 fonction qui ouvre une petite fenêtre avec un message. Elle s'utilise
 comme ceci :
 
 > alert("Au fait, vos cheveux sont en feu.");
 
-@_|()|_Quand on exécute le code d'une fonction, on dit qu'on l'@_invocation_invoque ou
-qu'on l'_appel_le. La notation pour faire ça utilise des parenthèses. Chaque
-expression qui produit une valeur peut être invoquée en utilisant des
-parenthèses après son nom. La chaîne de caractères entre parenthèses est
+@_|()|_Quand on exécute le code d'une fonction, on dit qu'on l'@_invocation_invoque,
+qu'on l'_appel_le ou qu'on l'applique. La notation pour faire ça utilise des parenthèses. Chaque
+expression qui produit une valeur de type fonction peut être invoquée en plaçant des parenthèses
+à sa suite. La chaîne de caractères entre parenthèses est
 donnée à la fonction qui l'utilise en tant que texte pour l'afficher dans la
 fenêtre. Les valeurs données aux fonctions sont appelées _paramètre_s ou
 _argument_s. |alert| en a juste besoin d'un, mais d'autres fonctions peuvent
