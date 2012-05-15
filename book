@@ -598,6 +598,11 @@ convenable des caractères spéciaux, vous pouvez faire |print("a\nb")|
 
 >> "Voici une première ligne\nEt maintenant la seconde"
 
+Remarquez que si vous entrez cette chaîne dans la console, elle s'affiche
+sous forme « source », avec des guillemets et des antislashs. Pour ne voir
+que du texte, vous pouvez entrez |print("a\nb")|. Ce que cela fait
+précisemment sera bientôt expliqué.
+
 Il existe bien entendu des cas où vous voudrez que l'antislash dans une
 chaîne soit juste un antislash et pas un caractère d'échappement. Si
 deux antislashs se succèdent, ils vont se combiner et seul l'un d'eux sera
