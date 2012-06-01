@@ -11241,7 +11241,7 @@ incompatibilités, alors faisons le encore une fois :
 La fonction encapsulatrice essaie de créer l'objet des trois manières en
 utilisant |try| et |catch| pour détecter celles qui échouent. Si aucune
 des manières ne fonctionne, ce qui peut être le cas avec les plus vieux
-navigateurs ou les navigateurs avec des paramêtres de sécurité stricts,
+navigateurs ou les navigateurs avec des paramètres de sécurité stricts,
 une erreur est signalée.
 
 Maintenant, pourquoi cet objet est-il appelé *XML* HTTP request ? C'est un
