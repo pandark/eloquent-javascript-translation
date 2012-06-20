@@ -353,7 +353,7 @@ Pour les bouts de code plus importants, ceux qui s'étendent sur plusieurs
 lignes et que vous voulez conserver un peu, la zone de droite peut être
 utilisée. Le bouton « Lancer » est utilisé pour exécuter les programmes
 écrits dans cette zone. Il est possible d'avoir plusieurs programmes ouverts en
-même temps. Utilisez le bouton « Nouveau » pour ouvrir un nouveau tampon vide
+même temps. Utilisez le bouton « Nouveau » pour ouvrir un nouveau tampon vide.
 Quand il y a plus d'un programme ouvert, le menu après le bouton « Lancer »
 peut être utilisé pour choisir lequel est affiché. Le bouton « Fermer »,
 comme vous pouvez vous en douter, ferme un programme.
