@@ -164,7 +164,7 @@ pour les instructions et les adresses mémoire :
 ]  Mettre 0 à 'total'
 ]  Mettre 1 à 'compteur'
 ] [boucle]
-]  Mettre compteur' à 'comparaison'
+]  Mettre 'compteur' à 'comparaison'
 ]  Soustraire 11 à 'comparaison'
 ]  Si 'comparaison' est zero, continuer à [fin]
 ]  Ajouter 'compteur' à 'total'
