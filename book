@@ -865,7 +865,7 @@ comme ceci :
 qu'on l'_appel_le ou qu'on l'applique. La notation pour faire ça utilise des parenthèses. Chaque
 expression qui produit une valeur de type fonction peut être invoquée en plaçant des parenthèses
 à sa suite. La chaîne de caractères entre parenthèses est
-donnée à la fonction qui l'utilise en tant que texte pour l'afficher dans la
+donnée à la fonction |alert| qui l'utilise en tant que texte pour l'afficher dans la
 fenêtre. Les valeurs données aux fonctions sont appelées _paramètre_s ou
 _argument_s. |alert| en a juste besoin d'un, mais d'autres fonctions peuvent
 en vouloir plus.
