@@ -207,7 +207,7 @@ détail stupide, et le pouvoir des langages de programmation est justement
 qu'ils règlent pour nous ce genre de choses accessoires.
 
 (NdT : |while| n'est pas traduit car c'est un mot du langage JavaScript,
-|print| n'est quant à lui pas traduit car c'est un des différents mots
+|print| non plus, c'est un des différents mots
 que vous retrouverez souvent en anglais dans la littérature ou dans
 d'autres programmes.)
 
