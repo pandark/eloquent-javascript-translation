@@ -419,9 +419,9 @@ Les bases du JavaScript : valeurs, variables et structures de contrôle / basi
 ===============================================================================
 
 Dans le monde des ordinateurs, seules les données existent. Ce qui n'est pas
-une donnée n'existe pas. Bien que toute donnée soit en essence seulement une
-séquence de bits##, et en cela fondamentalement similaires, chaque morceau
-de donnée joue un rôle qui lui est propre. Dans le système JavaScript,
+une donnée n'existe pas. Fondamentalement, toutes les données sont similaires,
+car elles ne sont par essence que des séquences de bits##.
+Cependant, chaque donnée joue un rôle qui lui est propre. Dans le système JavaScript,
 la plupart de ces données est soigneusement répartie entre des choses
 appelées _valeur_s. Chaque valeur a un type qui détermine le rôle qu'elle
 peut jouer. Il y a six types de valeurs de base : les nombres, les chaîne
