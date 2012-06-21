@@ -424,9 +424,9 @@ car elles ne sont par essence que des séquences de bits##.
 Cependant, chaque donnée joue un rôle qui lui est propre. Dans le système JavaScript,
 la plupart de ces données est soigneusement répartie entre des choses
 appelées _valeur_s. Chaque valeur a un type qui détermine le rôle qu'elle
-peut jouer. Il y a six types de valeurs de base : les nombres, les chaîne
-de caractères, les booléens, les objets, les fonctions et |undefined|
-pour représenter les valeurs indéfinies.
+peut jouer. Il y a six types de valeurs de base : les nombres (|number|),
+les chaînes de caractères (|string|), les booléens (|boolean|), les objets (|object|),
+les fonctions (|function|) et les valeurs indéfinies (|undefined|).
 
 ## Les bits sont toutes les choses à deux valeurs possibles, habituellement
 décrits comme des |0| et des |1|. Dans l'ordinateur, ils se concrétisent
@@ -522,7 +522,7 @@ valeurs précises.
 
 On utilise les nombres principalement en arithmétique. Les opérations
 arithmétiques, comme l'addition ou la multiplication prennent deux valeurs
-de type |number| pour créer un nouveau nombre. Voici ce que cela donne
+de type nombre pour créer un nouveau nombre. Voici ce que cela donne
 en JavaScript :
 
 >> 100 + 4 * 11
@@ -566,8 +566,8 @@ Modulo a le même ordre de priorité que la multiplication et la division.
 ---
 
 Le type de données suivant est la _chaîne de caractères_ (string). Son
-utilisation n'est pas aussi évidente à deviner d'après son nom que pour
-« number », mais elle remplit également un rôle très basique. Les chaînes
+utilisation n'est pas aussi évidente à deviner d'après son nom que pour le type de données nombre,
+mais elle remplit également un rôle très basique. Les chaînes
 de caractères sont utilisées pour représenter du texte, le nom est censé
 venir du fait qu'il enchaîne un groupe de caractères ensemble. Les
 chaînes de caractères sont écrites en insérant leur contenu entre des
