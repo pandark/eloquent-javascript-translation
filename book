@@ -565,7 +565,7 @@ Modulo a le même ordre de priorité que la multiplication et la division.
 
 ---
 
-Le type de données suivant est la _chaîne de caractères_ (string). Son
+Le type de données suivant est la _chaîne de caractères_. Son
 utilisation n'est pas aussi évidente à deviner d'après son nom que pour le type de données nombre,
 mais elle remplit également un rôle très basique. Les chaînes
 de caractères sont utilisées pour représenter du texte, le nom est censé
@@ -852,7 +852,7 @@ aille sur une nouvelle page.
 ---
 
 Beaucoup de valeurs fournies par l'environnement standard sont de type
-« function » (fonction)@_fonction_. Une fonction est une partie de programme contenue
+« |function| » (fonction)@_fonction_. Une fonction est une partie de programme contenue
 dans une valeur. Généralement, cette portion de programme fait quelque
 chose d'utile qui peut être invoqué en utilisant le nom défini pour la
 fonction. Dans un navigateur, la variable _|alert|_ contient une
@@ -2646,8 +2646,8 @@ chaîne qui n'existe pas.
 
 Cela confirme que cette version de |chaineCommencePar| fonctionne. Quand la fonction
 |chaineCommencePar("Idiots","Mes très chers collègues")| est appelée, l'appel
-à |slice| renverra toujours une chaîne plus courte que |pattern|, parce
-que |string| ne comporte pas assez de caractères. C'est pour cette raison
+à |slice| renverra toujours une chaîne plus courte que |motif|, parce
+que le premier argument, |chaine| ne comporte pas assez de caractères. C'est pour cette raison
 que la comparaison avec |==| renverra |false|, ce qui est correct.
 
 C'est une bonne idée de toujours consacrer un moment pour prendre en
@@ -4354,7 +4354,7 @@ rester sur un exemple assez simple. Si, à la fin du chapitre, vous voulez
 vous lancer un défi, essayer de modifier le programme pour qu'il prenne en
 charge les marquages « imbriqués ».
 
-Le manuscrit complet, sous forme de chaine, est disponible sur cette page
+Le manuscrit complet, sous forme de chaîne, est disponible sur cette page
 en appelant la fonction |fichierDeErmite|.
 
 ---
@@ -7024,7 +7024,7 @@ Maintenant, construisons un terrarium et voyons les insectes se déplacer.
 
 Examinons un instant l'instruction ci-dessus |print(terrarium)|, comment
 fait-elle pour renvoyer le contenu de notre méthode _|toString|_ ? |print|
-transfome les arguments qui lui sont passés en chaîne de caractère,
+transfome les arguments qui lui sont passés en chaîne de caractères,
 en utilisant la fonction |String|. Les objets sont transformés en chaîne
 de caractères par l'appel de leur méthode |toString|, aussi, écrire une
 méthode |toString| dans nos propres objets est un bon moyen de les rendre
@@ -7054,7 +7054,7 @@ Et…
 > clearInterval(pénible);
 
 Il existe des fonctions proches pour exécuter une action une seule fois
-après un laps de temps. _|setTimeout|_ exécute une fonction ou une chaine
+après un laps de temps. _|setTimeout|_ exécute une fonction ou une chaîne
 de caractères après un délai exprimé en millisecondes, et _|clearTimeout|_
 permet d'annuler une telle action.
 
@@ -7707,7 +7707,7 @@ par ces étudiants sont aussi une bonne façon d'aborder l'héritage.
 
 ## La paresse, pour un programmeur, n'est pas forcement un péché. Les
 personnes qui, laborieusement, font et refont toujours les mêmes choses
-tendent à être de bon travailleurs à la chaine et de mauvais programmeurs.
+tendent à être de bon travailleurs à la chaîne et de mauvais programmeurs.
 
 L'héritage est la création de nouveaux types d'objet, les « @_sous-type_sous-types »,
 basés sur des types existants, les « @_super-type_super-types ». Le sous-type commence
@@ -8124,8 +8124,8 @@ utiliser la fonction |eval| afin de l'exécuter. Le chargement des scripts
 est alors instantané et donc plus facile à gérer.
 
 _|eval|_, abrégé pour « evaluate » ou « évaluer », est une
-fonction intéressante. Si vous lui attribuez une valeur de chaîne (string),
-elle exécutera le contenu de la chaîne en tant que code JavaScript.
+fonction intéressante. Si vous lui attribuez une valeur de chaîne de caractères,
+elle exécutera le contenu de cette chaîne en tant que code JavaScript.
 
 > eval("print(\"je suis une chaîne à l'intérieur d'une chaîne !\");");
 
