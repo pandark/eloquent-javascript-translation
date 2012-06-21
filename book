@@ -669,7 +669,7 @@ minuscule) vaut |true| et les caractères non alphabétiques (« |!| »,
 « |@| », etc.) sont également inclus dans ce classement. Le véritable
 principe sur lequel repose la comparaison est le standard _Unicode_. Ce
 dernier assigne un nombre à potentiellement tout caractère dont on peut
-avoir besoin, y compris les caractères spéciaux de langues comme le grec,
+avoir besoin, y compris les caractères de langues comme le grec,
 l'arabe, le japonais, le tamoul, et ainsi de suite. Disposer de tels nombres est bien
 pratique pour stocker des chaînes de caractères dans un ordinateur --
 vous pouvez les représenter comme une série de nombres. En comparant les
