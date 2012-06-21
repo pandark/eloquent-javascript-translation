@@ -487,9 +487,9 @@ qui correspond à plus de 10^15, sera contenu sans risque dans un nombre
 JavaScript. Dans la plupart des cas, les nombres que nous utilisons restent
 bien en-deçà, nous n'avons donc absolument pas besoin de nous préoccuper
 des bits, ce qui nous arrange. Je n'ai rien de particulier contre les bits,
-mais *vous* avez besoin de beaucoup d'entre eux pour pouvoir faire quoi
-que ce soit. Si possible, il est donc plus agréable de travailler avec des
-entités plus grosses.
+mais vous *avez* besoin de beaucoup d'entre eux pour pouvoir faire quoi
+que ce soit. Chaque fois que c'est possible, il est donc plus agréable de
+travailler avec des outils plus abstraits.
 
 ## En fait 53, à cause d'une astuce utilisable pour obtenir un bit
 librement. Consultez le format « IEEE 754 » si vous êtes intéressé
