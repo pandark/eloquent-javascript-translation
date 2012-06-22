@@ -1536,7 +1536,7 @@ il retournera la valeur à sa droite.
 
 Une autre propriété de ces deux opérateurs est que l'expression de
 droite n'est évaluée que quand c'est nécessaire. Dans le cas |true ||X|,
-peu immporte ce qu'est |X|, le résultat sera toujours |true|, donc |X|
+peu importe ce qu'est |X|, le résultat sera toujours |true|, donc |X|
 n'est jamais évalué, et s'il a des effets de bord, ils ne se produiront
 jamais. C'est la même chose pour |false && X|.
 
