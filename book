@@ -876,7 +876,7 @@ Afficher une fenêtre de dialogue est un effet de bord. Beaucoup de fonctions
 sont utiles par leurs effets de bord. Une fonction peut aussi produire une
 valeur et dans ce cas elle n'a pas besoin de produire un effet de bord pour
 être utile. Par exemple, il existe une fonction _|Math.max|_, qui prend
-deux arguments et retourne le plus grand des deux :
+un nombre quelconque d'argument numérique et retourne le plus grand d'entre eux :
 
 > alert(Math.max(2, 4));
 
