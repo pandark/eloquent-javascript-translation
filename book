@@ -981,7 +981,7 @@ au programme une séquence de code. Dans notre cas le mot |while| est
 suivi par une expression entre parenthèse (les parenthèses étant
 obligatoires) qui détermine si la boucle continue à s'exécuter ou si
 elle doit s'arrêter. Aussi longtemps que la valeur booléenne produite
-par cette exression est |true|, le code à l'intérieur de la boucle est
+par cette expression est |true|, le code à l'intérieur de la boucle est
 répété. Dès qu'elle devient |false| le programme se place à la fin de
 la boucle et reprend à la normale.
 
@@ -1057,7 +1057,7 @@ en mettez-en deux, et ainsi de suite.
 
 Comment avoir une chaîne composée de X « # » ? Une solution est de
 la construire avec une « boucle imbriquée », c'est à dire une boucle
-dans une bloucle. Une méthode plus simple est de réutiliser la chaîne de
+dans une boucle. Une méthode plus simple est de réutiliser la chaîne de
 la précédente itération, et d'y ajouter un caractère.
 
 ///
