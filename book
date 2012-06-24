@@ -881,8 +881,8 @@ un nombre quelconque d'argument numérique et retourne le plus grand d'entre eux
 > alert(Math.max(2, 4));
 
 @_|Math.min|_Quand une fonction produit une valeur, on dit qu'elle
-la _retour_ne. Parce qu'il n'y a que les expressions qui produisent des
-valeurs, les appels de fonctions peuvent être utilisés comme une partie
+la _retour_ne. En JavaScript, les choses qui produisent des valeurs sont toujours des
+expressions, c'est pourquoi, les appels de fonctions peuvent être utilisés comme une partie
 d'une expression plus longue :
 
 > alert(Math.min(2, 4) + 100);
