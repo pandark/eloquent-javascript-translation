@@ -1368,7 +1368,7 @@ valeur. Que se passe-t'il alors lorsqu'on prend la valeur de cette variable ?
 
 En termes de tentacules, cette variable se termine dans les airs, elle ne
 s'accroche à rien. Quand vous demandez la valeur d'une variable vide, vous
-obtenez une réponse spéciale appelée _|undefined|_. Les fonctions qui ne
+obtenez une valeur spéciale appelée _|undefined|_. Les fonctions qui ne
 retournent pas de valeur convenable, comme |print| et |alert|, retournent
 la valeur |undefined|.
 
