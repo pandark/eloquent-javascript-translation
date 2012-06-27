@@ -1524,7 +1524,7 @@ comme cela ? Cela s'avère très pratique. Considérons l'exemple suivant :
 
 Si l'utilisateur presse « Annuler » ou ferme la fenêtre de dialogue sans
 donner de nom, la variable |input| prendra la valeur |null| ou |""|. Ces deux
-donneront |false| en essayant de convertir en booléen. L'expression |input ||
+valeurs donneront |false| après conversion en booléen. L'expression |input ||
 "cher ami"| peut être lue dans ce cas comme « la valeur de la variable
 |input|, sinon la chaîne |"cher ami"| ». C'est une manière simple de
 fournir une valeur de secours.
