@@ -1554,7 +1554,7 @@ réunir ces instructions au même endroit et demander au programme d'y
 faire un détour chaque fois que c'est nécessaire. C'est pour ça qu'on a
 inventé les _fonction_s : ce sont des unités de code que le programme
 peut parcourir à volonté. Afficher une chaîne à l'écran nécessite un
-certain nombre de déclarations, mais si nous disposons d'une fonction |print|
+certain nombre d'instructions, mais si nous disposons d'une fonction |print|
 il nous suffit d'écrire |print("Aleph")| et le tour est joué.
 
 Cependant, si on voit les fonctions simplement comme des boîtes de conserve
