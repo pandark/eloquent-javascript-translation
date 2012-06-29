@@ -7,8 +7,8 @@ eux étaient fournis avec un langage de programmation simple, généralement
 une variante de _BASIC_. Les interactions avec l'ordinateur étaient fortement
 liées à ce langage, et tout utilisateur d'un ordinateur devait dès lors y
 goûter, qu'il le veuille ou non. À présent que les ordinateurs sont devenus
-nombreux et bon marché, l'utilisateur moyen se contente la plupart du temps
-de ce qu'il peut faire en cliquant avec la souris. Pour nombre d'entre eux,
+nombreux et bon marché, les utilisateurs moyens se contentent la plupart du temps
+de ce qu'il peuvent faire en cliquant avec la souris. Pour nombre d'entre eux,
 cela fonctionne très bien. Mais pour ceux d'entre nous qui ont une inclination
 naturelle au bricolage technique, la disparition de la programmation dans
 l'usage quotidien d'un ordinateur représente une forme de barrière.
@@ -36,7 +36,7 @@ Au-delà des explications qu'il donne sur le JavaScript, ce livre s'efforce
 d'initier aux principes fondamentaux de la programmation. Programmer
 s'avère être un exercice difficile. Les règles de base sont la plupart
 du temps simples et claires. Cependant, même des programmes construits
-suivant ces règles de base, tendent à devenir suffisamment élaborés pour
+suivant ces règles de base tendent à devenir suffisamment élaborés pour
 générer leurs propres règles et leur propre complexité. Voilà pourquoi la
 programmation est rarement simple et prévisible. Comme le dit Donald Knuth,
 que l'on peut considérer comme un des pères fondateurs dans ce domaine,
@@ -60,7 +60,7 @@ programmeur, c'est la force directrice qui indique à l'ordinateur ce qu'il
 doit faire, c'est un ensemble de données dans la mémoire de l'ordinateur,
 et pourtant il contrôle les actions accomplies dans cette même mémoire. Les
 analogies qui comparent les programmes à des objets qui nous sont familiers
-ont tendance à tourner court alors que celle d'une machine est, de manière
+ont tendance à tourner court alors que l'image d'une machine est, de manière
 superficielle, mieux adaptée. Les roues et les engrenages d'une montre
 mécanique sont ingénieusement agencés et coordonnés, et si l'horloger
 connaît son affaire, la montre donnera l'heure pendant des années. Les
@@ -97,10 +97,10 @@ programmeurs.
 
 Quelle hostilité envers la richesse de la programmation ! Essayer de
 la réduire à quelque chose de direct et de prévisible, jeter l'opprobre
-sur tous les programmes bizarres et magnifiques. Le champ des techniques de
+sur tous les programmes bizarres et magnifiques… Le champ des techniques de
 programmation est gigantesque, fascinant par sa diversité et encore largement
 inexploré. Il est certainement bourré de chausse-trappes et de pièges à
-loups, menaçant de faire commettre au programmeur inexpérimenté toute sorte
+loups, menaçant de faire commettre au programmeur inexpérimenté toutes sortes
 d'affreuses erreurs. Cela signifie seulement que vous devez procéder avec
 prudence et garder votre sang-froid. En apprenant, vous rencontrerez toujours
 de nouveaux défis, de nouveaux territoires à explorer. Le programmeur qui
@@ -109,7 +109,7 @@ perdre le désir de programmer (et devenir chef de projet).
 
 En ce qui me concerne, le critère décisif pour évaluer un programme est :
 « Est-il correct ? ». L'efficacité, la clarté et la taille sont
-également importantes, mais pouvoir peser avec exactitude le poids de l'un
+également importantes, mais pouvoir mesurer avec exactitude le poids de l'un
 et le poids de l'autre est toujours une question d'opinion, une opinion
 que doit se faire chaque programmeur. Les règles générales sont utiles,
 mais on ne devrait jamais avoir peur de les transgresser.
@@ -133,7 +133,7 @@ Il s'agit d'un programme qui fait la somme des nombres de 1 à 10 et donne
 le résultat (1 + 2 + … + 10 = 55). Il pourrait tourner sur l'ordinateur le
 plus simple. Pour programmer les premiers ordinateurs, il était nécessaire
 de disposer de grandes séries d'interrupteurs dans la bonne position, ou de
-perforer des trous dans des cartes et les faire avaler à la machine. Vous
+perforer des trous dans des cartes que l'on faisait avaler à la machine. Vous
 imaginez facilement à quel point la procédure était fastidieuse et sujette
 à erreurs. Écrire ne serait-ce qu'un programme simple exigeait beaucoup
 d'intelligence et de discipline, les programmes complexes étaient carrément
@@ -196,8 +196,7 @@ Voici maintenant le même programme en JavaScript :
 > }
 > print(total);
 
-C'est encore un peu mieux pour nous. Le plus important est qu'il n'y a plus
-besoin de préciser la façon dont nous voulons que le programme fasse un bond
+C'est encore un peu mieux pour nous. Le plus important c'est qu'il n'est plus nécessaire de préciser la façon dont nous voulons que le programme fasse un bond
 par-ci par-là. Le mot magique |while| s'en occupe. Le programme continue à
 exécuter les lignes ci-dessous tant que la condition qu'on lui a donnée est
 satisfaite : |compteur <= 10|, ce qui veut dire tant que « |compteur|
@@ -271,7 +270,7 @@ par des considérations commerciales plutôt que rationnelles. En 1995,
 quand le JavaScript a été lancé par Netscape, le langage Java était promu
 partout et gagnait en popularité. Apparemment, quelqu'un a dû penser que
 c'était une bonne idée d'essayer de surfer sur la mode du moment. Nous
-voilà aujourd'hui coincé avec ce nom.
+voilà aujourd'hui coincés avec ce nom.
 
 Il existe un langage associé au JavaScript et qui s'appelle ECMAScript. Quand
 les navigateurs autres que Netscape ont commencé à prendre en charge le
@@ -296,7 +295,7 @@ JavaScript continue d'évoluer. Depuis la sortie de cet ouvrage, ECMAScript
 en tant que méthodes natives, quelques fonctionnalités que nous écrirons
 nous-même. La dernière génération de navigateurs fournit cette version
 augmentée de JavaScript. En 2011, « ECMAScript harmony », une extension
-plus radicale du langage, est en cours de standardisation. Vous ne devriez
+plus radicale du langage, était en cours de standardisation. Vous ne devriez
 pas trop craindre que ces nouvelles versions rendent obsolètes ce que vous
 apprenez dans ce livre. Il ne s'agira que d'une extension du langage dont
 nous disposons actuellement, donc pratiquement tout ce qui est écrit dans
@@ -397,7 +396,7 @@ d'une seule traite. Ça veut dire que vous devrez commencer à mi-chemin
 quand vous reprendrez votre lecture, mais si vous ne lancez pas tout le
 code en commençant du haut du chapitre, certaines choses peuvent ne pas
 fonctionner. En maintenant la touche majuscule pendant que vous appuyez sur
-la flèche « Lancer » d'un bloc de code, tous les blocs précédents
+la flèche « Lancer » d'un bloc de code, tous les blocs précédant
 celui-ci seront également exécutés, ainsi lorsque vous commencez au
 milieu d'un chapitre, maintenez la touche majuscule enfoncée la première
 fois que vous faites tourner un morceau de code, et tout devrait fonctionner
