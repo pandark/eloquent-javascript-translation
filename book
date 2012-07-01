@@ -1899,7 +1899,7 @@ tentant de renoncer à un peu d'efficacité pour gagner en simplicité.
 
 La règle de base, qui a été répétée par de nombreux programmeurs et que
 j'approuve de toutes mes forces, c'est de ne pas s'inquiéter de l'efficacité
-tant que le programme ne devient pas un peu trop lent. Lorsque c'est le cas,
+tant que le programme ne devient pas trop lent. Lorsque c'est le cas,
 trouvez quelles parties ralentissent l'exécution et commencez à viser
 l'efficacité plutôt que l'élégance.
 
