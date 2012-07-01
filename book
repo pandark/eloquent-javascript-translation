@@ -1499,8 +1499,8 @@ faut pas utiliser |*| ni les autres opérateurs numériques sur des valeurs
 de chaînes. Convertir un nombre en chaîne est toujours possible et simple,
 mais convertir une chaîne en nombre peut très bien ne pas marcher du tout
 (voir la dernière ligne de l'exemple). Mais nous pouvons utiliser |Number|
-pour convertir explicitement la chaîne en nombre, en montrant bien que nous
-prenons le risque de nous retrouver devant une valeur |NaN|.
+pour convertir explicitement la chaîne en nombre, ce qui rend plus visible
+le risque de nous retrouver devant une valeur |NaN|.
 
 > show(Number("5") * 5);
 
