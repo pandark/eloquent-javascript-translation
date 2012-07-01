@@ -1810,8 +1810,8 @@ Voici un cas qui pourrait vous surprendre :
 > var fille = fonctionParente();
 > fille();
 
-|fonctionParente| *renvoie* ses fonctions internes et le code en bas de
-l'appel à cette fonction. Même si |fonctionParente| a fini de s'executer
+|fonctionParente| *renvoie* sa fonction interne et le code en bas de
+appelle cette fonction. Même si |fonctionParente| a fini de s'exécuter
 à ce moment-là, l'environnement local dans lequel |variable| a la valeur
 |locale| existe toujours, et |fonctionFille| continue de l'utiliser. Ce
 phénomène s'appelle une fermeture lexicale (ou _closure_ en anglais).
@@ -1837,7 +1837,7 @@ elles ajoutant 2 à son argument, l'autre ajoutant 5 et ainsi de suite.
 > var ajouterCinq = creerFonctionAjouter(5);
 > show(ajouterDeux(1) + ajouterCinq(1));
 
-Pour vous rendre compte de cela, vous ne devez pas considérer que les
+Pour bien comprendre, vous ne devez pas considérer que les
 fonctions empaquettent seulement des calculs, mais aussi un environnement. Les
 fonctions de haut niveau exécutent simplement l'environnement de haut niveau,
 c'est assez évident. Mais une fonction définie à l'intérieur d'une autre
