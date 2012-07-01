@@ -507,7 +507,7 @@ du nombre :
 Ce qui donne 2.998 * 10^8 = 299800000.
 
 Les opérations avec des nombres sans virgule (aussi appelés nombres entiers)
-tenant en 52 bits ont une précision gerantie. Malheureusement,
+tenant en 52 bits ont une précision garantie. Malheureusement,
 les opérations avec des nombres fractionnels ne sont pas dans le même
 cas. Tout comme π (pi) qui ne peut être exprimé de manière précise
 par un nombre fini de chiffres à décimales, beaucoup de nombres perdent en
