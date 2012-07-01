@@ -507,8 +507,9 @@ du nombre :
 Ce qui donne 2.998 * 10^8 = 299800000.
 
 Les opérations avec des nombres sans virgule (aussi appelés nombres entiers)
-tenant en 52 bits ont une précision gerantie. Malheureusement,
-les opérations avec des nombres fractionnels ne sont pas dans le même cas. Tout comme π (pi) qui ne peut être exprimé de manière précise
+tenant en 52 bits ont une précision garantie. Malheureusement,
+les opérations avec des nombres fractionnels ne sont pas dans le même
+cas. Tout comme π (pi) qui ne peut être exprimé de manière précise
 par un nombre fini de chiffres à décimales, beaucoup de nombres perdent en
 précision lorsqu'on ne dispose que de 64 bits pour les stocker. C'est dommage,
 mais cela ne crée de problèmes pratiques que dans des situations très
@@ -961,7 +962,8 @@ façon de le faire est d'écrire :
 > print(10);
 > print(12);
 
-Ça marche, mais lorsque nous écrivons un programme l'idée est de nous épargner du travail et non pas de nous en donner plus. Si nous avions besoin des nombres pairs
+Ça marche, mais lorsque nous écrivons un programme l'idée est de nous épargner
+du travail et non pas de nous en donner plus. Si nous avions besoin des nombres pairs
 jusqu'à 100 cette méthode deviendrait tout simplement inexploitable. Nous
 avons besoin d'une manière de répéter une portion de code automatiquement.
 
