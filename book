@@ -421,13 +421,13 @@ Dans le monde des ordinateurs, seules les données existent. Ce qui n'est pas
 une donnée n'existe pas. Fondamentalement, toutes les données sont similaires,
 car elles ne sont par essence que des séquences de bits##.
 Cependant, chaque donnée joue un rôle qui lui est propre. Dans le système JavaScript,
-la plupart de ces données est soigneusement répartie entre des choses
+la plupart de ces données sont soigneusement réparties entre des choses
 appelées _valeur_s. Chaque valeur a un type qui détermine le rôle qu'elle
 peut jouer. Il y a six types de valeurs de base : les nombres (|number|),
 les chaînes de caractères (|string|), les booléens (|boolean|), les objets (|object|),
 les fonctions (|function|) et les valeurs indéfinies (|undefined|).
 
-## Les bits sont toutes les choses à deux valeurs possibles, habituellement
+## Les bits sont toutes les choses à deux valeurs possibles, ils sont habituellement
 décrits comme des |0| et des |1|. Dans l'ordinateur, ils se concrétisent
 par une charge électrique élevée ou basse, un signal fort ou faible,
 ou encore un point brillant ou terne sur la surface d'un CD.
@@ -453,7 +453,7 @@ sont habituellement écrits les nombres :
 
 Saisissez cela dans la console et la même chose est affichée dans la
 fenêtre de sortie. Le texte que vous avez saisi a donné naissance à une
-valeur numérique; la console a pris ce nombre et l'a affiché de nouveau à
+valeur numérique ; la console a pris ce nombre et l'a affiché de nouveau à
 l'écran. Dans ce cas, c'était assez inutile, mais nous produirons bientôt
 des valeurs de manières moins directes et il pourra être utile de « les
 essayer » dans la console pour voir ce qu'elles produisent.
@@ -507,9 +507,8 @@ du nombre :
 Ce qui donne 2.998 * 10^8 = 299800000.
 
 Les opérations avec des nombres sans virgule (aussi appelés nombres entiers)
-tenant en 52 bits sont garanties d'être toujours précis. Malheureusement,
-les opérations avec des nombres fractionnels ne le sont généralement
-pas. Tout comme π (pi) qui ne peut être exprimé de manière précise
+tenant en 52 bits ont une précision gerantie. Malheureusement,
+les opérations avec des nombres fractionnels ne sont pas dans le même cas. Tout comme π (pi) qui ne peut être exprimé de manière précise
 par un nombre fini de chiffres à décimales, beaucoup de nombres perdent en
 précision lorsqu'on ne dispose que de 64 bits pour les stocker. C'est dommage,
 mais cela ne crée de problèmes pratiques que dans des situations très
@@ -591,7 +590,7 @@ saut de ligne. De même, un « |t| » derrière un antislash signifie
 un caractère de tabulation##.
 
 ## Lorsque vous entrez des chaînes de caractères dans la console, vous
-pouvez remarquer qu'elles reviennent avec des guillemets et des antislashs
+pouvez remarquer qu'elles reviennent avec des guillemets et des antislashes
 de la même manière que vous les aviez saisies. Pour obtenir un affichage
 convenable des caractères spéciaux, vous pouvez faire |print("a\nb")|
 — nous verrons pourquoi cela fonctionne dans quelques instants.
@@ -599,13 +598,13 @@ convenable des caractères spéciaux, vous pouvez faire |print("a\nb")|
 >> "Voici une première ligne\nEt maintenant la seconde"
 
 Remarquez que si vous entrez cette chaîne dans la console, elle s'affiche
-sous forme « source », avec des guillemets et des antislashs. Pour ne voir
+sous forme « source », avec des guillemets et des antislashes. Pour ne voir
 que du texte, vous pouvez entrez |print("a\nb")|. Ce que cela fait
-précisemment sera bientôt expliqué.
+précisément sera bientôt expliqué.
 
-Il existe bien entendu des cas où vous voudrez que l'antislash dans une
+Il existe bien entendu des cas où vous voudriez que l'antislash dans une
 chaîne soit juste un antislash et pas un caractère d'échappement. Si
-deux antislashs se succèdent, ils vont se combiner et seul l'un d'eux sera
+deux antislashes se succèdent, ils vont se combiner et seul l'un d'eux sera
 conservé dans la chaîne résultante :
 
 >> "Un caractère de saut de ligne est écrit ainsi \"\\n\"."
@@ -631,7 +630,7 @@ de caractères spécifiant le type d'une valeur.
 >> typeof 4.5
 
 Les autres opérateurs que nous avons vus opèrent toujours sur deux valeurs,
-|typeof| sur une seul. Les opérateurs qui utilisent deux valeurs sont appelés
+|typeof| sur une seule. Les opérateurs qui utilisent deux valeurs sont appelés
 des @_opérateur binaire_opérateurs binaires alors que ceux qui n'en
 n'utilisent qu'une sont des @_opérateur unaire_opérateurs unaires. Le
 @_|-|_signe moins peut être utilisé aussi bien comme un opérateur binaire
@@ -744,7 +743,7 @@ si elles sont strictement nécessaires.
 ---
 
 Les exemples rencontrés jusqu'à présent utilisent le langage JavaScript
-de la même façon que l'on se sert d'une calculatrice de poche. Utiliser des
+de la même façon que l'on se sert d'une calculatrice de poche : utiliser des
 valeurs et leur appliquer des opérateurs pour obtenir d'autres valeurs. Créer
 de telles valeurs est une partie essentielle de chaque programme JavaScript,
 mais ce n'en est qu'une partie. Un bout de code qui produit une valeur
@@ -815,7 +814,7 @@ Si vous souhaitez que la nouvelle variable contienne tout de suite une
 valeur, comme c'est souvent le cas, vous pouvez utiliser l'opérateur _|=|_
 pour lui affecter la valeur d'une expression.
 
-Si une variable pointe vers une valeur, cela ne veut pas dire qu'elles sont
+Si une variable pointe vers une valeur, cela ne veut pas dire qu'elles soient
 liées pour toujours. Vous pouvez utiliser l'opérateur |=| à tout moment
 sur une variable existante pour lui enlever sa valeur actuelle et la faire
 pointer sur une nouvelle valeur.
@@ -853,7 +852,7 @@ aille sur une nouvelle page.
 Beaucoup de valeurs fournies par l'environnement standard sont de type
 « |function| » (fonction)@_fonction_. Une fonction est une partie de programme contenue
 dans une valeur. Généralement, cette portion de programme fait quelque
-chose d'utile qui peut être invoqué en utilisant le nom défini pour la
+chose d'utile qui peut être invoquée en utilisant le nom défini pour la
 fonction. Dans un navigateur, la variable _|alert|_ contient une
 fonction qui ouvre une petite fenêtre avec un message. Elle s'utilise
 comme ceci :
@@ -866,7 +865,7 @@ expression qui produit une valeur de type fonction peut être invoquée en plaç
 à sa suite. La chaîne de caractères entre parenthèses est
 donnée à la fonction |alert| qui l'utilise en tant que texte pour l'afficher dans la
 fenêtre. Les valeurs données aux fonctions sont appelées _paramètre_s ou
-_argument_s. |alert| en a juste besoin d'un, mais d'autres fonctions peuvent
+_argument_s. |alert| n'en a besoin que d'un seul, mais d'autres fonctions peuvent
 en vouloir plus.
 
 ---
@@ -875,13 +874,13 @@ Afficher une fenêtre de dialogue est un effet de bord. Beaucoup de fonctions
 sont utiles par leurs effets de bord. Une fonction peut aussi produire une
 valeur et dans ce cas elle n'a pas besoin de produire un effet de bord pour
 être utile. Par exemple, il existe une fonction _|Math.max|_, qui prend
-un nombre quelconque d'argument numérique et retourne le plus grand d'entre eux :
+un nombre quelconque d'arguments numériques et retourne le plus grand d'entre eux :
 
 > alert(Math.max(2, 4));
 
 @_|Math.min|_Quand une fonction produit une valeur, on dit qu'elle
 la _retour_ne. En JavaScript, les choses qui produisent des valeurs sont toujours des
-expressions, c'est pourquoi, les appels de fonctions peuvent être utilisés comme une partie
+expressions, c'est pourquoi les appels de fonctions peuvent être utilisés comme une partie
 d'une expression plus longue :
 
 > alert(Math.min(2, 4) + 100);
@@ -893,8 +892,8 @@ Nous examinerons dans le \\cfunctions la façon de créer vos propres fonctions.
 Comme l'a montré l'exemple précédent, |alert| peut être utile pour
 montrer le résultat de certaines expressions. Mais cliquer pour fermer
 toutes ces petites fenêtres peut devenir très vite énervant, donc à partir
-de maintenant nous allons plutôt utiliser une fonction similaire appellée
-_|print|_ qui ne fait pas apparaître de fenêtre, mais écrit juste une valeur
+de maintenant nous allons plutôt utiliser une fonction similaire appelée
+_|print|_ qui ne fait pas apparaître de fenêtre, mais écrit seulement une valeur
 dans la zone de sortie de la console. |print| n'est pas une fonction standard
 du JavaScript, les navigateurs ne la fournissent pas, mais il est possible
 de l'utiliser dans ce livre, donc vous pouvez l'utiliser sur ces pages.
@@ -903,8 +902,8 @@ de l'utiliser dans ce livre, donc vous pouvez l'utiliser sur ces pages.
 
 Une fonction similaire également disponible sur ces pages est |show|. Alors
 que |print| affichera son argument en texte brut, _|show|_ essayera de
-l'afficher de la même manière qu'un programme le ferait. Ce qui signifie
-qu'il donnera plus d'information sur le type de la valeur. Par exemple,
+l'afficher à la manière dont un programme le ferait. Ce qui signifie
+qu'il donnera plus d'informations sur le type de la valeur. Par exemple,
 les chaînes de caractères garderont leurs guillemets, en utilisant |show|:
 
 > show("N");
@@ -924,7 +923,7 @@ proposé comme la réponse de l'utilisateur.
 Une ligne de texte peut alors être tapée dans la case de texte de la
 fenêtre et la fonction la retournera comme une chaîne de caractères.
 
-> show(prompt("Dîtes-nous tout ce que vous savez.", "..."));
+> show(prompt("Dites-nous tout ce que vous savez.", "..."));
 
 ---
 
@@ -932,7 +931,7 @@ Dans l'environnement, il est possible de donner une nouvelle valeur à
 presque toutes les variables. Ça peut être utile mais aussi dangereux. Si
 vous donnez la valeur |8| à |print|, vous ne pourrez plus jamais rien
 afficher. Heureusement, il y a un bouton « Réinitialiser » sur la
-console, qui réinitialise totalement l'environnement.
+console, qui rétablit totalement l'environnement d'origine.
 
 ---
 
@@ -962,8 +961,7 @@ façon de le faire est d'écrire :
 > print(10);
 > print(12);
 
-Ça marche mais lorsqu'on écrit un programme l'idée est de nous faire faire
-*moins* de travail et non pas plus. Si nous avions besoin des nombres pairs
+Ça marche, mais lorsque nous écrivons un programme l'idée est de nous épargner du travail et non pas de nous en donner plus. Si nous avions besoin des nombres pairs
 jusqu'à 100 cette méthode deviendrait tout simplement inexploitable. Nous
 avons besoin d'une manière de répéter une portion de code automatiquement.
 
@@ -977,7 +975,7 @@ Vous avez sûrement vu dans l'introduction le mot _|while|_. Une instruction
 démarrant par |while| crée une _boucle_. Une boucle est une perturbation
 dans la séquence des instructions, il fera répéter plusieurs fois
 au programme une séquence de code. Dans notre cas le mot |while| est
-suivi par une expression entre parenthèse (les parenthèses étant
+suivi par une expression entre parenthèses (les parenthèses étant
 obligatoires) qui détermine si la boucle continue à s'exécuter ou si
 elle doit s'arrêter. Aussi longtemps que la valeur booléenne produite
 par cette expression est |true|, le code à l'intérieur de la boucle est
@@ -1022,7 +1020,7 @@ le résultat sera construit.
 
 Ne vous inquiétez pas si vous ne voyez pas tout de suite comment cela peut
 fonctionner. Même si vous comprenez parfaitement tous les concepts de ce
-chapitre, il peut être dur de les appliquer à des problèmes concrets. Lire
+chapitre, il peut être difficile de les appliquer à des problèmes concrets. Lire
 et écrire du code vous aidera à développer votre sensibilité pour
 ça. Donc, étudiez la solution, et essayez le prochain exercice.
 
@@ -1037,7 +1035,7 @@ et écrire du code vous aidera à développer votre sensibilité pour
 > show(resultat);
 
 Le compteur peut aussi commencer à |1| et être vérifié pour |<= 10|,
-mais pour des raisons que nous vous exposeront après il est préférable
+mais pour des raisons que nous vous exposerons après il est préférable
 de commencer à compter depuis 0.
 
 Évidemment vos solutions n'ont pas à être exactement identiques aux
@@ -1052,7 +1050,7 @@ un triangle », je veux dire « afficher du texte qui ressemble presque
 à un triangle quand on louche ».
 
 Affichez dix lignes. Sur la première, mettez un « # ». Sur la deuxième
-en mettez-en deux, et ainsi de suite.
+mettez-en deux, et ainsi de suite.
 
 Comment avoir une chaîne composée de X « # » ? Une solution est de
 la construire avec une « boucle imbriquée », c'est à dire une boucle
@@ -1094,7 +1092,7 @@ Dans quelques cas, le JavaScript vous autorise à omettre le point-virgule en
 fin d'instruction. Dans d'autres cas, il faut le mettre sans quoi des choses
 étranges se produiront. Les règles définissant quand on peut les oublier
 sont complexes et particulières. Dans ce livre, je ne les enlèverai jamais
-et je vous conseille vivement de faire pareil pour vos propres programmes.
+et je vous conseille vivement de faire de même pour vos propres programmes.
 
 ---
 
@@ -1105,8 +1103,8 @@ une vérification, généralement pour voir si le compteur a atteint sa
 limite. Ensuite, à la fin du corps de la boucle, le compteur est mis à jour.
 
 Beaucoup de boucles obéissent à ce schéma. C'est pour cette raison que
-le JavaScript, comme d'autres langages, fournit une forme plus courte et
-plus compréhensive :
+le JavaScript, comme d'autres langages, s'affiche sous une forme plus ramassée et
+plus complète :
 
 > for (var nombre = 0; nombre <= 12; nombre = nombre + 2)
 >   show(nombre);
@@ -1129,8 +1127,8 @@ un nom composé de plusieurs mots sont plus ou moins limités aux solutions
 suivantes : |petitpandaroux|, |petit_panda_roux|, |PetitPandaRoux|
 ou |petitPandaRoux|. Le premier est difficile à lire. Personnellement,
 j'aime celui avec les tirets bas, bien que ce soit un peu pénible à
-taper. Toutefois, les fonctions JavaScript standards, et la plupart des
-programmeurs JavaScript, suivent la dernière syntaxe. Il n'est pas compliqué
+taper. Toutefois, les fonctions JavaScript standards et la plupart des
+programmeurs JavaScript suivent la dernière syntaxe. Il n'est pas compliqué
 de s'habituer à ce genre de petites choses, alors je vais simplement suivre
 la majorité et mettre une majuscule à la première lettre de chaque mot
 excepté le premier.
@@ -1313,7 +1311,7 @@ attention à la première version.
 ***
 
 Ajoutez un |while|, et optionnellement un |break|, à votre solution du
-précédent exercice, afin qu'il continue à répéter la question jusqu'à
+précédent exercice, afin que le programme continue à répéter la question jusqu'à
 ce qu'une réponse correcte soit donnée.
 
 Notez que |while (true) …| peut être utilisé pour créer une boucle qui
@@ -1337,7 +1335,7 @@ programme de boucler tant que |true| est |true|, mais c'est une astuce utile.
 >   }
 > }
 
-Parce que le corps du premier |if| a deux instructions, j'ai ajouté des
+Puisque le corps du premier |if| comporte deux instructions, j'ai ajouté des
 accolades autour de tous les corps de |if|. C'est une question de goût. Avoir
 une chaîne |if|/|else| où certains corps sont des blocs et d'autres des
 instructions simples me semble un peu bancal. Mais je vous laisse vous faire
@@ -1358,7 +1356,7 @@ Une autre solution, probablement meilleure mais sans |break|, est la suivante 
 
 ---
 
-Dans la solution de l'exercice précédent il y a une instruction |var
+Dans la solution de l'exercice précédent se trouve une instruction |var
 reponse;|. Elle crée une variable appelée |reponse|, mais ne lui donne pas de
 valeur. Que se passe-t'il alors lorsqu'on prend la valeur de cette variable ?
 
@@ -1375,7 +1373,7 @@ la valeur |undefined|.
 
 Il y a aussi une valeur similaire, _|null|_, qui signifie que « cette
 variable est définie mais qu'elle n'a pas de valeur ». La différence entre
-|undefined| et |null| est principalement académique, et la majeure partie du
+|undefined| et |null| est principalement académique, et la plupart du
 temps sans intérêt. Dans la pratique, il est souvent nécessaire de vérifier
 si quelque chose possède une valeur. Dans ce cas, l'expression |quelqueChose
 == undefined| peut être utilisée, parce que même si ces deux valeurs ne
@@ -1383,7 +1381,7 @@ sont pas strictement équivalentes, |null == undefined| retournera |true|.
 
 ---
 
-Ceci nous amène vers un autre sujet un peu plus délicat…
+Ceci nous amène à aborder un autre sujet un peu plus délicat…
 
 > show(false == 0);
 > show("" == 0);
@@ -1397,7 +1395,7 @@ des variables dans le type de l'autre variable. Cependant, quand |null| ou
 |undefined| apparaît, il produira |true| seulement si les deux sont |null|
 ou |undefined|.
 
-Que faire si vous voulez tester si une variable se réfère à la valeur
+Que faire quand vous voulez tester si une variable se réfère à la valeur
 |false| ? La règle pour convertir des chaînes et des nombres en valeurs
 booléennes est que |0| et la chaîne vide sont considérés comme |false|,
 alors que toutes les autres valeurs comptent pour |true|. À cause de ça,
@@ -1405,8 +1403,8 @@ l'expression |variable == false| est également |true| quand |variable|
 se réfère à |0| ou à |""|. Pour des cas comme celui-ci, où vous ne
 voulez *aucune* conversion automatique de types, il existe deux nouveaux
 opérateurs : _|===|_ et _|!==|_. Le premier teste si une valeur est
-précisément égale à l'autre. Le deuxième teste s'ils ne sont pas
-précisément égaux.
+précisément égale à l'autre. Le deuxième teste se elles ne sont pas
+précisément égales.
 
 > show(null === undefined);
 > show(false === 0);
@@ -1452,8 +1450,8 @@ supplémentaire dans un programme. On l'utilise le plus souvent pour ajouter
 > var compteur = 0;
 > // Maintenant, nous allons créer une boucle.
 > while (compteur < 100 /* compteur est inférieur à 100 */)
-> /* À chaque fois que l'on boucle, nous incrémentons la valeur du compteur,
->    Vraiment, on ajoute juste un. */
+> /* À chaque fois que l'on boucle, on incrémente la valeur du compteur,
+>    mais oui, on ajoute seulement un. */
 >   compteur++;
 > // Puis c'est fini.
 
@@ -1464,7 +1462,7 @@ la ligne.
 
 Comme vous pouvez le voir, même les programmes les plus simples peuvent
 être faits pour avoir l'air gros, laid et compliqué, simplement en ajoutant
-beacuoup de commentaires.
+beaucoup de commentaires.
 
 ---
 
@@ -1488,7 +1486,7 @@ c'est pourquoi en le multipliant par |5| comme dans cet exemple, cela donne
 toujours |NaN|. De plus, et c'est parfois assez perturbant, |NaN == NaN|
 est égal à |false|, vérifier si une valeur est |NaN| peut être fait
 avec la fonction _|isNaN|_. |NaN| est encore (c'est la dernière) une de
-ces valeurs qui renvoie |false| quand elle est convertie en booléen.
+ces valeurs qui renvoient |false| quand elles sont converties en booléens.
 
 Ces conversions automatiques peuvent être très pratiques, mais elles sont
 aussi plutôt bizarres et sujettes à erreur. Même si |+| et |*| sont tous
@@ -1539,7 +1537,7 @@ peu importe ce qu'est |X|, le résultat sera toujours |true|, donc |X|
 n'est jamais évalué, et s'il a des effets de bord, ils ne se produiront
 jamais. C'est la même chose pour |false && X|.
 
-> false || alert("Je suis en train de me produire !");
+> false || alert("Je suis en train d'apparaître !");
 > true || alert("Pas moi.");
 
 =====================
@@ -8862,9 +8860,9 @@ pour être une bonne idée).
 Le premier argument pour le constructeur _|RegExp|_ est une chaîne
 contenant le motif, le deuxième argument peut être utilisé pour ajouter
 l'insensibilité à la casse ou la globalité. Quand on élabore une chaîne
-pour contenir le motif, on doit faire très attention aux antislashs. En
-effet, en principe, les antislashs sont supprimés quand une chaîne est
-interprétée, tous les antislashs qui doivent se trouver dans l'expression
+pour contenir le motif, on doit faire très attention aux antislashes. En
+effet, en principe, les antislashes sont supprimés quand une chaîne est
+interprétée, tous les antislashes qui doivent se trouver dans l'expression
 régulière elle-même doivent donc être échappés :
 
 > var chiffres = new RegExp("\\d+");
