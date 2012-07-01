@@ -1560,7 +1560,7 @@ Cependant, si on voit les fonctions simplement comme des boîtes de conserve
 de code on ne les considére pas à leur juste valeur. Si nécessaire, elles
 peuvent jouer les rôles de fonctions pures, d'algorithmes, de détours,
 d'abstractions, de moyens de décision, de modules, de prolongements, de
-structures de données et de beaucoup d'autres. Être capable d'utiliser
+structures de données et de bien d'autres choses encore. Être capable d'utiliser
 efficacement des fonctions est une compétence nécessaire pour qui veut
 programmer sérieusement. Ce chapitre propose une introduction au sujet,
 le \\cfp aborde plus en profondeur les subtilités des fonctions.
@@ -1596,11 +1596,11 @@ une fonction. Lorsqu'il est suivi d'un nom de variable, la fonction
 créée sera stockée sous ce nom. À la suite du nom, vient une liste
 de noms d'_argument_s, et enfin, après celle-ci le _corps_ de la
 fonction. Contrairement à ceux autour du corps d'une boucle |while| ou
-d'une instruction |if|, les accolades autours du corps d'une fonction sont
+d'une instruction |if|, les accolades autour du corps d'une fonction sont
 obligatoires##.
 
 ## Techniquement, cela ne devrait pas être nécessaire, mais je suppose que
-les concepteurs de JavaScript se sont dit que cela clarifierait les choses
+les concepteurs de JavaScript se sont dits que cela clarifierait les choses
 si le corps des fonctions était toujours entouré d'accolades.
 
 Le mot-clé _|return|_, suivi d'une expression, est utilisé pour déterminer
@@ -1767,9 +1767,9 @@ plutôt que sur l'environnement global.
 
 Au final, la visibilité des variables à l'intérieur d'une fonction est
 déterminée par la place de cette fonction dans le texte du programme. Toutes
-les variables définies « au dessus » de la définition d'une fonction
-sont visibles, ce qui signifie à la fois celles dans les corps des fonctions
-qui la renferme et celles globales pour tout le programme. Cette approche
+les variables définies « au-dessus » de la définition d'une fonction
+sont visibles, qu'elles soient dans les corps des fonctions
+qui la renferment ou globales pour tout le programme. Cette approche
 de la visibilité des variables est appelée _portée lexicale_.
 
 ---
@@ -1844,11 +1844,11 @@ c'est assez évident. Mais une fonction définie à l'intérieur d'une autre
 fonction conserve l'accès à l'environnement existant dans cette fonction
 à l'instant où elle a été définie.
 
-Par conséquent, la fonction |ajouter| de l'exemple au-dessus, qui est crée
+Par conséquent, la fonction |ajouter| de l'exemple au-dessus, qui est créée
 lorsque |creerFonctionAjouter| est appelée, capture un environnement dans lequel
 |quantite| a une certaine valeur. Il empaquette cet environnement avec le
 calcul |return nombre + quantite| à l'intérieur d'une valeur qui est alors
-retournée depuis la fonction extérieur.
+retournée depuis la fonction extérieure.
 
 Lorsque cette fonction renvoyée (|ajouterDeux| ou |aujouterCinq|) est appelée, un
 nouvel environnement — dans lequel la variable |nombre| a une valeur —
@@ -1894,7 +1894,7 @@ plus rapide.
 Dans le cas de la fonction |puissance| ci-dessus la version peu élégante est
 encore suffisamment simple et facile à lire. Cela n'aurait pas d'intérêt
 de la remplacer par une version récursive. Pourtant il arrive souvent que
-les concepts que traite un programme deviennent si complexes qu'il devient
+les concepts que traite un programme deviennent si complexes qu'il s'avère
 tentant de renoncer à un peu d'efficacité pour gagner en simplicité.
 
 La règle de base, qui a été répétée par de nombreux programmeurs et que
@@ -1937,7 +1937,7 @@ une fonction se termine, le contexte du haut de la pile en est retiré pour
 
 Cette pile nécessite un espace de stockage dans la mémoire de
 l'ordinateur. Quand la pile prend trop d'ampleur, l'ordinateur abandonne
-l'exécution en court avec un message du genre « plus d'espace disponible
+l'exécution en cours avec un message du genre « plus d'espace disponible
 dans la pile » ou « trop de récursions ». Mieux vaut s'en souvenir
 quand on écrit des fonctions récursives.
 
@@ -1953,11 +1953,11 @@ Non seulement cet exemple nous expose une manière très intéressante
 d'écrire un programme qui plante, mais il montre aussi qu'une fonction n'a
 pas à s'appeler elle-même directement pour être récursive. Si elle appelle
 une autre fonction qui (directement ou non) appelle à nouveau la première,
-elle est quand même récursive.
+elle est tout de même récursive.
 
 ---
 
-La récursion n'est pas toujours juste une alternative moins efficace à
+La récursion n'est pas toujours seulement une alternative moins efficace à
 une boucle. Certains problèmes sont bien plus faciles à résoudre avec
 une récursion qu'avec des boucles. Il s'agit le plus souvent de problèmes
 qui exigent l'exploration de plusieurs « branches », chacune d'elles
@@ -1970,7 +1970,7 @@ qui, étant donné un nombre, essaie de trouver une suite d'additions et de
 multiplications qui produise ce nombre ?
 
 Par exemple le nombre 13 peut être obtenu en multipliant d'abord 1 par 3,
-puis en ajoutant deux fois 5. Par contre, on ne peut pas obtenir le nombre 15.
+puis en ajoutant deux fois 5. En revanche, on ne peut pas obtenir le nombre 15.
 
 Voici la solution :
 
@@ -2101,7 +2101,7 @@ n'est pas transmis, sa valeur dans la fonction est |undefined|.
 Dans le chapitre suivant, nous verrons un moyen pour que le corps de la
 fonction connaisse la liste exacte des arguments qui lui sont donnés. Cela
 peut être utile, par exemple, pour réaliser une fonction qui accepte
-n'importe quel nombre d'arguments : |print| se comporte comme cela.
+n'importe quel nombre d'arguments : |print| se comporte ainsi.
 
 > print("R", 2, "D", 2);
 
