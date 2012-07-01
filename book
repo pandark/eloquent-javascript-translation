@@ -1778,7 +1778,7 @@ Les gens qui ont l'expérience d'autres langages de programmation pourraient
 s'attendre à ce qu'un _bloc_ de code (entre accolades) crée également
 un nouvel environnement local. Pas en JavaScript. Les fonctions sont les
 seules qui délimitent une nouvelle portée. Vous avez le droit d'utiliser
-des blocs libres comme ceci…
+des blocs autonomes comme ceci…
 
 > var quelqueChose = 1;
 > {
