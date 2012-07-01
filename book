@@ -1003,7 +1003,7 @@ de la boucle. Mais nous devons aussi afficher le nombre, donc la boucle sera
 consituée d'une instruction supplémentaire.
 Les@_|{}|_accolades (|{| et |}|) sont utilisées pour grouper des instructions
 dans des _bloc_s. Pour le reste du code un bloc compte comme une seule et
-même instruction. Dans l'exemple précédant ceci est utilisé pour inclure
+même instruction. Dans l'exemple précédent ceci est utilisé pour inclure
 dans la boucle à la fois l'appel à la fonction |print| et l'instruction
 qui actualise la variable |nombreCourant|.
 
@@ -2052,7 +2052,7 @@ structure générale de |var ajouter = 22;| et donc nécessite un point-virgule.
 
 Ce type de valeur est appelé _fonction anonyme_, parce que la fonction
 définie n'a alors pas de nom. Parfois il est inutile de donner un nom aux
-fonctions, comme dans l'exemple précédant de |creerFonctionAjouter| :
+fonctions, comme dans l'exemple précédent de |creerFonctionAjouter| :
 
 > function creerFonctionAjouter(quantite) {
 >   return function (nombre) {
