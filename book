@@ -1719,7 +1719,7 @@ d'une fonction, ils n'existent pas à l’extérieur de celle-ci. En plus
 de l’_environnement global_, il y a aussi de plus petits @_environnement
 local_environnements locaux créés par des appels de fonctions. Lorsque l'on
 cherche une variable à l'intérieur d'une fonction, l'environnement local
-est contrôlé en premier, et ensuite, seulement si la variable n'existe pas
+est examiné en premier, et ensuite, seulement si la variable n'existe pas
 là, on la cherche dans l'environnement global. Cela permet à une variable
 à l'intérieur d'une fonction de _masquer_ une variable globale du même nom.
 
