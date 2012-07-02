@@ -1360,7 +1360,7 @@ Une autre solution, probablement meilleure mais sans |break|, est la suivante 
 
 Dans la solution de l'exercice précédent se trouve une instruction |var
 reponse;|. Elle crée une variable appelée |reponse|, mais ne lui donne pas de
-valeur. Que se passe-t'il alors lorsqu'on prend la valeur de cette variable ?
+valeur. Que se passe-t-il alors lorsqu'on prend la valeur de cette variable ?
 
 > var variableMystere;
 > show(variableMystere);
@@ -2140,7 +2140,7 @@ courant de ses exploits. Ils sont de la forme suivante :
 | Je commence malgré tout à avoir quelques remords. Et puis tu as sans
 | doute raison, ça doit être illégal d'une manière ou d'une autre.
 |
-| (… etc. …)
+| (…etc.)
 |
 | Grosses bises,
 | Tante Émilie
@@ -2156,7 +2156,7 @@ généalogie de ses chats, pour pouvoir ajouter des commentaires comme
 samedi ! », ou bien « Comment va cette vieille Lady Pénélope ? Elle
 a cinq ans maintenant, n'est-ce pas ? », en évitant de préférence de
 demander des nouvelles des chats décédés. Vous avez une grande quantité
-de vieux emails de votre tante et, par chance, elle est très constante dans
+de vieux e-mails de votre tante et, par chance, elle est très constante dans
 sa manière de donner les renseignements sur les naissances et décès des
 chats à la fin de ses e-mails, toujours dans le même format.
 
@@ -2179,7 +2179,7 @@ conformiste à cette époque).
 Il est généralement préférable d'avoir une idée de départ sur ce que
 va faire un programme avant de se mettre à l'écrire… Voici le plan :
 
- 1. Commencer avec un ensemble de noms de chats ne comprenant que « Spot ».
+ 1. Commencer par un ensemble de noms de chats ne comprenant que « Spot ».
  2. Parcourir chaque e-mail dans l'archive dans l'ordre chronologique.
  3. Chercher les paragraphes qui commencent par « Est né le » ou « Décédé le ».
  4. Ajouter les noms trouvés dans les paragraphes qui commencent par « Est né le » à l'ensemble de noms.
@@ -2400,7 +2400,7 @@ faut, c'est une structure de chaînes de caractères distinctes.
 Les objets sont justement utilisés pour structurer des choses. On pourrait
 très bien créer un objet comme celui-ci :
 
-> var archiveDeMails = {"le premier e-mail": "Mon cher neveu, …",
+> var archiveDemails = {"le premier e-mail": "Mon cher neveu, …",
 >                    "le deuxième e-mail": "…"
 >                    /* et ainsi de suite… */};
 
@@ -2408,25 +2408,25 @@ Mais parcourir les e-mails du début à la fin serait difficile — comment
 le programme peut-il deviner le nom de ces propriétés ? La solution est
 d'utiliser des noms de propriétés plus prévisibles :
 
-> var archiveDeMails = {0: "Mon cher neveu, … (mail numéro 1)",
+> var archiveDemails = {0: "Mon cher neveu, … (mail numéro 1)",
 >                    1: "(mail numéro 2)",
 >                    2: "(mail numéro 3)"};
 >
-> for (var courant = 0; courant in archiveDeMails; courant++)
->   print("Traitement de l'e-mail #", courant, ": ", archiveDeMails[courant]);
+> for (var courant = 0; courant in archiveDemails; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveDemails[courant]);
 
 La chance veut qu'il existe un type d'objet particulier qui corresponde
 exactement à ce type de besoin. Ce sont les _tableau_x et ils
-fournissent des commodités très utiles, comme par exemple _|length|_
+fournissent des commodités très utiles, comme _|length|_
 (longueur), une propriété qui contient le nombre d'éléments dans le
 tableau et bien d'autres fonctions utiles pour ce type de structure.
 
 @_|[]|_Pour créer de nouveaux tableaux on utilise des crochets (|[| et |]|):
 
-> var archiveDeMails = ["mail un", "mail deux", "mail trois"];
+> var archiveDemails = ["mail un", "mail deux", "mail trois"];
 >
-> for (var courant = 0; courant < archiveDeMails.length; courant++)
->   print("Traitement de l'e-mail #", courant, ": ", archiveDeMails[courant]);
+> for (var courant = 0; courant < archiveDemails.length; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveDemails[courant]);
 
 Dans cet exemple, le nombre d'éléments n'est plus spécifié
 explicitement. Le premier a automatiquement le numéro 0, le deuxième le
@@ -2440,8 +2440,8 @@ vous allez vous y faire.
 Commencer par l'élément 0 veut aussi dire que dans une structure qui
 a |X| éléments, le dernier élément sera trouvé à la position |X -
 1|. C'est pourquoi la boucle |for| dans notre exemple teste la valeur
-|current < archiveDeMails.length|. Il n'y a pas d'élément à la position
-|archiveDeMails.length|, donc dès que |current| atteint cette valeur, on
+|current < archiveDemails.length|. Il n'y a pas d'élément à la position
+|archiveDemails.length|, donc dès que |current| atteint cette valeur, on
 arrête la boucle.
 
 *** range
@@ -2529,13 +2529,13 @@ avant l'assemblage de la chaîne de caractères finale.
 Revenons à nos chats : nous savons maintenant qu'utiliser un tableau
 serait une bonne idée pour ranger les archives des e-mails. Sur cette page,
 la fonction |recupererLesMails| sera utilisée pour récupérer (magiquement)
-ce tableau. Parcourir les emails qu'il contient pour les traiter un par un
+ce tableau. Parcourir les e-mails qu'il contient pour les traiter un par un
 devient simple comme un jeu d'enfant :
 
-> var archiveDeMails = recupererLesMails();
+> var archiveDemails = recupererLesMails();
 >
-> for (var i = 0; i < archiveDeMails.length; i++) {
->   var email = archiveDeMails[i];
+> for (var i = 0; i < archiveDemails.length; i++) {
+>   var email = archiveDemails[i];
 >   print("Traitement de l'e-mail #", i);
 >   // Faire plus de choses…
 > }
@@ -2619,7 +2619,7 @@ argument. Cela permet de vérifier une chaîne de caractères en peu de lignes.
 
 Écrivez une fonction nommée |chaineCommencePar| qui prend deux arguments, tous les
 deux des chaînes de caractères. Elle renvoie |true| quand le premier argument
-commence avec les caractères du second arguments, sinon elle renvoie |false|.
+commence par les caractères du second argument, sinon elle renvoie |false|.
 
 ///
 
@@ -2709,11 +2709,11 @@ faisons comme si, dans ce cas précis, l'entrée était toujours correcte.
 Tout ce qui nous reste à faire maintenant, c'est de rassembler les pièces
 du puzzle. Voici une façon de s'y prendre :
 
-> var archiveDeMails = recupererLesMails();
+> var archiveDemails = recupererLesMails();
 > var chatsVivants = {"Spot": true};
 >
-> for (var mail = 0; mail < archiveDeMails.length; mail++) {
->   var paragraphes = archiveDeMails[mail].split("\n");
+> for (var mail = 0; mail < archiveDemails.length; mail++) {
+>   var paragraphes = archiveDemails[mail].split("\n");
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
@@ -2780,8 +2780,8 @@ de la solution :
 
 > var chatsVivants = {Spot: true};
 >
-> for (var mail = 0; mail < archiveDeMails.length; mail++) {
->   var paragraphes = archiveDeMails[mail].split("\n");
+> for (var mail = 0; mail < archiveDemails.length; mail++) {
+>   var paragraphes = archiveDemails[mail].split("\n");
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
@@ -2818,7 +2818,7 @@ comme ça leur chante.
 Nous continuons à découper l'algorithme en petites unités :
 
 > function trouverChatsVivants() {
->   var archiveDeMails = recupererLesMails();
+>   var archiveDemails = recupererLesMails();
 >   var chatsVivants = {"Spot": true};
 >
 >   function traiterParagraphe(paragraphe) {
@@ -2828,8 +2828,8 @@ Nous continuons à découper l'algorithme en petites unités :
 >       enleverDuSet(chatsVivants, nomDesChats(paragraphe));
 >   }
 >
->   for (var mail = 0; mail < archiveDeMails.length; mail++) {
->     var paragraphes = archiveDeMails[mail].split("\n");
+>   for (var mail = 0; mail < archiveDemails.length; mail++) {
+>     var paragraphes = archiveDemails[mail].split("\n");
 >     for (var i = 0; i < paragraphes.length; i++)
 >       traiterParagraphe(paragraphes[i]);
 >   }
@@ -2866,7 +2866,7 @@ Le programme ignore encore un grand nombre d'informations qui sont incluses
 dans les mails. Il s'agit des dates de naissance, de mort et des noms
 des mères.
 
-Commençons avec les dates : quelle pourrait être la meilleure façon
+Commençons par les dates : quelle pourrait être la meilleure façon
 de stocker une date ? Nous pourrions créer un objet avec ces trois
 propriétés,  |year|, |month|, et |day| et stocker ensuite des nombres
 à l'intérieur.
@@ -2898,7 +2898,7 @@ représentant l'heure et la date actuelles est créé. Des arguments peuvent
 être précisés pour stocker une heure et une date précises. L'ordre des
 arguments est l'année, le mois, le jour, l'heure, la minute, la seconde puis
 la milliseconde. Les quatre derniers arguments sont optionnels et définis
-à 0 s'il ne sont pas précisés.
+à 0 s'ils ne sont pas précisés.
 
 Pour décrire les mois, on utilise la numérotation de 0 à 11, qui peut
 provoquer une confusion. Surtout que les nombres définissant les jours
@@ -3094,7 +3094,7 @@ façon plus simple :
 Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 
 > function trouverChats() {
->   var archiveDeMails = recupererLesMails();
+>   var archiveDemails = recupererLesMails();
 >   var chats = {"Spot": enregistrementChat("Spot", new Date(1997, 2, 5),
 >               "inconnue")};
 >
@@ -3106,8 +3106,8 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >       chatsDecedes(chats, nomDesChats(paragraphe), extraireDate(paragraphe));
 >   }
 >
->   for (var mail = 0; mail < archiveDeMails.length; mail++) {
->     var paragraphes = archiveDeMails[mail].split("\n");
+>   for (var mail = 0; mail < archiveDemails.length; mail++) {
+>     var paragraphes = archiveDemails[mail].split("\n");
 >     for (var i = 0; i < paragraphes.length; i++)
 >       traiterParagraphe(paragraphes[i]);
 >   }
@@ -3272,7 +3272,7 @@ prend le rôle de |fin| et |debut| devient |0|.
 
 ***
 
-Vous devez vous rappeler de la ligne de code cité en introduction :
+Vous devez vous rappeler la ligne de code citée en introduction :
 
 !> print(somme(serie(1, 10)));
 
@@ -3798,7 +3798,7 @@ des fonctions. Un codeur équipé d'un répertoire de fonctions fondamentales
 et, plus important, maîtrisant les manières de les utiliser est bien plus
 efficace que quelqu'un qui commence à partir de zéro. Malheureusement, un
 environnement JavaScript de base ne fournit que peu de fonctions essentielles,
-donc nous devons les écrire nous mêmes, ou, ce qui est souvent préférable,
+donc nous devons les écrire nous-mêmes, ou, ce qui est souvent préférable,
 utiliser le code de quelqu'un d'autre (plus de détails dans le \\cmodularity).
 
 Il y a d'autres approches plus populaires de l'abstraction, particulièrement
@@ -3859,13 +3859,13 @@ passé à |forEach| directement.
 
 Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
-] var paragraphes = archiveDeMails[mail].split("\n");
+] var paragraphes = archiveDemails[mail].split("\n");
 ] for (var i = 0; i < paragraphes.length; i++)
 ]   traiterParagraphe(paragraphes[i]);
 
 Il peut maintenant être écrit de la façon suivante :
 
-]  forEach(archiveDeMails[mail].split("\n"), traiterParagraphe);
+]  forEach(archiveDemails[mail].split("\n"), traiterParagraphe);
 
 Au final, une construction plus abstraite (ou « de plus haut niveau »)
 correspond à plus d'informations et à moins de bruits parasites : Le
@@ -4249,7 +4249,7 @@ pu récupérer le fichier suivant :
 ]
 ] Un ermite passa dix ans à écrire un programme. « Mon programme peut
 ] calculer le mouvement des étoiles sur un ordinateur 286 qui fait
-] tourner MS DOS » annonça t-il fièrement. « Personne ne possède un
+] tourner MS DOS » annonça-t-il fièrement. « Personne ne possède un
 ] ordinateur 286 ou ne l'utilise aujourd'hui » répondit-il.
 ]
 ] Fu-Tzu avait écrit un petit programme qui était plein de variables
@@ -4274,7 +4274,7 @@ pu récupérer le fichier suivant :
 ] sens, beaucoup de code est nécessaire. »
 ]
 ] Tzu-li et Tzu-ssu se vantaient de la taille de leur programmes.
-] « Deux cents mille lignes », dit Tzu-li, « sans compter les
+] « Deux cent mille lignes », dit Tzu-li, « sans compter les
 ] commentaires ! ». « Psah », dit Tzu-ssu, « le mien fait presque
 ] un *million* de lignes déjà. » Fu-tzu dit « Mon meilleur
 ] programme fait cinq cents lignes. » En entendant cela, Tzu-li
@@ -4292,7 +4292,7 @@ pu récupérer le fichier suivant :
 ] %% Progression
 ]
 ] Un programmeur débutant écrit un programme à la manière d'une
-] fourmis qui construit sa fourmilière, sans même penser à la
+] fourmi qui construit sa fourmilière, sans même penser à la
 ] structure finale. Ses programmes seront comme des grains de
 ] sable fin. Ils peuvent tenir un moment, mais en devenant plus
 ] gros ils tombent {en référence aux dangers d'une
@@ -4478,7 +4478,7 @@ donc c'est de la programmation fonctionnelle que nous ferons !
 Voyez-vous comment cela fonctionne ? La fonction |map| renvoie un tableau des
 positions où les caractères indiqués ont été trouvés, ou bien renvoie
 la fin de la chaîne si aucun n'a été trouvé, et la fonction |reduce|
-prend le minimum de ces positions, qui est la prochain position dans la
+prend le minimum de ces positions, qui est la prochaine position dans la
 chaîne où nous allons regarder.
 
 Si vous voulez écrire cela sans |map| et |reduce|, vous obtiendrez à peu
@@ -4600,7 +4600,7 @@ les portions de texte de notre document HTML, ainsi, le tableau |["Jouer
 au Go!"]| signifie que ce lien n'a qu'un élément englobé, cet élément
 étant un simple morceau de texte.
 
-Taper tout ces objets à la main serait pénible, mais nous n'allons pas
+Saisir tous ces objets à la main serait pénible, mais nous n'allons pas
 faire comme ça. Une fonction utilitaire fera cela pour nous:
 
 > function tag(nom, contenu, attributs) {
@@ -4608,9 +4608,9 @@ faire comme ça. Une fonction utilitaire fera cela pour nous:
 > }
 
 Remarquez que du fait que nous autorisons que les propriétés |attributs|
-et |contenu| d'un élément soient indéfinis s'il ne s'appliquent pas,
+et |contenu| d'un élément soient indéfinis s'ils ne s'appliquent pas,
 le second et troisième élément de cette fonction peuvent être ignorés
-s'il ne sont pas nécessaires.
+s'ils ne sont pas nécessaires.
 
 La fonction |tag| est cependant assez simpliste, c'est pourquoi nous écrivons
 quelques fonctions utilitaires pour des éléments fréquemment utilisés,
@@ -5202,7 +5202,7 @@ utiliser une autre méthode.
 Une approche très simple est de résoudre un tel problème par la méthode
 dite « _essais et erreurs_ ». Il faut :
 
- 1. génèrer toutes les routes possibles.
+ 1. générer toutes les routes possibles.
  2. Dans cet ensemble, trouver le plus court chemin qui connecte le point de départ au point d'arrivée.
 
 L'étape 2 n'est pas difficile. L'étape 1 est un peu plus problématique. Si
@@ -5211,7 +5211,7 @@ routes. Bien sûr, il est peu probable que les routes avec des boucles
 soient les chemins les plus courts pour aller d'un point à un autre, et
 les routes qui ne commencent pas au point de départ ne doivent pas non plus
 être prises en compte. Pour un petit graphe telle que Hiva Oa, il devrait
-être possible de génèrer des routes non cycliques (exemptes de boucles)
+être possible de générer des routes non cycliques (exemptes de boucles)
 démarrant d'un lieu donné.
 
 ---
@@ -5336,7 +5336,7 @@ beaucoup de tableaux intermédiaires et inutiles.
 
 ***
 
-Avant de commencer à génèrer des routes, nous avons besoin d'une fonction
+Avant de commencer à générer des routes, nous avons besoin d'une fonction
 d'ordre supérieur supplémentaire. Celle-ci est appelée _|filter|_. Tout
 comme |map|, elle prend une fonction et un tableau en arguments, et produit
 un nouveau tableau, mais au lieu de placer le résultat de la fonction
@@ -5363,10 +5363,10 @@ de la fonction, de manière à ce qu'il finisse à la gauche de |>|.)
 
 ---
 
-Imaginez à quoi un algorithme permettant de génèrer des itinéraires
+Imaginez à quoi un algorithme permettant de générer des itinéraires
 pourrait ressembler — il commence au point de départ et génère un
 itinéraire pour chaque route qui quitte ce lieu. À la fin de chaque route,
-il continue à génèrer des itinéraires supplémentaires. Il ne parcourt
+il continue à générer des itinéraires supplémentaires. Il ne parcourt
 pas un simple itinéraire, il se ramifie. À cause de cela, la _récursion_
 est une manière normale de modéliser ce phénomène.
 
@@ -5428,7 +5428,7 @@ parce qu'il doit être utilisé plusieurs fois.
 
 ***
 
-Maintenant que nous avons toutes les itinéraires possibles, essayons de
+Maintenant que nous avons tous les itinéraires possibles, essayons de
 trouver le plus court. Écrivez une fonction |itineraireLePlusCourt| qui,
 tout comme |itinerairesPossibles|, prend les noms des lieux de début et de
 fin en arguments. Elle retournera un simple objet itinéraire, du même type
@@ -5498,7 +5498,7 @@ pointe Teohotepapapa…
 ---
 
 Sur une petite île comme Hiva Oa, ce n'est pas une tâche insurmontable
-de génèrer tous les itinéraires possibles. Si vous essayez de faire ça
+de générer tous les itinéraires possibles. Si vous essayez de faire ça
 sur une carte raisonnablement détaillée de la Belgique, par exemple,
 cela va prendre un temps ridiculement long, sans parler d'une quantité
 de mémoire démentielle. Pourtant, vous avez sans doute déjà vu de tels
@@ -5507,7 +5507,7 @@ ou moins idéal parmi un énorme labyrinthe de routes possibles en quelques
 secondes à peine. Comment font-ils ça ?
 
 Si vous êtes attentif, vous avez peut-être remarqué qu'il n'est pas
-nécessaire de génèrer tous les itinéraires jusqu'au bout. Si nous
+nécessaire de générer tous les itinéraires jusqu'au bout. Si nous
 comparons les itinéraires *pendant* que nous les élaborons, nous pouvons
 cesser le calcul de ces itinéraires et dès que nous avons trouvé un
 premier itinéraire pour notre destination, nous pouvons cesser l'extension
@@ -5648,7 +5648,7 @@ Le problème fondamental, c'est qu'il y a trop de possibilités pour aller
 dans la mauvaise direction. À moins de savoir comment nous diriger vers la
 destination pendant l'exploration des chemins, un choix que nous faisons pour
 poursuivre une route donnée va plus probablement nous faire emprunter le
-mauvais chemin que le bon. Si vous continuez à génèrer des itinéraires
+mauvais chemin que le bon. Si vous continuez à générer des itinéraires
 de cette façon, et même si l'un d'entre eux atteint la cible de manière
 accidentelle, vous ne savez pas si c'est le chemin le plus court.
 
@@ -5731,7 +5731,7 @@ route vers ce point, car si elle était meilleure, son score serait plus bas.
 ---
 
 Essayez de ne pas vous énerver lorsque les subtilités de ce fonctionnement
-vous échappent. Quand on réfléchit à des algorithmes tels que ceux là,
+vous échappent. Quand on réfléchit à des algorithmes tels que ceux-là,
 avoir vu avant « quelque chose qui y ressemble »  aide beaucoup, cela
 vous donne un point de repère pour comparer les approches. Les programmeurs
 débutants doivent faire sans de tels points de repères, ce qui peut les
@@ -5791,7 +5791,7 @@ pour trouver tous les points par où la route est passée. On remarque que
 l'objet |B| appartient à deux routes, une qui se termine en |D|, et une
 autre qui se termine en |E|. Quand il y a beaucoup de routes, cela peut
 nous sauver beaucoup d'espace mémoire, chaque nouvelle route nécessite
-seulement un nouvel objet pour elle même, le reste est partagé avec les
+seulement un nouvel objet pour elle-même, le reste est partagé avec les
 autres routes qui ont commencé de la même manière.
 
 ***
@@ -5976,7 +5976,7 @@ liste ouverte ? Cela peut arriver, car les routes ne sont supprimés de
 la liste ouverte que lorsqu'on a déterminé qu'elles étaient la route
 optimale pour atteindre leur destination. Si  nous essayons de supprimer
 du tas binaire, une valeur qui n'y ait pas, cela va lever une exception,
-donc si mon raisonnement est faux, nous verrons probablement un exception
+donc si mon raisonnement est faux, nous verrons probablement une exception
 au moment d'exécuter la fonction.
 
 Quand le code devient suffisamment complexe pour vous faire douter de certaines
@@ -5988,7 +5988,7 @@ avez cassé.
 
 ---
 
-Remarquez que cette algorithme n'utilise pas la récursion, mais réussit quand
+Remarquez que cet algorithme n'utilise pas la récursion, mais réussit quand
 même à explorer toutes les branches. La liste ouverte remplace plus ou moins
 le rôle qu'avait la pile d'appel de fonction dans la solution récursive
 du problème Hiva Oa : il garde une trace des chemins qui doivent encore
@@ -6002,7 +6002,7 @@ Bien, essayons notre recherche de route :
 
 > var route = trouverItineraire(point(0, 0), point(19, 19));
 
-Si vous avez exécuter tout le code depuis le début du chapitre, et que
+Si vous avez exécuté tout le code depuis le début du chapitre, et que
 vous n'avez pas introduit d'erreurs, cet appel, même si cela peut prendre
 quelques secondes à s'exécuter, devrait vous donner un objet route. Cet
 objet est plutôt difficile à lire. On peut le faire en utilisant la fonction
@@ -6133,7 +6133,7 @@ Le mot-clé _|new|_ fournit un bon moyen de créer de nouveaux objets. Quand
 une fonction est appelée avec le mot |new| devant, sa variable _|this|_
 pointe sur un *nouvel* objet, qui sera automatiquement retourné (à moins que
 la fonction ne retourne explicitement autre chose). Les fonctions utilisées
-pour créer de nouveaux objets comme ça sont appelées des _constructeur_s. En
+pour créer de nouveaux objets comme cela sont appelées des _constructeur_s. En
 voici un pour les lapins :
 
 > function Lapin(adjectif) {
@@ -6177,7 +6177,7 @@ D'où vient la propriété |constructor| ? Elle fait partie du _prototype_
 d'un lapin. Les prototypes sont une partie importante du fonctionnement
 des objets en JavaScript. Chaque objet est basé sur un prototype, qui
 lui confère un ensemble de propriétés. Les objets simples que nous
-avons utilisés jusque là sont tous basés sur le plus élémentaires des
+avons utilisés jusque-là sont tous basés sur le plus élémentaires des
 prototypes, celui associé au constructeur |Object|. En fait, taper |{}|
 est équivalent à taper |new Object()|.
 
@@ -6215,7 +6215,7 @@ propriété, JavaScript cherche d'abord parmi les propriétés de l'objet
 c'est sa valeur que l'on obtient. S'il n'y en a pas, la recherche se poursuit
 à travers le prototype de l'objet, et ensuite à travers le prototype du
 prototype, et ainsi de suite. Si aucune propriété n'est trouvée, c'est
-la valeur |undefined| qui est renvoyée. À l'inverse, lorsqu'on *défini*
+la valeur |undefined| qui est renvoyée. À l'inverse, lorsqu'on *définit*
 la valeur d'une propriété, JavaScript ne remonte jamais au prototype,
 il attribue directement la valeur à une propriété de l'objet lui-même.
 
@@ -6384,7 +6384,7 @@ que déranger.
 
 Écrire l'expression ci-dessus à chaque fois qu'on a besoin de vérifier la
 présence d'une propriété dans un objet n'est pas viable. Nous pourrions
-le mettre dans une fonction, mais une meilleur approche est encore d'écrire
+le mettre dans une fonction, mais une meilleure approche est encore d'écrire
 un constructeur et un prototype dédié aux situations où nous voulons
 utiliser un objet simplement comme un ensemble propriétés. Puisqu'il est
 prévu pour pouvoir y chercher des choses par leurs noms, nous l'appellerons
@@ -6488,7 +6488,7 @@ en méthode sur les chaînes de caractère.
 
 De plus, si votre programme doit fonctionner sur la même page web qu'un autre
 programme (qu'il soit de vous ou non) qui utilise naïvement |for|/|in| --
-comme nous l'avons vu jusque là -- alors ajouter des choses aux prototypes,
+comme nous l'avons vu jusque-là -- alors ajouter des choses aux prototypes,
 et précisément à ceux d'|Object| et |Array| aura toutes les chances de
 casser quelque chose, vu que ces boucles vont d'un coup se mettre à inclure
 les nouvelles propriétés. Du coup, certaines personnes préfèrent ne pas
@@ -6604,7 +6604,7 @@ son contenu et de permettre aux insectes de bouger. Tout d'abord, précisons
 qu'il ne fait que *permettre* aux insectes de bouger. Les bébêtes seront
 elles-mêmes des objets, et ces objets seront responsables de leur propres
 décisions. Le terrarium ne fournit en gros que l'infrastructure qui leur
-demande quoi faire chaque demi-seconde. Et s'il décident de bouger, il
+demande quoi faire chaque demi-seconde. Et s'ils décident de bouger, il
 s'assure que ça se fasse.
 
 Stocker la grille sur laquelle le contenu du terrarium prend place peut vite
@@ -7039,7 +7039,7 @@ lisible lors de l'appel de |print|.
 Comme prévu, l'objet |Terrarium| sera doté de méthode |start| et |stop| pour
 démarrer et arrêter la simulation. Pour cela, nous utiliserons deux fonctions
 fournies par le navigateur web, appelées _|setInterval|_ et _|clearInterval|_.
-La première est utilisé dans le but que son premier argument (une fonction
+La première est utilisée dans le but que son premier argument (une fonction
 ou une chaîne de caractères contenant du code JavaScript) soit exécuté
 périodiquement. Son deuxième argument est la durée en millisecondes
 (1/1000 de seconde) entre les exécutions.
@@ -7079,7 +7079,7 @@ il nous faut constamment exécuter |print(terrarium)|. Ce n'est pas très
 pratique. Ce serait agréable que le contenu s'affiche automatiquement. Ce
 serait encore mieux si, au lieu d'afficher par milliers les images successives
 des terraria, nous n'ayons qu'une seule image que nous mettrions à jour.
-Pour ce dernier problème, cette page offre une fonction nommé
+Pour ce dernier problème, cette page offre une fonction nommée
 |inPlacePrinter|. Elle renvoie une fonction comme |print| qui, au lieu
 d'effectuer un nouvel affichage, remplace l'affichage précédent.
 
@@ -7122,7 +7122,7 @@ Qui voudrait d'une simulation de terrarium avec une seule sorte d'insecte,
 stupide qui plus est ? Pas moi. Ce serait judicieux si nous pouvions ajouter
 différentes sortes d'insectes. Heureusement, il nous suffit pour cela de
 rendre la fonction |elementdApresCaractere| plus générale. Pour le moment,
-elle décrit trois possibilités « codés en dur », c'est à dire de
+elle décrit trois possibilités « codés en dur », c'est-à-dire de
 façon linéaire et sans flexibilité :
 
 > function elementdApresCaractere(caractere) {
@@ -7303,7 +7303,7 @@ Pour rendre la vie dans le terrarium plus réelle, nous allons y ajouter
 les concepts de nourriture et de reproduction. Chaque créature vivante du
 terrarium reçoit une nouvelle propriété, |énergie|, qui est diminuée
 lorsqu'elle effectue une action, et augmentée lorsqu'elle mange quelque
-chose. Lorsqu'elle a suffisamment d'énergie, un chose vivante peut se
+chose. Lorsqu'elle a suffisamment d'énergie, une chose vivante peut se
 reproduire##, engendrant une nouvelle créature du même type.
 
 ## Pour rendre les choses plus simples, les créatures de notre terrarium
@@ -7350,7 +7350,7 @@ d'écrire une fonction qui fait cela, en utilisant l'astuce suivante :
 Cette fonction clone déclare un constructeur nommé
 ConstructeurNouveauPourChaqueClone qui est vide et unique, dont le prototype
 est l'objet passé en argument.
-En appelant |new| sur ce constructeur, un nouvel objet est crée, basé sur
+En appelant |new| sur ce constructeur, un nouvel objet est créé, basé sur
 l'objet passé en argument.
 
 > function TerrariumPlusVivant(plan) {
@@ -7382,10 +7382,10 @@ De cette façon, les objets du nouveau type pourraient prendre la place
 Dans les langages de programmation avec un support explicite de l'orientation
 objet, l'héritage est une chose très simple à mettre en œuvre. JavaScript
 n'a pas de moyen simple de le faire.
-A cause de cela, les programmeurs en JavaScript ont inventé différentes
+À cause de cela, les programmeurs en JavaScript ont inventé différentes
 approches pour le faire. Malheureusement, aucune d'entre elles n'est parfaite.
 
-A la fin de ce chapitre, je vous montrerai d'autres façons de mettre en
+À la fin de ce chapitre, je vous montrerai d'autres façons de mettre en
 œuvre l'héritage, et leurs inconvénients.
 
 ---
@@ -7499,7 +7499,7 @@ de nouveau ici.
 >   return trouve;
 > }
 
-Les lichens ne grandissent jamais au delà de 20 unités d'énergie, sinon
+Les lichens ne grandissent jamais au-delà de 20 unités d'énergie, sinon
 ils seraient trop imposants, quand, encerclés par d'autre lichens, ils
 n'ont plus de place pour se reproduire.
 
@@ -7564,7 +7564,7 @@ Et pour l'essayer.
 
 La plupart du temps, vous devriez voir le lichen envahir rapidement le
 terrarium, cette abondance de nourriture provoquera une abondance de créatures
-voraces, si nombreuses qu'elle finiront par épuiser les ressources en lichen,
+voraces, si nombreuses qu'elles finiront par épuiser les ressources en lichen,
 et enfin s'épuiser elles-mêmes. La nature est si tragique.
 
 > terrarium.stop();
@@ -7596,7 +7596,7 @@ de manger ne se fait que si |lichen.length| est au moins égal à 2.
 > };
 
 Faites fonctionner la simulation du terrarium |lichenPlan| à nouveau
-et constatez son évolution. A moins d'être très chanceux, vous allez
+et constatez son évolution. À moins d'être très chanceux, vous allez
 probablement constater l'extinction des créatures dévoreuses au bout
 d'un certain temps, parce que lorsque survient la famine, ces créatures
 se déplacent de façon désordonnée, au lieu de rechercher le lichen qui
@@ -7604,7 +7604,7 @@ n'est pas très loin d'elles.
 
 ***
 
-Chercher un moyen de rendre la créature |MangeuseLichen| plus apte à la
+Cherchez un moyen de rendre la créature |MangeuseLichen| plus apte à la
 survie. Ne trichez pas -- une  instruction |this.energie += 100| serait
 de la triche. Si vous ré-écrivez  le constructeur, n'oubliez pas de
 l'enregistrer à nouveau dans le  dictionnaire |typesDeCreature|, sinon le
@@ -7615,7 +7615,7 @@ terrarium continuerait d'utiliser  l'ancien constructeur.
 Une approche serait de restreindre le caractère aléatoire des
 déplacements. En choisissant systématiquement une direction aléatoire,
 elles reviennent très souvent sur leurs pas, sans rien trouver à manger. En
-se rappelant de la direction d'où elles viennent, et en privilégiant
+se rappelant la direction d'où elles viennent, et en privilégiant
 cette direction, elles dépenseraient moins de temps et trouveraient plus
 facilement de la nourriture.
 
@@ -7664,7 +7664,7 @@ l'écosystème sans qu'elles ne s'éteignent trop vite. Modifiez le tableau
 
 C'est maintenant à vous de jouer, je n'ai pas trouvé de moyen véritablement
 efficace d'empêcher ces créatures de s'éteindre immédiatement ou
-d'engloutir tous les dévoreuses de lichen, et de s'éteindre ensuite.
+d'engloutir toutes les dévoreuses de lichen, et de s'éteindre ensuite.
 L'astuce qui consiste à autoriser une créature à ne manger que lorsque
 deux unités de nourriture sont à proximité ne fonctionnent pas très bien
 pour elles, car, leur nourriture étant souvent en déplacement, il est rare
@@ -7704,14 +7704,14 @@ résume à la question de savoir si le code produit fonctionne correctement
 et n'a pas de répétition inutile. Pour autant, les principes discutés
 par ces étudiants sont aussi une bonne façon d'aborder l'héritage.
 
-## La paresse, pour un programmeur, n'est pas forcement un péché. Les
+## La paresse, pour un programmeur, n'est pas forcément un péché. Les
 personnes qui, laborieusement, font et refont toujours les mêmes choses
 tendent à être de bon travailleurs à la chaîne et de mauvais programmeurs.
 
 L'héritage est la création de nouveaux types d'objet, les « @_sous-type_sous-types »,
 basés sur des types existants, les « @_super-type_super-types ». Le sous-type commence
 avec la totalité des propriétés et des méthodes du super-type, il hérite
-de lui, ensuite, il en modifie quelques uns, éventuellement en ajoute.
+de lui, ensuite, il en modifie quelques-uns, éventuellement en ajoute.
 L'héritage est mieux utilisé quand les objets décrit par le sous-type
 peuvent être considéré comme *étant* également des objets du super-type.
 
@@ -8288,7 +8288,7 @@ répéter trois fois les noms de fonctions de l'interface. Pas génial.
 ---
 
 On peut résoudre le premier problème en rendant la fonction du module
-anonyme et en l'appelant directement.Pour cela, nous devons ajouter une
+anonyme et en l'appelant directement. Pour cela, nous devons ajouter une
 paire de parenthèses autour de la valeur de la fonction, sinon JavaScript
 va estimer que c'est une définition de fonction normale qui ne peut pas
 être appelée directement.
@@ -8536,7 +8536,7 @@ les expressions régulières peuvent effectuer quelques petites choses que les
 chaînes ne peuvent pas faire. Pour commencer elles permettent à certains
 de leurs éléments de coïncider sur plus d'un seul caractère. Dans le
 \\cfp, quand nous avons extrait les balises pour un document, nous avons eu
-besoin de trouver la première astérisque ou accolade ouvrante dans une
+besoin de trouver le premier astérisque ou la première accolade ouvrante dans une
 chaîne. Nous pouvions faire ainsi :
 
 > var asterisqueOuAccoladeOuvrante = /[\{\*]/;
@@ -8645,7 +8645,7 @@ chiffres ».
 
 ***
 
-Écrivez un motif qui correspond avec les adresses email. Pour simplifier,
+Écrivez un motif qui correspond avec les adresses e-mail. Pour simplifier,
 considérez que les parties avant et après le |@| peuvent contenir seulement
 des caractères alphanumériques et des caractères |.| et |-| (point et
 tiret), tandis que la dernière partie de l'adresse, le code du pays après
@@ -8654,11 +8654,11 @@ le dernier point, peut contenir des caractères alphanumériques et doit
 
 ///
 
-> var adresseEmail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
+> var adressee-mail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
 >
-> show(adresseEmail.test("kenny@test.net"));
-> show(adresseEmail.test("J'ai envyoé un mail à kenny@tets.nets, mais ça marche pas !"));
-> show(adresseEmail.test("le_paresseux_geant@gmail.com"));
+> show(adressee-mail.test("kenny@test.net"));
+> show(adressee-mail.test("J'ai envyoé un mail à kenny@tets.nets, mais ça marche pas !"));
+> show(adressee-mail.test("le_paresseux_geant@gmail.com"));
 
 Les |\b| au début et à la fin du motif permettent de s'assurer que la
 deuxième chaîne de caractères ne correspond pas.
@@ -8831,7 +8831,7 @@ l'expression |/[<>&"]/|.
 
 ---
 
-Il y des cas où les motifs avec lesquels doivent correspondre les
+Il y a des cas où les motifs avec lesquels doivent correspondre les
 chaînes ne sont pas connus au moment où le code est écrit. Par exemple,
 si nous écrivons un filtre à obscénités (simpliste) pour un forum de
 discussions. Nous voulons autoriser uniquement les messages qui ne contiennent
@@ -8958,7 +8958,7 @@ qu'un serveur web fasse quelque chose de plus compliqué que simplement
 rechercher un ficher et l'envoyer au client. -- Il peut traiter ce fichier
 d'une certaine manière en premier, ou peut-être n'y a-t-il pas du tout
 de fichier, mais seulement un programme qui, quand on lui donne une URL,
-a une façon de génèrer le document pertinent pour elle.
+a une façon de générer le document pertinent pour elle.
 
 Des programmes qui transforment ou génèrent des documents sur un serveur
 sont une façon populaire de rendre les pages web moins statiques. Quand
@@ -9044,7 +9044,7 @@ ouvertes pour le même domaine : quand un script tournant sur une page de
 faire tout ce qu'il veut sur cette page.
 
 Une fenêtre ouverte peut être fermée avec sa méthode
-@_|window.close|__|close|_. Si vous ne l'avez pas déjà fermée vous même...
+@_|window.close|__|close|_. Si vous ne l'avez pas déjà fermée vous-même...
 
 > perry.close();
 
@@ -9089,7 +9089,7 @@ propre et plus souple de modifier un document, mais occasionnellement,
 
 Une autre application populaire du JavaScript dans les pages web tourne
 autour des _formulaire_s. Dans les cas où vous ne seriez pas tout à fait sûr du
-rôle des « formulaires », laissez moi vous présenter un résumé rapide.
+rôle des « formulaires », laissez-moi vous présenter un résumé rapide.
 
 Une requête HTTP élémentaire est une simple requête pour un fichier. Quand
 ce fichier n'est pas vraiment un fichier passif, mais un programme côté
@@ -9101,7 +9101,7 @@ de fichier dans la requête. Pour cela, les requêtes HTTP sont autorisées
 
 Après le fichier (|/search|), l'URL continue avec un point d'interrogation,
 suivi de paramètres. Cette requête a un paramètre, nommé |q| (vraisemblablement
-pour 'query', c'est à dire requête), dont la valeur est |empire aztec|. La partie
+pour 'query', c'est-à-dire requête), dont la valeur est |empire aztec|. La partie
 |%20| correspond à un espace. Il y a nombre de caractères qui peuvent
 apparaître dans ces valeurs, comme les espaces, les esperluettes ou les
 points d'interrogation. Ceux-ci sont remplacés par un |%| suivi par une
@@ -9144,7 +9144,7 @@ Voici le HTML pour un formulaire simple :
 ] <form name="info_utilisateur" method="get" action="info.html">
 ]   <p>S'il vous plaît donnez-nous vos informations, afin que nous puissions vous envoyer du spam.</p>
 ]   <p>Nom: <input type="text" name="nom"/></p>
-]   <p>E-Mail: <input type="text" name="email"/></p>
+]   <p>e-mail: <input type="text" name="e-mail"/></p>
 ]   <p>Sexe: <select name="sexe">
 ]             <option>Homme</option>
 ]             <option>Femme</option>
@@ -9158,7 +9158,7 @@ comme nous allons le voir dans un moment. Les noms des champs déterminent
 les noms des paramètres HTTP qui sont utilisés afin de stocker leurs
 valeurs. Envoyer ce formulaire peut produire une URL comme ceci:
 
-] http://planetspam.com/info.html?nom=Ted&email=ted@zork.com&sexe=Homme
+] http://planetspam.com/info.html?nom=Ted&e-mail=ted@zork.com&sexe=Homme
 
 Il y a nombre d'autres tags et propriétés qui peuvent être utilisés dans
 les formulaires mais dans ce livre nous nous en tiendrons aux plus simples,
@@ -9175,7 +9175,7 @@ utilisant la méthode |post| met les valeurs de ses paramètres dans ce bloc
 de données plutôt que dans l'URL.
 
 Quand on envoie de grandes quantités de données, la méthode |get| va
-génèrer des URL d'un kilomètre de long, donc |post| est généralement
+générer des URL d'un kilomètre de long, donc |post| est généralement
 plus pratique. Mais la différence entre les deux méthodes n'est pas juste
 une question de convenance. Traditionnellement, les requêtes |get| sont
 utilisées pour demander un document au serveur, alors que les requêtes
@@ -9205,8 +9205,8 @@ Ouvrez-le.
 
 Quand une URL ne contient pas un nom de serveur, elle est appelée _URL
 relative_. Les URL relatives sont interprétées par le navigateur pour
-référencer des fichiers sur le même serveur que le document en cours. A
-moins qu'il ne commence avec un slash, le chemin (ou répertoire) du document
+référencer des fichiers sur le même serveur que le document en cours. À
+moins qu'il ne commence par un slash, le chemin (ou répertoire) du document
 en cours est aussi conservé et le chemin donné lui est ajouté.
 
 Nous ajouterons une vérification de validité au formulaire, afin qu'il
@@ -9283,14 +9283,14 @@ le nom a été rempli.
 Être capable de lire les valeurs des champs du formulaire rend possible
 l'écriture d'une fonction |valideInfo|, qui prend un objet formulaire comme
 argument et retourne une valeur booléenne: |true| quand le champ |nom|
-n'est pas vide et le champ |email| contient quelque chose qui ressemble à
-une adresse email, sinon |false|. Écrivez cette fonction.
+n'est pas vide et le champ |e-mail| contient quelque chose qui ressemble à
+une adresse e-mail, sinon |false|. Écrivez cette fonction.
 
 ///
 
 > function valideInfo(formulaire) {
 >   return formulaire.elements.nom.value != "" &&
->     /^.+@.+\.\w{2,3}$/.test(formulaire.elements.email.value);
+>     /^.+@.+\.\w{2,3}$/.test(formulaire.elements.e-mail.value);
 > }
 >
 > show(valideInfo(document.forms.info_utilisateur));
@@ -9398,7 +9398,7 @@ navigateur vous évitera de tomber sur des problèmes trop embarrassants.
 
 ---
 
-A part les bugs, les différences de conception d'interface entre navigateurs
+À part les bugs, les différences de conception d'interface entre navigateurs
 produisent un défi intéressant. La situation en cours ressemble à
 quelque chose comme ceci : d'un côté, il y a tous les « petits »
 navigateurs : Firefox, Safari et Opéra sont les plus importants mais il
@@ -9447,7 +9447,7 @@ fiable. Voyez ce que dit le vôtre##:
 >   print(nom, " = ", valeur);
 > });
 
-Une meilleur approche consiste à essayer « d'isoler » nos programmes
+Une meilleure approche consiste à essayer « d'isoler » nos programmes
 des différences entre navigateurs. Si vous devez, par exemple, en découvrir
 plus sur un évènement, comme le clic que nous avons géré en modifiant la
 propriété |onclick| de notre bouton d'envoi, vous devez regarder l'objet de
@@ -9489,7 +9489,7 @@ un navigateur sans JavaScript. Une large part de ce groupe est constitué
 de personnes utilisant un navigateur graphique usuel, mais avec JavaScript
 désactivé pour des raisons de sécurité. Ensuite ceux qui utilisent des
 navigateurs textes, ou navigateurs pour personnes aveugles. Quand on travaille
-sur un site « sérieux », c'est une bonne idée de commencer avec un
+sur un site « sérieux », c'est une bonne idée de commencer par un
 simple système HTML qui fonctionne et ensuite d'ajouter des bidouilles non
 essentielles et des trucs pratiques avec JavaScript.
 
@@ -10023,7 +10023,7 @@ nœud qui suivrait obstinément le curseur de la souris ou pour faire des
 >   $("image").style.top = (100 + 100 * Math.sin(angle)) + "px";
 > }, 100);
 
-Si vous n'êtes pas familier avec la trigonométrie, faites-moi confiance quand
+Si vous n'êtes pas familier de la trigonométrie, faites-moi confiance quand
 je vous dis que le cosinus et le sinus sont utilisés pour construire des
 coordonnées reposant sur le contour d'un cercle. Dix fois par seconde, l'angle
 sur lequel on a placé l'image est modifié et les nouvelles coordonnées
@@ -10146,7 +10146,7 @@ gère pas correctement quelques évènements utiles, tels que l'évènement
 |onunload| qui se produit quand on quitte une page, ou bien qui retourne
 parfois des informations peu claires à propos des évènements du clavier.
 
-Il existe quatre actions associées aux évènements que l'ont peut vouloir
+Il existe quatre actions associées aux évènements que l'on peut vouloir
 invoquer.
 
  * Enregistrement des gestionnaires d'évènements.
@@ -10342,7 +10342,7 @@ Et débarrassez-vous en de nouveau :
 contournement n'est pas quelque chose que vous avez envie de faire dans tous
 les gestionnaires d'évènements. Dans quelques instants, après avoir fait
 connaissance avec quelques incompatibilités supplémentaires, nous allons
-écrire un fonction pour « normaliser » les objets évènements pour
+écrire une fonction pour « normaliser » les objets évènements afin
 qu'ils fonctionnent de la même manière sur tous les navigateurs.
 
 Il est également parfois possible de déterminer quel bouton de la souris a
@@ -10368,7 +10368,7 @@ la souris (pour |mouseout|).
 |mouseover| et |mouseout| peuvent être embêtants quand ils sont enregistrés
 sur un élément qui a des nœuds-fils. Les évènements se produisant
 dans les nœuds-fils vont remonter vers l'élément parent, donc vous allez
-également recevoir une évènement |mouseover| quand la souris entre dans
+également recevoir un évènement |mouseover| quand la souris entre dans
 l'un des nœuds-fils. Les propriétés |target| et |relatedTarget| peuvent
 être utilisées pour détecter (ou ignorer) de tels évènements.
 
@@ -10403,7 +10403,7 @@ quelle touche peut être réalisé avec quelques simples expériences.
 
 Dans la plupart des navigateurs, un code de touche unique correspond à une
 touche *physique* unique sur votre clavier. Le navigateur Opera, toutefois,
-va génèrer des codes différents pour certaines touches en fonction du fait
+va générer des codes différents pour certaines touches en fonction du fait
 que la touche Maj est appuyée ou non. Pire encore, certains de ces codes
 shift-est-appuyé sont des codes qui sont également utilisés pour d'autres
 touches -- Maj-9, qui dans la plupart des claviers QWERTY est utilisé pour
@@ -10564,7 +10564,7 @@ des images sont ajoutées à ces cellules et déplacées  dans d'autres
 cellules en fonction du besoin.
 
 On pourrait utiliser ce tableau comme représentation principale de nos
-données : pour savoir si il y a un mur dans une case donnée, il suffit
+données : pour savoir s'il y a un mur dans une case donnée, il suffit
 de regarder l'image de fond de la cellule appropriée du tableau, et pour
 trouver le joueur, il suffit de chercher un nœud image avec la propriété
 |src| correcte. Dans certains cas, cette approche est pratique, mais pour
@@ -10594,7 +10594,7 @@ que l'opérateur |new|, pour créer de nouveaux objets.
 Commençons par les objets représentant les cases de l'aire de jeu. Ils
 sont chargés de la définition correcte de l'arrière-plan de leur cellule,
 et de l'ajout des images quand nécessaire. Le répertoire |img/sokoban/|
-contient un ensemble d'images, basées sur une autre ancien jeu, qui seront
+contient un ensemble d'images, basées sur un autre ancien jeu, qui seront
 utilisées pour visualiser le jeu. Pour commencer, le prototype |Carreau|
 peut ressembler à ça.
 
@@ -10851,7 +10851,7 @@ un type d'objet appelé |JeuSokoban|, qui est responsable de ce qui suit :
  * Mettre à jour le score, et passer au niveau suivant quand un niveau est réussi.
  * Ajouter des boutons pour réinitialiser le niveau en cours ou le jeu tout entier (retour au niveau 0).
 
-On commence encore avec un prototype inachevé.
+On commence encore par un prototype inachevé.
 
 > var JeuSokoban = {
 >   construct: function(place) {
@@ -10957,7 +10957,7 @@ brusquement. En modifiant la méthode |Carreau.effaceContenu|, essayez
 d'afficher une animation de rochers « tombants » lorsqu'ils sont
 sur le point d'être enlevés. Faites-les rapetisser un moment avant, puis
 disparaître. Vous pouvez utiliser |style.width = "50%"|, et de la même
-façon |style.height|, pour afficher un image à, par exemple, la moitié
+façon |style.height|, pour afficher une image à, par exemple, la moitié
 de sa taille habituelle.
 
 ///
@@ -10992,7 +10992,7 @@ les niveaux.
 
 @_|onfocus|_@_|onblur|_ D'autres types d'évènements qui peuvent être
 utiles sont les évènements _|focus|_ et _|blur|_, qui sont générés sur
-des éléments qui peuvent recevoir le « focus », comme par exemple les
+des éléments qui peuvent recevoir le « focus », par exemple les
 champs de saisie d'un formulaire. |focus|, évidemment, se produit lorsque
 vous donnez le focus à un élément, par exemple en cliquant dessus. |blur|
 est le terme JavaScript pour « enlever le focus », et il est généré
@@ -11061,7 +11061,7 @@ ralentir fortement un ordinateur.
 Quand est-ce que cette fuite se produit ? À cause d'un défaut dans le
 _ramasse-miettes_ d'Internet Explorer, le système dont le but est de
 récupérer les valeurs inutilisées, lorsque que vous avez un nœud DOM
-qui, à travers une des ses propriétés ou d'une façon plus indirecte,
+qui, à travers une de ses propriétés ou d'une façon plus indirecte,
 fait référence à un objet JavaScript normal, et que cet objet, en
 retour, fait référence à ce nœud DOM, aucun des deux objets ne sera
 ramassé par le ramasse-miettes. Cela vient du fait que les nœuds DOM
@@ -11137,7 +11137,7 @@ besoin, et d'enregistrer un évènement |onunload| pour dés-enregistrer
 les gestionnaires qui sont nécessaires jusqu'à ce que la page soit
 déchargée. Il est possible d'étendre un système d'enregistrement
 d'évènements, tel que notre fonction |addHandler|, pour automatiser le
-processus. En choisissant cette approche, vous devez gardez à l'esprit
+processus. En choisissant cette approche, vous devez garder à l'esprit
 que les gestionnaires d'évènements ne sont pas la seule source possible
 de fuite de mémoire — ajouter des propriétés aux objets des nœuds du
 DOM peut causer des problèmes comparables.
@@ -11703,7 +11703,7 @@ tableaux javaScript ont une magnifique méthode _|sort|_, qui peut être
 utilisée pour des tâches difficiles. Malheureusement, re-trier un tableau
 entier chaque fois qu'un élément est supprimé demande plus de travail que
 chercher simplement la valeur minimale dans un tableau non-trié. On peut
-utiliser certaines astuces, comme par exemple, au lieu de re-trier tout le
+utiliser certaines astuces, par exemple, au lieu de re-trier tout le
 tableau, s'assurer simplement que les nouvelles valeurs sont insérées au
 bon endroit, ce qui permet au tableau, qui était trié auparavant, de rester
 trié. Cela se rapproche de la méthode que le tas binaire utilise déjà,
