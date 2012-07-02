@@ -166,7 +166,7 @@ pour les instructions et les adresses mémoire :
 ] [boucle]
 ]  Mettre 'compteur' à 'comparaison'
 ]  Soustraire 11 à 'comparaison'
-]  Si 'comparaison' est zero, continuer à [fin]
+]  Si 'comparaison' est zéro, continuer à [fin]
 ]  Ajouter 'compteur' à 'total'
 ]  Ajouter 1 à 'compteur'
 ]  Continuer à [boucle]
@@ -733,7 +733,7 @@ est peut-être verte, mais elle n'est pas égale à "verte".
 
 ---
 
-Il n'est pas toujours évident de savoir si des parenthères sont
+Il n'est pas toujours évident de savoir si des parenthèses sont
 nécessaires. En pratique, on peut généralement s'en sortir en sachant que
 parmi tous les opérateurs rencontrés, |||| a la priorité la plus basse,
 viennent ensuite, dans l'ordre, |&&| puis les opérateurs de comparaisons
@@ -940,7 +940,7 @@ Des programmes d'une ligne ne sont pas très intéressant. Quand vous mettez
 plus d'une instruction dans un programme ces dernières sont, comme on peut
 s'en douter, exécutées une à la fois de haut en bas.
 
-> var leNombre = Number(prompt("Choissisez un nombre", ""));
+> var leNombre = Number(prompt("Choisissez un nombre", ""));
 > print("Votre nombre est la racine carrée de " +
 >       (leNombre * leNombre));
 
@@ -1000,7 +1000,7 @@ aurait pu être :
 
 Ici |nombreCourant = nombreCourant + 2;| est l'instruction qui forme le corps
 de la boucle. Mais nous devons aussi afficher le nombre, donc la boucle sera
-consituée d'une instruction supplémentaire.
+constituée d'une instruction supplémentaire.
 Les@_|{}|_accolades (|{| et |}|) sont utilisées pour grouper des instructions
 dans des _bloc_s. Pour le reste du code un bloc compte comme une seule et
 même instruction. Dans l'exemple précédent ceci est utilisé pour inclure
@@ -1087,7 +1087,7 @@ pour chaque nouveau bloc, mais les goûts varient.
 La zone de la console où vous pouvez taper des programmes ajoutera
 automatiquement ces espaces. Ça peut sembler pénible au début, mais
 quand vous écrirez beaucoup de code, vous verrez que c'est un gain de
-temps important. Appuyer sur la touche « tab » réindentra la ligne
+temps important. Appuyer sur la touche « tab » réindentera la ligne
 sur laquelle est le curseur.
 
 Dans quelques cas, le JavaScript vous autorise à omettre le point-virgule en
@@ -1557,7 +1557,7 @@ certain nombre d'instructions, mais si nous disposons d'une fonction |print|
 il nous suffit d'écrire |print("Aleph")| et le tour est joué.
 
 Cependant, si on voit les fonctions simplement comme des boîtes de conserve
-de code on ne les considére pas à leur juste valeur. Si nécessaire, elles
+de code on ne les considère pas à leur juste valeur. Si nécessaire, elles
 peuvent jouer les rôles de fonctions pures, d'algorithmes, de détours,
 d'abstractions, de moyens de décision, de modules, de prolongements, de
 structures de données et de bien d'autres choses encore. Être capable d'utiliser
@@ -1641,7 +1641,7 @@ et du point de vue du code qui l'appelle, il n'y a pas d'effet de bord.
 Écrivez une fonction appelée |absolu| qui retourne la valeur absolue du
 nombre qui lui est donné en argument. La valeur absolue d'un nombre négatif
 est la version positive du même nombre, et la valeur absolue d'un nombre
-positif (ou zero) est le nombre lui-même.
+positif (ou zéro) est le nombre lui-même.
 
 ///
 
@@ -2665,7 +2665,7 @@ est l'extraction des noms d'un paragraphe. L'algorithme était le suivant :
  3. Dans cette partie, séparer les noms en cherchant les virgules.
 
 Il faut reproduire cela à la fois pour les paragraphes qui commencent par
-|Décés le| et ceux qui commencent par |Est né le|. Ce serait une bonne idée
+|Décès le| et ceux qui commencent par |Est né le|. Ce serait une bonne idée
 de le mettre dans une fonction, de sorte que les deux parties de code qui
 gèrent les différentes sortes de paragraphes puissent l'utiliser.
 
@@ -2841,7 +2841,7 @@ Nous continuons à découper l'algorithme en petites unités :
 >   combien++;
 > print("Il y a ", combien, " chats.");
 
-La totalité de l'algoritme est encapsulée dans une fonction. Cela signifie
+La totalité de l'algorithme est encapsulée dans une fonction. Cela signifie
 qu'elle ne laisse rien traîner en vrac derrière elle après exécution :
 |chatsVivants| est maintenant une variable locale dans la fonction et non plus
 une variable globale, si bien qu'elle n'existe que pendant que la fonction
