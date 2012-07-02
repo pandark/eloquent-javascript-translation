@@ -2115,7 +2115,7 @@ Structures de données : objets et tableaux / data
 
 Ce chapitre sera consacré à la résolution de quelques problèmes simples. En
 chemin, nous allons étudier deux nouveaux types de valeurs, les tableaux
-et les objets, et étudier quelques techniques les concernant.
+et les objets, et quelques techniques les concernant.
 
 Considérons la situation suivante : votre tante Émilie l'excentrique,
 dont la rumeur dit qu'elle vit avec cinquante chats (en fait personne n'arrive
@@ -2253,7 +2253,7 @@ la propriété |"nom"| est liée à la chaîne |"Spot"|, et la propriété
 propriété |taille| en lui donnant une nouvelle valeur, ce qui se fait de
 la même manière que pour la modification d'une variable.
 
-Le mot-clé _|delete|_ supprime les propriétés. Essayez de lire une
+Le mot-clé _|delete|_ supprime les propriétés. Essayer de lire une
 propriété qui n'existe pas donnera la valeur |undefined|.
 
 Si une propriété qui n'existe pas encore est affectée avec l'opérateur
@@ -2274,7 +2274,7 @@ avec des parenthèses :
 > delete truc["gabba gabba"];
 
 Comme vous pouvez le voir, on peut mettre n'importe quelle expression entre
-les parenthèses. Elle sera convertie dans une chaîne pour définir le nom
+les parenthèses. Elle sera convertie en une chaîne pour définir le nom
 de la propriété. On peut aussi utiliser des variables pour donner un nom
 à une propriété :
 
@@ -2894,7 +2894,7 @@ Le constructeur  _|Date|_ peut être utilisé de différentes manières
 
 Comme vous pouvez le voir, ces objets peuvent enregistrer l'heure d'un
 jour aussi bien qu'une date. Quand aucun argument n'est précisé, un objet
-réprésentant l'heure et la date actuelles est créé. Des arguments peuvent
+représentant l'heure et la date actuelles est créé. Des arguments peuvent
 être précisés pour stocker une heure et une date précises. L'ordre des
 arguments est l'année, le mois, le jour, l'heure, la minute, la seconde puis
 la milliseconde. Les quatre derniers arguments sont optionnels et définis
@@ -2916,7 +2916,7 @@ méthodes |get…|.
 >       aujourdhui.getMinutes(), ", secondes: ", aujourdhui.getSeconds());
 > print("Jour de la semaine : ", aujourdhui.getDay());
 
-Tous ces éléments, expecté la méthode |getDay|, ont une variable |set...|
+Tous ces éléments, excepté la méthode |getDay|, ont une variable |set...|
 qui peut être utilisée pour modifier la valeur de l'objet date.
 
 Dans l'objet, une date est représentée par la somme de millisecondes
@@ -2939,12 +2939,12 @@ Comparer les dates avec |<|, |>|, |<=| et |>=| remplit exactement l'office
 que nous voulons en faire. Quand un objet date est comparé avec lui-même,
 le résultat est |true|, ce qui est bien également. Mais quand _|==|_ est
 utilisé pour comparer un objet date à un autre objet date différent mais
-de même valeur, on obtient |false|. Etrange, non ?
+de même valeur, on obtient |false|. Étrange, non ?
 
 Comme précisé plus tôt, |==| retournera la valeur [false| lors de la
 comparaison de deux éléments différents, même si ces deux éléments
 contiennent les mêmes propriétés. Ceci est un peu maladroit et sujet
-à erreur, puisqu''on s'attendrait à ce que |>=| et |==| aient le même
+à erreur, puisqu'on s'attendrait à ce que |>=| et |==| aient le même
 comportement. Pour tester si deux dates sont égales, peut être fait de
 cette manière :
 
@@ -2973,7 +2973,7 @@ s'éloigne du GMT (Heure du méridien de Greenwich)
 
 La partie date est toujours exactement à la même place du paragraphe. Comme
 c'est pratique. Écrivez une fonction |extraireDate| qui prend un tel paragraphe
-pour argument, extrait la date et la renvoit sous la forme d'un objet date.
+pour argument, extrait la date et la renvoie sous la forme d'un objet date.
 
 ///
 
@@ -3526,8 +3526,8 @@ La théorie derrière la gestion des exceptions fonctionne ainsi : il est
 possible pour le code de _lever_ (ou _lancer_) une _exception_, qui est une
 valeur. Quand on lève une exception, cela ressemble parfois à un retour de
 fonction boosté aux stéroïdes : on ne sort pas simplement de la fonction
-en cours, mais aussi des fonctions appellantes, en remontant à la fonction
-appellante de plus haut niveau qui a initié l'exécution actuelle. Cela
+en cours, mais aussi des fonctions appelantes, en remontant à la fonction
+appelante de plus haut niveau qui a initié l'exécution actuelle. Cela
 s'appelle _dépiler_. Vous vous rappelez peut-être que la _pile_ des appels
 de fonction qui avait été abordée au \\cfunctions. Une exception descend
 dans cette pile, en renvoyant tous les contextes des appels qu'elle rencontre.
@@ -3898,7 +3898,7 @@ au lieu d'une combinaison complexe de variables et de boucles, vous pouvez
 décomposer les algorithmes en algorithmes plus fondamentaux, qui sont
 appelés par leur nom et ne doivent pas être ré-écrits sans cesse.
 
-Etre en mesure d'écrire *ce que* nous voulons faire au lieu de *comment*
+Être en mesure d'écrire *ce que* nous voulons faire au lieu de *comment*
 nous le faisons, c'est travailler à un niveau d'abstraction supérieur. En
 pratique, cela implique un code plus concis, plus clair et plus agréable
 à lire.
@@ -3989,7 +3989,7 @@ Puis, écrivez une fonction |count| de plus haut niveau qui accepte un tableau
 et une fonction de tests en tant qu'arguments, et qui donne en retour le
 nombre d'éléments dans le tableau pour lesquels la fonction de test a
 renvoyé |true|.
-Ecrivez de nouveau |compterLesZeros| en utilisant cette fonction.
+Écrivez de nouveau |compterLesZeros| en utilisant cette fonction.
 
 ///
 
@@ -4082,7 +4082,7 @@ télécharger vers sa page personnelle en ligne...
 ---
 
 Est-ce que vous connaissez le HTML ? C'est la méthode utilisée pour ajouter
-du formattage sur les pages des sites web et on l'utilisera de temps en temps
+du formatage sur les pages des sites web et on l'utilisera de temps en temps
 dans ce livre, donc ce serait bien si vous saviez comment cela fonctionne,
 au moins de manière générale. Si vous êtes un bon étudiant, vous
 pourriez rechercher sur internet une introduction au HTML maintenant et
@@ -4103,7 +4103,7 @@ où doit apparaître une image sur la page, ou elle peut contenir du texte et
 d'autres balises, par exemple pour marquer le début et la fin des paragraphes.
 
 Certaines balises sont obligatoires, un document HTML intégral doit toujours
-tenir entre deux balises |html|. Voici un example d'un document HTML :
+tenir entre deux balises |html|. Voici un exemple d'un document HTML :
 
 ] <html>
 ]   <head>
@@ -4132,7 +4132,7 @@ d'abord ouverts avec |<tagname>|, et après ils sont terminés par
 et |body|. Le premier contient des informations *sur* le document, le second
 contient le document en lui-même.
 
-La plupart des noms de balise sont des abbréviations cryptiques. |h1| veut
+La plupart des noms de balise sont des abréviations cryptiques. |h1| veut
 dire « heading 1 » (titre 1), le plus gros titre qu'il y ait. Il y a
 aussi |h2| jusqu'à |h6| pour des titres de plus en plus petits. |p| veut
 dire « paragraphe », et |img| veut dire « image ». L'élément
@@ -4263,7 +4263,7 @@ pu récupérer le fichier suivant :
 ]
 ] %% Sagesse
 ]
-] Un étudiant se plaignait des valeurs numériques. « Quand je prend
+] Un étudiant se plaignait des valeurs numériques. « Quand je prends
 ] la racine de deux et que je veux de nouveau son carré, le résultat est
 ] inexact ! ».
 ] En entendant cela, Fu-Tzu rit. « Voici une feuille de papier.
@@ -4339,7 +4339,7 @@ programme de génération HTML pour lui. Une bonne approche à ce problème
 ressemble à ce qui suit :
 
  1. Découper le fichier en paragraphes en le découpant à chaque fin de ligne.
- 2. Supprimer les caractères « % » des paragraphes d'entête et marquer ceux-ci comme entête.
+ 2. Supprimer les caractères « % » des paragraphes d'en-tête et marquer ceux-ci comme en-têtes.
  3. Traiter le texte des paragraphes proprement dit, les découper en corps de texte, textes en emphase et notes de bas de page.
  4. Déplacer les notes de bas de page en fin de document, mettre des numéros## à leur place.
  5. Entourer chaque élément d'une balise HTML adéquate.
@@ -4368,13 +4368,13 @@ vous comprendrez que cela fera l'affaire :
 
 ***
 
-Ecrire une fonction |transformeParagraphe| qui, recevant un paragraphe sous
-forme de chaîne en argument, détermine si ce paragraphe est un entête. S'il
+Écrire une fonction |transformeParagraphe| qui, recevant un paragraphe sous
+forme de chaîne en argument, détermine si ce paragraphe est un en-tête. S'il
 l'est, enlever les caractères « % » et les compter. Cette fonction renvoie
 un objet doté de 2 propriétés, |contenu| contenant le texte du paragraphe,
 et |type|, qui contient le tag qui devra entourer le paragraphe, |"p"| pour
-des paragraphes proprement dit, |"h1"| pour les entêtes avec un seul « %
-», et |"hX"| pour les entêtes avec |X| « % » caractères.
+des paragraphes proprement dit, |"h1"| pour les en-têtes avec un seul « %
+», et |"hX"| pour les en-têtes avec |X| « % » caractères.
 
 Rappelez-vous que les chaînes possèdent une méthode |charAt| permettant
 de rechercher un caractère précis dans les caractères qui la composent.
@@ -4663,7 +4663,7 @@ d'une boucle chacun de ces motifs pour les appliquer un par un.
 
 Les guillemets sont également remplacés, car nous utiliserons cette fonction
 pour le texte à l'intérieur des attributs des balises HTML. Ces attributs
-seront encadrés par des guillements, et par conséquent ne pourront en
+seront encadrés par des guillemets, et par conséquent ne pourront en
 contenir eux-mêmes.
 
 Appeler quatre fois la méthode replace signifie que l'ordinateur devra
@@ -4763,7 +4763,7 @@ pour que la balise ne soit pas vide, et ainsi avoir une balise fermante).
 
 Écrivez une fonction |renduFragment|, et utilisez-la pour implémenter
 une autre fonction, |renduParagraphe|, qui prend un objet paragraphe (en
-ne tenant pas compte des notes de bas de page) et produit l'élement HTML
+ne tenant pas compte des notes de bas de page) et produit l'élément HTML
 correct (qui peut être un paragraphe ou un en-tête, en fonction du |type|
 de l'objet paragraphe).
 
@@ -4976,7 +4976,7 @@ vous pourriez rencontrer. Quand vous lisez un livre technique, il est bien trop
 facile de parcourir le texte très rapidement, d'acquiescer solennellement
 et de s'empresser d'oublier ce que l'on a lu. Si vous faites sérieusement
 un effort pour résoudre un problème, il devient votre problème, et sa
-solution aura vraiment sens.
+solution aura vraiment du sens.
 
 ---
 
@@ -5050,7 +5050,7 @@ Sympa, n'est-ce pas ? Remarquez comment la fonction interne (|ajouterRoute|)
 utilise les mêmes noms (|depart| et |arrivee|) pour ses paramètres que
 ceux de la fonction externe.
 Ils ne vont pas interférer : à l'intérieur de |ajouterRoute|, ils
-corresdpondent aux paramètre de |ajouterRoute|, et à l'extérieur, ils
+correspondent aux paramètre de |ajouterRoute|, et à l'extérieur, ils
 correspondent aux paramètres de |creerRoute|.
 
 L'instruction |if| dans |ajouterRoute| s'assure qu'il y a un tableau de
@@ -5194,7 +5194,7 @@ et déterministes.
 ---
 
 La méthode du joueur est la manière de faire pour ceux qui abhorrent
-la structuration et la planification, qui cherchent désespéremment
+la structuration et la planification, qui cherchent désespérément
 l'aventure. Nous avons décidé d'écrire un programme qui peut trouver le
 chemin *le plus court* pour aller d'un point à un autre, il nous faut donc
 utiliser une autre méthode.
@@ -5202,7 +5202,7 @@ utiliser une autre méthode.
 Une approche très simple est de résoudre un tel problème par la méthode
 dite « _essais et erreurs_ ». Il faut :
 
- 1. Générer toutes les routes possibles.
+ 1. génèrer toutes les routes possibles.
  2. Dans cet ensemble, trouver le plus court chemin qui connecte le point de départ au point d'arrivée.
 
 L'étape 2 n'est pas difficile. L'étape 1 est un peu plus problématique. Si
@@ -5211,7 +5211,7 @@ routes. Bien sûr, il est peu probable que les routes avec des boucles
 soient les chemins les plus courts pour aller d'un point à un autre, et
 les routes qui ne commencent pas au point de départ ne doivent pas non plus
 être prises en compte. Pour un petit graphe telle que Hiva Oa, il devrait
-être possible de générer des routes non cycliques (exemptes de boucles)
+être possible de génèrer des routes non cycliques (exemptes de boucles)
 démarrant d'un lieu donné.
 
 ---
@@ -5240,7 +5240,7 @@ utilisez une boucle |for|, vous pouvez en sortir avec l'instruction |break|,
 mais dans une structure |forEach| ceci ne fonctionnera pas, parce que le
 cœur de la boucle est une fonction et l'instruction |break| n'interrompt
 pas une fonction. Une solution pour être d'adapter |forEach| pour qu'il
-reconnaissse certains types d'exceptions comme une un signal pour un arrêt
+reconnaisse certains types d'exceptions comme une un signal pour un arrêt
 (similaire à |break| dans les boucles |for|)
 
 > var Break = {toString: function() {return "Break";}};
@@ -5336,7 +5336,7 @@ beaucoup de tableaux intermédiaires et inutiles.
 
 ***
 
-Avant de commencer à générer des routes, nous avons besoin d'une fonction
+Avant de commencer à génèrer des routes, nous avons besoin d'une fonction
 d'ordre supérieur supplémentaire. Celle-ci est appelée _|filter|_. Tout
 comme |map|, elle prend une fonction et un tableau en arguments, et produit
 un nouveau tableau, mais au lieu de placer le résultat de la fonction
@@ -5363,10 +5363,10 @@ de la fonction, de manière à ce qu'il finisse à la gauche de |>|.)
 
 ---
 
-Imaginez à quoi un algorithme permettant de générer des itinéraires
-pourrait ressembler — il commence au point de départ et génére un
+Imaginez à quoi un algorithme permettant de génèrer des itinéraires
+pourrait ressembler — il commence au point de départ et génère un
 itinéraire pour chaque route qui quitte ce lieu. À la fin de chaque route,
-il continue à générer des itinéraires supplémentaires. Il ne parcourt
+il continue à génèrer des itinéraires supplémentaires. Il ne parcourt
 pas un simple itinéraire, il se ramifie. À cause de cela, la _récursion_
 est une manière normale de modéliser ce phénomène.
 
@@ -5397,7 +5397,7 @@ La fonction renvoie un tableau d'objets itinéraire, chacun
 contenant un tableau de lieux parcourus par l'itinéraire et une
 longueur. |trouverItineraires| continue un itinéraire récursivement,
 renvoyant un tableau avec toutes les extensions possibles de cette
-route. Quand la fin de l'intinéraire est le lieu défini comme lieu de
+route. Quand la fin de l'itinéraire est le lieu défini comme lieu de
 fin, il retourne juste l'itinéraire, sachant que continuer l'itinéraire
 serait absurde. Si c'est un autre lieu, il faut donc continuer. La
 ligne contenant |flatten|/|map|/|filter| est probablement la plus dure à
@@ -5498,7 +5498,7 @@ pointe Teohotepapapa…
 ---
 
 Sur une petite île comme Hiva Oa, ce n'est pas une tâche insurmontable
-de générer tous les itinéraires possibles. Si vous essayez de faire ça
+de génèrer tous les itinéraires possibles. Si vous essayez de faire ça
 sur une carte raisonnablement détaillée de la Belgique, par exemple,
 cela va prendre un temps ridiculement long, sans parler d'une quantité
 de mémoire démentielle. Pourtant, vous avez sans doute déjà vu de tels
@@ -5507,7 +5507,7 @@ ou moins idéal parmi un énorme labyrinthe de routes possibles en quelques
 secondes à peine. Comment font-ils ça ?
 
 Si vous êtes attentif, vous avez peut-être remarqué qu'il n'est pas
-nécessaire de générer tous les itinéraires jusqu'au bout. Si nous
+nécessaire de génèrer tous les itinéraires jusqu'au bout. Si nous
 comparons les itinéraires *pendant* que nous les élaborons, nous pouvons
 cesser le calcul de ces itinéraires et dès que nous avons trouvé un
 premier itinéraire pour notre destination, nous pouvons cesser l'extension
@@ -5539,7 +5539,7 @@ Nous n'aimons pas gaspiller l'énergie, donc nous préférons prendre le
 chemin le plus facile. Monter est plus pénible que descendre, et descendre
 plus pénible que marcher sur un terrain plat##. Cette fonction calcule le
 « dénivelé » entre deux carrés adjacents, qui représente l'intensité
-de la fatique que vous éprouvez à marcher ou grimper de l'un à l'autre. On
+de la fatigue que vous éprouvez à marcher ou grimper de l'un à l'autre. On
 considère que monter est deux fois plus pénible que descendre.
 
 ## Si si, je vous assure.
@@ -5648,7 +5648,7 @@ Le problème fondamental, c'est qu'il y a trop de possibilités pour aller
 dans la mauvaise direction. À moins de savoir comment nous diriger vers la
 destination pendant l'exploration des chemins, un choix que nous faisons pour
 poursuivre une route donnée va plus probablement nous faire emprunter le
-mauvais chemin que le bon. Si vous continuez à générer des itinéraires
+mauvais chemin que le bon. Si vous continuez à génèrer des itinéraires
 de cette façon, et même si l'un d'entre eux atteint la cible de manière
 accidentelle, vous ne savez pas si c'est le chemin le plus court.
 
@@ -5835,7 +5835,7 @@ itinéraires inutiles.
 Nous allons utiliser un tas binaire pour stocker la liste ouverte. Quelle
 structure serait la bonne pour la liste des nœuds atteints ? Cette
 liste sera utilisée pour chercher des routes, en lui passant un
-couple |x|, |y| de coordonnées. Rapidement de préférence. Ecrivez
+couple |x|, |y| de coordonnées. Rapidement de préférence. Écrivez
 trois fonctions |creerListePointsParcourus|, |stockerPointsParcourus|, et
 |trouverPointsParcourus|. La première crée la structure de données ; la
 seconde, étant donnée une liste de nœuds atteints, un point, et une route,
@@ -5872,7 +5872,7 @@ que, parfois, l'objet intérieur que nous recherchons n'existe pas (encore).
 >     return listeInterne[point.y];
 > }
 
-Une autre possiblité est de fusionner les |x| et |y| du point en un nom
+Une autre possibilité est de fusionner les |x| et |y| du point en un nom
 unique de propriété, et de l'utiliser pour stocker les itinéraires dans
 un objet unique.
 
@@ -5909,7 +5909,7 @@ en utilisant |new| et qui ont des méthodes pour les manipuler.
 
 ---
 
-Nous avons donc enfin notre vrai fonction de recherche de chemin :
+Nous avons donc enfin notre vraie fonctionde recherche de chemin :
 
 > function trouverItineraire(depart, arrivee) {
 >   var listeOuverte = new BinaryHeap(scoreItineraire);
@@ -5957,7 +5957,7 @@ recalculer plusieurs fois.
 |ajouterItineraireOuvert| est une fonction commode pour ajouter une nouvelle
 route à la fois à la liste ouverte et à la liste des nœuds atteints. On
 l'utilise immédiatement pour ajouter le début de la route. Remarquez que
-les objets route ont roujours une propriétés |point|, qui stocke le point
+les objets route ont toujours une propriétés |point|, qui stocke le point
 d'arrivée de la route, et |longueur|, qui stocke la longueur courante de
 la route. Les routes qui ont plus d'une case de longueur, ont aussi une
 propriété |depart|, qui pointe sur leurs prédécesseurs.
@@ -6123,7 +6123,7 @@ d'où le |null|.
 
 Les fonctions ont également une méthode _|call|_, qui se comporte comme
 |apply|, à l'exception du fait que les arguments peuvent être fournis
-séparéments, et non dans un tableau :
+séparément, et non dans un tableau :
 
 > parler.call(grosLapin, "Rot.");
 
@@ -6146,9 +6146,9 @@ voici un pour les lapins :
 > var lapinTueur = new Lapin("tueur");
 > lapinTueur.parler("GRAAAAAAAAAH !");
 
-Il y a une convention, parmis les programmeurs JavaScript, qui consiste
+Il y a une convention, parmi les programmeurs JavaScript, qui consiste
 à faire débuter les noms de constructeurs par une lettre majuscule. Cela
-permet de mieux les reconnaîtres au milieu des autres fonctions.
+permet de mieux les reconnaître au milieu des autres fonctions.
 
 Mais pourquoi le mot clés |new| est-il nécessaire ? Après tout, nous
 aurions pu écrire simplement :
@@ -6210,7 +6210,7 @@ les objets basés dessus, mais les propriétés de cet objet ne changent
 jamais le prototype.
 
 Les règles sont précisément les suivantes : pour trouver la valeur d'une
-propriété, JavaScript cherche d'abord parmis les propriétés de l'objet
+propriété, JavaScript cherche d'abord parmi les propriétés de l'objet
 *lui-même*. S'il y a une propriété qui porte le nom de l'on recherche,
 c'est sa valeur que l'on obtient. S'il n'y en a pas, la recherche se poursuit
 à travers le prototype de l'objet, et ensuite à travers le prototype du
@@ -6320,7 +6320,7 @@ le nom de la propriété et la valeur qu'elle a dans l'objet.
 >   print("Un ", nom, " de ", valeur, ".");
 > });
 
-Mais, que se passe-t-il si on rencontre un chat nommé |hasOwnProperty|
+Mais, que se passe-t-il si on rencontre un chat nommé |hasOwnProperty| 
 ? (on ne sait jamais.)
 Il sera stocké dans l'objet, et la tentative suivante de parcourir la
 collection de chats, utilisant |objet.hasOwnProperty|, sera un échec, car
@@ -6346,7 +6346,7 @@ des propriétés intégrées.)
 Ici, au lieu d'utiliser la méthode trouvée dans l'objet lui-même, nous
 prenons la méthode fournie par le prototype |Object|, et l'appliquons en
 utilisant |call| sur le bon objet. À moins que quelqu'un n'ait joué avec
-la méthode de |Object.prototype| (et ne faîtes pas ça), le programme
+la méthode de |Object.prototype| (et ne faites pas ça), le programme
 devrait fonctionner correctement.
 
 ---
@@ -6561,7 +6561,7 @@ produit un objet avec des propriétés |x| et |y|. Ajoutez au prototype de
 ce constructeur une méthode |add|, qui prends un autre point en argument
 et retourne un *nouveau* point dont les |x| et |y| sont la somme des |x|
 et |y| des deux points donnés. Ajoutez également une méthode |isEqualTo|,
-qui prend un point et renvoit un booléen, indiquant si le point local (|this|)
+qui prend un point et renvoie un booléen, indiquant si le point local (|this|)
 a les mêmes coordonnées que le point donné.
 
 En dehors des deux méthodes, les propriétés |x| et |y| font également
@@ -6714,7 +6714,7 @@ Avant d'écrire un nouveau constructeur |Terrarium|, nous devons être
 plus précis à propos de ces « objets insectes » qui évolueront à
 l'intérieur. Précédemment, j'ai dit que le terrarium demandera aux
 insectes quelle action ils veulent effectuer. Cela fonctionnera de la fonction
-suivante : chaque insecte aura une méthode |agit| qui, appellée, renverra
+suivante : chaque insecte aura une méthode |agit| qui, appelée, renverra
 une « action ». Une action est un objet doté d'une propriété |type|,
 nommant le type d'action que l'insecte souhaitera effectuer. Par exemple
 |"déplacement"|. La plupart des actions porteront d'autres informations,
@@ -6725,7 +6725,7 @@ côté d'eux sur la grille. Mais ils peuvent s'en servir pour déterminer
 leurs actions. Quand la méthode |agit| est appelée, il lui est fourni un
 objet avec des informations sur l'environnement de l'insecte en question. Il
 porte une propriété pour chacune des huit directions autour de l'insecte. La
-propriété indiquant ce qu'il y a au-dessus de l'insecte est appellé |"n"|,
+propriété indiquant ce qu'il y a au-dessus de l'insecte est appelé |"n"|,
 pour Nord, pour ce qu'il y a au-dessus à droite |"ne"|, pour Nord-Est,
 et ainsi de suite.
 Pour savoir quelle direction explorer selon le nom de la direction, l'objet
@@ -6791,7 +6791,7 @@ part et occuper une partie de l'espace.
 La  méthode la plus évidente de l'objet terrarium est |toString|,
 qui  transforme un terrarium en chaîne de caractères. Pour faciliter
 cette  tâche, nous donnons à |mur| et au prototype de |InsecteStupide|
-une propriété |caractere|, contenant la réprésentation sous forme de
+une propriété |caractere|, contenant la représentation sous forme de
 caractère de ceux-ci.
 
 > mur.caractere = "#";
@@ -6976,7 +6976,7 @@ propriétés qui ne font pas partie de l'interface des objets.
 Voici encore une méthode interne, celle qui va demander à un insecte ce
 qu'il veut faire, et l'effectuer. Elle prend en argument un objet avec les
 propriétés |object| et |point|, comme le renvoie |listeCreaturesEnAction|.
-Pour le moment, elle ne reconnait que l'action |"déplacement"| :
+Pour le moment, elle ne reconnaît que l'action |"déplacement"| :
 
 > Terrarium.prototype.actionnerUneCreature = function(creature) {
 >   var alentours = this.listeAlentours(creature.point);
@@ -7023,7 +7023,7 @@ Maintenant, construisons un terrarium et voyons les insectes se déplacer.
 
 Examinons un instant l'instruction ci-dessus |print(terrarium)|, comment
 fait-elle pour renvoyer le contenu de notre méthode _|toString|_ ? |print|
-transfome les arguments qui lui sont passés en chaîne de caractères,
+transforme les arguments qui lui sont passés en chaîne de caractères,
 en utilisant la fonction |String|. Les objets sont transformés en chaîne
 de caractères par l'appel de leur méthode |toString|, aussi, écrire une
 méthode |toString| dans nos propres objets est un bon moyen de les rendre
@@ -7303,11 +7303,11 @@ Pour rendre la vie dans le terrarium plus réelle, nous allons y ajouter
 les concepts de nourriture et de reproduction. Chaque créature vivante du
 terrarium reçoit une nouvelle propriété, |énergie|, qui est diminuée
 lorsqu'elle effectue une action, et augmentée lorsqu'elle mange quelque
-chose. Lorsqu'elle a suffisament d'énergie, un chose vivante peut se
+chose. Lorsqu'elle a suffisamment d'énergie, un chose vivante peut se
 reproduire##, engendrant une nouvelle créature du même type.
 
 ## Pour rendre les choses plus simples, les créatures de notre terrarium
-se reproduiront de façon assexuée, d'elles-mêmes.
+se reproduiront de façon asexuée, d'elles-mêmes.
 
 S'il n'y avait que des insectes, les dépenses d'énergie de leurs
 déplacements, et le fait qu'ils se mangeraient entre eux, feraient que
@@ -7380,7 +7380,7 @@ De cette façon, les objets du nouveau type pourraient prendre la place
 (selon le polymorphisme) des objets de l'ancien type.
 
 Dans les langages de programmation avec un support explicite de l'orientation
-objet, l'héritage est une chose très simple à mettre en oeuvre. JavaScript
+objet, l'héritage est une chose très simple à mettre en œuvre. JavaScript
 n'a pas de moyen simple de le faire.
 A cause de cela, les programmeurs en JavaScript ont inventé différentes
 approches pour le faire. Malheureusement, aucune d'entre elles n'est parfaite.
@@ -7719,7 +7719,7 @@ Ainsi, un type |Piano| peut être un sous-type du type |Instrument|, parce
 qu'un piano *est* un instrument. Comme un piano a un tableau de touches,
 on peut être tenté de faire de |Piano| un sous-type de |Array|, mais un
 piano *n'est pas* un tableau de touches, et l'implémenter de cette façon
-entrainerait plein de choses idiotes. Par exemple, un piano a aussi des
+entraînerait plein de choses idiotes. Par exemple, un piano a aussi des
 pédales. Pourquoi |piano[0]| me renvoie la première touche, et pas la
 première pédale ?
 La situation est que, évidemment, le piano *possède* des touches, il est
@@ -7929,7 +7929,7 @@ utilisons un « faux constructeur », et nous lui appliquons |instanceof|.
 
 ---
 
-Ensuite, nous voulons créer un petit élément qui posséde une description
+Ensuite, nous voulons créer un petit élément qui possède une description
 détaillée. Il semblerait que cet élément devrait hériter à la fois de
 |ProduitDetaille| et |PetitProduit|. JavaScript ne permet pas à un objet
 d'avoir plusieurs prototypes, et même s'il le permettait, le problème
@@ -8032,7 +8032,7 @@ avez un objet |herisson|, qui a la capacité unique de rouler
 quand on lui tape dedans, vous pouvez simplement changer sa méthode |frapper|.
 
 Malheureusement, les aventures en mode texte ont suivi le même chemin que
-les disques vinyls, alors qu'ils étaient populaires à une époque, ils
+les disques vinyles, alors qu'ils étaient populaires à une époque, ils
 ne sont joués de nos jours que par une petite population d'[enthousiates |
 http://groups.google.com/group/rec.arts.int-fiction/topics].
 
@@ -8569,7 +8569,7 @@ un souligné, pour certaines raisons) et un « s » échappé (|\s|) est
 > var chiffreEncadreeParDesEspaces = /\s\d\s/;
 > show("1a 2 3d".search(chiffreEncadreeParDesEspaces));
 
-Les caractères « d », « w » et « s » echappés peuvent être
+Les caractères « d », « w » et « s » échappés peuvent être
 remplacés par la lettre capitale correspondante pour avoir la signification
 contraire. Par exemple, |\S| correspond à n'importe quel caractère qui
 n'est pas un espace. Lorsqu'on utilise |[| et |]|, un motif peut être
@@ -8874,7 +8874,7 @@ régulière elle-même doivent donc être échappés :
 
 Le plus important à savoir à propos des expressions régulières est qu'elles
 existent et peuvent augmenter de façon significative la puissance de votre
-code altérateur de chaînes. Elles sont tellement alambiquées qu'il vous
+code modificateur de chaînes. Elles sont tellement alambiquées qu'il vous
 faudra probablement regarder de très près leur détail les dix premières
 fois où vous voudrez les utiliser. Persévérez et vous écrirez vite sans
 les mains des expressions qui auront l'air de formules cabalistiques.
@@ -8910,7 +8910,7 @@ d'être échangé en utilisant un langage spécifique, un _protocole_.
 L'Internet est utilisé pour transporter des messages pour *nombre* de
 différents protocoles. Il y a des protocoles pour chatter, des protocoles pour
 l'échange de fichiers, des protocoles utilisés par des logiciels malicieux
-afin de contrôler l'ordinateur du pauvre schnock qui l'a installé et ainsi
+afin de contrôler l'ordinateur du pauvre schnock qui les a installés et ainsi
 de suite. Le protocole qui nous intéresse est celui qu'on utilise pour le
 World Wide Web. Il s'appelle _HTTP_, ce qui signifie Hyper Text Transfer
 Protocol (Protocole de Transfert Hyper Texte) et il sert à retrouver des
@@ -8948,7 +8948,7 @@ sera affiché comme une page web. Nous avons brièvement discuté d'HTML dans
 le \\cfp, où nous avons vu qu'il pouvait référencer des fichiers image. Dans
 le \\cmodularity, nous avons trouvé que les pages HTML peuvent contenir
 la balise |<script>| pour charger des fichiers de code JavaScript. Quand
-un document HTML s'affiche, un navigateur récupére tous ces fichiers
+un document HTML s'affiche, un navigateur récupère tous ces fichiers
 supplémentaires depuis leur serveur, de manière à les ajouter au document.
 
 ---
@@ -8958,14 +8958,14 @@ qu'un serveur web fasse quelque chose de plus compliqué que simplement
 rechercher un ficher et l'envoyer au client. -- Il peut traiter ce fichier
 d'une certaine manière en premier, ou peut-être n'y a-t-il pas du tout
 de fichier, mais seulement un programme qui, quand on lui donne une URL,
-a une façon de générer le document pertinent pour elle.
+a une façon de génèrer le document pertinent pour elle.
 
 Des programmes qui transforment ou génèrent des documents sur un serveur
 sont une façon populaire de rendre les pages web moins statiques. Quand
 un fichier est juste un fichier, il est toujours le même, mais quand il
 y a un programme pour le fabriquer chaque fois qu'il est demandé, il peut
 être fait pour sembler différent à chaque utilisateur, en fonction de son
-identification et de sss préférences. Cela peut aussi rendre la gestion de
+identification et de ses préférences. Cela peut aussi rendre la gestion de
 contenu sur les pages web bien plus simple -- au lieu d'ajouter un nouveau
 fichier HTML chaque fois que quelque chose de nouveau est placé sur un
 site web, un nouveau document est stocké dans un entrepôt central et le
@@ -9029,7 +9029,7 @@ qui indique clairement que c'est une fenêtre qui est en cours d'ouverture.
 La valeur retournée par |window.open| est une nouvelle fenêtre. C'est l'objet
 global pour le script tournant dans cette fenêtre, et il contient toutes les
 choses standards comme le constructeur |Object| et l'objet |Math|. Mais si vous
-essayez d'y jeter un oeil, la plupart des navigateurs ne vont (probablement)
+essayez d'y jeter un œil, la plupart des navigateurs ne vont (probablement)
 pas vous laisser faire...
 
 !> show(perry.Math);
@@ -9175,7 +9175,7 @@ utilisant la méthode |post| met les valeurs de ses paramètres dans ce bloc
 de données plutôt que dans l'URL.
 
 Quand on envoie de grandes quantités de données, la méthode |get| va
-générer des URL d'un kilomètre de long, donc |post| est généralement
+génèrer des URL d'un kilomètre de long, donc |post| est généralement
 plus pratique. Mais la différence entre les deux méthodes n'est pas juste
 une question de convenance. Traditionnellement, les requêtes |get| sont
 utilisées pour demander un document au serveur, alors que les requêtes
@@ -9211,7 +9211,7 @@ en cours est aussi conservé et le chemin donné lui est ajouté.
 
 Nous ajouterons une vérification de validité au formulaire, afin qu'il
 soumette seulement si le champ nom n'est pas laissé vide et si le champ e-mail
-contient quelque chose qui ressemble à une addresse e-mail valide. Parce
+contient quelque chose qui ressemble à une adresse e-mail valide. Parce
 que nous ne voulons plus que le formulaire soit soumis immédiatement quand
 le bouton « Envoyer ! » est cliqué. Sa propriété |type| a été
 changée de |"submit"| à |"button"|, ce qui le change en un bouton ordinaire
@@ -9284,7 +9284,7 @@ le nom a été rempli.
 l'écriture d'une fonction |valideInfo|, qui prend un objet formulaire comme
 argument et retourne une valeur booléenne: |true| quand le champ |nom|
 n'est pas vide et le champ |email| contient quelque chose qui ressemble à
-une adresse email, sinon |false|. Ecrivez cette fonction.
+une adresse email, sinon |false|. Écrivez cette fonction.
 
 ///
 
@@ -9415,7 +9415,7 @@ Dans certains domaines, tels que la façon dont le contenu d'un document
 HTML peut être interprété par le JavaScript (\\cdom), les standards
 sont basés sur la méthode inventée par Internet Explorer et les choses
 marchent plus ou moins de la même façon pour tous les navigateurs. Dans
-d'autres domaines, tels que la façon dont les événements sont gérés
+d'autres domaines, tels que la façon dont les évènements sont gérés
 (clic de souris, touche du clavier enfoncée et autres), Internet Explorer
 fonctionne différemment des autres.
 
@@ -9449,14 +9449,14 @@ fiable. Voyez ce que dit le vôtre##:
 
 Une meilleur approche consiste à essayer « d'isoler » nos programmes
 des différences entre navigateurs. Si vous devez, par exemple, en découvrir
-plus sur un événement, comme le clic que nous avons géré en modifiant la
+plus sur un évènement, comme le clic que nous avons géré en modifiant la
 propriété |onclick| de notre bouton d'envoi, vous devez regarder l'objet de
 haut niveau nommé |event| dans Internet Explorer, mais vous devez utiliser
 le premier argument passé à la fonction gérant cet évènement dans
 les autres navigateurs. Pour gérer ceci, et nombre d'autres différences
 liées aux évènements, on peut écrire une fonction d'aide pour attacher
 les évènements aux choses, elle prendra soin de toute la plomberie et
-permettra aux fonctions de gestion d'événements d'être les mêmes pour
+permettra aux fonctions de gestion d'évènements d'être les mêmes pour
 tous les navigateurs. Dans le \\cevent nous écrirons une fonction de ce genre.
 
 (Note: Les caprices de navigateur mentionnés dans les chapitres suivants
@@ -9484,7 +9484,7 @@ aux modernes mais obscurs navigateurs comme Konqueror, mais cela n'a pas
 été complètement vérifié. Heureusement, ces navigateurs de génération
 antérieure ont plus ou moins disparu, et ne sont plus guère utilisés.
 
-Il y a, malgré tout, un groupe d'utiliseurs web qui vont toujours utiliser
+Il y a, malgré tout, un groupe d'utilisateurs web qui vont toujours utiliser
 un navigateur sans JavaScript. Une large part de ce groupe est constitué
 de personnes utilisant un navigateur graphique usuel, mais avec JavaScript
 désactivé pour des raisons de sécurité. Ensuite ceux qui utilisent des
@@ -9948,7 +9948,7 @@ classe « moche ».
 ]   }
 ] </style>
 
-Les classes sont un concept lié aux syles. Si vous avez différentes sortes
+Les classes sont un concept lié aux styles. Si vous avez différentes sortes
 de paragraphes, des moches et des jolis par exemple, et que vous ne voulez
 pas attribuer le style à tous les éléments |p|, alors les _classe_s
 peuvent être utilisées pour les distinguer. Le style précédent ne sera
@@ -10196,7 +10196,7 @@ prend pas en charge un tel mécanisme, il est rarement utilisé.
 
 ***
 
-Ecrire une fonction nommée |registerEventHandler| pour encapsuler
+Écrire une fonction nommée |registerEventHandler| pour encapsuler
 les incompatibilités des deux modèles. Cette fonction possède trois
 arguments : un nœud DOM auquel le gestionnaire doit être attaché, le
 nom du type de l'évènement, comme |"click"| ou |"keypress"|, et enfin la
@@ -10242,7 +10242,7 @@ selon le navigateur. C'est plus efficace même si c'est un peu bizarre.
 
 ---
 
-Supprimer des événements fonctionne quasiment comme en ajouter, mais cette
+Supprimer des évènements fonctionne quasiment comme en ajouter, mais cette
 fois, on utilise les méthodes _|detachEvent|_ et _|removeEventListener|_.
 N'oubliez pas cela : pour supprimer un gestionnaire, vous devez avoir
 accès à la fonction que vous y avez attachée.
@@ -10256,12 +10256,12 @@ accès à la fonction que vous y avez attachée.
 
 ---
 
-Les exceptions produites par les gestionnaires d'événements ne peuvent pas,
+Les exceptions produites par les gestionnaires d'évènements ne peuvent pas,
 à cause de limitations techniques, être récupérées par la console. Elles
 sont donc gérées par le navigateur, ce qui veut dire qu'elles peuvent
 être cachées quelque part dans une sorte de « console d'erreur », ou
 bien faire un apparaître un message. Lorsque vous écrivez un gestionnaire
-d'événements et qu'il ne semble pas fonctionner, il peut s'arrêter de
+d'évènements et qu'il ne semble pas fonctionner, il peut s'arrêter de
 fonctionner silencieusement, car il cause une erreur quelconque.
 
 ---
@@ -10287,26 +10287,26 @@ débarrassez-vous en :
 ---
 
 @_|onmousedown|_@_|onmouseup|_@_|onclick|_@_|ondblclick|_ Quand l'utilisateur
-clique avec sa souris, trois événements sont générés. En premier
+clique avec sa souris, trois évènements sont générés. En premier
 _|mousedown|_, au moment où le bouton est appuyé. Puis _|mouseup|_, au moment
 où il est relâché. Et enfin _|click|_, pour indiquer que quelque chose a
-été cliqué. Quand cela se répéte deux fois rapidement, un événement
+été cliqué. Quand cela se répéte deux fois rapidement, un évènement
 _|dblclick|_ (double-clic) est également généré. Remarquez bien qu'il
-est possible que les événements |mousedown| et |mouseup| se produisent
+est possible que les évènements |mousedown| et |mouseup| se produisent
 avec un certain délai entre les deux -- lorsque le bouton de la souris est
 maintenu enfoncé pendant un certain temps.
 
-Lorsque vous attachez un gestionnaire d'événements, par exemple, à un
+Lorsque vous attachez un gestionnaire d'évènements, par exemple, à un
 bouton, le fait qu'il a été cliqué est souvent la seule chose que vous avez
 besoin de savoir. Lorsque le gestionnaire, d'un autre côté, est attaché
 à un nœud qui a des fils, les clics sur les fils vont « remonter »
 vers lui, et vous voudrez savoir quel fils a été cliqué. Dans ce but, les
-objets événements ont une propriété nommée _|target|_... ou |srcElement|,
+objets évènements ont une propriété nommée _|target|_... ou |srcElement|,
 en fonction du navigateur.
 
 @_|scrollTop|_@_|scrollLeft|_ Une autre information intéressante concerne
 les coordonnées précises auxquelles le clic s'est produit. Les objets
-événements concernant la souris contiennent  les propriétés _|clientX|_ and
+évènements concernant la souris contiennent  les propriétés _|clientX|_ and
 _|clientY|_, qui donnent les coordonnées |x| et |y| de la souris à l'écran,
 en pixels. Les documents peuvent défiler, ces informations ne nous donnent
 donc souvent pas beaucoup d'informations sur la partie du document au-dessus de
@@ -10340,14 +10340,14 @@ Et débarrassez-vous en de nouveau :
 
 Évidemment, écrire toutes ces vérifications et ces solutions de
 contournement n'est pas quelque chose que vous avez envie de faire dans tous
-les gestionnaires d'événements. Dans quelques instants, après avoir fait
+les gestionnaires d'évènements. Dans quelques instants, après avoir fait
 connaissance avec quelques incompatibilités supplémentaires, nous allons
-écrire un fonction pour « normaliser » les objets événements pour
-qu'ils fonctionnent de la même manière sur tous les naviagateurs.
+écrire un fonction pour « normaliser » les objets évènements pour
+qu'ils fonctionnent de la même manière sur tous les navigateurs.
 
 Il est également parfois possible de déterminer quel bouton de la souris a
 été appuyé, en utilisant les propriétés _|which|_ et _|button|_ des objets
-événement. Malheureusement, on ne peut pas leur faire confiance : certains
+évènement. Malheureusement, on ne peut pas leur faire confiance : certains
 navigateurs prétendent que les souris n'ont qu'un bouton, d'autres signalent
 les clics droits comme des clics avec la touche control appuyée, et ainsi
 de suite.
@@ -10355,12 +10355,12 @@ de suite.
 ---
 
 @_|onmousemove|_@_|onmouseover|_@_|onmouseout|_ En dehors des clics, on peut
-également être intéressé par les mouvements de la souris. L'événement
+également être intéressé par les mouvements de la souris. L'évènement
 _|mousemove|_ d'un nœud DOM se produit dès que la souris bouge lorsqu'elle
-est sur cet élément. Il y a aussi les événements _|mouseover|_ et
+est sur cet élément. Il y a aussi les évènements _|mouseover|_ et
 _|mouseout|_, qui se produisent uniquement lorsque la souris entre dans un nœud
-ou le quitte. Pour les événements du second type, la propriété |target|
-(ou |srcElement|) indique le nœud pour lequel l'événement s'est produit,
+ou le quitte. Pour les évènements du second type, la propriété |target|
+(ou |srcElement|) indique le nœud pour lequel l'évènement s'est produit,
 alors que la propriété _|relatedTarget|_ (ou |toElement|, ou |fromElement|)
 indique le nœud d'où provient (pour |mouseover|) ou vers lequel se dirige
 la souris (pour |mouseout|).
@@ -10368,25 +10368,25 @@ la souris (pour |mouseout|).
 |mouseover| et |mouseout| peuvent être embêtants quand ils sont enregistrés
 sur un élément qui a des nœuds-fils. Les évènements se produisant
 dans les nœuds-fils vont remonter vers l'élément parent, donc vous allez
-également recevoir une événement |mouseover| quand la souris entre dans
+également recevoir une évènement |mouseover| quand la souris entre dans
 l'un des nœuds-fils. Les propriétés |target| et |relatedTarget| peuvent
-être utilisées pour détecter (ou ignorer) de tels événements.
+être utilisées pour détecter (ou ignorer) de tels évènements.
 
 ---
 
 @_|onkeydown|_@_|onkeyup|_@_|onkeypress|_ Pour chaque touche pressée par
-l'utilisateur, trois événements sont générés: _|keydown|_, _|keyup|_,
+l'utilisateur, trois évènements sont générés: _|keydown|_, _|keyup|_,
 et _|keypress|_. En général, vous devez utiliser les deux premiers dans les
 cas où vous voulez vraiment savoir quelle touche a été pressée, par exemple
 lorsque vous voulez faire quelque chose lorsque les touches de direction sont
 pressées. |keypress|, d'un autre côté, doit être utilisé lorsque vous
 êtes intéressé par le caractère qui est tapé. La raison de cela est qu'il
-n'y a souvent aucune information de caractère dans les événements |keyup|
-et |keydown|, et Internet Explorer ne génère aucun événement |keypress|
+n'y a souvent aucune information de caractère dans les évènements |keyup|
+et |keydown|, et Internet Explorer ne génère aucun évènement |keypress|
 pour les touches spéciales comme les touches de direction.
 
 Déterminer quelle touche a été pressée peut être un défi en soi. Pour
-les événements |keydown| et |keyup|, l'objet événement va posséder
+les évènements |keydown| et |keyup|, l'objet évènement va possèder
 une propriété _|keyCode|_ qui contient un nombre. La plupart du temps,
 ces codes peuvent être utilisés pour identifier les touches d'une façon
 plutôt indépendante du navigateur. Déterminer quel code correspond à
@@ -10403,21 +10403,21 @@ quelle touche peut être réalisé avec quelques simples expériences.
 
 Dans la plupart des navigateurs, un code de touche unique correspond à une
 touche *physique* unique sur votre clavier. Le navigateur Opera, toutefois,
-va générer des codes différents pour certaines touches en fonction du fait
+va génèrer des codes différents pour certaines touches en fonction du fait
 que la touche Maj est appuyée ou non. Pire encore, certains de ces codes
 shift-est-appuyé sont des codes qui sont également utilisés pour d'autres
 touches -- Maj-9, qui dans la plupart des claviers QWERTY est utilisé pour
 taper une parenthèse, reçoit le même code que touche de direction bas,
 et il est donc difficile de distinguer les deux. Lorsque cela risque de
 saboter vos programmes, vous pouvez en général résoudre le problème en
-ignorant les événements d'appui de touche avec la touche Maj pressée.
+ignorant les évènements d'appui de touche avec la touche Maj pressée.
 
 Pour savoir si les touches shift, control ou alt sont appuyées lors
-d'un événement touche ou souris, vous pouvez regarder les propriétés
-_|shiftKey|_, _|ctrlKey|_, et _|altKey|_ de l'objet événement.
+d'un évènement touche ou souris, vous pouvez regarder les propriétés
+_|shiftKey|_, _|ctrlKey|_, et _|altKey|_ de l'objet évènement.
 
-Pour les événements |keypress|, vous voudrez savoir quel caractère a
-été tapé. L'objet événement aura une propriété _|charCode|_, qui,
+Pour les évènements |keypress|, vous voudrez savoir quel caractère a
+été tapé. L'objet évènement aura une propriété _|charCode|_, qui,
 si vous êtes chanceux, contiendra la valeur _Unicode_ correspondant au
 caractère qui a été tapé, qui peut être converti en une chaîne à 1 seul
 caractère en utilisant _|String.fromCharCode|_. Malheureusement, certains
@@ -10438,26 +10438,26 @@ et stockent à la place le code du caractère dans la propriété _|keyCode|_.
 
 ---
 
-Un gestionnaire d'événements peut « arrêter » l'événement qu'il est
+Un gestionnaire d'évènements peut « arrêter » l'évènement qu'il est
 en train de gérer. Il y a deux façons de faire cela. Vous pouvez empêcher
-l'événement de remonter dans les nœuds parents et les gestionnaires qui ont
+l'évènement de remonter dans les nœuds parents et les gestionnaires qui ont
 été définis pour eux, et vous pouvez empêcher le navigateur de réaliser
-les actions standards associés à un tel événement. Il est important de
+les actions standards associés à un tel évènement. Il est important de
 noter que les navigateurs ne vont pas forcément suivre vos instructions --
 empêcher les comportements par défaut lorsque l'utilisateur appuie sur
 certaines touches spéciales n'empêchera pas les navigateurs, pour la
 plupart d'entre eux, d'exécuter l'effet normal de ces touches.
 
-Dans la plupart des navigateurs, arrêter la remontée d'un événement
+Dans la plupart des navigateurs, arrêter la remontée d'un évènement
 est réalisé en utilisant la méthode _|stopPropagation|_ de l'objet
-événement, et empêcher le comportement par défaut est réalisé grâce
+évènement, et empêcher le comportement par défaut est réalisé grâce
 à la méthode _|preventDefault|_. Pour Internet Explorer, on le fait en
 définissant respsectivement la propriété _|cancelBubble|_ à |true|
 et la propriété _|returnValue|_ à |false|.
 
 Et c'était la dernière d'une longue liste d'incompatibilités dont nous
 discuterons dans ce chapitre. Cela veut donc dire que nous pouvons écrire
-la fonction de normalisation d'événements et passer à des choses plus
+la fonction de normalisation d'évènements et passer à des choses plus
 intéressantes.
 
 > function normaliseEvent(event) {
@@ -10491,7 +10491,7 @@ intéressantes.
 > }
 
 Une méthode _|stop|_ a été ajoutée, qui annule à la fois la remontée
-des événements et leur action par défaut. Certains navigateurs le proposent
+des évènements et leur action par défaut. Certains navigateurs le proposent
 déjà, dans ce cas nous le laissons tel quel.
 
 Ensuite, nous pouvons écrire des adaptateurs pratiques pour
@@ -10516,7 +10516,7 @@ Ensuite, nous pouvons écrire des adaptateurs pratiques pour
 
 La nouvelle fonction |addHandler| encapsule dans une nouvelle fonction la
 fonction du gestionnaire qui lui est donnée, ce qui lui permet de s'occuper
-de la normalisation des objets événement. Il retourne un objet qui peut
+de la normalisation des objets évènement. Il retourne un objet qui peut
 être passé à |removeHandler| lorsque l'on veut supprimer ce gestionnaire
 précis. Essayez de taper un |q| dans le champ texte.
 
@@ -10682,7 +10682,7 @@ cellules de la table, et peuvent donc, par exemple, être atteints avec
 ---
 
 Le type d'objet suivant sera appelé |TerrainSokoban|. On passe à son
-contructeur un objet du tableau |niveauxSokoban|, et il est en charge à
+constructeur un objet du tableau |niveauxSokoban|, et il est en charge à
 la fois de la création d'une table de nœud DOM, mais également de la
 création d'une grille d'objets |Carreau|. Cet objet s'occupera également
 des détails pour déplacer le joueur et les rochers, grâce à une méthode
@@ -10737,7 +10737,7 @@ La base du prototype de l'aire de jeu ressemblera à ça :
 > var terrainDeTest = TerrainSokoban.create(niveauxSokoban[0]);
 > show(terrainDeTest.lireCarreau(new Point(10, 2)).contenu);
 
-Le constructeur lit chaque ligne et chaque caratère du niveu, et stocke les
+Le constructeur lit chaque ligne et chaque caractère du niveau, et stocke les
 objets |Carreau| dans la propriété |carreaux|. Quand il rencontre une case
 avec le joueur, il enregistre cette position dans |positionDuJoueur|, pour qu'il soit
 facile de retrouver la case dans laquelle se trouve le joueur. |lireCarreau| est
@@ -10847,7 +10847,7 @@ un type d'objet appelé |JeuSokoban|, qui est responsable de ce qui suit :
 
  * Préparer un endroit où l'aire de jeu peut être placée.
  * Construire et enlever les objets |TerrainSokoban|.
- * Capturer des événements d'appui de touche et appeler la méthode |deplacer| sur le terrain actuel avec l'argument qui convient.
+ * Capturer des évènements d'appui de touche et appeler la méthode |deplacer| sur le terrain actuel avec l'argument qui convient.
  * Mettre à jour le score, et passer au niveau suivant quand un niveau est réussi.
  * Ajouter des boutons pour réinitialiser le niveau en cours ou le jeu tout entier (retour au niveau 0).
 
@@ -10898,7 +10898,7 @@ On peut mettre un jeu Sokoban dans notre document de cette façon :
 ***
 
 Tout ce qu'il reste à faire maintenant c'est de remplir le gestionnaire
-d'événements clavier. Remplacez la méthode |touchePressee| du prototype par une
+d'évènements clavier. Remplacez la méthode |touchePressee| du prototype par une
 autre qui détecte les appuis sur les touches des flèches de déplacement, et
 quand elle les trouve, déplace le joueur dans la bonne direction. |Dictionary|
 ci-dessous sera probablement utile :
@@ -10916,7 +10916,7 @@ joueur a gagné, utilisez |alert| pour afficher un message, et passer au niveau
 suivant. S'il n'y a pas de niveau suivant (vérifiez |niveauxSokoban.length|),
 redémarrez le jeu.
 
-Il est probablement sage d'arrêter les événements quand des appuis sur les
+Il est probablement sage d'arrêter les évènements quand des appuis sur les
 touches ont été gérés , sinon les appuis sur les flèches « haut »
 et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 
@@ -10941,8 +10941,8 @@ et « bas » feront défiler votre fenêtre, ce qui est plutôt gênant.
 > };
 
 Vous devez avoir conscience  que capturer des touches de cette manière
-(ajouter un gestionnaire  d'événements à |document| et stopper les
-événements que vous recherchez)  n'est pas très élégant quand il y a
+(ajouter un gestionnaire  d'évènements à |document| et stopper les
+évènements que vous recherchez)  n'est pas très élégant quand il y a
 d'autres éléments dans le document.  Par exemple, essayez de déplacer le
 curseur autour de la zone de texte en haut du document : cela ne fonctionne
 pas, vous allez juste déplacer le petit bonhomme dans le jeu Sokoban. Si
@@ -11015,27 +11015,27 @@ qui ne génèrent pas cet évènement avant que l'élément perde le focus.
 >         event.target.value, "'.");
 > });
 
-Vous pouvez taper ce que vous voulez, l'événement ne sera généré que
+Vous pouvez taper ce que vous voulez, l'évènement ne sera généré que
 lorsque vous cliquerez en-dehors de la zone de texte, appuierez sur la touche
 tabulation, ou enlèverez le focus de l'élément d'une autre façon.
 
-@_|submit|_ Les formulaires ont également un événement _|submit|_ , qui
+@_|submit|_ Les formulaires ont également un évènement _|submit|_ , qui
 est généré quand ils sont soumis. Il peut être stoppé pour empêcher la
 soumission d'avoir lieu. Cela nous donne une façon *vraiment* meilleure  de
 valider le formulaire que celle que nous avons présentée dans le chapitre
-précédent. Vous enregistrez simplement un gestionnaire d'événements
-pour |submit| qui arrête l'événement si le contenu du formulaire n'est
+précédent. Vous enregistrez simplement un gestionnaire d'évènements
+pour |submit| qui arrête l'évènement si le contenu du formulaire n'est
 pas valide. De cette façon, lorsque JavaScript n'est pas activé pour
 l'utilisateur , le formulaire va continuer de fonctionner, il n'y aura tout
 simplement pas de validation instantanée.
 
-@_|onload|_@_|unload|_ Les objets Window ont un événement _|load|_ qui
+@_|onload|_@_|unload|_ Les objets Window ont un évènement _|load|_ qui
 est généré lorsque le document est complètement chargé, ce qui peut
 être utile si votre script doit réaliser une initialisation quelconque qui
 doit attendre que tout le document soit présent. Par exemple, les scripts
 sur les pages de ce livre parcourent le chapitre en cours pour cacher les
 solutions des exercices. Vous ne pouvez pas le faire si les exercices ne
-sont pas encore chargés. Il existe également un événement _|unload|_,
+sont pas encore chargés. Il existe également un évènement _|unload|_,
 qui est généré lorsque l'utilisateur quitte le document, mais il n'est
 pas correctement pris en charge par tous les navigateurs.
 
@@ -11043,14 +11043,14 @@ pas correctement pris en charge par tous les navigateurs.
 de la mise en page du document au navigateur, mais il existe certains effets
 qui ne peuvent être réalisés qu'avec un peu de JavaScript pour définir
 la taille précise de certains nœuds d'un document. Quand vous faites cela,
-assurez-vous que vous surveillez les événements _|resize|_ de la fenêtre,
-et re-calculez la taille de vos éléments chaque fois que la fenêtre change
+assurez-vous que vous surveillez les évènements _|resize|_ de la fenêtre,
+et recalculez la taille de vos éléments chaque fois que la fenêtre change
 de taille.
 
 ---
 
 Pour terminer, je dois vous dire quelque chose à propos des gestionnaires
-d'événements que vous préféreriez ne pas savoir. Le navigateur Internet
+d'évènements que vous préféreriez ne pas savoir. Le navigateur Internet
 Explorer (c'est-à-dire, à l'heure où j'écris ceci, le navigateur de la
 majorité des internautes) souffre d'un bug qui empêche les valeurs d'être
 nettoyées correctement : même lorsqu'elles ne sont plus utilisées,
@@ -11071,7 +11071,7 @@ tous les nœuds qui sont encore référencés par des objets JavaScript,
 et vice-versa pour le système qui ramasse les valeurs JavaScript normales.
 
 Comme la description ci-dessus le montre, ce problème n'est pas spécifique
-aux gestionnaires d'événements. Ce code, par exemple, crée un peu de
+aux gestionnaires d'évènements. Ce code, par exemple, crée un peu de
 mémoire qui ne peut pas être récupérée :
 
 !> var unObjetJavaScript = {lien: document.body};
@@ -11079,14 +11079,14 @@ mémoire qui ne peut pas être récupérée :
 
 Même si un navigateur Internet Explorer passe à la page suivante, il
 continue à garder ce |document.body|. La raison pour laquelle ce bug
-est souvent associé aux gestionnaires d'événements vient du fait qu'il
+est souvent associé aux gestionnaires d'évènements vient du fait qu'il
 est extrêmement facile de créer de tels liens circulaires lorsque l'on
-enregistre un gestionnaire d'événement.
-Le nœud DOM conserve une référence sur ses gestionnaires d'événements,
+enregistre un gestionnaire d'évènement.
+Le nœud DOM conserve une référence sur ses gestionnaires d'évènements,
 et le gestionnaire, la plupart du temps. possède une référence
 vers le nœud DOM. Même lorsque cette référence n'est pas faite
 intentionnellement, les règles de portée de JavaScript ont tendance à
-l'ajouter implicitement. Etudions cette fonction :
+l'ajouter implicitement. Étudions cette fonction :
 
 !> function addAlerter(element) {
 !>   addHandler(element, "click", function() {
@@ -11098,7 +11098,7 @@ La fonction anonyme qui est créée par la fonction |addAlerter| peut
 'voir' la variable |element|. Elle ne l'utilise pas, mais cela n'a pas
 d'importance : simplement parce qu'elle peut la voir, elle possède une
 référence dessus. En enregistrant cette fonction comme un gestionnaire
-d'événement pour ce même objet |element|, nous avons créé un cercle.
+d'évènement pour ce même objet |element|, nous avons créé un cercle.
 
 Il existe trois manières de régler ce problème. La première approche,
 qui est très populaire, est de l'ignorer. La plupart des scripts vont
@@ -11132,13 +11132,13 @@ mais le programmeur doit vraiment faire *très* attention.
 En définitive la troisième solution consiste à ne pas trop s'en faire
 si l'on crée des structures qui ont des fuites, mais à s'assurer qu'on a
 bien tout nettoyé lorsqu'on a terminé de les élaborer. Ce qui implique
-de dés-enregistrer les gestionnaires d'événements quand on n'en a plus
-besoin, et d'enregistrer un événement |onunload| pour dés-enregistrer
+de dés-enregistrer les gestionnaires d'évènements quand on n'en a plus
+besoin, et d'enregistrer un évènement |onunload| pour dés-enregistrer
 les gestionnaires qui sont nécessaires jusqu'à ce que la page soit
 déchargée. Il est possible d'étendre un système d'enregistrement
-d'événements, tel que notre fonction |addHandler|, pour automatiser le
+d'évènements, tel que notre fonction |addHandler|, pour automatiser le
 processus. En choisissant cette approche, vous devez gardez à l'esprit
-que les gestionnaires d'événements ne sont pas la seule source possible
+que les gestionnaires d'évènements ne sont pas la seule source possible
 de fuite de mémoire — ajouter des propriétés aux objets des nœuds du
 DOM peut causer des problèmes comparables.
 
@@ -11419,7 +11419,7 @@ et engendrer une erreur.
 Lorsque vous exécutez |eval| sur un morceau de texte, vous devez garder à
 l'esprit que cela signifie que vous permettez à ce bout de texte d'exécuter
 arbitrairement n'importe quel code. Comme JavaScript ne nous permet de faire
-des requêtes que sur notre propre domaine, vous connaitrez généralement
+des requêtes que sur notre propre domaine, vous connaîtrez généralement
 de manière précise le genre de texte que vous récupérez et cela ne pose
 pas de problème. Dans d'autres situations, cela peut se révéler dangereux.
 
@@ -11688,7 +11688,7 @@ pour stocker une collection d'objets d'une façon que le plus petit
 élément soit rapidement trouvé. Comme promis, cet appendice va
 expliquer les détails derrière cette structure de données.
 
-Etudions de nouveau le problème à résoudre. L'algorithme A* créait une
+Étudions de nouveau le problème à résoudre. L'algorithme A* créait une
 grande quantité de petits objets, et devait les conserver dans une 'liste
 ouverte'. Il supprimait également constamment les plus petits objets de
 la liste. L'approche la plus simple aurait été de conserver simplement
@@ -11723,7 +11723,7 @@ la structure globale ressemble donc à quelque chose comme ça :
 De telles structures sont appelées des _arbre_s, à cause de la façon
 dont elles se séparent en branches. Maintenant, lorsque vous cherchez le
 plus petit élément, vous avez juste à prendre l'élément supérieur et
-réarranger l'arbre pour que l'un des fils de cet élement supérieur -- celui
+réarranger l'arbre pour que l'un des fils de cet élément supérieur -- celui
 avec la plus petite valeur -- devienne le nouvel élément supérieur. Lorsque
 vous insérez de nouveaux éléments, vous 'descendez' l'arbre jusqu'à ce
 que vous trouviez un élément plus petit que ce nouvel élément, et vous
@@ -11742,7 +11742,7 @@ cette image :
 
 L'élément |1| du tableau est la racine de l'arbre, les éléments |2| et
 |3| sont ses fils, et d'une façon générale, l'élément |X| du tableau a
-comme fils les élements |X * 2| et |X * 2 + 1|. Vous pouvez voir pourquoi
+comme fils les éléments |X * 2| et |X * 2 + 1|. Vous pouvez voir pourquoi
 cette structure est appelée 'tas' . Remarquez que ce tableau commence à |1|
 alors que les tableaux JavaScript commence à |0|. Le tas conserve toujours
 son plus petit élément en |1|, et s'assure que pour tout élément du tableau
