@@ -8654,11 +8654,11 @@ le dernier point, peut contenir des caractères alphanumériques et doit
 
 ///
 
-> var adressee-mail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
+> var adresseEmail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
 >
-> show(adressee-mail.test("kenny@test.net"));
-> show(adressee-mail.test("J'ai envyoé un mail à kenny@tets.nets, mais ça marche pas !"));
-> show(adressee-mail.test("le_paresseux_geant@gmail.com"));
+> show(adresseEmail.test("kenny@test.net"));
+> show(adresseEmail.test("J'ai envoyé un mail à kenny@tets.nets, mais ça marche pas !"));
+> show(adresseEmail.test("le_paresseux_geant@gmail.com"));
 
 Les |\b| au début et à la fin du motif permettent de s'assurer que la
 deuxième chaîne de caractères ne correspond pas.
