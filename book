@@ -2265,7 +2265,7 @@ _|=|_, elle est ajoutée à l'objet.
 
 Les propriétés dont le nom ne pourrait pas être une variable doivent être
 mises entre guillemets au moment de la création de l'objet et utilisées
-avec des parenthèses :
+avec des crochets :
 
 > var truc = {"gabba gabba": "hey", "5": 10};
 > show(truc["5"]);
@@ -2274,7 +2274,7 @@ avec des parenthèses :
 > delete truc["gabba gabba"];
 
 Comme vous pouvez le voir, on peut mettre n'importe quelle expression entre
-les parenthèses. Elle sera convertie en une chaîne pour définir le nom
+les crochets. Elle sera convertie en une chaîne pour définir le nom
 de la propriété. On peut aussi utiliser des variables pour donner un nom
 à une propriété :
 
