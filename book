@@ -8,7 +8,7 @@ une variante de _BASIC_. Les interactions avec l'ordinateur étaient fortement
 liées à ce langage, et tout utilisateur d'un ordinateur devait dès lors y
 goûter, qu'il le veuille ou non. À présent que les ordinateurs sont devenus
 nombreux et bon marché, les utilisateurs moyens se contentent la plupart du temps
-de ce qu'il peuvent faire en cliquant avec la souris. Pour nombre d'entre eux,
+de ce qu'ils peuvent faire en cliquant avec la souris. Pour nombre d'entre eux,
 cela fonctionne très bien. Mais pour ceux d'entre nous qui ont une inclination
 naturelle au bricolage technique, la disparition de la programmation dans
 l'usage quotidien d'un ordinateur représente une forme de barrière.
@@ -600,7 +600,7 @@ convenable des caractères spéciaux, vous pouvez faire |print("a\nb")|
 
 Remarquez que si vous entrez cette chaîne dans la console, elle s'affiche
 sous forme « source », avec des guillemets et des antislashes. Pour ne voir
-que du texte, vous pouvez entrez |print("a\nb")|. Ce que cela fait
+que du texte, vous pouvez entrer |print("a\nb")|. Ce que cela fait
 précisément sera bientôt expliqué.
 
 Il existe bien entendu des cas où vous voudriez que l'antislash dans une
@@ -1055,7 +1055,7 @@ Affichez dix lignes. Sur la première, mettez un « # ». Sur la deuxième
 mettez-en deux, et ainsi de suite.
 
 Comment avoir une chaîne composée de X « # » ? Une solution est de
-la construire avec une « boucle imbriquée », c'est à dire une boucle
+la construire avec une « boucle imbriquée », c'est-à-dire une boucle
 dans une boucle. Une méthode plus simple est de réutiliser la chaîne de
 la précédente itération, et d'y ajouter un caractère.
 
