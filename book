@@ -2440,7 +2440,7 @@ vous allez vous y faire.
 Commencer par l'élément 0 veut aussi dire que dans une structure qui
 a |X| éléments, le dernier élément sera trouvé à la position |X -
 1|. C'est pourquoi la boucle |for| dans notre exemple teste la valeur
-|current < archiveDeMessages.length|. Il n'y a pas d'élément à la position
+|courant < archiveDeMessages.length|. Il n'y a pas d'élément à la position
 |archiveDeMessages.length|, donc dès que |current| atteint cette valeur, on
 arrête la boucle.
 
