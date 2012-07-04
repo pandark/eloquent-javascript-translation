@@ -2400,7 +2400,7 @@ faut, c'est une structure de chaînes de caractères distinctes.
 Les objets sont justement utilisés pour structurer des choses. On pourrait
 très bien créer un objet comme celui-ci :
 
-> var archiveDemails = {"le premier e-mail": "Mon cher neveu, …",
+> var archiveDeMessages = {"le premier e-mail": "Mon cher neveu, …",
 >                    "le deuxième e-mail": "…"
 >                    /* et ainsi de suite… */};
 
@@ -2408,12 +2408,12 @@ Mais parcourir les e-mails du début à la fin serait difficile — comment
 le programme peut-il deviner le nom de ces propriétés ? La solution est
 d'utiliser des noms de propriétés plus prévisibles :
 
-> var archiveDemails = {0: "Mon cher neveu, … (mail numéro 1)",
->                    1: "(mail numéro 2)",
->                    2: "(mail numéro 3)"};
+> var archiveDeMessages = {0: "Mon cher neveu, … (e-mail numéro 1)",
+>                    1: "(e-mail numéro 2)",
+>                    2: "(e-mail numéro 3)"};
 >
-> for (var courant = 0; courant in archiveDemails; courant++)
->   print("Traitement de l'e-mail #", courant, ": ", archiveDemails[courant]);
+> for (var courant = 0; courant in archiveDeMessages; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveDeMessages[courant]);
 
 La chance veut qu'il existe un type d'objet particulier qui corresponde
 exactement à ce type de besoin. Ce sont les _tableau_x et ils
@@ -2423,10 +2423,10 @@ tableau et bien d'autres fonctions utiles pour ce type de structure.
 
 @_|[]|_Pour créer de nouveaux tableaux on utilise des crochets (|[| et |]|):
 
-> var archiveDemails = ["mail un", "mail deux", "mail trois"];
+> var archiveDeMessages = ["e-mail un", "e-mail deux", "e-mail trois"];
 >
-> for (var courant = 0; courant < archiveDemails.length; courant++)
->   print("Traitement de l'e-mail #", courant, ": ", archiveDemails[courant]);
+> for (var courant = 0; courant < archiveDeMessages.length; courant++)
+>   print("Traitement de l'e-mail #", courant, ": ", archiveDeMessages[courant]);
 
 Dans cet exemple, le nombre d'éléments n'est plus spécifié
 explicitement. Le premier a automatiquement le numéro 0, le deuxième le
@@ -2440,8 +2440,8 @@ vous allez vous y faire.
 Commencer par l'élément 0 veut aussi dire que dans une structure qui
 a |X| éléments, le dernier élément sera trouvé à la position |X -
 1|. C'est pourquoi la boucle |for| dans notre exemple teste la valeur
-|current < archiveDemails.length|. Il n'y a pas d'élément à la position
-|archiveDemails.length|, donc dès que |current| atteint cette valeur, on
+|current < archiveDeMessages.length|. Il n'y a pas d'élément à la position
+|archiveDeMessages.length|, donc dès que |current| atteint cette valeur, on
 arrête la boucle.
 
 *** range
@@ -2528,14 +2528,14 @@ avant l'assemblage de la chaîne de caractères finale.
 
 Revenons à nos chats : nous savons maintenant qu'utiliser un tableau
 serait une bonne idée pour ranger les archives des e-mails. Sur cette page,
-la fonction |recupererLesMails| sera utilisée pour récupérer (magiquement)
+la fonction |recupererLesMessages| sera utilisée pour récupérer (magiquement)
 ce tableau. Parcourir les e-mails qu'il contient pour les traiter un par un
 devient simple comme un jeu d'enfant :
 
-> var archiveDemails = recupererLesMails();
+> var archiveDeMessages = recupererLesMessages();
 >
-> for (var i = 0; i < archiveDemails.length; i++) {
->   var email = archiveDemails[i];
+> for (var i = 0; i < archiveDeMessages.length; i++) {
+>   var message = archiveDeMessages[i];
 >   print("Traitement de l'e-mail #", i);
 >   // Faire plus de choses…
 > }
@@ -2555,7 +2555,7 @@ devons définir les paragraphes de cette façon.
 
 Nous avons vu plus haut qu'il existe une chose qui s'appelle un caractère
 de fin de ligne. C'est ce que la plupart des gens utilisent pour séparer les
-paragraphes. Nous considérons donc un paragraphe comme une partie de mail qui
+paragraphes. Nous considérons donc un paragraphe comme une partie d'e-mail qui
 commence par un caractère saut de ligne ou au début du contenu du message
 et se termine au caractère saut de ligne suivant ou bien à la fin du contenu.
 
@@ -2709,11 +2709,11 @@ faisons comme si, dans ce cas précis, l'entrée était toujours correcte.
 Tout ce qui nous reste à faire maintenant, c'est de rassembler les pièces
 du puzzle. Voici une façon de s'y prendre :
 
-> var archiveDemails = recupererLesMails();
+> var archiveDeMessages = recupererLesMessages();
 > var chatsVivants = {"Spot": true};
 >
-> for (var mail = 0; mail < archiveDemails.length; mail++) {
->   var paragraphes = archiveDemails[mail].split("\n");
+> for (var message = 0; message < archiveDeMessages.length; message++) {
+>   var paragraphes = archiveDeMessages[message].split("\n");
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
@@ -2780,8 +2780,8 @@ de la solution :
 
 > var chatsVivants = {Spot: true};
 >
-> for (var mail = 0; mail < archiveDemails.length; mail++) {
->   var paragraphes = archiveDemails[mail].split("\n");
+> for (var message = 0; message < archiveDeMessages.length; message++) {
+>   var paragraphes = archiveDeMessages[message].split("\n");
 >   for (var paragraphe = 0;
 >        paragraphe < paragraphes.length;
 >        paragraphe++) {
@@ -2818,7 +2818,7 @@ comme ça leur chante.
 Nous continuons à découper l'algorithme en petites unités :
 
 > function trouverChatsVivants() {
->   var archiveDemails = recupererLesMails();
+>   var archiveDeMessages = recupererLesMessages();
 >   var chatsVivants = {"Spot": true};
 >
 >   function traiterParagraphe(paragraphe) {
@@ -2828,8 +2828,8 @@ Nous continuons à découper l'algorithme en petites unités :
 >       enleverDuSet(chatsVivants, nomDesChats(paragraphe));
 >   }
 >
->   for (var mail = 0; mail < archiveDemails.length; mail++) {
->     var paragraphes = archiveDemails[mail].split("\n");
+>   for (var message = 0; message < archiveDeMessages.length; message++) {
+>     var paragraphes = archiveDeMessages[message].split("\n");
 >     for (var i = 0; i < paragraphes.length; i++)
 >       traiterParagraphe(paragraphes[i]);
 >   }
@@ -2863,7 +2863,7 @@ plus propre et j'espère que vous reconnaîtrez qu'elle est plus lisible.
 ---
 
 Le programme ignore encore un grand nombre d'informations qui sont incluses
-dans les mails. Il s'agit des dates de naissance, de mort et des noms
+dans les e-mails. Il s'agit des dates de naissance, de mort et des noms
 des mères.
 
 Commençons par les dates : quelle pourrait être la meilleure façon
@@ -3094,7 +3094,7 @@ façon plus simple :
 Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 
 > function trouverChats() {
->   var archiveDemails = recupererLesMails();
+>   var archiveDeMessages = recupererLesMessages();
 >   var chats = {"Spot": enregistrementChat("Spot", new Date(1997, 2, 5),
 >               "inconnue")};
 >
@@ -3106,8 +3106,8 @@ Le nouvel algorithme à chats amélioré ressemble maintenant à ça :
 >       chatsDecedes(chats, nomDesChats(paragraphe), extraireDate(paragraphe));
 >   }
 >
->   for (var mail = 0; mail < archiveDemails.length; mail++) {
->     var paragraphes = archiveDemails[mail].split("\n");
+>   for (var message = 0; message < archiveDeMessages.length; message++) {
+>     var paragraphes = archiveDeMessages[message].split("\n");
 >     for (var i = 0; i < paragraphes.length; i++)
 >       traiterParagraphe(paragraphes[i]);
 >   }
@@ -3859,13 +3859,13 @@ passé à |forEach| directement.
 
 Le programme sur les chats dans le \\cdata contient le morceau de code suivant:
 
-] var paragraphes = archiveDemails[mail].split("\n");
+] var paragraphes = archiveDeMessages[message].split("\n");
 ] for (var i = 0; i < paragraphes.length; i++)
 ]   traiterParagraphe(paragraphes[i]);
 
 Il peut maintenant être écrit de la façon suivante :
 
-]  forEach(archiveDemails[mail].split("\n"), traiterParagraphe);
+]  forEach(archiveDeMessages[message].split("\n"), traiterParagraphe);
 
 Au final, une construction plus abstraite (ou « de plus haut niveau »)
 correspond à plus d'informations et à moins de bruits parasites : Le
@@ -8657,7 +8657,7 @@ le dernier point, peut contenir des caractères alphanumériques et doit
 > var adresseEmail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
 >
 > show(adresseEmail.test("kenny@test.net"));
-> show(adresseEmail.test("J'ai envoyé un mail à kenny@tets.nets, mais ça marche pas !"));
+> show(adresseEmail.test("J'ai envoyé un e-mail à kenny@tets.nets, mais ça marche pas !"));
 > show(adresseEmail.test("le_paresseux_geant@gmail.com"));
 
 Les |\b| au début et à la fin du motif permettent de s'assurer que la
