@@ -9144,7 +9144,7 @@ Voici le HTML pour un formulaire simple :
 ] <form name="info_utilisateur" method="get" action="info.html">
 ]   <p>S'il vous plaît donnez-nous vos informations, afin que nous puissions vous envoyer du spam.</p>
 ]   <p>Nom: <input type="text" name="nom"/></p>
-]   <p>e-mail: <input type="text" name="e-mail"/></p>
+]   <p>e-mail: <input type="text" name="email"/></p>
 ]   <p>Sexe: <select name="sexe">
 ]             <option>Homme</option>
 ]             <option>Femme</option>
@@ -9158,7 +9158,7 @@ comme nous allons le voir dans un moment. Les noms des champs déterminent
 les noms des paramètres HTTP qui sont utilisés afin de stocker leurs
 valeurs. Envoyer ce formulaire peut produire une URL comme ceci:
 
-] http://planetspam.com/info.html?nom=Ted&e-mail=ted@zork.com&sexe=Homme
+] http://planetspam.com/info.html?nom=Ted&email=ted@zork.com&sexe=Homme
 
 Il y a nombre d'autres tags et propriétés qui peuvent être utilisés dans
 les formulaires mais dans ce livre nous nous en tiendrons aux plus simples,
@@ -9283,14 +9283,14 @@ le nom a été rempli.
 Être capable de lire les valeurs des champs du formulaire rend possible
 l'écriture d'une fonction |valideInfo|, qui prend un objet formulaire comme
 argument et retourne une valeur booléenne: |true| quand le champ |nom|
-n'est pas vide et le champ |e-mail| contient quelque chose qui ressemble à
+n'est pas vide et le champ |email| contient quelque chose qui ressemble à
 une adresse e-mail, sinon |false|. Écrivez cette fonction.
 
 ///
 
 > function valideInfo(formulaire) {
 >   return formulaire.elements.nom.value != "" &&
->     /^.+@.+\.\w{2,3}$/.test(formulaire.elements.e-mail.value);
+>     /^.+@.+\.\w{2,3}$/.test(formulaire.elements.email.value);
 > }
 >
 > show(valideInfo(document.forms.info_utilisateur));
