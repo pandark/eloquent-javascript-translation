@@ -1839,7 +1839,7 @@ elles ajoutant 2 à son argument, l'autre ajoutant 5 et ainsi de suite.
 
 Pour bien comprendre, vous ne devez pas considérer que les
 fonctions empaquettent seulement des calculs, mais aussi un environnement. Les
-fonctions de haut niveau exécutent simplement l'environnement de haut niveau,
+fonctions globales s'exécutent simplement dans l'environnement global,
 c'est assez évident. Mais une fonction définie à l'intérieur d'une autre
 fonction conserve l'accès à l'environnement existant dans cette fonction
 à l'instant où elle a été définie.
@@ -3526,8 +3526,8 @@ La théorie derrière la gestion des exceptions fonctionne ainsi : il est
 possible pour le code de _lever_ (ou _lancer_) une _exception_, qui est une
 valeur. Quand on lève une exception, cela ressemble parfois à un retour de
 fonction boosté aux stéroïdes : on ne sort pas simplement de la fonction
-en cours, mais aussi des fonctions appelantes, en remontant à la fonction
-appelante de plus haut niveau qui a initié l'exécution actuelle. Cela
+en cours, mais aussi des fonctions appelantes, en remontant jusqu'au niveau
+qui a démarré l'exécution actuelle. Cela
 s'appelle _dépiler_. Vous vous rappelez peut-être que la _pile_ des appels
 de fonction qui avait été abordée au \\cfunctions. Une exception descend
 dans cette pile, en renvoyant tous les contextes des appels qu'elle rencontre.
@@ -8334,8 +8334,8 @@ pas très difficile de l'insérer dans une fonction.
 ---
 
 Il existe des cas dans lesquels un module exportera tellement de variables
-que c'est une mauvaise idée de toutes les mettre dans un environnement de
-haut niveau en les rendant globales. Dans de tels cas, vous pouvez faire
+que c'est une mauvaise idée de toutes les mettre dans l'environnement global.
+Dans de tels cas, vous pouvez faire
 ce que fait l'objet standard |Math| et représenter le module en tant que
 simple objet dont les propriétés sont les fonctions et les valeurs qu'il
 exporte. Par exemple…
@@ -8352,7 +8352,7 @@ exporte. Par exemple…
 
 Lorsque vous avez besoin du contenu d'un tel module si souvent que cela
 devient pénible de devoir taper constamment du |HTML|, vous pouvez toujours
-le déplacer dans un environnement de plus haut niveau en utilisant |provide|.
+le déplacer dans l'environnement global en utilisant |provide|.
 
 > provide(HTML);
 > show(lien("http://download.oracle.com/docs/cd/E19957-01/816-6408-10/object.htm",
@@ -9019,10 +9019,10 @@ a son utilité pourtant et dans ce livre nous l'utiliserons pour afficher
 certains exemples de page. D'une manière générale, vos scripts ne devraient
 pas ouvrir de nouvelle fenêtre sauf quand l'utilisateur le demande.
 
-Notez que, cp |open| (tout comme |setTimeout| et compagnie) est une méthode de
+Notez que comme |open| (tout comme |setTimeout| et compagnie) est une méthode de
 l'objet |window|, la partie |window.| peut être enlevée. Quand une fonction
 est appelée « normalement », elle est appelée comme une méthode sur
-l'objet de plus haut niveau, ce qu'est |window|. Personnellement, je pense que
+l'objet global, à savoir |window|. Personnellement, je pense que
 |open| semble un peu générique, donc généralement je tape |window.open|,
 qui indique clairement que c'est une fenêtre qui est en cours d'ouverture.
 
@@ -9451,7 +9451,7 @@ Une meilleure approche consiste à essayer « d'isoler » nos programmes
 des différences entre navigateurs. Si vous devez, par exemple, en découvrir
 plus sur un évènement, comme le clic que nous avons géré en modifiant la
 propriété |onclick| de notre bouton d'envoi, vous devez regarder l'objet de
-haut niveau nommé |event| dans Internet Explorer, mais vous devez utiliser
+l'environnement global nommé |event| dans Internet Explorer, mais vous devez utiliser
 le premier argument passé à la fonction gérant cet évènement dans
 les autres navigateurs. Pour gérer ceci, et nombre d'autres différences
 liées aux évènements, on peut écrire une fonction d'aide pour attacher
@@ -10268,10 +10268,10 @@ fonctionner silencieusement, car il cause une erreur quelconque.
 
 @_|event|_ La plupart des navigateurs passent l'_objet évènement_ en
 argument du gestionnaire. Internet Explorer le stocke dans une variable
-de haut niveau appelé |event|. Lorsque vous regarderez du code JavaScript,
+globale appelé |event|. Lorsque vous regarderez du code JavaScript,
 vous tomberez souvent sur quelque chose comme |event || window.event|, qui
-prend la variable locale |event|, ou, si elle est définie, la variable de
-haut niveau du même nom.
+prend la variable locale |event|, ou, si elle est définie, la variable globale
+du même nom.
 
 > function showEvent(event) {
 >   show(event || window.event);
