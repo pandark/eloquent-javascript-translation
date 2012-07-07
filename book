@@ -9019,7 +9019,7 @@ a son utilité pourtant et dans ce livre nous l'utiliserons pour afficher
 certains exemples de page. D'une manière générale, vos scripts ne devraient
 pas ouvrir de nouvelle fenêtre sauf quand l'utilisateur le demande.
 
-Notez que comme |open| (tout comme |setTimeout| et compagnie) est une méthode de
+Notez que parce qu'|open| (c'est également le cas de |setTimeout| et d'autres) est une méthode de
 l'objet |window|, la partie |window.| peut être enlevée. Quand une fonction
 est appelée « normalement », elle est appelée comme une méthode sur
 l'objet global, à savoir |window|. Personnellement, je pense que
