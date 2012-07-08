@@ -2451,8 +2451,8 @@ positif et retourne un tableau contenant chaque nombre de 0 jusqu'au nombre
 donné en paramètre inclus.
 
 Un tableau vide peut être créé en tapant simplement |[]|. Souvenez-vous que
-pour ajouter des propriétés à un tableau, comme pour un objet, il suffit
-d'affecter une valeur à la propriété avec l'opérateur |=|. La propriété
+pour ajouter une propriété à un tableau ou à un objet, il suffit
+d'affecter une valeur à cette propriété avec l'opérateur |=|. La propriété
 |length| est mise à jour automatiquement quand des éléments sont ajoutés.
 
 ///
