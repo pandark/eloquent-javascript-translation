@@ -2602,10 +2602,10 @@ le» :
 >      paragraphe.charAt(8) == "e");
 
 Mais cela devient un peu pénible -- imaginez que vous devez vérifier la
-présence d'un mot de 30 caractères. On peut cependant en tirer une leçon
-utile : si une ligne est démesurément longue, on peut l'étendre sur
+présence d'un mot de 10 caractères. On peut cependant en tirer une leçon
+utile : si une instruction est démesurément longue, on peut l'étendre sur
 plusieurs lignes. Le résultat peut être plus facile à lire en alignant
-le début d'une nouvelle ligne avec la ligne originale jouant le même rôle
+le début de la nouvelle ligne avec le premier élément similaire de la première ligne.
 
 Les chaînes possèdent également une méthode nommée _|slice|_. Elle permet
 de copier un morceau de la chaîne de caractères, en commençant par le
@@ -2674,7 +2674,7 @@ gèrent les différentes sortes de paragraphes puissent l'utiliser.
 Savez-vous écrire une fonction |nomDesChats| qui prenne un paragraphe comme
 argument et renvoie un tableau de noms ?
 
-Les chaînes ont une méthode _|indexOf|_que l'on peut utiliser pour trouver la
+Les chaînes ont une méthode _|indexOf|_ que l'on peut utiliser pour trouver la
 (première) position d'un caractère ou une sous-chaîne à l'intérieur d'une
 chaîne. De même si on ne donne qu'un seul argument à |slice|, elle renverra
 la partie de la chaîne depuis la première position jusqu'à son extrémité.
@@ -2694,7 +2694,7 @@ et illustrent parfois des exemples de code).
 > show(nomDesChats("Est né le 20/09/2004 (mère, Bess la Jaune): " +
 >               "Docteur Hobbles II, Kaïra"));
 
-La partie la plus délicate qui est ignorée par la description originale
+La partie la plus délicate, qui n'a pas été mentionnée lors la description originale
 de l'algorithme, est le traitement des espaces après les deux-points
 et les virgules. Le |+2|, utilisé pour le découpage de chaînes, est
 nécessaire pour laisser de côté le deux-points lui-même et l'espace qui
@@ -2753,7 +2753,7 @@ ce qui nous permettra d'énumérer tous les noms de notre ensemble.
 
 ---
 
-Certaines parties de code ressemble à une jungle impénétrable. L'exemple
+Certaines parties de code ressemblent à une jungle impénétrable. L'exemple
 de solution pour le problème des chats souffre de ce défaut. Une façon
 de ménager des clairières consiste tout simplement à ajouter des lignes
 vides. Cela améliore la lisibilité, mais ne résout pas véritablement
@@ -2868,7 +2868,7 @@ des mères.
 
 Commençons par les dates : quelle pourrait être la meilleure façon
 de stocker une date ? Nous pourrions créer un objet avec ces trois
-propriétés,  |year|, |month|, et |day| et stocker ensuite des nombres
+propriétés,  |year| (année), |month| (mois), et |day| (jour) et stocker ensuite des nombres
 à l'intérieur.
 
 > var quand = {year: 1980, month: 2, day: 1};
@@ -2938,14 +2938,14 @@ Une chose très utile à faire avec les dates, c'est de les comparer.
 Comparer les dates avec |<|, |>|, |<=| et |>=| remplit exactement l'office
 que nous voulons en faire. Quand un objet date est comparé avec lui-même,
 le résultat est |true|, ce qui est bien également. Mais quand _|==|_ est
-utilisé pour comparer un objet date à un autre objet date différent mais
+utilisé pour comparer un objet date à un autre objet date distinct mais
 de même valeur, on obtient |false|. Étrange, non ?
 
 Comme précisé plus tôt, |==| retournera la valeur [false| lors de la
 comparaison de deux éléments différents, même si ces deux éléments
 contiennent les mêmes propriétés. Ceci est un peu maladroit et sujet
 à erreur, puisqu'on s'attendrait à ce que |>=| et |==| aient le même
-comportement. Pour tester si deux dates sont égales, peut être fait de
+comportement. Tester si deux dates sont égales peut être fait de
 cette manière :
 
 > var chuteDuMur1 = new Date(1989, 10, 9),
@@ -2994,7 +2994,7 @@ d'avoir à répéter trois fois les parties |Number| et |slice|.
 
 Notez le |-1| pour le numéro du mois. Comme la plupart des gens, tante Émilie
 compte les mois à partir de 1, nous devons donc ajuster cette valeur avant
-de donner la |Date| au constructeur (le numéro du jour ne relève pas du
+de la donner au constructeur |Date| (le numéro du jour ne relève pas du
 même problème, puisque les objets |Date| compte les jours de la façon
 humaine habituelle).
 
