@@ -3227,9 +3227,9 @@ c'est quelque chose dont vous devez avoir connaissance.
 > }
 > compteurArgument("Mort", "Famine", "Fléau");
 
-Certaines fonctions peuvent prendre un certain nombre d'arguments, comme par
+Certaines fonctions peuvent prendre nombre quelconque d'arguments, comme par
 exemple la fonction |print|. Cette fonction particulière opére une boucle sur
-les valeurs des |arguments| d'un objet pour en faire quelque chose. Les autres
+les valeurs des |arguments| d'un objet pour en faire quelque chose. D'autres
 peuvent prendre des arguments de manière optionnelle qui sont initialisés
 à une valeur par défaut sensée si l'utilisateur ne fournit pas de valeur.
 
@@ -3266,7 +3266,7 @@ série, le second la fin.
 > show(serie(4));
 > show(serie(2, 4));
 
-L'argument optionnel ne fonctionne pas exactement comme le premier, dans
+L'argument optionnel ne fonctionne pas exactement comme celui de
 l'exemple |ajouter| ci-dessus. Quand il n'est pas précisé, le premier argument
 prend le rôle de |fin| et |debut| devient |0|.
 
@@ -3310,7 +3310,7 @@ La plupart des langages vous arrêteront, ou du moins vous alerteront,
 quand vous définirez une variable avec un nom déjà utilisé par
 l'environnement. Pas JavaScript.
 
-Dans tous les cas, on peut trouver tout un ensemble de fonctions mathématiques
+De toute façon, on peut trouver tout un ensemble de fonctions mathématiques
 et de constantes dans |Math|. Toutes les fonctions trigonométriques sont
 présentes : |cos|, |sin|, |tan|, |acos|, |asin| et |atan|. π et e, qui sont
 écrits en capitales (|PI| et |E|), ce qui était à une époque une façon
