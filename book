@@ -3204,7 +3204,7 @@ On peut la lire comme : «  ne stocker le chat en cours dans la variable
 qui est né après le chat en cours ».
 
 Notez que cette fonction renvoie |null| quand il n'existe aucun chat vivant
-dans |data|. Que devient notre solution dans cas ?
+dans |data|. Que fait votre solution à l'exercice dans ce cas ?
 
 ---
 
