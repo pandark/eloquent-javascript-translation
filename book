@@ -3162,11 +3162,11 @@ une nouvelle version qui fera cela.
 ///
 
 > function formatDate(date) {
->   function pad(number) {
->     if (number < 10)
->       return "0" + number;
+>   function pad(nombre) {
+>     if (nombre < 10)
+>       return "0" + nombre;
 >     else
->       return number;
+>       return nombre;
 >   }
 >   return pad(date.getDate()) + "/" + pad(date.getMonth() + 1) +
 >              "/" + date.getFullYear();
