@@ -3434,7 +3434,7 @@ fonction |extraireChaineEntre| :
 >   return chaine.slice(indexDebut, indexFin);
 > }
 
-Si le |start| et le |end| donnés n'apparaissent pas dans la chaîne, |indexOf|
+Si |debut| et |fin| donnés en argument n'apparaissent pas dans la chaîne, |indexOf|
 renverra |-1| et cette version de |extraireChaineEntre| retournera des absurdités :
 |extraireChaineEntre("Île déserte", "{-", "-}")| renvoie |"le désert"|.
 
