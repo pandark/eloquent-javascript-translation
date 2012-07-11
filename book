@@ -3459,7 +3459,7 @@ sont difficiles à utiliser, et même dangereuses. Que se passe-t-il si le
 code appelant |extraireChaineEntre| veut savoir si tout s'est bien passé ? Sur le
 moment, il ne peut le dire, sauf à refaire tout le travail qu'a effectué
 |extraireChaineEntre| et à vérifier le résultat de |extraireChaineEntre| par rapport au sien. Ce
-qui n'est pas bien. Une solution serait de faire renvoyer par |extraireChaineEntre|
+qui n'est terrible. Une solution serait de faire renvoyer par |extraireChaineEntre|
 une valeur spéciale telle que |false| ou |undefined| quand elle échoue.
 
 > function extraireChaineEntre(chaine, debut, fin) {
@@ -3526,7 +3526,7 @@ La théorie derrière la gestion des exceptions fonctionne ainsi : il est
 possible pour le code de _lever_ (ou _lancer_) une _exception_, qui est une
 valeur. Quand on lève une exception, cela ressemble parfois à un retour de
 fonction boosté aux stéroïdes : on ne sort pas simplement de la fonction
-en cours, mais aussi des fonctions appelantes, en remontant jusqu'au niveau
+en cours, mais aussi des fonctions appelantes, en retournant jusqu'au niveau
 qui a démarré l'exécution actuelle. Cela
 s'appelle _dépiler_. Vous vous rappelez peut-être que la _pile_ des appels
 de fonction qui avait été abordée au \\cfunctions. Une exception descend
@@ -3536,7 +3536,7 @@ Si elles descendaient sans s'arrêter jusqu'au bas de la pile, les exceptions
 ne seraient pas d'un grand intérêt, elles fourniraient juste un moyen
 original de détruire le programme. Heureusement, il est possible de dresser
 des obstacles aux exceptions le long de la pile. Ceux-ci « @_intercepter_interceptent »
-l'exception quand elle descend, et ils peuvent s'en charger, après quoi
+l'exception quand elle descend, et ils peuvent la prendre en charge, après quoi
 le programme continue de fonctionner normalement à partir du point où
 l'exception a été attrapée.
 
@@ -3561,7 +3561,7 @@ Un exemple :
 > }
 
 _|throw|_ est le mot-clé qui est utilisé pour lever l'exception. Le mot-clé
-_|try|_ lève un obstacle pour les exceptions : quand une exception est
+_|try|_ pose un obstacle pour les exceptions : quand une exception est
 levée dans le code du bloc suivant ce _|try|_, le bloc _|catch|_ sera
 exécuté. La variable nommée entre parenthèses après le mot |catch|
 est le nom donné à la valeur d'exception à l'intérieur du bloc.
