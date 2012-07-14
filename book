@@ -3773,7 +3773,7 @@ Une autre façons de décrire la recette :
 C'est plus court, mais si vous ne savez pas comment faire tremper les pois,
 vous raterez sûrement et les ferez tremper dans trop peu d'eau. Mais on peut
 rechercher comment tremper les pois, et c'est ça la clé. Si vous partez du
-principe que le public a des connaissances de base, vous pouvez recourir à
+principe que vos lecteurs ont des connaissances de base, vous pouvez recourir à
 un langage pour mentionner des concepts plus larges et vous exprimez d'une
 manière plus concise et plus claire. C'est plus ou moins ce que l'on veut
 dire quand on parle d'abstraction.
@@ -3784,7 +3784,7 @@ surcroît, la connaissance minimale que le cuisinier est supposé avoir
 correspond aux fonctions et autres concepts qui sont accessibles aux
 codeurs. Si vous vous rappelez de l'introduction à ce livre, des choses
 telles que |while| rendent la construction de boucles plus faciles. Dans le
-\\cdata, nous avons écrit des fonctions simples afin d'avoir des fonctions
+\\cdata, nous avons écrit des fonctions simples afin de pouvoir écrire d'autres fonctions
 plus courtes et plus directes. De tels outils, dont certains sont fournis par
 le langage lui-même et d'autres conçus par le programmeur, sont utilisés
 de manière à réduire le nombre de détails inutiles dans le reste du
@@ -3939,7 +3939,7 @@ devant s'appliquer à la fonction.
 
 Malheureusement, dans le navigateur Internet Explorer, différentes
 fonctions comme |alert|, ne sont pas *vraiment* des fonctions... ni quoi
-que ce soit. Elles indiquent un type |"object"| quand s'appliquent sur elles
+que ce soit. Elles indiquent un type |"object"| quand s'applique sur elles
 l'opérateur |typeof| et n'ont pas de méthode |apply|. Vos propres fonctions
 n'ont pas cet inconvénient, ce sont toujours de vraies fonctions.
 
