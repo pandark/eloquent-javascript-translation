@@ -332,7 +332,7 @@ Pour vous permettre d'essayer les programmes, aussi bien les exemples que le
 code que vous écrirez vous-même, ce livre utilise ce que l'on appelle une
 _console_. Si vous utilisez un navigateur graphique moderne (Internet Explorer
 version 6 ou supérieur, Firefox 1.5 ou supérieur, Opera 9 ou supérieur,
-Safari 3 ou supérieur), les pages de ce livre vont afficher une barre bleuâtre en
+Safari 3 ou supérieur, Chrome), les pages de ce livre vont afficher une barre bleuâtre en
 bas de votre écran. Vous pouvez ouvrir la console en cliquant sur la petite
 flèche à l'extrémité droite de cette barre (notez qu'il ne s'agit pas
 de la console intégrée de votre navigateur).
