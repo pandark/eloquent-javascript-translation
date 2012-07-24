@@ -8234,8 +8234,8 @@ propriété de cet objet d'environnement et il pointe vers lui-même.
 ---
 
 Si un volume de code important est chargé dans un environnement, il utilisera
-beaucoup de noms de variables globales. Une fois que la masse de code devient
-trop importante pour être supervisée dans tous ses détails, il est très
+beaucoup de noms de variables globales. Une fois que la quantité de code devient trop
+importante pour être gardée à l'esprit dans tous ses détails, il devient très
 facile d'employer accidentellement un nom qui a déjà été utilisé pour
 autre chose. Ce qui cassera le code qui utilisait la valeur d'origine. La
 prolifération de variables globales est appelée _pollution d'espace de noms_
