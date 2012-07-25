@@ -676,7 +676,7 @@ chaînes, le JavaScript se contente de comparer les nombres associés aux
 caractères dans la chaîne, de gauche à droite.
 
 Voici d'autres opérateurs du même genre : _|>=|_ (« supérieur ou
-égal à »), |<=|_ (« inférieur ou égal à »), _|==|_ (« égal
+égal à »), _|<=|_ (« inférieur ou égal à »), _|==|_ (« égal
 à »), et _|!=|_ (« n'est pas égal à »).
 
 >> "Itchy" != "Scratchy"
