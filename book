@@ -4038,9 +4038,9 @@ encore plus courte.
 
 Un autre « algorithme fondamental » généralement utile en lien avec
 les tableaux porte le nom de _|map|_. Il balaye un tableau, en exécutant une
-fonction sur chaque élément, tout comme |forEach|. Mais au lieu de rejeter
-les valeurs de retour de la fonction, il construit un nouveau tableau pour
-chacune de ses valeurs.
+fonction sur chaque élément, tout comme |forEach|. Mais au lieu d'ignorer
+les valeurs de retour de la fonction, il construit un nouveau tableau contenant
+chacune de ces valeurs.
 
 > function map(func, tableau) {
 >   var resultat = [];
