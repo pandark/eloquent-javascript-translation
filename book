@@ -4144,7 +4144,7 @@ fichier image qui devrait être affichée ici.
 Parce que |<| et |>| ont un sens spécial dans les documents HTML,
 ils ne peuvent être écrits directement dans le texte du document. Si
 vous voulez dire « 5 < 10 » dans un document HTML, vous devez
-écrire « |5 &lt; 10| », où « |lt| » veut dire « moins
+écrire « |5 &lt; 10| », où « |&lt| » veut dire « moins
 que ». « |&gt;| » est utilisé pour « |>| » et parce que ces
 codes donnent aussi à l'esperluette un sens spécial, un simple « |&| »
 est écrit « |&amp;| ».
