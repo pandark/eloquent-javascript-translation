@@ -4301,11 +4301,10 @@ pu récupérer le fichier suivant :
 ]
 ] En prenant conscience de ce problème, le codeur commencera à
 ] passer plus de temps à réfléchir à la structure. Ses programmes
-] seront structurés rigidement, à la manière
-] de sculptures de pierre. Ils sont solides, mais quand ils doivent
-] changer, on doit leur faire violence {en référence au fait
-] que la structure a tendance à brider l'évolution du
-] programme.}.
+] seront structurés rigidement, à la manière de sculptures de
+] pierre. Ils sont solides, mais quand ils doivent changer, on
+] doit leur faire violence {en référence au fait que la structure
+] a tendance à brider l'évolution du programme.}.
 ]
 ] Le programmeur expérimenté sait quand la structure est
 ] importante, et quand il doit laisser les choses telles quel.
@@ -4330,7 +4329,7 @@ pu récupérer le fichier suivant :
 ] ce qui se passait mal. Fu-tzu écouta pendant un moment,
 ] puis lui fit des reproches en lui disant « Chaque langage
 ] a sa philosophie. Suis son dessein, n'essaye pas de coder
-] comme si tu  utilisais un autre langage de programmation.»
+] comme si tu utilisais un autre langage de programmation.»
 
 ---
 
