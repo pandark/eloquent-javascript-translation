@@ -4639,7 +4639,7 @@ En reprenant, si nécessaire, l'exemple de document HTML donné précédemment,
 ---
 
 Quand nous aurons créé un document, il devra être mis à plat sous forme
-de chaîne. Mais construire cette chaîne a partir des structures de données
+de chaîne. Mais construire cette chaîne à partir des structures de données
 que nous aurons construites sera facile. L'aspect important dont il faut se
 souvenir est de transformer les caractères spéciaux de notre document…
 
