@@ -4404,7 +4404,7 @@ Et *boum*, nous avons un tableau de paragraphes proprement triés. Nous
 sommes allés un peu vite, nous avons oublié l'étape 3 de l'algorithme:
 
 | Traiter le texte des paragraphes proprement dit, séparer en texte normal,
-texte en emphase, notes de bas de page.
+| texte en emphase, notes de bas de page.
 
 Ce qui se décompose en :
 
