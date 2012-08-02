@@ -4095,12 +4095,12 @@ Hyper Texte). Un document HTML est entièrement en texte. Parce qu'il doit
 être capable d'exprimer la structure de ce texte et de spécifier quelle
 donnée du texte est un titre, quelle partie du texte est en violet et
 ainsi de suite, quelques caractères ont un sens spécial, un peu comme les
-antislash (\) dans les chaînes JavaScript. Les signes « inférieur »
-et « supérieur » sont utilisés pour créer des « _balise_s »
-(NdT: ou tags). Une balise apporte de l'information supplémentaire sur le
-document. Elle peut fonctionner de manière autonome par exemple pour indiquer
-où doit apparaître une image sur la page, ou elle peut contenir du texte et
-d'autres balises, par exemple pour marquer le début et la fin des paragraphes.
+antislash (\) dans les chaînes JavaScript. Les signes « inférieur » et
+« supérieur » sont utilisés pour créer des « _balise_s ».  Une balise apporte
+de l'information supplémentaire sur le document. Elle peut fonctionner de
+manière autonome par exemple pour indiquer où doit apparaître une image sur
+la page, ou elle peut contenir du texte et d'autres balises, par exemple pour
+marquer le début et la fin des paragraphes.
 
 Certaines balises sont obligatoires, un document HTML intégral doit toujours
 tenir entre deux balises |html|. Voici un exemple d'un document HTML :
@@ -4371,7 +4371,7 @@ vous comprendrez que cela fera l'affaire :
 forme de chaîne en argument, détermine si ce paragraphe est un en-tête. S'il
 l'est, enlever les caractères « % » et les compter. Cette fonction renvoie
 un objet doté de 2 propriétés, |contenu| contenant le texte du paragraphe,
-et |type|, qui contient le tag qui devra entourer le paragraphe, |"p"| pour
+et |type|, qui contient la balise qui devra entourer le paragraphe, |"p"| pour
 des paragraphes proprement dit, |"h1"| pour les en-têtes avec un seul « %
 », et |"hX"| pour les en-têtes avec |X| caractères « % ».
 
@@ -4602,7 +4602,7 @@ au Go!"]| signifie que ce lien n'a qu'un élément englobé, cet élément
 Saisir tous ces objets à la main serait pénible, mais nous n'allons pas
 faire comme ça. Une fonction utilitaire fera cela pour nous:
 
-> function tag(nom, contenu, attributs) {
+> function balise(nom, contenu, attributs) {
 >   return {nom: nom, attributs: attributs, contenu: contenu};
 > }
 
@@ -4611,17 +4611,17 @@ et |contenu| d'un élément soient indéfinis s'ils ne s'appliquent pas,
 le second et troisième élément de cette fonction peuvent être ignorés
 s'ils ne sont pas nécessaires.
 
-La fonction |tag| est cependant assez simpliste, c'est pourquoi nous écrivons
+La fonction |balise| est cependant assez simpliste, c'est pourquoi nous écrivons
 quelques fonctions utilitaires pour des éléments fréquemment utilisés,
 comme les liens, ou la structure générale d'un document simple :
 
 > function lien(cible, texte) {
->   return tag("a", [texte], {href: cible});
+>   return balise("a", [texte], {href: cible});
 > }
 >
 > function documentHtml(titre, contenu) {
->   return tag("html", [tag("head", [tag("title", [titre])]),
->                       tag("body", contenu)]);
+>   return balise("html", [balise("head", [balise("title", [titre])]),
+>                       balise("body", contenu)]);
 > }
 
 ***
@@ -4633,7 +4633,7 @@ En reprenant, si nécessaire, l'exemple de document HTML donné précédemment,
 ///
 
 > function image(src) {
->   return tag("img", [], {src: src});
+>   return balise("img", [], {src: src});
 > }
 
 ---
@@ -4740,8 +4740,8 @@ Ainsi, essayons notre outil de génération de HTML...
 
 Cela semble fonctionner.
 
-> var corps = [tag("h1", ["Le Test"]),
->             tag("p", ["Voici un paragraphe, et une image..."]),
+> var corps = [balise("h1", ["Le Test"]),
+>             balise("p", ["Voici un paragraphe, et une image..."]),
 >             image("img/sheep.png")];
 > var doc = documentHtml("Le Test", corps);
 > viewHTML(renduHTML(doc));
@@ -4770,7 +4770,7 @@ Cette fonction pourrait s'avérer utile pour produire les liens vers les
 références de bas de page :
 
 > function basDePage(numero) {
->   return tag("sup", [lien("#note" + numero,
+>   return balise("sup", [lien("#note" + numero,
 >                           String(numero))]);
 > }
 
@@ -4787,7 +4787,7 @@ normal peut être fourni avec n'importe quelle balise supplémentaire.
 ///
 
 > function renduParagraphe(paragraphe) {
->   return tag(paragraphe.type, map(renduFragment,
+>   return balise(paragraphe.type, map(renduFragment,
 >                                  paragraphe.contenu));
 > }
 >
@@ -4795,7 +4795,7 @@ normal peut être fourni avec n'importe quelle balise supplémentaire.
 >   if (fragment.type == "reference")
 >     return basDePage(fragment.numero);
 >   else if (fragment.type == "enEmphase")
->     return tag("em", [fragment.contenu]);
+>     return balise("em", [fragment.contenu]);
 >   else if (fragment.type == "normal")
 >     return fragment.contenu;
 > }
@@ -4810,9 +4810,9 @@ d'une balise |a|, également utilisé pour les liens. Dans ce cas, la balise
 prend un attribut |name| au lieu de |href|.
 
 > function renduNoteBasDePage(noteBasDePage) {
->   var ancre = tag("a", [], {name: "note" + noteBasDePage.numero});
+>   var ancre = balise("a", [], {name: "note" + noteBasDePage.numero});
 >   var numero = "[" + noteBasDePage.numero + "] ";
->   return tag("p", [tag("small", [ancre, numero,
+>   return balise("p", [balise("small", [ancre, numero,
 >                                  noteBasDePage.contenu])]);
 > }
 
@@ -8340,11 +8340,11 @@ simple objet dont les propriétés sont les fonctions et les valeurs qu'il
 exporte. Par exemple…
 
 > var HTML = {
->   tag: function(nom, contenu, proprietes) {
+>   balise: function(nom, contenu, proprietes) {
 >     return {name: nom, properties: proprietes, content: contenu};
 >   },
 >   lien: function(cible, texte) {
->     return HTML.tag("a", [texte], {href: cible});
+>     return HTML.balise("a", [texte], {href: cible});
 >   }
 >   /* ... beaucoup d'autres fonctions produisant du HTML ... */
 > };
@@ -8820,7 +8820,7 @@ mais qui n'appelle |replace| qu'une seule fois.
 >   });
 > }
 >
-> print(escapeHTML("Le tag pour le pré-formatage s'écrit \"<pre>\"."));
+> print(escapeHTML("La balise pour le pré-formatage s'écrit \"<pre>\"."));
 
 L'objet |remplacements| est un moyen rapide d'associer chaque caractère
 à sa version échappée. L'utiliser ainsi ne pose pas de problème
@@ -9159,9 +9159,9 @@ valeurs. Envoyer ce formulaire peut produire une URL comme ceci:
 
 ] http://planetspam.com/info.html?nom=Ted&email=ted@zork.com&sexe=Homme
 
-Il y a nombre d'autres tags et propriétés qui peuvent être utilisés dans
-les formulaires mais dans ce livre nous nous en tiendrons aux plus simples,
-afin de nous concentrer sur JavaScript.
+De nombreuses autres balises et propriétés qui peuvent être utilisés dans
+les formulaires mais nous nous en tiendrons dans ce livre aux plus simples,
+afin de nous concentrer sur le JavaScript.
 
 ---
 
