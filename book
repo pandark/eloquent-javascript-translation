@@ -8747,7 +8747,7 @@ régulière.
 Remarquez le caractère |g| après l'expression régulière. Elle signifie
 « global » et veut dire que toute partie de chaîne qui coïncide avec
 le motif devrait être remplacée. Quand le |g| est omis, seul le premier
-|"o"| doit être remplacé.
+|"o"| est remplacé.
 
 Il est parfois nécessaire de conserver des parties de chaînes
 remplacées. Par exemple, nous avons une longue chaîne qui contient des noms
@@ -8824,7 +8824,7 @@ mais qui n'appelle |replace| qu'une seule fois.
 
 L'objet |remplacements| est un moyen rapide d'associer chaque caractère
 à sa version échappée. L'utiliser ainsi ne pose pas de problème
-(c'est-à-dire aucun objet |Dictionary| n'est nécessaire) parce que les
+(c'est-à-dire qu'un objet |Dictionary| n'est pas nécessaire) parce que les
 seules propriétés qui seront utilisées sont celles qui correspondent avec
 l'expression |/[<>&"]/|.
 
