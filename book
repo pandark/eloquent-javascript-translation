@@ -9305,7 +9305,7 @@ il ne se passe rien du tout. Cela sera corrigé en réglant sa propriété
 |onclick|.
 
 > formulaireUtilisateur.elements.envoyer.onclick = function() {
->   alert("Clique.");
+>   alert("Clic !");
 > };
 
 Tout comme les actions données à |setInterval| et |setTimeout| (\\coo),
