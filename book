@@ -8061,7 +8061,7 @@ découper ce programme en modules pourrait être :
 
  * Pour commencer, un module |FunctionalTools| qui inclut les fonctions du \\cfp et n'a pas de dépendance.
  * Ensuite, |ObjectTools|, contenant des choses comme |clone| et |create|, qui dépend de |FunctionalTools|.
- * |Dictionary| qui contient le type dictionaire et dépend de |FunctionalTools|.
+ * |Dictionary| qui contient le type dictionnaire et dépend de |FunctionalTools|.
  * Enfin, le module |Terrarium| qui dépend de |ObjectTools| et |Dictionary|.
 
 Quand un module @_dépendance_dépend d'un autre module, il utilise des fonctions ou
