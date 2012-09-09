@@ -4127,8 +4127,8 @@ tenir entre deux balises |html|. Voici un exemple d'un document HTML :
 ] </html>
 
 Des éléments qui contiennent du texte ou d'autres balises sont
-d'abord ouverts avec |<tagname>|, et après ils sont terminés par
-|</tagname>|. L'élément |html| contient toujours deux enfants : |head|
+d'abord ouverts avec |<nomdebalise>|, et après ils sont terminés par
+|</nomdebalise>|. L'élément |html| contient toujours deux enfants : |head|
 et |body|. Le premier contient des informations *sur* le document, le second
 contient le document en lui-même.
 
