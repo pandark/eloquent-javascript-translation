@@ -3938,7 +3938,7 @@ devant s'appliquer à la fonction.
 > }
 
 Malheureusement, dans le navigateur Internet Explorer, différentes
-fonctions comme |alert|, ne sont pas *vraiment* des fonctions... ni quoi
+fonctions prédéfinies comme |alert|, ne sont pas *vraiment* des fonctions... ni quoi
 que ce soit. Elles indiquent un type |"object"| quand s'applique sur elles
 l'opérateur |typeof| et n'ont pas de méthode |apply|. Vos propres fonctions
 n'ont pas cet inconvénient, ce sont toujours de vraies fonctions.
