@@ -4410,7 +4410,7 @@ Ce qui se décompose en :
 
  1. Si le paragraphe commence par un astérisque, retirer la partie mise en emphase et la stocker.
  2. Si le paragraphe commence par une accolade ouvrante, retirer la note de page et la stocker.
- 3. Dans les autres cas, retirer le morceau de texte jusqu'à la première mise en exergue, mise en bas de page, sinon jusqu'à la fin de la chaîne, et l'enregistrer comme texte normal.
+ 3. Dans les autres cas, retirer le morceau de texte jusqu'à la première mise en emphase, mise en bas de page, sinon jusqu'à la fin de la chaîne, et l'enregistrer comme texte normal.
  4. S'il reste encore quelque chose dans le paragraphe, reprendre à nouveau en 1.
 
 ***
@@ -4501,7 +4501,7 @@ occurrence de 'ceci ou cela' dans une chaîne).
 Si vous avez écrit une fonction |decoupeParagraphe| qui enregistre les
 morceaux de texte d'une façon différente de la solution ci-dessus, vous
 devriez la modifier, car les fonctions du reste de ce chapitre supposent
-que les morceaux de texte sont des objets dotés des propriétés |type|
+que les morceaux de texte sont des objets ayant des propriétés |type|
 et |contenu|.
 
 ---
@@ -4653,7 +4653,7 @@ souvenir est de transformer les caractères spéciaux de notre document…
 > }
 
 La méthode |replace| des objets chaînes créé une nouvelle chaîne dans
-laquelle toutes les occurrences du motif passé en premier en premier argument
+laquelle toutes les occurrences du motif passé en premier argument
 sont remplacées par le second argument, ainsi |"Borobudur".replace(/r/g,
 "k")| donne |"Bokobuduk"|. Ne vous souciez pas ici de la syntaxe des motifs,
 cela sera vu au \\cregexp. La fonction |escapeHTML| stocke les différents
