@@ -4782,7 +4782,7 @@ contenant un caractère « # » font référence aux « ancres »
 lecteur à la fin de la page, où seront les notes de bas de page.
 
 La balise pour générer des parties mises en emphase est |em| ; un texte
-normal peut être fourni avec n'importe quelle balise supplémentaire.
+normal peut être généré sans balise supplémentaire.
 
 ///
 
