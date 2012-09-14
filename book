@@ -4836,7 +4836,7 @@ de caractère.
 ---
 
 Dans les chapitres suivant, les fonctions élémentaires d'ordre supérieur
-comme |map| et |reduce| seront toujours disponibles et utilisées dans les
+comme |map| et |reduce| seront toujours disponibles, et utilisées dans certains
 exemples. Ici et là, on leur ajoutera d'autres outils qui nous sembleront
 utiles. Dans le \\cmodularity, nous verrons une approche plus structurée
 pour gérer ce jeu de fonctions de base.
@@ -4861,7 +4861,7 @@ ces fonctions :
 Nous pouvons donc écrire |reduce(op["+"], 0, [1, 2, 3, 4, 5])| pour faire la
 somme d'un tableau. Mais que se passe-t-il si nous avons besoin de quelque
 chose comme |equals| ou |creerFonctionAjouter|, dans lequel un des arguments a
-déjà cette valeur ? Dans ce cas nous voilà revenus à l'écriture d'une
+déjà une valeur ? Dans ce cas nous voilà revenus à l'écriture d'une
 nouvelle fonction.
 
 Dans les cas comme ceux-là, l'utilisation d'une « _application partielle_ »
@@ -4897,7 +4897,7 @@ ne peut pas les voir (elle a sa propre variable |arguments|, qui masque
 celle de la fonction externe).
 
 Maintenant |equals(10)| pourrait s'écrire |partial(op["=="], 10)|, sans
-nécessiter de fonction |equals| particulière. Et vous pouvez faire ceci :
+nécessiter d'écrire, pour l'occasion, une fonction |equals|. Et vous pouvez faire ceci :
 
 > show(map(partial(op["+"], 1), [0, 2, 4, 6, 8, 10]));
 
@@ -4943,8 +4943,8 @@ dans une fonction de haut niveau de la façon suivante :
 
 Nous voilà en train de définir de nouvelles fonctions sans utiliser du
 tout le mot-clé |function|. Cela peut être utile si vous avez besoin de
-créer une fonction simple à passer, par exemple, à |map| ou |reduce|
-. Toutefois, quand une fonction devient plus complexe que ces exemples,
+créer une fonction simple à passer, par exemple, à |map| ou |reduce|.
+Toutefois, quand une fonction devient plus complexe que ces exemples,
 il est généralement plus rapide (sans parler du gain en efficacité)
 de l'écrire avec |function|.
 
