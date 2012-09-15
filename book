@@ -4884,9 +4884,9 @@ façon créative la méthode |apply| d'une fonction :
 >   };
 > }
 
-Nous voulons autoriser la combinaison de plusieurs arguments en même temps,
-donc la fonction |asArray| est nécessaire pour constituer des tableaux
-normaux avec les objets |arguments|. Elle copie leur contenu dans un vrai
+Nous voulons être en mesure de regrouper plusieurs arguments en un seul,
+pour cela, la fonction |asArray| est nécessaire afin de constituer des tableaux
+normaux avec des objets |arguments|. Elle copie leur contenu dans un vrai
 tableau, si bien que la méthode |concat| peut lui être appliquée. Elle
 peut prendre aussi un deuxième argument facultatif, permettant d'ignorer
 le ou les premiers arguments.
@@ -4896,7 +4896,7 @@ Notez également qu'il faut stocker les |arguments| de la fonction externe
 ne peut pas les voir (elle a sa propre variable |arguments|, qui masque
 celle de la fonction externe).
 
-Maintenant |equals(10)| pourrait s'écrire |partial(op["=="], 10)|, sans
+Maintenant, |equals(10)| peut s'écrire |partial(op["=="], 10)|, sans
 nécessiter d'écrire, pour l'occasion, une fonction |equals|. Et vous pouvez faire ceci :
 
 > show(map(partial(op["+"], 1), [0, 2, 4, 6, 8, 10]));
