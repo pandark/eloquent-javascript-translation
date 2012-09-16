@@ -5032,7 +5032,7 @@ Heureusement, nous avons à notre disposition le talent de notre ordinateur
 pour la répétition des tâches. On peut indiquer les routes une fois, et
 faire générer par l'ordinateur la bonne structure de données. D'abord,
 définissez un objet initial vide appelé |routes|, et écrivez une fonction
-|ajouterRoute| :
+|creerRoute| :
 
 > var routes = {};
 > function creerRoute(depart, arrivee, distance) {
@@ -5111,13 +5111,13 @@ informations sur les routes en définissant quelques opérations pratiques. On
 pourrait dire que nous avons exprimé l'information de façon plus succincte
 en élargissant notre vocabulaire. @_domain-specific language_Définir un
 'petit langage' comme ceci est une technique très puissante — quand, à
-tout moment, vous vous retrouvez à écrire du code répétitif et inutile,
-arrêtez-vous et essayez de réduire ce code avec du vocabulaire qui le
+un moment, vous vous retrouvez à écrire du code répétitif ou redondant,
+arrêtez-vous et essayez de réduire ce code avec un vocabulaire qui le
 raccourcira et le condensera.
 
 Le code redondant est non seulement ennuyeux à écrire mais aussi
 potentiellement générateur d'erreurs. Les gens font moins attention quand
-ils font des choses qui ne requiert pas de la réflexion de leur part. En plus
+ils font des choses qui ne requiert pas de réflexion de leur part. En plus
 de cela, le code répétitif est dur à modifier, parce qu'une structure, qui
 répète le même motif un millier de fois, doit également être modifiée
 un millier de fois si elle s'avère incorrecte ou suboptimale.
@@ -5127,7 +5127,7 @@ un millier de fois si elle s'avère incorrecte ou suboptimale.
 Si vous exécutez tous les morceaux de code ci-dessus, vous devriez avoir
 une variable nommée |routes| qui contient toutes les routes de l'île. Quand
 nous avons besoin de la liste des routes qui partent d'un certain lieu, nous
-pouvons juste faire |routes[lieu]|. Mais alors, si quelqu'un fait une coquille
+pouvons juste faire |routes[lieu]|. Mais si quelqu'un fait une coquille
 dans le nom d'un endroit, ce qui est fort probable avec des noms pareils,
 il récupèrera un |undefined| à la place du tableau qu'il attendait, et
 des erreurs étranges peuvent survenir. À la place, nous allons utiliser
@@ -5179,7 +5179,7 @@ La ligne la plus déroutante est surement celle contenant
 _|Math.random|_. Cette fonction renvoie un nombre pseudo-aléatoire## entre 0
 et 1. Essayez de l'appeler un certain nombre de fois à la console, vous verrez
 qu'il vous donnera (fort probablement)  un nombre différent à chaque fois. La
-fonction |randomInteger| multiplie ce nombre par l'argument qui lui est donné
+fonction |entierAuHasard| multiplie ce nombre par l'argument qui lui est donné
 et arrondie le résultat au chiffre inférieur avec |Math.floor|. Ainsi par
 exemple, |entierAuHasard(3)| renverra les chiffres |0|, |1| ou |2|.
 
@@ -5908,7 +5908,7 @@ en utilisant |new| et qui ont des méthodes pour les manipuler.
 
 ---
 
-Nous avons donc enfin notre vraie fonctionde recherche de chemin :
+Nous avons donc enfin notre vraie fonction de recherche de chemin :
 
 > function trouverItineraire(depart, arrivee) {
 >   var listeOuverte = new BinaryHeap(scoreItineraire);
@@ -5948,7 +5948,7 @@ Nous avons donc enfin notre vraie fonctionde recherche de chemin :
 > }
 
 Premièrement, il crée les structures de données dont il a besoin :
-une liste ouverte et une liste des nœuds atteints. |scoreItineraire|  est
+une liste ouverte et une liste des nœuds atteints. |scoreItineraire| est
 la fonction de calcul de score passée au tas binaire. Remarquez comment
 il stocke ses résultats dans l'objet route, pour éviter d'avoir à le
 recalculer plusieurs fois.
