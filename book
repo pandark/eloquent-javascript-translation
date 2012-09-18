@@ -975,7 +975,7 @@ avons besoin d'une manière de répéter une portion de code automatiquement.
 
 Vous avez sûrement vu dans l'introduction le mot _|while|_. Une instruction
 démarrant par |while| crée une _boucle_. Une boucle est une perturbation
-dans la séquence des instructions, il fera répéter plusieurs fois
+dans la séquence des instructions -- il fera répéter plusieurs fois
 au programme une séquence de code. Dans notre cas le mot |while| est
 suivi par une expression entre parenthèses (les parenthèses étant
 obligatoires) qui détermine si la boucle continue à s'exécuter ou si
@@ -4810,10 +4810,9 @@ d'une balise |a|, également utilisé pour les liens. Dans ce cas, la balise
 prend un attribut |name| au lieu de |href|.
 
 > function renduNoteBasDePage(noteBasDePage) {
->   var ancre = balise("a", [], {name: "note" + noteBasDePage.numero});
 >   var numero = "[" + noteBasDePage.numero + "] ";
->   return balise("p", [balise("small", [ancre, numero,
->                                  noteBasDePage.contenu])]);
+>   var ancre = balise("a", [numero], {name: "note" + noteBasDePage.numero});
+>   return balise("p", [balise("small", [ancre, noteBasDePage.contenu])]);
 > }
 
 Enfin, voici une fonction qui, recevant un fichier correctement formaté et
