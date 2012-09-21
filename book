@@ -5172,12 +5172,12 @@ du joueur :
 À chaque branche de la route, le joueur lance son dé pour décider quelle
 route il va prendre. Si le dé le renvoie à son lieu de départ, ainsi
 soit-il. Tôt ou tard, il arrivera à destination, du moment que tous les
-endroits de l'île sont connectés par des routes.
+endroits de l'île sont reliés par des routes.
 
 La ligne la plus déroutante est surement celle contenant
 _|Math.random|_. Cette fonction renvoie un nombre pseudo-aléatoire## entre 0
 et 1. Essayez de l'appeler un certain nombre de fois à la console, vous verrez
-qu'il vous donnera (fort probablement)  un nombre différent à chaque fois. La
+qu'elle vous donnera (fort probablement)  un nombre différent à chaque fois. La
 fonction |entierAuHasard| multiplie ce nombre par l'argument qui lui est donné
 et arrondie le résultat au chiffre inférieur avec |Math.floor|. Ainsi par
 exemple, |entierAuHasard(3)| renverra les chiffres |0|, |1| ou |2|.
@@ -5357,7 +5357,7 @@ valeurs de l'ancien tableau pour lequel la fonction donnée retourne |true|
 
 (Si le résultat de cette utilisation de |filter| vous surprend, souvenez-vous
 que l'argument donné à |partial| est utilisé comme le *premier* argument
-de la fonction, de manière à ce qu'il finisse à la gauche de |>|.)
+de la fonction, de manière à ce qu'il se retrouve à la gauche de |>|.)
 
 ---
 
@@ -5366,7 +5366,7 @@ pourrait ressembler — il commence au point de départ et génère un
 itinéraire pour chaque route qui quitte ce lieu. À la fin de chaque route,
 il continue à générer des itinéraires supplémentaires. Il ne parcourt
 pas un simple itinéraire, il se ramifie. À cause de cela, la _récursion_
-est une manière normale de modéliser ce phénomène.
+est une manière normale de modéliser cet algorithme.
 
 > function itinerairesPossibles(depart, arrivee) {
 >   function trouverItineraires(itineraire) {
