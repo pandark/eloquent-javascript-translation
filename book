@@ -5291,8 +5291,8 @@ appelée _|any|_ (ou quelquefois |some|). Elle ressemble à ceci :
 > print(member(["Peur", "Répugnance"], "Rejet"));
 
 |any| parcourt tous les éléments d'un tableau, de gauche à droite,
-et les soumet à une fonction de test. La première fois qu'elle renvoie
-une valeur comme |true|, cette valeur est renvoyée. Sinon, elle retourne
+et les soumet à une fonction de test. Le premier élément ayant déclenché une réponse |true|
+de la fonction de test est renvoyé. Si aucun élément ne déclenche de réponse |true|, elle retourne
 |false|. Appeler |any(test, tableau)| est plus ou moins équivalent à
 |test(tableau[0]) || test(tableau[1]) || …| et cætera.
 
@@ -5337,8 +5337,8 @@ beaucoup de tableaux intermédiaires et inutiles.
 Avant de commencer à générer des routes, nous avons besoin d'une fonction
 d'ordre supérieur supplémentaire. Celle-ci est appelée _|filter|_. Tout
 comme |map|, elle prend une fonction et un tableau en arguments, et produit
-un nouveau tableau, mais au lieu de placer le résultat de la fonction
-appelée dans le nouveau tableau, elle produit un tableau avec seulement les
+un nouveau tableau, mais au lieu de placer les résultats des appels à la fonction
+dans le nouveau tableau, elle produit un tableau avec seulement les
 valeurs de l'ancien tableau pour lequel la fonction donnée retourne |true|
 (ou une valeur considérée équivalente a |true|). Écrivez cette fonction.
 
@@ -5405,9 +5405,9 @@ avons déjà visités. Continue chacune de ces routes, ce qui donnera pour
 chacune d'entre elles un tableau d'itinéraires finis, puis met toutes ces
 routes dans un grand tableau renvoyé en résultat ».
 
-Cette ligne fait beaucoup de choses. C'est pourquoi une bonne abstraction
-de la chose peut aider : elle vous permet de dire des choses compliquées
-sans taper un écran entier de code.
+Cette ligne fait beaucoup de choses. C'est en cela que les bonnes abstractions
+sont utiles : elles vous permettent de dire des choses compliquées
+sans taper des écrans entiers de code.
 
 Ceci ne risque-t-il pas de se répéter indéfiniment, en continuant à
 s'appeler lui-même (via |continueItineraire|) ? Non, à un certain moment,
