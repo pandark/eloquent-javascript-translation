@@ -5507,7 +5507,7 @@ secondes à peine. Comment font-ils ça ?
 Si vous êtes attentif, vous avez peut-être remarqué qu'il n'est pas
 nécessaire de générer tous les itinéraires jusqu'au bout. Si nous
 comparons les itinéraires *pendant* que nous les élaborons, nous pouvons
-cesser le calcul de ces itinéraires et dès que nous avons trouvé un
+éviter de calculer un ensemble volumineux d'itinéraire, dès que nous avons trouvé un
 premier itinéraire pour notre destination, nous pouvons cesser l'extension
 des autres itinéraires plus longs que celui-ci.
 
