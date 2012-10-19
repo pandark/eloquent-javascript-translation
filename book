@@ -11283,7 +11283,7 @@ en certaines occasions pour obtenir des informations supplémentaires sur
 le document.
 
 > print(requete.getAllResponseHeaders());
-> show(requete.getResponseHeader("Date"));
+> show(requete.getResponseHeader("Last-Modified"));
 
 Si pour une quelconque raison, vous voulez ajouter des en-têtes à la
 requête qui est envoyée au serveur, vous pouvez utiliser la méthode
