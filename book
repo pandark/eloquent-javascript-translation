@@ -5554,7 +5554,7 @@ ligne ou colonne, ils sont contigus, et la distance qui les sépare est
 cent mètres. Sinon, on considère qu'ils sont adjacents en diagonale, et
 la distance en diagonale entre deux carrés de cette taille est cent fois
 la racine carrée de deux, ce qui fait à peu près |141|. Cette fonction
-n'est pas autorisée à être appelée pour des carrés qui sont éloignés
+ne doit pas être appelée pour des carrés qui sont éloignés
 de plus d'une unité (elle pourrait faire une double vérification … mais
 elle est trop paresseuse).
 
@@ -5646,7 +5646,7 @@ Le problème fondamental, c'est qu'il y a trop de possibilités pour aller
 dans la mauvaise direction. À moins de savoir comment nous diriger vers la
 destination pendant l'exploration des chemins, un choix que nous faisons pour
 poursuivre une route donnée va plus probablement nous faire emprunter le
-mauvais chemin que le bon. Si vous continuez à générer des itinéraires
+mauvais chemin plutôt que le bon. Si vous continuez à générer des itinéraires
 de cette façon, et même si l'un d'entre eux atteint la cible de manière
 accidentelle, vous ne savez pas si c'est le chemin le plus court.
 
@@ -5654,7 +5654,7 @@ Donc ce que vous voulez faire, c'est explorer les directions susceptibles de
 vous amener à la destination finale en premier. Sur une grille comme sur
 une carte, vous pouvez avoir une petite estimation de l'optimisation d'un
 tracé en vérifiant sa longueur et la proximité de sa destination avec la
-cible. En ajoutant la longueur et l'estimation de la distance restante, vous
+cible. En ajoutant sa longueur avec l'estimation de la distance restante, vous
 pouvez vous faire une bonne idée des itinéraires qui sont prometteurs. Si
 vous prolongez les itinéraires prometteurs en premier, vous avez moins de
 risques de perdre du temps avec ceux qui sont inutiles.
@@ -5675,7 +5675,7 @@ que le chemin A est le meilleur moyen de se rendre au point X, nous pouvons
 nous en souvenir. Quand plus tard le chemin B se rend aussi au point X,
 nous savons que ce n'est pas la meilleure route, donc nous n'avons pas à
 faire plus de recherches dessus. Ceci peut éviter à notre programme de
-tracer beaucoup d'itinéraires inutiles.
+calculer beaucoup d'itinéraires inutiles.
 
 ---
 
@@ -5683,7 +5683,7 @@ Donc, l'algorithme ressemble à quelque chose comme ça :
 
 Il y a deux ensembles de données pour garder un historique. Le premier est
 appelé la liste ouverte, elle contient des itinéraires partiels qui doivent
-toujours être explorés. Chaque chemin a une note, qui est calculée en
+toujours être explorés. Chaque itinéraire a une note, qui est calculée en
 additionnant sa longueur à la distance estimée qui sépare du but. Cette
 estimation doit toujours être optimiste, elle ne doit jamais exagérer la
 longueur. Le second est un ensemble de nœuds que nous avons parcouru, avec
@@ -5723,8 +5723,8 @@ le score le plus bas. Le score d'un itinéraire est sa longueur actuelle
 additionnée d'un estimation *optimiste* de sa longueur restante. Cela
 veut dire que si un itinéraire obtient la note la plus basse dans la liste
 ouverte, c'est toujours le chemin le plus direct vers sa destination finale,
-c'est impossible pour un autre itinéraire de trouver plus tard une meilleure
-route vers ce point, car si elle était meilleure, son score serait plus bas.
+il est impossible qu'un autre itinéraire puisse trouver plus tard une meilleure
+route vers ce point, car si elle était meilleure, son score aurait été plus bas.
 
 ---
 
