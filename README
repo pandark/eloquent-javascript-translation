@@ -1,5 +1,5 @@
 Ceci est la traduction du code source depuis lequel est généré
-http://eloquentjavascript.net
+http://fr.eloquentjavascript.net
 
 Pour le générer vous-même, installez GHC (avec les bibliothèques
 parsec2, mtl et utf8-string), et exécutez `make.sh` dans le
