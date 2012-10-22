@@ -6195,7 +6195,7 @@ prototype :
 
 Chaque fonction est automatiquement munie d'une propriété |prototype|,
 dont la propriété |constructor| renvoie à la fonction. Puisque que le
-prototype « lapin » est lui-même un objet, il est basé sur le prototype
+prototype lapin est lui-même un objet, il est basé sur le prototype
 |Object|, et partage sa méthode |toString|.
 
 > show(lapinTueur.toString == objetSimple.toString);
