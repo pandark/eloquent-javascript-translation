@@ -6811,9 +6811,9 @@ pour construire une chaîne de caractères. Pour que le résultat soit
 lisible, il est préférable d'avoir un retour chariot à chaque ligne. La
 coordonnée |x| de chaque case de la grille sera utilisé pour déterminer
 si la fin d'une ligne est atteinte.
-En ajoutant une méthode |toString| qui ne prend pas d'argument et renvoie
-une chaîne de caractères, et en passant cette chaîne à |print|, nous
-obtenons une vue bi-dimensionnelle convenable du terrarium.
+Ajouter une méthode |toString| au prototype de |Terrarium|. Cette méthode ne prend
+pas d'argument et renvoie une chaîne de caractères destinée à être passée à
+|print|, affichant ainsi une belle vue bi-dimensionnelle du terrarium.
 
 ///
 
