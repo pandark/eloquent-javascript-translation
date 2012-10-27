@@ -6286,8 +6286,8 @@ que l'objet a lui-même.
 Heureusement, il y a un moyen de trouver si une propriété appartient à un
 objet lui-même, ou à l'un de ses prototypes. Malheureusement, cela complique
 un peu le parcours des propriétés d'un objet. Tout objet a une méthode
-appelée _|hasOwnProperty|_, qui nous indique si l'objet a une propriété
-de ce nom. En se basant sur ce mécanisme, nous pouvons ré-écrire notre
+appelée _|hasOwnProperty|_, qui nous indique si l'objet possède une propriété
+dont le nom est passé en argument. En se basant sur ce mécanisme, nous pouvons ré-écrire notre
 méthode |properties| de la manière suivante :
 
 > Object.prototype.properties = function() {
