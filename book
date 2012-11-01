@@ -152,7 +152,7 @@ l'exprimer en français sous cette forme :
  3. Stocker la valeur de l'adresse mémoire 1 dans l'adresse mémoire 2
  4. Soustraire 11 de la valeur stockée à l'adresse mémoire 2
  5. Si la valeur à l'adresse mémoire 2 est le nombre 0, continuer à l'instruction 9
- 6. Ajouter la valeur de l'adresse mémoire 1 à l'adresse mémoire 0
+ 6. Ajouter la valeur de l'adresse mémoire 1 à la valeur de l'adresse mémoire 0
  7. Ajouter le nombre 1 à la valeur de l'adresse mémoire 1
  8. Continuer avec l'instruction 3
  9. Donner la valeur de l'adresse mémoire 0
