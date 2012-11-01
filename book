@@ -858,14 +858,14 @@ fonction. Dans un navigateur, la variable _|alert|_ contient une
 fonction qui ouvre une petite fenêtre avec un message. Elle s'utilise
 comme ceci :
 
-> alert("Au fait, vos cheveux sont en feu.");
+> alert("Au feu !");
 
 @_|()|_Quand on exécute le code d'une fonction, on dit qu'on l'@_invocation_invoque,
 qu'on l'_appel_le ou qu'on l'applique. La notation pour faire ça utilise des parenthèses. Chaque
 expression qui produit une valeur de type fonction peut être invoquée en plaçant des parenthèses
-à sa suite. La chaîne de caractères entre parenthèses est
-donnée à la fonction |alert| qui l'utilise en tant que texte pour l'afficher dans la
-fenêtre. Les valeurs données aux fonctions sont appelées _paramètre_s ou
+à sa suite. Dans cet exemple, la valeur |"Au feu !"| est
+donnée à la fonction |alert| qui l'utilise comme un texte à afficher dans une
+fenêtre de dialogue. Les valeurs données aux fonctions sont appelées _paramètre_s ou
 _argument_s. |alert| n'en a besoin que d'un seul, mais d'autres fonctions peuvent
 en vouloir plus.
 
