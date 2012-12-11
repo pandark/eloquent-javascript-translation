@@ -11699,7 +11699,7 @@ et de vérifier chaque élément.
 La solution suivante aurait été, bien entendu, de trier notre tableau. Les
 tableaux javaScript ont une magnifique méthode _|sort|_, qui peut être
 utilisée pour des tâches difficiles. Malheureusement, re-trier un tableau
-entier chaque fois qu'un élément est supprimé demande plus de travail que
+entier chaque fois qu'un élément est ajouté demande plus de travail que
 chercher simplement la valeur minimale dans un tableau non-trié. On peut
 utiliser certaines astuces, par exemple, au lieu de re-trier tout le
 tableau, s'assurer simplement que les nouvelles valeurs sont insérées au
