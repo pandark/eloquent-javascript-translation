@@ -5818,8 +5818,8 @@ que celui-là :
 
 [[diagonalpath.png]]
 
-... le chemin fait |8| cases de larges et |4| de haut, donc vous avez |8 -
-4 = 4| déplacements rectilignes et |4| déplacements en diagonales.
+... le chemin fait |6| cases de larges et |4| de haut, donc vous avez |6 -
+3 = 3| déplacements rectilignes et |3| déplacements en diagonales.
 
 Si vous écriviez une fonction qui calcule la distance « pythagoricienne
 » directe entre ces points, cela fonctionnerait aussi. Ce dont nous avons
