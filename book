@@ -2120,7 +2120,7 @@ et les objets, et quelques techniques les concernant.
 
 Considérons la situation suivante : votre tante Émilie l’excentrique,
 dont la rumeur dit qu’elle vit avec cinquante chats (en fait personne n’arrive
-à les compter), vous envoie régulièrement des e-mails pour vous tenir au
+à les compter), vous envoie régulièrement des courriels pour vous tenir au
 courant de ses exploits. Ils sont de la forme suivante :
 
 | Mon cher neveu,
@@ -2157,15 +2157,15 @@ généalogie de ses chats, pour pouvoir ajouter des commentaires comme
 samedi ! », ou bien « Comment va cette vieille Lady Pénélope ? Elle
 a cinq ans maintenant, n’est-ce pas ? », en évitant de préférence de
 demander des nouvelles des chats décédés. Vous avez une grande quantité
-de vieux e-mails de votre tante et, par chance, elle est très constante dans
+de vieux courriels de votre tante et, par chance, elle est très constante dans
 sa manière de donner les renseignements sur les naissances et décès des
-chats à la fin de ses e-mails, toujours dans le même format.
+chats à la fin de ses courriels, toujours dans le même format.
 
 Vous n’avez pas envie de parcourir à la main tous ces messages. Heureusement,
 nous avions justement besoin d’un exemple, nous allons donc écrire un
 programme qui va faire le travail pour nous. Pour commencer, nous allons
 écrire un programme qui va nous donner la liste des chats qui sont toujours
-vivants à la fin du dernier e-mail.
+vivants à la fin du dernier courriel.
 
 Avant que vous ne posiez la question, au début de cette correspondance,
 la tante Émilie n’avait qu’un seul chat : Spot (elle était encore assez
@@ -2181,7 +2181,7 @@ Il est généralement préférable d’avoir une idée de départ sur ce que
 va faire un programme avant de se mettre à l’écrire… Voici le plan :
 
  1. Commencer par un ensemble de noms de chats ne comprenant que « Spot ».
- 2. Parcourir chaque e-mail dans l’archive dans l’ordre chronologique.
+ 2. Parcourir chaque courriel dans l’archive dans l’ordre chronologique.
  3. Chercher les paragraphes qui commencent par « Est né le » ou « Décédé le ».
  4. Ajouter les noms trouvés dans les paragraphes qui commencent par « Est né le » à l’ensemble de noms.
  5. Supprimer les noms de chats trouvés dans les paragraphes qui commencent par « Décédé le » de notre ensemble.
@@ -2381,19 +2381,19 @@ les objets.
 
 Dans le plan d’action pour le problème des chats — en fait, appelons-le
 un *algorithme* au lieu d’un plan, cela nous donne l’impression qu’on sait
-de quoi on parle — dans l’algorithme, on parle de parcourir chaque e-mail
+de quoi on parle — dans l’algorithme, on parle de parcourir chaque courriel
 contenu dans une archive. Mais comment se présente cette archive ? Et
 d’où vient-elle ?
 
 Ne vous inquiétez pas de la deuxième question pour le moment. Le \\cxhr
 explique quelques-unes des possibilités pour importer des données dans
-vos programmes. Pour l’instant, on dira que les e-mails sont déjà là,
+vos programmes. Pour l’instant, on dira que les courriels sont déjà là,
 comme par magie. La magie est parfois très facile, avec les ordinateurs.
 
 ---
 
 La façon dont l’archive est enregistrée reste une question pertinente. Elle
-contient quantité d’e-mails. Un e-mail peut être vu comme une chaîne de
+contient quantité d’courriels. Un courriel peut être vu comme une chaîne de
 caractères, c’est évident. Toute l’archive pourrait être mise dans une
 énorme chaîne de caractères mais ce ne serait pas pratique. Ce qu’il nous
 faut, c’est une structure de chaînes de caractères distinctes.
@@ -2401,20 +2401,20 @@ faut, c’est une structure de chaînes de caractères distinctes.
 Les objets sont justement utilisés pour structurer des choses. On pourrait
 très bien créer un objet comme celui-ci :
 
-> var archiveDeMessages = {"le premier e-mail": "Mon cher neveu, …",
->                    "le deuxième e-mail": "…"
+> var archiveDeMessages = {"le premier courriel": "Mon cher neveu, …",
+>                    "le deuxième courriel": "…"
 >                    /* et ainsi de suite… */};
 
-Mais parcourir les e-mails du début à la fin serait difficile — comment
+Mais parcourir les courriels du début à la fin serait difficile — comment
 le programme peut-il deviner le nom de ces propriétés ? La solution est
 d’utiliser des noms de propriétés plus prévisibles :
 
-> var archiveDeMessages = {0: "Mon cher neveu, … (e-mail numéro 1)",
->                    1: "(e-mail numéro 2)",
->                    2: "(e-mail numéro 3)"};
+> var archiveDeMessages = {0: "Mon cher neveu, … (courriel numéro 1)",
+>                    1: "(courriel numéro 2)",
+>                    2: "(courriel numéro 3)"};
 >
 > for (var courant = 0; courant in archiveDeMessages; courant++)
->   print("Traitement de l’e-mail #", courant, ": ", archiveDeMessages[courant]);
+>   print("Traitement de l’courriel #", courant, ": ", archiveDeMessages[courant]);
 
 La chance veut qu’il existe un type d’objet particulier qui corresponde
 exactement à ce type de besoin. Ce sont les _tableau_x et ils
@@ -2424,10 +2424,10 @@ tableau et bien d’autres fonctions utiles pour ce type de structure.
 
 @_|[]|_Pour créer de nouveaux tableaux on utilise des crochets (|[| et |]|):
 
-> var archiveDeMessages = ["e-mail un", "e-mail deux", "e-mail trois"];
+> var archiveDeMessages = ["courriel un", "courriel deux", "courriel trois"];
 >
 > for (var courant = 0; courant < archiveDeMessages.length; courant++)
->   print("Traitement de l’e-mail #", courant, ": ", archiveDeMessages[courant]);
+>   print("Traitement de l’courriel #", courant, ": ", archiveDeMessages[courant]);
 
 Dans cet exemple, le nombre d’éléments n’est plus spécifié
 explicitement. Le premier a automatiquement le numéro 0, le deuxième le
@@ -2528,22 +2528,22 @@ avant l’assemblage de la chaîne de caractères finale.
 ---
 
 Revenons à nos chats : nous savons maintenant qu’utiliser un tableau
-serait une bonne idée pour ranger les archives des e-mails. Sur cette page,
+serait une bonne idée pour ranger les archives des courriels. Sur cette page,
 la fonction |recupererLesMessages| sera utilisée pour récupérer (magiquement)
-ce tableau. Parcourir les e-mails qu’il contient pour les traiter un par un
+ce tableau. Parcourir les courriels qu’il contient pour les traiter un par un
 devient simple comme un jeu d’enfant :
 
 > var archiveDeMessages = recupererLesMessages();
 >
 > for (var i = 0; i < archiveDeMessages.length; i++) {
 >   var message = archiveDeMessages[i];
->   print("Traitement de l’e-mail #", i);
+>   print("Traitement de l’courriel #", i);
 >   // Faire plus de choses…
 > }
 
 Nous avons également décidé d’une manière de représenter un ensemble
 de chats vivants. Le problème qui reste à traiter, cependant, est celui
-de détecter des paragraphes d’un e-mail qui contiennent |"Est né le"|  ou
+de détecter des paragraphes d’un courriel qui contiennent |"Est né le"|  ou
 |"Décédé le"|.
 
 ---
@@ -2556,7 +2556,7 @@ devons définir les paragraphes de cette façon.
 
 Nous avons vu plus haut qu’il existe une chose qui s’appelle un caractère
 de fin de ligne. C’est ce que la plupart des gens utilisent pour séparer les
-paragraphes. Nous considérons donc un paragraphe comme une partie d’e-mail qui
+paragraphes. Nous considérons donc un paragraphe comme une partie d’courriel qui
 commence par un caractère saut de ligne ou au début du contenu du message
 et se termine au caractère saut de ligne suivant ou bien à la fin du contenu.
 
@@ -2571,7 +2571,7 @@ en paragraphes.
 > show(mots.split(" "));
 
 Ainsi, découper avec des caractères saut de ligne (|"\n"|) est une méthode
-utilisable pour diviser un e-mail en paragraphes.
+utilisable pour diviser un courriel en paragraphes.
 
 ***
 
@@ -2864,7 +2864,7 @@ plus propre et j’espère que vous reconnaîtrez qu’elle est plus lisible.
 ---
 
 Le programme ignore encore un grand nombre d’informations qui sont incluses
-dans les e-mails. Il s’agit des dates de naissance, de mort et des noms
+dans les courriels. Il s’agit des dates de naissance, de mort et des noms
 des mères.
 
 Commençons par les dates : quelle pourrait être la meilleure façon
@@ -8644,7 +8644,7 @@ chiffres ».
 
 ***
 
-Écrivez un motif qui correspond avec les adresses e-mail. Pour simplifier,
+Écrivez un motif qui correspond avec les adresses électroniques. Pour simplifier,
 considérez que les parties avant et après le |@| peuvent contenir seulement
 des caractères alphanumériques et des caractères |.| et |-| (point et
 tiret), tandis que la dernière partie de l’adresse, le code du pays après
@@ -8653,11 +8653,11 @@ le dernier point, peut contenir des caractères alphanumériques et doit
 
 ///
 
-> var adresseEmail = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
+> var adresseElectronique = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/;
 >
-> show(adresseEmail.test("kenny@test.net"));
-> show(adresseEmail.test("J’ai envoyé un e-mail à kenny@tets.nets, mais ça marche pas !"));
-> show(adresseEmail.test("le_paresseux_geant@gmail.com"));
+> show(adresseElectronique.test("kenny@test.net"));
+> show(adresseElectronique.test("J’ai envoyé un courriel à kenny@tets.nets, mais ça ne fonctionne pas !"));
+> show(adresseElectronique.test("le_paresseux_geant@gmail.com"));
 
 Les |\b| au début et à la fin du motif permettent de s’assurer que la
 deuxième chaîne de caractères ne correspond pas.
@@ -9144,7 +9144,7 @@ Voici le HTML pour un formulaire simple :
 ] <form name="info_utilisateur" method="get" action="info.html">
 ]   <p>S’il vous plaît donnez-nous vos informations, afin que nous puissions vous envoyer du spam.</p>
 ]   <p>Nom: <input type="text" name="nom"/></p>
-]   <p>e-mail: <input type="text" name="email"/></p>
+]   <p>courriel: <input type="text" name="email"/></p>
 ]   <p>Sexe: <select name="sexe">
 ]             <option>Homme</option>
 ]             <option>Femme</option>
@@ -9210,8 +9210,8 @@ moins qu’il ne commence par un slash, le chemin (ou répertoire) du document
 en cours est aussi conservé et le chemin donné lui est ajouté.
 
 Nous ajouterons une vérification de validité au formulaire, afin qu’il
-soumette seulement si le champ nom n’est pas laissé vide et si le champ e-mail
-contient quelque chose qui ressemble à une adresse e-mail valide. Parce
+soumette seulement si le champ nom n’est pas laissé vide et si le champ courriel
+contient quelque chose qui ressemble à une adresse électronique valide. Parce
 que nous ne voulons plus que le formulaire soit soumis immédiatement quand
 le bouton « Envoyer ! » est cliqué. Sa propriété |type| a été
 changée de |"submit"| à |"button"|, ce qui le change en un bouton ordinaire
@@ -9284,7 +9284,7 @@ le nom a été rempli.
 l’écriture d’une fonction |valideInfo|, qui prend un objet formulaire comme
 argument et retourne une valeur booléenne: |true| quand le champ |nom|
 n’est pas vide et le champ |email| contient quelque chose qui ressemble à
-une adresse e-mail, sinon |false|. Écrivez cette fonction.
+une adresse électronique, sinon |false|. Écrivez cette fonction.
 
 ///
 
@@ -9296,7 +9296,7 @@ une adresse e-mail, sinon |false|. Écrivez cette fonction.
 > show(valideInfo(document.forms.info_utilisateur));
 
 Vous avez bien pensé à utiliser une expression régulière pour la
-vérification de l’e-mail, n’est-ce pas ?
+vérification de l’courriel, n’est-ce pas ?
 
 ---
 
@@ -9329,7 +9329,7 @@ méthode _|submit|_ qui ne prend aucun paramètre et soumet le formulaire.
 >   if (valideInfo(formulaireUtilisateur))
 >     formulaireUtilisateur.submit();
 >   else
->     alert("Donnez-nous un nom et une adresse e-mail valides !");
+>     alert("Donnez-nous un nom et une adresse électronique valides !");
 > };
 
 ---
