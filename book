@@ -9494,12 +9494,12 @@ simple système HTML qui fonctionne et ensuite d’ajouter des bidouilles non
 essentielles et des trucs pratiques avec JavaScript.
 
 ================================
-Le modèle d’objet-document / dom
+Le modèle objet de documents / dom
 ================================
 
 Dans le \\cweb nous avons vu les objets JavaScript qui font référence aux
 balises |form| et |input| du document HTML. De tels objets font partie d’une
-structure appelée le _modèle d’objet-document_ (_DOM_). Chaque élément du
+structure appelée le _modèle objet de documents_ (_DOM_). Chaque élément du
 document est représenté dans ce modèle, on peut l’examiner et interagir
 avec lui.
 
@@ -9511,7 +9511,7 @@ Vous pouvez vous le représenter comme une sorte d’arbre généalogique.
 
 [[html.png]]
 
-Le modèle document-objet est basé sur une telle vue du document.
+Le modèle objet de documents est basé sur une telle vue du document.
 Veuillez noter que l’arbre contient deux types d’éléments : les nœuds,
 représentés comme des boîtes bleues et de simples morceaux de texte. Les
 morceaux de texte sont comme nous le verrons assez différents des autres
@@ -9909,7 +9909,7 @@ et les nœuds DOM.
 ---
 
 Le sujet des @_feuille de style_feuilles de style est étroitement lié à
-HTML et au modèle document-objet. C’est un vaste sujet et je ne
+HTML et au modèle objet de documents. C’est un vaste sujet et je ne
 l’aborderai pas entièrement. Mais quelques notions sur les feuilles de
 styles sont nécessaires pour beaucoup de techniques intéressantes en
 JavaScript, nous allons donc en voir les rudiments.
