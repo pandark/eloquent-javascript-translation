@@ -10002,18 +10002,18 @@ Et pour faire revenir notre image :
 ---
 
 Il existe d’autres types de style dont on peut user et abuser de façon
-intéressante, ceux liés au positionnement. Dans un simple document HTML,
+intéressante, ceux liés au positionnement. Dans un document HTML simple,
 le navigateur s’occupe de déterminer la position de l’écran et de tous les
 éléments -- chaque élément est mis à la suite ou au-dessous de l’élément
 qui le précède et les nœuds ne se chevauchent pas (en général).
 
-@_|style.position|_Quand son style |position| est à |"absolute"|, un
-nœud est retiré du flux normal du document. Il n’a plus sa place dans
-le document mais en quelque sorte au-dessus de lui. Les styles |left| et
-|top| peuvent ensuite être utilisés pour influencer sa position. Ceux-ci
-peuvent être utilisés pour de nombreux usages, que ce soit pour faire un
-nœud qui suivrait obstinément le curseur de la souris ou pour faire des
-« fenêtres » qui s’ouvriraient au-dessus du reste du document.
+@_|style.position|_Quand la propriété |position| de sa propriété style vaut
+|"absolute"|, un nœud est retiré du flux normal du document. Il n’a plus
+sa place dans le document mais en quelque sorte au-dessus de lui. Les styles
+|left| et |top| peuvent ensuite être utilisés pour influencer sa position.
+Ceux-ci peuvent être utilisés pour de nombreux usages, que ce soit pour
+faire un nœud qui suivrait obstinément le curseur de la souris ou pour faire
+des « fenêtres » qui s’ouvriraient au-dessus du reste du document.
 
 > $("image").style.position = "absolute";
 > var angle = 0;
