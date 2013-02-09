@@ -8489,9 +8489,9 @@ qu’à l’avenir de nouvelles versions d’ECMAScript et des modifications dan
 les navigateurs rendent les boîtes à outils moins nécessaires, ce qui
 résoudrait partiellement ce problème.
 
-===============================
-Expressions régulières / regexp
-===============================
+=================================
+Expressions rationnelles / regexp
+=================================
 
 À diverses occasions dans les chapitres précédents, nous avons dû jeter
 un coup d’œil aux structures des valeurs de chaînes. Dans le \\cdata
@@ -8501,26 +8501,26 @@ la date. Plus loin, dans le \\cfp, nous avons vu des bouts de code assez
 laids destinés à chercher certains types de caractères dans une chaîne,
 par exemple ceux qui devaient être échappés en HTML.
 
-@_expression régulière_Les expressions régulières constituent un langage qui
+@_expression rationnelle_Les expressions rationnelles constituent un langage qui
 décrit les structures des chaînes. Il s’agit d’un petit langage spécifique
 mais qui est inclus dans le JavaScript (comme dans beaucoup d’autres langages
 de programmation, d’une façon ou d’une autre). Il n’est pas très lisible --
-les expressions régulières volumineuses finissent par devenir complètement
+les expressions rationnelles volumineuses finissent par devenir complètement
 illisibles. C’est pourtant un outil très utile qui peut vraiment simplifier
 les programmes qui traitent les chaînes.
 
 ---
 
 Tout comme on écrit les chaînes entre guillemets, les expressions
-régulières sont écrites entre des slash(_|/|_). Ce qui implique que des
+rationnelles sont écrites entre des slash(_|/|_). Ce qui implique que des
 slash à l’intérieur de l’expression devront être échappés.
 
 > var slash = /\//;
 > show("AC/DC".search(slash));
 
 La méthode _|search|_ ressemble à la méthode |indexOf|, mais elle cherche
-une expression régulière et non une chaîne. Les structures indiquées dans
-les expressions régulières peuvent effectuer quelques petites choses que les
+une expression rationnelle et non une chaîne. Les structures indiquées dans
+les expressions rationnelles peuvent effectuer quelques petites choses que les
 chaînes ne peuvent pas faire. Pour commencer elles permettent à certains
 de leurs éléments de coïncider sur plus d’un seul caractère. Dans le
 \\cfp, quand nous avons extrait les balises pour un document, nous avons eu
@@ -8533,10 +8533,10 @@ chaîne. Nous pouvions faire ainsi :
 > show(histoire.search(asterisqueOuAccoladeOuvrante));
 
 Les caractères |[| et |]| ont une signification particulière dans les
-expressions régulières. Lorsqu’ils encadrent d’autres caractères, ils
+expressions rationnelles. Lorsqu’ils encadrent d’autres caractères, ils
 signifient n’importe lequel de ces caractères.
 Comme la plupart des caractères non alphanumériques ont une signification
-particulière dans les expressions régulières, c’est une bonne idée de les
+particulière dans les expressions rationnelles, c’est une bonne idée de les
 échapper systématiquement avec un antislash## pour qu’ils soient compris
 comme de simples caractères.
 
@@ -8566,13 +8566,13 @@ inversé en commençant par un caractère |^| :
 > var pasABC = /[^ABC]/;
 > show("ABCBACCBBADABC".search(pasABC));
 
-Comme vous pouvez le voir, la façon dont les expressions régulières
+Comme vous pouvez le voir, la façon dont les expressions rationnelles
 utilisent des caractères pour construire des motifs les rend a) très courts,
 et b) très difficiles à lire.
 
 ***
 
-Écrivez une expression régulière qui retrouve une date au format
+Écrivez une expression rationnelle qui retrouve une date au format
 |"XX/XX/XXXX"|, dans laquelle les |X| sont des chiffres. Essayez sur cette
 chaîne |"Est né le 15/11/2003 (mère, Spot): Croc Blanc"|.
 
@@ -8591,11 +8591,11 @@ de la chaîne, le deuxième avec la fin.
 > show(/a+/.test("blah"));
 > show(/^a+$/.test("blah"));
 
-La première expression régulière retrouve toute chaîne qui contient
+La première expression rationnelle retrouve toute chaîne qui contient
 un caractère |a|, la seconde seulement les chaînes qui sont entièrement
 constituées de caractères |a|.
 
-Notez que les expressions régulières sont des objets et qu’elles ont des
+Notez que les expressions rationnelles sont des objets et qu’elles ont des
 méthodes. Leur méthode _|test|_ renvoie un booléen qui indique si une
 chaîne donnée correspond avec l’expression.
 
@@ -8653,15 +8653,15 @@ deuxième chaîne de caractères ne correspond pas.
 
 ---
 
-Des  parties d’une expression régulière peuvent être rassemblées en les
+Des  parties d’une expression rationnelle peuvent être rassemblées en les
 mettant entre parenthèses. Ce qui nous permet d’utiliser |*| et autres sur
 plus d’un caractère. Par exemple :
 
 > var criFaconCartoon = /boo(hoo+)+/i;
 > show("Il s’exclama alors « Boohoooohoohooo »".search(criFaconCartoon));
 
-D’où vient le |i| à la fin de cette expression régulière ? Après le
-slash fermant, une option peut être ajoutée à une expression régulière. Un
+D’où vient le |i| à la fin de cette expression rationnelle ? Après le
+slash fermant, une option peut être ajoutée à une expression rationnelle. Un
 |i| ici signifie que l’expression est insensible à la casse, ce qui permet
 d’utiliser un B minuscule dans le motif pour correspondre à celui en
 majuscule dans la chaîne de caractères.
@@ -8678,9 +8678,9 @@ Souvent, chercher un motif n’est que la première étape dans l’extraction
 d’un élément dans une chaîne. Dans les chapitres précédents, cette
 extraction était effectuée en appelant beaucoup les méthodes |indexOf|
 et |slice| de l’objet string. Maintenant que nous sommes conscients de
-l’existence des expressions régulières, nous pouvons utiliser plutôt
+l’existence des expressions rationnelles, nous pouvons utiliser plutôt
 la méthode |match|. Quand on teste la correspondance d’une chaîne à une
-expression régulière, le résultat sera |null| si la correspondance échoue
+expression rationnelle, le résultat sera |null| si la correspondance échoue
 ou un tableau de chaînes si des correspondances sont trouvées.
 
 > show("Non".match(/Oui/));
@@ -8721,7 +8721,7 @@ les dates dans lesquelles le jour ou le mois sont écrits avec un seul chiffre.
 Cette version est légèrement plus longue que la précédente mais elle a
 l’avantage de vérifier effectivement ce qui est fait et de faire retentir la
 sirène d’alarme quand une entrée illogique est faite. C’était beaucoup plus
-difficile sans expression régulière -- cela aurait nécessité beaucoup
+difficile sans expression rationnelle -- cela aurait nécessité beaucoup
 d’appels à |indexOf| pour déterminer si les nombres avaient un ou deux
 chiffres et si les tirets étaient à la bonne place.
 
@@ -8729,11 +8729,11 @@ chiffres et si les tirets étaient à la bonne place.
 
 La méthode _|replace|_ des valeurs de chaîne, que nous avons vue dans
 le \\cfp, peut être employée comme premier argument d’une expression
-régulière.
+rationnelle.
 
 > print("Borobudur".replace(/[ou]/g, "a"));
 
-Remarquez le caractère |g| après l’expression régulière. Elle signifie
+Remarquez le caractère |g| après l’expression rationnelle. Elle signifie
 « global » et veut dire que toute partie de chaîne qui coïncide avec
 le motif devrait être remplacée. Quand le |g| est omis, seul le premier
 |"o"| est remplacé.
@@ -8827,8 +8827,8 @@ pas de mot obscène. L’administrateur du forum peut spécifier une liste de
 mots qu’il ou elle considère comme inacceptables.
 
 Le moyen le plus efficace de vérifier un fragment du texte pour un ensemble
-de mots est d’utiliser une expression régulière. Si nous mettons notre liste
-de mots dans un tableau, nous pourrons construire l’expression régulière
+de mots est d’utiliser une expression rationnelle. Si nous mettons notre liste
+de mots dans un tableau, nous pourrons construire l’expression rationnelle
 de la façon suivante :
 
 > var motsInterdits = ["primate", "singe", "simien", "gorille", "evolution"];
@@ -8853,14 +8853,14 @@ l’insensibilité à la casse ou la globalité. Quand on élabore une chaîne
 pour contenir le motif, on doit faire très attention aux antislashes. En
 effet, en principe, les antislashes sont supprimés quand une chaîne est
 interprétée, tous les antislashes qui doivent se trouver dans l’expression
-régulière elle-même doivent donc être échappés :
+rationnelle elle-même doivent donc être échappés :
 
 > var chiffres = new RegExp("\\d+");
 > show(chiffres.test("101"));
 
 ---
 
-Le plus important à savoir à propos des expressions régulières est qu’elles
+Le plus important à savoir à propos des expressions rationnelles est qu’elles
 existent et peuvent augmenter de façon significative la puissance de votre
 code modificateur de chaînes. Elles sont tellement alambiquées qu’il vous
 faudra probablement regarder de très près leur détail les dix premières
@@ -9095,7 +9095,7 @@ pour "query", c’est-à-dire requête), dont la valeur est |empire aztec|. La p
 apparaître dans ces valeurs, comme les espaces, les esperluettes ou les
 points d’interrogation. Ceux-ci sont remplacés par un |%| suivi par une
 valeur numérique ##, ce qui a la même fonction que les antislash utilisés
-dans les textes et expressions régulières, mais est encore plus illisible.
+dans les textes et expressions rationnelles, mais est encore plus illisible.
 
 ## La valeur qu’un caractère prend est décidée par le standard ASCII,
 qui assigne les nombres 0 à 127 à un ensemble de lettres et symboles
@@ -9284,7 +9284,7 @@ une adresse électronique, sinon |false|. Écrivez cette fonction.
 >
 > show(valideInfo(document.forms.info_utilisateur));
 
-Vous avez bien pensé à utiliser une expression régulière pour la
+Vous avez bien pensé à utiliser une expression rationnelle pour la
 vérification de l’courriel, n’est-ce pas ?
 
 ---
