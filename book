@@ -2382,7 +2382,7 @@ comme par magie. La magie est parfois très facile, avec les ordinateurs.
 ---
 
 La façon dont l’archive est enregistrée reste une question pertinente. Elle
-contient quantité d’courriels. Un courriel peut être vu comme une chaîne de
+contient quantité de courriels. Un courriel peut être vu comme une chaîne de
 caractères, c’est évident. Toute l’archive pourrait être mise dans une
 énorme chaîne de caractères mais ce ne serait pas pratique. Ce qu’il nous
 faut, c’est une structure de chaînes de caractères distinctes.
@@ -2403,7 +2403,7 @@ d’utiliser des noms de propriétés plus prévisibles :
 >                    2: "(courriel numéro 3)"};
 >
 > for (var courant = 0; courant in archiveDeMessages; courant++)
->   print("Traitement de l’courriel #", courant, ": ", archiveDeMessages[courant]);
+>   print("Traitement du courriel #", courant, ": ", archiveDeMessages[courant]);
 
 La chance veut qu’il existe un type d’objet particulier qui corresponde
 exactement à ce type de besoin. Ce sont les _tableau_x et ils
@@ -2416,7 +2416,7 @@ tableau et bien d’autres fonctions utiles pour ce type de structure.
 > var archiveDeMessages = ["courriel un", "courriel deux", "courriel trois"];
 >
 > for (var courant = 0; courant < archiveDeMessages.length; courant++)
->   print("Traitement de l’courriel #", courant, ": ", archiveDeMessages[courant]);
+>   print("Traitement du courriel #", courant, ": ", archiveDeMessages[courant]);
 
 Dans cet exemple, le nombre d’éléments n’est plus spécifié
 explicitement. Le premier a automatiquement le numéro 0, le deuxième le
@@ -2526,7 +2526,7 @@ devient simple comme un jeu d’enfant :
 >
 > for (var i = 0; i < archiveDeMessages.length; i++) {
 >   var message = archiveDeMessages[i];
->   print("Traitement de l’courriel #", i);
+>   print("Traitement du courriel #", i);
 >   // Faire plus de choses…
 > }
 
@@ -2545,7 +2545,7 @@ devons définir les paragraphes de cette façon.
 
 Nous avons vu plus haut qu’il existe une chose qui s’appelle un caractère
 de fin de ligne. C’est ce que la plupart des gens utilisent pour séparer les
-paragraphes. Nous considérons donc un paragraphe comme une partie d’courriel qui
+paragraphes. Nous considérons donc un paragraphe comme une partie du courriel qui
 commence par un caractère saut de ligne ou au début du contenu du message
 et se termine au caractère saut de ligne suivant ou bien à la fin du contenu.
 
@@ -9285,7 +9285,7 @@ une adresse électronique, sinon |false|. Écrivez cette fonction.
 > show(valideInfo(document.forms.info_utilisateur));
 
 Vous avez bien pensé à utiliser une expression rationnelle pour la
-vérification de l’courriel, n’est-ce pas ?
+vérification du courriel, n’est-ce pas ?
 
 ---
 
