@@ -894,9 +894,9 @@ var processPage = function(){
         message = TEXTAREA(null, "");
     popup = DIV({"class": "reactpopup"},
                 P(null, "Send me a message..."),
-                P(null, SPAN(null, "Votre nom&nbsp;:"), name),
-                P(null, SPAN(null, "Votre e-mail&nbsp;:"), email),
-                P(null, SPAN(null, "Sujet&nbsp;:"), subject),
+                P(null, SPAN(null, "Votre nom&#160;:"), name),
+                P(null, SPAN(null, "Votre e-mail&#160;:"), email),
+                P(null, SPAN(null, "Sujet&#160;:"), subject),
                 P(null, message),
                 P(null,
                   BUTTON({type: "button"}, "Envoyer", attach("onclick", sendReaction)), " ",
@@ -946,7 +946,7 @@ var processPage = function(){
         return;
       }
 
-      if (!/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(email.value) && !confirm("Si vous ne saisissez pas une adresse électronique valide, je vous ignorerai probablement. Envoyer quand même&nbsp;?"))
+      if (!/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(email.value) && !confirm("Si vous ne saisissez pas une adresse électronique valide, je vous ignorerai probablement. Envoyer quand même&#160;?"))
         return;
 
       setCookie("name", name.value);
