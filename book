@@ -8378,7 +8378,10 @@ nous avons extrait les balises pour un document, nous avons eu besoin de
 trouver le premier astérisque ou la première accolade ouvrante dans une chaîne.
 Nous pouvions faire ainsi :
 
-> var asterisqueOuAccoladeOuvrante = /[\{\*]/; > var histoire = >   "Nous avons remarqué le *paresseux géant*, pendu à une énorme branche."; > show(histoire.search(asterisqueOuAccoladeOuvrante));
+> var asterisqueOuAccoladeOuvrante = /[\{\*]/;
+> var histoire =
+>   "Nous avons remarqué le *paresseux géant*, pendu à une énorme branche.";
+> show(histoire.search(asterisqueOuAccoladeOuvrante));
 
 Les caractères |[| et |]| ont une signification particulière dans les
 expressions rationnelles. Lorsqu’ils encadrent d’autres caractères, ils
