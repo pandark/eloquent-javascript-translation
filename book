@@ -3525,7 +3525,7 @@ redéfinie avec une valeur |null|.
 >     throw "Oh non ! Nous sommes déjà en train d’exécuter quelque chose !";
 >
 >   trucEnCours = unTruc;
->   /* faire des choses compliqués… */
+>   /* faire des choses compliquées… */
 >   trucEnCours = null;
 > }
 
