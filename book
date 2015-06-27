@@ -3545,7 +3545,7 @@ bloc |finally| :
 >
 >   trucEnCours = unTruc;
 >   try {
->     /* faire des choses compliqués… */
+>     /* faire des choses compliquées… */
 >   }
 >   finally {
 >     trucEnCours = null;
@@ -3805,7 +3805,7 @@ l’élément correspondant dans ce tableau et l’ajoutons au total* ».
 
 ---
 
-|forEach| prend un algorithme, ici « parcourir un tableau » et de rendre
+|forEach| prend un algorithme, ici « parcourir un tableau » et se charge de rendre
 celui-ci abstrait. Les « trous » dans cet algorithme (ici : que faire pour
 chacun des éléments du tableau), sont comblés par des fonctions passées à la
 fonction algorithme.
